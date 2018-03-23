@@ -17,4 +17,5 @@ usage:<br>1.plot gene clusters of many samples, one track means one sample, one 
 ![gene cluster image](example/out.svg)
 
 contact:<br>
-    QQ: 1522051171
+    QQ: 1522051171
+    mail: ilikeorangeapple@gmail.com
