@@ -1,6 +1,6 @@
 # ClustersPloter
 install:<br>
-    way1: git clone
+>>>>way1: git clone
 
 usage:<br>
     cd example <br>
