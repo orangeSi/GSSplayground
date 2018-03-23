@@ -22,5 +22,5 @@ todo:<br>
 ![gene cluster image](example/out.svg)
 
 contact:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;QQ: 1522051171
+&nbsp;&nbsp;&nbsp;&nbsp;QQ: 1522051171<br>
 &nbsp;&nbsp;&nbsp;&nbsp;mail: ilikeorangeapple@gmail.com
