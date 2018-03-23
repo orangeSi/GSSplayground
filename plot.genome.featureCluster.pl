@@ -1,7 +1,6 @@
 #!/usr/bin/env perl -w
 
 use Getopt::Long;
-use ToolKit;
 my ($list,$prefix,$outdir,$conf);
 GetOptions("list:s"=>\$list,
 	"prefix:s"=>\$prefix,
@@ -19,9 +18,11 @@ perl $0 [options]:
 
 writed by myth
 " unless($list && $prefix && $outdir && $conf);
+if(! -d "$outdir"){
+	`mkdir -p $outdir`;
+}
 
-
-my %conf = ToolKit::ReadConf($conf);
+my %conf = &read_conf($conf);
 %conf = &default_setting(%conf);
 &display_conf(%conf);
 my ($svg_width,$svg_height) = split(',',$conf{'svg_width_height'});
@@ -478,6 +479,25 @@ sub display_conf(){
 		}
 
 	}
+}
+
+sub read_conf(){
+	my ($conf) = @_;
+	my %confs;
+	open IN, "$conf" or die "$!";
+	while(<IN>){
+		chomp;
+		next if($_=~ /^#/ || $_=~ /^\s*$/);
+		my ($key, $value) = split(/\s*=\s*/, $_);
+		$value=~ s/\s*#.*$//;
+		if(!$key){
+			print "line is $_\n";
+		}
+		$confs{$key} = $value;
+	}
+	close IN;
+	return %confs;
+	
 }
 
 sub default_setting(){

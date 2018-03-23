@@ -1,0 +1,90 @@
+s30000	GenBank	gene	7789	8088	.	-	.	ID=gene_s3090000;Name=gene_s309;Parent=gene_s309;complete gene
+s30000	GenBank	mRNA	7789	8088	.	-	.	ID=gene_s3090000;Name=gene_s309;Parent=gene_s309;complete gene
+s30000	GenBank	CDS	7789	8088	.	-	.	Parent=gene_s309;
+s30000	GenBank	gene	4815	5888	.	-	.	ID=gene_s3060000;Name=gene_s306;Parent=gene_s306;complete gene
+s30000	GenBank	mRNA	4815	5888	.	-	.	ID=gene_s3060000;Name=gene_s306;Parent=gene_s306;complete gene
+s30000	GenBank	CDS	4815	5888	.	-	.	Parent=gene_s306;
+s30000	GenBank	gene	6664	7602	.	+	.	ID=gene_s3080000;Name=gene_s308;Parent=gene_s308;complete gene
+s30000	GenBank	mRNA	6664	7602	.	+	.	ID=gene_s3080000;Name=gene_s308;Parent=gene_s308;complete gene
+s30000	GenBank	CDS	6664	7602	.	+	.	Parent=gene_s308;
+s30000	GenBank	gene	6005	6421	.	+	.	ID=gene_s3070000;Name=gene_s307;Parent=gene_s307;complete gene
+s30000	GenBank	mRNA	6005	6421	.	+	.	ID=gene_s3070000;Name=gene_s307;Parent=gene_s307;complete gene
+s30000	GenBank	CDS	6005	6421	.	+	.	Parent=gene_s307;
+s30000	GenBank	gene	1106	1888	.	+	.	ID=gene_s3020000;Name=gene_s302;Parent=gene_s302;complete gene
+s30000	GenBank	mRNA	1106	1888	.	+	.	ID=gene_s3020000;Name=gene_s302;Parent=gene_s302;complete gene
+s30000	GenBank	CDS	1106	1888	.	+	.	Parent=gene_s302;
+s30000	GenBank	gene	2925	3119	.	+	.	ID=gene_s3030000;Name=gene_s303;Parent=gene_s303;complete gene
+s30000	GenBank	mRNA	2925	3119	.	+	.	ID=gene_s3030000;Name=gene_s303;Parent=gene_s303;complete gene
+s30000	GenBank	CDS	2925	3119	.	+	.	Parent=gene_s303;
+s30000	GenBank	gene	8088	8360	.	-	.	ID=gene_s3100000;Name=gene_s310;Parent=gene_s310;complete gene
+s30000	GenBank	mRNA	8088	8360	.	-	.	ID=gene_s3100000;Name=gene_s310;Parent=gene_s310;complete gene
+s30000	GenBank	CDS	8088	8360	.	-	.	Parent=gene_s310;
+s30000	GenBank	gene	3486	3857	.	+	.	ID=gene_s3040000;Name=gene_s304;Parent=gene_s304;complete gene
+s30000	GenBank	mRNA	3486	3857	.	+	.	ID=gene_s3040000;Name=gene_s304;Parent=gene_s304;complete gene
+s30000	GenBank	CDS	3486	3857	.	+	.	Parent=gene_s304;
+s30000	GenBank	gene	87	1109	.	+	.	ID=gene_s3010000;Name=gene_s301;Parent=gene_s301;complete gene
+s30000	GenBank	mRNA	87	1109	.	+	.	ID=gene_s3010000;Name=gene_s301;Parent=gene_s301;complete gene
+s30000	GenBank	CDS	87	1109	.	+	.	Parent=gene_s301;
+s30000	GenBank	gene	4343	4780	.	+	.	ID=gene_s3050000;Name=gene_s305;Parent=gene_s305;complete gene
+s30000	GenBank	mRNA	4343	4780	.	+	.	ID=gene_s3050000;Name=gene_s305;Parent=gene_s305;complete gene
+s30000	GenBank	CDS	4343	4780	.	+	.	Parent=gene_s305;
+s3000	GenBank	gene	7789	8088	.	-	.	ID=gene_s309000;Name=gene_s309;Parent=gene_s309;complete gene
+s3000	GenBank	mRNA	7789	8088	.	-	.	ID=gene_s309000;Name=gene_s309;Parent=gene_s309;complete gene
+s3000	GenBank	CDS	7789	8088	.	-	.	Parent=gene_s309;
+s3000	GenBank	gene	4815	5888	.	-	.	ID=gene_s306000;Name=gene_s306;Parent=gene_s306;complete gene
+s3000	GenBank	mRNA	4815	5888	.	-	.	ID=gene_s306000;Name=gene_s306;Parent=gene_s306;complete gene
+s3000	GenBank	CDS	4815	5888	.	-	.	Parent=gene_s306;
+s3000	GenBank	gene	6664	7602	.	+	.	ID=gene_s308000;Name=gene_s308;Parent=gene_s308;complete gene
+s3000	GenBank	mRNA	6664	7602	.	+	.	ID=gene_s308000;Name=gene_s308;Parent=gene_s308;complete gene
+s3000	GenBank	CDS	6664	7602	.	+	.	Parent=gene_s308;
+s3000	GenBank	gene	6005	6421	.	+	.	ID=gene_s307000;Name=gene_s307;Parent=gene_s307;complete gene
+s3000	GenBank	mRNA	6005	6421	.	+	.	ID=gene_s307000;Name=gene_s307;Parent=gene_s307;complete gene
+s3000	GenBank	CDS	6005	6421	.	+	.	Parent=gene_s307;
+s3000	GenBank	gene	1106	1888	.	+	.	ID=gene_s302000;Name=gene_s302;Parent=gene_s302;complete gene
+s3000	GenBank	mRNA	1106	1888	.	+	.	ID=gene_s302000;Name=gene_s302;Parent=gene_s302;complete gene
+s3000	GenBank	CDS	1106	1888	.	+	.	Parent=gene_s302;
+s3000	GenBank	gene	2925	3119	.	+	.	ID=gene_s303000;Name=gene_s303;Parent=gene_s303;complete gene
+s3000	GenBank	mRNA	2925	3119	.	+	.	ID=gene_s303000;Name=gene_s303;Parent=gene_s303;complete gene
+s3000	GenBank	CDS	2925	3119	.	+	.	Parent=gene_s303;
+s3000	GenBank	gene	8088	8360	.	-	.	ID=gene_s310000;Name=gene_s310;Parent=gene_s310;complete gene
+s3000	GenBank	mRNA	8088	8360	.	-	.	ID=gene_s310000;Name=gene_s310;Parent=gene_s310;complete gene
+s3000	GenBank	CDS	8088	8360	.	-	.	Parent=gene_s310;
+s3000	GenBank	gene	3486	3857	.	+	.	ID=gene_s304000;Name=gene_s304;Parent=gene_s304;complete gene
+s3000	GenBank	mRNA	3486	3857	.	+	.	ID=gene_s304000;Name=gene_s304;Parent=gene_s304;complete gene
+s3000	GenBank	CDS	3486	3857	.	+	.	Parent=gene_s304;
+s3000	GenBank	gene	87	1109	.	+	.	ID=gene_s301000;Name=gene_s301;Parent=gene_s301;complete gene
+s3000	GenBank	mRNA	87	1109	.	+	.	ID=gene_s301000;Name=gene_s301;Parent=gene_s301;complete gene
+s3000	GenBank	CDS	87	1109	.	+	.	Parent=gene_s301;
+s3000	GenBank	gene	4343	4780	.	+	.	ID=gene_s305000;Name=gene_s305;Parent=gene_s305;complete gene
+s3000	GenBank	mRNA	4343	4780	.	+	.	ID=gene_s305000;Name=gene_s305;Parent=gene_s305;complete gene
+s3000	GenBank	CDS	4343	4780	.	+	.	Parent=gene_s305;
+s3	GenBank	gene	7789	8088	.	-	.	ID=gene_s309;Name=gene_s309;Parent=gene_s309;complete gene
+s3	GenBank	mRNA	7789	8088	.	-	.	ID=gene_s309;Name=gene_s309;Parent=gene_s309;complete gene
+s3	GenBank	CDS	7789	8088	.	-	.	Parent=gene_s309;
+s3	GenBank	gene	4815	5888	.	-	.	ID=gene_s306;Name=gene_s306;Parent=gene_s306;complete gene
+s3	GenBank	mRNA	4815	5888	.	-	.	ID=gene_s306;Name=gene_s306;Parent=gene_s306;complete gene
+s3	GenBank	CDS	4815	5888	.	-	.	Parent=gene_s306;
+s3	GenBank	gene	6664	7602	.	+	.	ID=gene_s308;Name=gene_s308;Parent=gene_s308;complete gene
+s3	GenBank	mRNA	6664	7602	.	+	.	ID=gene_s308;Name=gene_s308;Parent=gene_s308;complete gene
+s3	GenBank	CDS	6664	7602	.	+	.	Parent=gene_s308;
+s3	GenBank	gene	6005	6421	.	+	.	ID=gene_s307;Name=gene_s307;Parent=gene_s307;complete gene
+s3	GenBank	mRNA	6005	6421	.	+	.	ID=gene_s307;Name=gene_s307;Parent=gene_s307;complete gene
+s3	GenBank	CDS	6005	6421	.	+	.	Parent=gene_s307;
+s3	GenBank	gene	1106	1888	.	+	.	ID=gene_s302;Name=gene_s302;Parent=gene_s302;complete gene
+s3	GenBank	mRNA	1106	1888	.	+	.	ID=gene_s302;Name=gene_s302;Parent=gene_s302;complete gene
+s3	GenBank	CDS	1106	1888	.	+	.	Parent=gene_s302;
+s3	GenBank	gene	2925	3119	.	+	.	ID=gene_s303;Name=gene_s303;Parent=gene_s303;complete gene
+s3	GenBank	mRNA	2925	3119	.	+	.	ID=gene_s303;Name=gene_s303;Parent=gene_s303;complete gene
+s3	GenBank	CDS	2925	3119	.	+	.	Parent=gene_s303;
+s3	GenBank	gene	8088	8360	.	-	.	ID=gene_s310;Name=gene_s310;Parent=gene_s310;complete gene
+s3	GenBank	mRNA	8088	8360	.	-	.	ID=gene_s310;Name=gene_s310;Parent=gene_s310;complete gene
+s3	GenBank	CDS	8088	8360	.	-	.	Parent=gene_s310;
+s3	GenBank	gene	3486	3857	.	+	.	ID=gene_s304;Name=gene_s304;Parent=gene_s304;complete gene
+s3	GenBank	mRNA	3486	3857	.	+	.	ID=gene_s304;Name=gene_s304;Parent=gene_s304;complete gene
+s3	GenBank	CDS	3486	3857	.	+	.	Parent=gene_s304;
+s3	GenBank	gene	87	1109	.	+	.	ID=gene_s301;Name=gene_s301;Parent=gene_s301;complete gene
+s3	GenBank	mRNA	87	1109	.	+	.	ID=gene_s301;Name=gene_s301;Parent=gene_s301;complete gene
+s3	GenBank	CDS	87	1109	.	+	.	Parent=gene_s301;
+s3	GenBank	gene	4343	4780	.	+	.	ID=gene_s305;Name=gene_s305;Parent=gene_s305;complete gene
+s3	GenBank	mRNA	4343	4780	.	+	.	ID=gene_s305;Name=gene_s305;Parent=gene_s305;complete gene
+s3	GenBank	CDS	4343	4780	.	+	.	Parent=gene_s305;
