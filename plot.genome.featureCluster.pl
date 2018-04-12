@@ -24,7 +24,7 @@ if(! -d "$outdir"){
 
 my %conf = &read_conf($conf);
 %conf = &default_setting(%conf);
-&display_conf(%conf);
+#&display_conf(%conf);
 my ($svg_width,$svg_height) = split(',',$conf{'svg_width_height'});
 
 
@@ -51,13 +51,13 @@ my %gff=%$gff;
 my $ends_extend_ratio = 0.1;
 foreach my $s(sort {$gff{$b}{chooselen_all}<=>$gff{$a}{chooselen_all}} keys %gff){
 	$max_length=$gff{$s}{chooselen_all};
-	print "sample is $s\n";
-	print "xxxx is $max_length\n";
+	#print "sample is $s\n";
+	#print "xxxx is $max_length\n";
 	last;
 }
-print "max_length is $max_length,\n";
+#print "max_length is $max_length,\n";
 my $ratio=$cluster_width_ratio*$svg_width/$max_length;
-print "ratio $cluster_width_ratio*$svg_width/$max_length\n";
+#print "ratio $cluster_width_ratio*$svg_width/$max_length\n";
 
 my $index;
 my $common_size;
@@ -90,17 +90,18 @@ while(<LI>){
 		$conf{sample_name_old2new}{$sample}{new_font_size} = $conf{sample_name_font_size_default};
 	}
 	$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"$conf{sample_name_old2new}{$sample}{new_font_size}px\" fill=\"$conf{sample_name_old2new}{$sample}{new_color}\"  text-anchor='end'>$conf{sample_name_old2new}{$sample}{new_name}</text>\n"; # draw sample name
+	print "draw sample name\n";
 	
 	
 	my $pre_block='';
 	foreach my $block_index(sort {$a<=>$b} keys %{$gff{$sample}{block}}){ # one block_index ---> one scaffold ---> one cluster of genes
-		print "block_index is $block_index, sample is $sample\n";
+		#print "block_index is $block_index, sample is $sample\n";
 		$flag++;
 		my @scf = keys %{$gff{$sample}{block}{$block_index}};
 		my $id_line_x=$left_distance; # 每个block的genome的起点的x,y坐标
 		my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
 		my $id_line_width=$gff{$sample}{chooselen_single}{$block_index} * $ratio; # 每个block的genome的宽度
-		print "chooselen_single is $sample $gff{$sample}{chooselen_single}{$block_index} * $ratio\n";
+		#print "chooselen_single is $sample $gff{$sample}{chooselen_single}{$block_index} * $ratio\n";
 
 		### draw main scaffold line
 		$svg.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:green\"   />\n";
@@ -111,7 +112,7 @@ while(<LI>){
 			my $pre_y = $id_line_y + 0.5 * $id_line_height;
 			my $now_x = $pre_x + $block_distance * 0.99;
 			my $now_y = $pre_y;
-			print "pre_block $pre_block $pre_x $pre_y $now_x $now_y\n";
+			#print "pre_block $pre_block $pre_x $pre_y $now_x $now_y\n";
 			$svg.="<g fill=\"none\" stroke=\"black\" stroke-width=\"2\"><path stroke-dasharray=\"2,2\" d=\"M$pre_x,$pre_y L$now_x,$now_y\" /></g>";
 		}
 		
@@ -124,7 +125,7 @@ while(<LI>){
 		my $gene_height_top=$id_line_height*1;
 		my $gene_width_arrow=0.3;
 		#print "here\n";
-		print "scf is @scf,$sample,$block_index\n";
+		#print "scf is @scf,$sample,$block_index\n";
 		my $angle_flag=0;
 		foreach my $index(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){
 			#next if($index eq "len");
@@ -140,7 +141,7 @@ while(<LI>){
 			$index_label_col = (exists $conf{color_feature_setting}{label}{$index_id}{label_col})? $conf{color_feature_setting}{label}{$index_id}{label_col}:'black';
 			$index_label_position = (exists $conf{color_feature_setting}{label}{$index_id}{label_position})? $conf{color_feature_setting}{label}{$index_id}{label_position}:'meddium_up';
 			$index_label_angle = (exists $conf{color_feature_setting}{label}{$index_id}{label_angle})? $conf{color_feature_setting}{label}{$index_id}{label_angle}:-45;
-			print "index_label_angle is $index_label_angle\n";
+			#print "index_label_angle is $index_label_angle\n";
 
 			## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 			$svg.=&draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
@@ -162,15 +163,11 @@ close LI;
 # draw crossing_links for feature
 foreach my $index(keys %{$conf{crossing_link}{index}}){
 	my @fs = @{$conf{crossing_link}{index}{$index}};
-	print "fss is @fs\n";
+	#print "fss is @fs\n";
 	for(my $i=0;$i<(scalar(@fs)-1);$i++){
 		if(not exists $conf{crossing_link}{position}{$fs[$i]}{start}{x}){
-			print "fs[$i] in crossing_link is not in gff\npass fs[$i]\n";
+			print "Warn:$fs[$i] in crossing_link is not in selected region of  $list, pass $fs[$i]\n";
 			next;
-		}
-		if(not exists $conf{crossing_link}{position}{$fs[$i+1]}{start}{x}){
-			print "fs[$i+1] in crossing_link is not in gff\npass fs[$i+1]\n";
-			next
 		}
 		my $left_up_x = $conf{crossing_link}{position}{$fs[$i]}{start}{x};
 		my $left_up_y = $conf{crossing_link}{position}{$fs[$i]}{start}{y};
@@ -182,7 +179,7 @@ foreach my $index(keys %{$conf{crossing_link}{index}}){
 		my $right_down_x = $conf{crossing_link}{position}{$fs[$i+1]}{end}{x};
 		my $right_down_y = $conf{crossing_link}{position}{$fs[$i+1]}{end}{y};
 
-		$svg.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:#FAEBD7;stroke:#000000;stroke-width:0;opacity:0.6\"/>"; #crossing link of features
+		$svg.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$conf{cross_link_color};stroke:#000000;stroke-width:0;opacity:0.6\"/>"; #crossing link of features
 
 
 	}
@@ -191,7 +188,7 @@ foreach my $index(keys %{$conf{crossing_link}{index}}){
 
 ## draw legend
 my $legend_num = keys %{$conf{color_feature_setting}{legend_col}};
-print "legend_num is $legend_num\n";
+#print "legend_num is $legend_num\n";
 #my $top_margin_legend;
 #my $legend_single_arror_height = $common_size; # 和sample name一样的字体大小，字体大小几乎等同同等像素的宽高
 #my $limit = 0.8;
@@ -228,7 +225,8 @@ foreach my $legend(keys %{$conf{color_feature_setting}{legend_col}}){
 	my @arr_cols = split(/,/, $conf{color_feature_setting}{legend_col}{$legend});
 	my $arrow_col_start;
 	my $arrow_col_end;
-	if(@arr_cols>=2){
+	if(@arr_cols==2){
+		#print "aisis $conf{color_feature_setting}{legend_col}{$legend},@arr_cols\n";
 		$arrow_col_start = $arr_cols[0];
 		$arrow_col_end = $arr_cols[1];
 		my $arrow_color_id = $conf{color_feature_setting}{legend_col}{$legend};
@@ -245,9 +243,9 @@ foreach my $legend(keys %{$conf{color_feature_setting}{legend_col}}){
 			<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:url(#$arrow_color_id);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1\" />
 		</g>";
 	}else{
-		$svg.="<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:$arr_cols[0];stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1\" />";
+		$svg.="<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:$conf{color_feature_setting}{legend_col}{$legend};stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1\" />";
 	}
-	print "legend_col is $conf{color_feature_setting}{legend_col}{$legend}\n";
+	#print "legend_col is $conf{color_feature_setting}{legend_col}{$legend}\n";
 	$arrow_y += $legend_single_arror_height * 1;
 	
 	## draw legend
@@ -257,7 +255,7 @@ foreach my $legend(keys %{$conf{color_feature_setting}{legend_col}}){
 }
 #legend外围的线框
 my $legend_rect_width = (1-$legend_width_margin*2)*$svg_width*$legend_width_ratio * 1.1;
-my $legend_rect_height = $svg_height*$legend_height_percent * 1.02;
+my $legend_rect_height = $svg_height*$legend_height_percent * 1.04;
 my $legend_rect_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width *0.9;
 my $legend_rect_y = $top_margin_legend;
 $svg.="<rect x=\"$legend_rect_x\" y=\"$legend_rect_y\" width=\"$legend_rect_width\" height=\"$legend_rect_height\" style=\"fill:none;stroke:black;stroke-width:1;fill-opacity:0;stroke-opacity:1\" />";
@@ -308,10 +306,10 @@ sub read_list(){
 			my @arr=split(/\t/,$_);
 			my $block_index=-1;
 			if(@arrs){ # has seq_id mean not full length of whole gff
-				my $xxx=scalar(@arrs);
-				if ($xxx == 9){
-					print "arrs is $xxx,$sample @arrs end\n";
-				}
+				#my $xxx=scalar(@arrs);
+				#if ($xxx == 9){
+				#	print "arrs is $xxx,$sample @arrs end\n";
+				#}
 
 				for (my $arrs_index=0;$arrs_index < scalar(@arrs);$arrs_index+=3){
 					my ($seq_id,$seq_draw_start,$seq_draw_end) = @arrs[$arrs_index..$arrs_index+2];
@@ -322,7 +320,7 @@ sub read_list(){
 					$arr[3]=$arr[3]-$seq_draw_start +1;
 					$arr[4]=$arr[4]-$seq_draw_start +1;
 					$block_index = $arrs_index;
-					print "hereis $block_index\n";
+					#print "hereis $block_index\n";
 					if(not exists  $gff{$sample}{chooselen_single}{$block_index}){
 						$gff{$sample}{chooselen_single}{$block_index} = $genome{$sample}{$arr[0]}{$arrs_index}{len};
 						$gff{$sample}{chooselen_all} +=$gff{$sample}{chooselen_single}{$block_index}; ## 把每行所有block长度加起来
@@ -331,7 +329,7 @@ sub read_list(){
 				}
 
 			}else{ # list里面没有定义seq_id/start/end,即要画full-length of scaffold
-				print "not seq_id\n";
+				#print "not seq_id\n";
 				$block_index = $conf{'scaffold_order'}{$sample}{$arr[0]};
 				if(not exists  $gff{$sample}{chooselen_single}{$arr[0]}){
 					$gff{$sample}{chooselen_single}{$arr[0]} = $genome{$sample}{$arr[0]}{len};
@@ -351,7 +349,7 @@ sub read_list(){
 			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{id}=$gene_id;
 			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{strand}=($arr[6]=~ /\+/)? 1:0;
 
-			print "block $sample $block_index $arr[0] $gene_index $arr[3] $arr[4] $gene_id\n";
+			#print "block $sample $block_index $arr[0] $gene_index $arr[3] $arr[4] $gene_id\n";
 			#print "id is $gene_id\n";
 
 		}
@@ -366,7 +364,7 @@ sub read_list(){
 
 sub draw_genes(){
 	my ($gene_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_cotent, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag)=@_;
-	print "index_color1 is $index_color\n";
+	#print "index_color1 is $index_color\n";
 	my ($back,$x1,$y1,$x2,$y2,$x3,$y3,$x4,$y4,$x5,$y5,$x6,$y6,$x7,$y7,$label_x,$label_y,$index_col_start,$index_col_end,$crossing_link_start_x,$crossing_link_start_y,$crossing_link_end_x,$crossing_link_end_y);
 	if($strand){
 		#以左上角为起始点，逆时针转一圈
@@ -400,9 +398,9 @@ sub draw_genes(){
 	}
 	#print "y1 is $y1\n";
 	#my ($gene_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label, $index_label_cotent, $index_label_size, $index_label_col, $index_label_position, $index_label_angle)=@_;
-	print "index_color2 is $index_color\n";
+	#print "index_color2 is $index_color\n";
 	my @arr_cols = split(/,/, $index_color);
-	if(@arr_cols>=2){
+	if(@arr_cols==2){
 		$index_col_start = $arr_cols[0];
 		$index_col_end = $arr_cols[1];
 		my $index_color_id = $index_color;
@@ -423,7 +421,7 @@ sub draw_genes(){
 		$back.="
 		<g style=\"fill:none\">
 			<title>$gene_id,$sample,$id,$start,$end,$strand</title>
-			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$arr_cols[0];stroke:purple;stroke-width:0\"/> 
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$index_color;stroke:purple;stroke-width:0\"/> 
 		</g>\n"; ## feture arrow
 	
 	}
@@ -432,19 +430,20 @@ sub draw_genes(){
 	#$index_label_angle = ($angle_flag)? $index_label_angle +10:$index_label_angle; # 相邻feature的label的angle错开
  	$index_label_angle = (($end-$start)<200 && $pre_feature_flag)? $index_label_angle +10:$index_label_angle; # 相邻feature的label的angle开
 	$pre_feature_flag = (($end-$start)<200)? 1:0;
-	print "index_label_angle $gene_id $index_label_angle angle_flag $angle_flag\n";
+	#print "index_label_angle $gene_id $index_label_angle angle_flag $angle_flag\n";
 
 	## draw label of feature
 	$back.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_cotent</text>\n"; # label of feature
 	#$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"${text_size}px\" fill=\"$conf{color_sample_name}\"  text-anchor='end'>$conf{sample_name_old2new}{$sample}</text>\n";
 	# check this feature if is in crossing_link
 	if(exists $conf{crossing_link}{features}{$gene_id}){
+		#print "crossing_link $gene_id\n";
 		$conf{crossing_link}{position}{$gene_id}{start}{x}=$crossing_link_start_x;
 		$conf{crossing_link}{position}{$gene_id}{start}{y}=$crossing_link_start_y;
 	
 		$conf{crossing_link}{position}{$gene_id}{end}{x}=$crossing_link_end_x;
 		$conf{crossing_link}{position}{$gene_id}{end}{y}=$crossing_link_end_y;
-		print "crossing_linkis $gene_id $crossing_link_start_x $crossing_link_start_y $crossing_link_end_x $crossing_link_end_y\n";
+		#print "crossing_linkis $gene_id $crossing_link_start_x $crossing_link_start_y $crossing_link_end_x $crossing_link_end_y\n";
 	}
 
 	return $back;	
@@ -490,6 +489,8 @@ sub read_conf(){
 		next if($_=~ /^#/ || $_=~ /^\s*$/);
 		my ($key, $value) = split(/\s*=\s*/, $_);
 		$value=~ s/\s*#.*$//;
+		$value=~ s/\s+$//;
+
 		if(!$key){
 			print "line is $_\n";
 		}
@@ -559,7 +560,7 @@ sub default_setting(){
 				$_=~ s/\s+$//;
 				#my @arr = split(/\s+/, $_);
 				my ($f_id, $f_col, $f_legend, $label_content, $label_size, $label_col, $label_position, $label_angle) = split(/\t+/, $_);
-				print "isisis $conf{color_feature_setting}\n";
+				#print "isisis $conf{color_feature_setting}\n";
 				$label_content ||=$f_id;
 				$label_size ||=10;
 				$label_col ||='black'; # feature对应的label的字体颜色等
@@ -576,7 +577,7 @@ sub default_setting(){
 				}
 				$conf{color_feature_setting}{feature_col}{$f_id} = $f_col;
 				$conf{color_feature_setting}{label}{$f_id}{label_content} = $label_content;
-				print "$f_id label_content $label_content\n";
+				#print "$f_id label_content $label_content\n";
 				$conf{color_feature_setting}{label}{$f_id}{label_size} = $label_size;
 				$conf{color_feature_setting}{label}{$f_id}{label_col} = $label_col;
 				$conf{color_feature_setting}{label}{$f_id}{label_position} = $label_position;
