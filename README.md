@@ -17,8 +17,8 @@ bug:<br>
 todo:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. plot tracks by sort sample list, or you can adjust the track order by adjust list file <br>
 &nbsp;&nbsp;&nbsp;&nbsp;2. feature only has arrow type, add other type<br>
-&nbsp;&nbsp;&nbsp;&nbsp;3. sort by feature,so same feature of different tracks can align centre<br> <br> 
-&nbsp;&nbsp;&nbsp;&nbsp;3. add ratio scale in the bottom to recognise the approximate length of every feature <br> <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;3. sort by feature,so same feature of different tracks can align centre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4. add ratio scale in the bottom to recognise the approximate length of every feature <br> <br> 
 
 ![gene cluster image](example/out.svg)
 
