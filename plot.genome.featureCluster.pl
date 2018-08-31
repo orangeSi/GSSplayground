@@ -51,6 +51,7 @@ my %gff=%$gff;
 my $ends_extend_ratio = 0.1;
 foreach my $s(sort {$gff{$b}{chooselen_all}<=>$gff{$a}{chooselen_all}} keys %gff){
 	$max_length=$gff{$s}{chooselen_all};
+	print "dd\n";
 	#print "sample is $s\n";
 	#print "xxxx is $max_length\n";
 	last;
@@ -121,7 +122,8 @@ while(<LI>){
 		
 		
 		### draw genes
-		my $gene_height_medium=$id_line_height*1.5;
+		#my $gene_height_medium=$id_line_height*1.5;#sikaiwei
+		my $gene_height_medium=$id_line_height*$conf{gene_height_ratio};
 		my $gene_height_top=$id_line_height*1;
 		my $gene_width_arrow=0.3;
 		#print "here\n";
@@ -258,7 +260,7 @@ my $legend_rect_width = (1-$legend_width_margin*2)*$svg_width*$legend_width_rati
 my $legend_rect_height = $svg_height*$legend_height_percent * 1.04;
 my $legend_rect_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width *0.9;
 my $legend_rect_y = $top_margin_legend;
-$svg.="<rect x=\"$legend_rect_x\" y=\"$legend_rect_y\" width=\"$legend_rect_width\" height=\"$legend_rect_height\" style=\"fill:none;stroke:black;stroke-width:1;fill-opacity:0;stroke-opacity:1\" />";
+#$svg.="<rect x=\"$legend_rect_x\" y=\"$legend_rect_y\" width=\"$legend_rect_width\" height=\"$legend_rect_height\" style=\"fill:none;stroke:black;stroke-width:1;fill-opacity:0;stroke-opacity:1\" />"; #不画这条线框了
 
 
 
@@ -266,7 +268,11 @@ $svg.="<rect x=\"$legend_rect_x\" y=\"$legend_rect_y\" width=\"$legend_rect_widt
 open SVG,">$outdir/$prefix.svg" or die "$!";
 print SVG "$svg\n</svg>";
 close SVG;
-`convert -density 200 $outdir/$prefix.svg $outdir/$prefix.png && echo outfile is $outdir/$prefix.svg`;
+print "outfile is  $outdir/$prefix.svg\n";
+`convert  $outdir/$prefix.svg $outdir/$prefix.png `;
+print "outfile is $outdir/$prefix.png\n";
+`convert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.pdf`;
+print "outfile is $outdir/$prefix.pdf\n";
 
 #$svg.=&draw_genes($gff{$sample}{id}{$id}{$index}{start},$gff{$sample}{id}{$id}{$index}{end},$gff{$sample}{id}{$id}{$index}{strand},$gene_height_medium,$gene_height_top);
 
@@ -313,6 +319,9 @@ sub read_list(){
 
 				for (my $arrs_index=0;$arrs_index < scalar(@arrs);$arrs_index+=3){
 					my ($seq_id,$seq_draw_start,$seq_draw_end) = @arrs[$arrs_index..$arrs_index+2];
+					$seq_draw_start = eval($seq_draw_start);
+					$seq_draw_end = eval($seq_draw_end);
+
 					#print "$seq_id,$seq_draw_start,$seq_draw_end\n";
 					next unless ($arr[0] eq $seq_id && $arr[3] >= $seq_draw_start && $arr[4] <= $seq_draw_end);
 					$seq_draw_end = ($genome{$sample}{$seq_id}{len}>=$seq_draw_end)? $seq_draw_end:$genome{$sample}{$seq_id}{len}; #防止seq_draw_end越界
@@ -505,6 +514,7 @@ sub default_setting(){
 	my (%conf) = @_;
 	$conf{svg_width_height} ||= '600,1500';
 	#$conf{anchor_positon_ratio} ||= 1;
+	$conf{pdf_dpi} ||=100;
 	$conf{top_bottom_margin} ||=0.1;
 	$conf{genome_height_ratio} ||= 1.1;
 	$conf{gene_height_ratio} ||= 1.1;
