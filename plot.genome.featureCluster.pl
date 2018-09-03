@@ -196,6 +196,7 @@ foreach my $index(keys %{$conf{crossing_link}{index}}){
 }
 
 
+
 ## draw legend
 my $legend_num = keys %{$conf{color_feature_setting}{legend_col}};
 #print "legend_num is $legend_num\n";
