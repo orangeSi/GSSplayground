@@ -163,25 +163,33 @@ while(<LI>){
 close LI;
 
 # draw crossing_links for feature
+my $cross_link_opacity = ($conf{cross_link_opacity})? $conf{cross_link_opacity}: 0.6;
 foreach my $index(keys %{$conf{crossing_link}{index}}){
 	my @fs = @{$conf{crossing_link}{index}{$index}};
 	#print "fss is @fs\n";
 	for(my $i=0;$i<(scalar(@fs)-1);$i++){
+		next if($fs[$i]=~ /^#\d+/);
 		if(not exists $conf{crossing_link}{position}{$fs[$i]}{start}{x}){
 			print "Warn:$fs[$i] in crossing_link is not in selected region of  $list, pass $fs[$i]\n";
 			next;
+		}
+
+		my $add=1;
+		my $color=$conf{cross_link_color};
+		if($fs[$i+1]=~ /^#\d+/){
+			$add=2;
+			$color=$fs[$i+1];
 		}
 		my $left_up_x = $conf{crossing_link}{position}{$fs[$i]}{start}{x};
 		my $left_up_y = $conf{crossing_link}{position}{$fs[$i]}{start}{y};
 		my $right_up_x = $conf{crossing_link}{position}{$fs[$i]}{end}{x};
 		my $right_up_y = $conf{crossing_link}{position}{$fs[$i]}{end}{y};
 
-		my $left_down_x = $conf{crossing_link}{position}{$fs[$i+1]}{start}{x};
-		my $left_down_y = $conf{crossing_link}{position}{$fs[$i+1]}{start}{y};
-		my $right_down_x = $conf{crossing_link}{position}{$fs[$i+1]}{end}{x};
-		my $right_down_y = $conf{crossing_link}{position}{$fs[$i+1]}{end}{y};
-
-		$svg.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$conf{cross_link_color};stroke:#000000;stroke-width:0;opacity:0.6\"/>"; #crossing link of features
+		my $left_down_x = $conf{crossing_link}{position}{$fs[$i+$add]}{start}{x};
+		my $left_down_y = $conf{crossing_link}{position}{$fs[$i+$add]}{start}{y};
+		my $right_down_x = $conf{crossing_link}{position}{$fs[$i+$add]}{end}{x};
+		my $right_down_y = $conf{crossing_link}{position}{$fs[$i+$add]}{end}{y};
+		$svg.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>"; #crossing link of features
 
 
 	}
