@@ -319,8 +319,12 @@ sub read_list(){
 
 				for (my $arrs_index=0;$arrs_index < scalar(@arrs);$arrs_index+=3){
 					my ($seq_id,$seq_draw_start,$seq_draw_end) = @arrs[$arrs_index..$arrs_index+2];
+					my $seq_draw_start_tmp=$seq_draw_start;
+					my $seq_draw_end_tmp=$seq_draw_end;
+
 					$seq_draw_start = eval($seq_draw_start);
 					$seq_draw_end = eval($seq_draw_end);
+					die "error:for $seq_id , start $seq_draw_start_tmp should less than end $seq_draw_end_tmp in --list " if($seq_draw_end <= $seq_draw_start);
 
 					#print "$seq_id,$seq_draw_start,$seq_draw_end\n";
 					next unless ($arr[0] eq $seq_id && $arr[3] >= $seq_draw_start && $arr[4] <= $seq_draw_end);
