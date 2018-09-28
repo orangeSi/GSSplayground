@@ -24,6 +24,10 @@ changelog:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. update *conf for more easily specific the start or end position , remove the border line of legend , freely defind the crosslink color and opacity one by one <br> <br> 
 
 ![gene cluster image](example/out.svg)
+<br>
+![gene cluster image](example/out2.svg)
+<br>
+![gene cluster image](example/out3.svg)
 
 contact:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;QQ: 1522051171<br>

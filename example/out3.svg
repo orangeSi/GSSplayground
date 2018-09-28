@@ -1,0 +1,390 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1500" height="400" >
+<text x="150" y="67.25" font-size="15px" fill="black"  text-anchor='end'>S1</text>
+<rect x="165" y="62.75" width="139.424640273149" height="4.5" style="fill:black"   />
+
+			<g style="fill:none">
+			<title>gene_s101,s1,s1,86,1108,1</title>
+			<polygon points="168.932607105113,53.75 168.932607105113,76.25 215.666612470531,76.25 215.666612470531,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s102,s1,s1,1105,1887,1</title>
+			<polygon points="215.529428501748,53.75 215.529428501748,76.25 251.288716364523,76.25 251.288716364523,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="329.575034550037" y="62.75" width="137.686976668564" height="4.5" style="fill:black"   />
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M304.424640273149,65 L329.323530607268,65" /></g>
+			<g style="fill:none">
+			<title>gene_s104,s1,s1,487,858,1</title>
+			<polygon points="351.844565482481,53.75 351.844565482481,76.25 368.809649621982,76.25 368.809649621982,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s105,s1,s1,1344,1781,1</title>
+			<polygon points="391.033452564832,53.75 391.033452564832,76.25 411.01658401756,76.25 411.01658401756,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s106,s1,s1,1816,2889,0</title>
+			<polygon points="412.617063653362,53.75 412.617063653362,76.25 461.68319648809,76.25 461.68319648809,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="492.412405495488" y="62.75" width="165.992602227461" height="4.5" style="fill:black"   />
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M467.2620112186,65 L492.160901552719,65" /></g>
+			<g style="fill:none">
+			<title>gene_s107,s1,s1,26,442,1</title>
+			<polygon points="493.601333224941,53.75 493.601333224941,76.25 512.624176896187,76.25 512.624176896187,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s108,s1,s1,685,1623,1</title>
+			<polygon points="523.736078367612,53.75 523.736078367612,76.25 566.628932607105,76.25 566.628932607105,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s109,s1,s1,1810,2109,0</title>
+			<polygon points="575.180066661247,53.75 575.180066661247,76.25 588.852735549955,76.25 588.852735549955,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s110,s1,s1,2109,2381,0</title>
+			<polygon points="588.852735549955,53.75 588.852735549955,76.25 601.290748719616,76.25 601.290748719616,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="683.555401999837" y="62.75" width="182.957686366962" height="4.5" style="fill:black"   />
+
+			<g style="fill:none">
+			<title>gene_s103000,s1,s1000,926,1120,1</title>
+			<polygon points="725.899520364198,53.75 725.899520364198,76.25 734.7707503455,76.25 734.7707503455,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s104000,s1,s1000,1487,1858,1</title>
+			<polygon points="751.552922526624,53.75 751.552922526624,76.25 768.518006666125,76.25 768.518006666125,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s105000,s1,s1000,2344,2781,1</title>
+			<polygon points="790.741809608975,53.75 790.741809608975,76.25 810.724941061702,76.25 810.724941061702,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s106000,s1,s1000,2816,3889,0</title>
+			<polygon points="812.325420697504,53.75 812.325420697504,76.25 861.391553532233,76.25 861.391553532233,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="891.663482643688" y="62.75" width="182.957686366962" height="4.5" style="fill:black"   />
+
+			<g style="fill:none">
+			<title>gene_s1030000,s1,s10000,926,1120,1</title>
+			<polygon points="934.007601008048,53.75 934.007601008048,76.25 942.87883098935,76.25 942.87883098935,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1040000,s1,s10000,1487,1858,1</title>
+			<polygon points="959.661003170474,53.75 959.661003170474,76.25 976.626087309975,76.25 976.626087309975,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1050000,s1,s10000,2344,2781,1</title>
+			<polygon points="998.849890252825,53.75 998.849890252825,76.25 1018.83302170555,76.25 1018.83302170555,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1060000,s1,s10000,2816,3889,0</title>
+			<polygon points="1020.43350134135,53.75 1020.43350134135,76.25 1069.49963417608,76.25 1069.49963417608,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="1099.77156328754" y="62.75" width="165.078042435574" height="4.5" style="fill:black"   />
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M1074.62116901065,65 L1099.52005934477,65" /></g>
+			<g style="fill:none">
+			<title>gene_s1070000,s1,s10000,6,422,1</title>
+			<polygon points="1100.0459312251,53.75 1100.0459312251,76.25 1119.06877489635,76.25 1119.06877489635,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1080000,s1,s10000,665,1603,1</title>
+			<polygon points="1130.18067636778,53.75 1130.18067636778,76.25 1173.07353060727,76.25 1173.07353060727,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1090000,s1,s10000,1790,2089,0</title>
+			<polygon points="1181.62466466141,53.75 1181.62466466141,76.25 1195.29733355012,76.25 1195.29733355012,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1100000,s1,s10000,2089,2361,0</title>
+			<polygon points="1195.29733355012,53.75 1195.29733355012,76.25 1207.73534671978,76.25 1207.73534671978,53.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<text x="150" y="157.25" font-size="15px" fill="black"  text-anchor='end'>S2</text>
+<rect x="165" y="152.75" width="411.551906349077" height="4.5" style="fill:black"   />
+
+			<g style="fill:none">
+			<title>gene_s201,s2,s2,87,1109,1</title>
+			<polygon points="168.978335094708,143.75 168.978335094708,166.25 215.712340460125,166.25 215.712340460125,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s202,s2,s2,1106,1888,1</title>
+			<polygon points="215.575156491342,143.75 215.575156491342,166.25 251.334444354118,166.25 251.334444354118,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s203,s2,s2,2925,3119,1</title>
+			<polygon points="298.75436956345,143.75 298.75436956345,166.25 307.625599544753,166.25 307.625599544753,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s204,s2,s2,3486,3857,1</title>
+			<polygon points="324.407771725876,143.75 324.407771725876,166.25 341.372855865377,166.25 341.372855865377,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s205,s2,s2,4343,4780,1</title>
+			<polygon points="363.596658808227,143.75 363.596658808227,166.25 383.579790260954,166.25 383.579790260954,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s206,s2,s2,4815,5888,0</title>
+			<polygon points="385.180269896756,143.75 385.180269896756,166.25 434.246402731485,166.25 434.246402731485,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s207,s2,s2,6005,6421,1</title>
+			<polygon points="439.596577514023,143.75 439.596577514023,166.25 458.61942118527,166.25 458.61942118527,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s208,s2,s2,6664,7602,1</title>
+			<polygon points="469.731322656695,143.75 469.731322656695,166.25 512.624176896187,166.25 512.624176896187,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s209,s2,s2,7789,8088,0</title>
+			<polygon points="521.175310950329,143.75 521.175310950329,166.25 534.847979839038,166.25 534.847979839038,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s210,s2,s2,8088,8360,0</title>
+			<polygon points="534.847979839038,143.75 534.847979839038,166.25 547.285993008698,166.25 547.285993008698,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="601.702300625965" y="152.75" width="182.957686366962" height="4.5" style="fill:black"   />
+
+			<g style="fill:none">
+			<title>gene_s203000,s2,s2000,926,1120,1</title>
+			<polygon points="644.046418990326,143.75 644.046418990326,166.25 652.917648971628,166.25 652.917648971628,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s204000,s2,s2000,1487,1858,1</title>
+			<polygon points="669.699821152752,143.75 669.699821152752,166.25 686.664905292253,166.25 686.664905292253,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s205000,s2,s2000,2344,2781,1</title>
+			<polygon points="708.888708235103,143.75 708.888708235103,166.25 728.87183968783,166.25 728.87183968783,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s206000,s2,s2000,2816,3889,0</title>
+			<polygon points="730.472319323632,143.75 730.472319323632,166.25 779.538452158361,166.25 779.538452158361,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="809.810381269815" y="152.75" width="182.957686366962" height="4.5" style="fill:black"   />
+
+			<g style="fill:none">
+			<title>gene_s2030000,s2,s20000,926,1120,1</title>
+			<polygon points="852.154499634176,143.75 852.154499634176,166.25 861.025729615478,166.25 861.025729615478,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s2040000,s2,s20000,1487,1858,1</title>
+			<polygon points="877.807901796602,143.75 877.807901796602,166.25 894.772985936103,166.25 894.772985936103,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s2050000,s2,s20000,2344,2781,1</title>
+			<polygon points="916.996788878953,143.75 916.996788878953,166.25 936.97992033168,166.25 936.97992033168,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s2060000,s2,s20000,2816,3889,0</title>
+			<polygon points="938.580399967482,143.75 938.580399967482,166.25 987.646532802211,166.25 987.646532802211,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="1017.91846191367" y="152.75" width="165.078042435574" height="4.5" style="fill:black"   />
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M992.768067636778,155 L1017.6669579709,155" /></g>
+			<g style="fill:none">
+			<title>gene_s2070000,s2,s20000,6,422,1</title>
+			<polygon points="1018.19282985123,143.75 1018.19282985123,166.25 1037.21567352248,166.25 1037.21567352248,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s2080000,s2,s20000,665,1603,1</title>
+			<polygon points="1048.3275749939,143.75 1048.3275749939,166.25 1091.2204292334,166.25 1091.2204292334,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s2090000,s2,s20000,1790,2089,0</title>
+			<polygon points="1099.77156328754,143.75 1099.77156328754,166.25 1113.44423217625,166.25 1113.44423217625,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s2100000,s2,s20000,2089,2361,0</title>
+			<polygon points="1113.44423217625,143.75 1113.44423217625,166.25 1125.88224534591,166.25 1125.88224534591,143.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<text x="150" y="247.25" font-size="15px" fill="black"  text-anchor='end'>S3</text>
+<rect x="165" y="242.75" width="232.7554670352" height="4.5" style="fill:black"   />
+
+			<g style="fill:none">
+			<title>gene_s301,s3,s3,77,1099,1</title>
+			<polygon points="168.521055198764,233.75 168.521055198764,256.25 215.255060564182,256.25 215.255060564182,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s302,s3,s3,1096,1878,1</title>
+			<polygon points="215.117876595399,233.75 215.117876595399,256.25 250.877164458174,256.25 250.877164458174,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s303,s3,s3,2915,3109,1</title>
+			<polygon points="298.297089667507,233.75 298.297089667507,256.25 307.168319648809,256.25 307.168319648809,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="422.905861312089" y="242.75" width="137.22969677262" height="4.5" style="fill:black"   />
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M397.7554670352,245 L422.65435736932,245" /></g>
+			<g style="fill:none">
+			<title>gene_s304,s3,s3,477,848,1</title>
+			<polygon points="444.71811234859,233.75 444.71811234859,256.25 461.68319648809,256.25 461.68319648809,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s305,s3,s3,1334,1771,1</title>
+			<polygon points="483.906999430941,233.75 483.906999430941,256.25 503.890130883668,256.25 503.890130883668,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s306,s3,s3,1816,2889,0</title>
+			<polygon points="505.947890415413,233.75 505.947890415413,256.25 555.014023250142,256.25 555.014023250142,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="585.285952361597" y="242.75" width="165.078042435574" height="4.5" style="fill:black"   />
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M560.135558084709,245 L585.034448418828,245" /></g>
+			<g style="fill:none">
+			<title>gene_s307,s3,s3,6,422,1</title>
+			<polygon points="585.560320299163,233.75 585.560320299163,256.25 604.583163970409,256.25 604.583163970409,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s308,s3,s3,665,1603,1</title>
+			<polygon points="615.695065441834,233.75 615.695065441834,256.25 658.587919681327,256.25 658.587919681327,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s309,s3,s3,1790,2089,0</title>
+			<polygon points="667.139053735469,233.75 667.139053735469,256.25 680.811722624177,256.25 680.811722624177,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s310,s3,s3,2089,2361,0</title>
+			<polygon points="680.811722624177,233.75 680.811722624177,256.25 693.249735793838,256.25 693.249735793838,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="775.514389074059" y="242.75" width="182.957686366962" height="4.5" style="fill:black"   />
+
+			<g style="fill:none">
+			<title>gene_s303000,s3,s3000,926,1120,1</title>
+			<polygon points="817.85850743842,233.75 817.85850743842,256.25 826.729737419722,256.25 826.729737419722,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s304000,s3,s3000,1487,1858,1</title>
+			<polygon points="843.511909600845,233.75 843.511909600845,256.25 860.476993740346,256.25 860.476993740346,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s305000,s3,s3000,2344,2781,1</title>
+			<polygon points="882.700796683197,233.75 882.700796683197,256.25 902.683928135924,256.25 902.683928135924,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s306000,s3,s3000,2816,3889,0</title>
+			<polygon points="904.284407771726,233.75 904.284407771726,256.25 953.350540606455,256.25 953.350540606455,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="983.622469717909" y="242.75" width="182.957686366962" height="4.5" style="fill:black"   />
+
+			<g style="fill:none">
+			<title>gene_s3030000,s3,s30000,926,1120,1</title>
+			<polygon points="1025.96658808227,233.75 1025.96658808227,256.25 1034.83781806357,256.25 1034.83781806357,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s3040000,s3,s30000,1487,1858,1</title>
+			<polygon points="1051.6199902447,233.75 1051.6199902447,256.25 1068.5850743842,256.25 1068.5850743842,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s3050000,s3,s30000,2344,2781,1</title>
+			<polygon points="1090.80887732705,233.75 1090.80887732705,256.25 1110.79200877977,256.25 1110.79200877977,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s3060000,s3,s30000,2816,3889,0</title>
+			<polygon points="1112.39248841558,233.75 1112.39248841558,256.25 1161.4586212503,256.25 1161.4586212503,233.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<text x="150" y="337.25" font-size="15px" fill="black"  text-anchor='end'>S4</text>
+<rect x="165" y="332.75" width="182.957686366962" height="4.5" style="fill:black"   />
+
+			<g style="fill:none">
+			<title>gene_s403000,s4,s4000,926,1120,1</title>
+			<polygon points="207.344118364361,323.75 207.344118364361,346.25 216.215348345663,346.25 216.215348345663,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s404000,s4,s4000,1487,1858,1</title>
+			<polygon points="232.997520526786,323.75 232.997520526786,346.25 249.962604666287,346.25 249.962604666287,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s405000,s4,s4000,2344,2781,1</title>
+			<polygon points="272.186407609138,323.75 272.186407609138,346.25 292.169539061865,346.25 292.169539061865,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s406000,s4,s4000,2816,3889,0</title>
+			<polygon points="293.770018697667,323.75 293.770018697667,346.25 342.836151532396,346.25 342.836151532396,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="373.10808064385" y="332.75" width="320.141655149988" height="4.5" style="fill:black"   />
+
+			<g style="fill:none">
+			<title>gene_s4020000,s4,s40000,107,889,1</title>
+			<polygon points="378.000975530445,323.75 378.000975530445,346.25 413.76026339322,346.25 413.76026339322,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s4030000,s4,s40000,1926,2120,1</title>
+			<polygon points="461.180188602553,323.75 461.180188602553,346.25 470.051418583855,346.25 470.051418583855,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s4040000,s4,s40000,2487,2858,1</title>
+			<polygon points="486.833590764979,323.75 486.833590764979,346.25 503.798674904479,346.25 503.798674904479,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s4050000,s4,s40000,3344,3781,1</title>
+			<polygon points="526.02247784733,323.75 526.02247784733,346.25 546.005609300057,346.25 546.005609300057,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s4060000,s4,s40000,3816,4889,0</title>
+			<polygon points="547.606088935859,323.75 547.606088935859,346.25 596.672221770588,346.25 596.672221770588,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s4070000,s4,s40000,5006,5422,1</title>
+			<polygon points="602.022396553126,323.75 602.022396553126,346.25 621.045240224372,346.25 621.045240224372,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s4080000,s4,s40000,5665,6603,1</title>
+			<polygon points="632.157141695797,323.75 632.157141695797,346.25 675.04999593529,346.25 675.04999593529,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+<rect x="718.400130070726" y="332.75" width="73.6220632468905" height="4.5" style="fill:black"   />
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M693.249735793838,335 L718.148626127957,335" /></g>
+			<g style="fill:none">
+			<title>gene_s4100000,s4,s40000,89,361,0</title>
+			<polygon points="722.469921144623,323.75 722.469921144623,346.25 734.907934314283,346.25 734.907934314283,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
+			</g>
+
+</svg>
