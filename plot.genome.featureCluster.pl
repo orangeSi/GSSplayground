@@ -124,7 +124,7 @@ while(<LI>){
 		### draw genes
 		#my $gene_height_medium=$id_line_height*1.5;#sikaiwei
 		my $gene_height_medium=$id_line_height*$conf{gene_height_ratio};
-		my $gene_height_top=$id_line_height*1;
+		my $gene_height_top=$id_line_height*$conf{feature_arrow_sharp_tend};
 		my $gene_width_arrow=0.3;
 		#print "here\n";
 		#print "scf is @scf,$sample,$block_index\n";
@@ -202,15 +202,15 @@ foreach my $index(keys %{$conf{crossing_link}{index}}){
 my $legend_num = keys %{$conf{color_feature_setting}{legend_col}};
 #print "legend_num is $legend_num\n";
 #my $top_margin_legend;
-#my $legend_single_arror_height = $common_size; # 和sample name一样的字体大小，字体大小几乎等同同等像素的宽高
+#my $legend_single_arrow_height = $common_size; # 和sample name一样的字体大小，字体大小几乎等同同等像素的宽高
 #my $limit = 0.8;
-#if($legend_single_arror_height*$legend_num < $svg_height*$limit){
-#	$top_margin_legend = $svg_height - $legend_single_arror_height*$legend_num *1.1; #第一个legend顶部的y轴
+#if($legend_single_arrow_height*$legend_num < $svg_height*$limit){
+#	$top_margin_legend = $svg_height - $legend_single_arrow_height*$legend_num *1.1; #第一个legend顶部的y轴
 #}else{
-#	$legend_single_arror_height = $svg_height*$limit/$legend_num;# 每行legend的高度
+#	$legend_single_arrow_height = $svg_height*$limit/$legend_num;# 每行legend的高度
 #	$top_margin_legend = (1-$limit)/2*$svg_height;
 #}
-#my $legend_font_size = $legend_single_arror_height * 0.9;
+#my $legend_font_size = $legend_single_arrow_height * 0.9;
 
 #my $legend_max_length=0;
 #foreach my $legend(keys %{$conf{color_feature_setting}{legend_col}}){
@@ -223,15 +223,15 @@ if(-e $conf{color_feature_setting}){
 	my $legend_font_size = $conf{legend_font_size}; #legend中文字字体大小
 	my $legend_height_percent = $conf{legend_height_percent};
 	my $top_margin_legend = (1-$legend_height_percent)/2*$svg_height;
-	my $legend_single_arror_height = $svg_height*$legend_height_percent/$legend_num;
+	my $legend_single_arrow_height = $svg_height*$legend_height_percent/$legend_num;
 	my $legend_width_margin = $conf{legend_width_margin};
 	my $legend_width_textpercent = $conf{legend_width_textpercent};
 	my $legend_arrow_width = (1-$legend_width_margin*2)*(1-$legend_width_textpercent)*$svg_width*$legend_width_ratio;
 	my $text_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width+$legend_arrow_width*1.2;
 	my $text_y = $top_margin_legend -2 ;
 	my $arrow_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width*1.1;
-	my $arrow_y = $top_margin_legend + (1-0.8)*$legend_single_arror_height;
-	my $legend_arrow_height = $legend_single_arror_height * 0.8;
+	my $arrow_y = $top_margin_legend + (1-0.8)*$legend_single_arrow_height;
+	my $legend_arrow_height = $legend_single_arrow_height * 0.8;
 	foreach my $legend(keys %{$conf{color_feature_setting}{legend_col}}){
 		my $color = $conf{color_feature_setting}{legend_col}{$legend};
 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
@@ -257,13 +257,13 @@ if(-e $conf{color_feature_setting}){
 			<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:url(#$arrow_color_id);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1\" />
 			</g>";
 		}else{
-			$svg.="<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:$conf{color_feature_setting}{legend_col}{$legend};stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1\" />";
+			$svg.="<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:$conf{color_feature_setting}{legend_col}{$legend};stroke:black;stroke-width:0;fill-opacity:1;stroke-opacity:1\" />";
 		}
 		#print "legend_col is $conf{color_feature_setting}{legend_col}{$legend}\n";
-		$arrow_y += $legend_single_arror_height * 1;
+		$arrow_y += $legend_single_arrow_height * 1;
 
 		## draw legend
-		$text_y += $legend_single_arror_height;
+		$text_y += $legend_single_arrow_height;
 		$svg.="<text x=\"$text_x\" y=\"$text_y\" font-size=\"${legend_font_size}px\" fill=\"black\" text-anchor='start'>$legend</text>";
 
 	}
@@ -275,6 +275,34 @@ if(-e $conf{color_feature_setting}){
 	#$svg.="<rect x=\"$legend_rect_x\" y=\"$legend_rect_y\" width=\"$legend_rect_width\" height=\"$legend_rect_height\" style=\"fill:none;stroke:black;stroke-width:1;fill-opacity:0;stroke-opacity:1\" />"; #不画这条线框了
 }
 
+
+#刻度尺
+if($conf{scale_display}=~ /yes/i){
+	print "disply scale\n";
+	my $x_start_scale=(1 + 0.1) * $ref_name_width_ratio * $svg_width;
+	#my $x_end_scale=$cluster_width_ratio*$svg_width + $x_start_scale - $space_len;
+	my $x_end_scale=$cluster_width_ratio*$svg_width + $x_start_scale;
+	my $y_scale;
+	if($conf{scale_position}=~ /up/){
+		$y_scale=$top_bottom_margin/2* 0.5 * $svg_height
+	}else{
+		$y_scale=(1- $top_bottom_margin/2* 0.5 ) * $svg_height
+	}
+	$svg.="<line x1=\"$x_start_scale\" y1=\"$y_scale\" x2=\"$x_end_scale\" y2=\"$y_scale\" style=\"stroke:black;stroke-width:1\"/>\n"; #
+	my $unit_scale=100; # bp
+	my $ticks=int($cluster_width_ratio*$svg_width/$unit_scale);
+	print "ticks number is $ticks\n";
+	my $tick_y1= $y_scale - 0.01* $svg_height; #single tick hegith
+	my $tick_y2= $y_scale;
+	foreach my $tick(0..$ticks){
+		my $tick_x=$tick*$unit_scale + $x_start_scale;
+		$svg.="<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:black;stroke-width:0.5\"/>\n"; #
+	}
+	if($cluster_width_ratio*$svg_width % $unit_scale){
+		$svg.="<line x1=\"$x_end_scale\" y1=\"$tick_y1\" x2=\"$x_end_scale\" y2=\"$tick_y2\" style=\"stroke:black;stroke-width:0.5\"/>\n"; #
+	}
+
+}
 
 open SVG,">$outdir/$prefix.svg" or die "$!";
 print SVG "$svg\n</svg>";
@@ -428,7 +456,7 @@ sub draw_genes(){
 			$crossing_link_end_x=$x5;
 			$crossing_link_end_y=$y5;
 		}else{
-			#负链以arror左边尖尖为起始点，逆时针旋转一周
+			#负链以arrow左边尖尖为起始点，逆时针旋转一周
 			$x1=($start*$ratio+$shift_x);$y1=0.5*$sample_single_height+$shift_y;
 			$x2=$x1+$gene_width_arrow*($end -$start)*$ratio;$y2=$y1+0.5*$gene_height_medium+$gene_height_top;
 			$x3=$x2;$y3=$y2 -$gene_height_top;
@@ -653,8 +681,8 @@ sub default_setting(){
 	#$conf{anchor_positon_ratio} ||= 1;
 	$conf{pdf_dpi} ||=100;
 	$conf{top_bottom_margin} ||=0.1;
-	$conf{genome_height_ratio} ||= 1.1;
-	$conf{gene_height_ratio} ||= 1.1;
+	$conf{genome_height_ratio} ||= 1;
+	$conf{gene_height_ratio} ||= 1.5;
 	$conf{space_ratio_between_blocks} ||= 1.1;
 	$conf{color_feature_default} ||= 'ForestGreen,LimeGreen';
 	$conf{color_track_default} ||= 'green';
@@ -672,6 +700,9 @@ sub default_setting(){
 	$conf{pos_feature_label} ||="top";
 	$conf{distance_closed_feature} ||=200;
 	$conf{shift_angle_closed_feature} ||=10;
+	$conf{feature_arrow_sharp_tend} ||=1;
+	$conf{scale_display} ||="no";
+	$conf{scale_position} ||="low";
 
 	#sample_name_old2new
 	if(exists $conf{sample_name_old2new}){
