@@ -106,7 +106,7 @@ while(<LI>){
 
 		### draw main scaffold line
 		$svg.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_color}\"   />\n";
-
+		print "sample is $sample, scf is @scf\n";
 		## 判断相邻的block是否来自同一条scaffold
 		if($scf[0] eq $pre_block){
 			my $pre_x = $id_line_x - $block_distance;
@@ -133,6 +133,7 @@ while(<LI>){
 			#next if($index eq "len");
 			#print "here $sample $block_index $scf[0] $index\n";
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
+			die "die:$sample $block_index $scf[0] $index\n" if(not $index_id);
 			my $index_start = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{start};
 			my $index_end = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{end};
 			my $index_strand = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{strand};
