@@ -386,5 +386,19 @@
 			<title>gene_s4100000,s4,s40000,89,361,0</title>
 			<polygon points="722.469921144623,323.75 722.469921144623,346.25 734.907934314283,346.25 734.907934314283,323.75 " style="fill:blue;stroke:purple;stroke-width:0"/> 
 			</g>
+<line x1="165" y1="390" x2="1290" y2="390" style="stroke:black;stroke-width:1"/>
+<line x1="165" y1="386" x2="165" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="265" y1="386" x2="265" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="365" y1="386" x2="365" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="465" y1="386" x2="465" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="565" y1="386" x2="565" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="665" y1="386" x2="665" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="765" y1="386" x2="765" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="865" y1="386" x2="865" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="965" y1="386" x2="965" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="1065" y1="386" x2="1065" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="1165" y1="386" x2="1165" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="1265" y1="386" x2="1265" y2="390" style="stroke:black;stroke-width:0.5"/>
+<line x1="1290" y1="386" x2="1290" y2="390" style="stroke:black;stroke-width:0.5"/>
 
 </svg>

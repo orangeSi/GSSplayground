@@ -28,6 +28,8 @@ changelog:<br>
 ![gene cluster image](example/out2.svg)
 <br>
 ![gene cluster image](example/out3.svg)
+<br>
+![gene cluster image](example/out6.svg)
 
 contact:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;QQ: 1522051171<br>
