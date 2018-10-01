@@ -68,6 +68,7 @@ open LI,"$list" or die "$!";
 my $top_distance=$top_bottom_margin/2*$svg_height;
 my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$sample_num; # 每个track的高度
 my $id_line_height = 0.05*$conf{genome_height_ratio}*2*$sample_single_height; # 每个block的genome的高度
+my $left_distance_init = (1 + 0.1) * $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
 while(<LI>){
 	chomp;
 	next if($_=~ /^#/ || $_=~ /^\s*$/);
@@ -75,7 +76,7 @@ while(<LI>){
 	my ($sample,@tmp) = split(/\s+/,$_);
 	my $block_distance = $space_len*$ratio; # block_distance 是每个block的间距
 	my $flag;
-	my $left_distance = (1 + 0.1) * $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
+	my $left_distance = $left_distance_init ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
 	#my $line_to_sample_single_top_dis=0.45; #track cluster顶部 y 轴在一个track高度的0.45，即cluster的y轴的底部在0.55，即一个cluster高度是整个track的0.55-0.45=0.1
 	my $line_to_sample_single_top_dis = 0.5 - 0.05*$conf{genome_height_ratio};#genome_height_ratio
 	my $shift_x = $left_distance;
@@ -134,8 +135,6 @@ while(<LI>){
 
 
 		### draw genes
-		my $gene_height_top=($conf{feature_shape}=~ /arrow/)? $id_line_height*$conf{feature_arrow_sharp_tend}:0;
-		my $gene_width_arrow=0.3;
 		#print "here\n";
 		#print "scf is @scf,$sample,$block_index\n";
 		my $angle_flag=0;
@@ -158,8 +157,13 @@ while(<LI>){
 			$index_label_angle = (exists $conf{feature_setting}{$index_id}{label_rotate_angle})? $conf{feature_setting}{$index_id}{label_rotate_angle}:$conf{label_rotate_angle};
 			$gene_height_medium = $id_line_height * $conf{feature_setting}{$index_id}{feature_height_ratio} if(exists $conf{feature_setting}{$index_id}{feature_height_ratio});
 			#print "index_label_angle is $index_label_angle\n";
+			my $gene_height_top=($conf{feature_shape}=~ /arrow/)? $id_line_height*$conf{feature_arrow_sharp_extent}:0;
 			my $sharp_len=($conf{ignore_sharp_arrow}=~ /yes/)? 0:$gene_height_top;
 			$conf{feature_setting}{$index_id}{cross_link_shift_y}=0.5*$gene_height_medium + $sharp_len;
+			my $gene_width_arrow=$conf{feature_arrow_width_extent};
+			$gene_width_arrow=$conf{feature_setting}{$index_id}{feature_arrow_width_extent} if(exists $conf{feature_setting}{$index_id}{feature_arrow_width_extent});
+			#print "$index_id gene_width_arrow is $gene_width_arrow\n";
+			$gene_height_top=$id_line_height*$conf{feature_setting}{$index_id}{feature_arrow_sharp_extent} if(exists $conf{feature_setting}{$index_id}{feature_arrow_sharp_extent});
 
 
 			## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
@@ -199,12 +203,11 @@ while(<LI>){
 close LI;
 
 # draw crossing_links for feature
-my $cross_link_opacity = ($conf{cross_link_opacity})? $conf{cross_link_opacity}: 0.6;
 foreach my $index(keys %{$conf{crossing_link}{index}}){
 	my @fs = @{$conf{crossing_link}{index}{$index}};
 	#print "fss is @fs\n";
 	for(my $i=0;$i<(scalar(@fs)-1);$i++){
-		next if($fs[$i]=~ /^#\d+/);
+		next if($fs[$i]=~ /^#\d+/ ||$fs[$i]=~ /^opacity/);
 		if(not exists $conf{crossing_link}{position}{$fs[$i]}{start}{x}){
 			print "Warn:$fs[$i] in crossing_link is not in selected region of  $list, pass $fs[$i]\n";
 			next;
@@ -212,9 +215,18 @@ foreach my $index(keys %{$conf{crossing_link}{index}}){
 
 		my $add=1;
 		my $color=$conf{cross_link_color};
-		if($fs[$i+1]=~ /^#\d+/){
-			$add=2;
-			$color=$fs[$i+1];
+		my $cross_link_opacity = $conf{cross_link_opacity};
+		foreach my $ii(1..2){
+			last if($i+$ii+1>@fs);
+			last if($fs[$i+$ii]!~ /^#\d+/ && $fs[$i+$ii]!~ /^opacity/);
+			if($fs[$i+$ii]=~ /^#\d+/){
+				$color=$fs[$i+$ii];
+				$add+=1;
+			}
+			if($fs[$i+$ii]=~ /^opacity(\d\.?\d*)/){
+				$cross_link_opacity=$1;
+				$add+=1;
+			}
 		}
 		my $left_up_x = $conf{crossing_link}{position}{$fs[$i]}{start}{x};
 		my $left_up_y = $conf{crossing_link}{position}{$fs[$i]}{start}{y};
@@ -244,6 +256,7 @@ foreach my $index(keys %{$conf{crossing_link}{index}}){
 		}
 		#$svg.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>"; #crossing link of features
 		$orders{$conf{cross_link_order}}.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
+		print "link corlis $color\n";
 
 
 
@@ -264,7 +277,7 @@ for my $f(keys %{$conf{feature_setting}}){
 		}else{
 			$legend_color_num{$conf{feature_setting}{$f}{feature_color}}=$conf{feature_setting}{$f}{legend_label};
 		}
-	
+
 	}
 }
 $legend_num=keys %legend_color_num;
@@ -348,30 +361,46 @@ if($conf{display_legend}=~ /yes/i){
 
 #刻度尺
 if($conf{scale_display}=~ /yes/i){
-	print "disply scale\n";
-	my $x_start_scale=(1 + 0.1) * $ref_name_width_ratio * $svg_width;
-	#my $x_end_scale=$cluster_width_ratio*$svg_width + $x_start_scale - $space_len;
-	my $x_end_scale=$cluster_width_ratio*$svg_width + $x_start_scale;
-	my $y_scale;
-	if($conf{scale_position}=~ /up/){
-		$y_scale=$top_bottom_margin/2* 0.5 * $svg_height
-	}else{
-		$y_scale=(1- $top_bottom_margin/2* 0.5 ) * $svg_height
-	}
-	$svg.="<line x1=\"$x_start_scale\" y1=\"$y_scale\" x2=\"$x_end_scale\" y2=\"$y_scale\" style=\"stroke:black;stroke-width:1\"/>\n"; #
-	my $unit_scale=100; # bp
-	my $ticks=int($cluster_width_ratio*$svg_width/$unit_scale);
-	print "ticks number is $ticks\n";
-	my $tick_y1= $y_scale - 0.01* $svg_height; #single tick hegith
-	my $tick_y2= $y_scale;
-	foreach my $tick(0..$ticks){
-		my $tick_x=$tick*$unit_scale + $x_start_scale;
-		$svg.="<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:black;stroke-width:0.5\"/>\n"; #
-	}
-	if($cluster_width_ratio*$svg_width % $unit_scale){
-		$svg.="<line x1=\"$x_end_scale\" y1=\"$tick_y1\" x2=\"$x_end_scale\" y2=\"$tick_y2\" style=\"stroke:black;stroke-width:0.5\"/>\n"; #
-	}
+	my @scales=split(/_/, $conf{scale_position});
+	foreach my $scale(@scales){
+		print "disply scale\n";
+		my $x_start_scale=$left_distance_init;
+		#my $x_end_scale=$cluster_width_ratio*$svg_width + $x_start_scale - $space_len;
+		my $x_end_scale=$cluster_width_ratio*$svg_width + $x_start_scale;
+		my $y_scale;
+		my $y_tick_shift=-3;
+		my $font_size=$conf{scale_tick_fontsize};
+		my $tick_height=$conf{scale_tick_height}* $svg_height;
+		if($scale=~ /up/){
+			$y_scale=$top_bottom_margin/2* 0.5 * (1-$conf{scale_padding_y})* $svg_height;
+			#$y_tick_shift=-$conf{scale_tick_padding_y};
+		}else{
+			$y_scale=(1- $top_bottom_margin/2*(1-$conf{scale_padding_y})) * $svg_height;
+			$y_tick_shift=$conf{scale_tick_padding_y};
+			$tick_height=-$tick_height;
+		}
+		$orders{$conf{scale_order}}.="<line x1=\"$x_start_scale\" y1=\"$y_scale\" x2=\"$x_end_scale\" y2=\"$y_scale\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width}\"/>\n"; #main line
+		my $unit_scale=$conf{scale_ratio}*$ratio; # bp
+		my $ticks=int($cluster_width_ratio*$svg_width/$unit_scale);
+		print "ticks number is $ticks\n";
+		my $tick_y1= $y_scale + $tick_height; #single tick hegith
+		my $tick_y2= $y_scale ;
+		my $tick_label_y=$y_scale+$y_tick_shift;
+		foreach my $tick(0..$ticks){
+			my $tick_x=$tick*$unit_scale + $x_start_scale;
+			my $tick_label=$tick*$conf{scale_ratio};
+			$orders{$conf{scale_order}}.="<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # ticks
+			$orders{$conf{scale_order}}.= "<text x=\"$tick_x\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$tick_label</text>\n"; # label of feature
 
+		}
+		if($cluster_width_ratio*$svg_width % $unit_scale){
+			$orders{$conf{scale_order}}.="<line x1=\"$x_end_scale\" y1=\"$tick_y1\" x2=\"$x_end_scale\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # last tick
+			my $last_tick_label=$max_length;
+			$orders{$conf{scale_order}}.= "<text x=\"$x_end_scale\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$last_tick_label</text>\n"; # label of feature
+
+		}
+
+	}
 }
 
 open SVG,">$outdir/$prefix.svg" or die "$!";
@@ -528,6 +557,7 @@ sub draw_genes(){
 	my ($feature_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_cotent, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag)=@_;
 	#$conf{feature_setting}{$index_id}{feature_height_ratio}
 	my $shape=$conf{feature_shape};
+	$shape=(exists $conf{feature_setting}{$feature_id}{feature_shape})? $conf{feature_setting}{$feature_id}{feature_shape}:$conf{feature_shape};
 	my $order_f=(exists $conf{feature_setting}{$feature_id}{feature_order})? $conf{feature_setting}{$feature_id}{feature_order}:$conf{feature_order};
 	my $order_f_label=(exists $conf{feature_setting}{$feature_id}{feature_label_order})? $conf{feature_setting}{$feature_id}{feature_label_order}:$conf{feature_label_order};
 	my $padding_feature_label=(exists $conf{feature_setting}{$feature_id}{padding_feature_label})? $conf{feature_setting}{$feature_id}{padding_feature_label}:$conf{padding_feature_label};
@@ -774,8 +804,8 @@ sub read_conf(){
 		chomp;
 		next if($_=~ /^#/ || $_=~ /^\s*$/);
 		die "error: need = in $_ of $conf~\n" if($_!~ /=/);
+		$_=~ s/([^=^\s])\s*#.*$/$1/g;
 		my ($key, $value) = split(/\s*=\s*/, $_);
-		$value=~ s/\s*#.*$//;
 		$value=~ s/\s+$//;
 
 		if(!$key){
@@ -815,7 +845,7 @@ sub default_setting(){
 	$conf{pos_feature_label} ||="medium_up";
 	$conf{distance_closed_feature} ||=200;
 	$conf{shift_angle_closed_feature} ||=10;
-	$conf{feature_arrow_sharp_tend} ||=1;
+	$conf{feature_arrow_sharp_extent} ||=0.3;
 	$conf{scale_display} ||="no";
 	$conf{scale_position} ||="low";
 	$conf{display_feature} ||="yes";
@@ -825,10 +855,22 @@ sub default_setting(){
 	$conf{feature_order} =(defined $conf{feature_order})? $conf{feature_order}:1;
 	$conf{feature_label_order} =(defined $conf{feature_label_order})? $conf{feature_label_order}:1;
 	$conf{cross_link_order} =(defined $conf{cross_link_order})? $conf{cross_link_order}:2; # bigger mean upper 
+	$conf{cross_link_opacity} ||=1;
 	$conf{display_feature_label} ||="yes";
 	$conf{display_legend} ||="yes";
 	$conf{cross_link_anchor_pos} ||="medium_medium";
 	$conf{ignore_sharp_arrow} ||="no";
+	$conf{scale_color} ||="black";
+	$conf{scale_width} ||=1;
+	$conf{scale_ratio} ||=100;
+	$conf{scale_padding_y} ||=0.4;
+	$conf{scale_tick_height} ||=0.01;
+	$conf{scale_tick_opacity} ||=0.5;
+	$conf{scale_order} ||=0;
+	$conf{scale_tick_padding_y} ||=10;
+	$conf{scale_tick_fontsize} ||=10;
+	$conf{feature_arrow_width_extent} ||=0.7;
+
 
 
 	#sample_name_old2new

@@ -3,31 +3,98 @@
 <text x="150" y="319" font-size="15px" fill="black"  text-anchor='end'>S2</text>
 <text x="150" y="499" font-size="15px" fill="black"  text-anchor='end'>S3</text>
 <text x="150" y="679" font-size="15px" fill="black"  text-anchor='end'>S4</text>
-<rect x="1312.125" y="359.68" width="47.25" height="25.2" style="fill:red;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="383.62" font-size="20px" fill="black" text-anchor='start'>legend.s1</text><rect x="1312.125" y="387.4" width="47.25" height="25.2" style="fill:rgb(255,165,0);stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="411.34" font-size="20px" fill="black" text-anchor='start'>legend.s2</text><rect x="1312.125" y="415.12" width="47.25" height="25.2" style="fill:yellow;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="439.06" font-size="20px" fill="black" text-anchor='start'>legend.s1i</text>
+<rect x="1312.125" y="359.68" width="47.25" height="25.2" style="fill:blue;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="383.62" font-size="20px" fill="black" text-anchor='start'>legend.s1i</text><rect x="1312.125" y="387.4" width="47.25" height="25.2" style="fill:red;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="411.34" font-size="20px" fill="black" text-anchor='start'>legend.s1</text><rect x="1312.125" y="415.12" width="47.25" height="25.2" style="fill:rgb(255,165,0);stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="439.06" font-size="20px" fill="black" text-anchor='start'>legend.s2</text>
+<line x1="165" y1="764" x2="1290" y2="764" style="stroke:green;stroke-width:0.5"/>
+<line x1="165" y1="44" x2="165" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="165" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="235.728027159562" y1="44" x2="235.728027159562" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="235.728027159562" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
+<line x1="306.456054319125" y1="44" x2="306.456054319125" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="306.456054319125" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
+<line x1="377.184081478687" y1="44" x2="377.184081478687" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="377.184081478687" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
+<line x1="447.91210863825" y1="44" x2="447.91210863825" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="447.91210863825" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
+<line x1="518.640135797812" y1="44" x2="518.640135797812" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="518.640135797812" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
+<line x1="589.368162957375" y1="44" x2="589.368162957375" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="589.368162957375" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
+<line x1="660.096190116937" y1="44" x2="660.096190116937" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="660.096190116937" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
+<line x1="730.824217276499" y1="44" x2="730.824217276499" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="730.824217276499" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
+<line x1="801.552244436062" y1="44" x2="801.552244436062" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="801.552244436062" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
+<line x1="872.280271595624" y1="44" x2="872.280271595624" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="872.280271595624" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
+<line x1="943.008298755187" y1="44" x2="943.008298755187" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="943.008298755187" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
+<line x1="1013.73632591475" y1="44" x2="1013.73632591475" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="1013.73632591475" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24000</text>
+<line x1="1084.46435307431" y1="44" x2="1084.46435307431" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="1084.46435307431" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">26000</text>
+<line x1="1155.19238023387" y1="44" x2="1155.19238023387" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="1155.19238023387" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">28000</text>
+<line x1="1225.92040739344" y1="44" x2="1225.92040739344" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="1225.92040739344" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">30000</text>
+<line x1="1290" y1="44" x2="1290" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="1290" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">31812</text>
+<line x1="165" y1="18" x2="1290" y2="18" style="stroke:green;stroke-width:0.5"/>
+<line x1="165" y1="738" x2="165" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="165" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="235.728027159562" y1="738" x2="235.728027159562" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="235.728027159562" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
+<line x1="306.456054319125" y1="738" x2="306.456054319125" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="306.456054319125" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
+<line x1="377.184081478687" y1="738" x2="377.184081478687" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="377.184081478687" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
+<line x1="447.91210863825" y1="738" x2="447.91210863825" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="447.91210863825" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
+<line x1="518.640135797812" y1="738" x2="518.640135797812" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="518.640135797812" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
+<line x1="589.368162957375" y1="738" x2="589.368162957375" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="589.368162957375" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
+<line x1="660.096190116937" y1="738" x2="660.096190116937" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="660.096190116937" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
+<line x1="730.824217276499" y1="738" x2="730.824217276499" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="730.824217276499" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
+<line x1="801.552244436062" y1="738" x2="801.552244436062" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="801.552244436062" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
+<line x1="872.280271595624" y1="738" x2="872.280271595624" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="872.280271595624" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
+<line x1="943.008298755187" y1="738" x2="943.008298755187" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="943.008298755187" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
+<line x1="1013.73632591475" y1="738" x2="1013.73632591475" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="1013.73632591475" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24000</text>
+<line x1="1084.46435307431" y1="738" x2="1084.46435307431" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="1084.46435307431" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">26000</text>
+<line x1="1155.19238023387" y1="738" x2="1155.19238023387" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="1155.19238023387" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">28000</text>
+<line x1="1225.92040739344" y1="738" x2="1225.92040739344" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="1225.92040739344" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">30000</text>
+<line x1="1290" y1="738" x2="1290" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
+<text x="1290" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">31812</text>
 
-			<g style="fill:none">
-			<title>gene_s1030000,s1,s10000,2925,3119,1</title>
-			<polygon points="268.43973972086,94 268.43973972086,166 273.242172764994,166 273.242172764994,178.6 275.300358355338,130 273.242172764994,81.4 273.242172764994,94" style="fill:red;stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="271.870049038099" y="184.6" font-size="15px" fill="green"  text-anchor='start'   transform="rotate(60 271.870049038099 184.6)" font-family="Times New Roman">gene_s1030000.label</text>
-<polygon points="335.277725386647,148 373.223311957752,148 460.643153526971,292 451.024141833271,292" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="451.024141833271,328 460.643153526971,328 460.643153526971,652 451.024141833271,652" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1025.86618257261,328 1032.72680120709,328 1003.02102980008,472 996.160411165598,472" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="996.160411165598,508 1003.02102980008,508 632.795171633346,652 625.934552998868,652" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1144.86608826858,148 1159.57751791777,148 1149.49877404753,292 1134.78734439834,292" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1134.78734439834,328 1149.49877404753,328 1119.79300264051,472 1105.08157299132,472" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1105.08157299132,508 1119.79300264051,508 392.072331195775,652 377.360901546586,652" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1025.86618257261,328 1032.72680120709,328 1029.11967182195,472 1015.99962278386,472" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1218.52932855526,148 1228.14834024896,148 1218.06959637873,292 1208.45058468502,292" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1208.45058468502,328 1218.06959637873,328 1188.36382497171,472 1178.74481327801,472" style="fill:#00BFFF;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1178.74481327801,508 1188.36382497171,508 334.039984911354,652 318.58591097699,652" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:1"/>
+
+<text x="271.870049038099" y="182.8" font-size="15px" fill="green"  text-anchor='start'   transform="rotate(60 271.870049038099 182.8)" font-family="Times New Roman">gene_s1030000.label</text>
+<polygon points="335.277725386647,160.6 373.223311957752,160.6 460.643153526971,279.4 451.024141833271,279.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="451.024141833271,340.6 460.643153526971,340.6 460.643153526971,639.4 451.024141833271,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1025.86618257261,340.6 1032.72680120709,340.6 1003.02102980008,459.4 996.160411165598,459.4" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="996.160411165598,520.6 1003.02102980008,520.6 632.795171633346,639.4 625.934552998868,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1144.86608826858,160.6 1159.57751791777,160.6 1149.49877404753,279.4 1134.78734439834,279.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1134.78734439834,340.6 1149.49877404753,340.6 1119.79300264051,459.4 1105.08157299132,459.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1105.08157299132,520.6 1119.79300264051,520.6 392.072331195775,639.4 377.360901546586,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1025.86618257261,340.6 1032.72680120709,340.6 1029.11967182195,459.4 1015.99962278386,459.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1218.52932855526,160.6 1228.14834024896,160.6 1218.06959637873,279.4 1208.45058468502,279.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1208.45058468502,340.6 1218.06959637873,340.6 1188.36382497171,459.4 1178.74481327801,459.4" style="fill:#00BFFF;stroke:#000000;stroke-width:0;opacity:0.8"/>
+<polygon points="1178.74481327801,520.6 1188.36382497171,520.6 334.039984911354,639.4 318.58591097699,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
 
 
 <rect x="541.59138061109" y="121" width="373.231799321011" height="18" style="fill:blue"   />
 
 			<g style="fill:none">
 			<title>gene_s103000,s1,s1000,2925,3119,1</title>
-			<polygon points="645.03112033195,112 645.03112033195,148 649.833553376085,148 649.833553376085,160.6 651.891738966428,130 649.833553376085,99.4 649.833553376085,112" style="fill:yellow;stroke:purple;stroke-width:0"/> 
+			<polygon points="645.03112033195,112 645.03112033195,148 649.833553376085,148 649.833553376085,160.6 651.891738966428,130 649.833553376085,99.4 649.833553376085,112" style="fill:blue;stroke:purple;stroke-width:0"/> 
 			</g>
 <text x="648.461429649189" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 648.461429649189 97.4)" font-family="Times New Roman">gene_s103000.label</text>
 <rect x="932.505186721992" y="121" width="339.812806488118" height="18" style="fill:blue"   />
@@ -260,7 +327,7 @@
 
 			<g style="fill:none">
 			<title>gene_s206000,s2,s2000,4815,5888,0</title>
-			<polygon points="735.209354960392,310 746.593030931724,340.6 746.593030931724,328 773.154941531498,328 773.154941531498,292 746.593030931724,292 746.593030931724,279.4" style="fill:rgb(255,165,0);stroke:purple;stroke-width:0"/> 
+			<polygon points="735.209354960392,292 735.209354960392,328 773.154941531498,328 773.154941531498,292 " style="fill:rgb(255,165,0);stroke:purple;stroke-width:0"/> 
 			</g>
 
 			<g style="fill:none">
@@ -315,7 +382,7 @@
 
 			<g style="fill:none">
 			<title>gene_s207,s2,s2,6005,6421,1</title>
-			<polygon points="1134.78734439834,292 1134.78734439834,328 1145.08534515277,328 1145.08534515277,340.6 1149.49877404753,310 1145.08534515277,279.4 1145.08534515277,292" style="fill:rgb(255,165,0);stroke:purple;stroke-width:0"/> 
+			<polygon points="1134.78734439834,292 1134.78734439834,328 1134.78734439834,328 1134.78734439834,340.6 1149.49877404753,310 1134.78734439834,279.4 1134.78734439834,292" style="fill:rgb(255,165,0);stroke:purple;stroke-width:0"/> 
 			</g>
 
 			<g style="fill:none">
@@ -677,7 +744,7 @@
 <text x="671.801678611845" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 671.801678611845 277.4)" font-family="Times New Roman"></text>
 <text x="694.770605431912" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 694.770605431912 277.4)" font-family="Times New Roman"></text>
 <text x="726.244577517918" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 726.244577517918 277.4)" font-family="Times New Roman"></text>
-<text x="754.182148245945" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 754.182148245945 277.4)" font-family="Times New Roman">gene_s207.label</text>
+<text x="754.182148245945" y="290" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 754.182148245945 290)" font-family="Times New Roman">gene_s206000.label</text>
 <text x="784.648245944927" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 784.648245944927 277.4)" font-family="Times New Roman"></text>
 <text x="817.183138438325" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 817.183138438325 277.4)" font-family="Times New Roman"></text>
 <text x="845.668851376839" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 845.668851376839 277.4)" font-family="Times New Roman"></text>
@@ -755,5 +822,12 @@
 
 
 <rect x="165" y="121" width="358.9093738212" height="18" style="fill:blue"   />
+
+
+
+			<g style="fill:none">
+			<title>gene_s1030000,s1,s10000,2925,3119,1</title>
+			<polygon points="268.43973972086,94 268.43973972086,166 268.43973972086,166 268.43973972086,176.8 275.300358355338,130 268.43973972086,83.2 268.43973972086,94" style="fill:red;stroke:purple;stroke-width:0"/> 
+			</g>
 
 </svg>
