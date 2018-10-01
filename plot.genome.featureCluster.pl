@@ -38,7 +38,7 @@ my ($ref_name_width_ratio, $cluster_width_ratio, $legend_width_ratio) = split(/-
 if($ref_name_width_ratio+$cluster_width_ratio+$legend_width_ratio !=1){
 	die "error:width_ratio_ref_cluster_legend in $list ,the sum is not equal to 1\n";
 }
-my $space_len = 500 * $conf{space_ratio_between_blocks};# 500bp是默认的blocks之间的间距
+my $space_len = $conf{space_between_blocks};# 500bp是默认的blocks之间的间距
 
 ## 
 my $pre_feature_flag=0;
@@ -51,28 +51,28 @@ my %gff=%$gff;
 my $ends_extend_ratio = 0.1;
 foreach my $s(sort {$gff{$b}{chooselen_all}<=>$gff{$a}{chooselen_all}} keys %gff){
 	$max_length=$gff{$s}{chooselen_all};
-	print "dd\n";
 	#print "sample is $s\n";
 	#print "xxxx is $max_length\n";
 	last;
 }
-#print "max_length is $max_length,\n";
+print "max_length is $max_length,\n";
 my $ratio=$cluster_width_ratio*$svg_width/$max_length;
 #print "ratio $cluster_width_ratio*$svg_width/$max_length\n";
 
 my $index;
 my $common_size;
 my $top_bottom_margin=$conf{top_bottom_margin};
+my %orders;
 my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_width\" height=\"$svg_height\" >\n";
 open LI,"$list" or die "$!";
 my $top_distance=$top_bottom_margin/2*$svg_height;
+my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$sample_num; # 每个track的高度
+my $id_line_height = 0.05*$conf{genome_height_ratio}*2*$sample_single_height; # 每个block的genome的高度
 while(<LI>){
 	chomp;
 	next if($_=~ /^#/ || $_=~ /^\s*$/);
 	$index++;
 	my ($sample,@tmp) = split(/\s+/,$_);
-	my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$sample_num; # 每个track的高度
-	my $id_line_height = 0.05*$conf{genome_height_ratio}*2*$sample_single_height; # 每个block的genome的高度
 	my $block_distance = $space_len*$ratio; # block_distance 是每个block的间距
 	my $flag;
 	my $left_distance = (1 + 0.1) * $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
@@ -91,7 +91,7 @@ while(<LI>){
 		$conf{sample_name_old2new}{$sample}{new_font_size} = $conf{sample_name_font_size_default};
 	}
 	$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"$conf{sample_name_old2new}{$sample}{new_font_size}px\" fill=\"$conf{sample_name_old2new}{$sample}{new_color}\"  text-anchor='end'>$conf{sample_name_old2new}{$sample}{new_name}</text>\n"; # draw sample name
-	print "draw sample name\n";
+	print "draw sample name $conf{sample_name_old2new}{$sample}{new_name}\n";
 
 
 	my $pre_block='';
@@ -101,12 +101,24 @@ while(<LI>){
 		my @scf = keys %{$gff{$sample}{block}{$block_index}};
 		my $id_line_x=$left_distance; # 每个block的genome的起点的x,y坐标
 		my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
-		my $id_line_width=$gff{$sample}{chooselen_single}{$block_index} * $ratio; # 每个block的genome的宽度
+		my $id_line_width=$gff{$sample}{chooselen_single}{$block_index}{len} * $ratio; # 每个block的genome的宽度
 		#print "chooselen_single is $sample $gff{$sample}{chooselen_single}{$block_index} * $ratio\n";
 
-		### draw main scaffold line
-		$svg.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_color}\"   />\n";
-		print "sample is $sample, scf is @scf\n";
+		### draw main scaffold line track
+		#$svg.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_color}\"   />\n";
+		my $track_order=$conf{track_order};
+		foreach my $f(keys %{$conf{feature_setting}}){
+			next if ( (not exists $conf{feature_setting}{$f}{track_order}) || $conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample);
+			#print "$conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample\n";
+			#print "f is $f\n\n";
+			my $start_f=$conf{feature_setting}{$f}{start};
+			my $end_f=$conf{feature_setting}{$f}{end};
+			if($start_f>=$gff{$sample}{chooselen_single}{$block_index}{start} && $end_f<=$gff{$sample}{chooselen_single}{$block_index}{end}){
+				$track_order=$conf{feature_setting}{$f}{track_order};
+				#print "$conf{feature_setting}{$f}{track_order}, $conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample;track_order is $track_order;sample is $sample, scf is @scf\n\n\n";
+			}
+		}
+		$orders{$track_order}.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_color}\"   />\n";
 		## 判断相邻的block是否来自同一条scaffold
 		if($scf[0] eq $pre_block){
 			my $pre_x = $id_line_x - $block_distance;
@@ -122,9 +134,7 @@ while(<LI>){
 
 
 		### draw genes
-		#my $gene_height_medium=$id_line_height*1.5;#sikaiwei
-		my $gene_height_medium=$id_line_height*$conf{gene_height_ratio};
-		my $gene_height_top=$id_line_height*$conf{feature_arrow_sharp_tend};
+		my $gene_height_top=($conf{feature_shape}=~ /arrow/)? $id_line_height*$conf{feature_arrow_sharp_tend}:0;
 		my $gene_width_arrow=0.3;
 		#print "here\n";
 		#print "scf is @scf,$sample,$block_index\n";
@@ -132,22 +142,47 @@ while(<LI>){
 		foreach my $index(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){
 			#next if($index eq "len");
 			#print "here $sample $block_index $scf[0] $index\n";
+			my $gene_height_medium=$id_line_height*$conf{feature_height_ratio};
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
-			die "die:$sample $block_index $scf[0] $index\n" if(not $index_id);
+			die "die:index_id is $index_id,$sample $block_index $scf[0] $index\n" if(not $index_id);
 			my $index_start = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{start};
 			my $index_end = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{end};
 			my $index_strand = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{strand};
-			my $index_color = (exists $conf{color_feature_setting}{feature_col}{$index_id})? $conf{color_feature_setting}{feature_col}{$index_id}:"$conf{color_feature_default}";
 
-			my $index_label_content = (exists $conf{color_feature_setting}{label}{$index_id}{label_content})? $conf{color_feature_setting}{label}{$index_id}{label_content}:(($conf{feature_label_display}=~ /yes/)? $index_id:'');
-			$index_label_size = (exists $conf{color_feature_setting}{label}{$index_id}{label_size})? $conf{color_feature_setting}{label}{$index_id}{label_size}:10;
-			$index_label_col = (exists $conf{color_feature_setting}{label}{$index_id}{label_col})? $conf{color_feature_setting}{label}{$index_id}{label_col}:'black';
-			$index_label_position = (exists $conf{color_feature_setting}{label}{$index_id}{label_position})? $conf{color_feature_setting}{label}{$index_id}{label_position}:'medium_up';
-			$index_label_angle = (exists $conf{color_feature_setting}{label}{$index_id}{label_angle})? $conf{color_feature_setting}{label}{$index_id}{label_angle}:$conf{label_rotate_angle};
+			my $index_color = (exists $conf{feature_setting}{$index_id}{feature_color})? $conf{feature_setting}{$index_id}{feature_color}:$conf{feature_color};
+			my $index_label_content = (exists $conf{feature_setting}{$index_id}{feature_label})? $conf{feature_setting}{$index_id}{feature_label}:"";
+			my $index_label_size = (exists $conf{feature_setting}{$index_id}{feature_label_size})? $conf{feature_setting}{$index_id}{feature_label_size}:$conf{feature_label_size};
+			$index_label_col = (exists $conf{feature_setting}{$index_id}{feature_label_color})? $conf{feature_setting}{$index_id}{feature_label_color}:$conf{feature_label_color};
+			$index_label_position = (exists $conf{feature_setting}{$index_id}{pos_feature_label})? $conf{feature_setting}{$index_id}{pos_feature_label}:$conf{pos_feature_label};
+			#print "$index_id\t$index_label_position\n";
+			$index_label_angle = (exists $conf{feature_setting}{$index_id}{label_rotate_angle})? $conf{feature_setting}{$index_id}{label_rotate_angle}:$conf{label_rotate_angle};
+			$gene_height_medium = $id_line_height * $conf{feature_setting}{$index_id}{feature_height_ratio} if(exists $conf{feature_setting}{$index_id}{feature_height_ratio});
 			#print "index_label_angle is $index_label_angle\n";
+			my $sharp_len=($conf{ignore_sharp_arrow}=~ /yes/)? 0:$gene_height_top;
+			$conf{feature_setting}{$index_id}{cross_link_shift_y}=0.5*$gene_height_medium + $sharp_len;
+
 
 			## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-			$svg.=&draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
+			$svg.=&draw_genes(
+				$index_id,
+				$index_start, 
+				$index_end, 
+				$index_strand,
+				$gene_height_medium,
+				$gene_height_top,
+				$gene_width_arrow,
+				$shift_x,
+				$top_distance,
+				$sample_single_height,
+				$sample,
+				$scf[0],
+				$index_color,
+				$index_label_content,
+				$index_label_size,
+				$index_label_col,
+				$index_label_position,
+				$index_label_angle,
+				$angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 			$angle_flag = ($angle_flag)? 0:1;
 			#print "sampe is $sample,id is $id;index is $index;$gff{$sample}{id}{$id}{$index}{start},$gff{$sample}{id}{$id}{$index}{end},$gff{$sample}{id}{$id}{$index}{strand},$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$top_distance,$sample_single_height\n";
 
@@ -185,12 +220,31 @@ foreach my $index(keys %{$conf{crossing_link}{index}}){
 		my $left_up_y = $conf{crossing_link}{position}{$fs[$i]}{start}{y};
 		my $right_up_x = $conf{crossing_link}{position}{$fs[$i]}{end}{x};
 		my $right_up_y = $conf{crossing_link}{position}{$fs[$i]}{end}{y};
-
+		if($conf{cross_link_anchor_pos}=~ /^up_/){
+			$left_up_y-=$conf{feature_setting}{$fs[$i]}{cross_link_shift_y};
+			$right_up_y-=$conf{feature_setting}{$fs[$i]}{cross_link_shift_y};
+		}elsif($conf{cross_link_anchor_pos}=~ /^low_/){
+			$left_up_y+=$conf{feature_setting}{$fs[$i]}{cross_link_shift_y};
+			$right_up_y+=$conf{feature_setting}{$fs[$i]}{cross_link_shift_y};
+		}else{
+			die "error: not support $conf{cross_link_anchor_pos} yet~\n"
+		}
 		my $left_down_x = $conf{crossing_link}{position}{$fs[$i+$add]}{start}{x};
 		my $left_down_y = $conf{crossing_link}{position}{$fs[$i+$add]}{start}{y};
 		my $right_down_x = $conf{crossing_link}{position}{$fs[$i+$add]}{end}{x};
 		my $right_down_y = $conf{crossing_link}{position}{$fs[$i+$add]}{end}{y};
-		$svg.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>"; #crossing link of features
+		if($conf{cross_link_anchor_pos}=~ /_low$/){
+			$left_down_y+=$conf{feature_setting}{$fs[$i+$add]}{cross_link_shift_y};
+			$right_down_y+=$conf{feature_setting}{$fs[$i+$add]}{cross_link_shift_y};
+		}elsif($conf{cross_link_anchor_pos}=~ /_up$/){
+			$left_down_y-=$conf{feature_setting}{$fs[$i+$add]}{cross_link_shift_y};
+			$right_down_y-=$conf{feature_setting}{$fs[$i+$add]}{cross_link_shift_y};
+		}else{
+			die "error: not support $conf{cross_link_anchor_pos} yet~\n"
+		}
+		#$svg.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>"; #crossing link of features
+		$orders{$conf{cross_link_order}}.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
+
 
 
 	}
@@ -199,7 +253,22 @@ foreach my $index(keys %{$conf{crossing_link}{index}}){
 
 
 ## draw legend
-my $legend_num = keys %{$conf{color_feature_setting}{legend_col}};
+my $legend_num=0;
+my %legend_color_num;
+for my $f(keys %{$conf{feature_setting}}){
+	if(exists $conf{feature_setting}{$f}{legend_label}){
+		if(exists $legend_color_num{$conf{feature_setting}{$f}{feature_color}}){
+			if($legend_color_num{$conf{feature_setting}{$f}{feature_color}} ne $conf{feature_setting}{$f}{legend_label}){
+				die "error: one $conf{feature_setting}{$f}{feature_color} -> more than one different legend_label\n";
+			}
+		}else{
+			$legend_color_num{$conf{feature_setting}{$f}{feature_color}}=$conf{feature_setting}{$f}{legend_label};
+		}
+	
+	}
+}
+$legend_num=keys %legend_color_num;
+
 #print "legend_num is $legend_num\n";
 #my $top_margin_legend;
 #my $legend_single_arrow_height = $common_size; # 和sample name一样的字体大小，字体大小几乎等同同等像素的宽高
@@ -213,37 +282,39 @@ my $legend_num = keys %{$conf{color_feature_setting}{legend_col}};
 #my $legend_font_size = $legend_single_arrow_height * 0.9;
 
 #my $legend_max_length=0;
-#foreach my $legend(keys %{$conf{color_feature_setting}{legend_col}}){
+#foreach my $legend(keys %{$conf{feature_setting}{legend_col}}){
 #	if(length($legend) >$legend_max_length){
 #		$legend_max_length = $length($legend);
 #	}
 #}
 
-if(-e $conf{color_feature_setting}){
+if($conf{display_legend}=~ /yes/i){
+	print "lengend start\n";
+	my $legend_arrow_height = $id_line_height*$conf{feature_height_ratio}*$conf{legend_height_ratio};
 	my $legend_font_size = $conf{legend_font_size}; #legend中文字字体大小
-	my $legend_height_percent = $conf{legend_height_percent};
-	my $top_margin_legend = (1-$legend_height_percent)/2*$svg_height;
-	my $legend_single_arrow_height = $svg_height*$legend_height_percent/$legend_num;
+	my $top_margin_legend = ($svg_height - ($legend_arrow_height * $legend_num + ($legend_num-1)*$legend_arrow_height*$conf{legend_height_space}))/2;
+	my $legend_single_arrow_height = $legend_arrow_height;
+
 	my $legend_width_margin = $conf{legend_width_margin};
 	my $legend_width_textpercent = $conf{legend_width_textpercent};
 	my $legend_arrow_width = (1-$legend_width_margin*2)*(1-$legend_width_textpercent)*$svg_width*$legend_width_ratio;
 	my $text_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width+$legend_arrow_width*1.2;
-	my $text_y = $top_margin_legend -2 ;
+	my $text_y = $top_margin_legend + 0.95*$legend_arrow_height ;
 	my $arrow_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width*1.1;
-	my $arrow_y = $top_margin_legend + (1-0.8)*$legend_single_arrow_height;
-	my $legend_arrow_height = $legend_single_arrow_height * 0.8;
-	foreach my $legend(keys %{$conf{color_feature_setting}{legend_col}}){
-		my $color = $conf{color_feature_setting}{legend_col}{$legend};
+	my $arrow_y = $top_margin_legend;
+	#my $legend_arrow_height = $legend_single_arrow_height * 0.8;
+	foreach my $legend_color(keys %legend_color_num){
+		my $legend = $legend_color_num{$legend_color};
 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 		# 先用方块代替arrow
-		my @arr_cols = split(/,/, $conf{color_feature_setting}{legend_col}{$legend});
+		my @arr_cols = split(/,/, $legend_color);
 		my $arrow_col_start;
 		my $arrow_col_end;
 		if(@arr_cols==2){
-			#print "aisis $conf{color_feature_setting}{legend_col}{$legend},@arr_cols\n";
+			#print "aisis $conf{feature_setting}{legend_col}{$legend},@arr_cols\n";
 			$arrow_col_start = $arr_cols[0];
 			$arrow_col_end = $arr_cols[1];
-			my $arrow_color_id = $conf{color_feature_setting}{legend_col}{$legend};
+			my $arrow_color_id = $conf{feature_setting}{legend_col}{$legend};
 			$arrow_color_id=~ s/,/-/g;
 			$svg.="
 			<defs>
@@ -257,21 +328,20 @@ if(-e $conf{color_feature_setting}){
 			<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:url(#$arrow_color_id);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1\" />
 			</g>";
 		}else{
-			$svg.="<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:$conf{color_feature_setting}{legend_col}{$legend};stroke:black;stroke-width:0;fill-opacity:1;stroke-opacity:1\" />";
+			$svg.="<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:$legend_color;stroke:$conf{legend_stroke_color};stroke-width:$conf{legend_stroke_width};fill-opacity:1;stroke-opacity:1\" />";
 		}
-		#print "legend_col is $conf{color_feature_setting}{legend_col}{$legend}\n";
-		$arrow_y += $legend_single_arrow_height * 1;
-
 		## draw legend
-		$text_y += $legend_single_arrow_height;
 		$svg.="<text x=\"$text_x\" y=\"$text_y\" font-size=\"${legend_font_size}px\" fill=\"black\" text-anchor='start'>$legend</text>";
+		$arrow_y += $legend_single_arrow_height +$legend_arrow_height*$conf{legend_height_space};
+		$text_y += $legend_single_arrow_height +$legend_arrow_height*$conf{legend_height_space};
+		## draw legend
 
 	}
 	#legend外围的线框
-	my $legend_rect_width = (1-$legend_width_margin*2)*$svg_width*$legend_width_ratio * 1.1;
-	my $legend_rect_height = $svg_height*$legend_height_percent * 1.04;
-	my $legend_rect_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width *0.9;
-	my $legend_rect_y = $top_margin_legend;
+	#my $legend_rect_width = (1-$legend_width_margin*2)*$svg_width*$legend_width_ratio * 1.1;
+	#my $legend_rect_height = $svg_height*$legend_height_percent * 1.04;
+	#my $legend_rect_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width *0.9;
+	#my $legend_rect_y = $top_margin_legend;
 	#$svg.="<rect x=\"$legend_rect_x\" y=\"$legend_rect_y\" width=\"$legend_rect_width\" height=\"$legend_rect_height\" style=\"fill:none;stroke:black;stroke-width:1;fill-opacity:0;stroke-opacity:1\" />"; #不画这条线框了
 }
 
@@ -305,13 +375,15 @@ if($conf{scale_display}=~ /yes/i){
 }
 
 open SVG,">$outdir/$prefix.svg" or die "$!";
-print SVG "$svg\n</svg>";
+print SVG "$svg";
+for my $order(sort {$a<=>$b}keys %orders){
+	print "order is $order\n";
+	print SVG "\n$orders{$order}\n";
+}
+print SVG "</svg>";
 close SVG;
 print "outfile is  $outdir/$prefix.svg\n";
-`convert  $outdir/$prefix.svg $outdir/$prefix.png `;
-print "outfile is $outdir/$prefix.png\n";
-`convert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.pdf`;
-print "outfile is $outdir/$prefix.pdf\n";
+`set -vex;convert  $outdir/$prefix.svg $outdir/$prefix.png ; echo outfile is $outdir/$prefix.png; convert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf;echo outfile is $outdir/$prefix.dpi$conf{pdf_dpi}.pdf`;
 
 #$svg.=&draw_genes($gff{$sample}{id}{$id}{$index}{start},$gff{$sample}{id}{$id}{$index}{end},$gff{$sample}{id}{$id}{$index}{strand},$gene_height_medium,$gene_height_top);
 
@@ -319,13 +391,22 @@ sub read_list(){
 	###start:get scaffold length in genome file and scaffold length  in gff file
 	my ($list) = @_;
 	my (%genome,%gff,$sample_num);
-
+	my @features=split(/,/, $conf{feature_keywords});
+	my %uniq_sample;
 	open LI,"$list" or die "$!";
 	while(<LI>){
 		chomp;
 		next if($_=~ /^\s*$/||$_=~ /^#/);
 		$sample_num++;
-		my ($sample,$gffs,$genome,@arrs)=split(/\t+/,$_); # $seq_id,$seq_draw_start,$seq_draw_end
+		my $block_index=1;
+		my %scf_block_id;
+		my ($sample,$gffs,$genome,@arrs)=split(/\s+/,$_); # $seq_id,$seq_draw_start,$seq_draw_end
+		if(exists $uniq_sample{$sample}){
+			die "error:more than one $sample, not allow same 1th column in $list~\n " 
+		}else{
+			$uniq_sample{$sample}="";
+		}
+		print "$sample\n";
 		if(@arrs%3){
 			die "$list line $. error format:$_\n"; 
 		}
@@ -350,6 +431,8 @@ sub read_list(){
 			next if($_=~ /^#/);
 			my @arr=split(/\t/,$_);
 			my $block_index=-1;
+			my $start_f=$arr[3];
+			my $end_f=$arr[4];
 			if(@arrs){ # has seq_id mean not full length of whole gff
 				#my $xxx=scalar(@arrs);
 				#if ($xxx == 9){
@@ -374,63 +457,92 @@ sub read_list(){
 					$block_index = $arrs_index;
 					#print "hereis $block_index\n";
 					if(not exists  $gff{$sample}{chooselen_single}{$block_index}){
-						$gff{$sample}{chooselen_single}{$block_index} = $genome{$sample}{$arr[0]}{$arrs_index}{len};
-						$gff{$sample}{chooselen_all} +=$gff{$sample}{chooselen_single}{$block_index}; ## 把每行所有block长度加起来
+						$gff{$sample}{chooselen_single}{$block_index}{len} = $genome{$sample}{$arr[0]}{$arrs_index}{len};
+						$gff{$sample}{chooselen_single}{$block_index}{start} = $seq_draw_start;
+						$gff{$sample}{chooselen_single}{$block_index}{end} = $seq_draw_end;
+						#gff{$sample}{chooselen_single}{$block_index}{scf_id} = $arr[0];
+						$gff{$sample}{chooselen_all} +=$gff{$sample}{chooselen_single}{$block_index}{len}; ## 把每行所有block长度加起来
 						$gff{$sample}{chooselen_all} += $space_len ; ## 加上 每个block之间的宽度，500bp相当于一个基因的长度,后面最好把这个500bp改成每个track实际的平均基因长度
 					}
 				}
 
 			}else{ # list里面没有定义seq_id/start/end,即要画full-length of scaffold
 				#print "not seq_id\n";
-				$block_index = $conf{'scaffold_order'}{$sample}{$arr[0]};
-				if(not exists  $gff{$sample}{chooselen_single}{$arr[0]}){
-					$gff{$sample}{chooselen_single}{$arr[0]} = $genome{$sample}{$arr[0]}{len};
-					$gff{$sample}{chooselen_all} +=$gff{$sample}{chooselen_single}{$arr[0]}; # ## 把每行所有block(即scaffold)长度加起来
+				#$block_index = $conf{'scaffold_order'}{$sample}{$arr[0]};
+				$scf_block_id{$arr[0]} = $. if(not exists $scf_block_id{$arr[0]});
+				$block_index=$scf_block_id{$arr[0]};
+				if(not exists  $gff{$sample}{chooselen_single}{$block_index}){
+					$gff{$sample}{chooselen_single}{$block_index}{len} = $genome{$sample}{$arr[0]}{len};
+					$gff{$sample}{chooselen_single}{$block_index}{start} = 1;
+					$gff{$sample}{chooselen_single}{$block_index}{end} = $genome{$sample}{$arr[0]}{len};
+
+					$gff{$sample}{chooselen_all} +=$gff{$sample}{chooselen_single}{$block_index}{len}; # ## 把每行所有block(即scaffold)长度加起来
+					#print "$sample	$gff{$sample}{chooselen_all}\n";
 					$gff{$sample}{chooselen_all} += $space_len ; ## 这个500最好改成每个track的blocks的平均长度的一定比例，比如一半
 				}
-				$gff{$sample}{block}{$block_index}{$arr[0]}{len}=$genome{$sample}{$arr[0]}{len}; # 一条scaffold就是一个block
+				#$gff{$sample}{block}{$block_index}{$arr[0]}{len}=$genome{$sample}{$arr[0]}{len}; # 一条scaffold就是一个block
 			}
 			#print "block $sample $block_index\n";
-			next if($arr[2] ne "gene" || $block_index == -1); ## 目前的只是画基因的cluster,后面会把其他组分也加进去
+
+			#next if($arr[2] ne "gene" || $block_index == -1); ## 目前的只是画基因的cluster,后面会把其他组分也加进去
+			next if(@arrs && $block_index == -1);
+			my $flag=1;
+			foreach my $f(@features){
+				next if ($f=~ /^\s*$/);
+				$f=~ s/\s//g;
+				$flag =0 if($arr[2]=~ /$f/);
+			}
+			next if($flag);
+
 			$_=~ /\sID=([^;]+);/;
-			my $gene_id=$1;
+			my $feature_id=$1;
 			$gene_index++;
 			if(!$arr[3]){die "error:$gffs line $.\n"}
 			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{start}=$arr[3]; # block_index 是指每行中每个cluster的左右顺序
 			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{end}=$arr[4];
-			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{id}=$gene_id;
+			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{id}=$feature_id;
+			if(!$feature_id){die "die:line is $_\n"}
 			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{strand}=($arr[6]=~ /\+/)? 1:0;
+			#foreach my $index(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){
+			$conf{feature_setting}{$feature_id}{start}=$start_f;
+			$conf{feature_setting}{$feature_id}{end}=$end_f;
+			$conf{feature_setting}{$feature_id}{sample}=$sample;
+			$conf{feature_setting}{$feature_id}{scf_id}=$arr[0];
 
-			#print "block $sample $block_index $arr[0] $gene_index $arr[3] $arr[4] $gene_id\n";
-			#print "id is $gene_id\n";
+			#print "block $sample $block_index $arr[0] $gene_index $arr[3] $arr[4] $feature_id\n";
+			#print "id is $feature_id\n";
 
 		}
 		close GFF;
 	}
 	close LI;
 
-	return (\%genome, \%gff, $sample_num)
+	return (\%genome, \%gff, $sample_num);
 	####end:get scaffold length in genome file and scaffold length  in gff file
 }
 
 
 sub draw_genes(){
 	#draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-	#my ($gene_id,$start,$end,$strand,$shape)=@_;
-	my ($gene_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_cotent, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag)=@_;
+	#my ($feature_id,$start,$end,$strand,$shape)=@_;
+	my ($feature_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_cotent, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag)=@_;
+	#$conf{feature_setting}{$index_id}{feature_height_ratio}
 	my $shape=$conf{feature_shape};
+	my $order_f=(exists $conf{feature_setting}{$feature_id}{feature_order})? $conf{feature_setting}{$feature_id}{feature_order}:$conf{feature_order};
+	my $order_f_label=(exists $conf{feature_setting}{$feature_id}{feature_label_order})? $conf{feature_setting}{$feature_id}{feature_label_order}:$conf{feature_label_order};
+	my $padding_feature_label=(exists $conf{feature_setting}{$feature_id}{padding_feature_label})? $conf{feature_setting}{$feature_id}{padding_feature_label}:$conf{padding_feature_label};
 	my ($back,$x1,$y1,$x2,$y2,$x3,$y3,$x4,$y4,$x5,$y5,$x6,$y6,$x7,$y7,$label_x,$label_y,$index_col_start,$index_col_end,$crossing_link_start_x,$crossing_link_start_y,$crossing_link_end_x,$crossing_link_end_y);
 	my ($label_y_shift, $label_roat_angle);
+	$back="";
 	#print "distance_closed_feature $conf{distance_closed_feature}\n";
-
-	if($conf{pos_feature_label}=~ /_up$/){
-		$label_y_shift= - $conf{padding_feature_label};
+	if($index_label_position=~ /_up$/){
+		$label_y_shift= - $padding_feature_label;
 		$index_label_angle = (($end-$start)<$conf{distance_closed_feature} && $pre_feature_flag)? $index_label_angle +$conf{shift_angle_closed_feature}:$index_label_angle; # 相邻feature的label的angle开
-	}elsif($conf{pos_feature_label}=~ /_low$/){
-		$label_y_shift= $gene_height_medium + $conf{padding_feature_label};
+	}elsif($index_label_position=~ /_low$/){
+		$label_y_shift= 2*$gene_height_top+$gene_height_medium + $padding_feature_label;
 		$index_label_angle = (($end-$start)<$conf{distance_closed_feature} && $pre_feature_flag)? $index_label_angle -$conf{shift_angle_closed_feature}:$index_label_angle; # 相邻feature的label的angle开
-	}elsif($conf{pos_feature_label}=~ /_medium$/){
-		$label_y_shift= 0.5*$gene_height_medium + $conf{padding_feature_label};
+	}elsif($index_label_position=~ /_medium$/){
+		$label_y_shift= $gene_height_top+0.5*$gene_height_medium + $padding_feature_label;
 		$index_label_angle = (($end-$start)<$conf{distance_closed_feature} && $pre_feature_flag)? $index_label_angle -$conf{shift_angle_closed_feature}:$index_label_angle; # 相邻feature的label的angle开
 	}else{
 		die "error:  not support $conf{pos_feature_label} yet~\n"
@@ -438,7 +550,7 @@ sub draw_genes(){
 	$pre_feature_flag = (($end-$start)<$conf{distance_closed_feature})? 1:0;
 
 	if($shape=~ /arrow/){
-		#my ($gene_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_cotent, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag)=@_;
+		#my ($feature_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_cotent, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag)=@_;
 		#print "index_color1 is $index_color\n";
 
 		if($strand){
@@ -473,26 +585,26 @@ sub draw_genes(){
 
 		}
 
-		if($conf{pos_feature_label}=~ /^medium_/){
+		if($index_label_position=~ /^medium_/){
 			$label_x = $x1 + ($end - $start)/2 * $ratio;
-		}elsif($conf{pos_feature_label}=~ /^left_/){
+		}elsif($index_label_position=~ /^left_/){
 			$label_x = $x1;
-		}elsif($conf{pos_feature_label}=~ /^right_/){
+		}elsif($index_label_position=~ /^right_/){
 			$label_x = $x4;
 		}else{
 			die "error:  not support $conf{pos_feature_label} yet~\n"
 		}
 
 		#print "y1 is $y1\n";
-		#my ($gene_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label, $index_label_cotent, $index_label_size, $index_label_col, $index_label_position, $index_label_angle)=@_;
+		#my ($feature_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label, $index_label_cotent, $index_label_size, $index_label_col, $index_label_position, $index_label_angle)=@_;
 		#print "index_color2 is $index_color\n";
 		my @arr_cols = split(/,/, $index_color);
-		if(@arr_cols==2){
+		if(@arr_cols==2 && $conf{display_feature}=~ /yes/i){
 			$index_col_start = $arr_cols[0];
 			$index_col_end = $arr_cols[1];
 			my $index_color_id = $index_color;
 			$index_color_id=~ s/,/-/g;
-			$back="
+			$orders{$order_f}.="
 			<defs>
 			<linearGradient id=\"$index_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
 			<stop offset=\"0%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
@@ -501,13 +613,13 @@ sub draw_genes(){
 			</linearGradient>
 			</defs>
 			<g style=\"fill:none\">
-			<title>$gene_id,$sample,$id,$start,$end,$strand</title>
+			<title>$feature_id,$sample,$id,$start,$end,$strand</title>
 			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:url(#$index_color_id);stroke:purple;stroke-width:0\"/> 
 			</g>\n"; ## feture arrow
-		}else{
-			$back.="
+		}elsif($conf{display_feature}=~ /yes/i){
+			$orders{$order_f}.="
 			<g style=\"fill:none\">
-			<title>$gene_id,$sample,$id,$start,$end,$strand</title>
+			<title>$feature_id,$sample,$id,$start,$end,$strand</title>
 			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$index_color;stroke:purple;stroke-width:0\"/> 
 			</g>\n"; ## feture arrow
 
@@ -516,17 +628,17 @@ sub draw_genes(){
 
 
 		## draw label of feature
-		$back.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_cotent</text>\n" if(-e $conf{color_feature_setting}); # label of feature
+		$orders{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_cotent</text>\n" if($conf{feature_label_display}=~ /yes/); # label of feature
 		#$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"${text_size}px\" fill=\"$conf{color_sample_name}\"  text-anchor='end'>$conf{sample_name_old2new}{$sample}</text>\n";
 		# check this feature if is in crossing_link
-		if(exists $conf{crossing_link}{features}{$gene_id}){
-			#print "crossing_link $gene_id\n";
-			$conf{crossing_link}{position}{$gene_id}{start}{x}=$crossing_link_start_x;
-			$conf{crossing_link}{position}{$gene_id}{start}{y}=$crossing_link_start_y;
+		if(exists $conf{crossing_link}{features}{$feature_id}){
+			#print "crossing_link $feature_id\n";
+			$conf{crossing_link}{position}{$feature_id}{start}{x}=$crossing_link_start_x;
+			$conf{crossing_link}{position}{$feature_id}{start}{y}=$crossing_link_start_y;
 
-			$conf{crossing_link}{position}{$gene_id}{end}{x}=$crossing_link_end_x;
-			$conf{crossing_link}{position}{$gene_id}{end}{y}=$crossing_link_end_y;
-			#print "crossing_linkis $gene_id $crossing_link_start_x $crossing_link_start_y $crossing_link_end_x $crossing_link_end_y\n";
+			$conf{crossing_link}{position}{$feature_id}{end}{x}=$crossing_link_end_x;
+			$conf{crossing_link}{position}{$feature_id}{end}{y}=$crossing_link_end_y;
+			#print "crossing_linkis $feature_id $crossing_link_start_x $crossing_link_start_y $crossing_link_end_x $crossing_link_end_y\n";
 		}
 
 	}elsif($shape=~ /^rect/){
@@ -557,26 +669,26 @@ sub draw_genes(){
 			$crossing_link_end_y=$crossing_link_start_y;
 		}
 
-		if($conf{pos_feature_label}=~ /^medium_/){
+		if($index_label_position=~ /^medium_/){
 			$label_x = $x1 + ($end - $start)/2 * $ratio;
-		}elsif($conf{pos_feature_label}=~ /^left_/){
+		}elsif($index_label_position=~ /^left_/){
 			$label_x = $x1;
-		}elsif($conf{pos_feature_label}=~ /^right_/){
+		}elsif($index_label_position=~ /^right_/){
 			$label_x = $x4;
 		}else{
 			die "error:  not support $conf{pos_feature_label} yet~\n"
 		}
 
 		#print "y1 is $y1\n";
-		#my ($gene_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label, $index_label_cotent, $index_label_size, $index_label_col, $index_label_position, $index_label_angle)=@_;
+		#my ($feature_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label, $index_label_cotent, $index_label_size, $index_label_col, $index_label_position, $index_label_angle)=@_;
 		#print "index_color2 is $index_color\n";
 		my @arr_cols = split(/,/, $index_color);
-		if(@arr_cols==2){
+		if(@arr_cols==2 && $conf{display_feature}=~ /yes/i){
 			$index_col_start = $arr_cols[0];
 			$index_col_end = $arr_cols[1];
 			my $index_color_id = $index_color;
 			$index_color_id=~ s/,/-/g;
-			$back="
+			$orders{$order_f}.="
 			<defs>
 			<linearGradient id=\"$index_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
 			<stop offset=\"0%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
@@ -585,13 +697,13 @@ sub draw_genes(){
 			</linearGradient>
 			</defs>
 			<g style=\"fill:none\">
-			<title>$gene_id,$sample,$id,$start,$end,$strand</title>
+			<title>$feature_id,$sample,$id,$start,$end,$strand</title>
 			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:url(#$index_color_id);stroke:purple;stroke-width:0\"/> 
 			</g>\n"; ## feture rect
-		}else{
-			$back.="
+		}elsif($conf{display_feature}=~ /yes/i){
+			$orders{$order_f}.="
 			<g style=\"fill:none\">
-			<title>$gene_id,$sample,$id,$start,$end,$strand</title>
+			<title>$feature_id,$sample,$id,$start,$end,$strand</title>
 			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:purple;stroke-width:0\"/> 
 			</g>\n"; ## feture rect
 
@@ -600,17 +712,17 @@ sub draw_genes(){
 
 
 		## draw label of feature
-		$back.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_cotent</text>\n" if(-e $conf{color_feature_setting}); # label of feature
+		$orders{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_cotent</text>\n" if($conf{feature_label_display}=~ /yes/); # label of feature
 		#$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"${text_size}px\" fill=\"$conf{color_sample_name}\"  text-anchor='end'>$conf{sample_name_old2new}{$sample}</text>\n";
 		# check this feature if is in crossing_link
-		if(exists $conf{crossing_link}{features}{$gene_id}){
-			#print "crossing_link $gene_id\n";
-			$conf{crossing_link}{position}{$gene_id}{start}{x}=$crossing_link_start_x;
-			$conf{crossing_link}{position}{$gene_id}{start}{y}=$crossing_link_start_y;
+		if(exists $conf{crossing_link}{features}{$feature_id}){
+			#print "crossing_link $feature_id\n";
+			$conf{crossing_link}{position}{$feature_id}{start}{x}=$crossing_link_start_x;
+			$conf{crossing_link}{position}{$feature_id}{start}{y}=$crossing_link_start_y;
 
-			$conf{crossing_link}{position}{$gene_id}{end}{x}=$crossing_link_end_x;
-			$conf{crossing_link}{position}{$gene_id}{end}{y}=$crossing_link_end_y;
-			#print "crossing_linkis $gene_id $crossing_link_start_x $crossing_link_start_y $crossing_link_end_x $crossing_link_end_y\n";
+			$conf{crossing_link}{position}{$feature_id}{end}{x}=$crossing_link_end_x;
+			$conf{crossing_link}{position}{$feature_id}{end}{y}=$crossing_link_end_y;
+			#print "crossing_linkis $feature_id $crossing_link_start_x $crossing_link_start_y $crossing_link_end_x $crossing_link_end_y\n";
 		}
 
 	}elsif($shape=~ /^round_rect/){
@@ -630,7 +742,7 @@ sub display_conf(){
 			foreach my $old(keys %{$conf{$k}}){
 				print "$k\t$old\t$conf{$k}{$old}\n";
 			}
-		}elsif($k eq "color_feature_setting"){
+		}elsif($k eq "feature_setting"){
 			foreach my $f(keys %{$conf{$k}}){
 				foreach my $e(keys %{$conf{$k}{$f}}){
 					print "$k\t$f\t$e\t$conf{$k}{$f}{$e}\n";
@@ -661,6 +773,7 @@ sub read_conf(){
 	while(<IN>){
 		chomp;
 		next if($_=~ /^#/ || $_=~ /^\s*$/);
+		die "error: need = in $_ of $conf~\n" if($_!~ /=/);
 		my ($key, $value) = split(/\s*=\s*/, $_);
 		$value=~ s/\s*#.*$//;
 		$value=~ s/\s+$//;
@@ -682,10 +795,12 @@ sub default_setting(){
 	$conf{pdf_dpi} ||=100;
 	$conf{top_bottom_margin} ||=0.1;
 	$conf{genome_height_ratio} ||= 1;
-	$conf{gene_height_ratio} ||= 1.5;
-	$conf{space_ratio_between_blocks} ||= 1.1;
-	$conf{color_feature_default} ||= 'ForestGreen,LimeGreen';
-	$conf{color_track_default} ||= 'green';
+	$conf{feature_height_ratio} ||= 1.5;
+	$conf{space_between_blocks} ||= 1.1;
+	$conf{feature_label_size} ||=10;
+	$conf{feature_label_color} ||="black";
+	$conf{label_rotate_angle} ||=-60;
+	$conf{feature_color} ||= 'ForestGreen'; #ForestGreen,LimeGreen
 	$conf{color_sample_name_default} ||= 'green';
 	$conf{sample_name_color_default} ||='black';
 	$conf{sample_name_font_size_default} ||=15;
@@ -697,12 +812,24 @@ sub default_setting(){
 	$conf{feature_shape} ||= 'round_rect';
 	$conf{track_color} ||="green";
 	$conf{padding_feature_label} ||= 3;
-	$conf{pos_feature_label} ||="top";
+	$conf{pos_feature_label} ||="medium_up";
 	$conf{distance_closed_feature} ||=200;
 	$conf{shift_angle_closed_feature} ||=10;
 	$conf{feature_arrow_sharp_tend} ||=1;
 	$conf{scale_display} ||="no";
 	$conf{scale_position} ||="low";
+	$conf{display_feature} ||="yes";
+	$conf{legend_stroke_color} ||="black";
+	$conf{legend_stroke_width} ||=0;
+	$conf{track_order}=(defined $conf{track_order})? $conf{track_order}:0;
+	$conf{feature_order} =(defined $conf{feature_order})? $conf{feature_order}:1;
+	$conf{feature_label_order} =(defined $conf{feature_label_order})? $conf{feature_label_order}:1;
+	$conf{cross_link_order} =(defined $conf{cross_link_order})? $conf{cross_link_order}:2; # bigger mean upper 
+	$conf{display_feature_label} ||="yes";
+	$conf{display_legend} ||="yes";
+	$conf{cross_link_anchor_pos} ||="medium_medium";
+	$conf{ignore_sharp_arrow} ||="no";
+
 
 	#sample_name_old2new
 	if(exists $conf{sample_name_old2new}){
@@ -734,44 +861,45 @@ sub default_setting(){
 		}
 	}
 
-	##color_feature_setting
-	if(exists $conf{color_feature_setting}){
-		if(-e $conf{color_feature_setting}){
-			open IN,"$conf{color_feature_setting}" or die "$!";
+	##feature_setting
+	if(exists $conf{feature_setting}){
+		if(-e $conf{feature_setting}){
+			open IN,"$conf{feature_setting}" or die "$!";
 			while(<IN>){
 				chomp;
 				next if($_=~ /^#/ || $_=~ /^\s*$/);
 				$_=~ s/\s+$//;
-				#my @arr = split(/\s+/, $_);
-				my ($f_id, $f_col, $f_legend, $label_content, $label_size, $label_col, $label_position, $label_angle) = split(/\t+/, $_);
-				#print "isisis $conf{color_feature_setting}\n";
-				$label_content ||=$f_id;
-				$label_size ||=10;
-				$label_col ||='black'; # feature对应的label的字体颜色等
-				$label_position ||='medium_up';
-				$label_angle ||=$conf{label_rotate_angle};
+				my @arr = split(/\s+/, $_);
+				if(@arr!=3){die "error: $conf{feature_setting} should only have 3 columns~, but $_ is not\n "}
+				$conf{feature_setting}{$arr[0]}{$arr[1]}=$arr[2];
+				#my ($f_id, $f_col, $f_legend, $label_content, $label_size, $label_col, $label_position, $label_angle) = split(/\t+/, $_);
+				#print "isisis $conf{feature_setting}\n";
+				#$label_content ||=$f_id;
+				#$label_size ||=10;
+				#$label_col ||='black'; # feature对应的label的字体颜色等
+				#$label_position ||='medium_up';
+				#$label_angle ||=$conf{label_rotate_angle};
 
-				if(!$f_legend){
-					die "error line$.:$_,need feature_id color legend label_conent(option) label_size(option) label_color(option) label_position(option)  label_angle(option)\n";
-				}
-				if(not exists $conf{color_feature_setting}{legend_col}{$f_legend}){
-					$conf{color_feature_setting}{legend_col}{$f_legend} = $f_col; ##feature_id color legend		
-				}elsif($conf{color_feature_setting}{legend_col}{$f_legend} ne $f_col){
-					die "error:legend $f_legend has two color,it should only be one color!\n";
-				}
-				$conf{color_feature_setting}{feature_col}{$f_id} = $f_col;
-				$conf{color_feature_setting}{label}{$f_id}{label_content} = $label_content;
+				#if(!$f_legend){
+				#	die "error line$.:$_,need feature_id color legend label_conent(option) label_size(option) label_color(option) label_position(option)  label_angle(option)\n";
+				#}
+				#if(not exists $conf{feature_setting}{legend_col}{$f_legend}){
+				#	$conf{feature_setting}{legend_col}{$f_legend} = $f_col; ##feature_id color legend		
+				#}elsif($conf{feature_setting}{legend_col}{$f_legend} ne $f_col){
+				#	die "error:legend $f_legend has two color,it should only be one color!\n";
+				#}
+				#$conf{feature_setting}{feature_col}{$f_id} = $f_col;
+				#$conf{feature_setting}{label}{$f_id}{label_content} = $label_content;
 				#print "$f_id label_content $label_content\n";
-				$conf{color_feature_setting}{label}{$f_id}{label_size} = $label_size;
-				$conf{color_feature_setting}{label}{$f_id}{label_col} = $label_col;
-				$conf{color_feature_setting}{label}{$f_id}{label_position} = $label_position;
-				$conf{color_feature_setting}{label}{$f_id}{label_angle} = $label_angle;
-
+				#$conf{feature_setting}{label}{$f_id}{label_size} = $label_size;
+				#$conf{feature_setting}{label}{$f_id}{label_col} = $label_col;
+				#$conf{feature_setting}{label}{$f_id}{label_position} = $label_position;
+				#$conf{feature_setting}{label}{$f_id}{label_angle} = $label_angle;
 			}
 			close IN;
 
 		}else{
-			die "for color_feature_setting: $conf{color_feature_setting} file not exists!\n";
+			die "for feature_setting: $conf{feature_setting} file not exists!\n";
 		}
 	}
 

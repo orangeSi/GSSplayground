@@ -1,0 +1,11 @@
+#feature_id	color	legend	label_conent(option)	label_size(option)	label_color(option)	label_position(option)	label_angle(option) distance_between_label_and_feature(option)
+#label_conent(option)    label_size(option)  label_color(option) label_position(option)  label_angle(option) distance_between_label_and_feature(option) 
+#those options default are:feature_id 10 black meddium_up	-45 1
+gene_s102	black	legend.s1.g	gene_s103.label
+gene_s103000	yellow	legend.s1i	gene_s103000.label
+gene_s1030000	red	legend.s1	gene_s1030000.label
+
+gene_s207	rgb(255,165,0)	legend.s2	gene_s207.label
+gene_s206000	rgb(255,165,0)	legend.s2	gene_s206000.label
+gene_s2070000	rgb(255,165,0)	legend.s2	gene_s2070000.label
+
