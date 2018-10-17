@@ -863,7 +863,7 @@ sub default_setting(){
 	$conf{scale_color} ||="black";
 	$conf{scale_width} ||=1;
 	$conf{scale_ratio} ||=100;
-	$conf{scale_padding_y} ||=0.4;
+	$conf{scale_padding_y} ||=-0.1;
 	$conf{scale_tick_height} ||=0.01;
 	$conf{scale_tick_opacity} ||=0.5;
 	$conf{scale_order} ||=0;

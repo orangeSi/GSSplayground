@@ -4,76 +4,76 @@
 <text x="150" y="499" font-size="15px" fill="black"  text-anchor='end'>S3</text>
 <text x="150" y="679" font-size="15px" fill="black"  text-anchor='end'>S4</text>
 <rect x="1312.125" y="359.68" width="47.25" height="25.2" style="fill:blue;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="383.62" font-size="20px" fill="black" text-anchor='start'>legend.s1i</text><rect x="1312.125" y="387.4" width="47.25" height="25.2" style="fill:red;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="411.34" font-size="20px" fill="black" text-anchor='start'>legend.s1</text><rect x="1312.125" y="415.12" width="47.25" height="25.2" style="fill:rgb(255,165,0);stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="439.06" font-size="20px" fill="black" text-anchor='start'>legend.s2</text>
-<line x1="165" y1="764" x2="1290" y2="764" style="stroke:green;stroke-width:0.5"/>
-<line x1="165" y1="44" x2="165" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="165" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
-<line x1="235.728027159562" y1="44" x2="235.728027159562" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="235.728027159562" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
-<line x1="306.456054319125" y1="44" x2="306.456054319125" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="306.456054319125" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
-<line x1="377.184081478687" y1="44" x2="377.184081478687" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="377.184081478687" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
-<line x1="447.91210863825" y1="44" x2="447.91210863825" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="447.91210863825" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
-<line x1="518.640135797812" y1="44" x2="518.640135797812" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="518.640135797812" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
-<line x1="589.368162957375" y1="44" x2="589.368162957375" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="589.368162957375" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
-<line x1="660.096190116937" y1="44" x2="660.096190116937" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="660.096190116937" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
-<line x1="730.824217276499" y1="44" x2="730.824217276499" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="730.824217276499" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
-<line x1="801.552244436062" y1="44" x2="801.552244436062" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="801.552244436062" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
-<line x1="872.280271595624" y1="44" x2="872.280271595624" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="872.280271595624" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
-<line x1="943.008298755187" y1="44" x2="943.008298755187" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="943.008298755187" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
-<line x1="1013.73632591475" y1="44" x2="1013.73632591475" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="1013.73632591475" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24000</text>
-<line x1="1084.46435307431" y1="44" x2="1084.46435307431" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="1084.46435307431" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">26000</text>
-<line x1="1155.19238023387" y1="44" x2="1155.19238023387" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="1155.19238023387" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">28000</text>
-<line x1="1225.92040739344" y1="44" x2="1225.92040739344" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="1225.92040739344" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">30000</text>
-<line x1="1290" y1="44" x2="1290" y2="764" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="1290" y="779" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">31812</text>
-<line x1="165" y1="18" x2="1290" y2="18" style="stroke:green;stroke-width:0.5"/>
-<line x1="165" y1="738" x2="165" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="165" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
-<line x1="235.728027159562" y1="738" x2="235.728027159562" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="235.728027159562" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
-<line x1="306.456054319125" y1="738" x2="306.456054319125" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="306.456054319125" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
-<line x1="377.184081478687" y1="738" x2="377.184081478687" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="377.184081478687" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
-<line x1="447.91210863825" y1="738" x2="447.91210863825" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="447.91210863825" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
-<line x1="518.640135797812" y1="738" x2="518.640135797812" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="518.640135797812" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
-<line x1="589.368162957375" y1="738" x2="589.368162957375" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="589.368162957375" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
-<line x1="660.096190116937" y1="738" x2="660.096190116937" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="660.096190116937" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
-<line x1="730.824217276499" y1="738" x2="730.824217276499" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="730.824217276499" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
-<line x1="801.552244436062" y1="738" x2="801.552244436062" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="801.552244436062" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
-<line x1="872.280271595624" y1="738" x2="872.280271595624" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="872.280271595624" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
-<line x1="943.008298755187" y1="738" x2="943.008298755187" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="943.008298755187" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
-<line x1="1013.73632591475" y1="738" x2="1013.73632591475" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="1013.73632591475" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24000</text>
-<line x1="1084.46435307431" y1="738" x2="1084.46435307431" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="1084.46435307431" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">26000</text>
-<line x1="1155.19238023387" y1="738" x2="1155.19238023387" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="1155.19238023387" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">28000</text>
-<line x1="1225.92040739344" y1="738" x2="1225.92040739344" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="1225.92040739344" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">30000</text>
-<line x1="1290" y1="738" x2="1290" y2="18" style="stroke:green;stroke-width:0.5;opacity:0.5"/>
-<text x="1290" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">31812</text>
+<line x1="165" y1="752" x2="1290" y2="752" style="stroke:green;stroke-width:0.5"/>
+<line x1="165" y1="744" x2="165" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="165" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="235.728027159562" y1="744" x2="235.728027159562" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="235.728027159562" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
+<line x1="306.456054319125" y1="744" x2="306.456054319125" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="306.456054319125" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
+<line x1="377.184081478687" y1="744" x2="377.184081478687" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="377.184081478687" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
+<line x1="447.91210863825" y1="744" x2="447.91210863825" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="447.91210863825" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
+<line x1="518.640135797812" y1="744" x2="518.640135797812" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="518.640135797812" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
+<line x1="589.368162957375" y1="744" x2="589.368162957375" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="589.368162957375" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
+<line x1="660.096190116937" y1="744" x2="660.096190116937" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="660.096190116937" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
+<line x1="730.824217276499" y1="744" x2="730.824217276499" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="730.824217276499" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
+<line x1="801.552244436062" y1="744" x2="801.552244436062" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="801.552244436062" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
+<line x1="872.280271595624" y1="744" x2="872.280271595624" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="872.280271595624" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
+<line x1="943.008298755187" y1="744" x2="943.008298755187" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="943.008298755187" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
+<line x1="1013.73632591475" y1="744" x2="1013.73632591475" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1013.73632591475" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24000</text>
+<line x1="1084.46435307431" y1="744" x2="1084.46435307431" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1084.46435307431" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">26000</text>
+<line x1="1155.19238023387" y1="744" x2="1155.19238023387" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1155.19238023387" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">28000</text>
+<line x1="1225.92040739344" y1="744" x2="1225.92040739344" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1225.92040739344" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">30000</text>
+<line x1="1290" y1="744" x2="1290" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1290" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">31812</text>
+<line x1="165" y1="24" x2="1290" y2="24" style="stroke:green;stroke-width:0.5"/>
+<line x1="165" y1="32" x2="165" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="165" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="235.728027159562" y1="32" x2="235.728027159562" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="235.728027159562" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
+<line x1="306.456054319125" y1="32" x2="306.456054319125" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="306.456054319125" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
+<line x1="377.184081478687" y1="32" x2="377.184081478687" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="377.184081478687" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
+<line x1="447.91210863825" y1="32" x2="447.91210863825" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="447.91210863825" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
+<line x1="518.640135797812" y1="32" x2="518.640135797812" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="518.640135797812" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
+<line x1="589.368162957375" y1="32" x2="589.368162957375" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="589.368162957375" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
+<line x1="660.096190116937" y1="32" x2="660.096190116937" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="660.096190116937" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
+<line x1="730.824217276499" y1="32" x2="730.824217276499" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="730.824217276499" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
+<line x1="801.552244436062" y1="32" x2="801.552244436062" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="801.552244436062" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
+<line x1="872.280271595624" y1="32" x2="872.280271595624" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="872.280271595624" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
+<line x1="943.008298755187" y1="32" x2="943.008298755187" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="943.008298755187" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
+<line x1="1013.73632591475" y1="32" x2="1013.73632591475" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1013.73632591475" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24000</text>
+<line x1="1084.46435307431" y1="32" x2="1084.46435307431" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1084.46435307431" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">26000</text>
+<line x1="1155.19238023387" y1="32" x2="1155.19238023387" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1155.19238023387" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">28000</text>
+<line x1="1225.92040739344" y1="32" x2="1225.92040739344" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1225.92040739344" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">30000</text>
+<line x1="1290" y1="32" x2="1290" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1290" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">31812</text>
 
 
 <text x="271.870049038099" y="182.8" font-size="15px" fill="green"  text-anchor='start'   transform="rotate(60 271.870049038099 182.8)" font-family="Times New Roman">gene_s1030000.label</text>
