@@ -1,613 +1,681 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1500" height="800" >
 <text x="150" y="89.5" font-size="15px" fill="black"  text-anchor='end'>s1.s1</text>
-<rect x="165" y="80.5" width="139.424640273149" height="9" style="fill:blue"   />
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M303.910824930142,85 L326.462762726279,85" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M463.870125136678,85 L486.422062932815,85" /></g><text x="150" y="179.5" font-size="15px" fill="black"  text-anchor='end'>s1.s1000</text>
+<text x="150" y="269.5" font-size="15px" fill="black"  text-anchor='end'>s1.s10000.2k-6k</text>
+<text x="150" y="359.5" font-size="15px" fill="black"  text-anchor='end'>s1.s10000.6k-10k</text>
+<text x="150" y="449.5" font-size="15px" fill="black"  text-anchor='end'>S1</text>
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M303.910824930142,445 L326.462762726279,445" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M463.870125136678,445 L486.422062932815,445" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M1062.15708905358,445 L1084.70902684971,445" /></g><text x="150" y="539.5" font-size="15px" fill="black"  text-anchor='end'>S2</text>
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M985.161584254647,535 L1007.71352205078,535" /></g><text x="150" y="629.5" font-size="15px" fill="black"  text-anchor='end'>S3</text>
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M396.897703802697,625 L419.449641598834,625" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M556.401409306281,625 L578.953347102418,625" /></g><text x="150" y="719.5" font-size="15px" fill="black"  text-anchor='end'>S4</text>
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M689.025027335682,715 L711.576965131819,715" /></g><rect x="1312.125" y="369.4" width="47.25" height="18" style="fill:red;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="386.5" font-size="20px" fill="black" text-anchor='start'>legend.s1</text><rect x="1312.125" y="391" width="47.25" height="18" style="fill:blue;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="408.1" font-size="20px" fill="black" text-anchor='start'>legend.s1i</text><rect x="1312.125" y="412.6" width="47.25" height="18" style="fill:rgb(255,165,0);stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="429.7" font-size="20px" fill="black" text-anchor='start'>legend.s2</text>
+<line x1="165" y1="752" x2="1290" y2="752" style="stroke:green;stroke-width:0.5"/>
+<line x1="165" y1="744" x2="165" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="165" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="256.118940590451" y1="744" x2="256.118940590451" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="256.118940590451" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
+<line x1="347.237881180901" y1="744" x2="347.237881180901" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="347.237881180901" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
+<line x1="438.356821771352" y1="744" x2="438.356821771352" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="438.356821771352" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
+<line x1="529.475762361803" y1="744" x2="529.475762361803" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="529.475762361803" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
+<line x1="620.594702952254" y1="744" x2="620.594702952254" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="620.594702952254" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
+<line x1="711.713643542704" y1="744" x2="711.713643542704" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="711.713643542704" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
+<line x1="802.832584133155" y1="744" x2="802.832584133155" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="802.832584133155" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
+<line x1="893.951524723606" y1="744" x2="893.951524723606" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="893.951524723606" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
+<line x1="985.070465314057" y1="744" x2="985.070465314057" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="985.070465314057" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
+<line x1="1076.18940590451" y1="744" x2="1076.18940590451" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1076.18940590451" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
+<line x1="1167.30834649496" y1="744" x2="1167.30834649496" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1167.30834649496" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
+<line x1="1258.42728708541" y1="744" x2="1258.42728708541" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1258.42728708541" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24000</text>
+<line x1="1290" y1="744" x2="1290" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1290" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24693</text>
+<line x1="165" y1="24" x2="1290" y2="24" style="stroke:green;stroke-width:0.5"/>
+<line x1="165" y1="32" x2="165" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="165" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="256.118940590451" y1="32" x2="256.118940590451" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="256.118940590451" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
+<line x1="347.237881180901" y1="32" x2="347.237881180901" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="347.237881180901" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
+<line x1="438.356821771352" y1="32" x2="438.356821771352" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="438.356821771352" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
+<line x1="529.475762361803" y1="32" x2="529.475762361803" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="529.475762361803" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
+<line x1="620.594702952254" y1="32" x2="620.594702952254" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="620.594702952254" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
+<line x1="711.713643542704" y1="32" x2="711.713643542704" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="711.713643542704" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
+<line x1="802.832584133155" y1="32" x2="802.832584133155" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="802.832584133155" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
+<line x1="893.951524723606" y1="32" x2="893.951524723606" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="893.951524723606" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
+<line x1="985.070465314057" y1="32" x2="985.070465314057" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="985.070465314057" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
+<line x1="1076.18940590451" y1="32" x2="1076.18940590451" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1076.18940590451" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
+<line x1="1167.30834649496" y1="32" x2="1167.30834649496" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1167.30834649496" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
+<line x1="1258.42728708541" y1="32" x2="1258.42728708541" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1258.42728708541" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24000</text>
+<line x1="1290" y1="32" x2="1290" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1290" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24693</text>
 
-			<g style="fill:none">
-			<title>gene_s101,s1.s1,s1,86,1108,1</title>
-			<polygon points="168.932607105113,76 168.932607105113,94 201.646410860906,94 201.646410860906,100.3 215.666612470531,85 201.646410860906,69.7 201.646410860906,76" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="192.299609787822" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 192.299609787822 67.7)" font-family="Times New Roman">gene_s101</text>
 
-			<g style="fill:none">
-			<title>gene_s102,s1.s1,s1,1105,1887,1</title>
-			<polygon points="215.529428501748,76 215.529428501748,94 240.560930005691,94 240.560930005691,100.3 251.288716364523,85 240.560930005691,69.7 240.560930005691,76" style="fill:black;stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="233.409072433136" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 233.409072433136 67.7)" font-family="Times New Roman">gene_s103.label</text>
-<rect x="329.575034550037" y="80.5" width="137.686976668564" height="9" style="fill:blue"   />
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M304.424640273149,85 L329.323530607268,85" /></g>
-			<g style="fill:none">
-			<title>gene_s104,s1.s1,s1,487,858,1</title>
-			<polygon points="351.844565482481,76 351.844565482481,94 363.720124380132,94 363.720124380132,100.3 368.809649621982,85 363.720124380132,69.7 363.720124380132,76" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="360.327107552232" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 360.327107552232 67.7)" font-family="Times New Roman">gene_s104</text>
+<text x="211.607338112016" y="294.4" font-size="15px" fill="green"  text-anchor='start'   transform="rotate(60 211.607338112016 294.4)" font-family="Times New Roman">gene_s1030000.label</text>
+<text x="926.480986514397" y="474.4" font-size="15px" fill="green"  text-anchor='start'   transform="rotate(60 926.480986514397 474.4)" font-family="Times New Roman">gene_s1030000.label</text>
+<polygon points="298.261450613534,550.3 307.099987850808,550.3 458.311869760661,609.7 441.409306281132,609.7" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1008.16911675374,460.3 1057.05442838051,460.3 1115.50722876929,519.7 1103.11505284899,519.7" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1103.11505284899,550.3 1115.50722876929,550.3 728.251731259871,699.7 715.85955533957,699.7" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.5"/>
+<polygon points="298.261450613534,550.3 307.099987850808,550.3 306.644393147856,609.7 297.805855910582,609.7" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="297.805855910582,640.3 306.644393147856,640.3 216.026606730652,699.7 207.188069493379,699.7" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="487.834406511967,460.3 506.787146154781,460.3 457.537358765642,519.7 438.584619122828,519.7" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="438.584619122828,550.3 457.537358765642,550.3 598.407240918479,609.7 579.454501275665,609.7" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="579.454501275665,640.3 598.407240918479,640.3 617.086623739521,699.7 598.133884096708,699.7" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="582.734783136921,460.3 595.126959057223,460.3 545.877171668084,519.7 533.484995747783,519.7" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="533.484995747783,550.3 545.877171668084,550.3 686.747053820921,609.7 674.35487790062,609.7" style="fill:#00BFFF;stroke:#000000;stroke-width:0;opacity:0.8"/>
+<polygon points="674.35487790062,640.3 686.747053820921,640.3 542.323532985057,699.7 522.414044466043,699.7" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
 
-			<g style="fill:none">
-			<title>gene_s105,s1.s1,s1,1344,1781,1</title>
-			<polygon points="391.033452564832,76 391.033452564832,94 405.021644581741,94 405.021644581741,100.3 411.01658401756,85 405.021644581741,69.7 405.021644581741,76" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="401.025018291196" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 401.025018291196 67.7)" font-family="Times New Roman">gene_s105</text>
 
-			<g style="fill:none">
-			<title>gene_s106,s1.s1,s1,1816,2889,0</title>
-			<polygon points="412.617063653362,85 427.33690350378,100.3 427.33690350378,94 461.68319648809,94 461.68319648809,76 427.33690350378,76 427.33690350378,69.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="437.150130070726" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 437.150130070726 67.7)" font-family="Times New Roman">gene_s106</text>
-<rect x="492.412405495488" y="80.5" width="165.992602227461" height="9" style="fill:blue"   />
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M467.2620112186,85 L492.160901552719,85" /></g>
-			<g style="fill:none">
-			<title>gene_s107,s1.s1,s1,26,442,1</title>
-			<polygon points="493.601333224941,76 493.601333224941,94 506.917323794813,94 506.917323794813,100.3 512.624176896187,85 506.917323794813,69.7 506.917323794813,76" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="503.112755060564" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 503.112755060564 67.7)" font-family="Times New Roman">gene_s107</text>
-
-			<g style="fill:none">
-			<title>gene_s108,s1.s1,s1,685,1623,1</title>
-			<polygon points="523.736078367612,76 523.736078367612,94 553.761076335257,94 553.761076335257,100.3 566.628932607105,85 553.761076335257,69.7 553.761076335257,76" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="545.182505487359" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 545.182505487359 67.7)" font-family="Times New Roman">gene_s108</text>
-
-			<g style="fill:none">
-			<title>gene_s109,s1.s1,s1,1810,2109,0</title>
-			<polygon points="575.180066661247,85 579.28186732786,100.3 579.28186732786,94 588.852735549955,94 588.852735549955,76 579.28186732786,76 579.28186732786,69.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="582.016401105601" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 582.016401105601 67.7)" font-family="Times New Roman">gene_s109</text>
-
-			<g style="fill:none">
-			<title>gene_s110,s1.s1,s1,2109,2381,0</title>
-			<polygon points="588.852735549955,85 592.584139500854,100.3 592.584139500854,94 601.290748719616,94 601.290748719616,76 592.584139500854,76 592.584139500854,69.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="595.071742134786" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 595.071742134786 67.7)" font-family="Times New Roman">gene_s110</text>
-<text x="150" y="179.5" font-size="15px" fill="black"  text-anchor='end'>s1.s1000</text>
-<rect x="165" y="170.5" width="182.957686366962" height="9" style="fill:blue"   />
+<rect x="165" y="80.5" width="138.910824930142" height="9" style="fill:blue"   />
+<rect x="326.690560077755" y="80.5" width="137.179565058924" height="9" style="fill:blue"   />
+<rect x="486.649860284291" y="80.5" width="165.380877171668" height="9" style="fill:blue"   />
+<rect x="165" y="170.5" width="182.283440651197" height="9" style="fill:blue"   />
 
 			<g style="fill:none">
 			<title>gene_s103000,s1.s1000,s1000,926,1120,1</title>
-			<polygon points="207.344118364361,166 207.344118364361,184 213.553979351272,184 213.553979351272,190.3 216.215348345663,175 213.553979351272,159.7 213.553979351272,166" style="fill:yellow;stroke:purple;stroke-width:0"/> 
+			<polygon points="207.188069493379,166 207.188069493379,184 213.37504555947,184 213.37504555947,190.3 216.026606730652,175 213.37504555947,159.7 213.37504555947,166" style="fill:blue;stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="211.779733355012" y="157.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 211.779733355012 157.7)" font-family="Times New Roman">gene_s103000.label</text>
-
-			<g style="fill:none">
-			<title>gene_s104000,s1.s1000,s1000,1487,1858,1</title>
-			<polygon points="232.997520526786,166 232.997520526786,184 244.873079424437,184 244.873079424437,190.3 249.962604666287,175 244.873079424437,159.7 244.873079424437,166" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="241.480062596537" y="157.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 241.480062596537 157.7)" font-family="Times New Roman">gene_s104000</text>
-
-			<g style="fill:none">
-			<title>gene_s105000,s1.s1000,s1000,2344,2781,1</title>
-			<polygon points="272.186407609138,166 272.186407609138,184 286.174599626047,184 286.174599626047,190.3 292.169539061865,175 286.174599626047,159.7 286.174599626047,166" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="282.177973335501" y="157.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 282.177973335501 157.7)" font-family="Times New Roman">gene_s105000</text>
-
-			<g style="fill:none">
-			<title>gene_s106000,s1.s1000,s1000,2816,3889,0</title>
-			<polygon points="293.770018697667,175 308.489858548086,190.3 308.489858548086,184 342.836151532396,184 342.836151532396,166 308.489858548086,166 308.489858548086,159.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="318.303085115031" y="157.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 318.303085115031 157.7)" font-family="Times New Roman">gene_s106000</text>
-<text x="150" y="269.5" font-size="15px" fill="black"  text-anchor='end'>s1.s10000.2k-6k</text>
-<rect x="165" y="260.5" width="182.957686366962" height="9" style="fill:blue"   />
-
-			<g style="fill:none">
-			<title>gene_s1030000,s1.s10000.2k-6k,s10000,926,1120,1</title>
-			<polygon points="207.344118364361,256 207.344118364361,274 213.553979351272,274 213.553979351272,280.3 216.215348345663,265 213.553979351272,249.7 213.553979351272,256" style="fill:red;stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="211.779733355012" y="247.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 211.779733355012 247.7)" font-family="Times New Roman">gene_s1030000.label</text>
-
-			<g style="fill:none">
-			<title>gene_s1040000,s1.s10000.2k-6k,s10000,1487,1858,1</title>
-			<polygon points="232.997520526786,256 232.997520526786,274 244.873079424437,274 244.873079424437,280.3 249.962604666287,265 244.873079424437,249.7 244.873079424437,256" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="241.480062596537" y="247.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 241.480062596537 247.7)" font-family="Times New Roman">gene_s1040000</text>
-
-			<g style="fill:none">
-			<title>gene_s1050000,s1.s10000.2k-6k,s10000,2344,2781,1</title>
-			<polygon points="272.186407609138,256 272.186407609138,274 286.174599626047,274 286.174599626047,280.3 292.169539061865,265 286.174599626047,249.7 286.174599626047,256" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="282.177973335501" y="247.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 282.177973335501 247.7)" font-family="Times New Roman">gene_s1050000</text>
-
-			<g style="fill:none">
-			<title>gene_s1060000,s1.s10000.2k-6k,s10000,2816,3889,0</title>
-			<polygon points="293.770018697667,265 308.489858548086,280.3 308.489858548086,274 342.836151532396,274 342.836151532396,256 308.489858548086,256 308.489858548086,249.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="318.303085115031" y="247.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 318.303085115031 247.7)" font-family="Times New Roman">gene_s1060000</text>
-<text x="150" y="359.5" font-size="15px" fill="black"  text-anchor='end'>s1.s10000.6k-10k</text>
-<rect x="165" y="350.5" width="165.078042435574" height="9" style="fill:blue"   />
-
-			<g style="fill:none">
-			<title>gene_s1070000,s1.s10000.6k-10k,s10000,6,422,1</title>
-			<polygon points="165.274367937566,346 165.274367937566,364 178.590358507438,364 178.590358507438,370.3 184.297211608812,355 178.590358507438,339.7 178.590358507438,346" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="174.785789773189" y="337.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 174.785789773189 337.7)" font-family="Times New Roman">gene_s1070000</text>
-
-			<g style="fill:none">
-			<title>gene_s1080000,s1.s10000.6k-10k,s10000,665,1603,1</title>
-			<polygon points="195.409113080237,346 195.409113080237,364 225.434111047882,364 225.434111047882,370.3 238.30196731973,355 225.434111047882,339.7 225.434111047882,346" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="216.855540199984" y="337.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 216.855540199984 337.7)" font-family="Times New Roman">gene_s1080000</text>
-
-			<g style="fill:none">
-			<title>gene_s1090000,s1.s10000.6k-10k,s10000,1790,2089,0</title>
-			<polygon points="246.853101373872,355 250.954902040485,370.3 250.954902040485,364 260.52577026258,364 260.52577026258,346 250.954902040485,346 250.954902040485,339.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="253.689435818226" y="337.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 253.689435818226 337.7)" font-family="Times New Roman">gene_s1090000</text>
-
-			<g style="fill:none">
-			<title>gene_s1100000,s1.s10000.6k-10k,s10000,2089,2361,0</title>
-			<polygon points="260.52577026258,355 264.257174213479,370.3 264.257174213479,364 272.963783432241,364 272.963783432241,346 264.257174213479,346 264.257174213479,339.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="266.744776847411" y="337.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 266.744776847411 337.7)" font-family="Times New Roman">gene_s1100000</text>
-<text x="150" y="449.5" font-size="15px" fill="black"  text-anchor='end'>S1</text>
-<rect x="165" y="440.5" width="139.424640273149" height="9" style="fill:blue"   />
-
-			<g style="fill:none">
-			<title>gene_s101,s1,s1,86,1108,1</title>
-			<polygon points="168.932607105113,436 168.932607105113,454 201.646410860906,454 201.646410860906,460.3 215.666612470531,445 201.646410860906,429.7 201.646410860906,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="192.299609787822" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 192.299609787822 427.7)" font-family="Times New Roman">gene_s101</text>
-
-			<g style="fill:none">
-			<title>gene_s102,s1,s1,1105,1887,1</title>
-			<polygon points="215.529428501748,436 215.529428501748,454 240.560930005691,454 240.560930005691,460.3 251.288716364523,445 240.560930005691,429.7 240.560930005691,436" style="fill:black;stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="233.409072433136" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 233.409072433136 427.7)" font-family="Times New Roman">gene_s103.label</text>
-<rect x="329.575034550037" y="440.5" width="137.686976668564" height="9" style="fill:blue"   />
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M304.424640273149,445 L329.323530607268,445" /></g>
-			<g style="fill:none">
-			<title>gene_s104,s1,s1,487,858,1</title>
-			<polygon points="351.844565482481,436 351.844565482481,454 363.720124380132,454 363.720124380132,460.3 368.809649621982,445 363.720124380132,429.7 363.720124380132,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="360.327107552232" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 360.327107552232 427.7)" font-family="Times New Roman">gene_s104</text>
-
-			<g style="fill:none">
-			<title>gene_s105,s1,s1,1344,1781,1</title>
-			<polygon points="391.033452564832,436 391.033452564832,454 405.021644581741,454 405.021644581741,460.3 411.01658401756,445 405.021644581741,429.7 405.021644581741,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="401.025018291196" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 401.025018291196 427.7)" font-family="Times New Roman">gene_s105</text>
-
-			<g style="fill:none">
-			<title>gene_s106,s1,s1,1816,2889,0</title>
-			<polygon points="412.617063653362,445 427.33690350378,460.3 427.33690350378,454 461.68319648809,454 461.68319648809,436 427.33690350378,436 427.33690350378,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="437.150130070726" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 437.150130070726 427.7)" font-family="Times New Roman">gene_s106</text>
-<rect x="492.412405495488" y="440.5" width="165.992602227461" height="9" style="fill:blue"   />
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M467.2620112186,445 L492.160901552719,445" /></g>
-			<g style="fill:none">
-			<title>gene_s107,s1,s1,26,442,1</title>
-			<polygon points="493.601333224941,436 493.601333224941,454 506.917323794813,454 506.917323794813,460.3 512.624176896187,445 506.917323794813,429.7 506.917323794813,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="503.112755060564" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 503.112755060564 427.7)" font-family="Times New Roman">gene_s107</text>
-
-			<g style="fill:none">
-			<title>gene_s108,s1,s1,685,1623,1</title>
-			<polygon points="523.736078367612,436 523.736078367612,454 553.761076335257,454 553.761076335257,460.3 566.628932607105,445 553.761076335257,429.7 553.761076335257,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="545.182505487359" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 545.182505487359 427.7)" font-family="Times New Roman">gene_s108</text>
-
-			<g style="fill:none">
-			<title>gene_s109,s1,s1,1810,2109,0</title>
-			<polygon points="575.180066661247,445 579.28186732786,460.3 579.28186732786,454 588.852735549955,454 588.852735549955,436 579.28186732786,436 579.28186732786,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="582.016401105601" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 582.016401105601 427.7)" font-family="Times New Roman">gene_s109</text>
-
-			<g style="fill:none">
-			<title>gene_s110,s1,s1,2109,2381,0</title>
-			<polygon points="588.852735549955,445 592.584139500854,460.3 592.584139500854,454 601.290748719616,454 601.290748719616,436 592.584139500854,436 592.584139500854,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="595.071742134786" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 595.071742134786 427.7)" font-family="Times New Roman">gene_s110</text>
-<rect x="683.555401999837" y="440.5" width="182.957686366962" height="9" style="fill:blue"   />
+<text x="211.607338112016" y="157.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 211.607338112016 157.7)" font-family="Times New Roman">gene_s103000.label</text>
+<rect x="165" y="260.5" width="182.283440651197" height="9" style="fill:blue"   />
+<rect x="165" y="350.5" width="182.283440651197" height="9" style="fill:blue"   />
+<rect x="165" y="440.5" width="138.910824930142" height="9" style="fill:blue"   />
+<rect x="326.690560077755" y="440.5" width="137.179565058924" height="9" style="fill:blue"   />
+<rect x="486.649860284291" y="440.5" width="165.380877171668" height="9" style="fill:blue"   />
+<rect x="674.810472603572" y="440.5" width="182.283440651197" height="9" style="fill:blue"   />
 
 			<g style="fill:none">
 			<title>gene_s103000,s1,s1000,926,1120,1</title>
-			<polygon points="725.899520364198,436 725.899520364198,454 732.10938135111,454 732.10938135111,460.3 734.7707503455,445 732.10938135111,429.7 732.10938135111,436" style="fill:yellow;stroke:purple;stroke-width:0"/> 
+			<polygon points="716.998542096951,436 716.998542096951,454 723.185518163042,454 723.185518163042,460.3 725.837079334224,445 723.185518163042,429.7 723.185518163042,436" style="fill:blue;stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="730.335135354849" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 730.335135354849 427.7)" font-family="Times New Roman">gene_s103000.label</text>
+<text x="721.417810715587" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 721.417810715587 427.7)" font-family="Times New Roman">gene_s103000.label</text>
+<rect x="1084.93682420119" y="440.5" width="182.283440651197" height="9" style="fill:blue"   />
+<rect x="165" y="530.5" width="410.035232657028" height="9" style="fill:blue"   />
+<rect x="597.814967804641" y="530.5" width="182.283440651197" height="9" style="fill:blue"   />
+<rect x="802.87814360345" y="530.5" width="182.283440651197" height="9" style="fill:blue"   />
+<rect x="1007.94131940226" y="530.5" width="182.283440651197" height="9" style="fill:blue"   />
+<rect x="165" y="620.5" width="231.897703802697" height="9" style="fill:blue"   />
+<rect x="419.67743895031" y="620.5" width="136.723970355971" height="9" style="fill:blue"   />
+<rect x="579.181144453894" y="620.5" width="164.469687765764" height="9" style="fill:blue"   />
+<rect x="766.43056736727" y="620.5" width="182.283440651197" height="9" style="fill:blue"   />
+<rect x="971.49374316608" y="620.5" width="182.283440651197" height="9" style="fill:blue"   />
+<rect x="165" y="710.5" width="182.283440651197" height="9" style="fill:blue"   />
+<rect x="370.063175798809" y="710.5" width="318.961851536873" height="9" style="fill:blue"   />
+<rect x="711.804762483295" y="710.5" width="73.3507471753128" height="9" style="fill:blue"   />
+
+
+
+			<g style="fill:none">
+			<title>gene_s101,s1.s1,s1,86,1108,1</title>
+			<polygon points="168.918114445389,76 168.918114445389,94 201.511359494594,94 201.511359494594,100.3 215.47989308711,85 201.511359494594,69.7 201.511359494594,76" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s102,s1.s1,s1,1105,1887,1</title>
+			<polygon points="215.343214676224,76 215.343214676224,94 240.28246871583,94 240.28246871583,100.3 250.97072044709,85 240.28246871583,69.7 240.28246871583,76" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s104,s1.s1,s1,487,858,1</title>
+			<polygon points="348.87802211153,76 348.87802211153,94 360.7098165472,94 360.7098165472,100.3 365.780585591058,85 360.7098165472,69.7 360.7098165472,76" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s105,s1.s1,s1,1344,1781,1</title>
+			<polygon points="387.922488154538,76 387.922488154538,94 401.859130117847,94 401.859130117847,100.3 407.831976673551,85 401.859130117847,69.7 401.859130117847,76" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s106,s1.s1,s1,1816,2889,0</title>
+			<polygon points="409.426558133884,85 424.092151621917,100.3 424.092151621917,94 458.311869760661,94 458.311869760661,76 424.092151621917,76 424.092151621917,69.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s107,s1.s1,s1,26,442,1</title>
+			<polygon points="487.834406511967,76 487.834406511967,94 501.101324261937,94 501.101324261937,100.3 506.787146154781,85 501.101324261937,69.7 501.101324261937,76" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s108,s1.s1,s1,685,1623,1</title>
+			<polygon points="517.858097436521,76 517.858097436521,94 547.772445632365,94 547.772445632365,100.3 560.592880573442,85 547.772445632365,69.7 547.772445632365,76" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s109,s1.s1,s1,1810,2109,0</title>
+			<polygon points="569.112501518649,85 573.199186004131,100.3 573.199186004131,94 582.734783136921,94 582.734783136921,76 573.199186004131,76 573.199186004131,69.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s110,s1.s1,s1,2109,2381,0</title>
+			<polygon points="582.734783136921,85 586.452435913012,100.3 586.452435913012,94 595.126959057223,94 595.126959057223,76 586.452435913012,76 586.452435913012,69.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s104000,s1.s1000,s1000,1487,1858,1</title>
+			<polygon points="232.746932329,166 232.746932329,184 244.57872676467,184 244.57872676467,190.3 249.649495808529,175 244.57872676467,159.7 244.57872676467,166" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s105000,s1.s1000,s1000,2344,2781,1</title>
+			<polygon points="271.791398372008,166 271.791398372008,184 285.728040335318,184 285.728040335318,190.3 291.700886891022,175 285.728040335318,159.7 285.728040335318,166" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s106000,s1.s1000,s1000,2816,3889,0</title>
+			<polygon points="293.295468351355,175 307.961061839388,190.3 307.961061839388,184 342.180779978131,184 342.180779978131,166 307.961061839388,166 307.961061839388,159.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1040000,s1.s10000.2k-6k,s10000,1487,1858,1</title>
+			<polygon points="232.746932329,256 232.746932329,274 244.57872676467,274 244.57872676467,280.3 249.649495808529,265 244.57872676467,249.7 244.57872676467,256" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1050000,s1.s10000.2k-6k,s10000,2344,2781,1</title>
+			<polygon points="271.791398372008,256 271.791398372008,274 285.728040335318,274 285.728040335318,280.3 291.700886891022,265 285.728040335318,249.7 285.728040335318,256" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1060000,s1.s10000.2k-6k,s10000,2816,3889,0</title>
+			<polygon points="293.295468351355,265 307.961061839388,280.3 307.961061839388,274 342.180779978131,274 342.180779978131,256 307.961061839388,256 307.961061839388,249.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1070000,s1.s10000.6k-10k,s10000,6,422,1</title>
+			<polygon points="165.273356821771,346 165.273356821771,364 178.540274571741,364 178.540274571741,370.3 184.226096464585,355 178.540274571741,339.7 178.540274571741,346" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1080000,s1.s10000.6k-10k,s10000,665,1603,1</title>
+			<polygon points="195.297047746325,346 195.297047746325,364 225.21139594217,364 225.21139594217,370.3 238.031830883246,355 225.21139594217,339.7 225.21139594217,346" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1090000,s1.s10000.6k-10k,s10000,1790,2089,0</title>
+			<polygon points="246.551451828453,355 250.638136313935,370.3 250.638136313935,364 260.173733446726,364 260.173733446726,346 250.638136313935,346 250.638136313935,339.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1100000,s1.s10000.6k-10k,s10000,2089,2361,0</title>
+			<polygon points="260.173733446726,355 263.891386222816,370.3 263.891386222816,364 272.565909367027,364 272.565909367027,346 263.891386222816,346 263.891386222816,339.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s101,s1,s1,86,1108,1</title>
+			<polygon points="168.918114445389,436 168.918114445389,454 201.511359494594,454 201.511359494594,460.3 215.47989308711,445 201.511359494594,429.7 201.511359494594,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s102,s1,s1,1105,1887,1</title>
+			<polygon points="215.343214676224,436 215.343214676224,454 240.28246871583,454 240.28246871583,460.3 250.97072044709,445 240.28246871583,429.7 240.28246871583,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s104,s1,s1,487,858,1</title>
+			<polygon points="348.87802211153,436 348.87802211153,454 360.7098165472,454 360.7098165472,460.3 365.780585591058,445 360.7098165472,429.7 360.7098165472,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s105,s1,s1,1344,1781,1</title>
+			<polygon points="387.922488154538,436 387.922488154538,454 401.859130117847,454 401.859130117847,460.3 407.831976673551,445 401.859130117847,429.7 401.859130117847,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s106,s1,s1,1816,2889,0</title>
+			<polygon points="409.426558133884,445 424.092151621917,460.3 424.092151621917,454 458.311869760661,454 458.311869760661,436 424.092151621917,436 424.092151621917,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s107,s1,s1,26,442,1</title>
+			<polygon points="487.834406511967,436 487.834406511967,454 501.101324261937,454 501.101324261937,460.3 506.787146154781,445 501.101324261937,429.7 501.101324261937,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s108,s1,s1,685,1623,1</title>
+			<polygon points="517.858097436521,436 517.858097436521,454 547.772445632365,454 547.772445632365,460.3 560.592880573442,445 547.772445632365,429.7 547.772445632365,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s109,s1,s1,1810,2109,0</title>
+			<polygon points="569.112501518649,445 573.199186004131,460.3 573.199186004131,454 582.734783136921,454 582.734783136921,436 573.199186004131,436 573.199186004131,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s110,s1,s1,2109,2381,0</title>
+			<polygon points="582.734783136921,445 586.452435913012,460.3 586.452435913012,454 595.126959057223,454 595.126959057223,436 586.452435913012,436 586.452435913012,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			</g>
 
 			<g style="fill:none">
 			<title>gene_s104000,s1,s1000,1487,1858,1</title>
-			<polygon points="751.552922526624,436 751.552922526624,454 763.428481424275,454 763.428481424275,460.3 768.518006666125,445 763.428481424275,429.7 763.428481424275,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="742.557404932572,436 742.557404932572,454 754.389199368242,454 754.389199368242,460.3 759.459968412101,445 754.389199368242,429.7 754.389199368242,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="760.035464596374" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 760.035464596374 427.7)" font-family="Times New Roman">gene_s104000</text>
 
 			<g style="fill:none">
 			<title>gene_s105000,s1,s1000,2344,2781,1</title>
-			<polygon points="790.741809608975,436 790.741809608975,454 804.730001625884,454 804.730001625884,460.3 810.724941061702,445 804.730001625884,429.7 804.730001625884,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="781.60187097558,436 781.60187097558,454 795.53851293889,454 795.53851293889,460.3 801.511359494594,445 795.53851293889,429.7 795.53851293889,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="800.733375335339" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 800.733375335339 427.7)" font-family="Times New Roman">gene_s105000</text>
 
 			<g style="fill:none">
 			<title>gene_s106000,s1,s1000,2816,3889,0</title>
-			<polygon points="812.325420697504,445 827.045260547923,460.3 827.045260547923,454 861.391553532233,454 861.391553532233,436 827.045260547923,436 827.045260547923,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="803.105940954927,445 817.77153444296,460.3 817.77153444296,454 851.991252581704,454 851.991252581704,436 817.77153444296,436 817.77153444296,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="836.858487114869" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 836.858487114869 427.7)" font-family="Times New Roman">gene_s106000</text>
-<rect x="891.663482643688" y="440.5" width="182.957686366962" height="9" style="fill:blue"   />
-
-			<g style="fill:none">
-			<title>gene_s1030000,s1,s10000,926,1120,1</title>
-			<polygon points="934.007601008048,436 934.007601008048,454 940.21746199496,454 940.21746199496,460.3 942.87883098935,445 940.21746199496,429.7 940.21746199496,436" style="fill:red;stroke:purple;stroke-width:0"/> 
-			</g>
-<text x="938.443215998699" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 938.443215998699 427.7)" font-family="Times New Roman">gene_s1030000.label</text>
 
 			<g style="fill:none">
 			<title>gene_s1040000,s1,s10000,1487,1858,1</title>
-			<polygon points="959.661003170474,436 959.661003170474,454 971.536562068125,454 971.536562068125,460.3 976.626087309975,445 971.536562068125,429.7 971.536562068125,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="947.620580731382,436 947.620580731382,454 959.452375167052,454 959.452375167052,460.3 964.52314421091,445 959.452375167052,429.7 959.452375167052,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="968.143545240225" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 968.143545240225 427.7)" font-family="Times New Roman">gene_s1040000</text>
 
 			<g style="fill:none">
 			<title>gene_s1050000,s1,s10000,2344,2781,1</title>
-			<polygon points="998.849890252825,436 998.849890252825,454 1012.83808226973,454 1012.83808226973,460.3 1018.83302170555,445 1012.83808226973,429.7 1012.83808226973,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="986.66504677439,436 986.66504677439,454 1000.6016887377,454 1000.6016887377,460.3 1006.5745352934,445 1000.6016887377,429.7 1000.6016887377,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1008.84145597919" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1008.84145597919 427.7)" font-family="Times New Roman">gene_s1050000</text>
 
 			<g style="fill:none">
 			<title>gene_s1060000,s1,s10000,2816,3889,0</title>
-			<polygon points="1020.43350134135,445 1035.15334119177,460.3 1035.15334119177,454 1069.49963417608,454 1069.49963417608,436 1035.15334119177,436 1035.15334119177,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1008.16911675374,445 1022.83471024177,460.3 1022.83471024177,454 1057.05442838051,454 1057.05442838051,436 1022.83471024177,436 1022.83471024177,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1044.96656775872" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1044.96656775872 427.7)" font-family="Times New Roman">gene_s1060000</text>
-<rect x="1099.77156328754" y="440.5" width="165.078042435574" height="9" style="fill:blue"   />
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M1074.62116901065,445 L1099.52005934477,445" /></g>
+
 			<g style="fill:none">
 			<title>gene_s1070000,s1,s10000,6,422,1</title>
-			<polygon points="1100.0459312251,436 1100.0459312251,454 1113.36192179498,454 1113.36192179498,460.3 1119.06877489635,445 1113.36192179498,429.7 1113.36192179498,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1085.21018102296,436 1085.21018102296,454 1098.47709877293,454 1098.47709877293,460.3 1104.16292066578,445 1098.47709877293,429.7 1098.47709877293,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1109.55735306073" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1109.55735306073 427.7)" font-family="Times New Roman">gene_s1070000</text>
 
 			<g style="fill:none">
 			<title>gene_s1080000,s1,s10000,665,1603,1</title>
-			<polygon points="1130.18067636778,436 1130.18067636778,454 1160.20567433542,454 1160.20567433542,460.3 1173.07353060727,445 1160.20567433542,429.7 1160.20567433542,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1115.23387194752,436 1115.23387194752,454 1145.14822014336,454 1145.14822014336,460.3 1157.96865508444,445 1145.14822014336,429.7 1145.14822014336,436" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1151.62710348752" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1151.62710348752 427.7)" font-family="Times New Roman">gene_s1080000</text>
 
 			<g style="fill:none">
 			<title>gene_s1090000,s1,s10000,1790,2089,0</title>
-			<polygon points="1181.62466466141,445 1185.72646532802,460.3 1185.72646532802,454 1195.29733355012,454 1195.29733355012,436 1185.72646532802,436 1185.72646532802,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1166.48827602964,445 1170.57496051513,460.3 1170.57496051513,454 1180.11055764792,454 1180.11055764792,436 1170.57496051513,436 1170.57496051513,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1188.46099910576" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1188.46099910576 427.7)" font-family="Times New Roman">gene_s1090000</text>
 
 			<g style="fill:none">
 			<title>gene_s1100000,s1,s10000,2089,2361,0</title>
-			<polygon points="1195.29733355012,445 1199.02873750102,460.3 1199.02873750102,454 1207.73534671978,454 1207.73534671978,436 1199.02873750102,436 1199.02873750102,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1180.11055764792,445 1183.82821042401,460.3 1183.82821042401,454 1192.50273356822,454 1192.50273356822,436 1183.82821042401,436 1183.82821042401,429.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1201.51634013495" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1201.51634013495 427.7)" font-family="Times New Roman">gene_s1100000</text>
-<text x="150" y="539.5" font-size="15px" fill="black"  text-anchor='end'>S2</text>
-<rect x="165" y="530.5" width="411.551906349077" height="9" style="fill:blue"   />
 
 			<g style="fill:none">
 			<title>gene_s201,s2,s2,87,1109,1</title>
-			<polygon points="168.978335094708,526 168.978335094708,544 201.6921388505,544 201.6921388505,550.3 215.712340460125,535 201.6921388505,519.7 201.6921388505,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="168.963673915685,526 168.963673915685,544 201.556918964889,544 201.556918964889,550.3 215.525452557405,535 201.556918964889,519.7 201.556918964889,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="192.345337777416" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 192.345337777416 517.7)" font-family="Times New Roman">gene_s201</text>
 
 			<g style="fill:none">
 			<title>gene_s202,s2,s2,1106,1888,1</title>
-			<polygon points="215.575156491342,526 215.575156491342,544 240.606657995285,544 240.606657995285,550.3 251.334444354118,535 240.606657995285,519.7 240.606657995285,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="215.388774146519,526 215.388774146519,544 240.328028186126,544 240.328028186126,550.3 251.016279917386,535 240.328028186126,519.7 240.328028186126,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="233.45480042273" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 233.45480042273 517.7)" font-family="Times New Roman">gene_s202</text>
 
 			<g style="fill:none">
 			<title>gene_s203,s2,s2,2925,3119,1</title>
-			<polygon points="298.75436956345,526 298.75436956345,544 304.964230550362,544 304.964230550362,550.3 307.625599544753,535 304.964230550362,519.7 304.964230550362,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="298.261450613534,526 298.261450613534,544 304.448426679626,544 304.448426679626,550.3 307.099987850808,535 304.448426679626,519.7 304.448426679626,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="303.189984554101" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 303.189984554101 517.7)" font-family="Times New Roman">gene_s203</text>
 
 			<g style="fill:none">
 			<title>gene_s204,s2,s2,3486,3857,1</title>
-			<polygon points="324.407771725876,526 324.407771725876,544 336.283330623527,544 336.283330623527,550.3 341.372855865377,535 336.283330623527,519.7 336.283330623527,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="323.820313449156,526 323.820313449156,544 335.652107884826,544 335.652107884826,550.3 340.722876928684,535 335.652107884826,519.7 335.652107884826,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="332.890313795626" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 332.890313795626 517.7)" font-family="Times New Roman">gene_s204</text>
 
 			<g style="fill:none">
 			<title>gene_s205,s2,s2,4343,4780,1</title>
-			<polygon points="363.596658808227,526 363.596658808227,544 377.584850825136,544 377.584850825136,550.3 383.579790260954,535 377.584850825136,519.7 377.584850825136,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="362.864779492164,526 362.864779492164,544 376.801421455473,544 376.801421455473,550.3 382.774268011177,535 376.801421455473,519.7 376.801421455473,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="373.588224534591" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 373.588224534591 517.7)" font-family="Times New Roman">gene_s205</text>
 
 			<g style="fill:none">
 			<title>gene_s206,s2,s2,4815,5888,0</title>
-			<polygon points="385.180269896756,535 399.900109747175,550.3 399.900109747175,544 434.246402731485,544 434.246402731485,526 399.900109747175,526 399.900109747175,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="384.36884947151,535 399.034442959543,550.3 399.034442959543,544 433.254161098287,544 433.254161098287,526 399.034442959543,526 399.034442959543,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="409.713336314121" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 409.713336314121 517.7)" font-family="Times New Roman">gene_s206</text>
 
 			<g style="fill:none">
 			<title>gene_s207,s2,s2,6005,6421,1</title>
-			<polygon points="439.596577514023,526 439.596577514023,544 452.912568083896,544 452.912568083896,550.3 458.61942118527,535 452.912568083896,519.7 452.912568083896,526" style="fill:rgb(255,165,0);stroke:purple;stroke-width:0"/> 
+			<polygon points="438.584619122828,526 438.584619122828,544 438.584619122828,544 438.584619122828,550.3 457.537358765642,535 438.584619122828,519.7 438.584619122828,526" style="fill:rgb(255,165,0);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="449.107999349646" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 449.107999349646 517.7)" font-family="Times New Roman">gene_s207.label</text>
 
 			<g style="fill:none">
 			<title>gene_s208,s2,s2,6664,7602,1</title>
-			<polygon points="469.731322656695,526 469.731322656695,544 499.756320624339,544 499.756320624339,550.3 512.624176896187,535 499.756320624339,519.7 499.756320624339,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="468.608310047382,526 468.608310047382,544 498.522658243227,544 498.522658243227,550.3 511.343093184303,535 498.522658243227,519.7 498.522658243227,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="491.177749776441" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 491.177749776441 517.7)" font-family="Times New Roman">gene_s208</text>
 
 			<g style="fill:none">
 			<title>gene_s209,s2,s2,7789,8088,0</title>
-			<polygon points="521.175310950329,535 525.277111616942,550.3 525.277111616942,544 534.847979839038,544 534.847979839038,526 525.277111616942,526 525.277111616942,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="519.86271412951,535 523.949398614992,550.3 523.949398614992,544 533.484995747783,544 533.484995747783,526 523.949398614992,526 523.949398614992,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="528.011645394683" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 528.011645394683 517.7)" font-family="Times New Roman">gene_s209</text>
 
 			<g style="fill:none">
 			<title>gene_s210,s2,s2,8088,8360,0</title>
-			<polygon points="534.847979839038,535 538.579383789936,550.3 538.579383789936,544 547.285993008698,544 547.285993008698,526 538.579383789936,526 538.579383789936,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="533.484995747783,535 537.202648523873,550.3 537.202648523873,544 545.877171668084,544 545.877171668084,526 537.202648523873,526 537.202648523873,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="541.066986423868" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 541.066986423868 517.7)" font-family="Times New Roman">gene_s210</text>
-<rect x="601.702300625965" y="530.5" width="182.957686366962" height="9" style="fill:blue"   />
 
 			<g style="fill:none">
 			<title>gene_s203000,s2,s2000,926,1120,1</title>
-			<polygon points="644.046418990326,526 644.046418990326,544 650.256279977238,544 650.256279977238,550.3 652.917648971628,535 650.256279977238,519.7 650.256279977238,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="640.00303729802,526 640.00303729802,544 646.190013364111,544 646.190013364111,550.3 648.841574535293,535 646.190013364111,519.7 646.190013364111,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="648.482033980977" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 648.482033980977 517.7)" font-family="Times New Roman">gene_s203000</text>
 
 			<g style="fill:none">
 			<title>gene_s204000,s2,s2000,1487,1858,1</title>
-			<polygon points="669.699821152752,526 669.699821152752,544 681.575380050402,544 681.575380050402,550.3 686.664905292253,535 681.575380050402,519.7 681.575380050402,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="665.561900133641,526 665.561900133641,544 677.393694569311,544 677.393694569311,550.3 682.46446361317,535 677.393694569311,519.7 677.393694569311,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="678.182363222502" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 678.182363222502 517.7)" font-family="Times New Roman">gene_s204000</text>
 
 			<g style="fill:none">
 			<title>gene_s205000,s2,s2000,2344,2781,1</title>
-			<polygon points="708.888708235103,526 708.888708235103,544 722.876900252012,544 722.876900252012,550.3 728.87183968783,535 722.876900252012,519.7 722.876900252012,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="704.606366176649,526 704.606366176649,544 718.543008139959,544 718.543008139959,550.3 724.515854695663,535 718.543008139959,519.7 718.543008139959,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="718.880273961467" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 718.880273961467 517.7)" font-family="Times New Roman">gene_s205000</text>
 
 			<g style="fill:none">
 			<title>gene_s206000,s2,s2000,2816,3889,0</title>
-			<polygon points="730.472319323632,535 745.192159174051,550.3 745.192159174051,544 779.538452158361,544 779.538452158361,526 745.192159174051,526 745.192159174051,519.7" style="fill:rgb(255,165,0);stroke:purple;stroke-width:0"/> 
+			<polygon points="726.110436155996,526 726.110436155996,544 774.995747782772,544 774.995747782772,526 " style="fill:rgb(255,165,0);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="755.005385740997" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 755.005385740997 517.7)" font-family="Times New Roman">gene_s206000.label</text>
-<rect x="809.810381269815" y="530.5" width="182.957686366962" height="9" style="fill:blue"   />
 
 			<g style="fill:none">
 			<title>gene_s2030000,s2,s20000,926,1120,1</title>
-			<polygon points="852.154499634176,526 852.154499634176,544 858.364360621088,544 858.364360621088,550.3 861.025729615478,535 858.364360621088,519.7 858.364360621088,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="845.066213096829,526 845.066213096829,544 851.253189162921,544 851.253189162921,550.3 853.904750334103,535 851.253189162921,519.7 851.253189162921,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="856.590114624827" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 856.590114624827 517.7)" font-family="Times New Roman">gene_s2030000</text>
 
 			<g style="fill:none">
 			<title>gene_s2040000,s2,s20000,1487,1858,1</title>
-			<polygon points="877.807901796602,526 877.807901796602,544 889.683460694253,544 889.683460694253,550.3 894.772985936103,535 889.683460694253,519.7 889.683460694253,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="870.625075932451,526 870.625075932451,544 882.456870368121,544 882.456870368121,550.3 887.527639411979,535 882.456870368121,519.7 882.456870368121,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="886.290443866352" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 886.290443866352 517.7)" font-family="Times New Roman">gene_s2040000</text>
 
 			<g style="fill:none">
 			<title>gene_s2050000,s2,s20000,2344,2781,1</title>
-			<polygon points="916.996788878953,526 916.996788878953,544 930.984980895862,544 930.984980895862,550.3 936.97992033168,535 930.984980895862,519.7 930.984980895862,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="909.669541975459,526 909.669541975459,544 923.606183938768,544 923.606183938768,550.3 929.579030494472,535 923.606183938768,519.7 923.606183938768,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="926.988354605317" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 926.988354605317 517.7)" font-family="Times New Roman">gene_s2050000</text>
 
 			<g style="fill:none">
 			<title>gene_s2060000,s2,s20000,2816,3889,0</title>
-			<polygon points="938.580399967482,535 953.300239817901,550.3 953.300239817901,544 987.646532802211,544 987.646532802211,526 953.300239817901,526 953.300239817901,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="931.173611954805,535 945.839205442838,550.3 945.839205442838,544 980.058923581582,544 980.058923581582,526 945.839205442838,526 945.839205442838,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="963.113466384847" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 963.113466384847 517.7)" font-family="Times New Roman">gene_s2060000</text>
-<rect x="1017.91846191367" y="530.5" width="165.078042435574" height="9" style="fill:blue"   />
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M992.768067636778,535 L1017.6669579709,535" /></g>
+
 			<g style="fill:none">
 			<title>gene_s2070000,s2,s20000,6,422,1</title>
-			<polygon points="1018.19282985123,526 1018.19282985123,544 1031.5088204211,544 1031.5088204211,550.3 1037.21567352248,535 1031.5088204211,519.7 1031.5088204211,526" style="fill:rgb(255,165,0);stroke:purple;stroke-width:0"/> 
+			<polygon points="1008.21467622403,526 1008.21467622403,544 1021.481593974,544 1021.481593974,550.3 1027.16741586684,535 1021.481593974,519.7 1021.481593974,526" style="fill:rgb(255,165,0);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1027.70425168685" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1027.70425168685 517.7)" font-family="Times New Roman">gene_s2070000.label</text>
 
 			<g style="fill:none">
 			<title>gene_s2080000,s2,s20000,665,1603,1</title>
-			<polygon points="1048.3275749939,526 1048.3275749939,544 1078.35257296155,544 1078.35257296155,550.3 1091.2204292334,535 1078.35257296155,519.7 1078.35257296155,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1038.23836714858,526 1038.23836714858,544 1068.15271534443,544 1068.15271534443,550.3 1080.97315028551,535 1068.15271534443,519.7 1068.15271534443,526" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1069.77400211365" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1069.77400211365 517.7)" font-family="Times New Roman">gene_s2080000</text>
 
 			<g style="fill:none">
 			<title>gene_s2090000,s2,s20000,1790,2089,0</title>
-			<polygon points="1099.77156328754,535 1103.87336395415,550.3 1103.87336395415,544 1113.44423217625,544 1113.44423217625,526 1103.87336395415,526 1103.87336395415,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1089.49277123071,535 1093.5794557162,550.3 1093.5794557162,544 1103.11505284899,544 1103.11505284899,526 1093.5794557162,526 1093.5794557162,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1106.60789773189" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1106.60789773189 517.7)" font-family="Times New Roman">gene_s2090000</text>
 
 			<g style="fill:none">
 			<title>gene_s2100000,s2,s20000,2089,2361,0</title>
-			<polygon points="1113.44423217625,535 1117.17563612714,550.3 1117.17563612714,544 1125.88224534591,544 1125.88224534591,526 1117.17563612714,526 1117.17563612714,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1103.11505284899,535 1106.83270562508,550.3 1106.83270562508,544 1115.50722876929,544 1115.50722876929,526 1106.83270562508,526 1106.83270562508,519.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1119.66323876108" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1119.66323876108 517.7)" font-family="Times New Roman">gene_s2100000</text>
-<text x="150" y="629.5" font-size="15px" fill="black"  text-anchor='end'>S3</text>
-<rect x="165" y="620.5" width="232.7554670352" height="9" style="fill:blue"   />
 
 			<g style="fill:none">
 			<title>gene_s301,s3,s3,77,1099,1</title>
-			<polygon points="168.521055198764,616 168.521055198764,634 201.234858954557,634 201.234858954557,640.3 215.255060564182,625 201.234858954557,609.7 201.234858954557,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="168.508079212732,616 168.508079212732,634 201.101324261937,634 201.101324261937,640.3 215.069857854453,625 201.101324261937,609.7 201.101324261937,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="191.888057881473" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 191.888057881473 607.7)" font-family="Times New Roman">gene_s301</text>
 
 			<g style="fill:none">
 			<title>gene_s302,s3,s3,1096,1878,1</title>
-			<polygon points="215.117876595399,616 215.117876595399,634 240.149378099342,634 240.149378099342,640.3 250.877164458174,625 240.149378099342,609.7 240.149378099342,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="214.933179443567,616 214.933179443567,634 239.872433483173,634 239.872433483173,640.3 250.560685214433,625 239.872433483173,609.7 239.872433483173,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="232.997520526786" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 232.997520526786 607.7)" font-family="Times New Roman">gene_s302</text>
 
 			<g style="fill:none">
 			<title>gene_s303,s3,s3,2915,3109,1</title>
-			<polygon points="298.297089667507,616 298.297089667507,634 304.506950654418,634 304.506950654418,640.3 307.168319648809,625 304.506950654418,609.7 304.506950654418,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="297.805855910582,616 297.805855910582,634 303.992831976674,634 303.992831976674,640.3 306.644393147856,625 303.992831976674,609.7 303.992831976674,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="302.732704658158" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 302.732704658158 607.7)" font-family="Times New Roman">gene_s303</text>
-<rect x="422.905861312089" y="620.5" width="137.22969677262" height="9" style="fill:blue"   />
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M397.7554670352,625 L422.65435736932,625" /></g>
+
 			<g style="fill:none">
 			<title>gene_s304,s3,s3,477,848,1</title>
-			<polygon points="444.71811234859,616 444.71811234859,634 456.59367124624,634 456.59367124624,640.3 461.68319648809,625 456.59367124624,609.7 456.59367124624,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="441.409306281132,616 441.409306281132,634 453.241100716802,634 453.241100716802,640.3 458.311869760661,625 453.241100716802,609.7 453.241100716802,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="453.20065441834" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 453.20065441834 607.7)" font-family="Times New Roman">gene_s304</text>
 
 			<g style="fill:none">
 			<title>gene_s305,s3,s3,1334,1771,1</title>
-			<polygon points="483.906999430941,616 483.906999430941,634 497.89519144785,634 497.89519144785,640.3 503.890130883668,625 497.89519144785,609.7 497.89519144785,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="480.45377232414,616 480.45377232414,634 494.39041428745,634 494.39041428745,640.3 500.363260843154,625 494.39041428745,609.7 494.39041428745,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="493.898565157304" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 493.898565157304 607.7)" font-family="Times New Roman">gene_s305</text>
 
 			<g style="fill:none">
 			<title>gene_s306,s3,s3,1816,2889,0</title>
-			<polygon points="505.947890415413,625 520.667730265832,640.3 520.667730265832,634 555.014023250142,634 555.014023250142,616 520.667730265832,616 520.667730265832,609.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="502.413437006439,625 517.079030494472,640.3 517.079030494472,634 551.298748633216,634 551.298748633216,616 517.079030494472,616 517.079030494472,609.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="530.480956832778" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 530.480956832778 607.7)" font-family="Times New Roman">gene_s306</text>
-<rect x="585.285952361597" y="620.5" width="165.078042435574" height="9" style="fill:blue"   />
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M560.135558084709,625 L585.034448418828,625" /></g>
+
 			<g style="fill:none">
 			<title>gene_s307,s3,s3,6,422,1</title>
-			<polygon points="585.560320299163,616 585.560320299163,634 598.876310869035,634 598.876310869035,640.3 604.583163970409,625 598.876310869035,609.7 598.876310869035,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="579.454501275665,616 579.454501275665,634 592.721419025635,634 592.721419025635,640.3 598.407240918479,625 592.721419025635,609.7 592.721419025635,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="595.071742134786" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 595.071742134786 607.7)" font-family="Times New Roman">gene_s307</text>
 
 			<g style="fill:none">
 			<title>gene_s308,s3,s3,665,1603,1</title>
-			<polygon points="615.695065441834,616 615.695065441834,634 645.720063409479,634 645.720063409479,640.3 658.587919681327,625 645.720063409479,609.7 645.720063409479,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="609.478192200219,616 609.478192200219,634 639.392540396064,634 639.392540396064,640.3 652.21297533714,625 639.392540396064,609.7 639.392540396064,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="637.14149256158" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 637.14149256158 607.7)" font-family="Times New Roman">gene_s308</text>
 
 			<g style="fill:none">
 			<title>gene_s309,s3,s3,1790,2089,0</title>
-			<polygon points="667.139053735469,625 671.240854402081,640.3 671.240854402081,634 680.811722624177,634 680.811722624177,616 671.240854402081,616 671.240854402081,609.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="660.732596282347,625 664.819280767829,640.3 664.819280767829,634 674.35487790062,634 674.35487790062,616 664.819280767829,616 664.819280767829,609.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="673.975388179823" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 673.975388179823 607.7)" font-family="Times New Roman">gene_s309</text>
 
 			<g style="fill:none">
 			<title>gene_s310,s3,s3,2089,2361,0</title>
-			<polygon points="680.811722624177,625 684.543126575075,640.3 684.543126575075,634 693.249735793838,634 693.249735793838,616 684.543126575075,616 684.543126575075,609.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="674.35487790062,625 678.07253067671,640.3 678.07253067671,634 686.747053820921,634 686.747053820921,616 678.07253067671,616 678.07253067671,609.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="687.030729209007" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 687.030729209007 607.7)" font-family="Times New Roman">gene_s310</text>
-<rect x="775.514389074059" y="620.5" width="182.957686366962" height="9" style="fill:blue"   />
 
 			<g style="fill:none">
 			<title>gene_s303000,s3,s3000,926,1120,1</title>
-			<polygon points="817.85850743842,616 817.85850743842,634 824.068368425331,634 824.068368425331,640.3 826.729737419722,625 824.068368425331,609.7 824.068368425331,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="808.618636860649,616 808.618636860649,634 814.80561292674,634 814.80561292674,640.3 817.457174097923,625 814.80561292674,609.7 814.80561292674,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="822.294122429071" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 822.294122429071 607.7)" font-family="Times New Roman">gene_s303000</text>
 
 			<g style="fill:none">
 			<title>gene_s304000,s3,s3000,1487,1858,1</title>
-			<polygon points="843.511909600845,616 843.511909600845,634 855.387468498496,634 855.387468498496,640.3 860.476993740346,625 855.387468498496,609.7 855.387468498496,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="834.17749969627,616 834.17749969627,634 846.00929413194,634 846.00929413194,640.3 851.080063175799,625 846.00929413194,609.7 846.00929413194,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="851.994451670596" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 851.994451670596 607.7)" font-family="Times New Roman">gene_s304000</text>
 
 			<g style="fill:none">
 			<title>gene_s305000,s3,s3000,2344,2781,1</title>
-			<polygon points="882.700796683197,616 882.700796683197,634 896.688988700106,634 896.688988700106,640.3 902.683928135924,625 896.688988700106,609.7 896.688988700106,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="873.221965739278,616 873.221965739278,634 887.158607702588,634 887.158607702588,640.3 893.131454258292,625 887.158607702588,609.7 887.158607702588,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="892.69236240956" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 892.69236240956 607.7)" font-family="Times New Roman">gene_s305000</text>
 
 			<g style="fill:none">
 			<title>gene_s306000,s3,s3000,2816,3889,0</title>
-			<polygon points="904.284407771726,625 919.004247622145,640.3 919.004247622145,634 953.350540606455,634 953.350540606455,616 919.004247622145,616 919.004247622145,609.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="894.726035718625,625 909.391629206658,640.3 909.391629206658,634 943.611347345402,634 943.611347345402,616 909.391629206658,616 909.391629206658,609.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="928.81747418909" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 928.81747418909 607.7)" font-family="Times New Roman">gene_s306000</text>
-<rect x="983.622469717909" y="620.5" width="182.957686366962" height="9" style="fill:blue"   />
 
 			<g style="fill:none">
 			<title>gene_s3030000,s3,s30000,926,1120,1</title>
-			<polygon points="1025.96658808227,616 1025.96658808227,634 1032.17644906918,634 1032.17644906918,640.3 1034.83781806357,625 1032.17644906918,609.7 1032.17644906918,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1013.68181265946,616 1013.68181265946,634 1019.86878872555,634 1019.86878872555,640.3 1022.52034989673,625 1019.86878872555,609.7 1019.86878872555,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1030.40220307292" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1030.40220307292 607.7)" font-family="Times New Roman">gene_s3030000</text>
 
 			<g style="fill:none">
 			<title>gene_s3040000,s3,s30000,1487,1858,1</title>
-			<polygon points="1051.6199902447,616 1051.6199902447,634 1063.49554914235,634 1063.49554914235,640.3 1068.5850743842,625 1063.49554914235,609.7 1063.49554914235,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1039.24067549508,616 1039.24067549508,634 1051.07246993075,634 1051.07246993075,640.3 1056.14323897461,625 1051.07246993075,609.7 1051.07246993075,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1060.10253231445" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1060.10253231445 607.7)" font-family="Times New Roman">gene_s3040000</text>
 
 			<g style="fill:none">
 			<title>gene_s3050000,s3,s30000,2344,2781,1</title>
-			<polygon points="1090.80887732705,616 1090.80887732705,634 1104.79706934396,634 1104.79706934396,640.3 1110.79200877977,625 1104.79706934396,609.7 1104.79706934396,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1078.28514153809,616 1078.28514153809,634 1092.2217835014,634 1092.2217835014,640.3 1098.1946300571,625 1092.2217835014,609.7 1092.2217835014,616" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1100.80044305341" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1100.80044305341 607.7)" font-family="Times New Roman">gene_s3050000</text>
 
 			<g style="fill:none">
 			<title>gene_s3060000,s3,s30000,2816,3889,0</title>
-			<polygon points="1112.39248841558,625 1127.11232826599,640.3 1127.11232826599,634 1161.4586212503,634 1161.4586212503,616 1127.11232826599,616 1127.11232826599,609.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="1099.78921151743,625 1114.45480500547,640.3 1114.45480500547,634 1148.67452314421,634 1148.67452314421,616 1114.45480500547,616 1114.45480500547,609.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="1136.92555483294" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1136.92555483294 607.7)" font-family="Times New Roman">gene_s3060000</text>
-<text x="150" y="719.5" font-size="15px" fill="black"  text-anchor='end'>S4</text>
-<rect x="165" y="710.5" width="182.957686366962" height="9" style="fill:blue"   />
 
 			<g style="fill:none">
 			<title>gene_s403000,s4,s4000,926,1120,1</title>
-			<polygon points="207.344118364361,706 207.344118364361,724 213.553979351272,724 213.553979351272,730.3 216.215348345663,715 213.553979351272,699.7 213.553979351272,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="207.188069493379,706 207.188069493379,724 213.37504555947,724 213.37504555947,730.3 216.026606730652,715 213.37504555947,699.7 213.37504555947,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="211.779733355012" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 211.779733355012 697.7)" font-family="Times New Roman">gene_s403000</text>
 
 			<g style="fill:none">
 			<title>gene_s404000,s4,s4000,1487,1858,1</title>
-			<polygon points="232.997520526786,706 232.997520526786,724 244.873079424437,724 244.873079424437,730.3 249.962604666287,715 244.873079424437,699.7 244.873079424437,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="232.746932329,706 232.746932329,724 244.57872676467,724 244.57872676467,730.3 249.649495808529,715 244.57872676467,699.7 244.57872676467,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="241.480062596537" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 241.480062596537 697.7)" font-family="Times New Roman">gene_s404000</text>
 
 			<g style="fill:none">
 			<title>gene_s405000,s4,s4000,2344,2781,1</title>
-			<polygon points="272.186407609138,706 272.186407609138,724 286.174599626047,724 286.174599626047,730.3 292.169539061865,715 286.174599626047,699.7 286.174599626047,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="271.791398372008,706 271.791398372008,724 285.728040335318,724 285.728040335318,730.3 291.700886891022,715 285.728040335318,699.7 285.728040335318,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="282.177973335501" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 282.177973335501 697.7)" font-family="Times New Roman">gene_s405000</text>
 
 			<g style="fill:none">
 			<title>gene_s406000,s4,s4000,2816,3889,0</title>
-			<polygon points="293.770018697667,715 308.489858548086,730.3 308.489858548086,724 342.836151532396,724 342.836151532396,706 308.489858548086,706 308.489858548086,699.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="293.295468351355,715 307.961061839388,730.3 307.961061839388,724 342.180779978131,724 342.180779978131,706 307.961061839388,706 307.961061839388,699.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="318.303085115031" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 318.303085115031 697.7)" font-family="Times New Roman">gene_s406000</text>
-<rect x="373.10808064385" y="710.5" width="320.141655149988" height="9" style="fill:blue"   />
 
 			<g style="fill:none">
 			<title>gene_s4020000,s4,s40000,107,889,1</title>
-			<polygon points="378.000975530445,706 378.000975530445,724 403.032477034388,724 403.032477034388,730.3 413.76026339322,715 403.032477034388,699.7 403.032477034388,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="374.938039120399,706 374.938039120399,724 399.877293160005,724 399.877293160005,730.3 410.565544891265,715 399.877293160005,699.7 399.877293160005,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="395.880619461832" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 395.880619461832 697.7)" font-family="Times New Roman">gene_s4020000</text>
 
 			<g style="fill:none">
 			<title>gene_s4030000,s4,s40000,1926,2120,1</title>
-			<polygon points="461.180188602553,706 461.180188602553,724 467.390049589464,724 467.390049589464,730.3 470.051418583855,715 467.390049589464,699.7 467.390049589464,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="457.810715587413,706 457.810715587413,724 463.997691653505,724 463.997691653505,730.3 466.649252824687,715 463.997691653505,699.7 463.997691653505,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="465.615803593204" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 465.615803593204 697.7)" font-family="Times New Roman">gene_s4030000</text>
 
 			<g style="fill:none">
 			<title>gene_s4040000,s4,s40000,2487,2858,1</title>
-			<polygon points="486.833590764979,706 486.833590764979,724 498.709149662629,724 498.709149662629,730.3 503.798674904479,715 498.709149662629,699.7 498.709149662629,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="483.369578423035,706 483.369578423035,724 495.201372858705,724 495.201372858705,730.3 500.272141902564,715 495.201372858705,699.7 495.201372858705,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="495.316132834729" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 495.316132834729 697.7)" font-family="Times New Roman">gene_s4040000</text>
 
 			<g style="fill:none">
 			<title>gene_s4050000,s4,s40000,3344,3781,1</title>
-			<polygon points="526.02247784733,706 526.02247784733,724 540.010669864239,724 540.010669864239,730.3 546.005609300057,715 540.010669864239,699.7 540.010669864239,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="522.414044466043,706 522.414044466043,724 536.350686429352,724 536.350686429352,730.3 542.323532985057,715 536.350686429352,699.7 536.350686429352,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="536.014043573693" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 536.014043573693 697.7)" font-family="Times New Roman">gene_s4050000</text>
 
 			<g style="fill:none">
 			<title>gene_s4060000,s4,s40000,3816,4889,0</title>
-			<polygon points="547.606088935859,715 562.325928786278,730.3 562.325928786278,724 596.672221770588,724 596.672221770588,706 562.325928786278,706 562.325928786278,699.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="543.918114445389,715 558.583707933422,730.3 558.583707933422,724 592.803426072166,724 592.803426072166,706 558.583707933422,706 558.583707933422,699.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="572.139155353223" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 572.139155353223 697.7)" font-family="Times New Roman">gene_s4060000</text>
 
 			<g style="fill:none">
 			<title>gene_s4070000,s4,s40000,5006,5422,1</title>
-			<polygon points="602.022396553126,706 602.022396553126,724 615.338387122998,724 615.338387122998,730.3 621.045240224372,715 615.338387122998,699.7 615.338387122998,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="598.133884096708,706 598.133884096708,724 611.400801846677,724 611.400801846677,730.3 617.086623739521,715 611.400801846677,699.7 611.400801846677,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="611.533818388749" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 611.533818388749 697.7)" font-family="Times New Roman">gene_s4070000</text>
 
 			<g style="fill:none">
 			<title>gene_s4080000,s4,s40000,5665,6603,1</title>
-			<polygon points="632.157141695797,706 632.157141695797,724 662.182139663442,724 662.182139663442,730.3 675.04999593529,715 662.182139663442,699.7 662.182139663442,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="628.157575021261,706 628.157575021261,724 658.071923217106,724 658.071923217106,730.3 670.892358158183,715 658.071923217106,699.7 658.071923217106,706" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="653.603568815544" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 653.603568815544 697.7)" font-family="Times New Roman">gene_s4080000</text>
-<rect x="718.400130070726" y="710.5" width="73.6220632468905" height="9" style="fill:blue"   />
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M693.249735793838,715 L718.148626127957,715" /></g>
+
 			<g style="fill:none">
 			<title>gene_s4100000,s4,s40000,89,361,0</title>
-			<polygon points="722.469921144623,715 726.201325095521,730.3 726.201325095521,724 734.907934314283,724 734.907934314283,706 726.201325095521,706 726.201325095521,699.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
+			<polygon points="715.85955533957,715 719.57720811566,730.3 719.57720811566,724 728.251731259871,724 728.251731259871,706 719.57720811566,706 719.57720811566,699.7" style="fill:rgb(50,205,50);stroke:purple;stroke-width:0"/> 
 			</g>
-<text x="728.688927729453" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 728.688927729453 697.7)" font-family="Times New Roman">gene_s4100000</text>
-<polygon points="298.75436956345,535 307.625599544753,535 461.68319648809,625 444.71811234859,625" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:0.6"/><polygon points="493.601333224941,445 512.624176896187,445 458.61942118527,535 439.596577514023,535" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:0.6"/><polygon points="439.596577514023,535 458.61942118527,535 604.583163970409,625 585.560320299163,625" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:0.6"/><polygon points="585.560320299163,625 604.583163970409,625 621.045240224372,715 602.022396553126,715" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:0.6"/><polygon points="298.75436956345,535 307.625599544753,535 307.168319648809,625 298.297089667507,625" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:0.6"/><polygon points="298.297089667507,625 307.168319648809,625 216.215348345663,715 207.344118364361,715" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:0.6"/><polygon points="588.852735549955,445 601.290748719616,445 547.285993008698,535 534.847979839038,535" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:0.6"/><polygon points="534.847979839038,535 547.285993008698,535 693.249735793838,625 680.811722624177,625" style="fill:#00BFFF;stroke:#000000;stroke-width:0;opacity:0.6"/><polygon points="680.811722624177,625 693.249735793838,625 546.005609300057,715 526.02247784733,715" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:0.6"/><polygon points="1020.43350134135,445 1069.49963417608,445 1125.88224534591,535 1113.44423217625,535" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:0.6"/><polygon points="1113.44423217625,535 1125.88224534591,535 734.907934314283,715 722.469921144623,715" style="fill:rgb(255,222,173);stroke:#000000;stroke-width:0;opacity:0.6"/><rect x="1312.125" y="364" width="47.25" height="16" style="fill:rgb(255,165,0);stroke:black;stroke-width:0;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="378" font-size="18px" fill="black" text-anchor='start'>legend.s2</text><rect x="1312.125" y="384" width="47.25" height="16" style="fill:yellow;stroke:black;stroke-width:0;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="398" font-size="18px" fill="black" text-anchor='start'>legend.s1i</text><rect x="1312.125" y="404" width="47.25" height="16" style="fill:red;stroke:black;stroke-width:0;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="418" font-size="18px" fill="black" text-anchor='start'>legend.s1</text><rect x="1312.125" y="424" width="47.25" height="16" style="fill:black;stroke:black;stroke-width:0;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="438" font-size="18px" fill="black" text-anchor='start'>legend.s1.g</text><line x1="165" y1="780" x2="1290" y2="780" style="stroke:black;stroke-width:1"/>
-<line x1="165" y1="772" x2="165" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="265" y1="772" x2="265" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="365" y1="772" x2="365" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="465" y1="772" x2="465" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="565" y1="772" x2="565" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="665" y1="772" x2="665" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="765" y1="772" x2="765" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="865" y1="772" x2="865" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="965" y1="772" x2="965" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="1065" y1="772" x2="1065" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="1165" y1="772" x2="1165" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="1265" y1="772" x2="1265" y2="780" style="stroke:black;stroke-width:0.5"/>
-<line x1="1290" y1="772" x2="1290" y2="780" style="stroke:black;stroke-width:0.5"/>
+
+
+<text x="192.19900376625" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 192.19900376625 67.7)" font-family="Times New Roman"></text>
+<text x="233.156967561657" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 233.156967561657 67.7)" font-family="Times New Roman"></text>
+<text x="357.329303851294" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 357.329303851294 67.7)" font-family="Times New Roman"></text>
+<text x="397.877232414044" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 397.877232414044 67.7)" font-family="Times New Roman"></text>
+<text x="433.869213947273" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 433.869213947273 67.7)" font-family="Times New Roman"></text>
+<text x="497.310776333374" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 497.310776333374 67.7)" font-family="Times New Roman"></text>
+<text x="539.225489004981" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 539.225489004981 67.7)" font-family="Times New Roman"></text>
+<text x="575.923642327785" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 575.923642327785 67.7)" font-family="Times New Roman"></text>
+<text x="588.930871097072" y="67.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 588.930871097072 67.7)" font-family="Times New Roman"></text>
+<text x="241.198214068764" y="157.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 241.198214068764 157.7)" font-family="Times New Roman"></text>
+<text x="281.746142631515" y="157.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 281.746142631515 157.7)" font-family="Times New Roman"></text>
+<text x="317.738124164743" y="157.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 317.738124164743 157.7)" font-family="Times New Roman"></text>
+<text x="241.198214068764" y="247.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 241.198214068764 247.7)" font-family="Times New Roman"></text>
+<text x="281.746142631515" y="247.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 281.746142631515 247.7)" font-family="Times New Roman"></text>
+<text x="317.738124164743" y="247.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 317.738124164743 247.7)" font-family="Times New Roman"></text>
+<text x="174.749726643178" y="337.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 174.749726643178 337.7)" font-family="Times New Roman"></text>
+<text x="216.664439314786" y="337.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 216.664439314786 337.7)" font-family="Times New Roman"></text>
+<text x="253.36259263759" y="337.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 253.36259263759 337.7)" font-family="Times New Roman"></text>
+<text x="266.369821406876" y="337.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 266.369821406876 337.7)" font-family="Times New Roman"></text>
+<text x="192.19900376625" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 192.19900376625 427.7)" font-family="Times New Roman"></text>
+<text x="233.156967561657" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 233.156967561657 427.7)" font-family="Times New Roman"></text>
+<text x="357.329303851294" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 357.329303851294 427.7)" font-family="Times New Roman"></text>
+<text x="397.877232414044" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 397.877232414044 427.7)" font-family="Times New Roman"></text>
+<text x="433.869213947273" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 433.869213947273 427.7)" font-family="Times New Roman"></text>
+<text x="497.310776333374" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 497.310776333374 427.7)" font-family="Times New Roman"></text>
+<text x="539.225489004981" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 539.225489004981 427.7)" font-family="Times New Roman"></text>
+<text x="575.923642327785" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 575.923642327785 427.7)" font-family="Times New Roman"></text>
+<text x="588.930871097072" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 588.930871097072 427.7)" font-family="Times New Roman"></text>
+<text x="751.008686672336" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 751.008686672336 427.7)" font-family="Times New Roman"></text>
+<text x="791.556615235087" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 791.556615235087 427.7)" font-family="Times New Roman"></text>
+<text x="827.548596768315" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 827.548596768315 427.7)" font-family="Times New Roman"></text>
+<text x="956.071862471146" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 956.071862471146 427.7)" font-family="Times New Roman"></text>
+<text x="996.619791033896" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 996.619791033896 427.7)" font-family="Times New Roman"></text>
+<text x="1032.61177256712" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1032.61177256712 427.7)" font-family="Times New Roman"></text>
+<text x="1094.68655084437" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1094.68655084437 427.7)" font-family="Times New Roman"></text>
+<text x="1136.60126351598" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1136.60126351598 427.7)" font-family="Times New Roman"></text>
+<text x="1173.29941683878" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1173.29941683878 427.7)" font-family="Times New Roman"></text>
+<text x="1186.30664560807" y="427.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1186.30664560807 427.7)" font-family="Times New Roman"></text>
+<text x="192.244563236545" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 192.244563236545 517.7)" font-family="Times New Roman"></text>
+<text x="233.202527031952" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 233.202527031952 517.7)" font-family="Times New Roman"></text>
+<text x="302.680719232171" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 302.680719232171 517.7)" font-family="Times New Roman"></text>
+<text x="332.27159518892" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 332.27159518892 517.7)" font-family="Times New Roman"></text>
+<text x="372.819523751671" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 372.819523751671 517.7)" font-family="Times New Roman"></text>
+<text x="408.811505284899" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 408.811505284899 517.7)" font-family="Times New Roman"></text>
+<text x="448.060988944235" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 448.060988944235 517.7)" font-family="Times New Roman">gene_s207.label</text>
+<text x="489.975701615843" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 489.975701615843 517.7)" font-family="Times New Roman"></text>
+<text x="526.673854938647" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 526.673854938647 517.7)" font-family="Times New Roman"></text>
+<text x="539.681083707933" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 539.681083707933 517.7)" font-family="Times New Roman"></text>
+<text x="644.422305916657" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 644.422305916657 517.7)" font-family="Times New Roman"></text>
+<text x="674.013181873406" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 674.013181873406 517.7)" font-family="Times New Roman"></text>
+<text x="714.561110436156" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 714.561110436156 517.7)" font-family="Times New Roman"></text>
+<text x="750.553091969384" y="524" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 750.553091969384 524)" font-family="Times New Roman">gene_s206000.label</text>
+<text x="849.485481715466" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 849.485481715466 517.7)" font-family="Times New Roman"></text>
+<text x="879.076357672215" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 879.076357672215 517.7)" font-family="Times New Roman"></text>
+<text x="919.624286234965" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 919.624286234965 517.7)" font-family="Times New Roman"></text>
+<text x="955.616267768194" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 955.616267768194 517.7)" font-family="Times New Roman"></text>
+<text x="1017.69104604544" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1017.69104604544 517.7)" font-family="Times New Roman">gene_s2070000.label</text>
+<text x="1059.60575871705" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1059.60575871705 517.7)" font-family="Times New Roman"></text>
+<text x="1096.30391203985" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1096.30391203985 517.7)" font-family="Times New Roman"></text>
+<text x="1109.31114080914" y="517.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1109.31114080914 517.7)" font-family="Times New Roman"></text>
+<text x="191.788968533593" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 191.788968533593 607.7)" font-family="Times New Roman"></text>
+<text x="232.746932329" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 232.746932329 607.7)" font-family="Times New Roman"></text>
+<text x="302.225124529219" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 302.225124529219 607.7)" font-family="Times New Roman"></text>
+<text x="449.860588020897" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 449.860588020897 607.7)" font-family="Times New Roman"></text>
+<text x="490.408516583647" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 490.408516583647 607.7)" font-family="Times New Roman"></text>
+<text x="526.856092819827" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 526.856092819827 607.7)" font-family="Times New Roman"></text>
+<text x="588.930871097072" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 588.930871097072 607.7)" font-family="Times New Roman"></text>
+<text x="630.845583768679" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 630.845583768679 607.7)" font-family="Times New Roman"></text>
+<text x="667.543737091483" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 667.543737091483 607.7)" font-family="Times New Roman"></text>
+<text x="680.55096586077" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 680.55096586077 607.7)" font-family="Times New Roman"></text>
+<text x="813.037905479286" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 813.037905479286 607.7)" font-family="Times New Roman"></text>
+<text x="842.628781436035" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 842.628781436035 607.7)" font-family="Times New Roman"></text>
+<text x="883.176709998785" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 883.176709998785 607.7)" font-family="Times New Roman"></text>
+<text x="919.168691532013" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 919.168691532013 607.7)" font-family="Times New Roman"></text>
+<text x="1018.1010812781" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1018.1010812781 607.7)" font-family="Times New Roman"></text>
+<text x="1047.69195723484" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1047.69195723484 607.7)" font-family="Times New Roman"></text>
+<text x="1088.23988579759" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1088.23988579759 607.7)" font-family="Times New Roman"></text>
+<text x="1124.23186733082" y="607.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1124.23186733082 607.7)" font-family="Times New Roman"></text>
+<text x="211.607338112016" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 211.607338112016 697.7)" font-family="Times New Roman"></text>
+<text x="241.198214068764" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 241.198214068764 697.7)" font-family="Times New Roman"></text>
+<text x="281.746142631515" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 281.746142631515 697.7)" font-family="Times New Roman"></text>
+<text x="317.738124164743" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 317.738124164743 697.7)" font-family="Times New Roman"></text>
+<text x="392.751792005832" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 392.751792005832 697.7)" font-family="Times New Roman"></text>
+<text x="462.22998420605" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 462.22998420605 697.7)" font-family="Times New Roman"></text>
+<text x="491.820860162799" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 491.820860162799 697.7)" font-family="Times New Roman"></text>
+<text x="532.36878872555" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 532.36878872555 697.7)" font-family="Times New Roman"></text>
+<text x="568.360770258778" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 568.360770258778 697.7)" font-family="Times New Roman"></text>
+<text x="607.610253918114" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 607.610253918114 697.7)" font-family="Times New Roman"></text>
+<text x="649.524966589722" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 649.524966589722 697.7)" font-family="Times New Roman"></text>
+<text x="722.055643299721" y="697.7" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 722.055643299721 697.7)" font-family="Times New Roman"></text>
+
+
+<rect x="879.873648402381" y="440.5" width="182.283440651197" height="9" style="fill:blue"   />
+
+
+
+			<g style="fill:none">
+			<title>gene_s1030000,s1.s10000.2k-6k,s10000,926,1120,1</title>
+			<polygon points="207.188069493379,247 207.188069493379,283 207.188069493379,283 207.188069493379,288.4 216.026606730652,265 207.188069493379,241.6 207.188069493379,247" style="fill:red;stroke:purple;stroke-width:0"/> 
+			</g>
+
+			<g style="fill:none">
+			<title>gene_s1030000,s1,s10000,926,1120,1</title>
+			<polygon points="922.06171789576,427 922.06171789576,463 922.06171789576,463 922.06171789576,468.4 930.900255133034,445 922.06171789576,421.6 922.06171789576,427" style="fill:red;stroke:purple;stroke-width:0"/> 
+			</g>
 
 </svg>

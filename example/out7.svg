@@ -77,17 +77,17 @@
 
 
 <text x="271.870049038099" y="182.8" font-size="15px" fill="green"  text-anchor='start'   transform="rotate(60 271.870049038099 182.8)" font-family="Times New Roman">gene_s1030000.label</text>
-<polygon points="335.277725386647,160.6 373.223311957752,160.6 460.643153526971,279.4 451.024141833271,279.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="451.024141833271,340.6 460.643153526971,340.6 460.643153526971,639.4 451.024141833271,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1025.86618257261,340.6 1032.72680120709,340.6 1003.02102980008,459.4 996.160411165598,459.4" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="996.160411165598,520.6 1003.02102980008,520.6 632.795171633346,639.4 625.934552998868,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
 <polygon points="1144.86608826858,160.6 1159.57751791777,160.6 1149.49877404753,279.4 1134.78734439834,279.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
 <polygon points="1134.78734439834,340.6 1149.49877404753,340.6 1119.79300264051,459.4 1105.08157299132,459.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
 <polygon points="1105.08157299132,520.6 1119.79300264051,520.6 392.072331195775,639.4 377.360901546586,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1025.86618257261,340.6 1032.72680120709,340.6 1029.11967182195,459.4 1015.99962278386,459.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1025.86618257261,340.6 1032.72680120709,340.6 1003.02102980008,459.4 996.160411165598,459.4" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="996.160411165598,520.6 1003.02102980008,520.6 632.795171633346,639.4 625.934552998868,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
 <polygon points="1218.52932855526,160.6 1228.14834024896,160.6 1218.06959637873,279.4 1208.45058468502,279.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
 <polygon points="1208.45058468502,340.6 1218.06959637873,340.6 1188.36382497171,459.4 1178.74481327801,459.4" style="fill:#00BFFF;stroke:#000000;stroke-width:0;opacity:0.8"/>
 <polygon points="1178.74481327801,520.6 1188.36382497171,520.6 334.039984911354,639.4 318.58591097699,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1025.86618257261,340.6 1032.72680120709,340.6 1029.11967182195,459.4 1015.99962278386,459.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="335.277725386647,160.6 373.223311957752,160.6 460.643153526971,279.4 451.024141833271,279.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="451.024141833271,340.6 460.643153526971,340.6 460.643153526971,639.4 451.024141833271,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.5"/>
 
 
 <rect x="541.59138061109" y="121" width="373.231799321011" height="18" style="fill:blue"   />
@@ -701,124 +701,124 @@
 			</g>
 
 
-<text x="186.147680120709" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 186.147680120709 97.4)" font-family="Times New Roman"></text>
-<text x="217.939928328932" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 217.939928328932 97.4)" font-family="Times New Roman"></text>
-<text x="294.838975858167" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 294.838975858167 97.4)" font-family="Times New Roman"></text>
-<text x="326.312947944172" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 326.312947944172 97.4)" font-family="Times New Roman"></text>
-<text x="354.250518672199" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 354.250518672199 97.4)" font-family="Times New Roman"></text>
-<text x="384.716616371181" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 384.716616371181 97.4)" font-family="Times New Roman"></text>
-<text x="417.251508864579" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 417.251508864579 97.4)" font-family="Times New Roman"></text>
-<text x="445.737221803093" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 445.737221803093 97.4)" font-family="Times New Roman"></text>
-<text x="455.833647680121" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 455.833647680121 97.4)" font-family="Times New Roman"></text>
-<text x="562.739060731799" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 562.739060731799 97.4)" font-family="Times New Roman"></text>
-<text x="594.531308940023" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 594.531308940023 97.4)" font-family="Times New Roman"></text>
-<text x="671.430356469257" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 671.430356469257 97.4)" font-family="Times New Roman"></text>
-<text x="702.904328555262" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 702.904328555262 97.4)" font-family="Times New Roman"></text>
-<text x="730.841899283289" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 730.841899283289 97.4)" font-family="Times New Roman"></text>
-<text x="761.307996982271" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 761.307996982271 97.4)" font-family="Times New Roman"></text>
-<text x="793.842889475669" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 793.842889475669 97.4)" font-family="Times New Roman"></text>
-<text x="822.328602414183" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 822.328602414183 97.4)" font-family="Times New Roman"></text>
-<text x="832.425028291211" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 832.425028291211 97.4)" font-family="Times New Roman"></text>
-<text x="953.652866842701" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 953.652866842701 97.4)" font-family="Times New Roman"></text>
-<text x="985.445115050924" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 985.445115050924 97.4)" font-family="Times New Roman"></text>
-<text x="1039.37523576009" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1039.37523576009 97.4)" font-family="Times New Roman"></text>
-<text x="1062.34416258016" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1062.34416258016 97.4)" font-family="Times New Roman"></text>
-<text x="1093.81813466616" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1093.81813466616 97.4)" font-family="Times New Roman"></text>
-<text x="1121.75570539419" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1121.75570539419 97.4)" font-family="Times New Roman"></text>
-<text x="1152.22180309317" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1152.22180309317 97.4)" font-family="Times New Roman"></text>
-<text x="1184.75669558657" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1184.75669558657 97.4)" font-family="Times New Roman"></text>
-<text x="1213.24240852508" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1213.24240852508 97.4)" font-family="Times New Roman"></text>
-<text x="1223.33883440211" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1223.33883440211 97.4)" font-family="Times New Roman"></text>
-<text x="186.147680120709" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 186.147680120709 277.4)" font-family="Times New Roman"></text>
-<text x="217.939928328932" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 217.939928328932 277.4)" font-family="Times New Roman"></text>
-<text x="271.870049038099" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 271.870049038099 277.4)" font-family="Times New Roman"></text>
-<text x="294.838975858167" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 294.838975858167 277.4)" font-family="Times New Roman"></text>
-<text x="326.312947944172" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 326.312947944172 277.4)" font-family="Times New Roman"></text>
-<text x="354.250518672199" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 354.250518672199 277.4)" font-family="Times New Roman"></text>
+<text x="186.147680120709" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 186.147680120709 97.4)" font-family="Times New Roman">gene_s1010000</text>
+<text x="217.939928328932" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 217.939928328932 97.4)" font-family="Times New Roman">gene_s1020000</text>
+<text x="294.838975858167" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 294.838975858167 97.4)" font-family="Times New Roman">gene_s1040000</text>
+<text x="326.312947944172" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 326.312947944172 97.4)" font-family="Times New Roman">gene_s1050000</text>
+<text x="354.250518672199" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 354.250518672199 97.4)" font-family="Times New Roman">gene_s1060000</text>
+<text x="384.716616371181" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 384.716616371181 97.4)" font-family="Times New Roman">gene_s1070000</text>
+<text x="417.251508864579" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 417.251508864579 97.4)" font-family="Times New Roman">gene_s1080000</text>
+<text x="445.737221803093" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 445.737221803093 97.4)" font-family="Times New Roman">gene_s1090000</text>
+<text x="455.833647680121" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 455.833647680121 97.4)" font-family="Times New Roman">gene_s1100000</text>
+<text x="562.739060731799" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 562.739060731799 97.4)" font-family="Times New Roman">gene_s101000</text>
+<text x="594.531308940023" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 594.531308940023 97.4)" font-family="Times New Roman">gene_s102000</text>
+<text x="671.430356469257" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 671.430356469257 97.4)" font-family="Times New Roman">gene_s104000</text>
+<text x="702.904328555262" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 702.904328555262 97.4)" font-family="Times New Roman">gene_s105000</text>
+<text x="730.841899283289" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 730.841899283289 97.4)" font-family="Times New Roman">gene_s106000</text>
+<text x="761.307996982271" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 761.307996982271 97.4)" font-family="Times New Roman">gene_s107000</text>
+<text x="793.842889475669" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 793.842889475669 97.4)" font-family="Times New Roman">gene_s108000</text>
+<text x="822.328602414183" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 822.328602414183 97.4)" font-family="Times New Roman">gene_s109000</text>
+<text x="832.425028291211" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 832.425028291211 97.4)" font-family="Times New Roman">gene_s110000</text>
+<text x="953.652866842701" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 953.652866842701 97.4)" font-family="Times New Roman">gene_s101</text>
+<text x="985.445115050924" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 985.445115050924 97.4)" font-family="Times New Roman">gene_s102</text>
+<text x="1039.37523576009" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1039.37523576009 97.4)" font-family="Times New Roman">gene_s103</text>
+<text x="1062.34416258016" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1062.34416258016 97.4)" font-family="Times New Roman">gene_s104</text>
+<text x="1093.81813466616" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1093.81813466616 97.4)" font-family="Times New Roman">gene_s105</text>
+<text x="1121.75570539419" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1121.75570539419 97.4)" font-family="Times New Roman">gene_s106</text>
+<text x="1152.22180309317" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1152.22180309317 97.4)" font-family="Times New Roman">gene_s107</text>
+<text x="1184.75669558657" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1184.75669558657 97.4)" font-family="Times New Roman">gene_s108</text>
+<text x="1213.24240852508" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1213.24240852508 97.4)" font-family="Times New Roman">gene_s109</text>
+<text x="1223.33883440211" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1223.33883440211 97.4)" font-family="Times New Roman">gene_s110</text>
+<text x="186.147680120709" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 186.147680120709 277.4)" font-family="Times New Roman">gene_s2010000</text>
+<text x="217.939928328932" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 217.939928328932 277.4)" font-family="Times New Roman">gene_s2020000</text>
+<text x="271.870049038099" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 271.870049038099 277.4)" font-family="Times New Roman">gene_s2030000</text>
+<text x="294.838975858167" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 294.838975858167 277.4)" font-family="Times New Roman">gene_s2040000</text>
+<text x="326.312947944172" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 326.312947944172 277.4)" font-family="Times New Roman">gene_s2050000</text>
+<text x="354.250518672199" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 354.250518672199 277.4)" font-family="Times New Roman">gene_s2060000</text>
 <text x="384.716616371181" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 384.716616371181 277.4)" font-family="Times New Roman">gene_s2070000.label</text>
-<text x="417.251508864579" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 417.251508864579 277.4)" font-family="Times New Roman"></text>
-<text x="445.737221803093" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 445.737221803093 277.4)" font-family="Times New Roman"></text>
-<text x="455.833647680121" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 455.833647680121 277.4)" font-family="Times New Roman"></text>
-<text x="586.079309694455" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 586.079309694455 277.4)" font-family="Times New Roman"></text>
-<text x="617.871557902678" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 617.871557902678 277.4)" font-family="Times New Roman"></text>
-<text x="671.801678611845" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 671.801678611845 277.4)" font-family="Times New Roman"></text>
-<text x="694.770605431912" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 694.770605431912 277.4)" font-family="Times New Roman"></text>
-<text x="726.244577517918" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 726.244577517918 277.4)" font-family="Times New Roman"></text>
+<text x="417.251508864579" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 417.251508864579 277.4)" font-family="Times New Roman">gene_s2080000</text>
+<text x="445.737221803093" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 445.737221803093 277.4)" font-family="Times New Roman">gene_s2090000</text>
+<text x="455.833647680121" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 455.833647680121 277.4)" font-family="Times New Roman">gene_s2100000</text>
+<text x="586.079309694455" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 586.079309694455 277.4)" font-family="Times New Roman">gene_s201000</text>
+<text x="617.871557902678" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 617.871557902678 277.4)" font-family="Times New Roman">gene_s202000</text>
+<text x="671.801678611845" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 671.801678611845 277.4)" font-family="Times New Roman">gene_s203000</text>
+<text x="694.770605431912" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 694.770605431912 277.4)" font-family="Times New Roman">gene_s204000</text>
+<text x="726.244577517918" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 726.244577517918 277.4)" font-family="Times New Roman">gene_s205000</text>
 <text x="754.182148245945" y="290" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 754.182148245945 290)" font-family="Times New Roman">gene_s206000.label</text>
-<text x="784.648245944927" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 784.648245944927 277.4)" font-family="Times New Roman"></text>
-<text x="817.183138438325" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 817.183138438325 277.4)" font-family="Times New Roman"></text>
-<text x="845.668851376839" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 845.668851376839 277.4)" font-family="Times New Roman"></text>
-<text x="855.765277253867" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 855.765277253867 277.4)" font-family="Times New Roman"></text>
-<text x="943.574122972463" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 943.574122972463 277.4)" font-family="Times New Roman"></text>
-<text x="975.366371180687" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 975.366371180687 277.4)" font-family="Times New Roman"></text>
-<text x="1029.29649188985" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1029.29649188985 277.4)" font-family="Times New Roman"></text>
-<text x="1052.26541870992" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1052.26541870992 277.4)" font-family="Times New Roman"></text>
-<text x="1083.73939079593" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1083.73939079593 277.4)" font-family="Times New Roman"></text>
-<text x="1111.67696152395" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1111.67696152395 277.4)" font-family="Times New Roman"></text>
+<text x="784.648245944927" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 784.648245944927 277.4)" font-family="Times New Roman">gene_s207000</text>
+<text x="817.183138438325" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 817.183138438325 277.4)" font-family="Times New Roman">gene_s208000</text>
+<text x="845.668851376839" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 845.668851376839 277.4)" font-family="Times New Roman">gene_s209000</text>
+<text x="855.765277253867" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 855.765277253867 277.4)" font-family="Times New Roman">gene_s210000</text>
+<text x="943.574122972463" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 943.574122972463 277.4)" font-family="Times New Roman">gene_s201</text>
+<text x="975.366371180687" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 975.366371180687 277.4)" font-family="Times New Roman">gene_s202</text>
+<text x="1029.29649188985" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1029.29649188985 277.4)" font-family="Times New Roman">gene_s203</text>
+<text x="1052.26541870992" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1052.26541870992 277.4)" font-family="Times New Roman">gene_s204</text>
+<text x="1083.73939079593" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1083.73939079593 277.4)" font-family="Times New Roman">gene_s205</text>
+<text x="1111.67696152395" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1111.67696152395 277.4)" font-family="Times New Roman">gene_s206</text>
 <text x="1142.14305922293" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1142.14305922293 277.4)" font-family="Times New Roman">gene_s207.label</text>
-<text x="1174.67795171633" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1174.67795171633 277.4)" font-family="Times New Roman"></text>
-<text x="1203.16366465485" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1203.16366465485 277.4)" font-family="Times New Roman"></text>
-<text x="1213.26009053187" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1213.26009053187 277.4)" font-family="Times New Roman"></text>
-<text x="186.147680120709" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 186.147680120709 457.4)" font-family="Times New Roman"></text>
-<text x="217.939928328932" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 217.939928328932 457.4)" font-family="Times New Roman"></text>
-<text x="271.870049038099" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 271.870049038099 457.4)" font-family="Times New Roman"></text>
-<text x="294.838975858167" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 294.838975858167 457.4)" font-family="Times New Roman"></text>
-<text x="326.312947944172" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 326.312947944172 457.4)" font-family="Times New Roman"></text>
-<text x="354.250518672199" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 354.250518672199 457.4)" font-family="Times New Roman"></text>
-<text x="384.716616371181" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 384.716616371181 457.4)" font-family="Times New Roman"></text>
-<text x="417.251508864579" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 417.251508864579 457.4)" font-family="Times New Roman"></text>
-<text x="445.737221803093" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 445.737221803093 457.4)" font-family="Times New Roman"></text>
-<text x="455.833647680121" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 455.833647680121 457.4)" font-family="Times New Roman"></text>
-<text x="556.373538287439" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 556.373538287439 457.4)" font-family="Times New Roman"></text>
-<text x="588.165786495662" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 588.165786495662 457.4)" font-family="Times New Roman"></text>
-<text x="642.095907204828" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 642.095907204828 457.4)" font-family="Times New Roman"></text>
-<text x="665.064834024896" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 665.064834024896 457.4)" font-family="Times New Roman"></text>
-<text x="696.538806110902" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 696.538806110902 457.4)" font-family="Times New Roman"></text>
-<text x="724.476376838929" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 724.476376838929 457.4)" font-family="Times New Roman"></text>
-<text x="754.94247453791" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 754.94247453791 457.4)" font-family="Times New Roman"></text>
-<text x="787.477367031309" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 787.477367031309 457.4)" font-family="Times New Roman"></text>
-<text x="815.963079969823" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 815.963079969823 457.4)" font-family="Times New Roman"></text>
-<text x="826.05950584685" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 826.05950584685 457.4)" font-family="Times New Roman"></text>
-<text x="913.868351565447" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 913.868351565447 457.4)" font-family="Times New Roman"></text>
-<text x="945.66059977367" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 945.66059977367 457.4)" font-family="Times New Roman"></text>
-<text x="999.590720482837" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 999.590720482837 457.4)" font-family="Times New Roman"></text>
-<text x="1022.5596473029" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1022.5596473029 457.4)" font-family="Times New Roman"></text>
-<text x="1054.03361938891" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1054.03361938891 457.4)" font-family="Times New Roman"></text>
-<text x="1081.97119011694" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1081.97119011694 457.4)" font-family="Times New Roman"></text>
-<text x="1112.43728781592" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1112.43728781592 457.4)" font-family="Times New Roman"></text>
-<text x="1144.97218030932" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1144.97218030932 457.4)" font-family="Times New Roman"></text>
-<text x="1173.45789324783" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1173.45789324783 457.4)" font-family="Times New Roman"></text>
-<text x="1183.55431912486" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1183.55431912486 457.4)" font-family="Times New Roman"></text>
-<text x="186.147680120709" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 186.147680120709 637.4)" font-family="Times New Roman"></text>
-<text x="217.939928328932" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 217.939928328932 637.4)" font-family="Times New Roman"></text>
-<text x="271.870049038099" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 271.870049038099 637.4)" font-family="Times New Roman"></text>
-<text x="294.838975858167" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 294.838975858167 637.4)" font-family="Times New Roman"></text>
-<text x="326.312947944172" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 326.312947944172 637.4)" font-family="Times New Roman"></text>
-<text x="354.250518672199" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 354.250518672199 637.4)" font-family="Times New Roman"></text>
-<text x="384.716616371181" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 384.716616371181 637.4)" font-family="Times New Roman"></text>
-<text x="417.251508864579" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 417.251508864579 637.4)" font-family="Times New Roman"></text>
-<text x="445.737221803093" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 445.737221803093 637.4)" font-family="Times New Roman"></text>
-<text x="455.833647680121" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 455.833647680121 637.4)" font-family="Times New Roman"></text>
-<text x="543.642493398717" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 543.642493398717 637.4)" font-family="Times New Roman"></text>
-<text x="575.434741606941" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 575.434741606941 637.4)" font-family="Times New Roman"></text>
-<text x="629.364862316107" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 629.364862316107 637.4)" font-family="Times New Roman"></text>
-<text x="652.333789136175" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 652.333789136175 637.4)" font-family="Times New Roman"></text>
-<text x="683.80776122218" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 683.80776122218 637.4)" font-family="Times New Roman"></text>
-<text x="711.745331950208" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 711.745331950208 637.4)" font-family="Times New Roman"></text>
-<text x="742.211429649189" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 742.211429649189 637.4)" font-family="Times New Roman"></text>
-<text x="774.746322142588" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 774.746322142588 637.4)" font-family="Times New Roman"></text>
-<text x="803.232035081101" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 803.232035081101 637.4)" font-family="Times New Roman"></text>
-<text x="813.328460958129" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 813.328460958129 637.4)" font-family="Times New Roman"></text>
-<text x="901.137306676726" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 901.137306676726 637.4)" font-family="Times New Roman"></text>
-<text x="932.929554884949" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 932.929554884949 637.4)" font-family="Times New Roman"></text>
-<text x="986.859675594116" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 986.859675594116 637.4)" font-family="Times New Roman"></text>
-<text x="1009.82860241418" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1009.82860241418 637.4)" font-family="Times New Roman"></text>
-<text x="1041.30257450019" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1041.30257450019 637.4)" font-family="Times New Roman"></text>
-<text x="1069.24014522822" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1069.24014522822 637.4)" font-family="Times New Roman"></text>
-<text x="1099.7062429272" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1099.7062429272 637.4)" font-family="Times New Roman"></text>
-<text x="1132.2411354206" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1132.2411354206 637.4)" font-family="Times New Roman"></text>
-<text x="1160.72684835911" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1160.72684835911 637.4)" font-family="Times New Roman"></text>
-<text x="1170.82327423614" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1170.82327423614 637.4)" font-family="Times New Roman"></text>
+<text x="1174.67795171633" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1174.67795171633 277.4)" font-family="Times New Roman">gene_s208</text>
+<text x="1203.16366465485" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1203.16366465485 277.4)" font-family="Times New Roman">gene_s209</text>
+<text x="1213.26009053187" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1213.26009053187 277.4)" font-family="Times New Roman">gene_s210</text>
+<text x="186.147680120709" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 186.147680120709 457.4)" font-family="Times New Roman">gene_s3010000</text>
+<text x="217.939928328932" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 217.939928328932 457.4)" font-family="Times New Roman">gene_s3020000</text>
+<text x="271.870049038099" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 271.870049038099 457.4)" font-family="Times New Roman">gene_s3030000</text>
+<text x="294.838975858167" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 294.838975858167 457.4)" font-family="Times New Roman">gene_s3040000</text>
+<text x="326.312947944172" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 326.312947944172 457.4)" font-family="Times New Roman">gene_s3050000</text>
+<text x="354.250518672199" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 354.250518672199 457.4)" font-family="Times New Roman">gene_s3060000</text>
+<text x="384.716616371181" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 384.716616371181 457.4)" font-family="Times New Roman">gene_s3070000</text>
+<text x="417.251508864579" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 417.251508864579 457.4)" font-family="Times New Roman">gene_s3080000</text>
+<text x="445.737221803093" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 445.737221803093 457.4)" font-family="Times New Roman">gene_s3090000</text>
+<text x="455.833647680121" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 455.833647680121 457.4)" font-family="Times New Roman">gene_s3100000</text>
+<text x="556.373538287439" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 556.373538287439 457.4)" font-family="Times New Roman">gene_s301000</text>
+<text x="588.165786495662" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 588.165786495662 457.4)" font-family="Times New Roman">gene_s302000</text>
+<text x="642.095907204828" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 642.095907204828 457.4)" font-family="Times New Roman">gene_s303000</text>
+<text x="665.064834024896" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 665.064834024896 457.4)" font-family="Times New Roman">gene_s304000</text>
+<text x="696.538806110902" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 696.538806110902 457.4)" font-family="Times New Roman">gene_s305000</text>
+<text x="724.476376838929" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 724.476376838929 457.4)" font-family="Times New Roman">gene_s306000</text>
+<text x="754.94247453791" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 754.94247453791 457.4)" font-family="Times New Roman">gene_s307000</text>
+<text x="787.477367031309" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 787.477367031309 457.4)" font-family="Times New Roman">gene_s308000</text>
+<text x="815.963079969823" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 815.963079969823 457.4)" font-family="Times New Roman">gene_s309000</text>
+<text x="826.05950584685" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 826.05950584685 457.4)" font-family="Times New Roman">gene_s310000</text>
+<text x="913.868351565447" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 913.868351565447 457.4)" font-family="Times New Roman">gene_s301</text>
+<text x="945.66059977367" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 945.66059977367 457.4)" font-family="Times New Roman">gene_s302</text>
+<text x="999.590720482837" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 999.590720482837 457.4)" font-family="Times New Roman">gene_s303</text>
+<text x="1022.5596473029" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1022.5596473029 457.4)" font-family="Times New Roman">gene_s304</text>
+<text x="1054.03361938891" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1054.03361938891 457.4)" font-family="Times New Roman">gene_s305</text>
+<text x="1081.97119011694" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1081.97119011694 457.4)" font-family="Times New Roman">gene_s306</text>
+<text x="1112.43728781592" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1112.43728781592 457.4)" font-family="Times New Roman">gene_s307</text>
+<text x="1144.97218030932" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1144.97218030932 457.4)" font-family="Times New Roman">gene_s308</text>
+<text x="1173.45789324783" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1173.45789324783 457.4)" font-family="Times New Roman">gene_s309</text>
+<text x="1183.55431912486" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1183.55431912486 457.4)" font-family="Times New Roman">gene_s310</text>
+<text x="186.147680120709" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 186.147680120709 637.4)" font-family="Times New Roman">gene_s4010000</text>
+<text x="217.939928328932" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 217.939928328932 637.4)" font-family="Times New Roman">gene_s4020000</text>
+<text x="271.870049038099" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 271.870049038099 637.4)" font-family="Times New Roman">gene_s4030000</text>
+<text x="294.838975858167" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 294.838975858167 637.4)" font-family="Times New Roman">gene_s4040000</text>
+<text x="326.312947944172" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 326.312947944172 637.4)" font-family="Times New Roman">gene_s4050000</text>
+<text x="354.250518672199" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 354.250518672199 637.4)" font-family="Times New Roman">gene_s4060000</text>
+<text x="384.716616371181" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 384.716616371181 637.4)" font-family="Times New Roman">gene_s4070000</text>
+<text x="417.251508864579" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 417.251508864579 637.4)" font-family="Times New Roman">gene_s4080000</text>
+<text x="445.737221803093" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 445.737221803093 637.4)" font-family="Times New Roman">gene_s4090000</text>
+<text x="455.833647680121" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 455.833647680121 637.4)" font-family="Times New Roman">gene_s4100000</text>
+<text x="543.642493398717" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 543.642493398717 637.4)" font-family="Times New Roman">gene_s401000</text>
+<text x="575.434741606941" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 575.434741606941 637.4)" font-family="Times New Roman">gene_s402000</text>
+<text x="629.364862316107" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 629.364862316107 637.4)" font-family="Times New Roman">gene_s403000</text>
+<text x="652.333789136175" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 652.333789136175 637.4)" font-family="Times New Roman">gene_s404000</text>
+<text x="683.80776122218" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 683.80776122218 637.4)" font-family="Times New Roman">gene_s405000</text>
+<text x="711.745331950208" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 711.745331950208 637.4)" font-family="Times New Roman">gene_s406000</text>
+<text x="742.211429649189" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 742.211429649189 637.4)" font-family="Times New Roman">gene_s407000</text>
+<text x="774.746322142588" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 774.746322142588 637.4)" font-family="Times New Roman">gene_s408000</text>
+<text x="803.232035081101" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 803.232035081101 637.4)" font-family="Times New Roman">gene_s409000</text>
+<text x="813.328460958129" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 813.328460958129 637.4)" font-family="Times New Roman">gene_s410000</text>
+<text x="901.137306676726" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 901.137306676726 637.4)" font-family="Times New Roman">gene_s401</text>
+<text x="932.929554884949" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 932.929554884949 637.4)" font-family="Times New Roman">gene_s402</text>
+<text x="986.859675594116" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 986.859675594116 637.4)" font-family="Times New Roman">gene_s403</text>
+<text x="1009.82860241418" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1009.82860241418 637.4)" font-family="Times New Roman">gene_s404</text>
+<text x="1041.30257450019" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1041.30257450019 637.4)" font-family="Times New Roman">gene_s405</text>
+<text x="1069.24014522822" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1069.24014522822 637.4)" font-family="Times New Roman">gene_s406</text>
+<text x="1099.7062429272" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1099.7062429272 637.4)" font-family="Times New Roman">gene_s407</text>
+<text x="1132.2411354206" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1132.2411354206 637.4)" font-family="Times New Roman">gene_s408</text>
+<text x="1160.72684835911" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1160.72684835911 637.4)" font-family="Times New Roman">gene_s409</text>
+<text x="1170.82327423614" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1170.82327423614 637.4)" font-family="Times New Roman">gene_s410</text>
 
 
 <rect x="165" y="121" width="358.9093738212" height="18" style="fill:blue"   />
