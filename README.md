@@ -12,12 +12,13 @@ main feature:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;2. you can draw crosslink or sysnteny among features of different tracks<br>
 
 update feture:<br>
-&nbsp;&nbsp;&nbsp;2018-10-29: redesign the the main.conf and feature.crossing.link.conf~ make more freely to reset every feature, you can also reset every link color and opacity one by one.
-&nbsp;&nbsp;&nbsp;&nbsp; add rect for feature shape, now have arrow and rect
-&nbsp;&nbsp;&nbsp;&nbsp; remove the legend border line
+&nbsp;&nbsp;&nbsp;2018-10-29:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;redesign the the main.conf and feature.crossing.link.conf~ make more freely to reset every feature, you can also reset every link color and opacity one by one.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; add rect for feature shape, now have arrow and rect<br>
+&nbsp;&nbsp;&nbsp;&nbsp; remove the legend border line<br>
 
 bug:<br>
-&nbsp;&nbsp;&nbsp;&nbsp; not yet, welcome to call me at the issue
+&nbsp;&nbsp;&nbsp;&nbsp; not yet, welcome to call me at the issue<br>
 
 todo:<br>
 &nbsp;&nbsp;&nbsp;2018-10-29:
@@ -25,8 +26,6 @@ todo:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;3. sort by feature,so same feature of different tracks can align centre<br>
 &nbsp;&nbsp;&nbsp;&nbsp;4. add ratio scale in the bottom to recognise the approximate length of every feature <br> <br> 
 
-changelog:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;1. update *conf for more easily specific the start or end position , remove the border line of legend , freely defind the crosslink color and opacity one by one <br> <br> 
 
 ![gene cluster image](example/out.svg)
 <br>
