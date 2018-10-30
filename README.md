@@ -15,6 +15,8 @@ update feture:<br>
 &nbsp;&nbsp;&nbsp;2018-10-29:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;redesign the the main.conf and feature.crossing.link.conf to make more freely to reset every feature, reset every link color and opacity one by one, and reset order depth of every feature or crosslink or track, reset feature height one by one, like in out2.svg<br>
 &nbsp;&nbsp;&nbsp;&nbsp; add rect for feature shape, now have arrow and rect, you can use arrow and rect at the same time<br>
+=======
+&nbsp;&nbsp;&nbsp;&nbsp;redesign the the main.conf and feature.crossing.link.conf~ make more freely to reset every feature, you can also reset every link color and opacity one by one.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; remove the legend border line<br>
 
 bug:<br>
