@@ -318,19 +318,23 @@ if($conf{display_legend}=~ /yes/i){
 	my $arrow_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width*1.1;
 	my $arrow_y = $top_margin_legend;
 	#my $legend_arrow_height = $legend_single_arrow_height * 0.8;
-	foreach my $legend_color(keys %legend_color_num){
+	foreach my $legend_color(sort keys %legend_color_num){
 		my $legend = $legend_color_num{$legend_color};
 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 		# 先用方块代替arrow
-		my @arr_cols = split(/,/, $legend_color);
+		my @arr_cols = split(/,,/, $legend_color);
 		my $arrow_col_start;
 		my $arrow_col_end;
+		#print "legend arr_cols is @arr_cols\n";
 		if(@arr_cols==2){
 			#print "aisis $conf{feature_setting}{legend_col}{$legend},@arr_cols\n";
 			$arrow_col_start = $arr_cols[0];
 			$arrow_col_end = $arr_cols[1];
-			my $arrow_color_id = $conf{feature_setting}{legend_col}{$legend};
+			#my $arrow_color_id = $conf{feature_setting}{legend_col}{$legend};
+			my $arrow_color_id = $legend_color;
 			$arrow_color_id=~ s/,/-/g;
+			$arrow_color_id=~ s/\)/-/g;
+			$arrow_color_id=~ s/\(/-/g;
 			$svg.="
 			<defs>
 			<linearGradient id=\"$arrow_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
@@ -556,7 +560,12 @@ sub read_list(){
 sub draw_genes(){
 	#draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 	#my ($feature_id,$start,$end,$strand,$shape)=@_;
+	#print "feature_color is $conf{feature_color}\n";
 	my ($feature_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag)=@_;
+	if($index_color=~ /rgb\(\d+,\d+,\d+\),[^,]/ or $index_color=~ /[^,],rgb\(\d+,\d+,\d+\)/){
+		die "\nerror: should use ,, instead of , to separate the $index_color\n";
+	}
+	
 	#$conf{feature_setting}{$index_id}{feature_height_ratio}
 	my $shape=$conf{feature_shape};
 	$shape=(exists $conf{feature_setting}{$feature_id}{feature_shape})? $conf{feature_setting}{$feature_id}{feature_shape}:$conf{feature_shape};
@@ -582,8 +591,6 @@ sub draw_genes(){
 	$pre_feature_flag = (($end-$start)<$conf{distance_closed_feature})? 1:0;
 
 	if($shape=~ /arrow/){
-		#my ($feature_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag)=@_;
-		#print "index_color1 is $index_color\n";
 
 		if($strand){
 			#以左上角为起始点，逆时针转一圈
@@ -627,15 +634,16 @@ sub draw_genes(){
 			die "error:  not support $conf{pos_feature_label} yet~\n"
 		}
 
-		#print "y1 is $y1\n";
-		#my ($feature_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle)=@_;
 		#print "index_color2 is $index_color\n";
-		my @arr_cols = split(/,/, $index_color);
+		my @arr_cols = split(/,,/, $index_color);
+		#		print "arr is @arr_cols\n";
 		if(@arr_cols==2 && $conf{display_feature}=~ /yes/i){
 			$index_col_start = $arr_cols[0];
 			$index_col_end = $arr_cols[1];
 			my $index_color_id = $index_color;
 			$index_color_id=~ s/,/-/g;
+			$index_color_id=~ s/\)/-/g;
+			$index_color_id=~ s/\(/-/g;
 			$orders{$order_f}.="
 			<defs>
 			<linearGradient id=\"$index_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
@@ -714,12 +722,14 @@ sub draw_genes(){
 		#print "y1 is $y1\n";
 		#my ($feature_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle)=@_;
 		#print "index_color2 is $index_color\n";
-		my @arr_cols = split(/,/, $index_color);
+		my @arr_cols = split(/,,/, $index_color);
 		if(@arr_cols==2 && $conf{display_feature}=~ /yes/i){
 			$index_col_start = $arr_cols[0];
 			$index_col_end = $arr_cols[1];
 			my $index_color_id = $index_color;
 			$index_color_id=~ s/,/-/g;
+			$index_color_id=~ s/\)/-/g;
+			$index_color_id=~ s/\(/-/g;
 			$orders{$order_f}.="
 			<defs>
 			<linearGradient id=\"$index_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
@@ -806,7 +816,7 @@ sub read_conf(){
 		chomp;
 		next if($_=~ /^#/ || $_=~ /^\s*$/);
 		die "error: need = in $_ of $conf~\n" if($_!~ /=/);
-		$_=~ s/([^=^\s])\s*#.*$/$1/g;
+		$_=~ s/([^=^\s])\s+#.*$/$1/g;
 		my ($key, $value) = split(/\s*=\s*/, $_);
 		$value=~ s/\s+$//;
 		$value=~ s/^\s+//;
@@ -815,6 +825,7 @@ sub read_conf(){
 			print "line is $_\n";
 		}
 		$confs{$key} = $value;
+		print "$key -> $value\n";
 	}
 	close IN;
 	return %confs;
