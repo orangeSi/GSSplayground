@@ -16,6 +16,7 @@ s40000	GenBank	CDS	1106	1888	.	+	.	Parent=gene_s402;
 s40000	GenBank	gene	2925	3119	.	+	.	ID=gene_s4030000;Name=gene_s403;Parent=gene_s403;complete gene
 s40000	GenBank	mRNA	2925	3119	.	+	.	ID=gene_s4030000;Name=gene_s403;Parent=gene_s403;complete gene
 s40000	GenBank	CDS	2925	3119	.	+	.	Parent=gene_s403;
+s40000	GenBank	gene	8188	8260	.	-	.	ID=gene_s410000000;Name=gene_s410;Parent=gene_s410;complete gene
 s40000	GenBank	gene	8088	8360	.	-	.	ID=gene_s4100000;Name=gene_s410;Parent=gene_s410;complete gene
 s40000	GenBank	mRNA	8088	8360	.	-	.	ID=gene_s4100000;Name=gene_s410;Parent=gene_s410;complete gene
 s40000	GenBank	CDS	8088	8360	.	-	.	Parent=gene_s410;

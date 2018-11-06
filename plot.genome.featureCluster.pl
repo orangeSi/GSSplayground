@@ -119,7 +119,7 @@ while(<LI>){
 				#print "$conf{feature_setting}{$f}{track_order}, $conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample;track_order is $track_order;sample is $sample, scf is @scf\n\n\n";
 			}
 		}
-		$orders{$track_order}.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_color}\"   />\n";
+		$orders{$track_order}.="<g><title>$scf[0]</title><rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_color}\"   /></g>\n";
 		## 判断相邻的block是否来自同一条scaffold
 		if($scf[0] eq $pre_block and $conf{connect_with_same_scaffold}=~ /yes/i){
 			my $pre_x = $id_line_x - $block_distance;
@@ -150,6 +150,8 @@ while(<LI>){
 			my $index_start = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{start};
 			my $index_end = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{end};
 			my $index_strand = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{strand};
+			my $index_start_raw = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{start_raw};
+			my $index_end_raw = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{end_raw};
 
 			my $index_color = (exists $conf{feature_setting}{$index_id}{feature_color})? $conf{feature_setting}{$index_id}{feature_color}:$conf{feature_color};
 			my $feature_not_mark_label = ($conf{display_feature_label}=~ /^yes$/ or $conf{display_feature_label}=~ /,yes/)? $index_id:"";
@@ -169,19 +171,21 @@ while(<LI>){
 			$gene_width_arrow=$conf{feature_setting}{$index_id}{feature_arrow_width_extent} if(exists $conf{feature_setting}{$index_id}{feature_arrow_width_extent});
 			#print "$index_id gene_width_arrow is $gene_width_arrow\n";
 			$gene_height_top=$id_line_height*$conf{feature_setting}{$index_id}{feature_arrow_sharp_extent} if(exists $conf{feature_setting}{$index_id}{feature_arrow_sharp_extent});
-
-
+			my $feature_shift_y=($conf{feature_setting}{$index_id}{feature_shift_y})? $conf{feature_setting}{$index_id}{feature_shift_y}:$conf{feature_shift_y};
 			## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 			$svg.=&draw_genes(
 				$index_id,
 				$index_start, 
 				$index_end, 
 				$index_strand,
+				$index_start_raw, 
+				$index_end_raw, 
 				$gene_height_medium,
 				$gene_height_top,
 				$gene_width_arrow,
 				$shift_x,
 				$top_distance,
+				$feature_shift_y,
 				$sample_single_height,
 				$sample,
 				$scf[0],
@@ -199,7 +203,6 @@ while(<LI>){
 		$shift_x+=($id_line_width+$block_distance);
 	}
 	$top_distance+=$sample_single_height;
-	#	$shift_y+= 
 	#$gff{$sample}{id}{$arr[0]}{$gene_index}{end}=$arr[4]
 
 
@@ -438,7 +441,7 @@ sub read_list(){
 		$sample_num++;
 		my $block_index=1;
 		my %scf_block_id;
-		my ($sample,$gffs,$genome,@arrs)=split(/\s+/,$_); # $seq_id,$seq_draw_start,$seq_draw_end
+		my ($sample,$gffs,$genome,@arrs)=split(/\t/,$_); # $seq_id,$seq_draw_start,$seq_draw_end
 		if(exists $uniq_sample{$sample}){
 			die "error:more than one $sample, not allow same 1th column in $list~\n " 
 		}else{
@@ -446,7 +449,7 @@ sub read_list(){
 		}
 		print "$sample\n";
 		if(@arrs%3){
-			die "$list line $. error format:$_\n"; 
+			die "$list line $. error format:$_, should be separated by \\t \n"; 
 		}
 		open GE,"$genome" or die "$!";
 		$/=">";<GE>;
@@ -471,6 +474,7 @@ sub read_list(){
 			my $block_index=-1;
 			my $start_f=$arr[3];
 			my $end_f=$arr[4];
+			
 			if(@arrs){ # has seq_id mean not full length of whole gff
 				#my $xxx=scalar(@arrs);
 				#if ($xxx == 9){
@@ -537,7 +541,9 @@ sub read_list(){
 			$gene_index++;
 			if(!$arr[3]){die "error:$gffs line $.\n"}
 			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{start}=$arr[3]; # block_index 是指每行中每个cluster的左右顺序
+			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{start_raw}=$start_f; # block_index 是指每行中每个cluster的左右顺序
 			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{end}=$arr[4];
+			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{end_raw}=$end_f;
 			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{id}=$feature_id;
 			if(!$feature_id){die "die:line is $_\n"}
 			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{strand}=($arr[6]=~ /\+/)? 1:0;
@@ -562,13 +568,21 @@ sub read_list(){
 
 sub draw_genes(){
 	#draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-	#my ($feature_id,$start,$end,$strand,$shape)=@_;
-	#print "feature_color is $conf{feature_color}\n";
-	my ($feature_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag)=@_;
+	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag)=@_;
 	if($index_color=~ /rgb\(\d+,\d+,\d+\),[^,]/ or $index_color=~ /[^,],rgb\(\d+,\d+,\d+\)/){
 		die "\nerror: should use ,, instead of , to separate the $index_color\n";
 	}
-	
+	if($feature_shift_y=~ /^\s*([+-])([\d\.]+)/){
+		if($1 eq "+"){
+			$shift_y += -1 * $2 * $id_line_height
+		}else{
+			$shift_y +=  1 * $2 * $id_line_height
+		}
+	}elsif($feature_shift_y=~ /^\s*0/){
+		$shift_y +=0
+	}else{
+		die "error: for $feature_id, feature_shift_y should be like +1 or -1, +2, so on\n"
+	}
 	#$conf{feature_setting}{$index_id}{feature_height_ratio}
 	my $shape=$conf{feature_shape};
 	$shape=(exists $conf{feature_setting}{$feature_id}{feature_shape})? $conf{feature_setting}{$feature_id}{feature_shape}:$conf{feature_shape};
@@ -593,6 +607,12 @@ sub draw_genes(){
 	}
 	$pre_feature_flag = (($end-$start)<$conf{distance_closed_feature})? 1:0;
 
+	my $start_title=$start;
+	my $end_title=$end;
+	if($conf{absolute_postion_in_title}=~ /yes/i){
+		$start_title=$start_raw;
+		$end_title=$end_raw;
+	}
 	if($shape=~ /arrow/){
 
 		if($strand){
@@ -656,13 +676,13 @@ sub draw_genes(){
 			</linearGradient>
 			</defs>
 			<g style=\"fill:none\">
-			<title>$feature_id,$sample,$id,$start,$end,$strand</title>
+			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
 			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:url(#$index_color_id);stroke:purple;stroke-width:0\"/> 
 			</g>\n"; ## feture arrow
 		}elsif($conf{display_feature}=~ /yes/i){
 			$orders{$order_f}.="
 			<g style=\"fill:none\">
-			<title>$feature_id,$sample,$id,$start,$end,$strand</title>
+			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
 			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$index_color;stroke:purple;stroke-width:0\"/> 
 			</g>\n"; ## feture arrow
 
@@ -742,13 +762,13 @@ sub draw_genes(){
 			</linearGradient>
 			</defs>
 			<g style=\"fill:none\">
-			<title>$feature_id,$sample,$id,$start,$end,$strand</title>
+			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
 			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:url(#$index_color_id);stroke:purple;stroke-width:0\"/> 
 			</g>\n"; ## feture rect
 		}elsif($conf{display_feature}=~ /yes/i){
 			$orders{$order_f}.="
 			<g style=\"fill:none\">
-			<title>$feature_id,$sample,$id,$start,$end,$strand</title>
+			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
 			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:purple;stroke-width:0\"/> 
 			</g>\n"; ## feture rect
 
@@ -890,6 +910,8 @@ sub default_setting(){
 	$conf{connect_stroke_dasharray} ||="2,2";
 	$conf{connect_stroke_width} ||=2;
 	$conf{connect_stroke_color} ||="black";
+	$conf{absolute_postion_in_title} ||="yes";
+	$conf{feature_shift_y} ||=0;
 
 
 
@@ -931,8 +953,8 @@ sub default_setting(){
 				chomp;
 				next if($_=~ /^#/ || $_=~ /^\s*$/);
 				$_=~ s/\s+$//;
-				my @arr = split(/\s+/, $_);
-				if(@arr!=3){die "error: $conf{feature_setting} should only have 3 columns~, but $_ is not\n "}
+				my @arr = split(/\t/, $_);
+				if(@arr!=3){die "error: $conf{feature_setting} should only have 3 columns seperate by \\t, but $_ is not\n "}
 				$conf{feature_setting}{$arr[0]}{$arr[1]}=$arr[2];
 				#my ($f_id, $f_col, $f_legend, $label_content, $label_size, $label_col, $label_position, $label_angle) = split(/\t+/, $_);
 				#print "isisis $conf{feature_setting}\n";

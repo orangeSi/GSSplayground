@@ -1,15 +1,17 @@
-if [ "$1" == "" ];
+if [ "$2" == "" ];
 then
-	echo "sh $0 <commit>"
+	echo "sh $0 <git commit -m > <git add >example: sh $0 'update readme' 'README.md */*' "
 	exit
 fi
 commit=$1
+add=$2
 set -vex
-git add * 
+git add $add
 git commit -m "$commit"
 git push -u origin master
 
 exit
+
 ## for first use git
 #git init
 #git add *
