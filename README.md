@@ -37,7 +37,7 @@ git clone
 <br><br><br>
 ![gene cluster image](example/out3.svg)
 <br><br>
-![gene cluster image](example/out3.1.svg)
+![gene cluster image](example/out3.2.svg)
 <br><br><br>
 ![gene cluster image](example/out6.svg)
 <br><br><br>
