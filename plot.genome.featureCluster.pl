@@ -121,13 +121,16 @@ while(<LI>){
 		}
 		$orders{$track_order}.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_color}\"   />\n";
 		## 判断相邻的block是否来自同一条scaffold
-		if($scf[0] eq $pre_block){
+		if($scf[0] eq $pre_block and $conf{connect_with_same_scaffold}=~ /yes/i){
 			my $pre_x = $id_line_x - $block_distance;
 			my $pre_y = $id_line_y + 0.5 * $id_line_height;
 			my $now_x = $pre_x + $block_distance * 0.99;
 			my $now_y = $pre_y;
 			#print "pre_block $pre_block $pre_x $pre_y $now_x $now_y\n";
-			$svg.="<g fill=\"none\" stroke=\"black\" stroke-width=\"2\"><path stroke-dasharray=\"2,2\" d=\"M$pre_x,$pre_y L$now_x,$now_y\" /></g>";
+			my $stroke_dasharray=$conf{connect_stroke_dasharray};
+			my $stroke_width=$conf{connect_stroke_width};
+			my $stroke_color=$conf{connect_stroke_color};
+			$svg.="<g fill=\"none\" stroke=\"$stroke_color\" stroke-width=\"$stroke_width\"><path stroke-dasharray=\"$stroke_dasharray\" d=\"M$pre_x,$pre_y L$now_x,$now_y\" /></g>";
 		}
 
 		$left_distance+=($block_distance+$id_line_width); #每个block左侧起点的x坐标shift
@@ -883,6 +886,10 @@ sub default_setting(){
 	$conf{scale_tick_padding_y} ||=10;
 	$conf{scale_tick_fontsize} ||=10;
 	$conf{feature_arrow_width_extent} ||=0.7;
+	$conf{connect_with_same_scaffold} ||="yes";
+	$conf{connect_stroke_dasharray} ||="2,2";
+	$conf{connect_stroke_width} ||=2;
+	$conf{connect_stroke_color} ||="black";
 
 
 
