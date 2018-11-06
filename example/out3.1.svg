@@ -4,6 +4,37 @@
 <g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M985.161584254647,160 L1007.71352205078,160" /></g><text x="150" y="244" font-size="15px" fill="black"  text-anchor='end'>S3</text>
 <g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M396.897703802697,240 L419.449641598834,240" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M556.401409306281,240 L578.953347102418,240" /></g><text x="150" y="324" font-size="15px" fill="black"  text-anchor='end'>S4</text>
 <g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M689.025027335682,320 L711.576965131819,320" /></g>
+<line x1="165" y1="352" x2="1290" y2="352" style="stroke:green;stroke-width:0.5"/>
+<line x1="165" y1="348" x2="165" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="165" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="256.118940590451" y1="348" x2="256.118940590451" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="256.118940590451" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
+<line x1="347.237881180901" y1="348" x2="347.237881180901" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="347.237881180901" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
+<line x1="438.356821771352" y1="348" x2="438.356821771352" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="438.356821771352" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
+<line x1="529.475762361803" y1="348" x2="529.475762361803" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="529.475762361803" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
+<line x1="620.594702952254" y1="348" x2="620.594702952254" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="620.594702952254" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
+<line x1="711.713643542704" y1="348" x2="711.713643542704" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="711.713643542704" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
+<line x1="802.832584133155" y1="348" x2="802.832584133155" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="802.832584133155" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
+<line x1="893.951524723606" y1="348" x2="893.951524723606" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="893.951524723606" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
+<line x1="985.070465314057" y1="348" x2="985.070465314057" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="985.070465314057" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
+<line x1="1076.18940590451" y1="348" x2="1076.18940590451" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1076.18940590451" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
+<line x1="1167.30834649496" y1="348" x2="1167.30834649496" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1167.30834649496" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
+<line x1="1258.42728708541" y1="348" x2="1258.42728708541" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1258.42728708541" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24000</text>
+<line x1="1290" y1="348" x2="1290" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1290" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24693</text>
+
+
 <rect x="165" y="76" width="138.910824930142" height="8" style="fill:blue"   />
 <rect x="326.690560077755" y="76" width="137.179565058924" height="8" style="fill:blue"   />
 <rect x="486.649860284291" y="76" width="165.380877171668" height="8" style="fill:blue"   />
