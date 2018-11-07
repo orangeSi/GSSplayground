@@ -17,7 +17,7 @@ git clone
 
 #### update feture:<br>
 &nbsp;&nbsp;**2018-11-07**:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;1. feature_shaple now support circle_point/rect/arrow, add feature_shift_y, as example/out9.svg.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1. feature_shaple now support circle_point/rect/arrow, add feature_shift_y, as example/out9.svg. combine with feature_height_ratio or feature_shift_y, you can plot line or scatter or heatmap or histogram now, but it cost some time to configure the files<br>
 &nbsp;&nbsp;**2018-10-29**:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. redesign the the main.conf and feature.crossing.link.conf to make more freely to reset every feature, reset every link color and opacity one by one, and reset order depth of every feature or crosslink or track, reset feature height one by one as in out2.svg<br>
 &nbsp;&nbsp;&nbsp;&nbsp;2. add rect for feature shape, now have arrow and rect, you can use arrow and rect at the same time<br>
