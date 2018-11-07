@@ -330,7 +330,7 @@ if($conf{display_legend}=~ /yes/i){
 		my $legend = $legend_color_num{$legend_color};
 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 		# 先用方块代替arrow
-		my @arr_cols = split(/,,/, $legend_color);
+		my @arr_cols=split(/,,/, $legend_color);
 		my $arrow_col_start;
 		my $arrow_col_end;
 		#print "legend arr_cols is @arr_cols\n";
