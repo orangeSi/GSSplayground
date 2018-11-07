@@ -330,7 +330,7 @@ if($conf{display_legend}=~ /yes/i){
 		my $legend = $legend_color_num{$legend_color};
 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 		# 先用方块代替arrow
-		my @arr_cols / split(/,,/, $legend_color);
+		my @arr_cols = split(/,,/, $legend_color);
 		my $arrow_col_start;
 		my $arrow_col_end;
 		#print "legend arr_cols is @arr_cols\n";
@@ -815,6 +815,10 @@ sub draw_genes(){
 		my $radius= ($end - $start)*$ratio*0.5 ; # 0.5*$gene_height_medium;
 		my $x1=$start*$ratio+$shift_x;
 		my $x4=$x1+($end-$start)*$ratio;
+		my $crossing_link_start_x=$center_point_x;
+		my $crossing_link_start_y=$center_point_y-$radius;
+		my $crossing_link_end_x=$center_point_x;
+		my $crossing_link_end_y=$center_point_y+$radius;
 		if($index_label_position=~ /^medium_/){
 			$label_x = $x1 + ($end - $start)/2 * $ratio;
 		}elsif($index_label_position=~ /^left_/){
