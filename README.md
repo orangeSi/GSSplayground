@@ -16,6 +16,8 @@ git clone
 - you can draw crosslink or sysnteny among features of different tracks<br>
 
 #### update feture:<br>
+&nbsp;&nbsp;**2018-11-07**:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1. feature_shaple now support circle_point/rect/arrow, add feature_shift_y, as example/out9.svg.
 &nbsp;&nbsp;**2018-10-29**:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. redesign the the main.conf and feature.crossing.link.conf to make more freely to reset every feature, reset every link color and opacity one by one, and reset order depth of every feature or crosslink or track, reset feature height one by one as in out2.svg<br>
 &nbsp;&nbsp;&nbsp;&nbsp;2. add rect for feature shape, now have arrow and rect, you can use arrow and rect at the same time<br>
@@ -38,6 +40,8 @@ git clone
 ![gene cluster image](example/out3.svg)
 <br><br>
 ![gene cluster image](example/out3.2.svg)
+<br><br>
+![gene cluster image](example/out9.svg)
 <br><br><br>
 ![gene cluster image](example/out6.svg)
 <br><br><br>

@@ -154,9 +154,11 @@ while(<LI>){
 			my $index_end_raw = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{end_raw};
 
 			my $index_color = (exists $conf{feature_setting}{$index_id}{feature_color})? $conf{feature_setting}{$index_id}{feature_color}:$conf{feature_color};
-			my $feature_not_mark_label = ($conf{display_feature_label}=~ /^yes$/ or $conf{display_feature_label}=~ /,yes/)? $index_id:"";
 
-			my $index_label_content = (exists $conf{feature_setting}{$index_id}{feature_label})? (($conf{display_feature_label}=~ /^yes$/ or $conf{display_feature_label}=~ /^yes,/)? $conf{feature_setting}{$index_id}{feature_label}:""):$feature_not_mark_label;
+			my $display_feature_label=(exists $conf{feature_setting}{$index_id}{display_feature_label})? $conf{feature_setting}{$index_id}{display_feature_label}:$conf{display_feature_label};
+			my $feature_not_mark_label = ($display_feature_label=~ /^yes$/i or $display_feature_label=~ /,yes/i)? $index_id:"";
+
+			my $index_label_content = (exists $conf{feature_setting}{$index_id}{feature_label})? (($display_feature_label=~ /^yes$/ or $display_feature_label=~ /^yes,/)? $conf{feature_setting}{$index_id}{feature_label}:""):$feature_not_mark_label;
 			my $index_label_size = (exists $conf{feature_setting}{$index_id}{feature_label_size})? $conf{feature_setting}{$index_id}{feature_label_size}:$conf{feature_label_size};
 			$index_label_col = (exists $conf{feature_setting}{$index_id}{feature_label_color})? $conf{feature_setting}{$index_id}{feature_label_color}:$conf{feature_label_color};
 			$index_label_position = (exists $conf{feature_setting}{$index_id}{pos_feature_label})? $conf{feature_setting}{$index_id}{pos_feature_label}:$conf{pos_feature_label};
@@ -328,7 +330,7 @@ if($conf{display_legend}=~ /yes/i){
 		my $legend = $legend_color_num{$legend_color};
 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 		# 先用方块代替arrow
-		my @arr_cols = split(/,,/, $legend_color);
+		my @arr_cols / split(/,,/, $legend_color);
 		my $arrow_col_start;
 		my $arrow_col_end;
 		#print "legend arr_cols is @arr_cols\n";
@@ -474,6 +476,10 @@ sub read_list(){
 			my $block_index=-1;
 			my $start_f=$arr[3];
 			my $end_f=$arr[4];
+			if($arr[3] > $arr[4]){
+				$arr[3] = $end_f;
+				$arr[4] = $start_f;
+			}
 			
 			if(@arrs){ # has seq_id mean not full length of whole gff
 				#my $xxx=scalar(@arrs);
@@ -572,23 +578,39 @@ sub draw_genes(){
 	if($index_color=~ /rgb\(\d+,\d+,\d+\),[^,]/ or $index_color=~ /[^,],rgb\(\d+,\d+,\d+\)/){
 		die "\nerror: should use ,, instead of , to separate the $index_color\n";
 	}
+	my @arr_cols = split(/,,/, $index_color);
+	for my $c (@arr_cols){
+		if($c!~ /^rgb/ && $c!~ /^#\d+$/ && $c!~ /^\w/){
+			die "error: $c for @arr_cols of $feature_id is wrong color format\n";
+		}
+	}
+
+	my $shape=$conf{feature_shape};
+	$shape=(exists $conf{feature_setting}{$feature_id}{feature_shape})? $conf{feature_setting}{$feature_id}{feature_shape}:$conf{feature_shape};
+	my $shift_unit=$id_line_height;
+	if($shape=~ /^circle_point/){
+		$shift_unit=($end-$start)*$ratio;
+	}
 	if($feature_shift_y=~ /^\s*([+-])([\d\.]+)/){
 		if($1 eq "+"){
-			$shift_y += -1 * $2 * $id_line_height
+			$shift_y += -1 * $2 * $shift_unit - 0.5 * $id_line_height;
 		}else{
-			$shift_y +=  1 * $2 * $id_line_height
+			$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height;
 		}
 	}elsif($feature_shift_y=~ /^\s*0/){
 		$shift_y +=0
 	}else{
 		die "error: for $feature_id, feature_shift_y should be like +1 or -1, +2, so on\n"
 	}
-	#$conf{feature_setting}{$index_id}{feature_height_ratio}
-	my $shape=$conf{feature_shape};
-	$shape=(exists $conf{feature_setting}{$feature_id}{feature_shape})? $conf{feature_setting}{$feature_id}{feature_shape}:$conf{feature_shape};
 	my $order_f=(exists $conf{feature_setting}{$feature_id}{feature_order})? $conf{feature_setting}{$feature_id}{feature_order}:$conf{feature_order};
 	my $order_f_label=(exists $conf{feature_setting}{$feature_id}{feature_label_order})? $conf{feature_setting}{$feature_id}{feature_label_order}:$conf{feature_label_order};
 	my $padding_feature_label=(exists $conf{feature_setting}{$feature_id}{padding_feature_label})? $conf{feature_setting}{$feature_id}{padding_feature_label}:$conf{padding_feature_label};
+	my $display_feature=(exists $conf{feature_setting}{$feature_id}{display_feature})? $conf{feature_setting}{$feature_setting}{display_feature}:$conf{display_feature};
+	my $display_feature_label=(exists $conf{feature_setting}{$feature_id}{display_feature_label})? $conf{feature_setting}{$feature_setting}{display_feature_label}:$conf{display_feature_label};
+	#<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$feature_color\"/>
+	my $feature_stroke_color=(exists $conf{feature_setting}{$feature_id}{feature_border_color})? $conf{feature_setting}{$feature_id}{feature_border_color}:$conf{feature_border_color};
+	my $feature_stroke_size= (exists $conf{feature_setting}{$feature_id}{feature_border_size})? $conf{feature_setting}{$feature_id}{feature_border_size}:$conf{feature_border_size};
+
 	my ($back,$x1,$y1,$x2,$y2,$x3,$y3,$x4,$y4,$x5,$y5,$x6,$y6,$x7,$y7,$label_x,$label_y,$index_col_start,$index_col_end,$crossing_link_start_x,$crossing_link_start_y,$crossing_link_end_x,$crossing_link_end_y);
 	my ($label_y_shift, $label_roat_angle);
 	$back="";
@@ -658,9 +680,7 @@ sub draw_genes(){
 		}
 
 		#print "index_color2 is $index_color\n";
-		my @arr_cols = split(/,,/, $index_color);
-		#		print "arr is @arr_cols\n";
-		if(@arr_cols==2 && $conf{display_feature}=~ /yes/i){
+		if(@arr_cols==2 && $display_feature=~ /yes/i){
 			$index_col_start = $arr_cols[0];
 			$index_col_end = $arr_cols[1];
 			my $index_color_id = $index_color;
@@ -677,13 +697,13 @@ sub draw_genes(){
 			</defs>
 			<g style=\"fill:none\">
 			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
-			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:url(#$index_color_id);stroke:purple;stroke-width:0\"/> 
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size\"/> 
 			</g>\n"; ## feture arrow
-		}elsif($conf{display_feature}=~ /yes/i){
+		}elsif($display_feature=~ /yes/i){
 			$orders{$order_f}.="
 			<g style=\"fill:none\">
 			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
-			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$index_color;stroke:purple;stroke-width:0\"/> 
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size\"/> 
 			</g>\n"; ## feture arrow
 
 		}
@@ -691,7 +711,7 @@ sub draw_genes(){
 
 
 		## draw label of feature
-		$orders{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_content</text>\n" if($conf{display_feature_label} ne "no" && $conf{display_feature_label} ne "no,no" ); # label of feature
+		$orders{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
 		#$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"${text_size}px\" fill=\"$conf{color_sample_name}\"  text-anchor='end'>$conf{sample_name_old2new}{$sample}</text>\n";
 		# check this feature if is in crossing_link
 		if(exists $conf{crossing_link}{features}{$feature_id}){
@@ -705,7 +725,6 @@ sub draw_genes(){
 		}
 
 	}elsif($shape=~ /^rect/){
-
 		if($strand){
 			#以左上角为起始点，逆时针转一圈
 			$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
@@ -745,8 +764,7 @@ sub draw_genes(){
 		#print "y1 is $y1\n";
 		#my ($feature_id,$start,$end,$strand,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$sample_single_height,$sample,$id, $index_color, $index_label, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle)=@_;
 		#print "index_color2 is $index_color\n";
-		my @arr_cols = split(/,,/, $index_color);
-		if(@arr_cols==2 && $conf{display_feature}=~ /yes/i){
+		if(@arr_cols==2 && $display_feature=~ /yes/i){
 			$index_col_start = $arr_cols[0];
 			$index_col_end = $arr_cols[1];
 			my $index_color_id = $index_color;
@@ -763,13 +781,13 @@ sub draw_genes(){
 			</defs>
 			<g style=\"fill:none\">
 			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
-			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:url(#$index_color_id);stroke:purple;stroke-width:0\"/> 
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size\"/> 
 			</g>\n"; ## feture rect
-		}elsif($conf{display_feature}=~ /yes/i){
+		}elsif($display_feature=~ /yes/i){
 			$orders{$order_f}.="
 			<g style=\"fill:none\">
 			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
-			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:purple;stroke-width:0\"/> 
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size\"/> 
 			</g>\n"; ## feture rect
 
 		}
@@ -777,8 +795,7 @@ sub draw_genes(){
 
 
 		## draw label of feature
-		$orders{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_content</text>\n" if($conf{display_feature_label} ne "no" && $conf{display_feature_label} ne "no,no"); # label of feature
-		#$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"${text_size}px\" fill=\"$conf{color_sample_name}\"  text-anchor='end'>$conf{sample_name_old2new}{$sample}</text>\n";
+		$orders{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		# check this feature if is in crossing_link
 		if(exists $conf{crossing_link}{features}{$feature_id}){
 			#print "crossing_link $feature_id\n";
@@ -792,6 +809,67 @@ sub draw_genes(){
 
 	}elsif($shape=~ /^round_rect/){
 		die "error: not support $shape yet~\n";
+	}elsif($shape=~ /^circle_point/){
+		my $center_point_x=$start*$ratio + $shift_x + ($end - $start)*$ratio*0.5;
+		my $center_point_y=($sample_single_height - $gene_height_medium)/2 + $shift_y + 0.5*$gene_height_medium ;
+		my $radius= ($end - $start)*$ratio*0.5 ; # 0.5*$gene_height_medium;
+		my $x1=$start*$ratio+$shift_x;
+		my $x4=$x1+($end-$start)*$ratio;
+		if($index_label_position=~ /^medium_/){
+			$label_x = $x1 + ($end - $start)/2 * $ratio;
+		}elsif($index_label_position=~ /^left_/){
+			$label_x = $x1;
+		}elsif($index_label_position=~ /^right_/){
+			$label_x = $x4;
+		}else{
+			die "error:  not support $conf{pos_feature_label} yet~\n"
+		}
+
+		if(@arr_cols==2 && $display_feature=~ /yes/i){
+			$index_col_start = $arr_cols[0];
+			$index_col_end = $arr_cols[1];
+			my $index_color_id = $index_color;
+			$index_color_id=~ s/,/-/g;
+			$index_color_id=~ s/\)/-/g;
+			$index_color_id=~ s/\(/-/g;
+			$orders{$order_f}.="
+			<defs>
+			<linearGradient id=\"$index_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
+			<stop offset=\"0%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
+			<stop offset=\"50%\" style=\"stop-color:$index_col_end;stop-opacity:1\"/>
+			<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
+			</linearGradient>
+			</defs>
+			<g style=\"fill:none\">
+			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
+			<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\"/>
+			</g>\n"; ## feture rect
+		}elsif($display_feature=~ /yes/i){
+			$orders{$order_f}.="
+			<g style=\"fill:none\">
+			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
+			<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\"/>
+
+			</g>\n"; ## feture rect
+
+		}
+
+
+
+		## draw label of feature
+		$orders{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
+		# check this feature if is in crossing_link
+		if(exists $conf{crossing_link}{features}{$feature_id}){
+			#print "crossing_link $feature_id\n";
+			$conf{crossing_link}{position}{$feature_id}{start}{x}=$crossing_link_start_x;
+			$conf{crossing_link}{position}{$feature_id}{start}{y}=$crossing_link_start_y;
+
+			$conf{crossing_link}{position}{$feature_id}{end}{x}=$crossing_link_end_x;
+			$conf{crossing_link}{position}{$feature_id}{end}{y}=$crossing_link_end_y;
+			#print "crossing_linkis $feature_id $crossing_link_start_x $crossing_link_start_y $crossing_link_end_x $crossing_link_end_y\n";
+		}
+
+		#die "error: not support $shape yet~\n";
 	}else{
 		die "error: not support $shape yet~\n";
 	}
@@ -912,6 +990,9 @@ sub default_setting(){
 	$conf{connect_stroke_color} ||="black";
 	$conf{absolute_postion_in_title} ||="yes";
 	$conf{feature_shift_y} ||=0;
+	$conf{feature_border_size} ||=0;
+	$conf{feature_border_color} ||="black";
+
 
 
 
