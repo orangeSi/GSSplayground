@@ -31,7 +31,7 @@ git clone http://github.com/orangeSi/ClustersPloter.git
 &nbsp;&nbsp;&nbsp;&nbsp;1. plot tracks by sort sample list, or you can adjust the track order by adjust list file <br>
 &nbsp;&nbsp;&nbsp;&nbsp;3. sort by feature,so same feature of different tracks can align centre<br>
 &nbsp;&nbsp;&nbsp;&nbsp;4. add ratio scale in the bottom to recognise the approximate length of every feature <br>
-&nbsp;&nbsp;&nbsp;&nbsp;5. embed svg in svg to make heatmap or scatter or line or histogram more easy to product<br> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;5. embed svg in svg to make heatmap or scatter or line or histogram more easy to product, like example/out.svg*svg or \<foreignObject\> <br> <br>
 
 
 ![gene cluster image](example/out.svg)
