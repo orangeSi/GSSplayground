@@ -17,7 +17,7 @@ git clone http://github.com/orangeSi/ClustersPloter.git
 
 #### update feture:<br>
 &nbsp;&nbsp;**2018-11-07**:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;1. feature_shaple now support <b>circle_point</b>/rect/arrow, add <b>feature_shift_y</b>, as example/out9.svg. combine with <b>feature_height_ratio</b> or <b>feature_shift_y</b>, try to plot <b>line</b> or <b>scatter</b> or <b>heatmap</b> or <b>histogram</b> is possible, but I have not test this <br>
+&nbsp;&nbsp;&nbsp;&nbsp;1. feature_shaple now support <b>circle_point</b>/rect/arrow, add <b>feature_shift_y</b>, as example/out9.svg. combine with <b>feature_height_ratio</b> or <b>feature_shift_y</b>, try to plot <b>line</b> or <b>scatter</b> or <b>heatmap</b> or <b>histogram</b> is possible but hard for much data points, I will try do this by embed svg in svg, the embedded svg is producted by python or R tool, abd and the linux convert cmd not support embed svg, but cairosvg support it (should use the absoluted embedded svg path)!<br>
 &nbsp;&nbsp;**2018-10-29**:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. redesign the the main.conf and feature.crossing.link.conf to make more freely to reset every feature, reset every link color and opacity one by one, and reset order depth of every feature or crosslink or track, reset feature height one by one as in out2.svg<br>
 &nbsp;&nbsp;&nbsp;&nbsp;2. add rect for feature shape, now have arrow and rect, you can use arrow and rect at the same time<br>
@@ -27,10 +27,11 @@ git clone http://github.com/orangeSi/ClustersPloter.git
 &nbsp;&nbsp;&nbsp;&nbsp; welcome to call me at the issue<br>
 
 #### todo:<br>
-&nbsp;&nbsp;**2018-10-29**:<br>
+&nbsp;&nbsp;**2018-11-09**:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. plot tracks by sort sample list, or you can adjust the track order by adjust list file <br>
 &nbsp;&nbsp;&nbsp;&nbsp;3. sort by feature,so same feature of different tracks can align centre<br>
-&nbsp;&nbsp;&nbsp;&nbsp;4. add ratio scale in the bottom to recognise the approximate length of every feature <br> <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;4. add ratio scale in the bottom to recognise the approximate length of every feature <br>
+&nbsp;&nbsp;&nbsp;&nbsp;5. embed svg in svg to make heatmap or scatter or line or histogram more easy to product<br> <br>
 
 
 ![gene cluster image](example/out.svg)
