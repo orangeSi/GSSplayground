@@ -44,9 +44,13 @@ my $space_len = $conf{space_between_blocks};# 500bp是默认的blocks之间的�
 ## 
 
 ###start:get scaffold length in genome file and scaffold length  in gff file of list 
-my ($genome, $gff, $sample_num) = &read_list($list);
+my ($genome, $gff, $track_order, $sample_num) = &read_list($list);
 my %genome=%$genome;
 my %gff=%$gff;
+my @track_order=@$track_order;
+my @track_reorder;
+
+&check_track_order();
 
 my $ends_extend_ratio = 0.1;
 foreach my $s(sort {$gff{$b}{chooselen_all}<=>$gff{$a}{chooselen_all}} keys %gff){
@@ -64,16 +68,14 @@ my $common_size;
 my $top_bottom_margin=$conf{top_bottom_margin};
 my %orders;
 my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_width\" height=\"$svg_height\" >\n";
-open LI,"$list" or die "$!";
 my $top_distance=$top_bottom_margin/2*$svg_height;
 my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$sample_num; # 每个track的高度
 my $id_line_height = 0.05*$conf{genome_height_ratio}*2*$sample_single_height; # 每个block的genome的高度
 my $left_distance_init = (1 + 0.1) * $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
-while(<LI>){
-	chomp;
-	next if($_=~ /^#/ || $_=~ /^\s*$/);
+while(@track_order){
 	$index++;
-	my ($sample,@tmp) = split(/\s+/,$_);
+	my $sample = shift @track_order;
+	die "error: $sample not in gff file of --list \n" if (not exists $gff{$sample});
 	my $block_distance = $space_len*$ratio; # block_distance 是每个block的间距
 	my $flag;
 	my $left_distance = $left_distance_init ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
@@ -218,13 +220,13 @@ while(<LI>){
 
 
 }
-close LI;
 
 # draw crossing_links for feature crosslink
 foreach my $pair(keys %{$conf{crossing_link}{index}}){
 	#$conf{crossing_link}{index}{"$arr[0],$arr[1]"}{$arr[2]} = $arr[3];
 	my ($up_id, $down_id) = split(",", $pair);
 		my $color=(exists $conf{crossing_link}{index}{$pair}{cross_link_color})? $conf{crossing_link}{index}{$pair}{cross_link_color}:$conf{cross_link_color};
+		my $cross_link_orientatation=(exists $conf{crossing_link}{index}{$pair}{cross_link_orientatation})? $conf{crossing_link}{index}{$pair}{cross_link_orientatation}:$conf{cross_link_orientatation};
 		my $cross_link_opacity=(exists $conf{crossing_link}{index}{$pair}{cross_link_opacity})? $conf{crossing_link}{index}{$pair}{cross_link_opacity}:$conf{cross_link_opacity};
 		my $cross_link_order=(exists $conf{crossing_link}{index}{$pair}{cross_link_order})? $conf{crossing_link}{index}{$pair}{cross_link_order}:$conf{cross_link_order};
 		my $cross_link_anchor_pos=(exists $conf{crossing_link}{index}{$pair}{cross_link_anchor_pos})? $conf{crossing_link}{index}{$pair}{cross_link_anchor_pos}:$conf{cross_link_anchor_pos};
@@ -254,8 +256,13 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 		}elsif($cross_link_anchor_pos !~ /_medium$/){
 			die "error: not support $conf{cross_link_anchor_pos} yet~\n"
 		}
-		$orders{$cross_link_order}.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
-		#print "link corlis $color\n";
+		die "error: got $cross_link_orientatation for cross_link_orientatation, but must be reverse or forward for $pair\n" if($cross_link_orientatation!~ /reverse/i && $cross_link_orientatation!~ /forward/i);
+		if($cross_link_orientatation=~ /reverse/i){
+			$color=(exists $conf{crossing_link}{index}{$pair}{cross_link_color_reverse})? $conf{crossing_link}{index}{$pair}{cross_link_color_reverse}:$conf{cross_link_color_reverse};
+			$orders{$cross_link_order}.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
+		}else{
+			$orders{$cross_link_order}.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
+		}
 
 	
 }
@@ -413,14 +420,14 @@ for my $order(sort {$a<=>$b}keys %orders){
 print SVG "</svg>";
 close SVG;
 print "outfile is  $outdir/$prefix.svg\n";
-`set -vex;convert  $outdir/$prefix.svg $outdir/$prefix.png ; echo outfile is $outdir/$prefix.png; convert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf;echo outfile is $outdir/$prefix.dpi$conf{pdf_dpi}.pdf`;
+`set -vx;convert  $outdir/$prefix.svg $outdir/$prefix.png ; echo outfile is $outdir/$prefix.png; convert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf;echo outfile is $outdir/$prefix.dpi$conf{pdf_dpi}.pdf`;
 
 #$svg.=&draw_genes($gff{$sample}{id}{$id}{$index}{start},$gff{$sample}{id}{$id}{$index}{end},$gff{$sample}{id}{$id}{$index}{strand},$gene_height_medium,$gene_height_top);
 
 sub read_list(){
 	###start:get scaffold length in genome file and scaffold length  in gff file
 	my ($list) = @_;
-	my (%genome,%gff,$sample_num);
+	my (%genome,%gff,@track_order,$sample_num);
 	my @features=split(/,/, $conf{feature_keywords});
 	my %uniq_sample;
 	open LI,"$list" or die "$!";
@@ -431,6 +438,7 @@ sub read_list(){
 		my $block_index=1;
 		my %scf_block_id;
 		my ($sample,$gffs,$genome,@arrs)=split(/\t/,$_); # $seq_id,$seq_draw_start,$seq_draw_end
+		push @track_order, $sample;
 		if(exists $uniq_sample{$sample}){
 			die "error:more than one $sample, not allow same 1th column in $list~\n " 
 		}else{
@@ -567,7 +575,7 @@ sub read_list(){
 	}
 	close LI;
 
-	return (\%genome, \%gff, $sample_num);
+	return (\%genome, \%gff, \@track_order, $sample_num);
 	####end:get scaffold length in genome file and scaffold length  in gff file
 }
 
@@ -1002,9 +1010,20 @@ sub default_setting(){
 	$conf{feature_border_size} ||=0;
 	$conf{feature_border_color} ||="black";
 	$conf{feature_opacity} =(defined $conf{feature_opacity})? $conf{feature_opacity}:1;
+	$conf{cross_link_orientatation} ||="forward";
+	$conf{cross_link_color} ||="#FF8C00";
+	$conf{cross_link_color_reverse} ||="#3CB371";
 
 
-
+	if(exists $conf{tracks_reorder}){
+		open OR,"$conf{tracks_reorder}" or die "$!";
+		while(<OR>){
+			chomp;
+			next if($_=~ /^\s*#/ || $_=~ /^\s*$/);
+			push @track_reorder, $_;
+		}
+		close OR;		
+	}
 
 	#sample_name_old2new
 	if(exists $conf{sample_name_old2new}){
@@ -1114,3 +1133,15 @@ sub default_setting(){
 
 }
 
+
+sub check_track_order(){
+	return 1 if(@track_reorder ==0);
+	my $len = scalar(@track_order);
+	my $len_re = scalar(@track_reorder);
+	if($len != $len_re){
+		die "error: track_reorder has $len_re tracks which is not equal to --list\n";
+	}else{
+		@track_order = @track_reorder;
+	}
+
+}
