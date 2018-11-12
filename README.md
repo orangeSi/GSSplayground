@@ -13,7 +13,7 @@ git clone http://github.com/orangeSi/ClustersPloter.git
 
 #### main feature:<br>
 - every track mean one sample , one sample can has more than one fragments. you can defind the feature color/lable font size/label color/label rotaion in feature.color.label.conf <br>
-- you can draw crosslink or sysnteny among features of different tracks<br>
+- you can draw crosslink or sysnteny among features of different tracks<br><br>
 
 ### update feture:<br>
 #### 2018-11-12:<br>
