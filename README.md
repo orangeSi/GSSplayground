@@ -16,6 +16,8 @@ git clone http://github.com/orangeSi/ClustersPloter.git
 - you can draw crosslink or sysnteny among features of different tracks<br>
 
 #### update feture:<br>
+&nbsp;&nbsp;**2018-11-12**:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1. rewrite feature.crossing.link.conf so that defined color and opactity or order or anchor position of every pair of links.<br>
 &nbsp;&nbsp;**2018-11-07**:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. feature_shaple now support <b>circle_point</b>/rect/arrow, add <b>feature_shift_y</b>, as example/out9.svg. combine with <b>feature_height_ratio</b> or <b>feature_shift_y</b>, try to plot <b>line</b> or <b>scatter</b> or <b>heatmap</b> or <b>histogram</b> is possible but hard for much data points, I will try do this by embed svg in svg, the embedded svg is producted by python or R tool, abd and the linux convert cmd not support embed svg, but cairosvg support it (should use the absoluted embedded svg path)!<br>
 &nbsp;&nbsp;**2018-10-29**:<br>
