@@ -25,6 +25,7 @@ if(! -d "$outdir"){
 my %conf = &read_conf($conf);
 %conf = &default_setting(%conf);
 #&display_conf(%conf);
+my $shift_angle_closed_feature=0;
 my ($svg_width,$svg_height) = split(',',$conf{'svg_width_height'});
 
 
@@ -41,7 +42,6 @@ if($ref_name_width_ratio+$cluster_width_ratio+$legend_width_ratio !=1){
 my $space_len = $conf{space_between_blocks};# 500bp是默认的blocks之间的间距
 
 ## 
-my $pre_feature_flag=0;
 
 ###start:get scaffold length in genome file and scaffold length  in gff file of list 
 my ($genome, $gff, $sample_num) = &read_list($list);
@@ -119,7 +119,8 @@ while(<LI>){
 				#print "$conf{feature_setting}{$f}{track_order}, $conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample;track_order is $track_order;sample is $sample, scf is @scf\n\n\n";
 			}
 		}
-		$orders{$track_order}.="<g><title>$scf[0]</title><rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_color}\"   /></g>\n";
+
+		$orders{$track_order}.="<g><title>$scf[0],$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}</title><rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_color}\"   /></g>\n";
 		## 判断相邻的block是否来自同一条scaffold
 		if($scf[0] eq $pre_block and $conf{connect_with_same_scaffold}=~ /yes/i){
 			my $pre_x = $id_line_x - $block_distance;
@@ -141,6 +142,8 @@ while(<LI>){
 		#print "here\n";
 		#print "scf is @scf,$sample,$block_index\n";
 		my $angle_flag=0;
+		my $pre_index_end=0;
+		my $pre_scf_id="";
 		foreach my $index(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){
 			#next if($index eq "len");
 			#print "here $sample $block_index $scf[0] $index\n";
@@ -174,6 +177,10 @@ while(<LI>){
 			#print "$index_id gene_width_arrow is $gene_width_arrow\n";
 			$gene_height_top=$id_line_height*$conf{feature_setting}{$index_id}{feature_arrow_sharp_extent} if(exists $conf{feature_setting}{$index_id}{feature_arrow_sharp_extent});
 			my $feature_shift_y=($conf{feature_setting}{$index_id}{feature_shift_y})? $conf{feature_setting}{$index_id}{feature_shift_y}:$conf{feature_shift_y};
+			if($scf[0] eq $pre_scf_id && ($index_start - $pre_index_end) <= $conf{distance_closed_feature} && ($index_end - $index_start)< 300 ){
+				$angle_flag = 1
+			}
+			#print "angle is $angle_flag\n";
 			## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 			$svg.=&draw_genes(
 				$index_id,
@@ -198,7 +205,8 @@ while(<LI>){
 				$index_label_position,
 				$index_label_angle,
 				$angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-			$angle_flag = ($angle_flag)? 0:1;
+			$pre_index_end = $index_end;
+			$pre_scf_id = $scf[0];
 			#print "sampe is $sample,id is $id;index is $index;$gff{$sample}{id}{$id}{$index}{start},$gff{$sample}{id}{$id}{$index}{end},$gff{$sample}{id}{$id}{$index}{strand},$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$top_distance,$sample_single_height\n";
 
 		}
@@ -212,65 +220,44 @@ while(<LI>){
 }
 close LI;
 
-# draw crossing_links for feature
-foreach my $index(keys %{$conf{crossing_link}{index}}){
-	my @fs = @{$conf{crossing_link}{index}{$index}};
-	#print "fss is @fs\n";
-	for(my $i=0;$i<(scalar(@fs)-1);$i++){
-		next if($fs[$i]=~ /^#\d+/ ||$fs[$i]=~ /^opacity/);
-		if(not exists $conf{crossing_link}{position}{$fs[$i]}{start}{x}){
-			print "Warn:$fs[$i] in crossing_link is not in selected region of  $list, pass $fs[$i]\n";
-			next;
-		}
-
-		my $add=1;
-		my $color=$conf{cross_link_color};
-		my $cross_link_opacity = $conf{cross_link_opacity};
-		foreach my $ii(1..2){
-			last if($i+$ii+1>@fs);
-			last if($fs[$i+$ii]!~ /^#\d+/ && $fs[$i+$ii]!~ /^opacity/);
-			if($fs[$i+$ii]=~ /^#\d+/){
-				$color=$fs[$i+$ii];
-				$add+=1;
-			}
-			if($fs[$i+$ii]=~ /^opacity(\d\.?\d*)/){
-				$cross_link_opacity=$1;
-				$add+=1;
-			}
-		}
-		my $left_up_x = $conf{crossing_link}{position}{$fs[$i]}{start}{x};
-		my $left_up_y = $conf{crossing_link}{position}{$fs[$i]}{start}{y};
-		my $right_up_x = $conf{crossing_link}{position}{$fs[$i]}{end}{x};
-		my $right_up_y = $conf{crossing_link}{position}{$fs[$i]}{end}{y};
-		if($conf{cross_link_anchor_pos}=~ /^up_/){
-			$left_up_y-=$conf{feature_setting}{$fs[$i]}{cross_link_shift_y};
-			$right_up_y-=$conf{feature_setting}{$fs[$i]}{cross_link_shift_y};
-		}elsif($conf{cross_link_anchor_pos}=~ /^low_/){
-			$left_up_y+=$conf{feature_setting}{$fs[$i]}{cross_link_shift_y};
-			$right_up_y+=$conf{feature_setting}{$fs[$i]}{cross_link_shift_y};
-		}else{
+# draw crossing_links for feature crosslink
+foreach my $pair(keys %{$conf{crossing_link}{index}}){
+	#$conf{crossing_link}{index}{"$arr[0],$arr[1]"}{$arr[2]} = $arr[3];
+	my ($up_id, $down_id) = split(",", $pair);
+		my $color=(exists $conf{crossing_link}{index}{$pair}{cross_link_color})? $conf{crossing_link}{index}{$pair}{cross_link_color}:$conf{cross_link_color};
+		my $cross_link_opacity=(exists $conf{crossing_link}{index}{$pair}{cross_link_opacity})? $conf{crossing_link}{index}{$pair}{cross_link_opacity}:$conf{cross_link_opacity};
+		my $cross_link_order=(exists $conf{crossing_link}{index}{$pair}{cross_link_order})? $conf{crossing_link}{index}{$pair}{cross_link_order}:$conf{cross_link_order};
+		my $cross_link_anchor_pos=(exists $conf{crossing_link}{index}{$pair}{cross_link_anchor_pos})? $conf{crossing_link}{index}{$pair}{cross_link_anchor_pos}:$conf{cross_link_anchor_pos};
+		my $left_up_x = $conf{crossing_link}{position}{$up_id}{start}{x};
+		my $left_up_y = $conf{crossing_link}{position}{$up_id}{start}{y};
+		my $right_up_x = $conf{crossing_link}{position}{$up_id}{end}{x};
+		my $right_up_y = $conf{crossing_link}{position}{$up_id}{end}{y};
+		if($cross_link_anchor_pos=~ /^up_/){
+			$left_up_y-=$conf{feature_setting}{$up_id}{cross_link_shift_y};
+			$right_up_y-=$conf{feature_setting}{$up_id}{cross_link_shift_y};
+		}elsif($cross_link_anchor_pos=~ /^low_/){
+			$left_up_y+=$conf{feature_setting}{$up_id}{cross_link_shift_y};
+			$right_up_y+=$conf{feature_setting}{$up_id}{cross_link_shift_y};
+		}elsif($cross_link_anchor_pos !~ /^medium_/){
 			die "error: not support $conf{cross_link_anchor_pos} yet~\n"
 		}
-		my $left_down_x = $conf{crossing_link}{position}{$fs[$i+$add]}{start}{x};
-		my $left_down_y = $conf{crossing_link}{position}{$fs[$i+$add]}{start}{y};
-		my $right_down_x = $conf{crossing_link}{position}{$fs[$i+$add]}{end}{x};
-		my $right_down_y = $conf{crossing_link}{position}{$fs[$i+$add]}{end}{y};
-		if($conf{cross_link_anchor_pos}=~ /_low$/){
-			$left_down_y+=$conf{feature_setting}{$fs[$i+$add]}{cross_link_shift_y};
-			$right_down_y+=$conf{feature_setting}{$fs[$i+$add]}{cross_link_shift_y};
-		}elsif($conf{cross_link_anchor_pos}=~ /_up$/){
-			$left_down_y-=$conf{feature_setting}{$fs[$i+$add]}{cross_link_shift_y};
-			$right_down_y-=$conf{feature_setting}{$fs[$i+$add]}{cross_link_shift_y};
-		}else{
+		my $left_down_x = $conf{crossing_link}{position}{$down_id}{start}{x};
+		my $left_down_y = $conf{crossing_link}{position}{$down_id}{start}{y};
+		my $right_down_x = $conf{crossing_link}{position}{$down_id}{end}{x};
+		my $right_down_y = $conf{crossing_link}{position}{$down_id}{end}{y};
+		if($cross_link_anchor_pos=~ /_low$/){
+			$left_down_y+=$conf{feature_setting}{$down_id}{cross_link_shift_y};
+			$right_down_y+=$conf{feature_setting}{$down_id}{cross_link_shift_y};
+		}elsif($cross_link_anchor_pos=~ /_up$/){
+			$left_down_y-=$conf{feature_setting}{$down_id}{cross_link_shift_y};
+			$right_down_y-=$conf{feature_setting}{$down_id}{cross_link_shift_y};
+		}elsif($cross_link_anchor_pos !~ /_medium$/){
 			die "error: not support $conf{cross_link_anchor_pos} yet~\n"
 		}
-		#$svg.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>"; #crossing link of features
-		$orders{$conf{cross_link_order}}.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
-		print "link corlis $color\n";
+		$orders{$cross_link_order}.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
+		#print "link corlis $color\n";
 
-
-
-	}
+	
 }
 
 
@@ -467,12 +454,23 @@ sub read_list(){
 		close GE;
 		$/="\n";
 
+		my %all_seq_id;
+		open GFF,"$gffs" or die "$!";
+		while(<GFF>){
+			chomp;
+			next if($_=~ /^#/);
+			my @arr=split(/\t/,$_);
+			$all_seq_id{$arr[0]} = "";
+		}
+		close GFF;
+
 		open GFF,"$gffs" or die "$!";
 		my $gene_index;
 		while(<GFF>){
 			chomp;
 			next if($_=~ /^#/);
 			my @arr=split(/\t/,$_);
+			die "error: $gffs should have tab in file~\n" if(@arr==1);
 			my $block_index=-1;
 			my $start_f=$arr[3];
 			my $end_f=$arr[4];
@@ -489,6 +487,7 @@ sub read_list(){
 
 				for (my $arrs_index=0;$arrs_index < scalar(@arrs);$arrs_index+=3){
 					my ($seq_id,$seq_draw_start,$seq_draw_end) = @arrs[$arrs_index..$arrs_index+2];
+					die "error: $seq_id not in $gffs\n" if(not exists $all_seq_id{$seq_id});
 					my $seq_draw_start_tmp=$seq_draw_start;
 					my $seq_draw_end_tmp=$seq_draw_end;
 
@@ -544,6 +543,7 @@ sub read_list(){
 
 			$_=~ /\sID=([^;]+);/;
 			my $feature_id=$1;
+			die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);
 			$gene_index++;
 			if(!$arr[3]){die "error:$gffs line $.\n"}
 			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{start}=$arr[3]; # block_index 是指每行中每个cluster的左右顺序
@@ -585,6 +585,7 @@ sub draw_genes(){
 		}
 	}
 
+	my $feature_opacity=(exists $conf{feature_setting}{$feature_id}{feature_opacity})? $conf{feature_setting}{$feature_id}{feature_opacity}:$conf{feature_opacity};
 	my $shape=$conf{feature_shape};
 	$shape=(exists $conf{feature_setting}{$feature_id}{feature_shape})? $conf{feature_setting}{$feature_id}{feature_shape}:$conf{feature_shape};
 	my $shift_unit=$id_line_height;
@@ -615,19 +616,23 @@ sub draw_genes(){
 	my ($label_y_shift, $label_roat_angle);
 	$back="";
 	#print "distance_closed_feature $conf{distance_closed_feature}\n";
+	if($angle_flag){
+		$shift_angle_closed_feature += $conf{shift_angle_closed_feature};
+	}else{
+		$shift_angle_closed_feature = 0;
+	}
 	if($index_label_position=~ /_up$/){
 		$label_y_shift= - $padding_feature_label;
-		$index_label_angle = (($end-$start)<$conf{distance_closed_feature} && $pre_feature_flag)? $index_label_angle +$conf{shift_angle_closed_feature}:$index_label_angle; # 相邻feature的label的angle开
+		$index_label_angle = ($angle_flag)? $index_label_angle +$shift_angle_closed_feature:$index_label_angle; # 相邻feature的label的angle开
 	}elsif($index_label_position=~ /_low$/){
 		$label_y_shift= 2*$gene_height_top+$gene_height_medium + $padding_feature_label;
-		$index_label_angle = (($end-$start)<$conf{distance_closed_feature} && $pre_feature_flag)? $index_label_angle -$conf{shift_angle_closed_feature}:$index_label_angle; # 相邻feature的label的angle开
+		$index_label_angle = ($angle_flag)? $index_label_angle -$shift_angle_closed_feature:$index_label_angle; # 相邻feature的label的angle开
 	}elsif($index_label_position=~ /_medium$/){
 		$label_y_shift= $gene_height_top+0.5*$gene_height_medium + $padding_feature_label;
-		$index_label_angle = (($end-$start)<$conf{distance_closed_feature} && $pre_feature_flag)? $index_label_angle -$conf{shift_angle_closed_feature}:$index_label_angle; # 相邻feature的label的angle开
+		$index_label_angle = ($angle_flag)? $index_label_angle -$shift_angle_closed_feature:$index_label_angle; # 相邻feature的label的angle开
 	}else{
 		die "error:  not support $conf{pos_feature_label} yet~\n"
 	}
-	$pre_feature_flag = (($end-$start)<$conf{distance_closed_feature})? 1:0;
 
 	my $start_title=$start;
 	my $end_title=$end;
@@ -697,13 +702,13 @@ sub draw_genes(){
 			</defs>
 			<g style=\"fill:none\">
 			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
-			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size\"/> 
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/> 
 			</g>\n"; ## feture arrow
 		}elsif($display_feature=~ /yes/i){
 			$orders{$order_f}.="
 			<g style=\"fill:none\">
 			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
-			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size\"/> 
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/> 
 			</g>\n"; ## feture arrow
 
 		}
@@ -781,13 +786,13 @@ sub draw_genes(){
 			</defs>
 			<g style=\"fill:none\">
 			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
-			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size\"/> 
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/> 
 			</g>\n"; ## feture rect
 		}elsif($display_feature=~ /yes/i){
 			$orders{$order_f}.="
 			<g style=\"fill:none\">
 			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
-			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size\"/> 
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/> 
 			</g>\n"; ## feture rect
 
 		}
@@ -846,13 +851,13 @@ sub draw_genes(){
 			</defs>
 			<g style=\"fill:none\">
 			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
-			<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\"/>
+			<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\" style=\"opacity:$feature_opacity\" />
 			</g>\n"; ## feture rect
 		}elsif($display_feature=~ /yes/i){
 			$orders{$order_f}.="
 			<g style=\"fill:none\">
 			<title>$feature_id,$sample,$id,$start_title,$end_title,$strand</title>
-			<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\"/>
+			<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\" style=\"opacity:$feature_opacity\"/>
 
 			</g>\n"; ## feture rect
 
@@ -961,9 +966,9 @@ sub default_setting(){
 	$conf{track_color} ||="green";
 	$conf{padding_feature_label} ||= 3;
 	$conf{pos_feature_label} ||="medium_up";
-	$conf{distance_closed_feature} ||=200;
+	$conf{distance_closed_feature} ||=50;
 	$conf{shift_angle_closed_feature} ||=10;
-	$conf{feature_arrow_sharp_extent} ||=0.3;
+	$conf{feature_arrow_sharp_extent} =(defined $conf{feature_arrow_sharp_extent})? $conf{feature_arrow_sharp_extent}:0.3;
 	$conf{scale_display} ||="no";
 	$conf{scale_position} ||="low";
 	$conf{display_feature} ||="yes";
@@ -996,6 +1001,7 @@ sub default_setting(){
 	$conf{feature_shift_y} ||=0;
 	$conf{feature_border_size} ||=0;
 	$conf{feature_border_color} ||="black";
+	$conf{feature_opacity} =(defined $conf{feature_opacity})? $conf{feature_opacity}:1;
 
 
 
@@ -1041,29 +1047,6 @@ sub default_setting(){
 				my @arr = split(/\t/, $_);
 				if(@arr!=3){die "error: $conf{feature_setting} should only have 3 columns seperate by \\t, but $_ is not\n "}
 				$conf{feature_setting}{$arr[0]}{$arr[1]}=$arr[2];
-				#my ($f_id, $f_col, $f_legend, $label_content, $label_size, $label_col, $label_position, $label_angle) = split(/\t+/, $_);
-				#print "isisis $conf{feature_setting}\n";
-				#$label_content ||=$f_id;
-				#$label_size ||=10;
-				#$label_col ||='black'; # feature对应的label的字体颜色等
-				#$label_position ||='medium_up';
-				#$label_angle ||=$conf{label_rotate_angle};
-
-				#if(!$f_legend){
-				#	die "error line$.:$_,need feature_id color legend label_conent(option) label_size(option) label_color(option) label_position(option)  label_angle(option)\n";
-				#}
-				#if(not exists $conf{feature_setting}{legend_col}{$f_legend}){
-				#	$conf{feature_setting}{legend_col}{$f_legend} = $f_col; ##feature_id color legend		
-				#}elsif($conf{feature_setting}{legend_col}{$f_legend} ne $f_col){
-				#	die "error:legend $f_legend has two color,it should only be one color!\n";
-				#}
-				#$conf{feature_setting}{feature_col}{$f_id} = $f_col;
-				#$conf{feature_setting}{label}{$f_id}{label_content} = $label_content;
-				#print "$f_id label_content $label_content\n";
-				#$conf{feature_setting}{label}{$f_id}{label_size} = $label_size;
-				#$conf{feature_setting}{label}{$f_id}{label_col} = $label_col;
-				#$conf{feature_setting}{label}{$f_id}{label_position} = $label_position;
-				#$conf{feature_setting}{label}{$f_id}{label_angle} = $label_angle;
 			}
 			close IN;
 
@@ -1078,14 +1061,26 @@ sub default_setting(){
 			open IN,"$conf{crossing_link}" or die "$!";
 			while(<IN>){
 				chomp;
-				next if($_=~ /^#/ || $_!~ /,/);
-				$_=~ s/,\s*$//;
-				my @arr = split(/,/, $_);
-				@{$conf{crossing_link}{index}{$.}} = @arr; ##YP_pPCP09_1,YP_pPCP09_2,YP_pPCP09_3
+				next if($_=~ /^#/ || $_=~ /^\s*$/);
+				my @arr;
+				if($_=~ /^\S+,\S/){
+					$_=~ s/,\s*$//;
+					@arr = split(",", $_);
+					foreach my $k(0..(scalar @arr -1)){
+						$conf{crossing_link}{index}{"$arr[$k],$arr[$k+1]"}{'id'} = "" if ($k != (scalar @arr -1));
+					}
+
+				}elsif($_=~ /\t/){
+					@arr = split("\t", $_);
+					die "error: wrong format of $_ of $conf{crossing_link}, should have four columns~\n" if (@arr!=4);
+					$conf{crossing_link}{index}{"$arr[0],$arr[1]"}{$arr[2]} = $arr[3];
+					@arr = ($arr[0],$arr[1]);
+				}else{
+					die "error: wrong format $_ of $conf{crossing_link}\n";
+				}
 				foreach my $k(@arr){
 					$conf{crossing_link}{features}{$k} = '';
 				}
-				#print "4 crossing_link $. @arr\n";
 			}
 			close IN;
 

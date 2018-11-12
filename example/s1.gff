@@ -19,6 +19,7 @@ s10000	GenBank	CDS	2925	3119	.	+	.	Parent=gene_s103;
 s10000	GenBank	gene	8088	8360	.	-	.	ID=gene_s1100000;Name=gene_s110;Parent=gene_s110;complete gene
 s10000	GenBank	mRNA	8088	8360	.	-	.	ID=gene_s1100000;Name=gene_s110;Parent=gene_s110;complete gene
 s10000	GenBank	CDS	8088	8360	.	-	.	Parent=gene_s110;
+s10000	GenBank	gene	8361	8560	.	-	.	ID=gene_s11000001;Name=gene_s110;Parent=gene_s110;complete gene
 s10000	GenBank	gene	3486	3857	.	+	.	ID=gene_s1040000;Name=gene_s104;Parent=gene_s104;complete gene
 s10000	GenBank	mRNA	3486	3857	.	+	.	ID=gene_s1040000;Name=gene_s104;Parent=gene_s104;complete gene
 s10000	GenBank	CDS	3486	3857	.	+	.	Parent=gene_s104;
