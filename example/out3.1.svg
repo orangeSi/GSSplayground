@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1500" height="400" >
-<text x="150" y="84" font-size="15px" fill="black"  text-anchor='end'>S1</text>
-<text x="150" y="164" font-size="15px" fill="black"  text-anchor='end'>S2</text>
-<text x="150" y="244" font-size="15px" fill="black"  text-anchor='end'>S3</text>
-<text x="150" y="324" font-size="15px" fill="black"  text-anchor='end'>S4</text>
+<text x="150" y="84" font-size="15px" fill="black"  text-anchor='end'>s1</text>
+<text x="150" y="164" font-size="15px" fill="black"  text-anchor='end'>s2</text>
+<text x="150" y="244" font-size="15px" fill="black"  text-anchor='end'>s3</text>
+<text x="150" y="324" font-size="15px" fill="black"  text-anchor='end'>s4</text>
 
 <line x1="165" y1="352" x2="1290" y2="352" style="stroke:green;stroke-width:0.5"/>
 <line x1="165" y1="348" x2="165" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>

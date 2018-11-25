@@ -596,23 +596,15 @@ sub draw_genes(){
 	my $feature_opacity=(exists $conf{feature_setting}{$feature_id}{feature_opacity})? $conf{feature_setting}{$feature_id}{feature_opacity}:$conf{feature_opacity};
 	my $shape=$conf{feature_shape};
 	$shape=(exists $conf{feature_setting}{$feature_id}{feature_shape})? $conf{feature_setting}{$feature_id}{feature_shape}:$conf{feature_shape};
-	my $feature_shift_y_unit=(exists $conf{feature_setting}{$feature_id}{feature_shift_y_unit})? $conf{feature_setting}{$feature_id}{feature_shift_y_unit}:$conf{feature_shift_y_unit};
 	my $shift_unit=$id_line_height;
 	if($shape=~ /^circle_point/){
-        if($feature_shift_y_unit=~ /radius/){
-            $shift_unit=($end-$start)*$ratio;
-        }elsif($feature_shift_y_unit=~ /backbone/){
-            $shift_unit=$id_line_height;
-        }else{
-            die "error: only support radius or backbone for feature_shift_y_unit, but not $feature_shift_y_unit\n";
-        }
-        #print "circle shift_unit is $shift_unit\n";
+		$shift_unit=($end-$start)*$ratio;
 	}
 	if($feature_shift_y=~ /^\s*([+-])([\d\.]+)/){
 		if($1 eq "+"){
-            $shift_y += -1 * $2 * $shift_unit - 0.5 * $id_line_height;
+			$shift_y += -1 * $2 * $shift_unit - 0.5 * $id_line_height;
 		}else{
-            $shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height;
+			$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height;
 		}
 	}elsif($feature_shift_y=~ /^\s*0/){
 		$shift_y +=0
@@ -1021,7 +1013,6 @@ sub default_setting(){
 	$conf{cross_link_orientatation} ||="forward";
 	$conf{cross_link_color} ||="#FF8C00";
 	$conf{cross_link_color_reverse} ||="#3CB371";
-    $conf{feature_shift_y_unit} ||="radius";
 
 
 	if(exists $conf{tracks_reorder}){
@@ -1071,10 +1062,8 @@ sub default_setting(){
 			while(<IN>){
 				chomp;
 				next if($_=~ /^#/ || $_=~ /^\s*$/);
-                last if($_ eq "exit");
 				$_=~ s/\s+$//;
-                $_=~ s/\s*#\s+.*$//;
-				my @arr = split(/\t+/, $_);
+				my @arr = split(/\t/, $_);
 				if(@arr!=3){die "error: $conf{feature_setting} should only have 3 columns seperate by \\t, but $_ is not\n "}
 				$conf{feature_setting}{$arr[0]}{$arr[1]}=$arr[2];
 			}
