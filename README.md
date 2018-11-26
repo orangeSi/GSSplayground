@@ -1,12 +1,7 @@
 # ClustersPloter
-#### install:<br>
-```
-git clone http://github.com/orangeSi/ClustersPloter.git
-```
-
-
 #### usage:<br>
 ```
+  git clone http://github.com/orangeSi/ClustersPloter.git
   cd  example 
   cat test.sh 
 ```
