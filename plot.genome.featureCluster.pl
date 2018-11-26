@@ -108,7 +108,7 @@ while(@track_order){
 		#print "chooselen_single is $sample $gff{$sample}{chooselen_single}{$block_index} * $ratio\n";
 
 		### draw main scaffold line track
-		#$svg.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_color}\"   />\n";
+		#$svg.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_style}\"   />\n";
 		my $track_order=$conf{track_order};
 		foreach my $f(keys %{$conf{feature_setting}}){
 			next if ( (not exists $conf{feature_setting}{$f}{track_order}) || $conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample);
@@ -122,7 +122,7 @@ while(@track_order){
 			}
 		}
 
-		$orders{$track_order}.="<g><title>$scf[0],$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}</title><rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_color}\"   /></g>\n";
+		$orders{$track_order}.="<g><title>$scf[0],$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}</title><rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
 		## 判断相邻的block是否来自同一条scaffold
 		if($scf[0] eq $pre_block and $conf{connect_with_same_scaffold}=~ /yes/i){
 			my $pre_x = $id_line_x - $block_distance;
@@ -979,7 +979,7 @@ sub default_setting(){
 	$conf{legend_width_margin} ||= 0.1; # legends左右两侧的margin
 	$conf{legend_width_textpercent} ||= 0.6; # l
 	$conf{feature_shape} ||= 'round_rect';
-	$conf{track_color} ||="green";
+	$conf{track_style} ||="fill:green";
 	$conf{padding_feature_label} ||= 3;
 	$conf{pos_feature_label} ||="medium_up";
 	$conf{distance_closed_feature} ||=50;
@@ -1023,6 +1023,9 @@ sub default_setting(){
 	$conf{cross_link_color_reverse} ||="#3CB371";
     $conf{feature_shift_y_unit} ||="radius";
 
+	if($conf{track_style}!~ /:/){
+		die "error: track_style format like  fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9\n";
+	}
 
 	if(exists $conf{tracks_reorder}){
 		open OR,"$conf{tracks_reorder}" or die "$!";
