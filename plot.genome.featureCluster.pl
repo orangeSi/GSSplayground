@@ -44,9 +44,10 @@ my $space_len = $conf{space_between_blocks};# 500bp是默认的blocks之间的�
 ## 
 
 ###start:get scaffold length in genome file and scaffold length  in gff file of list 
-my ($genome, $gff, $track_order, $sample_num) = &read_list($list);
+my ($genome, $gff, $track_order, $sample_num, $fts) = &read_list($list);
 my %genome=%$genome;
 my %gff=%$gff;
+my %fts=%$fts;
 my @track_order=@$track_order;
 my @track_reorder;
 
@@ -256,20 +257,57 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 		}elsif($cross_link_anchor_pos=~ /_up/){
 			$left_down_y-=$conf{feature_setting}{$down_id}{cross_link_shift_y};
 			$right_down_y-=$conf{feature_setting}{$down_id}{cross_link_shift_y};
-			print "downid is $down_id\n";
 		}elsif($cross_link_anchor_pos !~ /_medium/){
 			die "error: 2not support cross_link_anchor_pos=$cross_link_anchor_pos yet~\n"
 		}
 		die "error: got $cross_link_orientation for cross_link_orientation, but must be reverse or forward for $pair\n" if($cross_link_orientation!~ /reverse/i && $cross_link_orientation!~ /forward/i);
-		my $title_clink="<g><title>$up_id -> $down_id</title>";
-		if($cross_link_orientation=~ /reverse/i){
-			$color=(exists $conf{crossing_link}{index}{$pair}{cross_link_color_reverse})? $conf{crossing_link}{index}{$pair}{cross_link_color_reverse}:$conf{cross_link_color_reverse};
-			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
-		}elsif($cross_link_orientation=~ /forward/i){
-			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
-		}else{
-			die "error: not support cross_link_orientation=$cross_link_orientation\n";
+		my $cross_link_shape=(exists $conf{crossing_link}{index}{$pair}{cross_link_shape})? $conf{crossing_link}{index}{$pair}{cross_link_shape}:$conf{cross_link_shape};
+		my $cross_link_position_ellipse=(exists $conf{crossing_link}{index}{$pair}{cross_link_position_ellipse})? $conf{crossing_link}{index}{$pair}{cross_link_position_ellipse}:$conf{cross_link_position_ellipse};
+		my $cross_link_height_ellipse=(exists $conf{crossing_link}{index}{$pair}{cross_link_height_ellipse})? $conf{crossing_link}{index}{$pair}{cross_link_height_ellipse}:$conf{cross_link_height_ellipse};
+		if($cross_link_height_ellipse!~ /^[\d\.]+,[\d\.]+$/){
+			die "error: not support cross_link_height_ellipse=$cross_link_height_ellipse\n";
 		}
+
+		if($cross_link_position_ellipse=~ /up/i){
+			$cross_link_position_ellipse="0,1,1,0"
+		}elsif($cross_link_position_ellipse=~ /down/i){
+			$cross_link_position_ellipse="1,0,0,1"
+		}else{
+			die "error: not support cross_link_position_ellipse=$cross_link_position_ellipse for $up_id and $down_id\n"
+		}
+
+		my $title_clink="<g><title>$up_id -> $down_id</title>";
+		#if($fts{$up_id}{sample} eq $fts{$down_id}{sample} && $fts{$up_id}{scf} eq $fts{$down_id}{scf} && $cross_link_shape=~ /ellipse/i){
+		if($cross_link_shape=~ /ellipse/i){
+			my $r1=($right_down_x - $left_up_x)/2;
+			my $r1_rev=($left_down_x - $right_up_x)/2;
+			my ($r2, $r2_rev)=split(",", $cross_link_height_ellipse); # r1 and r2 is radius of elipse
+			$r2 = $r2*$id_line_height;
+			$r2_rev = $r2_rev*$id_line_height;
+			my $rotate=0;
+			my $rotate_rev=0;
+			my ($large_arc_flag, $sweep_flag, $large_arc_flag_rev, $sweep_flag_rev)=split(",", $cross_link_position_ellipse); #http://xahlee.info/js/svg_path_ellipse_arc.html
+
+
+			$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"fill:$color;opacity:$cross_link_opacity\" /></g>";
+			print "downid is $down_id, up is is $up_id\n";
+			next
+		}elsif($cross_link_shape=~ /rect/i){
+			if($cross_link_orientation=~ /reverse/i){
+				$color=(exists $conf{crossing_link}{index}{$pair}{cross_link_color_reverse})? $conf{crossing_link}{index}{$pair}{cross_link_color_reverse}:$conf{cross_link_color_reverse};
+				$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
+			}elsif($cross_link_orientation=~ /forward/i){
+				$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
+			}else{
+				die "error: not support cross_link_orientation=$cross_link_orientation\n";
+			}
+		}elsif($cross_link_shape=~ /^v$/i){
+			print "wait\n"
+		}else{
+			die "error:not support cross_link_shape=$cross_link_shape for $up_id and $down_id\n";
+		}
+
+
 
 	
 }
@@ -564,8 +602,9 @@ sub read_list(){
 			if(exists $fts{$feature_id}){
 				die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
 			}else{
-				$fts{$feature_id}{'sample'} = $sample;
-				$fts{$feature_id}{'scf'} = $arr[0];
+				$fts{$feature_id}{sample} = $sample;
+				$fts{$feature_id}{scf} = $arr[0];
+				#print "fts has $feature_id\n";
 			}
 			$gene_index++;
 			if(!$arr[3]){die "error:$gffs line $.\n"}
@@ -590,7 +629,7 @@ sub read_list(){
 	}
 	close LI;
 
-	return (\%genome, \%gff, \@track_order, $sample_num);
+	return (\%genome, \%gff, \@track_order, $sample_num, \%fts);
 	####end:get scaffold length in genome file and scaffold length  in gff file
 }
 
@@ -1043,6 +1082,9 @@ sub default_setting(){
 	$conf{cross_link_color} ||="#FF8C00";
 	$conf{cross_link_color_reverse} ||="#3CB371";
 	$conf{feature_shift_y_unit} ||="radius";
+	$conf{cross_link_position_ellipse} ||="up";
+	$conf{cross_link_shape} ||="rect";
+	$conf{cross_link_height_ellipse} ||="10,8";
 
 	if($conf{track_style}!~ /:/){
 		die "error: track_style format like  fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9\n";
@@ -1120,6 +1162,7 @@ sub default_setting(){
 				chomp;
 				next if($_=~ /^#/ || $_=~ /^\s*$/);
 				$_=~ s/\s+$//;
+				$_=~ s/#\s+\S+.*$//;
 				my @arr;
 				if($_=~ /^\S+,\S/){
 					$_=~ s/,\s*$//;
