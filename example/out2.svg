@@ -3,7 +3,7 @@
 <g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M303.910824930142,65 L326.462762726279,65" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M463.870125136678,65 L486.422062932815,65" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M1062.15708905358,65 L1084.70902684971,65" /></g><text x="150" y="159.5" font-size="15px" fill="black"  text-anchor='end'>s2</text>
 <g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M985.161584254647,155 L1007.71352205078,155" /></g><text x="150" y="249.5" font-size="15px" fill="black"  text-anchor='end'>s3</text>
 <g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M396.897703802697,245 L419.449641598834,245" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M556.401409306281,245 L578.953347102418,245" /></g><text x="150" y="339.5" font-size="15px" fill="black"  text-anchor='end'>s4</text>
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M689.025027335682,335 L711.576965131819,335" /></g><rect x="1312.125" y="179.84" width="47.25" height="12.6" style="fill:blue;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="191.81" font-size="20px" fill="black" text-anchor='start'>legend.s1i</text><rect x="1312.125" y="193.7" width="47.25" height="12.6" style="fill:red;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="205.67" font-size="20px" fill="black" text-anchor='start'>legend.s1</text><rect x="1312.125" y="207.56" width="47.25" height="12.6" style="fill:rgb(255,165,0);stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="219.53" font-size="20px" fill="black" text-anchor='start'>legend.s2</text>
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M689.025027335682,335 L711.576965131819,335" /></g><rect x="1312.125" y="179.84" width="47.25" height="12.6" style="fill:black;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="191.81" font-size="20px" fill="black" text-anchor='start'>legend.s1i</text><rect x="1312.125" y="193.7" width="47.25" height="12.6" style="fill:red;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="205.67" font-size="20px" fill="black" text-anchor='start'>legend.s1</text><rect x="1312.125" y="207.56" width="47.25" height="12.6" style="fill:rgb(255,165,0);stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="219.53" font-size="20px" fill="black" text-anchor='start'>legend.s2</text>
 <line x1="165" y1="368" x2="1290" y2="368" style="stroke:green;stroke-width:0.5"/>
 <line x1="165" y1="364" x2="165" y2="368" style="stroke:green;stroke-width:0.5;opacity:1"/>
 <text x="165" y="383" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
@@ -42,7 +42,7 @@
 
 			<g style="fill:none">
 			<title>gene_s103000,s1,s1000,2925,3119,1</title>
-			<polygon points="716.998542096951,56 716.998542096951,74 725.837079334224,74 725.837079334224,56 " style="fill:blue;stroke:black;stroke-width:0;opacity:1"/> 
+			<polygon points="716.998542096951,56 716.998542096951,74 725.837079334224,74 725.837079334224,56 " style="fill:black;stroke:black;stroke-width:0;opacity:1"/> 
 			</g>
 <g><title>s10000,6000,10000</title><rect x="1084.93682420119" y="60.5" width="182.283440651197" height="9" style="fill:blue"   /></g>
 <g><title>s2,1,9000</title><rect x="165" y="150.5" width="410.035232657028" height="9" style="fill:blue"   /></g>
@@ -421,7 +421,7 @@
 			</g>
 
 			<g style="fill:none">
-			<title>gene_s410000000,s4,s40000,8188,8260,0</title>
+			<title>gene_s410000000,s4,s40000,8188,8260,1</title>
 			<polygon points="720.415502369092,326 720.415502369092,344 723.695784230349,344 723.695784230349,326 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/> 
 			</g>
 

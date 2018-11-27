@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1500" height="400" >
-<text x="150" y="80.4" font-size="15px" fill="black"  text-anchor='end'>s1</text>
-<text x="150" y="160.4" font-size="15px" fill="black"  text-anchor='end'>s2</text>
-<text x="150" y="240.4" font-size="15px" fill="black"  text-anchor='end'>s3</text>
-<text x="150" y="320.4" font-size="15px" fill="black"  text-anchor='end'>s4</text>
+<text x="150" y="80.4" font-size="15px" fill="black"  text-anchor='end'>s1</text>
+<text x="150" y="160.4" font-size="15px" fill="black"  text-anchor='end'>s2</text>
+<text x="150" y="240.4" font-size="15px" fill="black"  text-anchor='end'>s3</text>
+<text x="150" y="320.4" font-size="15px" fill="black"  text-anchor='end'>s4</text>
 
 <line x1="165" y1="352" x2="1290" y2="352" style="stroke:green;stroke-width:0.5"/>
 <line x1="165" y1="348" x2="165" y2="352" style="stroke:green;stroke-width:0.5;opacity:1"/>
@@ -33,10 +33,10 @@
 <text x="1290" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22293</text>
 
 
-<polygon points="1018.19943480016,96.8 1072.34759790069,96.8 1157.27896649172,160.8 1143.55268469923,160.8" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="312.103350827614,239.2 321.893419459023,239.2 221.519983851433,303.2 211.729915220024,303.2" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
 <polygon points="1143.55268469923,176.8 1157.27896649172,176.8 723.437626160678,326.126281792491 723.437626160678,312.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="312.103350827614,239.2 321.893419459023,239.2 221.519983851433,303.2 211.729915220024,303.2" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
 <polygon points="312.607993540573,159.2 322.398062171982,159.2 321.893419459023,223.2 312.103350827614,223.2" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<polygon points="1018.19943480016,96.8 1072.34759790069,96.8 1157.27896649172,160.8 1143.55268469923,160.8" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
 
 
 <g><title>s1,2,3050</title><rect x="165" y="79.6" width="153.865563181268" height="0.8" style="fill:blue"   /></g>

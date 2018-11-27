@@ -3,7 +3,7 @@
 <g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,5" d="M303.910824930142,130 L326.462762726279,130" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,5" d="M463.870125136678,130 L486.422062932815,130" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,5" d="M1062.15708905358,130 L1084.70902684971,130" /></g><text x="150" y="319" font-size="15px" fill="black"  text-anchor='end'>s2</text>
 <g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,5" d="M985.161584254647,310 L1007.71352205078,310" /></g><text x="150" y="499" font-size="15px" fill="black"  text-anchor='end'>s4</text>
 <g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,5" d="M689.025027335682,490 L711.576965131819,490" /></g><text x="150" y="679" font-size="15px" fill="black"  text-anchor='end'>s3</text>
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,5" d="M396.897703802697,670 L419.449641598834,670" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,5" d="M556.401409306281,670 L578.953347102418,670" /></g><rect x="1312.125" y="359.68" width="47.25" height="25.2" style="fill:blue;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="383.62" font-size="20px" fill="black" text-anchor='start'>legend.s1i</text><rect x="1312.125" y="387.4" width="47.25" height="25.2" style="fill:red;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="411.34" font-size="20px" fill="black" text-anchor='start'>legend.s1</text><rect x="1312.125" y="415.12" width="47.25" height="25.2" style="fill:rgb(255,165,0);stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="439.06" font-size="20px" fill="black" text-anchor='start'>legend.s2</text>
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,5" d="M396.897703802697,670 L419.449641598834,670" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,5" d="M556.401409306281,670 L578.953347102418,670" /></g><rect x="1312.125" y="359.68" width="47.25" height="25.2" style="fill:black;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="383.62" font-size="20px" fill="black" text-anchor='start'>legend.s1i</text><rect x="1312.125" y="387.4" width="47.25" height="25.2" style="fill:red;stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="411.34" font-size="20px" fill="black" text-anchor='start'>legend.s1</text><rect x="1312.125" y="415.12" width="47.25" height="25.2" style="fill:rgb(255,165,0);stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="439.06" font-size="20px" fill="black" text-anchor='start'>legend.s2</text>
 <line x1="165" y1="752" x2="1290" y2="752" style="stroke:green;stroke-width:0.5"/>
 <line x1="165" y1="744" x2="165" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
 <text x="165" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
@@ -64,19 +64,18 @@
 <text x="1290" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24693</text>
 
 
-<text x="926.480986514397" y="182.8" font-size="15px" fill="green"  text-anchor='start'   transform="rotate(60 926.480986514397 182.8)" font-family="Times New Roman">gene_s1030000.label</text>
-<polygon points="579.454501275665,670 598.407240918479,670 598.133884096708,490 617.086623739521,490" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:0.6"/>
-<polygon points="487.834406511967,130 506.787146154781,130 457.537358765642,310 438.584619122828,310" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
-<polygon points="1103.11505284899,328 1115.50722876929,328 728.251731259871,472 715.85955533957,472" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.3"/>
-<polygon points="582.734783136921,130 595.126959057223,130 545.877171668084,310 533.484995747783,310" style="fill:#00BFFF;stroke:#000000;stroke-width:0;opacity:0.8"/>
-<polygon points="297.805855910582,670 306.644393147856,670 216.026606730652,490 207.188069493379,490" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
-<polygon points=", , , ," style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
-<polygon points="438.584619122828,310 457.537358765642,310 598.407240918479,670 579.454501275665,670" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
-<polygon points="674.35487790062,670 686.747053820921,670 542.323532985057,490 522.414044466043,490" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
-<polygon points="298.261450613534,310 307.099987850808,310 458.311869760661,670 441.409306281132,670" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
+<text x="926.480986514397" y="182.8" font-size="15px" fill="blue"  text-anchor='start'   transform="rotate(60 926.480986514397 182.8)" font-family="Times New Roman">gene_s1030000.label</text>
+<polygon points="487.834406511967,130 506.787146154781,130 438.584619122828,310 457.537358765642,310" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:0.6"/>
 <polygon points="1008.16911675374,130 1057.05442838051,130 1115.50722876929,310 1103.11505284899,310" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
-<polygon points="533.484995747783,310 545.877171668084,310 686.747053820921,670 674.35487790062,670" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
 <polygon points="298.261450613534,310 307.099987850808,310 297.805855910582,670 306.644393147856,670" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:0.5"/>
+<polygon points="533.484995747783,310 545.877171668084,310 686.747053820921,670 674.35487790062,670" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
+<polygon points="582.734783136921,130 595.126959057223,130 545.877171668084,310 533.484995747783,310" style="fill:#00BFFF;stroke:#000000;stroke-width:0;opacity:0.8"/>
+<polygon points="298.261450613534,310 307.099987850808,310 458.311869760661,670 441.409306281132,670" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
+<polygon points="609.478192200219,670 652.21297533714,670 598.133884096708,490 617.086623739521,490" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:0.6"/>
+<polygon points="674.35487790062,670 686.747053820921,670 542.323532985057,490 522.414044466043,490" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
+<polygon points="1103.11505284899,328 1115.50722876929,328 728.251731259871,472 715.85955533957,472" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.3"/>
+<polygon points="438.584619122828,328 457.537358765642,328 598.407240918479,652 579.454501275665,652" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
+<polygon points="297.805855910582,670 306.644393147856,670 216.026606730652,490 207.188069493379,490" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.6"/>
 
 
 <g><title>s1,2,3050</title><rect x="165" y="121" width="138.910824930142" height="18" style="fill:blue"   /></g>
@@ -86,7 +85,7 @@
 
 			<g style="fill:none">
 			<title>gene_s103000,s1,s1000,2925,3119,1</title>
-			<polygon points="716.998542096951,112 716.998542096951,148 723.185518163042,148 723.185518163042,148 725.837079334224,130 723.185518163042,112 723.185518163042,112" style="fill:blue;stroke:black;stroke-width:0;opacity:0.8"/> 
+			<polygon points="716.998542096951,112 716.998542096951,148 723.185518163042,148 723.185518163042,148 725.837079334224,130 723.185518163042,112 723.185518163042,112" style="fill:black;stroke:black;stroke-width:0;opacity:0.8"/> 
 			</g>
 <text x="721.417810715587" y="110" font-size="12px" fill="black"  text-anchor='start'   transform="rotate(-30 721.417810715587 110)" font-family="Times New Roman">gene_s103000.label</text>
 <g><title>s10000,6000,10000</title><rect x="1084.93682420119" y="121" width="182.283440651197" height="18" style="fill:blue"   /></g>

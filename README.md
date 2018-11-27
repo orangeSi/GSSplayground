@@ -44,6 +44,8 @@
 <br><br><br>
 ![gene cluster image](example/out6.svg)
 <br><br><br>
+![gene cluster image](example/out8.svg)
+<br><br><br>
 ![gene cluster image](example/out7.svg)
 
 contact:<br>

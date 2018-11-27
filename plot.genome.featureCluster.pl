@@ -226,10 +226,11 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 	#$conf{crossing_link}{index}{"$arr[0],$arr[1]"}{$arr[2]} = $arr[3];
 	my ($up_id, $down_id) = split(",", $pair);
 		my $color=(exists $conf{crossing_link}{index}{$pair}{cross_link_color})? $conf{crossing_link}{index}{$pair}{cross_link_color}:$conf{cross_link_color};
-		my $cross_link_orientatation=(exists $conf{crossing_link}{index}{$pair}{cross_link_orientatation})? $conf{crossing_link}{index}{$pair}{cross_link_orientatation}:$conf{cross_link_orientatation};
+		my $cross_link_orientation=(exists $conf{crossing_link}{index}{$pair}{cross_link_orientation})? $conf{crossing_link}{index}{$pair}{cross_link_orientation}:$conf{cross_link_orientation};
 		my $cross_link_opacity=(exists $conf{crossing_link}{index}{$pair}{cross_link_opacity})? $conf{crossing_link}{index}{$pair}{cross_link_opacity}:$conf{cross_link_opacity};
 		my $cross_link_order=(exists $conf{crossing_link}{index}{$pair}{cross_link_order})? $conf{crossing_link}{index}{$pair}{cross_link_order}:$conf{cross_link_order};
 		my $cross_link_anchor_pos=(exists $conf{crossing_link}{index}{$pair}{cross_link_anchor_pos})? $conf{crossing_link}{index}{$pair}{cross_link_anchor_pos}:$conf{cross_link_anchor_pos};
+		die "error: $up_id of crosslink is not in --list regions, please try to check it\n" if(not exists $conf{crossing_link}{position}{$up_id}{start}{x});
 		my $left_up_x = $conf{crossing_link}{position}{$up_id}{start}{x};
 		my $left_up_y = $conf{crossing_link}{position}{$up_id}{start}{y};
 		my $right_up_x = $conf{crossing_link}{position}{$up_id}{end}{x};
@@ -244,6 +245,7 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 			die "error: 1not support cross_link_anchor_pos =$cross_link_anchor_pos yet~\n"
 		}
 
+		die "error: $down_id of crosslink is not in --list regions, please try to check it\n" if(not exists $conf{crossing_link}{position}{$down_id}{start}{x});
 		my $left_down_x = $conf{crossing_link}{position}{$down_id}{start}{x};
 		my $left_down_y = $conf{crossing_link}{position}{$down_id}{start}{y};
 		my $right_down_x = $conf{crossing_link}{position}{$down_id}{end}{x};
@@ -256,16 +258,16 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 			$right_down_y-=$conf{feature_setting}{$down_id}{cross_link_shift_y};
 			print "downid is $down_id\n";
 		}elsif($cross_link_anchor_pos !~ /_medium/){
-			die "error: 2not support cross_link_anchor_pos=
-			$cross_link_anchor_pos:
-			yet~\n"
+			die "error: 2not support cross_link_anchor_pos=$cross_link_anchor_pos yet~\n"
 		}
-		die "error: got $cross_link_orientatation for cross_link_orientatation, but must be reverse or forward for $pair\n" if($cross_link_orientatation!~ /reverse/i && $cross_link_orientatation!~ /forward/i);
-		if($cross_link_orientatation=~ /reverse/i){
+		die "error: got $cross_link_orientation for cross_link_orientation, but must be reverse or forward for $pair\n" if($cross_link_orientation!~ /reverse/i && $cross_link_orientation!~ /forward/i);
+		if($cross_link_orientation=~ /reverse/i){
 			$color=(exists $conf{crossing_link}{index}{$pair}{cross_link_color_reverse})? $conf{crossing_link}{index}{$pair}{cross_link_color_reverse}:$conf{cross_link_color_reverse};
 			$orders{$cross_link_order}.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
-		}else{
+		}elsif($cross_link_orientation=~ /forward/i){
 			$orders{$cross_link_order}.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
+		}else{
+			die "error: not support cross_link_orientation=$cross_link_orientation\n";
 		}
 
 	
@@ -559,7 +561,7 @@ sub read_list(){
 			my $feature_id=$1;
 			die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);
 			if(exists $fts{$feature_id}){
-				die "error: feature_id should be uniq, but $feature_id appear more than once\n\n";
+				die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
 			}else{
 				$fts{$feature_id}{'sample'} = $sample;
 				$fts{$feature_id}{'scf'} = $arr[0];
@@ -1036,7 +1038,7 @@ sub default_setting(){
 	$conf{feature_border_size} ||=0;
 	$conf{feature_border_color} ||="black";
 	$conf{feature_opacity} =(defined $conf{feature_opacity})? $conf{feature_opacity}:1;
-	$conf{cross_link_orientatation} ||="forward";
+	$conf{cross_link_orientation} ||="forward";
 	$conf{cross_link_color} ||="#FF8C00";
 	$conf{cross_link_color_reverse} ||="#3CB371";
 	$conf{feature_shift_y_unit} ||="radius";

@@ -5,6 +5,7 @@ then
 fi
 commit=$1
 add=$2
+dos2unix $add
 set -vex
 git add $add
 git commit -m "$commit"
