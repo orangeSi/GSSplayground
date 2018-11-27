@@ -75,7 +75,7 @@ my $left_distance_init = (1 + 0.1) * $ref_name_width_ratio * $svg_width ;#block�
 while(@track_order){
 	$index++;
 	my $sample = shift @track_order;
-	die "error: $sample not in gff file of --list \n" if (not exists $gff{$sample});
+	die "error: sample :$sample: is not in gff file of --list \n" if (not exists $gff{$sample});
 	my $block_distance = $space_len*$ratio; # block_distance 是每个block的间距
 	my $flag;
 	my $left_distance = $left_distance_init ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
@@ -241,20 +241,24 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 			$left_up_y+=$conf{feature_setting}{$up_id}{cross_link_shift_y};
 			$right_up_y+=$conf{feature_setting}{$up_id}{cross_link_shift_y};
 		}elsif($cross_link_anchor_pos !~ /^medium_/){
-			die "error: not support $conf{cross_link_anchor_pos} yet~\n"
+			die "error: 1not support cross_link_anchor_pos =$cross_link_anchor_pos yet~\n"
 		}
+
 		my $left_down_x = $conf{crossing_link}{position}{$down_id}{start}{x};
 		my $left_down_y = $conf{crossing_link}{position}{$down_id}{start}{y};
 		my $right_down_x = $conf{crossing_link}{position}{$down_id}{end}{x};
 		my $right_down_y = $conf{crossing_link}{position}{$down_id}{end}{y};
-		if($cross_link_anchor_pos=~ /_low$/){
+		if($cross_link_anchor_pos=~ /_low/){
 			$left_down_y+=$conf{feature_setting}{$down_id}{cross_link_shift_y};
 			$right_down_y+=$conf{feature_setting}{$down_id}{cross_link_shift_y};
-		}elsif($cross_link_anchor_pos=~ /_up$/){
+		}elsif($cross_link_anchor_pos=~ /_up/){
 			$left_down_y-=$conf{feature_setting}{$down_id}{cross_link_shift_y};
 			$right_down_y-=$conf{feature_setting}{$down_id}{cross_link_shift_y};
-		}elsif($cross_link_anchor_pos !~ /_medium$/){
-			die "error: not support $conf{cross_link_anchor_pos} yet~\n"
+			print "downid is $down_id\n";
+		}elsif($cross_link_anchor_pos !~ /_medium/){
+			die "error: 2not support cross_link_anchor_pos=
+			$cross_link_anchor_pos:
+			yet~\n"
 		}
 		die "error: got $cross_link_orientatation for cross_link_orientatation, but must be reverse or forward for $pair\n" if($cross_link_orientatation!~ /reverse/i && $cross_link_orientatation!~ /forward/i);
 		if($cross_link_orientatation=~ /reverse/i){
@@ -426,6 +430,7 @@ print "outfile is  $outdir/$prefix.svg\n";
 
 sub read_list(){
 	###start:get scaffold length in genome file and scaffold length  in gff file
+	my %fts;
 	my ($list) = @_;
 	my (%genome,%gff,@track_order,$sample_num);
 	my @features=split(/,/, $conf{feature_keywords});
@@ -439,6 +444,7 @@ sub read_list(){
 		my %scf_block_id;
 		my ($sample,$gffs,$genome,@arrs)=split(/\t/,$_); # $seq_id,$seq_draw_start,$seq_draw_end
 		push @track_order, $sample;
+		
 		if(exists $uniq_sample{$sample}){
 			die "error:more than one $sample, not allow same 1th column in $list~\n " 
 		}else{
@@ -552,6 +558,12 @@ sub read_list(){
 			$_=~ /\sID=([^;]+);/;
 			my $feature_id=$1;
 			die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);
+			if(exists $fts{$feature_id}){
+				die "error: feature_id should be uniq, but $feature_id appear more than once\n\n";
+			}else{
+				$fts{$feature_id}{'sample'} = $sample;
+				$fts{$feature_id}{'scf'} = $arr[0];
+			}
 			$gene_index++;
 			if(!$arr[3]){die "error:$gffs line $.\n"}
 			$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{start}=$arr[3]; # block_index 是指每行中每个cluster的左右顺序
@@ -597,6 +609,11 @@ sub draw_genes(){
 	my $shape=$conf{feature_shape};
 	$shape=(exists $conf{feature_setting}{$feature_id}{feature_shape})? $conf{feature_setting}{$feature_id}{feature_shape}:$conf{feature_shape};
 	my $feature_shift_y_unit=(exists $conf{feature_setting}{$feature_id}{feature_shift_y_unit})? $conf{feature_setting}{$feature_id}{feature_shift_y_unit}:$conf{feature_shift_y_unit};
+	my $feature_shift_x=(exists $conf{feature_setting}{$feature_id}{feature_shift_x})? $conf{feature_setting}{$feature_id}{feature_shift_x}:$conf{feature_shift_x};
+	if($feature_shift_x!~ /^[\+\-]?\d+\.?\d*$/){
+		die "error: feature_shift_x format like 0 or +10 or -10, unit is bp\n"
+	}
+	$shift_x+=$feature_shift_x*$ratio;
 	my $shift_unit=$id_line_height;
 	if($shape=~ /^circle_point/){
         if($feature_shift_y_unit=~ /radius/){
@@ -1015,16 +1032,20 @@ sub default_setting(){
 	$conf{connect_stroke_color} ||="black";
 	$conf{absolute_postion_in_title} ||="yes";
 	$conf{feature_shift_y} ||=0;
+	$conf{feature_shift_x} ||=0;
 	$conf{feature_border_size} ||=0;
 	$conf{feature_border_color} ||="black";
 	$conf{feature_opacity} =(defined $conf{feature_opacity})? $conf{feature_opacity}:1;
 	$conf{cross_link_orientatation} ||="forward";
 	$conf{cross_link_color} ||="#FF8C00";
 	$conf{cross_link_color_reverse} ||="#3CB371";
-    $conf{feature_shift_y_unit} ||="radius";
+	$conf{feature_shift_y_unit} ||="radius";
 
 	if($conf{track_style}!~ /:/){
 		die "error: track_style format like  fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9\n";
+	}
+	if($conf{feature_shift_x}!~ /^\d+$/){
+		die "error:feature_shift_x format like 0 or +10 or -10, unit is bp\n"
 	}
 
 	if(exists $conf{tracks_reorder}){
@@ -1095,6 +1116,7 @@ sub default_setting(){
 			while(<IN>){
 				chomp;
 				next if($_=~ /^#/ || $_=~ /^\s*$/);
+				$_=~ s/\s+$//;
 				my @arr;
 				if($_=~ /^\S+,\S/){
 					$_=~ s/,\s*$//;
@@ -1105,7 +1127,8 @@ sub default_setting(){
 
 				}elsif($_=~ /\t/){
 					@arr = split("\t", $_);
-					die "error: wrong format of $_ of $conf{crossing_link}, should have four columns~\n" if (@arr!=4);
+					my $len=scalar@arr;
+					die "error: line is $_\nwrong format of $_ of $conf{crossing_link}, should have four columns not $len~\n" if (@arr!=4);
 					$conf{crossing_link}{index}{"$arr[0],$arr[1]"}{$arr[2]} = $arr[3];
 					@arr = ($arr[0],$arr[1]);
 				}else{

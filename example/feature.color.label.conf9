@@ -13,6 +13,7 @@ gene_s410000000	feature_border_color	black
 
 
 gene_s4100000	feature_shift_y	-0.5
+gene_s4100000	feature_shift_x	-361
 #gene_s4100000	feature_shift_y	-5
 #gene_s4100000	feature_shift_y	0
 gene_s4100000	feature_height_ratio	10
