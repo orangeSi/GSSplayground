@@ -3,5 +3,5 @@ gene_s203,gene_s303,gene_s403000
 gene_s1060000,gene_s2100000,gene_s4100000
 gene_s2100000	gene_s4100000	cross_link_anchor_pos	low_up
 
-#gene_s403,gene_s409
+gene_s403000,gene_s406000
 

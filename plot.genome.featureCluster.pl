@@ -261,11 +261,12 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 			die "error: 2not support cross_link_anchor_pos=$cross_link_anchor_pos yet~\n"
 		}
 		die "error: got $cross_link_orientation for cross_link_orientation, but must be reverse or forward for $pair\n" if($cross_link_orientation!~ /reverse/i && $cross_link_orientation!~ /forward/i);
+		my $title_clink="<g><title>$up_id -> $down_id</title>";
 		if($cross_link_orientation=~ /reverse/i){
 			$color=(exists $conf{crossing_link}{index}{$pair}{cross_link_color_reverse})? $conf{crossing_link}{index}{$pair}{cross_link_color_reverse}:$conf{cross_link_color_reverse};
-			$orders{$cross_link_order}.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
+			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
 		}elsif($cross_link_orientation=~ /forward/i){
-			$orders{$cross_link_order}.="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
+			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
 		}else{
 			die "error: not support cross_link_orientation=$cross_link_orientation\n";
 		}

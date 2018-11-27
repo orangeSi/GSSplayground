@@ -33,10 +33,11 @@
 <text x="1290" y="367" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22293</text>
 
 
-<polygon points="1143.55268469923,176.8 1157.27896649172,176.8 723.437626160678,326.126281792491 723.437626160678,312.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="312.103350827614,239.2 321.893419459023,239.2 221.519983851433,303.2 211.729915220024,303.2" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="312.607993540573,159.2 322.398062171982,159.2 321.893419459023,223.2 312.103350827614,223.2" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1018.19943480016,96.8 1072.34759790069,96.8 1157.27896649172,160.8 1143.55268469923,160.8" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
+<g><title>gene_s303 -> gene_s403000</title><polygon points="312.103350827614,239.2 321.893419459023,239.2 221.519983851433,303.2 211.729915220024,303.2" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s203 -> gene_s303</title><polygon points="312.607993540573,159.2 322.398062171982,159.2 321.893419459023,223.2 312.103350827614,223.2" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s403000 -> gene_s406000</title><polygon points="211.729915220024,319.2 221.519983851433,319.2 361.255551069843,320.8 307.107387969318,320.8" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s2100000 -> gene_s4100000</title><polygon points="1143.55268469923,176.8 1157.27896649172,176.8 723.437626160678,326.126281792491 723.437626160678,312.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s1060000 -> gene_s2100000</title><polygon points="1018.19943480016,96.8 1072.34759790069,96.8 1157.27896649172,160.8 1143.55268469923,160.8" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
 
 
 <g><title>s1,2,3050</title><rect x="165" y="79.6" width="153.865563181268" height="0.8" style="fill:blue"   /></g>
