@@ -1,4 +1,5 @@
 set -vex
+dos2unix *
 perl ../plot.genome.featureCluster.pl --list list5 --prefix out --outdir . --conf main.conf
 
 # remove the crosslinks and decrease the height of figure, change feature type to rect
