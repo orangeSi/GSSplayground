@@ -5,7 +5,7 @@ then
 fi
 commit=$1
 add=$2
-dos2unix $add
+find $add -type f|xargs -L 1 -I {} dos2unix {}
 set -vex
 git add $add
 git commit -m "$commit"
