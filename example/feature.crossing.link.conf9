@@ -9,17 +9,24 @@ gene_s403000	gene_s406000	cross_link_shape	ellipse 	# ellipse or w or quadrilate
 gene_s403000	gene_s406000	cross_link_anchor_pos	low_up
 gene_s403000	gene_s406000	cross_link_height_ellipse	20,15
 
-gene_s304	gene_s305	cross_link_shape	w 	# ellipse or w or quadrilateral or line, default is quadrilateral
-gene_s304	gene_s305	cross_link_height_w	10
-gene_s304	gene_s305	cross_link_anchor_pos	low_up
-gene_s304	gene_s305	cross_link_orientation_w	up,1	# up and 1 wave
+#gene_s304	gene_s305	cross_link_shape	w 	# ellipse or w or quadrilateral or line, default is quadrilateral
+#gene_s304	gene_s305	cross_link_height_w	10
+#gene_s304	gene_s305	cross_link_anchor_pos	low_up
+#gene_s304	gene_s305	cross_link_orientation_w	up,1	# up and 1 wave
 
 
 gene_s307	gene_s308	cross_link_shape	line 	# ellipse or w or quadrilateral or line, default is quadrilateral
-gene_s307	gene_s308	cross_link_height_line	3
+gene_s307	gene_s308	cross_link_height_line	2
 gene_s307	gene_s308	cross_link_anchor_pos	medium_medium
-gene_s307	gene_s308	cross_link_orientation_line	end,start	# form end of left feature to start of right feature, as start,end or end,end or start,start
-gene_s307	gene_s308	cross_link_color	black
+gene_s307	gene_s308	cross_link_orientation_line	start,start	# form end of left feature to start of right feature, as start,end or end,end or start,start, meidum,medium start,medium 
+gene_s307	gene_s308	cross_link_color	red
+gene_s307	gene_s308	cross_link_order	0
+
+gene_s208	gene_s304	cross_link_shape	line 	# ellipse or w or quadrilateral or line, default is quadrilateral
+gene_s208	gene_s304	cross_link_orientation_line	medium,medium
+gene_s208	gene_s304	cross_link_height_line	2
+gene_s208	gene_s304	cross_link_anchor_pos	medium_medium
+#gene_s208	gene_s304
 
 gene_s404000	gene_s4020000	cross_link_shape	ellipse 	# ellipse or w or quadrilateral or line, default is quadrilateral
 gene_s404000	gene_s4020000	cross_link_height_ellipse	20,15

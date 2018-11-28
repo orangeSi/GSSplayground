@@ -44,10 +44,11 @@ my $space_len = $conf{space_between_blocks};# 500bp是默认的blocks之间的�
 ## 
 
 ###start:get scaffold length in genome file and scaffold length  in gff file of list 
-my ($genome, $gff, $track_order, $sample_num, $fts) = &read_list($list);
+my ($genome, $gff, $track_order, $sample_num, $fts, $sample_scf) = &read_list($list);
 my %genome=%$genome;
 my %gff=%$gff;
 my %fts=%$fts;
+my %sample_scf=%$sample_scf;
 my @track_order=@$track_order;
 my @track_reorder;
 
@@ -71,8 +72,12 @@ my %orders;
 my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_width\" height=\"$svg_height\" style=\"background-color:$conf{svg_background_color};\">\n";
 my $top_distance=$top_bottom_margin/2*$svg_height;
 my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$sample_num; # 每个track的高度
-my $id_line_height = 0.05*$conf{genome_height_ratio}*2*$sample_single_height; # 每个block的genome的高度
+my $genome_height_raw=0.05;
+my $id_line_height = $genome_height_raw*$conf{genome_height_ratio} * 2 * $sample_single_height; # 每个block的genome的高度
 my $left_distance_init = (1 + 0.1) * $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
+
+my $ytick_region_all = 0.5 / ($genome_height_raw*$conf{genome_height_ratio});
+print "\n\nytick_region_all is $ytick_region_all\n\n";
 while(@track_order){
 	$index++;
 	my $sample = shift @track_order;
@@ -136,6 +141,9 @@ while(@track_order){
 			my $stroke_color=$conf{connect_stroke_color};
 			$svg.="<g fill=\"none\" stroke=\"$stroke_color\" stroke-width=\"$stroke_width\"><path stroke-dasharray=\"$stroke_dasharray\" d=\"M$pre_x,$pre_y L$now_x,$now_y\" /></g>";
 		}
+		#$gff{$sample}{chooselen_single}{$block_index}{end_x_in_svg} = $shift_x+$id_line_width;
+		$gff{$sample}{chooselen_single}{$block_index}{end_x_in_svg} = $id_line_x+$id_line_width;
+		$gff{$sample}{chooselen_single}{$block_index}{end_y_in_svg} = $id_line_y;
 
 		$left_distance+=($block_distance+$id_line_width); #每个block左侧起点的x坐标shift
 		$pre_block = $scf[0];
@@ -278,6 +286,7 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 
 		my $title_clink="<g><title>$up_id -> $down_id</title>";
 		#if($fts{$up_id}{sample} eq $fts{$down_id}{sample} && $fts{$up_id}{scf} eq $fts{$down_id}{scf} && $cross_link_shape=~ /ellipse/i){
+		$cross_link_shape=~ s/\s+//g;
 		if($cross_link_shape=~ /ellipse/i){
 			my $r1=($right_down_x - $left_up_x)/2;
 			my $r1_rev=($left_down_x - $right_up_x)/2;
@@ -301,12 +310,50 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 			}else{
 				die "error: not support cross_link_orientation=$cross_link_orientation\n";
 			}
-		}elsif($cross_link_shape=~ /^w$/i){
+		}elsif($cross_link_shape eq "w"){
 			print "wait w\n";
+			die "not support w yet\n";
 		}elsif($cross_link_shape=~ /line/i){
 			print "wait line\n";
+			#cross_link_orientation_line
+			my $cross_link_orientation_line=(exists $conf{crossing_link}{index}{$pair}{cross_link_orientation_line})? $conf{crossing_link}{index}{$pair}{cross_link_orientation_line}:$conf{cross_link_orientation_line};
+			my $cross_link_height_line=(exists $conf{crossing_link}{index}{$pair}{cross_link_height_line})? $conf{crossing_link}{index}{$pair}{cross_link_height_line}:$conf{cross_link_height_line};
+			@cross_link_orientation_line_list = split(/,/, $cross_link_orientation_line);
+			if(@cross_link_orientation_line_list!=2){
+				die "error: cross_link_orientation_line=$cross_link_orientation_line ,error format. example: start,end or end,start ~\n"
+			}
+
+			my ($ss, $ee) = @cross_link_orientation_line_list;
+			my ($x1,$y1,$x2,$y2);
+			if($ss=~ /start/i){
+				$x1=$left_up_x;
+				$y1=$left_up_y;
+			}elsif($ss=~ /medium/i){
+				$x1=($right_up_x+$left_up_x)/2;
+				$y1=($right_up_y+$left_up_y)/2;
+			}elsif($ss=~ /end/i){
+				$x1=$right_up_x;
+				$y1=$right_up_y;
+			}else{
+				die "error: only strat or end or medium, but get $ss,$ee\n"
+			}
+
+			if($ee=~ /start/i){
+				$x2=$left_down_x;
+				$y2=$left_down_y;
+			}elsif($ee=~ /medium/i){
+				$x2=($right_down_x+$left_down_x)/2;
+				$y2=($right_down_y+$left_down_y)/2;
+			}elsif($ee=~ /end/i){
+				$x2=$right_down_x;
+				$y2=$right_down_y;
+			}else{
+				die "error: only strat or end or medium, but get $ss,$ee\n"
+			}
+			my $stroke_width=$cross_link_height_line*$id_line_height;
+			$orders{$cross_link_order}.="$title_clink<line x1=\"$x1\" y1=\"$y1\" x2=\"$x2\" y2=\"$y2\" style=\"stroke:$color;stroke-width:$stroke_width;opacity:$cross_link_opacity\" /></g>\n"; #crossing link of features
 		}else{
-			die "error:not support cross_link_shape=$cross_link_shape for $up_id and $down_id, only support quadrilateral or w or ellipse\n";
+			die "error:not support cross_link_shape=$cross_link_shape: for $up_id and $down_id, only support quadrilateral or w or ellipse or line\n";
 		}
 
 
@@ -460,6 +507,7 @@ if($conf{scale_display}=~ /yes/i){
 
 open SVG,">$outdir/$prefix.svg" or die "$!";
 print SVG "$svg";
+&feature_ytick();
 for my $order(sort {$a<=>$b}keys %orders){
 	print "order is $order\n";
 	print SVG "\n$orders{$order}\n";
@@ -467,7 +515,7 @@ for my $order(sort {$a<=>$b}keys %orders){
 print SVG "</svg>";
 close SVG;
 print "outfile is  $outdir/$prefix.svg\n";
-`set -vx;convert  $outdir/$prefix.svg $outdir/$prefix.png ; echo outfile is $outdir/$prefix.png; convert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf;echo outfile is $outdir/$prefix.dpi$conf{pdf_dpi}.pdf`;
+`set -vex;convert  $outdir/$prefix.svg $outdir/$prefix.png ; echo outfile is $outdir/$prefix.png; convert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf;echo outfile is $outdir/$prefix.dpi$conf{pdf_dpi}.pdf`;
 
 #$svg.=&draw_genes($gff{$sample}{id}{$id}{$index}{start},$gff{$sample}{id}{$id}{$index}{end},$gff{$sample}{id}{$id}{$index}{strand},$gene_height_medium,$gene_height_top);
 
@@ -478,6 +526,7 @@ sub read_list(){
 	my (%genome,%gff,@track_order,$sample_num);
 	my @features=split(/,/, $conf{feature_keywords});
 	my %uniq_sample;
+	my %sample_scf;
 	open LI,"$list" or die "$!";
 	while(<LI>){
 		chomp;
@@ -520,7 +569,6 @@ sub read_list(){
 			$all_seq_id{$arr[0]} = "";
 		}
 		close GFF;
-
 		open GFF,"$gffs" or die "$!";
 		my $gene_index;
 		while(<GFF>){
@@ -622,7 +670,9 @@ sub read_list(){
 			$conf{feature_setting}{$feature_id}{end}=$end_f;
 			$conf{feature_setting}{$feature_id}{sample}=$sample;
 			$conf{feature_setting}{$feature_id}{scf_id}=$arr[0];
-
+			die "error: sample $sample should not have : char\n" if($sample=~ /:/ && exists $conf{feature_ytick_region});
+			die "error: scaffold_id $arr[0] should not have : char\n" if($arr[0]=~ /:/ && exists $conf{feature_ytick_region});
+			$sample_scf{$sample}{$arr[0]}="";
 			#print "block $sample $block_index $arr[0] $gene_index $arr[3] $arr[4] $feature_id\n";
 			#print "id is $feature_id\n";
 
@@ -630,11 +680,67 @@ sub read_list(){
 		close GFF;
 	}
 	close LI;
-
-	return (\%genome, \%gff, \@track_order, $sample_num, \%fts);
+	return (\%genome, \%gff, \@track_order, $sample_num, \%fts, \%sample_scf);
 	####end:get scaffold length in genome file and scaffold length  in gff file
 }
 
+sub feature_ytick(){
+	print "xxxxx is $conf{feature_ytick_region}\n\n";
+	if(exists $conf{feature_ytick_region}){	
+		print "\nfeature_ytick_region\n\n";
+		#$conf{feature_ytick_region}
+		$conf{feature_ytick_region}=~ s/^\s+//;
+		$conf{feature_ytick_region}=~ s/\s+$//;
+		print "feture_ytick_regionis :$conf{feature_ytick_region}:\n";
+		if($conf{feature_ytick_region}=~ /^All:-:-:\([^\)+]\)/){
+			print "\nALL\n";
+		}elsif($conf{feature_ytick_region}=~ /^\S+:\S+:[\d\.]+:[\d\.]+:[\d\.]+:[\d\.]+:[rl]:\([^:^\)]+\)/){
+			my @yticks = split(/\)\s+/, $conf{feature_ytick_region});
+			foreach my $ytick(@yticks){
+				$ytick.=")" if($ytick!~ /\)$/);
+				if($ytick=~ /^(\S+):(\S+):[\d\.]+:[\d\.]+:[\d\.]+:[\d\.]+:[rl]:\([^:^\)]+\)/){
+					my ($ytick_sample, $ytick_scf) = ($1, $2);
+					die "error:$ytick_sample: with :$ytick_scf: is not together for $ytick\n" if(not exists $sample_scf{$ytick_sample}{$ytick_scf});			      
+					my @ticks = split(/:/, $ytick);
+					shift @ticks;shift @ticks;
+					$yticks = join(":", @ticks);
+					@ticks = split(/;/, $yticks);
+					foreach my $tick(@ticks){
+						my @tick_unit=split(/:/, $tick);
+						die "error: error format:$tick\n" if(@tick_unit%6);
+						my ($s1, $e1, $s2, $e2, $ytick_pos, $title) = @tick_unit;
+						#$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{end}=$arr[4];
+						for my $block(keys %{$gff{$ytick_sample}{block}}){
+							my @scf= keys %{$gff{$ytick_sample}{block}{$block}};
+							#print "scf is block is $block,@scf\n";
+							next if($scf[0] ne $ytick_scf);
+							#$gff{$ytick_sample}{chooselen_single}{$block}{end};
+							my $ytick_vline_width=0.7;
+							my $down_x=$gff{$ytick_sample}{chooselen_single}{$block}{end_x_in_svg}+$ytick_vline_width/2;
+							my $down_y=$gff{$ytick_sample}{chooselen_single}{$block}{end_y_in_svg} -10;
+							my $up_x=$down_x;
+							my $up_y=$down_y-50;
+							#$orders{5}.="<line x1=\"$down_x\" y1=\"$down_y\" x2=\"$up_x\" y2=\"$up_y\" style=\"stroke:black;stroke-width:$ytick_vline_width\" />\n";
+							$orders{5}.="<g fill=\"none\" stroke=\"black\"><path stroke-width=\"$ytick_vline_width\" d=\"M$down_x $down_y L$up_x $up_y\" /></g>\n";
+							#<path stroke-width="2" d="M5 20 l215 0" />
+
+
+						}
+
+					}
+					print "ok,ytick is $ytick\n";
+
+				}else{
+					die "die11 $ytick\n\n";
+				}
+			}
+		}else{
+			die "die2, $conf{feature_ytick_region}\n\n"
+		}
+	}
+
+
+}
 
 sub draw_genes(){
 	#draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
@@ -1008,8 +1114,11 @@ sub read_conf(){
 		$value=~ s/\s+$//;
 		$value=~ s/^\s+//;
 
-		if(!$key){
-			print "line is $_\n";
+		if($key eq ""){
+			die "error format: $_\n";
+		}
+		if($value eq ""){
+			die "error format: $_\n";
 		}
 		$confs{$key} = $value;
 		print "$key -> $value\n";
@@ -1088,6 +1197,7 @@ sub default_setting(){
 	$conf{cross_link_shape} ||="quadrilateral";
 	$conf{cross_link_height_ellipse} ||="10,8";
 	$conf{svg_background_color} ||="white";
+	#$conf{feature_ytick_region} ||="0-3:0-10;";
 
 	if($conf{track_style}!~ /:/){
 		die "error: track_style format like  fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9\n";
@@ -1143,9 +1253,10 @@ sub default_setting(){
 			while(<IN>){
 				chomp;
 				next if($_=~ /^#/ || $_=~ /^\s*$/);
-                last if($_ eq "exit");
+		                last if($_ eq "exit");
+                		$_=~ s/#\s+.*$//;
 				$_=~ s/\s+$//;
-                $_=~ s/\s*#\s+.*$//;
+
 				my @arr = split(/\t+/, $_);
 				if(@arr!=3){die "error: $conf{feature_setting} should only have 3 columns seperate by \\t, but $_ is not\n "}
 				$conf{feature_setting}{$arr[0]}{$arr[1]}=$arr[2];

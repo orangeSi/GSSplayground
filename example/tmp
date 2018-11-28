@@ -1,1 +1,6 @@
-error: sample :s1: is not in gff file of --list 
++ convert ./out9.svg ./out9.png
+无效参数 - /out9.svg
++ echo outfile is ./out9.png
++ convert -density 100 ./out9.svg ./out9.dpi100.pdf
+无效参数 - 100
++ echo outfile is ./out9.dpi100.pdf
