@@ -68,7 +68,7 @@ my $index;
 my $common_size;
 my $top_bottom_margin=$conf{top_bottom_margin};
 my %orders;
-my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_width\" height=\"$svg_height\" >\n";
+my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_width\" height=\"$svg_height\" style=\"background-color:$conf{svg_background_color};\">\n";
 my $top_distance=$top_bottom_margin/2*$svg_height;
 my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$sample_num; # 每个track的高度
 my $id_line_height = 0.05*$conf{genome_height_ratio}*2*$sample_single_height; # 每个block的genome的高度
@@ -262,18 +262,18 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 		}
 		die "error: got $cross_link_orientation for cross_link_orientation, but must be reverse or forward for $pair\n" if($cross_link_orientation!~ /reverse/i && $cross_link_orientation!~ /forward/i);
 		my $cross_link_shape=(exists $conf{crossing_link}{index}{$pair}{cross_link_shape})? $conf{crossing_link}{index}{$pair}{cross_link_shape}:$conf{cross_link_shape};
-		my $cross_link_position_ellipse=(exists $conf{crossing_link}{index}{$pair}{cross_link_position_ellipse})? $conf{crossing_link}{index}{$pair}{cross_link_position_ellipse}:$conf{cross_link_position_ellipse};
+		my $cross_link_orientation_ellipse=(exists $conf{crossing_link}{index}{$pair}{cross_link_orientation_ellipse})? $conf{crossing_link}{index}{$pair}{cross_link_orientation_ellipse}:$conf{cross_link_orientation_ellipse};
 		my $cross_link_height_ellipse=(exists $conf{crossing_link}{index}{$pair}{cross_link_height_ellipse})? $conf{crossing_link}{index}{$pair}{cross_link_height_ellipse}:$conf{cross_link_height_ellipse};
 		if($cross_link_height_ellipse!~ /^[\d\.]+,[\d\.]+$/){
-			die "error: not support cross_link_height_ellipse=$cross_link_height_ellipse\n";
+			die "error: not support cross_link_height_ellipse=$cross_link_height_ellipse, right format should like 10,8\n";
 		}
 
-		if($cross_link_position_ellipse=~ /up/i){
-			$cross_link_position_ellipse="0,1,1,0"
-		}elsif($cross_link_position_ellipse=~ /down/i){
-			$cross_link_position_ellipse="1,0,0,1"
+		if($cross_link_orientation_ellipse=~ /up/i){
+			$cross_link_orientation_ellipse="0,1,1,0"
+		}elsif($cross_link_orientation_ellipse=~ /down/i){
+			$cross_link_orientation_ellipse="1,0,0,1"
 		}else{
-			die "error: not support cross_link_position_ellipse=$cross_link_position_ellipse for $up_id and $down_id\n"
+			die "error: not support cross_link_orientation_ellipse=$cross_link_orientation_ellipse for $up_id and $down_id\n"
 		}
 
 		my $title_clink="<g><title>$up_id -> $down_id</title>";
@@ -286,13 +286,13 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 			$r2_rev = $r2_rev*$id_line_height;
 			my $rotate=0;
 			my $rotate_rev=0;
-			my ($large_arc_flag, $sweep_flag, $large_arc_flag_rev, $sweep_flag_rev)=split(",", $cross_link_position_ellipse); #http://xahlee.info/js/svg_path_ellipse_arc.html
+			my ($large_arc_flag, $sweep_flag, $large_arc_flag_rev, $sweep_flag_rev)=split(",", $cross_link_orientation_ellipse); #http://xahlee.info/js/svg_path_ellipse_arc.html
 
 
 			$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"fill:$color;opacity:$cross_link_opacity\" /></g>";
 			print "downid is $down_id, up is is $up_id\n";
 			next
-		}elsif($cross_link_shape=~ /rect/i){
+		}elsif($cross_link_shape=~ /quadrilateral/i){
 			if($cross_link_orientation=~ /reverse/i){
 				$color=(exists $conf{crossing_link}{index}{$pair}{cross_link_color_reverse})? $conf{crossing_link}{index}{$pair}{cross_link_color_reverse}:$conf{cross_link_color_reverse};
 				$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
@@ -301,10 +301,12 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 			}else{
 				die "error: not support cross_link_orientation=$cross_link_orientation\n";
 			}
-		}elsif($cross_link_shape=~ /^v$/i){
-			print "wait\n"
+		}elsif($cross_link_shape=~ /^w$/i){
+			print "wait w\n";
+		}elsif($cross_link_shape=~ /line/i){
+			print "wait line\n";
 		}else{
-			die "error:not support cross_link_shape=$cross_link_shape for $up_id and $down_id\n";
+			die "error:not support cross_link_shape=$cross_link_shape for $up_id and $down_id, only support quadrilateral or w or ellipse\n";
 		}
 
 
@@ -1081,10 +1083,11 @@ sub default_setting(){
 	$conf{cross_link_orientation} ||="forward";
 	$conf{cross_link_color} ||="#FF8C00";
 	$conf{cross_link_color_reverse} ||="#3CB371";
-	$conf{feature_shift_y_unit} ||="radius";
-	$conf{cross_link_position_ellipse} ||="up";
-	$conf{cross_link_shape} ||="rect";
+	$conf{feature_shift_y_unit} ||="backbone"; # radius or backbone
+	$conf{cross_link_orientation_ellipse} ||="up";
+	$conf{cross_link_shape} ||="quadrilateral";
 	$conf{cross_link_height_ellipse} ||="10,8";
+	$conf{svg_background_color} ||="white";
 
 	if($conf{track_style}!~ /:/){
 		die "error: track_style format like  fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9\n";
