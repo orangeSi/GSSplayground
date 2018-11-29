@@ -24,8 +24,6 @@ if(! -d "$outdir"){
 
 my %conf = &read_conf($conf);
 %conf = &default_setting(%conf);
-#die  "AAA $conf{feature_setting}{s2000_3_2000_6000}{display_feature_label}\n\n";
-
 #&display_conf(%conf);
 my $shift_angle_closed_feature=0;
 my ($svg_width,$svg_height) = split(',',$conf{'svg_width_height'});
@@ -162,7 +160,6 @@ while(@track_order){
 			#print "here $sample $block_index $scf[0] $index\n";
 			my $gene_height_medium=$id_line_height*$conf{feature_height_ratio};
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
-			#print "index id is $index_id\n";
 			die "die:index_id is $index_id,$sample $block_index $scf[0] $index\n" if(not $index_id);
 			my $index_start = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{start};
 			my $index_end = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{end};
@@ -564,27 +561,25 @@ sub read_list(){
 
 		my %all_seq_id;
 		my @gffss = split(/,/, $gffs);
-		my $gene_index;
 		foreach my $gffs(@gffss){
 			open GFF,"$gffs" or die "$!";
 			while(<GFF>){
 				chomp;
-				next if($_=~ /^#/||$_=~ /^\s*$/);
+				next if($_=~ /^#/);
 				my @arr=split(/\t/,$_);
-				die "error: need 9 columns for gff format, $gffs, line$.\n" if(@arr!=9);
 				$all_seq_id{$arr[0]} = "";
 			}
 			close GFF;
 			open GFF,"$gffs" or die "$!";
+			my $gene_index;
 			while(<GFF>){
 				chomp;
-				next if($_=~ /^#/||$_=~ /^\s*$/);
+				next if($_=~ /^#/);
 				my @arr=split(/\t/,$_);
 				die "error: $gffs should have tab in file~\n" if(@arr==1);
 				my $block_index=-1;
 				my $start_f=$arr[3];
 				my $end_f=$arr[4];
-				#die "die1\n" if($start_f == 5998);
 				if($arr[3] > $arr[4]){
 					$arr[3] = $end_f;
 					$arr[4] = $start_f;
@@ -608,7 +603,6 @@ sub read_list(){
 
 						#print "$seq_id,$seq_draw_start,$seq_draw_end\n";
 						next unless ($arr[0] eq $seq_id && $arr[3] >= $seq_draw_start && $arr[4] <= $seq_draw_end);
-						#die "die1\n" if($start_f == 5998);
 						$seq_draw_end = ($genome{$sample}{$seq_id}{len}>=$seq_draw_end)? $seq_draw_end:$genome{$sample}{$seq_id}{len}; #防止seq_draw_end越界
 						$genome{$sample}{$arr[0]}{$arrs_index}{len}=$seq_draw_end -$seq_draw_start+1; # 一条scaffold有多个block
 						$arr[3]=$arr[3]-$seq_draw_start +1;
@@ -645,7 +639,6 @@ sub read_list(){
 
 				#next if($arr[2] ne "gene" || $block_index == -1); ## 目前的只是画基因的cluster,后面会把其他组分也加进去
 				next if(@arrs && $block_index == -1);
-				#die "die1\n" if($start_f == 5998);
 				my $flag=1;
 				foreach my $f(@features){
 					next if ($f=~ /^\s*$/);
@@ -727,11 +720,11 @@ sub draw_genes(){
 		}
 		#print "circle shift_unit is $shift_unit\n";
 	}
-	if($feature_shift_y=~ /^\s*([+-])?([\d\.]+)/){
-		if($1 eq "+" || $1 eq ""){
-			$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height;
-		}else{
+	if($feature_shift_y=~ /^\s*([+-])([\d\.]+)/){
+		if($1 eq "+"){
 			$shift_y += -1 * $2 * $shift_unit - 0.5 * $id_line_height;
+		}else{
+			$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height;
 		}
 	}elsif($feature_shift_y=~ /^\s*0/){
 		$shift_y +=0
@@ -741,9 +734,8 @@ sub draw_genes(){
 	my $order_f=(exists $conf{feature_setting}{$feature_id}{feature_order})? $conf{feature_setting}{$feature_id}{feature_order}:$conf{feature_order};
 	my $order_f_label=(exists $conf{feature_setting}{$feature_id}{feature_label_order})? $conf{feature_setting}{$feature_id}{feature_label_order}:$conf{feature_label_order};
 	my $padding_feature_label=(exists $conf{feature_setting}{$feature_id}{padding_feature_label})? $conf{feature_setting}{$feature_id}{padding_feature_label}:$conf{padding_feature_label};
-	my $display_feature=(exists $conf{feature_setting}{$feature_id}{display_feature})? $conf{feature_setting}{$feature_id}{display_feature}:$conf{display_feature};
-	my $display_feature_label=(exists $conf{feature_setting}{$feature_id}{display_feature_label})? $conf{feature_setting}{$feature_id}{display_feature_label}:$conf{display_feature_label};
-	
+	my $display_feature=(exists $conf{feature_setting}{$feature_id}{display_feature})? $conf{feature_setting}{$feature_setting}{display_feature}:$conf{display_feature};
+	my $display_feature_label=(exists $conf{feature_setting}{$feature_id}{display_feature_label})? $conf{feature_setting}{$feature_setting}{display_feature_label}:$conf{display_feature_label};
 	#<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$feature_color\"/>
 	my $feature_stroke_color=(exists $conf{feature_setting}{$feature_id}{feature_border_color})? $conf{feature_setting}{$feature_id}{feature_border_color}:$conf{feature_border_color};
 	my $feature_stroke_size= (exists $conf{feature_setting}{$feature_id}{feature_border_size})? $conf{feature_setting}{$feature_id}{feature_border_size}:$conf{feature_border_size};
@@ -1213,9 +1205,6 @@ sub default_setting(){
 				my @arr = split(/\t+/, $_);
 				if(@arr!=3){die "error: $conf{feature_setting} should only have 3 columns seperate by \\t, but $_ is not\n "}
 				$conf{feature_setting}{$arr[0]}{$arr[1]}=$arr[2];
-				#if($arr[0]=~ /s2000.3.2000.6000/){
-					#print "s2000.3.2000.6000 is ,$arr[0],$arr[1],$arr[2], line is $_\n";
-				#}
 			}
 			close IN;
 

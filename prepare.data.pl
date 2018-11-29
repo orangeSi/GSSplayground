@@ -5,7 +5,7 @@ my ($list,$prefix,$outdir,$conf);
 GetOptions("list:s"=>\$list,
 	"prefix:s"=>\$prefix,
 	"outdir:s"=>\$outdir,
-	"conf:s"=>\$conf
+	"conf:s"=>\$confile
 );
 
 die "
@@ -17,16 +17,13 @@ perl $0 [options]:
 * --conf <str> 
 
 writed by myth
-" unless($list && $prefix && $outdir && $conf);
+" unless($list && $prefix && $outdir && $confile);
 if(! -d "$outdir"){
 	`mkdir -p $outdir`;
 }
 
-my %conf = &read_conf($conf);
+my %conf = &read_conf($confile);
 %conf = &default_setting(%conf);
-#die  "AAA $conf{feature_setting}{s2000_3_2000_6000}{display_feature_label}\n\n";
-
-#&display_conf(%conf);
 my $shift_angle_closed_feature=0;
 my ($svg_width,$svg_height) = split(',',$conf{'svg_width_height'});
 
@@ -80,446 +77,10 @@ my $left_distance_init = (1 + 0.1) * $ref_name_width_ratio * $svg_width ;#block�
 
 my $ytick_region_all = 0.5 / ($genome_height_raw*$conf{genome_height_ratio});
 print "\n\nytick_region_all is $ytick_region_all\n\n";
-while(@track_order){
-	$index++;
-	my $sample = shift @track_order;
-	die "error: sample :$sample: is not in gff file of --list \n" if (not exists $gff{$sample});
-	my $block_distance = $space_len*$ratio; # block_distance 是每个block的间距
-	my $flag;
-	my $left_distance = $left_distance_init ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
-	#my $line_to_sample_single_top_dis=0.45; #track cluster顶部 y 轴在一个track高度的0.45，即cluster的y轴的底部在0.55，即一个cluster高度是整个track的0.55-0.45=0.1
-	my $line_to_sample_single_top_dis = 0.5 - 0.05*$conf{genome_height_ratio};#genome_height_ratio
-	my $shift_x = $left_distance;
 
-	# write sample name for track
-	my $text_size = $id_line_height * 1; # sample name 文字大小
-	$common_size = $text_size;
-	my $ref_name_x = $svg_width * $ref_name_width_ratio; # sample name 右下角end的x和y轴
-	my $ref_name_y = $top_distance + (0.5 + 0.05*$conf{genome_height_ratio}) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
-	if(not exists $conf{sample_name_old2new}{$sample}{new_name}){
-		$conf{sample_name_old2new}{$sample}{new_name} = $sample;
-		$conf{sample_name_old2new}{$sample}{new_color} = $conf{sample_name_color_default};
-		$conf{sample_name_old2new}{$sample}{new_font_size} = $conf{sample_name_font_size_default};
-	}
-	$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"$conf{sample_name_old2new}{$sample}{new_font_size}px\" fill=\"$conf{sample_name_old2new}{$sample}{new_color}\"  text-anchor='end'>$conf{sample_name_old2new}{$sample}{new_name}</text>\n"; # draw sample name
-	print "draw sample name $conf{sample_name_old2new}{$sample}{new_name}\n";
+print "done\n";
 
 
-	my $pre_block='';
-	foreach my $block_index(sort {$a<=>$b} keys %{$gff{$sample}{block}}){ # one block_index ---> one scaffold ---> one cluster of genes
-		#print "block_index is $block_index, sample is $sample\n";
-		$flag++;
-		my @scf = keys %{$gff{$sample}{block}{$block_index}};
-		my $id_line_x=$left_distance; # 每个block的genome的起点的x,y坐标
-		my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
-		my $id_line_width=$gff{$sample}{chooselen_single}{$block_index}{len} * $ratio; # 每个block的genome的宽度
-		#print "chooselen_single is $sample $gff{$sample}{chooselen_single}{$block_index} * $ratio\n";
-
-		### draw main scaffold line track
-		#$svg.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_style}\"   />\n";
-		my $track_order=$conf{track_order};
-		foreach my $f(keys %{$conf{feature_setting}}){
-			next if ( (not exists $conf{feature_setting}{$f}{track_order}) || $conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample);
-			#print "$conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample\n";
-			#print "f is $f\n\n";
-			my $start_f=$conf{feature_setting}{$f}{start};
-			my $end_f=$conf{feature_setting}{$f}{end};
-			if($start_f>=$gff{$sample}{chooselen_single}{$block_index}{start} && $end_f<=$gff{$sample}{chooselen_single}{$block_index}{end}){
-				$track_order=$conf{feature_setting}{$f}{track_order};
-				#print "$conf{feature_setting}{$f}{track_order}, $conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample;track_order is $track_order;sample is $sample, scf is @scf\n\n\n";
-			}
-		}
-
-		$orders{$track_order}.="<g><title>$scf[0],$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}</title><rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
-		## 判断相邻的block是否来自同一条scaffold
-		if($scf[0] eq $pre_block and $conf{connect_with_same_scaffold}=~ /yes/i){
-			my $pre_x = $id_line_x - $block_distance;
-			my $pre_y = $id_line_y + 0.5 * $id_line_height;
-			my $now_x = $pre_x + $block_distance * 0.99;
-			my $now_y = $pre_y;
-			#print "pre_block $pre_block $pre_x $pre_y $now_x $now_y\n";
-			my $stroke_dasharray=$conf{connect_stroke_dasharray};
-			my $stroke_width=$conf{connect_stroke_width};
-			my $stroke_color=$conf{connect_stroke_color};
-			$svg.="<g fill=\"none\" stroke=\"$stroke_color\" stroke-width=\"$stroke_width\"><path stroke-dasharray=\"$stroke_dasharray\" d=\"M$pre_x,$pre_y L$now_x,$now_y\" /></g>";
-		}
-		#$gff{$sample}{chooselen_single}{$block_index}{end_x_in_svg} = $shift_x+$id_line_width;
-		$gff{$sample}{chooselen_single}{$block_index}{end_x_in_svg} = $id_line_x+$id_line_width;
-		$gff{$sample}{chooselen_single}{$block_index}{end_y_in_svg} = $id_line_y;
-
-		$left_distance+=($block_distance+$id_line_width); #每个block左侧起点的x坐标shift
-		$pre_block = $scf[0];
-
-
-		### draw genes
-		#print "here\n";
-		#print "scf is @scf,$sample,$block_index\n";
-		my $angle_flag=0;
-		my $pre_index_end=0;
-		my $pre_scf_id="";
-		foreach my $index(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){
-			#next if($index eq "len");
-			#print "here $sample $block_index $scf[0] $index\n";
-			my $gene_height_medium=$id_line_height*$conf{feature_height_ratio};
-			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
-			#print "index id is $index_id\n";
-			die "die:index_id is $index_id,$sample $block_index $scf[0] $index\n" if(not $index_id);
-			my $index_start = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{start};
-			my $index_end = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{end};
-			my $index_strand = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{strand};
-			my $index_start_raw = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{start_raw};
-			my $index_end_raw = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{end_raw};
-
-			my $index_color = (exists $conf{feature_setting}{$index_id}{feature_color})? $conf{feature_setting}{$index_id}{feature_color}:$conf{feature_color};
-
-			my $display_feature_label=(exists $conf{feature_setting}{$index_id}{display_feature_label})? $conf{feature_setting}{$index_id}{display_feature_label}:$conf{display_feature_label};
-			my $feature_not_mark_label = ($display_feature_label=~ /^yes$/i or $display_feature_label=~ /,yes/i)? $index_id:"";
-
-			my $index_label_content = (exists $conf{feature_setting}{$index_id}{feature_label})? (($display_feature_label=~ /^yes$/ or $display_feature_label=~ /^yes,/)? $conf{feature_setting}{$index_id}{feature_label}:""):$feature_not_mark_label;
-			my $index_label_size = (exists $conf{feature_setting}{$index_id}{feature_label_size})? $conf{feature_setting}{$index_id}{feature_label_size}:$conf{feature_label_size};
-			$index_label_col = (exists $conf{feature_setting}{$index_id}{feature_label_color})? $conf{feature_setting}{$index_id}{feature_label_color}:$conf{feature_label_color};
-			$index_label_position = (exists $conf{feature_setting}{$index_id}{pos_feature_label})? $conf{feature_setting}{$index_id}{pos_feature_label}:$conf{pos_feature_label};
-			#print "$index_id\t$index_label_position\n";
-			$index_label_angle = (exists $conf{feature_setting}{$index_id}{label_rotate_angle})? $conf{feature_setting}{$index_id}{label_rotate_angle}:$conf{label_rotate_angle};
-			$gene_height_medium = $id_line_height * $conf{feature_setting}{$index_id}{feature_height_ratio} if(exists $conf{feature_setting}{$index_id}{feature_height_ratio});
-			#print "index_label_angle is $index_label_angle\n";
-			my $gene_height_top=($conf{feature_shape}=~ /arrow/)? $id_line_height*$conf{feature_arrow_sharp_extent}:0;
-			my $sharp_len=($conf{ignore_sharp_arrow}=~ /yes/)? 0:$gene_height_top;
-			$conf{feature_setting}{$index_id}{cross_link_shift_y}=0.5*$gene_height_medium + $sharp_len;
-			my $gene_width_arrow=$conf{feature_arrow_width_extent};
-			$gene_width_arrow=$conf{feature_setting}{$index_id}{feature_arrow_width_extent} if(exists $conf{feature_setting}{$index_id}{feature_arrow_width_extent});
-			#print "$index_id gene_width_arrow is $gene_width_arrow\n";
-			$gene_height_top=$id_line_height*$conf{feature_setting}{$index_id}{feature_arrow_sharp_extent} if(exists $conf{feature_setting}{$index_id}{feature_arrow_sharp_extent});
-			my $feature_shift_y=($conf{feature_setting}{$index_id}{feature_shift_y})? $conf{feature_setting}{$index_id}{feature_shift_y}:$conf{feature_shift_y};
-			if($scf[0] eq $pre_scf_id && ($index_start - $pre_index_end) <= $conf{distance_closed_feature} && ($index_end - $index_start)< 300 ){
-				$angle_flag = 1
-			}
-			#print "angle is $angle_flag\n";
-			## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-			$svg.=&draw_genes(
-				$index_id,
-				$index_start, 
-				$index_end, 
-				$index_strand,
-				$index_start_raw, 
-				$index_end_raw, 
-				$gene_height_medium,
-				$gene_height_top,
-				$gene_width_arrow,
-				$shift_x,
-				$top_distance,
-				$feature_shift_y,
-				$sample_single_height,
-				$sample,
-				$scf[0],
-				$index_color,
-				$index_label_content,
-				$index_label_size,
-				$index_label_col,
-				$index_label_position,
-				$index_label_angle,
-				$angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-			$pre_index_end = $index_end;
-			$pre_scf_id = $scf[0];
-			#print "sampe is $sample,id is $id;index is $index;$gff{$sample}{id}{$id}{$index}{start},$gff{$sample}{id}{$id}{$index}{end},$gff{$sample}{id}{$id}{$index}{strand},$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$top_distance,$sample_single_height\n";
-
-		}
-		$shift_x+=($id_line_width+$block_distance);
-	}
-	$top_distance+=$sample_single_height;
-	#$gff{$sample}{id}{$arr[0]}{$gene_index}{end}=$arr[4]
-
-
-
-}
-
-# draw crossing_links for feature crosslink
-foreach my $pair(keys %{$conf{crossing_link}{index}}){
-	#$conf{crossing_link}{index}{"$arr[0],$arr[1]"}{$arr[2]} = $arr[3];
-	my ($up_id, $down_id) = split(",", $pair);
-	my $color=(exists $conf{crossing_link}{index}{$pair}{cross_link_color})? $conf{crossing_link}{index}{$pair}{cross_link_color}:$conf{cross_link_color};
-	my $cross_link_orientation=(exists $conf{crossing_link}{index}{$pair}{cross_link_orientation})? $conf{crossing_link}{index}{$pair}{cross_link_orientation}:$conf{cross_link_orientation};
-	my $cross_link_opacity=(exists $conf{crossing_link}{index}{$pair}{cross_link_opacity})? $conf{crossing_link}{index}{$pair}{cross_link_opacity}:$conf{cross_link_opacity};
-	my $cross_link_order=(exists $conf{crossing_link}{index}{$pair}{cross_link_order})? $conf{crossing_link}{index}{$pair}{cross_link_order}:$conf{cross_link_order};
-	my $cross_link_anchor_pos=(exists $conf{crossing_link}{index}{$pair}{cross_link_anchor_pos})? $conf{crossing_link}{index}{$pair}{cross_link_anchor_pos}:$conf{cross_link_anchor_pos};
-	die "error: $up_id of crosslink is not in --list regions, please try to check it\n" if(not exists $conf{crossing_link}{position}{$up_id}{start}{x});
-	my $left_up_x = $conf{crossing_link}{position}{$up_id}{start}{x};
-	my $left_up_y = $conf{crossing_link}{position}{$up_id}{start}{y};
-	my $right_up_x = $conf{crossing_link}{position}{$up_id}{end}{x};
-	my $right_up_y = $conf{crossing_link}{position}{$up_id}{end}{y};
-	if($cross_link_anchor_pos=~ /^up_/){
-		$left_up_y-=$conf{feature_setting}{$up_id}{cross_link_shift_y};
-		$right_up_y-=$conf{feature_setting}{$up_id}{cross_link_shift_y};
-	}elsif($cross_link_anchor_pos=~ /^low_/){
-		$left_up_y+=$conf{feature_setting}{$up_id}{cross_link_shift_y};
-		$right_up_y+=$conf{feature_setting}{$up_id}{cross_link_shift_y};
-	}elsif($cross_link_anchor_pos !~ /^medium_/){
-		die "error: 1not support cross_link_anchor_pos =$cross_link_anchor_pos yet~\n"
-	}
-
-	die "error: $down_id of crosslink is not in --list regions, please try to check it\n" if(not exists $conf{crossing_link}{position}{$down_id}{start}{x});
-	my $left_down_x = $conf{crossing_link}{position}{$down_id}{start}{x};
-	my $left_down_y = $conf{crossing_link}{position}{$down_id}{start}{y};
-	my $right_down_x = $conf{crossing_link}{position}{$down_id}{end}{x};
-	my $right_down_y = $conf{crossing_link}{position}{$down_id}{end}{y};
-	if($cross_link_anchor_pos=~ /_low/){
-		$left_down_y+=$conf{feature_setting}{$down_id}{cross_link_shift_y};
-		$right_down_y+=$conf{feature_setting}{$down_id}{cross_link_shift_y};
-	}elsif($cross_link_anchor_pos=~ /_up/){
-		$left_down_y-=$conf{feature_setting}{$down_id}{cross_link_shift_y};
-		$right_down_y-=$conf{feature_setting}{$down_id}{cross_link_shift_y};
-	}elsif($cross_link_anchor_pos !~ /_medium/){
-		die "error: 2not support cross_link_anchor_pos=$cross_link_anchor_pos yet~\n"
-	}
-	die "error: got $cross_link_orientation for cross_link_orientation, but must be reverse or forward for $pair\n" if($cross_link_orientation!~ /reverse/i && $cross_link_orientation!~ /forward/i);
-	my $cross_link_shape=(exists $conf{crossing_link}{index}{$pair}{cross_link_shape})? $conf{crossing_link}{index}{$pair}{cross_link_shape}:$conf{cross_link_shape};
-	my $cross_link_orientation_ellipse=(exists $conf{crossing_link}{index}{$pair}{cross_link_orientation_ellipse})? $conf{crossing_link}{index}{$pair}{cross_link_orientation_ellipse}:$conf{cross_link_orientation_ellipse};
-	my $cross_link_height_ellipse=(exists $conf{crossing_link}{index}{$pair}{cross_link_height_ellipse})? $conf{crossing_link}{index}{$pair}{cross_link_height_ellipse}:$conf{cross_link_height_ellipse};
-	if($cross_link_height_ellipse!~ /^[\d\.]+,[\d\.]+$/){
-		die "error: not support cross_link_height_ellipse=$cross_link_height_ellipse, right format should like 10,8\n";
-	}
-
-	if($cross_link_orientation_ellipse=~ /up/i){
-		$cross_link_orientation_ellipse="0,1,1,0"
-	}elsif($cross_link_orientation_ellipse=~ /down/i){
-		$cross_link_orientation_ellipse="1,0,0,1"
-	}else{
-		die "error: not support cross_link_orientation_ellipse=$cross_link_orientation_ellipse for $up_id and $down_id\n"
-	}
-
-	my $title_clink="<g><title>$up_id -> $down_id</title>";
-	#if($fts{$up_id}{sample} eq $fts{$down_id}{sample} && $fts{$up_id}{scf} eq $fts{$down_id}{scf} && $cross_link_shape=~ /ellipse/i){
-	$cross_link_shape=~ s/\s+//g;
-	if($cross_link_shape=~ /ellipse/i){
-		my $r1=($right_down_x - $left_up_x)/2;
-		my $r1_rev=($left_down_x - $right_up_x)/2;
-		my ($r2, $r2_rev)=split(",", $cross_link_height_ellipse); # r1 and r2 is radius of elipse
-		$r2 = $r2*$id_line_height;
-		$r2_rev = $r2_rev*$id_line_height;
-		my $rotate=0;
-		my $rotate_rev=0;
-		my ($large_arc_flag, $sweep_flag, $large_arc_flag_rev, $sweep_flag_rev)=split(",", $cross_link_orientation_ellipse); #http://xahlee.info/js/svg_path_ellipse_arc.html
-
-
-		$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"fill:$color;opacity:$cross_link_opacity\" /></g>";
-		print "downid is $down_id, up is is $up_id\n";
-		next
-	}elsif($cross_link_shape=~ /quadrilateral/i){
-		if($cross_link_orientation=~ /reverse/i){
-			$color=(exists $conf{crossing_link}{index}{$pair}{cross_link_color_reverse})? $conf{crossing_link}{index}{$pair}{cross_link_color_reverse}:$conf{cross_link_color_reverse};
-			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
-		}elsif($cross_link_orientation=~ /forward/i){
-			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
-		}else{
-			die "error: not support cross_link_orientation=$cross_link_orientation\n";
-		}
-	}elsif($cross_link_shape eq "w"){
-		print "wait w\n";
-		die "not support w yet\n";
-	}elsif($cross_link_shape=~ /line/i){
-		print "wait line\n";
-		#cross_link_orientation_line
-		my $cross_link_orientation_line=(exists $conf{crossing_link}{index}{$pair}{cross_link_orientation_line})? $conf{crossing_link}{index}{$pair}{cross_link_orientation_line}:$conf{cross_link_orientation_line};
-		my $cross_link_height_line=(exists $conf{crossing_link}{index}{$pair}{cross_link_height_line})? $conf{crossing_link}{index}{$pair}{cross_link_height_line}:$conf{cross_link_height_line};
-		@cross_link_orientation_line_list = split(/,/, $cross_link_orientation_line);
-		if(@cross_link_orientation_line_list!=2){
-			die "error: cross_link_orientation_line=$cross_link_orientation_line ,error format. example: start,end or end,start ~\n"
-		}
-
-		my ($ss, $ee) = @cross_link_orientation_line_list;
-		my ($x1,$y1,$x2,$y2);
-		if($ss=~ /start/i){
-			$x1=$left_up_x;
-			$y1=$left_up_y;
-		}elsif($ss=~ /medium/i){
-			$x1=($right_up_x+$left_up_x)/2;
-			$y1=($right_up_y+$left_up_y)/2;
-		}elsif($ss=~ /end/i){
-			$x1=$right_up_x;
-			$y1=$right_up_y;
-		}else{
-			die "error: only strat or end or medium, but get $ss,$ee\n"
-		}
-
-		if($ee=~ /start/i){
-			$x2=$left_down_x;
-			$y2=$left_down_y;
-		}elsif($ee=~ /medium/i){
-			$x2=($right_down_x+$left_down_x)/2;
-			$y2=($right_down_y+$left_down_y)/2;
-		}elsif($ee=~ /end/i){
-			$x2=$right_down_x;
-			$y2=$right_down_y;
-		}else{
-			die "error: only strat or end or medium, but get $ss,$ee\n"
-		}
-		my $stroke_width=$cross_link_height_line*$id_line_height;
-		$orders{$cross_link_order}.="$title_clink<line x1=\"$x1\" y1=\"$y1\" x2=\"$x2\" y2=\"$y2\" style=\"stroke:$color;stroke-width:$stroke_width;opacity:$cross_link_opacity\" /></g>\n"; #crossing link of features
-	}else{
-		die "error:not support cross_link_shape=$cross_link_shape: for $up_id and $down_id, only support quadrilateral or w or ellipse or line\n";
-	}
-
-
-
-
-}
-
-
-
-## draw legend
-my $legend_num=0;
-my %legend_color_num;
-for my $f(keys %{$conf{feature_setting}}){
-	if(exists $conf{feature_setting}{$f}{legend_label}){
-		if(exists $legend_color_num{$conf{feature_setting}{$f}{feature_color}}){
-			if($legend_color_num{$conf{feature_setting}{$f}{feature_color}} ne $conf{feature_setting}{$f}{legend_label}){
-				die "error: one $conf{feature_setting}{$f}{feature_color} -> more than one different legend_label\n";
-			}
-		}else{
-			$legend_color_num{$conf{feature_setting}{$f}{feature_color}}=$conf{feature_setting}{$f}{legend_label};
-		}
-
-	}
-}
-$legend_num=keys %legend_color_num;
-
-#print "legend_num is $legend_num\n";
-#my $top_margin_legend;
-#my $legend_single_arrow_height = $common_size; # 和sample name一样的字体大小，字体大小几乎等同同等像素的宽高
-#my $limit = 0.8;
-#if($legend_single_arrow_height*$legend_num < $svg_height*$limit){
-#	$top_margin_legend = $svg_height - $legend_single_arrow_height*$legend_num *1.1; #第一个legend顶部的y轴
-#}else{
-#	$legend_single_arrow_height = $svg_height*$limit/$legend_num;# 每行legend的高度
-#	$top_margin_legend = (1-$limit)/2*$svg_height;
-#}
-#my $legend_font_size = $legend_single_arrow_height * 0.9;
-
-#my $legend_max_length=0;
-#foreach my $legend(keys %{$conf{feature_setting}{legend_col}}){
-#	if(length($legend) >$legend_max_length){
-#		$legend_max_length = $length($legend);
-#	}
-#}
-
-if($conf{display_legend}=~ /yes/i){
-	print "lengend start\n";
-	my $legend_arrow_height = $id_line_height*$conf{feature_height_ratio}*$conf{legend_height_ratio};
-	my $legend_font_size = $conf{legend_font_size}; #legend中文字字体大小
-	my $top_margin_legend = ($svg_height - ($legend_arrow_height * $legend_num + ($legend_num-1)*$legend_arrow_height*$conf{legend_height_space}))/2;
-	my $legend_single_arrow_height = $legend_arrow_height;
-
-	my $legend_width_margin = $conf{legend_width_margin};
-	my $legend_width_textpercent = $conf{legend_width_textpercent};
-	my $legend_arrow_width = (1-$legend_width_margin*2)*(1-$legend_width_textpercent)*$svg_width*$legend_width_ratio;
-	my $text_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width+$legend_arrow_width*1.2;
-	my $text_y = $top_margin_legend + 0.95*$legend_arrow_height ;
-	my $arrow_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width*1.1;
-	my $arrow_y = $top_margin_legend;
-	#my $legend_arrow_height = $legend_single_arrow_height * 0.8;
-	foreach my $legend_color(sort keys %legend_color_num){
-		my $legend = $legend_color_num{$legend_color};
-		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-		# 先用方块代替arrow
-		my @arr_cols=split(/,,/, $legend_color);
-		my $arrow_col_start;
-		my $arrow_col_end;
-		#print "legend arr_cols is @arr_cols\n";
-		if(@arr_cols==2){
-			#print "aisis $conf{feature_setting}{legend_col}{$legend},@arr_cols\n";
-			$arrow_col_start = $arr_cols[0];
-			$arrow_col_end = $arr_cols[1];
-			#my $arrow_color_id = $conf{feature_setting}{legend_col}{$legend};
-			my $arrow_color_id = $legend_color;
-			$arrow_color_id=~ s/,/-/g;
-			$arrow_color_id=~ s/\)/-/g;
-			$arrow_color_id=~ s/\(/-/g;
-			$svg.="
-			<defs>
-			<linearGradient id=\"$arrow_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
-			<stop offset=\"0%\" style=\"stop-color:$arrow_col_start;stop-opacity:1\"/>
-			<stop offset=\"50%\" style=\"stop-color:$arrow_col_end;stop-opacity:1\"/>
-			<stop offset=\"100%\" style=\"stop-color:$arrow_col_start;stop-opacity:1\"/>
-			</linearGradient>
-			</defs>
-			<g style=\"fill:none\">
-			<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:url(#$arrow_color_id);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1\" />
-			</g>";
-		}else{
-			$svg.="<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:$legend_color;stroke:$conf{legend_stroke_color};stroke-width:$conf{legend_stroke_width};fill-opacity:1;stroke-opacity:1\" />";
-		}
-		## draw legend
-		$svg.="<text x=\"$text_x\" y=\"$text_y\" font-size=\"${legend_font_size}px\" fill=\"black\" text-anchor='start'>$legend</text>";
-		$arrow_y += $legend_single_arrow_height +$legend_arrow_height*$conf{legend_height_space};
-		$text_y += $legend_single_arrow_height +$legend_arrow_height*$conf{legend_height_space};
-		## draw legend
-
-	}
-	#legend外围的线框
-	#my $legend_rect_width = (1-$legend_width_margin*2)*$svg_width*$legend_width_ratio * 1.1;
-	#my $legend_rect_height = $svg_height*$legend_height_percent * 1.04;
-	#my $legend_rect_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width *0.9;
-	#my $legend_rect_y = $top_margin_legend;
-	#$svg.="<rect x=\"$legend_rect_x\" y=\"$legend_rect_y\" width=\"$legend_rect_width\" height=\"$legend_rect_height\" style=\"fill:none;stroke:black;stroke-width:1;fill-opacity:0;stroke-opacity:1\" />"; #不画这条线框了
-}
-
-
-#刻度尺
-if($conf{scale_display}=~ /yes/i){
-	my @scales=split(/_/, $conf{scale_position});
-	foreach my $scale(@scales){
-		print "disply scale\n";
-		my $x_start_scale=$left_distance_init;
-		#my $x_end_scale=$cluster_width_ratio*$svg_width + $x_start_scale - $space_len;
-		my $x_end_scale=$cluster_width_ratio*$svg_width + $x_start_scale;
-		my $y_scale;
-		my $y_tick_shift=-3;
-		my $font_size=$conf{scale_tick_fontsize};
-		my $tick_height=$conf{scale_tick_height}* $svg_height;
-		if($scale=~ /up/){
-			$y_scale=$top_bottom_margin/2* 0.5 * (1-$conf{scale_padding_y})* $svg_height;
-			#$y_tick_shift=-$conf{scale_tick_padding_y};
-		}else{
-			$y_scale=(1- $top_bottom_margin/2*(1-$conf{scale_padding_y})) * $svg_height;
-			$y_tick_shift=$conf{scale_tick_padding_y};
-			$tick_height=-$tick_height;
-		}
-		$orders{$conf{scale_order}}.="<line x1=\"$x_start_scale\" y1=\"$y_scale\" x2=\"$x_end_scale\" y2=\"$y_scale\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width}\"/>\n"; #main line
-		my $unit_scale=$conf{scale_ratio}*$ratio; # bp
-		my $ticks=int($cluster_width_ratio*$svg_width/$unit_scale);
-		print "ticks number is $ticks\n";
-		my $tick_y1= $y_scale + $tick_height; #single tick hegith
-		my $tick_y2= $y_scale ;
-		my $tick_label_y=$y_scale+$y_tick_shift;
-		foreach my $tick(0..$ticks){
-			my $tick_x=$tick*$unit_scale + $x_start_scale;
-			my $tick_label=$tick*$conf{scale_ratio};
-			$orders{$conf{scale_order}}.="<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # ticks
-			$orders{$conf{scale_order}}.= "<text x=\"$tick_x\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$tick_label</text>\n"; # label of feature
-
-		}
-		if($cluster_width_ratio*$svg_width % $unit_scale){
-			$orders{$conf{scale_order}}.="<line x1=\"$x_end_scale\" y1=\"$tick_y1\" x2=\"$x_end_scale\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # last tick
-			my $last_tick_label=$max_length;
-			$orders{$conf{scale_order}}.= "<text x=\"$x_end_scale\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$last_tick_label</text>\n"; # label of feature
-
-		}
-
-	}
-}
-
-open SVG,">$outdir/$prefix.svg" or die "$!";
-print SVG "$svg";
-for my $order(sort {$a<=>$b}keys %orders){
-	print "order is $order\n";
-	print SVG "\n$orders{$order}\n";
-}
-print SVG "</svg>";
-close SVG;
-print "outfile is  $outdir/$prefix.svg\n";
-`set -vex;convert  $outdir/$prefix.svg $outdir/$prefix.png ; echo outfile is $outdir/$prefix.png; convert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf;echo outfile is $outdir/$prefix.dpi$conf{pdf_dpi}.pdf`;
-
-#$svg.=&draw_genes($gff{$sample}{id}{$id}{$index}{start},$gff{$sample}{id}{$id}{$index}{end},$gff{$sample}{id}{$id}{$index}{strand},$gene_height_medium,$gene_height_top);
 
 sub read_list(){
 	###start:get scaffold length in genome file and scaffold length  in gff file
@@ -564,27 +125,25 @@ sub read_list(){
 
 		my %all_seq_id;
 		my @gffss = split(/,/, $gffs);
-		my $gene_index;
 		foreach my $gffs(@gffss){
 			open GFF,"$gffs" or die "$!";
 			while(<GFF>){
 				chomp;
-				next if($_=~ /^#/||$_=~ /^\s*$/);
+				next if($_=~ /^#/);
 				my @arr=split(/\t/,$_);
-				die "error: need 9 columns for gff format, $gffs, line$.\n" if(@arr!=9);
 				$all_seq_id{$arr[0]} = "";
 			}
 			close GFF;
 			open GFF,"$gffs" or die "$!";
+			my $gene_index;
 			while(<GFF>){
 				chomp;
-				next if($_=~ /^#/||$_=~ /^\s*$/);
+				next if($_=~ /^#/);
 				my @arr=split(/\t/,$_);
 				die "error: $gffs should have tab in file~\n" if(@arr==1);
 				my $block_index=-1;
 				my $start_f=$arr[3];
 				my $end_f=$arr[4];
-				#die "die1\n" if($start_f == 5998);
 				if($arr[3] > $arr[4]){
 					$arr[3] = $end_f;
 					$arr[4] = $start_f;
@@ -608,7 +167,6 @@ sub read_list(){
 
 						#print "$seq_id,$seq_draw_start,$seq_draw_end\n";
 						next unless ($arr[0] eq $seq_id && $arr[3] >= $seq_draw_start && $arr[4] <= $seq_draw_end);
-						#die "die1\n" if($start_f == 5998);
 						$seq_draw_end = ($genome{$sample}{$seq_id}{len}>=$seq_draw_end)? $seq_draw_end:$genome{$sample}{$seq_id}{len}; #防止seq_draw_end越界
 						$genome{$sample}{$arr[0]}{$arrs_index}{len}=$seq_draw_end -$seq_draw_start+1; # 一条scaffold有多个block
 						$arr[3]=$arr[3]-$seq_draw_start +1;
@@ -645,7 +203,6 @@ sub read_list(){
 
 				#next if($arr[2] ne "gene" || $block_index == -1); ## 目前的只是画基因的cluster,后面会把其他组分也加进去
 				next if(@arrs && $block_index == -1);
-				#die "die1\n" if($start_f == 5998);
 				my $flag=1;
 				foreach my $f(@features){
 					next if ($f=~ /^\s*$/);
@@ -687,12 +244,135 @@ sub read_list(){
 			}
 			close GFF;
 		}
+		#&feature_ytick();
 	}
 	close LI;
+	&feature_ytick(\%sample_scf, \%gff);
 	return (\%genome, \%gff, \@track_order, $sample_num, \%fts, \%sample_scf);
 	####end:get scaffold length in genome file and scaffold length  in gff file
 }
 
+sub feature_ytick(){
+	my ($sample_scf, $gff)=@_;
+	print "xxxxx is $conf{feature_ytick_region}\n\n";
+	if(exists $conf{feature_ytick_region}){	
+		print "\nfeature_ytick_region\n\n";
+		#$conf{feature_ytick_region}
+		$conf{feature_ytick_region}=~ s/^\s+//;
+		$conf{feature_ytick_region}=~ s/\s+$//;
+		print "feture_ytick_regionis :$conf{feature_ytick_region}:\n";
+		if($conf{feature_ytick_region}=~ /^All:-:-:\([^\)+]\)/){
+			print "\nALL\n";
+		}elsif($conf{feature_ytick_region}=~ /^\S+:\S+:[\d\.]+:[\d\.]+:[\d\.]+:[\d\.]+:[rl]:\([^:^\)]+\)/){
+			my @yticks = split(/\)\s+/, $conf{feature_ytick_region});
+			foreach my $ytick(@yticks){
+				$ytick.=")" if($ytick!~ /\)$/);
+				if($ytick=~ /^(\S+):(\S+):[\d\.]+:[\d\.]+:[\d\.]+:[\d\.]+:[rl]:\([^:^\)]+\)/){
+					print "\nfeature_ytick_region4\n\n";
+					my ($ytick_sample, $ytick_scf) = ($1, $2);
+					my $ytick_gff;
+					my $ytick_setting_conf;
+					die "error:$ytick_sample: with :$ytick_scf: is not together for $ytick\n" if(not exists $sample_scf->{$ytick_sample}->{$ytick_scf});			      
+					my @ticks = split(/:/, $ytick);
+					shift @ticks;shift @ticks;
+					$yticks = join(":", @ticks);
+					@ticks = split(/;/, $yticks);
+					my $tick_index=0;
+					foreach my $tick(@ticks){
+						$tick_index++;
+						#print "\nfeature_ytick_region5\n\n";
+						my @tick_unit=split(/:/, $tick);
+						die "error: error format:$tick\n" if(@tick_unit%6);
+						my ($s1, $e1, $s2, $e2, $ytick_pos, $title) = @tick_unit;
+						#$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{end}=$arr[4];
+						for my $block(keys %{$gff->{$ytick_sample}->{block}}){
+							my @scf= keys %{$gff->{$ytick_sample}->{block}->{$block}};
+							#print "scf is block is $block,@scf\n";
+							next if($scf[0] ne $ytick_scf);
+							my $ytick_orientation = "up";
+							my $block_start_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{start};
+							my $block_end_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{end};
+							my $ytick_feature_backbone_width = 20; # bp 
+							my $feature_backbone_shift_x = $ytick_feature_backbone_width; 
+							my $ytick_feature_backbone_start = $block_end_bp - $ytick_feature_backbone_width;
+							my $ytick_feature_backbone_end = $block_end_bp;
+							#my $ytick_feature_backbone_id="$scf[0]_$block\_$block_start_bp\_$block_end_bp";
+							my $ytick_feature_backbone_id = "$scf[0].$block.$block_start_bp.$block_end_bp.$tick_index";
+							my $ytick_feature_backbone_height = $e1-$s1;
+							my $feature_backbone_shift_y = 0.5 + $s1 + 0.5*$ytick_feature_backbone_height;
+							if($ytick_orientation=~ /up/i){
+								$feature_backbone_shift_y *=-1;
+							}elsif($ytick_orientation=~ /down/i){
+								$feature_backbone_shift_y=~ s/^(\d)/+$1/;
+							}else{
+								die "die:\n";
+							}
+
+							#print "\nfeature_ytick_region7\n\n";
+
+							$ytick_gff.="$scf[0]\tadd\tytick\t$ytick_feature_backbone_start\t$ytick_feature_backbone_end\t.\t+\t.\tID=$ytick_feature_backbone_id;\n";
+
+							$ytick_setting_conf.="\n$ytick_feature_backbone_id\tfeature_height_ratio\t$ytick_feature_backbone_height\n";
+							$ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_shape\trect\n";
+							$ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_shift_x\t$feature_backbone_shift_x\n";
+							$ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_shift_y\t$feature_backbone_shift_y\n";
+							$ytick_setting_conf.="$ytick_feature_backbone_id\tdisplay_feature_label\tyes\n";
+							$ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_label\t33333333333333333\n";
+							print "\n2ytick_gff is $ytick_gff\n\n";
+							my $ytick_unit=10;
+							#my $ytick_unit_real = $ytick_height/($e1-$s1)*$ytick_unit;
+							my $ytick_nums = int(($e1-$s1)/$ytick_unit);
+							for my $k (0..$ytick_nums){
+								my $ytick_feature_tick_width = 80; # bp 
+								my $ytick_feature_tick_start=$block_end_bp - $ytick_feature_tick_width;
+								my $ytick_feature_tick_end=$block_end_bp;
+								my $ytick_feature_tick_height=1;
+								my $ytick_feature_tick_id="$ytick_feature_backbone_id.tick$k";
+								my $feature_tick_shift_x=0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width*0.9999;
+
+								my $feature_tick_shift_y = 0.5 + $s1 + $k * $ytick_unit + 0.5*$ytick_feature_tick_height;
+								if($ytick_orientation=~ /up/i){
+									$feature_tick_shift_y *=-1;
+								}elsif($ytick_orientation=~ /down/i){
+									$feature_tick_shift_y=~ s/^(\d)/+$1/;
+								}else{
+									die "die:\n";
+								}
+
+								$ytick_gff.="$scf[0]\tadd\tytick\t$ytick_feature_tick_start\t$ytick_feature_tick_end\t.\t+\t.\tID=$ytick_feature_tick_id;\n";
+								$ytick_setting_conf.="\n$ytick_feature_tick_id\tfeature_height_ratio\t$ytick_feature_tick_height\n";
+								$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_shape\trect\n";
+								$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_shift_x\t$feature_tick_shift_x\n";
+								$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_shift_y\t$feature_tick_shift_y\n";
+								$ytick_setting_conf.="$ytick_feature_tick_id\tdisplay_feature_label\tno\n";
+								$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label\t33333333333333333\n";
+
+								
+							}
+							#<path stroke-width="2" d="M5 20 l215 0" />
+
+
+						}
+
+					}
+
+					#my ($ytick_sample, $ytick_scf) = ($1, $2);
+					#my $ytick_gff;
+					#my $ytick_setting_conf;
+					`set -vex;echo -e "$ytick_gff" > $ytick_sample.$ytick_scf.fake.gff ;echo -e "$ytick_setting_conf" > $ytick_sample.$ytick_scf.setting.conf; cat  $ytick_sample.$ytick_scf.setting.conf >> $conf{feature_setting}.new`;
+					print "ok,ytick is $ytick\n";
+
+				}else{
+					die "die11 $ytick\n\n";
+				}
+			}
+		}else{
+			die "die2, $conf{feature_ytick_region}\n\n"
+		}
+	}
+
+
+}
 
 sub draw_genes(){
 	#draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
@@ -727,11 +407,11 @@ sub draw_genes(){
 		}
 		#print "circle shift_unit is $shift_unit\n";
 	}
-	if($feature_shift_y=~ /^\s*([+-])?([\d\.]+)/){
-		if($1 eq "+" || $1 eq ""){
-			$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height;
-		}else{
+	if($feature_shift_y=~ /^\s*([+-])([\d\.]+)/){
+		if($1 eq "+"){
 			$shift_y += -1 * $2 * $shift_unit - 0.5 * $id_line_height;
+		}else{
+			$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height;
 		}
 	}elsif($feature_shift_y=~ /^\s*0/){
 		$shift_y +=0
@@ -741,9 +421,8 @@ sub draw_genes(){
 	my $order_f=(exists $conf{feature_setting}{$feature_id}{feature_order})? $conf{feature_setting}{$feature_id}{feature_order}:$conf{feature_order};
 	my $order_f_label=(exists $conf{feature_setting}{$feature_id}{feature_label_order})? $conf{feature_setting}{$feature_id}{feature_label_order}:$conf{feature_label_order};
 	my $padding_feature_label=(exists $conf{feature_setting}{$feature_id}{padding_feature_label})? $conf{feature_setting}{$feature_id}{padding_feature_label}:$conf{padding_feature_label};
-	my $display_feature=(exists $conf{feature_setting}{$feature_id}{display_feature})? $conf{feature_setting}{$feature_id}{display_feature}:$conf{display_feature};
-	my $display_feature_label=(exists $conf{feature_setting}{$feature_id}{display_feature_label})? $conf{feature_setting}{$feature_id}{display_feature_label}:$conf{display_feature_label};
-	
+	my $display_feature=(exists $conf{feature_setting}{$feature_id}{display_feature})? $conf{feature_setting}{$feature_setting}{display_feature}:$conf{display_feature};
+	my $display_feature_label=(exists $conf{feature_setting}{$feature_id}{display_feature_label})? $conf{feature_setting}{$feature_setting}{display_feature_label}:$conf{display_feature_label};
 	#<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$feature_color\"/>
 	my $feature_stroke_color=(exists $conf{feature_setting}{$feature_id}{feature_border_color})? $conf{feature_setting}{$feature_id}{feature_border_color}:$conf{feature_border_color};
 	my $feature_stroke_size= (exists $conf{feature_setting}{$feature_id}{feature_border_size})? $conf{feature_setting}{$feature_id}{feature_border_size}:$conf{feature_border_size};
@@ -1202,6 +881,10 @@ sub default_setting(){
 	##feature_setting
 	if(exists $conf{feature_setting}){
 		if(-e $conf{feature_setting}){
+			if(-f "$conf{feature_setting}.new"){
+				`cp $conf{feature_setting}.new $conf{feature_setting}.new.bk`
+			}
+			`cp $conf{feature_setting} $conf{feature_setting}.new`;
 			open IN,"$conf{feature_setting}" or die "$!";
 			while(<IN>){
 				chomp;
@@ -1213,9 +896,6 @@ sub default_setting(){
 				my @arr = split(/\t+/, $_);
 				if(@arr!=3){die "error: $conf{feature_setting} should only have 3 columns seperate by \\t, but $_ is not\n "}
 				$conf{feature_setting}{$arr[0]}{$arr[1]}=$arr[2];
-				#if($arr[0]=~ /s2000.3.2000.6000/){
-					#print "s2000.3.2000.6000 is ,$arr[0],$arr[1],$arr[2], line is $_\n";
-				#}
 			}
 			close IN;
 
