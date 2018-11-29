@@ -6,7 +6,7 @@ gene_s2100000	gene_s4100000	cross_link_anchor_pos	low_up
 gene_s403000,gene_s406000
 gene_s403000	gene_s406000	cross_link_orientation_ellipse	down 	# up or down,default is up
 gene_s403000	gene_s406000	cross_link_shape	ellipse 	# ellipse or w or quadrilateral or line, default is quadrilateral
-gene_s403000	gene_s406000	cross_link_anchor_pos	low_up
+gene_s403000	gene_s406000	cross_link_anchor_pos	low_low
 gene_s403000	gene_s406000	cross_link_height_ellipse	20,18
 
 #gene_s304	gene_s305	cross_link_shape	w 	# ellipse or w or quadrilateral or line, default is quadrilateral

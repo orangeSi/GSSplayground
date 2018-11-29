@@ -160,28 +160,28 @@ s2000.3.2000.6000.1	feature_label	33333333333333333
 
 s2000.3.2000.6000.1.tick0	feature_height_ratio	1
 s2000.3.2000.6000.1.tick0	feature_shape	rect
-s2000.3.2000.6000.1.tick0	feature_shift_x	90
+s2000.3.2000.6000.1.tick0	feature_shift_x	89.992
 s2000.3.2000.6000.1.tick0	feature_shift_y	-11
 s2000.3.2000.6000.1.tick0	display_feature_label	no
 s2000.3.2000.6000.1.tick0	feature_label	33333333333333333
 
 s2000.3.2000.6000.1.tick1	feature_height_ratio	1
 s2000.3.2000.6000.1.tick1	feature_shape	rect
-s2000.3.2000.6000.1.tick1	feature_shift_x	90
+s2000.3.2000.6000.1.tick1	feature_shift_x	89.992
 s2000.3.2000.6000.1.tick1	feature_shift_y	-21
 s2000.3.2000.6000.1.tick1	display_feature_label	no
 s2000.3.2000.6000.1.tick1	feature_label	33333333333333333
 
 s2000.3.2000.6000.1.tick2	feature_height_ratio	1
 s2000.3.2000.6000.1.tick2	feature_shape	rect
-s2000.3.2000.6000.1.tick2	feature_shift_x	90
+s2000.3.2000.6000.1.tick2	feature_shift_x	89.992
 s2000.3.2000.6000.1.tick2	feature_shift_y	-31
 s2000.3.2000.6000.1.tick2	display_feature_label	no
 s2000.3.2000.6000.1.tick2	feature_label	33333333333333333
 
 s2000.3.2000.6000.1.tick3	feature_height_ratio	1
 s2000.3.2000.6000.1.tick3	feature_shape	rect
-s2000.3.2000.6000.1.tick3	feature_shift_x	90
+s2000.3.2000.6000.1.tick3	feature_shift_x	89.992
 s2000.3.2000.6000.1.tick3	feature_shift_y	-41
 s2000.3.2000.6000.1.tick3	display_feature_label	no
 s2000.3.2000.6000.1.tick3	feature_label	33333333333333333
@@ -195,28 +195,28 @@ s2000.3.2000.6000.2	feature_label	33333333333333333
 
 s2000.3.2000.6000.2.tick0	feature_height_ratio	1
 s2000.3.2000.6000.2.tick0	feature_shape	rect
-s2000.3.2000.6000.2.tick0	feature_shift_x	90
+s2000.3.2000.6000.2.tick0	feature_shift_x	89.992
 s2000.3.2000.6000.2.tick0	feature_shift_y	-51
 s2000.3.2000.6000.2.tick0	display_feature_label	no
 s2000.3.2000.6000.2.tick0	feature_label	33333333333333333
 
 s2000.3.2000.6000.2.tick1	feature_height_ratio	1
 s2000.3.2000.6000.2.tick1	feature_shape	rect
-s2000.3.2000.6000.2.tick1	feature_shift_x	90
+s2000.3.2000.6000.2.tick1	feature_shift_x	89.992
 s2000.3.2000.6000.2.tick1	feature_shift_y	-61
 s2000.3.2000.6000.2.tick1	display_feature_label	no
 s2000.3.2000.6000.2.tick1	feature_label	33333333333333333
 
 s2000.3.2000.6000.2.tick2	feature_height_ratio	1
 s2000.3.2000.6000.2.tick2	feature_shape	rect
-s2000.3.2000.6000.2.tick2	feature_shift_x	90
+s2000.3.2000.6000.2.tick2	feature_shift_x	89.992
 s2000.3.2000.6000.2.tick2	feature_shift_y	-71
 s2000.3.2000.6000.2.tick2	display_feature_label	no
 s2000.3.2000.6000.2.tick2	feature_label	33333333333333333
 
 s2000.3.2000.6000.2.tick3	feature_height_ratio	1
 s2000.3.2000.6000.2.tick3	feature_shape	rect
-s2000.3.2000.6000.2.tick3	feature_shift_x	90
+s2000.3.2000.6000.2.tick3	feature_shift_x	89.992
 s2000.3.2000.6000.2.tick3	feature_shift_y	-81
 s2000.3.2000.6000.2.tick3	display_feature_label	no
 s2000.3.2000.6000.2.tick3	feature_label	33333333333333333
@@ -231,28 +231,28 @@ s40000.3.1000.8000.1	feature_label	33333333333333333
 
 s40000.3.1000.8000.1.tick0	feature_height_ratio	1
 s40000.3.1000.8000.1.tick0	feature_shape	rect
-s40000.3.1000.8000.1.tick0	feature_shift_x	90
+s40000.3.1000.8000.1.tick0	feature_shift_x	89.992
 s40000.3.1000.8000.1.tick0	feature_shift_y	-31
 s40000.3.1000.8000.1.tick0	display_feature_label	no
 s40000.3.1000.8000.1.tick0	feature_label	33333333333333333
 
 s40000.3.1000.8000.1.tick1	feature_height_ratio	1
 s40000.3.1000.8000.1.tick1	feature_shape	rect
-s40000.3.1000.8000.1.tick1	feature_shift_x	90
+s40000.3.1000.8000.1.tick1	feature_shift_x	89.992
 s40000.3.1000.8000.1.tick1	feature_shift_y	-41
 s40000.3.1000.8000.1.tick1	display_feature_label	no
 s40000.3.1000.8000.1.tick1	feature_label	33333333333333333
 
 s40000.3.1000.8000.1.tick2	feature_height_ratio	1
 s40000.3.1000.8000.1.tick2	feature_shape	rect
-s40000.3.1000.8000.1.tick2	feature_shift_x	90
+s40000.3.1000.8000.1.tick2	feature_shift_x	89.992
 s40000.3.1000.8000.1.tick2	feature_shift_y	-51
 s40000.3.1000.8000.1.tick2	display_feature_label	no
 s40000.3.1000.8000.1.tick2	feature_label	33333333333333333
 
 s40000.3.1000.8000.1.tick3	feature_height_ratio	1
 s40000.3.1000.8000.1.tick3	feature_shape	rect
-s40000.3.1000.8000.1.tick3	feature_shift_x	90
+s40000.3.1000.8000.1.tick3	feature_shift_x	89.992
 s40000.3.1000.8000.1.tick3	feature_shift_y	-61
 s40000.3.1000.8000.1.tick3	display_feature_label	no
 s40000.3.1000.8000.1.tick3	feature_label	33333333333333333
@@ -266,28 +266,28 @@ s40000.6.8000.9609.1	feature_label	33333333333333333
 
 s40000.6.8000.9609.1.tick0	feature_height_ratio	1
 s40000.6.8000.9609.1.tick0	feature_shape	rect
-s40000.6.8000.9609.1.tick0	feature_shift_x	90
+s40000.6.8000.9609.1.tick0	feature_shift_x	89.992
 s40000.6.8000.9609.1.tick0	feature_shift_y	-31
 s40000.6.8000.9609.1.tick0	display_feature_label	no
 s40000.6.8000.9609.1.tick0	feature_label	33333333333333333
 
 s40000.6.8000.9609.1.tick1	feature_height_ratio	1
 s40000.6.8000.9609.1.tick1	feature_shape	rect
-s40000.6.8000.9609.1.tick1	feature_shift_x	90
+s40000.6.8000.9609.1.tick1	feature_shift_x	89.992
 s40000.6.8000.9609.1.tick1	feature_shift_y	-41
 s40000.6.8000.9609.1.tick1	display_feature_label	no
 s40000.6.8000.9609.1.tick1	feature_label	33333333333333333
 
 s40000.6.8000.9609.1.tick2	feature_height_ratio	1
 s40000.6.8000.9609.1.tick2	feature_shape	rect
-s40000.6.8000.9609.1.tick2	feature_shift_x	90
+s40000.6.8000.9609.1.tick2	feature_shift_x	89.992
 s40000.6.8000.9609.1.tick2	feature_shift_y	-51
 s40000.6.8000.9609.1.tick2	display_feature_label	no
 s40000.6.8000.9609.1.tick2	feature_label	33333333333333333
 
 s40000.6.8000.9609.1.tick3	feature_height_ratio	1
 s40000.6.8000.9609.1.tick3	feature_shape	rect
-s40000.6.8000.9609.1.tick3	feature_shift_x	90
+s40000.6.8000.9609.1.tick3	feature_shift_x	89.992
 s40000.6.8000.9609.1.tick3	feature_shift_y	-61
 s40000.6.8000.9609.1.tick3	display_feature_label	no
 s40000.6.8000.9609.1.tick3	feature_label	33333333333333333
