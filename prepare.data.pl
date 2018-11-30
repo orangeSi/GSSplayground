@@ -42,8 +42,13 @@ my $space_len = $conf{space_between_blocks};# 500bp是默认的blocks之间的�
 
 ## 
 
+my $genome_height_raw=0.05;
+$ytick_region_all = 0.5 / ($genome_height_raw*$conf{genome_height_ratio}) /100;
+print "\n\nytick_region_all is $ytick_region_all\n\n";
+
+
 ###start:get scaffold length in genome file and scaffold length  in gff file of list 
-my ($genome, $gff, $track_order, $sample_num, $fts, $sample_scf) = &read_list($list);
+my ($genome, $gff, $track_order, $sample_num, $fts, $sample_scf) = &read_list($list, $ytick_region_all);
 my %genome=%$genome;
 my %gff=%$gff;
 my %fts=%$fts;
@@ -71,21 +76,17 @@ my %orders;
 my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_width\" height=\"$svg_height\" style=\"background-color:$conf{svg_background_color};\">\n";
 my $top_distance=$top_bottom_margin/2*$svg_height;
 my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$sample_num; # 每个track的高度
-my $genome_height_raw=0.05;
 my $id_line_height = $genome_height_raw*$conf{genome_height_ratio} * 2 * $sample_single_height; # 每个block的genome的高度
 my $left_distance_init = (1 + 0.1) * $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
 
-my $ytick_region_all = 0.5 / ($genome_height_raw*$conf{genome_height_ratio});
-print "\n\nytick_region_all is $ytick_region_all\n\n";
 
-print "done\n";
-
-
+`set -vex;sed 's/$conf{feature_setting}/$conf{feature_setting}.new/g' $confile > $confile.new`;
+print "\ndata done\n";
 
 sub read_list(){
 	###start:get scaffold length in genome file and scaffold length  in gff file
 	my %fts;
-	my ($list) = @_;
+	my ($list, $ytick_region_all) = @_;
 	my (%genome,%gff,@track_order,$sample_num);
 	my @features=split(/,/, $conf{feature_keywords});
 	my %uniq_sample;
@@ -247,13 +248,13 @@ sub read_list(){
 		#&feature_ytick();
 	}
 	close LI;
-	&feature_ytick(\%sample_scf, \%gff);
+	&feature_ytick(\%sample_scf, \%gff, $ytick_region_all);
 	return (\%genome, \%gff, \@track_order, $sample_num, \%fts, \%sample_scf);
 	####end:get scaffold length in genome file and scaffold length  in gff file
 }
 
 sub feature_ytick(){
-	my ($sample_scf, $gff)=@_;
+	my ($sample_scf, $gff, $ytick_region_all)=@_;
 	print "xxxxx is $conf{feature_ytick_region}\n\n";
 	if(exists $conf{feature_ytick_region}){	
 		print "\nfeature_ytick_region\n\n";
@@ -284,6 +285,12 @@ sub feature_ytick(){
 						my @tick_unit=split(/:/, $tick);
 						die "error: error format:$tick\n" if(@tick_unit%6);
 						my ($s1, $e1, $s2, $e2, $ytick_pos, $title) = @tick_unit;
+						print "s1 is $s1, e1 is $e1\n";
+						my $s1_raw = $s1;
+						my $e1_raw = $e1;
+						$s1 *=$ytick_region_all;
+						$e1 *=$ytick_region_all;
+						print "s1 is $s1, e1 is $e1\n";
 						#$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{end}=$arr[4];
 						for my $block(keys %{$gff->{$ytick_sample}->{block}}){
 							my @scf= keys %{$gff->{$ytick_sample}->{block}->{$block}};
@@ -316,21 +323,24 @@ sub feature_ytick(){
 							$ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_shape\trect\n";
 							$ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_shift_x\t$feature_backbone_shift_x\n";
 							$ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_shift_y\t$feature_backbone_shift_y\n";
-							$ytick_setting_conf.="$ytick_feature_backbone_id\tdisplay_feature_label\tyes\n";
+							$ytick_setting_conf.="$ytick_feature_backbone_id\tdisplay_feature_label\tno\n";
 							$ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_label\t33333333333333333\n";
-							print "\n2ytick_gff is $ytick_gff\n\n";
+							#print "\n2ytick_gff is $ytick_gff\n\n";
 							my $ytick_unit=10;
 							#my $ytick_unit_real = $ytick_height/($e1-$s1)*$ytick_unit;
-							my $ytick_nums = int(($e1-$s1)/$ytick_unit);
+							my $ytick_nums = int(($e1_raw-$s1_raw)/$ytick_unit);
 							for my $k (0..$ytick_nums){
 								my $ytick_feature_tick_width = 80; # bp 
 								my $ytick_feature_tick_start=$block_end_bp - $ytick_feature_tick_width;
 								my $ytick_feature_tick_end=$block_end_bp;
-								my $ytick_feature_tick_height=1;
+								my $ytick_feature_tick_height=0.4;
+								my $feature_label_size=6;
+								my $padding_feature_label=$feature_label_size*0.3;
 								my $ytick_feature_tick_id="$ytick_feature_backbone_id.tick$k";
-								my $feature_tick_shift_x=0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width*0.9999;
+								my $feature_tick_shift_x=0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width - $ytick_feature_backbone_width*0.5; # bp 
 
-								my $feature_tick_shift_y = 0.5 + $s1 + $k * $ytick_unit + 0.5*$ytick_feature_tick_height;
+								my $feature_tick_shift_y = 0.5 + $s1 + $k * $ytick_unit *$ytick_region_all + 0.5*$ytick_feature_tick_height;
+								my $tick_label=$s1_raw+$k*$ytick_unit;
 								if($ytick_orientation=~ /up/i){
 									$feature_tick_shift_y *=-1;
 								}elsif($ytick_orientation=~ /down/i){
@@ -344,10 +354,16 @@ sub feature_ytick(){
 								$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_shape\trect\n";
 								$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_shift_x\t$feature_tick_shift_x\n";
 								$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_shift_y\t$feature_tick_shift_y\n";
-								$ytick_setting_conf.="$ytick_feature_tick_id\tdisplay_feature_label\tno\n";
-								$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label\t33333333333333333\n";
+								$ytick_setting_conf.="$ytick_feature_tick_id\tdisplay_feature_label\tyes\n";
+								$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label\t$tick_label\n";
+								$ytick_setting_conf.="$ytick_feature_tick_id\tpos_feature_label\tright_medium\n";	
+								$ytick_setting_conf.="$ytick_feature_tick_id\tlabel_rotate_angle\t0\n";
+								$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label_size\t$feature_label_size\n";
+								$ytick_setting_conf.="$ytick_feature_tick_id\tpadding_feature_label\t$padding_feature_label\n";
+								$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label_auto_angle_flag\t0\n\n";
+								#feature_ytick_hgrid_line=1
+								#
 
-								
 							}
 							#<path stroke-width="2" d="M5 20 l215 0" />
 
@@ -359,7 +375,7 @@ sub feature_ytick(){
 					#my ($ytick_sample, $ytick_scf) = ($1, $2);
 					#my $ytick_gff;
 					#my $ytick_setting_conf;
-					`set -vex;echo -e "$ytick_gff" > $ytick_sample.$ytick_scf.fake.gff ;echo -e "$ytick_setting_conf" > $ytick_sample.$ytick_scf.setting.conf; cat  $ytick_sample.$ytick_scf.setting.conf >> $conf{feature_setting}.new`;
+					`set -vex;echo -e "$ytick_gff" > $ytick_sample.$ytick_scf.fake.gff ;echo -e "$ytick_setting_conf" > $ytick_sample.$ytick_scf.setting.conf; cat  $ytick_sample.$ytick_scf.setting.conf >> $conf{feature_setting}.new;`;
 					print "ok,ytick is $ytick\n";
 
 				}else{
@@ -786,16 +802,16 @@ sub default_setting(){
 	$conf{pos_feature_label} ||="medium_up";
 	$conf{distance_closed_feature} ||=50;
 	$conf{shift_angle_closed_feature} ||=10;
-	$conf{feature_arrow_sharp_extent} =(defined $conf{feature_arrow_sharp_extent})? $conf{feature_arrow_sharp_extent}:0.3;
+	$conf{feature_arrow_sharp_extent} =(exists $conf{feature_arrow_sharp_extent})? $conf{feature_arrow_sharp_extent}:0.3;
 	$conf{scale_display} ||="no";
 	$conf{scale_position} ||="low";
 	$conf{display_feature} ||="yes";
 	$conf{legend_stroke_color} ||="black";
 	$conf{legend_stroke_width} ||=0;
-	$conf{track_order}=(defined $conf{track_order})? $conf{track_order}:0;
-	$conf{feature_order} =(defined $conf{feature_order})? $conf{feature_order}:1;
-	$conf{feature_label_order} =(defined $conf{feature_label_order})? $conf{feature_label_order}:1;
-	$conf{cross_link_order} =(defined $conf{cross_link_order})? $conf{cross_link_order}:2; # bigger mean upper 
+	$conf{track_order}=(exists $conf{track_order})? $conf{track_order}:0;
+	$conf{feature_order} =(exists $conf{feature_order})? $conf{feature_order}:1;
+	$conf{feature_label_order} =(exists $conf{feature_label_order})? $conf{feature_label_order}:1;
+	$conf{cross_link_order} =(exists $conf{cross_link_order})? $conf{cross_link_order}:2; # bigger mean upper 
 	$conf{cross_link_opacity} ||=1;
 	$conf{display_feature_label} ||="yes";
 	$conf{display_legend} ||="yes";
@@ -820,7 +836,7 @@ sub default_setting(){
 	$conf{feature_shift_x} ||=0;
 	$conf{feature_border_size} ||=0;
 	$conf{feature_border_color} ||="black";
-	$conf{feature_opacity} =(defined $conf{feature_opacity})? $conf{feature_opacity}:1;
+	$conf{feature_opacity} =(exists $conf{feature_opacity})? $conf{feature_opacity}:1;
 	$conf{cross_link_orientation} ||="forward";
 	$conf{cross_link_color} ||="#FF8C00";
 	$conf{cross_link_color_reverse} ||="#3CB371";
@@ -830,6 +846,7 @@ sub default_setting(){
 	$conf{cross_link_height_ellipse} ||="10,8";
 	$conf{svg_background_color} ||="white";
 	#$conf{feature_ytick_region} ||="0-3:0-10;";
+	$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
 
 	if($conf{track_style}!~ /:/){
 		die "error: track_style format like  fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9\n";

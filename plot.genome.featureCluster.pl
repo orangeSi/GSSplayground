@@ -76,10 +76,15 @@ my $top_distance=$top_bottom_margin/2*$svg_height;
 my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$sample_num; # 每个track的高度
 my $genome_height_raw=0.05;
 my $id_line_height = $genome_height_raw*$conf{genome_height_ratio} * 2 * $sample_single_height; # 每个block的genome的高度
-my $left_distance_init = (1 + 0.1) * $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
 
-my $ytick_region_all = 0.5 / ($genome_height_raw*$conf{genome_height_ratio});
-print "\n\nytick_region_all is $ytick_region_all\n\n";
+my $ref_name_right_gap=0.1;
+#my $left_distance_init = (1 - 0.1) * $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
+my $left_distance_init = $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
+
+
+my $ytick_region_ratio = 0.5 / ($genome_height_raw*$conf{genome_height_ratio})/100;
+print "ytick_region_ratio is $ytick_region_ratio\n";
+
 while(@track_order){
 	$index++;
 	my $sample = shift @track_order;
@@ -88,14 +93,23 @@ while(@track_order){
 	my $flag;
 	my $left_distance = $left_distance_init ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
 	#my $line_to_sample_single_top_dis=0.45; #track cluster顶部 y 轴在一个track高度的0.45，即cluster的y轴的底部在0.55，即一个cluster高度是整个track的0.55-0.45=0.1
-	my $line_to_sample_single_top_dis = 0.5 - 0.05*$conf{genome_height_ratio};#genome_height_ratio
+	my $line_to_sample_single_top_dis = 0.5 - $genome_height_raw*$conf{genome_height_ratio}/2;#genome_height_ratio
 	my $shift_x = $left_distance;
 
 	# write sample name for track
 	my $text_size = $id_line_height * 1; # sample name 文字大小
 	$common_size = $text_size;
-	my $ref_name_x = $svg_width * $ref_name_width_ratio; # sample name 右下角end的x和y轴
-	my $ref_name_y = $top_distance + (0.5 + 0.05*$conf{genome_height_ratio}) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
+	my $ref_name_x = (1- $ref_name_right_gap )* $svg_width * $ref_name_width_ratio; # sample name 右下角end的x和y轴
+	#my $ref_name_y = $top_distance + (0.5 + 0.05*$conf{genome_height_ratio}) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
+	my $ref_name_y;
+	if($conf{genome_height_ratio} <= 0.05){
+		$ref_name_y = $top_distance + (0.5 + $genome_height_raw*$conf{genome_height_ratio}*1.5) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
+	}elsif($conf{genome_height_ratio} <= 0.2){
+		$ref_name_y = $top_distance + (0.5 + $genome_height_raw*$conf{genome_height_ratio}*0.5) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
+	}else{
+		$ref_name_y = $top_distance + (0.5 + $genome_height_raw*$conf{genome_height_ratio}*0.2) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
+	}
+
 	if(not exists $conf{sample_name_old2new}{$sample}{new_name}){
 		$conf{sample_name_old2new}{$sample}{new_name} = $sample;
 		$conf{sample_name_old2new}{$sample}{new_color} = $conf{sample_name_color_default};
@@ -191,9 +205,16 @@ while(@track_order){
 			#print "$index_id gene_width_arrow is $gene_width_arrow\n";
 			$gene_height_top=$id_line_height*$conf{feature_setting}{$index_id}{feature_arrow_sharp_extent} if(exists $conf{feature_setting}{$index_id}{feature_arrow_sharp_extent});
 			my $feature_shift_y=($conf{feature_setting}{$index_id}{feature_shift_y})? $conf{feature_setting}{$index_id}{feature_shift_y}:$conf{feature_shift_y};
-			if($scf[0] eq $pre_scf_id && ($index_start - $pre_index_end) <= $conf{distance_closed_feature} && ($index_end - $index_start)< 300 ){
+			if(not $conf{feature_label_auto_angle_flag}){
+				$angle_flag = 0;
+			}elsif(exists $conf{feature_setting}{$index_id}{feature_label_auto_angle_flag}){
+				$angle_flag = $conf{feature_setting}{$index_id}{feature_label_auto_angle_flag};
+			}elsif($scf[0] eq $pre_scf_id && ($index_start - $pre_index_end) <= $conf{distance_closed_feature} && ($index_end - $index_start)< 300 ){
 				$angle_flag = 1
 			}
+			
+			
+
 			#print "angle is $angle_flag\n";
 			## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 			$svg.=&draw_genes(
@@ -276,7 +297,7 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 	my $cross_link_orientation_ellipse=(exists $conf{crossing_link}{index}{$pair}{cross_link_orientation_ellipse})? $conf{crossing_link}{index}{$pair}{cross_link_orientation_ellipse}:$conf{cross_link_orientation_ellipse};
 	my $cross_link_height_ellipse=(exists $conf{crossing_link}{index}{$pair}{cross_link_height_ellipse})? $conf{crossing_link}{index}{$pair}{cross_link_height_ellipse}:$conf{cross_link_height_ellipse};
 	if($cross_link_height_ellipse!~ /^[\d\.]+,[\d\.]+$/){
-		die "error: not support cross_link_height_ellipse=$cross_link_height_ellipse, right format should like 10,8\n";
+		die "error: not support cross_link_height_ellipse=$cross_link_height_ellipse for $pair, right format should like 10,8\n";
 	}
 
 	if($cross_link_orientation_ellipse=~ /up/i){
@@ -294,8 +315,9 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 		my $r1=($right_down_x - $left_up_x)/2;
 		my $r1_rev=($left_down_x - $right_up_x)/2;
 		my ($r2, $r2_rev)=split(",", $cross_link_height_ellipse); # r1 and r2 is radius of elipse
-		$r2 = $r2*$id_line_height;
-		$r2_rev = $r2_rev*$id_line_height;
+		#print "ytick_region_ratio is $ytick_region_ratio\n";
+		$r2 = $r2*$id_line_height * $ytick_region_ratio;
+		$r2_rev = $r2_rev*$id_line_height * $ytick_region_ratio;
 		my $rotate=0;
 		my $rotate_rev=0;
 		my ($large_arc_flag, $sweep_flag, $large_arc_flag_rev, $sweep_flag_rev)=split(",", $cross_link_orientation_ellipse); #http://xahlee.info/js/svg_path_ellipse_arc.html
@@ -317,7 +339,6 @@ foreach my $pair(keys %{$conf{crossing_link}{index}}){
 		print "wait w\n";
 		die "not support w yet\n";
 	}elsif($cross_link_shape=~ /line/i){
-		print "wait line\n";
 		#cross_link_orientation_line
 		my $cross_link_orientation_line=(exists $conf{crossing_link}{index}{$pair}{cross_link_orientation_line})? $conf{crossing_link}{index}{$pair}{cross_link_orientation_line}:$conf{cross_link_orientation_line};
 		my $cross_link_height_line=(exists $conf{crossing_link}{index}{$pair}{cross_link_height_line})? $conf{crossing_link}{index}{$pair}{cross_link_height_line}:$conf{cross_link_height_line};
@@ -678,6 +699,7 @@ sub read_list(){
 				$conf{feature_setting}{$feature_id}{end}=$end_f;
 				$conf{feature_setting}{$feature_id}{sample}=$sample;
 				$conf{feature_setting}{$feature_id}{scf_id}=$arr[0];
+				$conf{feature_setting}{$feature_id}{type}=$arr[2];
 				die "error: sample $sample should not have : char\n" if($sample=~ /:/ && exists $conf{feature_ytick_region});
 				die "error: scaffold_id $arr[0] should not have : char\n" if($arr[0]=~ /:/ && exists $conf{feature_ytick_region});
 				$sample_scf{$sample}{$arr[0]}="";
@@ -757,6 +779,7 @@ sub draw_genes(){
 	}else{
 		$shift_angle_closed_feature = 0;
 	}
+	$gene_height_top=0 if($shape!~ /arrow/i);
 	if($index_label_position=~ /_up$/){
 		$label_y_shift= - $padding_feature_label;
 		$index_label_angle = ($angle_flag)? $index_label_angle +$shift_angle_closed_feature:$index_label_angle; # 相邻feature的label的angle开
@@ -769,7 +792,6 @@ sub draw_genes(){
 	}else{
 		die "error:  not support $conf{pos_feature_label} yet~\n"
 	}
-
 	my $start_title=$start;
 	my $end_title=$end;
 	if($conf{absolute_postion_in_title}=~ /yes/i){
@@ -936,6 +958,7 @@ sub draw_genes(){
 
 
 		## draw label of feature
+		die "die:label_y is $label_y, id is $feature_id\n" if(!$label_y);
 		$orders{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		# check this feature if is in crossing_link
 		if(exists $conf{crossing_link}{features}{$feature_id}){
@@ -1092,7 +1115,7 @@ sub default_setting(){
 	$conf{space_between_blocks} ||= 1.1;
 	$conf{feature_label_size} ||=10;
 	$conf{feature_label_color} ||="black";
-	$conf{label_rotate_angle} ||=-60;
+	$conf{label_rotate_angle} =(exists $conf{label_rotate_angle})? $conf{label_rotate_angle}:-60;
 	$conf{feature_color} ||= 'ForestGreen'; #ForestGreen,LimeGreen
 	$conf{color_sample_name_default} ||= 'green';
 	$conf{sample_name_color_default} ||='black';
@@ -1107,7 +1130,7 @@ sub default_setting(){
 	$conf{pos_feature_label} ||="medium_up";
 	$conf{distance_closed_feature} ||=50;
 	$conf{shift_angle_closed_feature} ||=10;
-	$conf{feature_arrow_sharp_extent} =(defined $conf{feature_arrow_sharp_extent})? $conf{feature_arrow_sharp_extent}:0.3;
+	$conf{feature_arrow_sharp_extent} =(exists $conf{feature_arrow_sharp_extent})? $conf{feature_arrow_sharp_extent}:0.3;
 	$conf{scale_display} ||="no";
 	$conf{scale_position} ||="low";
 	$conf{display_feature} ||="yes";
@@ -1150,7 +1173,9 @@ sub default_setting(){
 	$conf{cross_link_shape} ||="quadrilateral";
 	$conf{cross_link_height_ellipse} ||="10,8";
 	$conf{svg_background_color} ||="white";
+	$conf{feature_label_auto_angle_flag} =(exists $conf{feature_label_auto_angle_flag})? $conf{feature_label_auto_angle_flag}:1;
 	#$conf{feature_ytick_region} ||="0-3:0-10;";
+	$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
 
 	if($conf{track_style}!~ /:/){
 		die "error: track_style format like  fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9\n";
@@ -1231,8 +1256,8 @@ sub default_setting(){
 			while(<IN>){
 				chomp;
 				next if($_=~ /^#/ || $_=~ /^\s*$/);
-				$_=~ s/\s+$//;
 				$_=~ s/#\s+\S+.*$//;
+				$_=~ s/\s+$//;
 				my @arr;
 				if($_=~ /^\S+,\S/){
 					$_=~ s/,\s*$//;
