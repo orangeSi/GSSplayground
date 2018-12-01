@@ -167,7 +167,7 @@ s2000.3.2000.6000.1.tick0	feature_label	10
 s2000.3.2000.6000.1.tick0	pos_feature_label	right_medium
 s2000.3.2000.6000.1.tick0	label_rotate_angle	0
 s2000.3.2000.6000.1.tick0	feature_label_size	6
-s2000.3.2000.6000.1.tick0	padding_feature_label	1.2
+s2000.3.2000.6000.1.tick0	padding_feature_label	1.8
 s2000.3.2000.6000.1.tick0	feature_label_auto_angle_flag	0
 
 
@@ -180,7 +180,7 @@ s2000.3.2000.6000.1.tick1	feature_label	20
 s2000.3.2000.6000.1.tick1	pos_feature_label	right_medium
 s2000.3.2000.6000.1.tick1	label_rotate_angle	0
 s2000.3.2000.6000.1.tick1	feature_label_size	6
-s2000.3.2000.6000.1.tick1	padding_feature_label	1.2
+s2000.3.2000.6000.1.tick1	padding_feature_label	1.8
 s2000.3.2000.6000.1.tick1	feature_label_auto_angle_flag	0
 
 
@@ -193,7 +193,7 @@ s2000.3.2000.6000.1.tick2	feature_label	30
 s2000.3.2000.6000.1.tick2	pos_feature_label	right_medium
 s2000.3.2000.6000.1.tick2	label_rotate_angle	0
 s2000.3.2000.6000.1.tick2	feature_label_size	6
-s2000.3.2000.6000.1.tick2	padding_feature_label	1.2
+s2000.3.2000.6000.1.tick2	padding_feature_label	1.8
 s2000.3.2000.6000.1.tick2	feature_label_auto_angle_flag	0
 
 
@@ -206,7 +206,7 @@ s2000.3.2000.6000.1.tick3	feature_label	40
 s2000.3.2000.6000.1.tick3	pos_feature_label	right_medium
 s2000.3.2000.6000.1.tick3	label_rotate_angle	0
 s2000.3.2000.6000.1.tick3	feature_label_size	6
-s2000.3.2000.6000.1.tick3	padding_feature_label	1.2
+s2000.3.2000.6000.1.tick3	padding_feature_label	1.8
 s2000.3.2000.6000.1.tick3	feature_label_auto_angle_flag	0
 
 
@@ -226,7 +226,7 @@ s2000.3.2000.6000.2.tick0	feature_label	50
 s2000.3.2000.6000.2.tick0	pos_feature_label	right_medium
 s2000.3.2000.6000.2.tick0	label_rotate_angle	0
 s2000.3.2000.6000.2.tick0	feature_label_size	6
-s2000.3.2000.6000.2.tick0	padding_feature_label	1.2
+s2000.3.2000.6000.2.tick0	padding_feature_label	1.8
 s2000.3.2000.6000.2.tick0	feature_label_auto_angle_flag	0
 
 
@@ -239,7 +239,7 @@ s2000.3.2000.6000.2.tick1	feature_label	60
 s2000.3.2000.6000.2.tick1	pos_feature_label	right_medium
 s2000.3.2000.6000.2.tick1	label_rotate_angle	0
 s2000.3.2000.6000.2.tick1	feature_label_size	6
-s2000.3.2000.6000.2.tick1	padding_feature_label	1.2
+s2000.3.2000.6000.2.tick1	padding_feature_label	1.8
 s2000.3.2000.6000.2.tick1	feature_label_auto_angle_flag	0
 
 
@@ -252,7 +252,7 @@ s2000.3.2000.6000.2.tick2	feature_label	70
 s2000.3.2000.6000.2.tick2	pos_feature_label	right_medium
 s2000.3.2000.6000.2.tick2	label_rotate_angle	0
 s2000.3.2000.6000.2.tick2	feature_label_size	6
-s2000.3.2000.6000.2.tick2	padding_feature_label	1.2
+s2000.3.2000.6000.2.tick2	padding_feature_label	1.8
 s2000.3.2000.6000.2.tick2	feature_label_auto_angle_flag	0
 
 
@@ -265,120 +265,9 @@ s2000.3.2000.6000.2.tick3	feature_label	80
 s2000.3.2000.6000.2.tick3	pos_feature_label	right_medium
 s2000.3.2000.6000.2.tick3	label_rotate_angle	0
 s2000.3.2000.6000.2.tick3	feature_label_size	6
-s2000.3.2000.6000.2.tick3	padding_feature_label	1.2
+s2000.3.2000.6000.2.tick3	padding_feature_label	1.8
 s2000.3.2000.6000.2.tick3	feature_label_auto_angle_flag	0
 
-
-
-s40000.3.1000.8000.1	feature_height_ratio	35
-s40000.3.1000.8000.1	feature_shape	rect
-s40000.3.1000.8000.1	feature_shift_x	20
-s40000.3.1000.8000.1	feature_shift_y	-23
-s40000.3.1000.8000.1	display_feature_label	no
-s40000.3.1000.8000.1	feature_label	33333333333333333
-
-s40000.3.1000.8000.1.tick0	feature_height_ratio	0.4
-s40000.3.1000.8000.1.tick0	feature_shape	rect
-s40000.3.1000.8000.1.tick0	feature_shift_x	80
-s40000.3.1000.8000.1.tick0	feature_shift_y	-5.7
-s40000.3.1000.8000.1.tick0	display_feature_label	yes
-s40000.3.1000.8000.1.tick0	feature_label	10
-s40000.3.1000.8000.1.tick0	pos_feature_label	right_medium
-s40000.3.1000.8000.1.tick0	label_rotate_angle	0
-s40000.3.1000.8000.1.tick0	feature_label_size	6
-s40000.3.1000.8000.1.tick0	padding_feature_label	1.2
-s40000.3.1000.8000.1.tick0	feature_label_auto_angle_flag	0
-
-
-s40000.3.1000.8000.1.tick1	feature_height_ratio	0.4
-s40000.3.1000.8000.1.tick1	feature_shape	rect
-s40000.3.1000.8000.1.tick1	feature_shift_x	80
-s40000.3.1000.8000.1.tick1	feature_shift_y	-10.7
-s40000.3.1000.8000.1.tick1	display_feature_label	yes
-s40000.3.1000.8000.1.tick1	feature_label	20
-s40000.3.1000.8000.1.tick1	pos_feature_label	right_medium
-s40000.3.1000.8000.1.tick1	label_rotate_angle	0
-s40000.3.1000.8000.1.tick1	feature_label_size	6
-s40000.3.1000.8000.1.tick1	padding_feature_label	1.2
-s40000.3.1000.8000.1.tick1	feature_label_auto_angle_flag	0
-
-
-s40000.3.1000.8000.1.tick2	feature_height_ratio	0.4
-s40000.3.1000.8000.1.tick2	feature_shape	rect
-s40000.3.1000.8000.1.tick2	feature_shift_x	80
-s40000.3.1000.8000.1.tick2	feature_shift_y	-15.7
-s40000.3.1000.8000.1.tick2	display_feature_label	yes
-s40000.3.1000.8000.1.tick2	feature_label	30
-s40000.3.1000.8000.1.tick2	pos_feature_label	right_medium
-s40000.3.1000.8000.1.tick2	label_rotate_angle	0
-s40000.3.1000.8000.1.tick2	feature_label_size	6
-s40000.3.1000.8000.1.tick2	padding_feature_label	1.2
-s40000.3.1000.8000.1.tick2	feature_label_auto_angle_flag	0
-
-
-s40000.3.1000.8000.1.tick3	feature_height_ratio	0.4
-s40000.3.1000.8000.1.tick3	feature_shape	rect
-s40000.3.1000.8000.1.tick3	feature_shift_x	80
-s40000.3.1000.8000.1.tick3	feature_shift_y	-20.7
-s40000.3.1000.8000.1.tick3	display_feature_label	yes
-s40000.3.1000.8000.1.tick3	feature_label	40
-s40000.3.1000.8000.1.tick3	pos_feature_label	right_medium
-s40000.3.1000.8000.1.tick3	label_rotate_angle	0
-s40000.3.1000.8000.1.tick3	feature_label_size	6
-s40000.3.1000.8000.1.tick3	padding_feature_label	1.2
-s40000.3.1000.8000.1.tick3	feature_label_auto_angle_flag	0
-
-
-s40000.3.1000.8000.1.tick4	feature_height_ratio	0.4
-s40000.3.1000.8000.1.tick4	feature_shape	rect
-s40000.3.1000.8000.1.tick4	feature_shift_x	80
-s40000.3.1000.8000.1.tick4	feature_shift_y	-25.7
-s40000.3.1000.8000.1.tick4	display_feature_label	yes
-s40000.3.1000.8000.1.tick4	feature_label	50
-s40000.3.1000.8000.1.tick4	pos_feature_label	right_medium
-s40000.3.1000.8000.1.tick4	label_rotate_angle	0
-s40000.3.1000.8000.1.tick4	feature_label_size	6
-s40000.3.1000.8000.1.tick4	padding_feature_label	1.2
-s40000.3.1000.8000.1.tick4	feature_label_auto_angle_flag	0
-
-
-s40000.3.1000.8000.1.tick5	feature_height_ratio	0.4
-s40000.3.1000.8000.1.tick5	feature_shape	rect
-s40000.3.1000.8000.1.tick5	feature_shift_x	80
-s40000.3.1000.8000.1.tick5	feature_shift_y	-30.7
-s40000.3.1000.8000.1.tick5	display_feature_label	yes
-s40000.3.1000.8000.1.tick5	feature_label	60
-s40000.3.1000.8000.1.tick5	pos_feature_label	right_medium
-s40000.3.1000.8000.1.tick5	label_rotate_angle	0
-s40000.3.1000.8000.1.tick5	feature_label_size	6
-s40000.3.1000.8000.1.tick5	padding_feature_label	1.2
-s40000.3.1000.8000.1.tick5	feature_label_auto_angle_flag	0
-
-
-s40000.3.1000.8000.1.tick6	feature_height_ratio	0.4
-s40000.3.1000.8000.1.tick6	feature_shape	rect
-s40000.3.1000.8000.1.tick6	feature_shift_x	80
-s40000.3.1000.8000.1.tick6	feature_shift_y	-35.7
-s40000.3.1000.8000.1.tick6	display_feature_label	yes
-s40000.3.1000.8000.1.tick6	feature_label	70
-s40000.3.1000.8000.1.tick6	pos_feature_label	right_medium
-s40000.3.1000.8000.1.tick6	label_rotate_angle	0
-s40000.3.1000.8000.1.tick6	feature_label_size	6
-s40000.3.1000.8000.1.tick6	padding_feature_label	1.2
-s40000.3.1000.8000.1.tick6	feature_label_auto_angle_flag	0
-
-
-s40000.3.1000.8000.1.tick7	feature_height_ratio	0.4
-s40000.3.1000.8000.1.tick7	feature_shape	rect
-s40000.3.1000.8000.1.tick7	feature_shift_x	80
-s40000.3.1000.8000.1.tick7	feature_shift_y	-40.7
-s40000.3.1000.8000.1.tick7	display_feature_label	yes
-s40000.3.1000.8000.1.tick7	feature_label	80
-s40000.3.1000.8000.1.tick7	pos_feature_label	right_medium
-s40000.3.1000.8000.1.tick7	label_rotate_angle	0
-s40000.3.1000.8000.1.tick7	feature_label_size	6
-s40000.3.1000.8000.1.tick7	padding_feature_label	1.2
-s40000.3.1000.8000.1.tick7	feature_label_auto_angle_flag	0
 
 
 s40000.6.8000.9609.1	feature_height_ratio	35
@@ -397,7 +286,7 @@ s40000.6.8000.9609.1.tick0	feature_label	10
 s40000.6.8000.9609.1.tick0	pos_feature_label	right_medium
 s40000.6.8000.9609.1.tick0	label_rotate_angle	0
 s40000.6.8000.9609.1.tick0	feature_label_size	6
-s40000.6.8000.9609.1.tick0	padding_feature_label	1.2
+s40000.6.8000.9609.1.tick0	padding_feature_label	1.8
 s40000.6.8000.9609.1.tick0	feature_label_auto_angle_flag	0
 
 
@@ -410,7 +299,7 @@ s40000.6.8000.9609.1.tick1	feature_label	20
 s40000.6.8000.9609.1.tick1	pos_feature_label	right_medium
 s40000.6.8000.9609.1.tick1	label_rotate_angle	0
 s40000.6.8000.9609.1.tick1	feature_label_size	6
-s40000.6.8000.9609.1.tick1	padding_feature_label	1.2
+s40000.6.8000.9609.1.tick1	padding_feature_label	1.8
 s40000.6.8000.9609.1.tick1	feature_label_auto_angle_flag	0
 
 
@@ -423,7 +312,7 @@ s40000.6.8000.9609.1.tick2	feature_label	30
 s40000.6.8000.9609.1.tick2	pos_feature_label	right_medium
 s40000.6.8000.9609.1.tick2	label_rotate_angle	0
 s40000.6.8000.9609.1.tick2	feature_label_size	6
-s40000.6.8000.9609.1.tick2	padding_feature_label	1.2
+s40000.6.8000.9609.1.tick2	padding_feature_label	1.8
 s40000.6.8000.9609.1.tick2	feature_label_auto_angle_flag	0
 
 
@@ -436,7 +325,7 @@ s40000.6.8000.9609.1.tick3	feature_label	40
 s40000.6.8000.9609.1.tick3	pos_feature_label	right_medium
 s40000.6.8000.9609.1.tick3	label_rotate_angle	0
 s40000.6.8000.9609.1.tick3	feature_label_size	6
-s40000.6.8000.9609.1.tick3	padding_feature_label	1.2
+s40000.6.8000.9609.1.tick3	padding_feature_label	1.8
 s40000.6.8000.9609.1.tick3	feature_label_auto_angle_flag	0
 
 
@@ -449,7 +338,7 @@ s40000.6.8000.9609.1.tick4	feature_label	50
 s40000.6.8000.9609.1.tick4	pos_feature_label	right_medium
 s40000.6.8000.9609.1.tick4	label_rotate_angle	0
 s40000.6.8000.9609.1.tick4	feature_label_size	6
-s40000.6.8000.9609.1.tick4	padding_feature_label	1.2
+s40000.6.8000.9609.1.tick4	padding_feature_label	1.8
 s40000.6.8000.9609.1.tick4	feature_label_auto_angle_flag	0
 
 
@@ -462,7 +351,7 @@ s40000.6.8000.9609.1.tick5	feature_label	60
 s40000.6.8000.9609.1.tick5	pos_feature_label	right_medium
 s40000.6.8000.9609.1.tick5	label_rotate_angle	0
 s40000.6.8000.9609.1.tick5	feature_label_size	6
-s40000.6.8000.9609.1.tick5	padding_feature_label	1.2
+s40000.6.8000.9609.1.tick5	padding_feature_label	1.8
 s40000.6.8000.9609.1.tick5	feature_label_auto_angle_flag	0
 
 
@@ -475,7 +364,7 @@ s40000.6.8000.9609.1.tick6	feature_label	70
 s40000.6.8000.9609.1.tick6	pos_feature_label	right_medium
 s40000.6.8000.9609.1.tick6	label_rotate_angle	0
 s40000.6.8000.9609.1.tick6	feature_label_size	6
-s40000.6.8000.9609.1.tick6	padding_feature_label	1.2
+s40000.6.8000.9609.1.tick6	padding_feature_label	1.8
 s40000.6.8000.9609.1.tick6	feature_label_auto_angle_flag	0
 
 
@@ -488,7 +377,118 @@ s40000.6.8000.9609.1.tick7	feature_label	80
 s40000.6.8000.9609.1.tick7	pos_feature_label	right_medium
 s40000.6.8000.9609.1.tick7	label_rotate_angle	0
 s40000.6.8000.9609.1.tick7	feature_label_size	6
-s40000.6.8000.9609.1.tick7	padding_feature_label	1.2
+s40000.6.8000.9609.1.tick7	padding_feature_label	1.8
 s40000.6.8000.9609.1.tick7	feature_label_auto_angle_flag	0
+
+
+s40000.3.1000.8000.1	feature_height_ratio	35
+s40000.3.1000.8000.1	feature_shape	rect
+s40000.3.1000.8000.1	feature_shift_x	20
+s40000.3.1000.8000.1	feature_shift_y	-23
+s40000.3.1000.8000.1	display_feature_label	no
+s40000.3.1000.8000.1	feature_label	33333333333333333
+
+s40000.3.1000.8000.1.tick0	feature_height_ratio	0.4
+s40000.3.1000.8000.1.tick0	feature_shape	rect
+s40000.3.1000.8000.1.tick0	feature_shift_x	80
+s40000.3.1000.8000.1.tick0	feature_shift_y	-5.7
+s40000.3.1000.8000.1.tick0	display_feature_label	yes
+s40000.3.1000.8000.1.tick0	feature_label	10
+s40000.3.1000.8000.1.tick0	pos_feature_label	right_medium
+s40000.3.1000.8000.1.tick0	label_rotate_angle	0
+s40000.3.1000.8000.1.tick0	feature_label_size	6
+s40000.3.1000.8000.1.tick0	padding_feature_label	1.8
+s40000.3.1000.8000.1.tick0	feature_label_auto_angle_flag	0
+
+
+s40000.3.1000.8000.1.tick1	feature_height_ratio	0.4
+s40000.3.1000.8000.1.tick1	feature_shape	rect
+s40000.3.1000.8000.1.tick1	feature_shift_x	80
+s40000.3.1000.8000.1.tick1	feature_shift_y	-10.7
+s40000.3.1000.8000.1.tick1	display_feature_label	yes
+s40000.3.1000.8000.1.tick1	feature_label	20
+s40000.3.1000.8000.1.tick1	pos_feature_label	right_medium
+s40000.3.1000.8000.1.tick1	label_rotate_angle	0
+s40000.3.1000.8000.1.tick1	feature_label_size	6
+s40000.3.1000.8000.1.tick1	padding_feature_label	1.8
+s40000.3.1000.8000.1.tick1	feature_label_auto_angle_flag	0
+
+
+s40000.3.1000.8000.1.tick2	feature_height_ratio	0.4
+s40000.3.1000.8000.1.tick2	feature_shape	rect
+s40000.3.1000.8000.1.tick2	feature_shift_x	80
+s40000.3.1000.8000.1.tick2	feature_shift_y	-15.7
+s40000.3.1000.8000.1.tick2	display_feature_label	yes
+s40000.3.1000.8000.1.tick2	feature_label	30
+s40000.3.1000.8000.1.tick2	pos_feature_label	right_medium
+s40000.3.1000.8000.1.tick2	label_rotate_angle	0
+s40000.3.1000.8000.1.tick2	feature_label_size	6
+s40000.3.1000.8000.1.tick2	padding_feature_label	1.8
+s40000.3.1000.8000.1.tick2	feature_label_auto_angle_flag	0
+
+
+s40000.3.1000.8000.1.tick3	feature_height_ratio	0.4
+s40000.3.1000.8000.1.tick3	feature_shape	rect
+s40000.3.1000.8000.1.tick3	feature_shift_x	80
+s40000.3.1000.8000.1.tick3	feature_shift_y	-20.7
+s40000.3.1000.8000.1.tick3	display_feature_label	yes
+s40000.3.1000.8000.1.tick3	feature_label	40
+s40000.3.1000.8000.1.tick3	pos_feature_label	right_medium
+s40000.3.1000.8000.1.tick3	label_rotate_angle	0
+s40000.3.1000.8000.1.tick3	feature_label_size	6
+s40000.3.1000.8000.1.tick3	padding_feature_label	1.8
+s40000.3.1000.8000.1.tick3	feature_label_auto_angle_flag	0
+
+
+s40000.3.1000.8000.1.tick4	feature_height_ratio	0.4
+s40000.3.1000.8000.1.tick4	feature_shape	rect
+s40000.3.1000.8000.1.tick4	feature_shift_x	80
+s40000.3.1000.8000.1.tick4	feature_shift_y	-25.7
+s40000.3.1000.8000.1.tick4	display_feature_label	yes
+s40000.3.1000.8000.1.tick4	feature_label	50
+s40000.3.1000.8000.1.tick4	pos_feature_label	right_medium
+s40000.3.1000.8000.1.tick4	label_rotate_angle	0
+s40000.3.1000.8000.1.tick4	feature_label_size	6
+s40000.3.1000.8000.1.tick4	padding_feature_label	1.8
+s40000.3.1000.8000.1.tick4	feature_label_auto_angle_flag	0
+
+
+s40000.3.1000.8000.1.tick5	feature_height_ratio	0.4
+s40000.3.1000.8000.1.tick5	feature_shape	rect
+s40000.3.1000.8000.1.tick5	feature_shift_x	80
+s40000.3.1000.8000.1.tick5	feature_shift_y	-30.7
+s40000.3.1000.8000.1.tick5	display_feature_label	yes
+s40000.3.1000.8000.1.tick5	feature_label	60
+s40000.3.1000.8000.1.tick5	pos_feature_label	right_medium
+s40000.3.1000.8000.1.tick5	label_rotate_angle	0
+s40000.3.1000.8000.1.tick5	feature_label_size	6
+s40000.3.1000.8000.1.tick5	padding_feature_label	1.8
+s40000.3.1000.8000.1.tick5	feature_label_auto_angle_flag	0
+
+
+s40000.3.1000.8000.1.tick6	feature_height_ratio	0.4
+s40000.3.1000.8000.1.tick6	feature_shape	rect
+s40000.3.1000.8000.1.tick6	feature_shift_x	80
+s40000.3.1000.8000.1.tick6	feature_shift_y	-35.7
+s40000.3.1000.8000.1.tick6	display_feature_label	yes
+s40000.3.1000.8000.1.tick6	feature_label	70
+s40000.3.1000.8000.1.tick6	pos_feature_label	right_medium
+s40000.3.1000.8000.1.tick6	label_rotate_angle	0
+s40000.3.1000.8000.1.tick6	feature_label_size	6
+s40000.3.1000.8000.1.tick6	padding_feature_label	1.8
+s40000.3.1000.8000.1.tick6	feature_label_auto_angle_flag	0
+
+
+s40000.3.1000.8000.1.tick7	feature_height_ratio	0.4
+s40000.3.1000.8000.1.tick7	feature_shape	rect
+s40000.3.1000.8000.1.tick7	feature_shift_x	80
+s40000.3.1000.8000.1.tick7	feature_shift_y	-40.7
+s40000.3.1000.8000.1.tick7	display_feature_label	yes
+s40000.3.1000.8000.1.tick7	feature_label	80
+s40000.3.1000.8000.1.tick7	pos_feature_label	right_medium
+s40000.3.1000.8000.1.tick7	label_rotate_angle	0
+s40000.3.1000.8000.1.tick7	feature_label_size	6
+s40000.3.1000.8000.1.tick7	padding_feature_label	1.8
+s40000.3.1000.8000.1.tick7	feature_label_auto_angle_flag	0
 
 

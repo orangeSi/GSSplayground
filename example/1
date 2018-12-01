@@ -185,7 +185,7 @@ sub read_list(){
                             $genome{$sample}{$arr[0]}{$arrs_index}{len}=$seq_draw_end -$seq_draw_start+1; # 一条scaffold有多个block
                             $arr[3]=$arr[3]-$seq_draw_start +1;
                         $arr[4]=$arr[4]-$seq_draw_start +1;
-                        $block_index = $arrs_index/3;
+                        $block_index = $arrs_index;
 #print "hereis $block_index\n";
                         if(not exists  $gff{$sample}{chooselen_single}{$block_index}){
                             $gff{$sample}{chooselen_single}{$block_index}{len} = $genome{$sample}{$arr[0]}{$arrs_index}{len};
@@ -198,7 +198,10 @@ sub read_list(){
                     }
 
                 }else{ # list里面没有定义seq_id/start/end,即要画full-length of scaffold
-                    
+#print "not seq_id\n";
+#$block_index = $conf{'scaffold_order'}{$sample}{$arr[0]};
+                    $scf_block_id{$arr[0]} = $. if(not exists $scf_block_id{$arr[0]});
+                    $block_index=$scf_block_id{$arr[0]};
                     if(not exists  $gff{$sample}{chooselen_single}{$block_index}){
                         $gff{$sample}{chooselen_single}{$block_index}{len} = $genome{$sample}{$arr[0]}{len};
                         $gff{$sample}{chooselen_single}{$block_index}{start} = 1;

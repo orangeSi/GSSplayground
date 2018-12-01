@@ -1,45 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1500" height="800" style="background-color:white;">
-<text x="135" y="160.8" font-size="15px" fill="black"  text-anchor='end'>s1</text>
-<text x="135" y="320.8" font-size="15px" fill="black"  text-anchor='end'>s2</text>
-<text x="135" y="480.8" font-size="15px" fill="black"  text-anchor='end'>s3</text>
-<text x="135" y="640.8" font-size="15px" fill="black"  text-anchor='end'>s4</text>
+<text x="135" y="160.32" font-size="15px" fill="black"  text-anchor='end'>s1</text>
+<text x="135" y="320.32" font-size="15px" fill="black"  text-anchor='end'>s2</text>
+<text x="135" y="480.32" font-size="15px" fill="black"  text-anchor='end'>s3</text>
+<text x="135" y="640.32" font-size="15px" fill="black"  text-anchor='end'>s4</text>
 
 <line x1="150" y1="704" x2="1275" y2="704" style="stroke:green;stroke-width:0.5"/>
 <line x1="150" y1="696" x2="150" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
 <text x="150" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
 <line x1="250.928542591845" y1="696" x2="250.928542591845" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="250.928542591845" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
+<text x="250.928542591845" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2,000</text>
 <line x1="351.85708518369" y1="696" x2="351.85708518369" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="351.85708518369" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
+<text x="351.85708518369" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4,000</text>
 <line x1="452.785627775535" y1="696" x2="452.785627775535" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="452.785627775535" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
+<text x="452.785627775535" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6,000</text>
 <line x1="553.71417036738" y1="696" x2="553.71417036738" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="553.71417036738" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
+<text x="553.71417036738" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8,000</text>
 <line x1="654.642712959225" y1="696" x2="654.642712959225" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="654.642712959225" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
+<text x="654.642712959225" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10,000</text>
 <line x1="755.57125555107" y1="696" x2="755.57125555107" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="755.57125555107" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
+<text x="755.57125555107" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12,000</text>
 <line x1="856.499798142915" y1="696" x2="856.499798142915" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="856.499798142915" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
+<text x="856.499798142915" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14,000</text>
 <line x1="957.42834073476" y1="696" x2="957.42834073476" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="957.42834073476" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
+<text x="957.42834073476" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16,000</text>
 <line x1="1058.3568833266" y1="696" x2="1058.3568833266" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1058.3568833266" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
+<text x="1058.3568833266" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18,000</text>
 <line x1="1159.28542591845" y1="696" x2="1159.28542591845" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1159.28542591845" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
-<line x1="1260.21396851029" y1="696" x2="1260.21396851029" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1260.21396851029" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
+<text x="1159.28542591845" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20,000</text>
 <line x1="1275" y1="696" x2="1275" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1275" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22293</text>
+<text x="1275" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22,293bp</text>
 
 
-<g><title>gene_s203 -> gene_s303</title><polygon points="297.607993540573,387.2 307.398062171982,387.2 306.893419459023,483.2 297.103350827614,483.2" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
-<g><title>gene_s2100000 -> gene_s4100000</title><polygon points="1128.55268469923,316.8 1142.27896649172,316.8 708.437626160678,606.4 708.437626160678,592.673718207509" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
-<g><title>gene_s404000 -> gene_s4020000</title><path d="M243.762616067824 643.2 L225.040371417037 643.2 A88.3881711748082 160  0 0 1   401.816713766653 643.2 L362.353653613242 643.2 A59.2955187727089 144 0 1 0 243.762616067824 643.2 Z"  style="fill:#FF8C00;opacity:0.5" /></g><g><title>gene_s403000 -> gene_s406000</title><path d="M206.519983851433 707.2 L196.729915220024 707.2 A74.7628179249092 64  0 1 0   346.255551069843 636.8 L292.107387969318 636.8 A42.7937020589423 57.6 0 0 1 206.519983851433 707.2 Z"  style="fill:#FF8C00;opacity:1" /></g><g><title>gene_s307 -> gene_s308</title><line x1="568.702058942269" y1="515.2" x2="601.958013726282" y2="515.2" style="stroke:red;stroke-width:6.4;opacity:1" /></g>
-<g><title>gene_s208 -> gene_s304</title><line x1="509.961647153815" y1="355.2" x2="445.342147759386" y2="515.2" style="stroke:#FF8C00;stroke-width:6.4;opacity:1" /></g>
 <g><title>gene_s1060000 -> gene_s2100000</title><polygon points="1003.19943480016,156.8 1057.34759790069,156.8 1142.27896649172,252.8 1128.55268469923,252.8" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s208 -> gene_s304</title><line x1="509.961647153815" y1="355.2" x2="445.342147759386" y2="515.2" style="stroke:#FF8C00;stroke-width:6.4;opacity:1" /></g>
+<g><title>gene_s307 -> gene_s308</title><line x1="568.702058942269" y1="515.2" x2="601.958013726282" y2="515.2" style="stroke:red;stroke-width:6.4;opacity:1" /></g>
+<g><title>gene_s2100000 -> gene_s4100000</title><polygon points="1128.55268469923,316.8 1142.27896649172,316.8 708.437626160678,606.4 708.437626160678,592.673718207509" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
 <g><title>gene_s303 -> gene_s403000</title><polygon points="297.103350827614,547.2 306.893419459023,547.2 206.519983851433,643.2 196.729915220024,643.2" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
-
+<g><title>gene_s203 -> gene_s303</title><polygon points="297.607993540573,387.2 307.398062171982,387.2 306.893419459023,483.2 297.103350827614,483.2" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s403000 -> gene_s406000</title><path d="M206.519983851433 707.2 L196.729915220024 707.2 A74.7628179249092 32  0 1 0   346.255551069843 636.8 L292.107387969318 636.8 A42.7937020589423 28.8 0 0 1 206.519983851433 707.2 Z"  style="fill:#FF8C00;opacity:1" /></g><g><title>gene_s404000 -> gene_s4020000</title><path d="M243.762616067824 643.2 L225.040371417037 643.2 A88.3881711748082 80  0 0 1   401.816713766653 643.2 L362.353653613242 643.2 A59.2955187727089 64 0 1 0 243.762616067824 643.2 Z"  style="fill:#FF8C00;opacity:0.5" /></g>
 
 <g><title>s1,2,3050</title><rect x="150" y="159.2" width="153.865563181268" height="3.2" style="fill:blue;opacity:0.2"   /></g>
 <g><title>s1,3000,6010</title><rect x="308.91199031086" y="159.2" width="151.947920872023" height="3.2" style="fill:blue;opacity:0.2"   /></g>

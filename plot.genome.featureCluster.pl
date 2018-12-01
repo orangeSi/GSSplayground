@@ -24,6 +24,7 @@ if(! -d "$outdir"){
 
 my %conf = &read_conf($conf);
 %conf = &default_setting(%conf);
+&check_para();
 #die  "AAA $conf{feature_setting}{s2000_3_2000_6000}{display_feature_label}\n\n";
 
 #&display_conf(%conf);
@@ -102,9 +103,9 @@ while(@track_order){
 	my $ref_name_x = (1- $ref_name_right_gap )* $svg_width * $ref_name_width_ratio; # sample name 右下角end的x和y轴
 	#my $ref_name_y = $top_distance + (0.5 + 0.05*$conf{genome_height_ratio}) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
 	my $ref_name_y;
-	if($conf{genome_height_ratio} <= 0.05){
+	if($conf{genome_height_ratio} < 0.05){
 		$ref_name_y = $top_distance + (0.5 + $genome_height_raw*$conf{genome_height_ratio}*1.5) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
-	}elsif($conf{genome_height_ratio} <= 0.2){
+	}elsif($conf{genome_height_ratio} < 0.2){
 		$ref_name_y = $top_distance + (0.5 + $genome_height_raw*$conf{genome_height_ratio}*0.5) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
 	}else{
 		$ref_name_y = $top_distance + (0.5 + $genome_height_raw*$conf{genome_height_ratio}*0.2) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
@@ -174,7 +175,7 @@ while(@track_order){
 		foreach my $index(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){
 			#next if($index eq "len");
 			#print "here $sample $block_index $scf[0] $index\n";
-			my $gene_height_medium=$id_line_height*$conf{feature_height_ratio};
+			my $gene_height_medium;
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
 			#print "index id is $index_id\n";
 			die "die:index_id is $index_id,$sample $block_index $scf[0] $index\n" if(not $index_id);
@@ -195,7 +196,17 @@ while(@track_order){
 			$index_label_position = (exists $conf{feature_setting}{$index_id}{pos_feature_label})? $conf{feature_setting}{$index_id}{pos_feature_label}:$conf{pos_feature_label};
 			#print "$index_id\t$index_label_position\n";
 			$index_label_angle = (exists $conf{feature_setting}{$index_id}{label_rotate_angle})? $conf{feature_setting}{$index_id}{label_rotate_angle}:$conf{label_rotate_angle};
-			$gene_height_medium = $id_line_height * $conf{feature_setting}{$index_id}{feature_height_ratio} if(exists $conf{feature_setting}{$index_id}{feature_height_ratio});
+	        
+    		my $feature_height_ratio = (exists $conf{feature_setting}{$index_id}{feature_height_ratio})? $conf{feature_setting}{$index_id}{feature_height_ratio}:$conf{feature_height_ratio};
+            my $feature_height_unit=(exists $conf{feature_setting}{$index_id}{feature_height_unit})? $conf{feature_setting}{$index_id}{feature_height_unit}:$conf{feature_height_unit};
+            if($feature_height_unit=~ /percent/){
+                $gene_height_medium=($sample_single_height-$id_line_height-1)/100*$feature_height_ratio;
+            }elsif($feature_height_unit=~ /backbone/){
+    			$gene_height_medium = $id_line_height * $feature_height_ratio;
+            }else{
+                print "error:feature_height_unit only support percent or backbone, but $feature_height_unit for $index_id\n"
+            }
+
 			#print "index_label_angle is $index_label_angle\n";
 			my $gene_height_top=($conf{feature_shape}=~ /arrow/)? $id_line_height*$conf{feature_arrow_sharp_extent}:0;
 			my $sharp_len=($conf{ignore_sharp_arrow}=~ /yes/)? 0:$gene_height_top;
@@ -515,13 +526,17 @@ if($conf{scale_display}=~ /yes/i){
 		foreach my $tick(0..$ticks){
 			my $tick_x=$tick*$unit_scale + $x_start_scale;
 			my $tick_label=$tick*$conf{scale_ratio};
+            last if( ($max_length - $tick_label) < $conf{scale_ratio} );
+			$tick_label=&format_scale($tick_label);
 			$orders{$conf{scale_order}}.="<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # ticks
 			$orders{$conf{scale_order}}.= "<text x=\"$tick_x\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$tick_label</text>\n"; # label of feature
 
 		}
 		if($cluster_width_ratio*$svg_width % $unit_scale){
 			$orders{$conf{scale_order}}.="<line x1=\"$x_end_scale\" y1=\"$tick_y1\" x2=\"$x_end_scale\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # last tick
-			my $last_tick_label=$max_length;
+			my $last_tick_label=&format_scale($max_length);
+            $last_tick_label.="bp";
+
 			$orders{$conf{scale_order}}.= "<text x=\"$x_end_scale\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$last_tick_label</text>\n"; # label of feature
 
 		}
@@ -542,6 +557,15 @@ print "outfile is  $outdir/$prefix.svg\n";
 
 #$svg.=&draw_genes($gff{$sample}{id}{$id}{$index}{start},$gff{$sample}{id}{$id}{$index}{end},$gff{$sample}{id}{$id}{$index}{strand},$gene_height_medium,$gene_height_top);
 
+
+sub format_scale(){
+            my ($last_tick_label)=@_;
+            $last_tick_label=reverse($last_tick_label);
+			$last_tick_label=~ s/(\d\d\d)/$1,/g;
+            $last_tick_label=reverse($last_tick_label);
+            return $last_tick_label;
+}
+
 sub read_list(){
 	###start:get scaffold length in genome file and scaffold length  in gff file
 	my %fts;
@@ -557,7 +581,7 @@ sub read_list(){
 		$sample_num++;
 		my $block_index=1;
 		my %scf_block_id;
-		my ($sample,$gffs,$genome,@arrs)=split(/\t/,$_); # $seq_id,$seq_draw_start,$seq_draw_end
+		my ($sample,$gffs,$genome,@arrs)=split(/\s+/,$_); # $seq_id,$seq_draw_start,$seq_draw_end
 		push @track_order, $sample;
 
 		if(exists $uniq_sample{$sample}){
@@ -567,7 +591,7 @@ sub read_list(){
 		}
 		print "$sample\n";
 		if(@arrs%3){
-			die "$list line $. error format:$_, should be separated by \\t \n"; 
+			die "error:$list line $. error format:$_, should be separated by \\t \n"; 
 		}
 		open GE,"$genome" or die "$!";
 		$/=">";<GE>;
@@ -634,7 +658,7 @@ sub read_list(){
 						$genome{$sample}{$arr[0]}{$arrs_index}{len}=$seq_draw_end -$seq_draw_start+1; # 一条scaffold有多个block
 						$arr[3]=$arr[3]-$seq_draw_start +1;
 						$arr[4]=$arr[4]-$seq_draw_start +1;
-						$block_index = $arrs_index;
+						$block_index = $arrs_index/3;
 						#print "hereis $block_index\n";
 						if(not exists  $gff{$sample}{chooselen_single}{$block_index}){
 							$gff{$sample}{chooselen_single}{$block_index}{len} = $genome{$sample}{$arr[0]}{$arrs_index}{len};
@@ -649,8 +673,11 @@ sub read_list(){
 				}else{ # list里面没有定义seq_id/start/end,即要画full-length of scaffold
 					#print "not seq_id\n";
 					#$block_index = $conf{'scaffold_order'}{$sample}{$arr[0]};
-					$scf_block_id{$arr[0]} = $. if(not exists $scf_block_id{$arr[0]});
-					$block_index=$scf_block_id{$arr[0]};
+                    if(not exists $scf_block_id{$arr[0]}){
+                        $block_index++;
+                        $scf_block_id{$arr[0]}="";
+                    }
+                    $block_index=1 if($block_index==0);
 					if(not exists  $gff{$sample}{chooselen_single}{$block_index}){
 						$gff{$sample}{chooselen_single}{$block_index}{len} = $genome{$sample}{$arr[0]}{len};
 						$gff{$sample}{chooselen_single}{$block_index}{start} = 1;
@@ -660,11 +687,8 @@ sub read_list(){
 						#print "$sample	$gff{$sample}{chooselen_all}\n";
 						$gff{$sample}{chooselen_all} += $space_len ; ## 这个500最好改成每个track的blocks的平均长度的一定比例，比如一半
 					}
-					#$gff{$sample}{block}{$block_index}{$arr[0]}{len}=$genome{$sample}{$arr[0]}{len}; # 一条scaffold就是一个block
 				}
-				#print "block $sample $block_index\n";
 
-				#next if($arr[2] ne "gene" || $block_index == -1); ## 目前的只是画基因的cluster,后面会把其他组分也加进去
 				next if(@arrs && $block_index == -1);
 				#die "die1\n" if($start_f == 5998);
 				my $flag=1;
@@ -675,8 +699,10 @@ sub read_list(){
 				}
 				next if($flag);
 
-				$_=~ /\sID=([^;]+);/;
+				$_=~ /\sID=(\S+)/;
 				my $feature_id=$1;
+                $feature_id=~ s/\s//g;
+                $feature_id=~ s/;.*//g;
 				die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);
 				if(exists $fts{$feature_id}){
 					die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
@@ -734,6 +760,7 @@ sub draw_genes(){
 	$shape=(exists $conf{feature_setting}{$feature_id}{feature_shape})? $conf{feature_setting}{$feature_id}{feature_shape}:$conf{feature_shape};
 	my $feature_shift_y_unit=(exists $conf{feature_setting}{$feature_id}{feature_shift_y_unit})? $conf{feature_setting}{$feature_id}{feature_shift_y_unit}:$conf{feature_shift_y_unit};
 	my $feature_shift_x=(exists $conf{feature_setting}{$feature_id}{feature_shift_x})? $conf{feature_setting}{$feature_id}{feature_shift_x}:$conf{feature_shift_x};
+
 	if($feature_shift_x!~ /^[\+\-]?\d+\.?\d*$/){
 		die "error: feature_shift_x format like 0 or +10 or -10, unit is bp\n"
 	}
@@ -749,7 +776,15 @@ sub draw_genes(){
 		}
 		#print "circle shift_unit is $shift_unit\n";
 	}
-	if($feature_shift_y=~ /^\s*([+-])?([\d\.]+)/){
+    my @feature_shift_y_units = ("radius", "backbone", "percent");
+    die "\nerror: not support $feature_shift_y_unit for $feature_id. only support @feature_shift_y_units\n" if(! grep(/^$feature_shift_y_unit$/, @feature_shift_y_units));
+    if($feature_shift_y_unit=~ /percent/){
+        $shift_unit=($sample_single_height-$id_line_height-1)/100;
+    }
+
+    $feature_shift_y=~ s/^([1-9].*)/\+$1/;
+	if($feature_shift_y=~ /^([+-])([\d\.]+)/){
+        print "$feature_shift_y\n";
 		if($1 eq "+" || $1 eq ""){
 			$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height;
 		}else{
@@ -1112,6 +1147,7 @@ sub default_setting(){
 	$conf{top_bottom_margin} ||=0.1;
 	$conf{genome_height_ratio} ||= 1;
 	$conf{feature_height_ratio} ||= 1.5;
+	$conf{feature_height_unit} ||= "backbone"; # or percent
 	$conf{space_between_blocks} ||= 1.1;
 	$conf{feature_label_size} ||=10;
 	$conf{feature_label_color} ||="black";
@@ -1168,7 +1204,7 @@ sub default_setting(){
 	$conf{cross_link_orientation} ||="forward";
 	$conf{cross_link_color} ||="#FF8C00";
 	$conf{cross_link_color_reverse} ||="#3CB371";
-	$conf{feature_shift_y_unit} ||="backbone"; # radius or backbone
+	$conf{feature_shift_y_unit} ||="backbone"; # radius or backbone or percent
 	$conf{cross_link_orientation_ellipse} ||="up";
 	$conf{cross_link_shape} ||="quadrilateral";
 	$conf{cross_link_height_ellipse} ||="10,8";
@@ -1235,8 +1271,17 @@ sub default_setting(){
 				$_=~ s/#\s+.*$//;
 				$_=~ s/\s+$//;
 
-				my @arr = split(/\t+/, $_);
-				if(@arr!=3){die "error: $conf{feature_setting} should only have 3 columns seperate by \\t, but $_ is not\n "}
+				my @arr;
+                if($_=~ /\s+\S+_label\s+/){
+                   @arr=split(/\t+/, $_);
+                }else{
+                   @arr=split(/\s+/, $_);
+                }
+				if(@arr!=3){
+                    my $tmp=scalar(@arr);
+                    for my $k(@arr){print "$k\n"}
+                    die "error: $conf{feature_setting} should only have 3 columns seperate by \\t, but $_ has $tmp\n "
+                }
 				$conf{feature_setting}{$arr[0]}{$arr[1]}=$arr[2];
 				#if($arr[0]=~ /s2000.3.2000.6000/){
 					#print "s2000.3.2000.6000 is ,$arr[0],$arr[1],$arr[2], line is $_\n";
@@ -1322,4 +1367,13 @@ sub check_track_order(){
 		@track_order = @track_reorder;
 	}
 
+}
+
+
+sub check_para(){
+    my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend","depth_hist","depth_scatter","depth_scatter_line","display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit","feature_ytick_hgrid_line","feature_ytick_region","genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent","lr_mapping","padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","sr_mapping","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit");
+    for my $k (keys %conf){
+        die "\nerror: not support $k in $conf. only support @paras\n" if(!grep(/^$k$/, @paras));
+    }
+    print "check done\n";
 }
