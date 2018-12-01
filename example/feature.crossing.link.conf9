@@ -32,3 +32,7 @@ gene_s404000	gene_s4020000	cross_link_shape	ellipse 	# ellipse or w or quadrilat
 gene_s404000	gene_s4020000	cross_link_height_ellipse	50,40 # form 0 -> 100
 gene_s404000	gene_s4020000	cross_link_anchor_pos	up_up
 gene_s404000	gene_s4020000	cross_link_opacity	0.5
+
+gene_s406000	gene_s4060000	cross_link_shape	ellipse 	# ellipse or w or quadrilateral or line, default is quadrilateral
+gene_s406000	gene_s4060000	cross_link_height_ellipse	50,40 # form 0 -> 100
+gene_s406000	gene_s4060000	cross_link_anchor_pos	up_up
