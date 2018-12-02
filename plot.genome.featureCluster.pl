@@ -26,7 +26,8 @@ if(! -d "$outdir"){
 }
 
 my @track_reorder;
-my %conf = &read_conf($conf);
+my @funcs=();
+my %conf = &read_conf($conf,@funcs);
 ($conf, $track_reorder) = &default_setting(%conf);
 %conf=%$conf;
 @track_reorder=@$track_reorder;
@@ -50,11 +51,10 @@ if($ref_name_width_ratio+$cluster_width_ratio+$legend_width_ratio !=1){
 
 
 ###start:get scaffold length in genome file and scaffold length  in gff file of list 
-my ($genome, $gff, $track_order, $sample_num, $fts, $sample_scf) = &read_list($list, \%conf);
+my ($genome, $gff, $track_order, $sample_num, $fts) = &read_list($list, \%conf);
 my %genome=%$genome;
 my %gff=%$gff;
 my %fts=%$fts;
-my %sample_scf=%$sample_scf;
 my @track_order=@$track_order;
 
 &check_track_order(\@track_order, \@track_reorder);

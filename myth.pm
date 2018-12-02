@@ -23,7 +23,6 @@ sub read_list(){
 	my @features=split(/,/, $conf->{feature_keywords});
     my $space_len = $conf->{space_between_blocks};# 500bp是默认的blocks之间的间距
 	my %uniq_sample;
-	my %sample_scf;
 	open LI,"$list" or die "$!";
 	while(<LI>){
 		chomp;
@@ -84,13 +83,15 @@ sub read_list(){
 					$arr[3] = $end_f;
 					$arr[4] = $start_f;
 				}
+				my $flag=1;
+				foreach my $f(@features){
+					next if ($f=~ /^\s*$/);
+					$f=~ s/\s//g;
+					$flag =0 if($arr[2]=~ /$f/);
+				}
+		        next if($flag);
 
 				if(@arrs){ # has seq_id mean not full length of whole gff
-					#my $xxx=scalar(@arrs);
-					#if ($xxx == 9){
-					#	print "arrs is $xxx,$sample @arrs end\n";
-					#}
-
 					for (my $arrs_index=0;$arrs_index < scalar(@arrs);$arrs_index+=3){
 						my ($seq_id,$seq_draw_start,$seq_draw_end) = @arrs[$arrs_index..$arrs_index+2];
 						die "error: $seq_id not in $gffs\n" if(not exists $all_seq_id{$seq_id});
@@ -108,7 +109,7 @@ sub read_list(){
 						$genome{$sample}{$arr[0]}{$arrs_index}{len}=$seq_draw_end -$seq_draw_start+1; # 一条scaffold有多个block
 						$arr[3]=$arr[3]-$seq_draw_start +1;
 						$arr[4]=$arr[4]-$seq_draw_start +1;
-						$block_index = $arrs_index/3;
+						$block_index = ($arrs_index/3+1);
 						#print "hereis $block_index\n";
 						if(not exists  $gff{$sample}{chooselen_single}{$block_index}){
 							$gff{$sample}{chooselen_single}{$block_index}{len} = $genome{$sample}{$arr[0]}{$arrs_index}{len};
@@ -117,7 +118,12 @@ sub read_list(){
 							#gff{$sample}{chooselen_single}{$block_index}{scf_id} = $arr[0];
 							$gff{$sample}{chooselen_all} +=$gff{$sample}{chooselen_single}{$block_index}{len}; ## 把每行所有block长度加起来
 							$gff{$sample}{chooselen_all} += $space_len ; ## 加上 每个block之间的宽度，500bp相当于一个基因的长度,后面最好把这个500bp改成每个track实际的平均基因长度
-						}
+                        }
+                        my ($gff,$fts);
+                        ($conf, $gff, $block_index, $gene_index, $fts) = &go_line($conf, \%gff, $sample, $block_index, $gffs, $., $start_f, $end_f, \@arr, \@arrs, $_, $gene_index, \%fts);
+                        %gff=%$gff;
+                        %fts=%$fts;
+
 					}
 
 				}else{ # list里面没有定义seq_id/start/end,即要画full-length of scaffold
@@ -136,59 +142,63 @@ sub read_list(){
 						#print "$sample	$gff{$sample}{chooselen_all}\n";
 						$gff{$sample}{chooselen_all} += $space_len ; ## 这个500最好改成每个track的blocks的平均长度的一定比例，比如一半
 					}
-				}
 
-				next if(@arrs && $block_index == -1);
-				#die "die1\n" if($start_f == 5998);
-				my $flag=1;
-				foreach my $f(@features){
-					next if ($f=~ /^\s*$/);
-					$f=~ s/\s//g;
-					$flag =0 if($arr[2]=~ /$f/);
-				}
-				next if($flag);
+                    my ($gff,$fts);
+                    ($conf, $gff, $block_index, $gene_index, $fts) = &go_line($conf, \%gff, $sample, $block_index, $gffs, $., $start_f, $end_f, \@arr, \@arrs, $_, $gene_index, \%fts);
+                    %gff=%$gff;
+                    %fts=%$fts;
 
-				$_=~ /\sID=(\S+)/;
-				my $feature_id=$1;
-                $feature_id=~ s/\s//g;
-                $feature_id=~ s/;.*//g;
-				die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);
-				if(exists $fts{$feature_id}){
-					die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
-				}else{
-					$fts{$feature_id}{sample} = $sample;
-					$fts{$feature_id}{scf} = $arr[0];
-					#print "fts has $feature_id\n";
 				}
-				$gene_index++;
-				if(!$arr[3]){die "error:$gffs line $.\n"}
-				$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{start}=$arr[3]; # block_index 是指每行中每个cluster的左右顺序
-				$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{start_raw}=$start_f; # block_index 是指每行中每个cluster的左右顺序
-				$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{end}=$arr[4];
-				$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{end_raw}=$end_f;
-				$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{id}=$feature_id;
-				if(!$feature_id){die "die:line is $_\n"}
-				$gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{strand}=($arr[6]=~ /\+/)? 1:0;
-				#foreach my $index(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){
-				$conf->{feature_setting2}->{$feature_id}->{start}=$start_f;
-				$conf->{feature_setting2}->{$feature_id}->{end}=$end_f;
-				$conf->{feature_setting2}->{$feature_id}->{sample}=$sample;
-				$conf->{feature_setting2}->{$feature_id}->{scf_id}=$arr[0];
-				$conf->{feature_setting2}->{$feature_id}->{type}=$arr[2];
-				die "error: sample $sample should not have : char\n" if($sample=~ /:/ && exists $conf->{feature_ytick_region});
-				die "error: scaffold_id $arr[0] should not have : char\n" if($arr[0]=~ /:/ && exists $conf->{feature_ytick_region});
-				$sample_scf{$sample}{$arr[0]}="";
-				#print "block $sample $block_index $arr[0] $gene_index $arr[3] $arr[4] $feature_id\n";
-				#print "id is $feature_id\n";
+    
 
 			}
 			close GFF;
 		}
 	}
 	close LI;
-	return (\%genome, \%gff, \@track_order, $sample_num, \%fts, \%sample_scf);
+	return (\%genome, \%gff, \@track_order, $sample_num, \%fts);
 	####end:get scaffold length in genome file and scaffold length  in gff file
 }
+
+sub go_line(){
+    my ($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, $arr, $arrs, $line, $gene_index, $fts)=@_;
+                my @arr=@{$arr};
+                my @arrs=@{$arrs};
+
+				$line=~ /\sID=(\S+)/;
+				my $feature_id=$1;
+                $feature_id=~ s/\s//g;
+                $feature_id=~ s/;.*//g;
+				die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);
+				if(exists $fts->{$feature_id}){
+					die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+				}else{
+					$fts->{$feature_id}{sample} = $sample;
+					$fts->{$feature_id}{scf} = $arr[0];
+					#print "fts has $feature_id\n";
+				}
+				$gene_index++;
+				if(!$arr[3]){die "error:$gffs line $line_num\n"}
+				$gff->{$sample}->{block}->{$block_index}->{$arr[0]}->{$gene_index}->{start}=$arr[3]; # block_index 是指每行中每个cluster的左右顺序
+				$gff->{$sample}->{block}->{$block_index}->{$arr[0]}->{$gene_index}->{start_raw}=$start_f; # block_index 是指每行中每个cluster的左右顺序
+				$gff->{$sample}->{block}->{$block_index}->{$arr[0]}->{$gene_index}->{end}=$arr[4];
+				$gff->{$sample}->{block}->{$block_index}->{$arr[0]}->{$gene_index}->{end_raw}=$end_f;
+				$gff->{$sample}->{block}->{$block_index}->{$arr[0]}->{$gene_index}->{id}=$feature_id;
+                $gff->{$sample}->{scf}->{$arr[0]}="";
+				if(!$feature_id){die "die:line is $line\n"}
+				$gff->{$sample}->{block}->{$block_index}->{$arr[0]}->{$gene_index}->{strand}=($arr[6]=~ /\+/)? 1:0;
+				$conf->{feature_setting2}->{$feature_id}->{start}=$start_f;
+				$conf->{feature_setting2}->{$feature_id}->{end}=$end_f;
+				$conf->{feature_setting2}->{$feature_id}->{sample}=$sample;
+				$conf->{feature_setting2}->{$feature_id}->{scf_id}=$arr[0];
+				$conf->{feature_setting2}->{$feature_id}->{type}=$arr[2];
+				die "error: sample $sample should not have : char\n" if($sample=~ /:/);
+				die "error: scaffold_id $arr[0] should not have : char\n" if($arr[0]=~ /:/);
+
+    return ($conf, $gff, $block_index, $gene_index, $fts);
+}
+
+
 sub get_para(){
     my ($para, $feature_id, $conf)=@_;
     #print "$para,$feature_id,\n";
@@ -569,7 +579,7 @@ sub display_conf(){
 }
 
 sub read_conf(){
-	my ($conf) = @_;
+	my ($conf,@funcs) = @_;
 	my %confs;
 	open IN, "$conf" or die "$!";
 	while(<IN>){
@@ -587,7 +597,11 @@ sub read_conf(){
 		if($value eq ""){
 			die "error format: $_\n";
 		}
-		$confs{$key} = $value;
+        if(grep(/^$key$/, @funcs)){
+		    push @{$confs{$key}},$value;
+        }else{
+		    $confs{$key} = $value;
+        }
 		print "$key -> $value\n";
 	}
 	close IN;
@@ -604,7 +618,7 @@ sub default_setting(){
 	$conf{genome_height_ratio} ||= 1;
 	$conf{feature_height_ratio} ||= 1.5;
 	$conf{feature_height_unit} ||= "backbone"; # or percent
-	$conf{space_between_blocks} ||= 1.1;
+	$conf{space_between_blocks} ||= 500; # bp
 	$conf{feature_label_size} ||=10;
 	$conf{feature_label_color} ||="black";
 	$conf{label_rotate_angle} =(exists $conf{label_rotate_angle})? $conf{label_rotate_angle}:-60;
