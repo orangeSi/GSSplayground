@@ -1,5 +1,11 @@
 s3	add	ytick	9589	9609	.	+	.	ID=s3.s3.3.5100.9609.5;
+s3	add	ytick	5100	9609	.	+	.	ID=s3.s3.3.5100.9609.5.tick0.hgrid;
 s3	add	ytick	9529	9609	.	+	.	ID=s3.s3.3.5100.9609.5.tick0;
+s3	add	ytick	5100	9609	.	+	.	ID=s3.s3.3.5100.9609.5.tick1.hgrid;
 s3	add	ytick	9529	9609	.	+	.	ID=s3.s3.3.5100.9609.5.tick1;
+s3	add	ytick	5100	9609	.	+	.	ID=s3.s3.3.5100.9609.5.tick2.hgrid;
 s3	add	ytick	9529	9609	.	+	.	ID=s3.s3.3.5100.9609.5.tick2;
+s3	add	ytick	5100	9609	.	+	.	ID=s3.s3.3.5100.9609.5.tick3.hgrid;
 s3	add	ytick	9529	9609	.	+	.	ID=s3.s3.3.5100.9609.5.tick3;
+s3	add	ytick	5100	9609	.	+	.	ID=s3.s3.3.5100.9609.5.tick4.hgrid;
+s3	add	ytick	9529	9609	.	+	.	ID=s3.s3.3.5100.9609.5.tick4;
