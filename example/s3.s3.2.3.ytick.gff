@@ -1,0 +1,13 @@
+s3	add	ytick	4980	5000	.	+	.	ID=s3.s3.2.2020.5000.3;
+s3	add	ytick	2020	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick0.hgrid;
+s3	add	ytick	4920	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick0;
+s3	add	ytick	2020	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick1.hgrid;
+s3	add	ytick	4920	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick1;
+s3	add	ytick	2020	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick2.hgrid;
+s3	add	ytick	4920	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick2;
+s3	add	ytick	2020	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick3.hgrid;
+s3	add	ytick	4920	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick3;
+s3	add	ytick	2020	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick4.hgrid;
+s3	add	ytick	4920	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick4;
+s3	add	ytick	2020	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick5.hgrid;
+s3	add	ytick	4920	5000	.	+	.	ID=s3.s3.2.2020.5000.3.tick5;

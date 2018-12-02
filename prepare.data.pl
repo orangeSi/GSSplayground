@@ -109,7 +109,7 @@ sub depth_hist(){
                 print CONF "$ytick_setting_conf";
                 close CONF;
 
-                my ($hist_gff, $hist_setting_conf)=&depth_hist_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $hist_label_size);
+                my ($hist_gff, $hist_setting_conf)=&depth_hist_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $hist_label_size, $k_index);
                 my $out_hist_gff="$sample.$scf.$block_index.$k_index.hist.gff";
                 print "output $out_hist_gff\n";
                 push @{$outname{$sample}{gff}},$out_hist_gff;
@@ -135,7 +135,7 @@ sub depth_hist(){
 }
 
 sub depth_hist_run(){
-    my ($s1, $e1, $s2, $e2, $title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $hist_label_size)=@_;
+    my ($s1, $e1, $s2, $e2, $title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $hist_label_size, $k_index)=@_;
     my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block}->{start};
     my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block}->{end};
     print "info is $info\n";
@@ -179,7 +179,7 @@ sub depth_hist_run(){
             $padding_hist_label="+1";
         }
         $depth=int($depth);
-        my $hist_id="$sample.$scf.$block.hist.$window";
+        my $hist_id="$sample.$scf.$block.hist.$window.$k_index";
         $hist_gff.="$scf\tadd\tdepth_hist\t$hist_start\t$hist_end\t.\t+\t.\tID=$hist_id;\n";
         $hist_setting_conf.="\n$hist_id\tfeature_height_ratio\t$hist_height\n";
         $hist_setting_conf.="\n$hist_id\tfeature_height_unit\tpercent\n";

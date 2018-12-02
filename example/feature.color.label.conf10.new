@@ -4,7 +4,7 @@ s3.s3.1.11.2010.1	feature_height_ratio	50
 s3.s3.1.11.2010.1	feature_height_unit	percent
 s3.s3.1.11.2010.1	feature_shape	rect
 s3.s3.1.11.2010.1	feature_shift_x	20
-s3.s3.1.11.2010.1	feature_shift_y	-35.5
+s3.s3.1.11.2010.1	feature_shift_y	-30.5
 s3.s3.1.11.2010.1	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1	display_feature_label	no
 s3.s3.1.11.2010.1	pos_feature_label	right_medium
@@ -18,7 +18,7 @@ s3.s3.1.11.2010.1.tick0.hgrid	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick0.hgrid	feature_shape	rect
 s3.s3.1.11.2010.1.tick0.hgrid	display_feature_label	no
 s3.s3.1.11.2010.1.tick0.hgrid	feature_opacity	0.5
-s3.s3.1.11.2010.1.tick0.hgrid	feature_shift_y	-10
+s3.s3.1.11.2010.1.tick0.hgrid	feature_shift_y	-5
 s3.s3.1.11.2010.1.tick0.hgrid	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick0.hgrid	feature_color	black
 
@@ -27,7 +27,7 @@ s3.s3.1.11.2010.1.tick0	feature_height_ratio	1
 s3.s3.1.11.2010.1.tick0	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick0	feature_shape	rect
 s3.s3.1.11.2010.1.tick0	feature_shift_x	80
-s3.s3.1.11.2010.1.tick0	feature_shift_y	-10
+s3.s3.1.11.2010.1.tick0	feature_shift_y	-5
 s3.s3.1.11.2010.1.tick0	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick0	display_feature_label	yes
 s3.s3.1.11.2010.1.tick0	feature_label	20
@@ -48,7 +48,7 @@ s3.s3.1.11.2010.1.tick1.hgrid	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick1.hgrid	feature_shape	rect
 s3.s3.1.11.2010.1.tick1.hgrid	display_feature_label	no
 s3.s3.1.11.2010.1.tick1.hgrid	feature_opacity	0.5
-s3.s3.1.11.2010.1.tick1.hgrid	feature_shift_y	-20
+s3.s3.1.11.2010.1.tick1.hgrid	feature_shift_y	-15
 s3.s3.1.11.2010.1.tick1.hgrid	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick1.hgrid	feature_color	black
 
@@ -57,7 +57,7 @@ s3.s3.1.11.2010.1.tick1	feature_height_ratio	1
 s3.s3.1.11.2010.1.tick1	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick1	feature_shape	rect
 s3.s3.1.11.2010.1.tick1	feature_shift_x	80
-s3.s3.1.11.2010.1.tick1	feature_shift_y	-20
+s3.s3.1.11.2010.1.tick1	feature_shift_y	-15
 s3.s3.1.11.2010.1.tick1	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick1	display_feature_label	yes
 s3.s3.1.11.2010.1.tick1	feature_label	22
@@ -78,7 +78,7 @@ s3.s3.1.11.2010.1.tick2.hgrid	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick2.hgrid	feature_shape	rect
 s3.s3.1.11.2010.1.tick2.hgrid	display_feature_label	no
 s3.s3.1.11.2010.1.tick2.hgrid	feature_opacity	0.5
-s3.s3.1.11.2010.1.tick2.hgrid	feature_shift_y	-30
+s3.s3.1.11.2010.1.tick2.hgrid	feature_shift_y	-25
 s3.s3.1.11.2010.1.tick2.hgrid	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick2.hgrid	feature_color	black
 
@@ -87,7 +87,7 @@ s3.s3.1.11.2010.1.tick2	feature_height_ratio	1
 s3.s3.1.11.2010.1.tick2	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick2	feature_shape	rect
 s3.s3.1.11.2010.1.tick2	feature_shift_x	80
-s3.s3.1.11.2010.1.tick2	feature_shift_y	-30
+s3.s3.1.11.2010.1.tick2	feature_shift_y	-25
 s3.s3.1.11.2010.1.tick2	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick2	display_feature_label	yes
 s3.s3.1.11.2010.1.tick2	feature_label	24
@@ -108,7 +108,7 @@ s3.s3.1.11.2010.1.tick3.hgrid	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick3.hgrid	feature_shape	rect
 s3.s3.1.11.2010.1.tick3.hgrid	display_feature_label	no
 s3.s3.1.11.2010.1.tick3.hgrid	feature_opacity	0.5
-s3.s3.1.11.2010.1.tick3.hgrid	feature_shift_y	-40
+s3.s3.1.11.2010.1.tick3.hgrid	feature_shift_y	-35
 s3.s3.1.11.2010.1.tick3.hgrid	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick3.hgrid	feature_color	black
 
@@ -117,7 +117,7 @@ s3.s3.1.11.2010.1.tick3	feature_height_ratio	1
 s3.s3.1.11.2010.1.tick3	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick3	feature_shape	rect
 s3.s3.1.11.2010.1.tick3	feature_shift_x	80
-s3.s3.1.11.2010.1.tick3	feature_shift_y	-40
+s3.s3.1.11.2010.1.tick3	feature_shift_y	-35
 s3.s3.1.11.2010.1.tick3	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick3	display_feature_label	yes
 s3.s3.1.11.2010.1.tick3	feature_label	26
@@ -138,7 +138,7 @@ s3.s3.1.11.2010.1.tick4.hgrid	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick4.hgrid	feature_shape	rect
 s3.s3.1.11.2010.1.tick4.hgrid	display_feature_label	no
 s3.s3.1.11.2010.1.tick4.hgrid	feature_opacity	0.5
-s3.s3.1.11.2010.1.tick4.hgrid	feature_shift_y	-50
+s3.s3.1.11.2010.1.tick4.hgrid	feature_shift_y	-45
 s3.s3.1.11.2010.1.tick4.hgrid	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick4.hgrid	feature_color	black
 
@@ -147,7 +147,7 @@ s3.s3.1.11.2010.1.tick4	feature_height_ratio	1
 s3.s3.1.11.2010.1.tick4	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick4	feature_shape	rect
 s3.s3.1.11.2010.1.tick4	feature_shift_x	80
-s3.s3.1.11.2010.1.tick4	feature_shift_y	-50
+s3.s3.1.11.2010.1.tick4	feature_shift_y	-45
 s3.s3.1.11.2010.1.tick4	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick4	display_feature_label	yes
 s3.s3.1.11.2010.1.tick4	feature_label	28
@@ -168,7 +168,7 @@ s3.s3.1.11.2010.1.tick5.hgrid	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick5.hgrid	feature_shape	rect
 s3.s3.1.11.2010.1.tick5.hgrid	display_feature_label	no
 s3.s3.1.11.2010.1.tick5.hgrid	feature_opacity	0.5
-s3.s3.1.11.2010.1.tick5.hgrid	feature_shift_y	-60
+s3.s3.1.11.2010.1.tick5.hgrid	feature_shift_y	-55
 s3.s3.1.11.2010.1.tick5.hgrid	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick5.hgrid	feature_color	black
 
@@ -177,7 +177,7 @@ s3.s3.1.11.2010.1.tick5	feature_height_ratio	1
 s3.s3.1.11.2010.1.tick5	feature_height_unit	percent
 s3.s3.1.11.2010.1.tick5	feature_shape	rect
 s3.s3.1.11.2010.1.tick5	feature_shift_x	80
-s3.s3.1.11.2010.1.tick5	feature_shift_y	-60
+s3.s3.1.11.2010.1.tick5	feature_shift_y	-55
 s3.s3.1.11.2010.1.tick5	feature_shift_y_unit	percent
 s3.s3.1.11.2010.1.tick5	display_feature_label	yes
 s3.s3.1.11.2010.1.tick5	feature_label	30
@@ -192,1365 +192,1698 @@ s3.s3.1.11.2010.1.tick5	feature_color	green
 s3.s3.1.11.2010.1.tick5	feature_opacity	1
 
 
-s3.s3.1.hist.0	feature_height_ratio	15.15
-
-s3.s3.1.hist.0	feature_height_unit	percent
-s3.s3.1.hist.0	feature_shape	rect
-s3.s3.1.hist.0	feature_shift_y	-17.575
-s3.s3.1.hist.0	feature_shift_y_unit	percent
-s3.s3.1.hist.0	display_feature_label	no
-s3.s3.1.hist.0	feature_color	green
-s3.s3.1.hist.0	feature_opacity	1
-
-s3.s3.1.hist.1	feature_height_ratio	40.35
-
-s3.s3.1.hist.1	feature_height_unit	percent
-s3.s3.1.hist.1	feature_shape	rect
-s3.s3.1.hist.1	feature_shift_y	-30.175
-s3.s3.1.hist.1	feature_shift_y_unit	percent
-s3.s3.1.hist.1	display_feature_label	no
-s3.s3.1.hist.1	feature_color	green
-s3.s3.1.hist.1	feature_opacity	1
-
-s3.s3.1.hist.2	feature_height_ratio	12.45
-
-s3.s3.1.hist.2	feature_height_unit	percent
-s3.s3.1.hist.2	feature_shape	rect
-s3.s3.1.hist.2	feature_shift_y	-16.225
-s3.s3.1.hist.2	feature_shift_y_unit	percent
-s3.s3.1.hist.2	display_feature_label	no
-s3.s3.1.hist.2	feature_color	green
-s3.s3.1.hist.2	feature_opacity	1
-
-s3.s3.1.hist.3	feature_height_ratio	31.75
-
-s3.s3.1.hist.3	feature_height_unit	percent
-s3.s3.1.hist.3	feature_shape	rect
-s3.s3.1.hist.3	feature_shift_y	-25.875
-s3.s3.1.hist.3	feature_shift_y_unit	percent
-s3.s3.1.hist.3	display_feature_label	no
-s3.s3.1.hist.3	feature_color	green
-s3.s3.1.hist.3	feature_opacity	1
-
-s3.s3.1.hist.4	feature_height_ratio	26.85
-
-s3.s3.1.hist.4	feature_height_unit	percent
-s3.s3.1.hist.4	feature_shape	rect
-s3.s3.1.hist.4	feature_shift_y	-23.425
-s3.s3.1.hist.4	feature_shift_y_unit	percent
-s3.s3.1.hist.4	display_feature_label	no
-s3.s3.1.hist.4	feature_color	green
-s3.s3.1.hist.4	feature_opacity	1
-
-s3.s3.1.hist.5	feature_height_ratio	23.8
-
-s3.s3.1.hist.5	feature_height_unit	percent
-s3.s3.1.hist.5	feature_shape	rect
-s3.s3.1.hist.5	feature_shift_y	-21.9
-s3.s3.1.hist.5	feature_shift_y_unit	percent
-s3.s3.1.hist.5	display_feature_label	no
-s3.s3.1.hist.5	feature_color	green
-s3.s3.1.hist.5	feature_opacity	1
-
-s3.s3.1.hist.6	feature_height_ratio	20.85
-
-s3.s3.1.hist.6	feature_height_unit	percent
-s3.s3.1.hist.6	feature_shape	rect
-s3.s3.1.hist.6	feature_shift_y	-20.425
-s3.s3.1.hist.6	feature_shift_y_unit	percent
-s3.s3.1.hist.6	display_feature_label	no
-s3.s3.1.hist.6	feature_color	green
-s3.s3.1.hist.6	feature_opacity	1
-
-s3.s3.1.hist.7	feature_height_ratio	27.6
-
-s3.s3.1.hist.7	feature_height_unit	percent
-s3.s3.1.hist.7	feature_shape	rect
-s3.s3.1.hist.7	feature_shift_y	-23.8
-s3.s3.1.hist.7	feature_shift_y_unit	percent
-s3.s3.1.hist.7	display_feature_label	no
-s3.s3.1.hist.7	feature_color	green
-s3.s3.1.hist.7	feature_opacity	1
-
-s3.s3.1.hist.8	feature_height_ratio	38
-
-s3.s3.1.hist.8	feature_height_unit	percent
-s3.s3.1.hist.8	feature_shape	rect
-s3.s3.1.hist.8	feature_shift_y	-29
-s3.s3.1.hist.8	feature_shift_y_unit	percent
-s3.s3.1.hist.8	display_feature_label	no
-s3.s3.1.hist.8	feature_color	green
-s3.s3.1.hist.8	feature_opacity	1
-
-s3.s3.1.hist.9	feature_height_ratio	25.05
-
-s3.s3.1.hist.9	feature_height_unit	percent
-s3.s3.1.hist.9	feature_shape	rect
-s3.s3.1.hist.9	feature_shift_y	-22.525
-s3.s3.1.hist.9	feature_shift_y_unit	percent
-s3.s3.1.hist.9	display_feature_label	no
-s3.s3.1.hist.9	feature_color	green
-s3.s3.1.hist.9	feature_opacity	1
-
-s3.s3.1.hist.10	feature_height_ratio	32.65
-
-s3.s3.1.hist.10	feature_height_unit	percent
-s3.s3.1.hist.10	feature_shape	rect
-s3.s3.1.hist.10	feature_shift_y	-26.325
-s3.s3.1.hist.10	feature_shift_y_unit	percent
-s3.s3.1.hist.10	display_feature_label	no
-s3.s3.1.hist.10	feature_color	green
-s3.s3.1.hist.10	feature_opacity	1
-
-s3.s3.1.hist.11	feature_height_ratio	20.45
-
-s3.s3.1.hist.11	feature_height_unit	percent
-s3.s3.1.hist.11	feature_shape	rect
-s3.s3.1.hist.11	feature_shift_y	-20.225
-s3.s3.1.hist.11	feature_shift_y_unit	percent
-s3.s3.1.hist.11	display_feature_label	no
-s3.s3.1.hist.11	feature_color	green
-s3.s3.1.hist.11	feature_opacity	1
-
-s3.s3.1.hist.12	feature_height_ratio	32.4
-
-s3.s3.1.hist.12	feature_height_unit	percent
-s3.s3.1.hist.12	feature_shape	rect
-s3.s3.1.hist.12	feature_shift_y	-26.2
-s3.s3.1.hist.12	feature_shift_y_unit	percent
-s3.s3.1.hist.12	display_feature_label	no
-s3.s3.1.hist.12	feature_color	green
-s3.s3.1.hist.12	feature_opacity	1
-
-s3.s3.1.hist.13	feature_height_ratio	15.7
-
-s3.s3.1.hist.13	feature_height_unit	percent
-s3.s3.1.hist.13	feature_shape	rect
-s3.s3.1.hist.13	feature_shift_y	-17.85
-s3.s3.1.hist.13	feature_shift_y_unit	percent
-s3.s3.1.hist.13	display_feature_label	no
-s3.s3.1.hist.13	feature_color	green
-s3.s3.1.hist.13	feature_opacity	1
-
-s3.s3.1.hist.14	feature_height_ratio	26.05
-
-s3.s3.1.hist.14	feature_height_unit	percent
-s3.s3.1.hist.14	feature_shape	rect
-s3.s3.1.hist.14	feature_shift_y	-23.025
-s3.s3.1.hist.14	feature_shift_y_unit	percent
-s3.s3.1.hist.14	display_feature_label	no
-s3.s3.1.hist.14	feature_color	green
-s3.s3.1.hist.14	feature_opacity	1
-
-s3.s3.1.hist.15	feature_height_ratio	26.75
-
-s3.s3.1.hist.15	feature_height_unit	percent
-s3.s3.1.hist.15	feature_shape	rect
-s3.s3.1.hist.15	feature_shift_y	-23.375
-s3.s3.1.hist.15	feature_shift_y_unit	percent
-s3.s3.1.hist.15	display_feature_label	no
-s3.s3.1.hist.15	feature_color	green
-s3.s3.1.hist.15	feature_opacity	1
-
-s3.s3.1.hist.16	feature_height_ratio	8.95
-
-s3.s3.1.hist.16	feature_height_unit	percent
-s3.s3.1.hist.16	feature_shape	rect
-s3.s3.1.hist.16	feature_shift_y	-14.475
-s3.s3.1.hist.16	feature_shift_y_unit	percent
-s3.s3.1.hist.16	display_feature_label	no
-s3.s3.1.hist.16	feature_color	green
-s3.s3.1.hist.16	feature_opacity	1
-
-s3.s3.1.hist.17	feature_height_ratio	26.9
-
-s3.s3.1.hist.17	feature_height_unit	percent
-s3.s3.1.hist.17	feature_shape	rect
-s3.s3.1.hist.17	feature_shift_y	-23.45
-s3.s3.1.hist.17	feature_shift_y_unit	percent
-s3.s3.1.hist.17	display_feature_label	no
-s3.s3.1.hist.17	feature_color	green
-s3.s3.1.hist.17	feature_opacity	1
-
-s3.s3.1.hist.18	feature_height_ratio	12.4
-
-s3.s3.1.hist.18	feature_height_unit	percent
-s3.s3.1.hist.18	feature_shape	rect
-s3.s3.1.hist.18	feature_shift_y	-16.2
-s3.s3.1.hist.18	feature_shift_y_unit	percent
-s3.s3.1.hist.18	display_feature_label	no
-s3.s3.1.hist.18	feature_color	green
-s3.s3.1.hist.18	feature_opacity	1
-
-s3.s3.1.hist.19	feature_height_ratio	34.05
-
-s3.s3.1.hist.19	feature_height_unit	percent
-s3.s3.1.hist.19	feature_shape	rect
-s3.s3.1.hist.19	feature_shift_y	-27.025
-s3.s3.1.hist.19	feature_shift_y_unit	percent
-s3.s3.1.hist.19	display_feature_label	no
-s3.s3.1.hist.19	feature_color	green
-s3.s3.1.hist.19	feature_opacity	1
-
-s3.s3.2.2020.5000.2	feature_height_ratio	55
-
-s3.s3.2.2020.5000.2	feature_height_unit	percent
-s3.s3.2.2020.5000.2	feature_shape	rect
-s3.s3.2.2020.5000.2	feature_shift_x	20
-s3.s3.2.2020.5000.2	feature_shift_y	-43
-s3.s3.2.2020.5000.2	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2	display_feature_label	no
-s3.s3.2.2020.5000.2	pos_feature_label	right_medium
-s3.s3.2.2020.5000.2	feature_label	ytick_label
-s3.s3.2.2020.5000.2	feature_color	green
-s3.s3.2.2020.5000.2	feature_opacity	0.6
-
-s3.s3.2.2020.5000.2.tick0.hgrid	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick0.hgrid	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick0.hgrid	feature_shape	rect
-s3.s3.2.2020.5000.2.tick0.hgrid	display_feature_label	no
-s3.s3.2.2020.5000.2.tick0.hgrid	feature_opacity	0.3
-s3.s3.2.2020.5000.2.tick0.hgrid	feature_shift_y	-15
-s3.s3.2.2020.5000.2.tick0.hgrid	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick0.hgrid	feature_color	green
-
-s3.s3.2.2020.5000.2.tick0	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick0	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick0	feature_shape	rect
-s3.s3.2.2020.5000.2.tick0	feature_shift_x	80
-s3.s3.2.2020.5000.2.tick0	feature_shift_y	-15
-s3.s3.2.2020.5000.2.tick0	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick0	display_feature_label	yes
-s3.s3.2.2020.5000.2.tick0	feature_label	20
-s3.s3.2.2020.5000.2.tick0	pos_feature_label	right_medium
-s3.s3.2.2020.5000.2.tick0	label_rotate_angle	0
-s3.s3.2.2020.5000.2.tick0	feature_label_size	6
-s3.s3.2.2020.5000.2.tick0	padding_feature_label	1.8
-s3.s3.2.2020.5000.2.tick0	feature_label_auto_angle_flag	0
-
-s3.s3.2.2020.5000.2.tick0	feature_color	green
-
-s3.s3.2.2020.5000.2.tick0	feature_opacity	0.6
-
-
-s3.s3.2.2020.5000.2.tick1.hgrid	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick1.hgrid	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick1.hgrid	feature_shape	rect
-s3.s3.2.2020.5000.2.tick1.hgrid	display_feature_label	no
-s3.s3.2.2020.5000.2.tick1.hgrid	feature_opacity	0.3
-s3.s3.2.2020.5000.2.tick1.hgrid	feature_shift_y	-25
-s3.s3.2.2020.5000.2.tick1.hgrid	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick1.hgrid	feature_color	green
-
-s3.s3.2.2020.5000.2.tick1	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick1	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick1	feature_shape	rect
-s3.s3.2.2020.5000.2.tick1	feature_shift_x	80
-s3.s3.2.2020.5000.2.tick1	feature_shift_y	-25
-s3.s3.2.2020.5000.2.tick1	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick1	display_feature_label	yes
-s3.s3.2.2020.5000.2.tick1	feature_label	21
-s3.s3.2.2020.5000.2.tick1	pos_feature_label	right_medium
-s3.s3.2.2020.5000.2.tick1	label_rotate_angle	0
-s3.s3.2.2020.5000.2.tick1	feature_label_size	6
-s3.s3.2.2020.5000.2.tick1	padding_feature_label	1.8
-s3.s3.2.2020.5000.2.tick1	feature_label_auto_angle_flag	0
-
-s3.s3.2.2020.5000.2.tick1	feature_color	green
-
-s3.s3.2.2020.5000.2.tick1	feature_opacity	0.6
-
-
-s3.s3.2.2020.5000.2.tick2.hgrid	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick2.hgrid	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick2.hgrid	feature_shape	rect
-s3.s3.2.2020.5000.2.tick2.hgrid	display_feature_label	no
-s3.s3.2.2020.5000.2.tick2.hgrid	feature_opacity	0.3
-s3.s3.2.2020.5000.2.tick2.hgrid	feature_shift_y	-35
-s3.s3.2.2020.5000.2.tick2.hgrid	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick2.hgrid	feature_color	green
-
-s3.s3.2.2020.5000.2.tick2	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick2	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick2	feature_shape	rect
-s3.s3.2.2020.5000.2.tick2	feature_shift_x	80
-s3.s3.2.2020.5000.2.tick2	feature_shift_y	-35
-s3.s3.2.2020.5000.2.tick2	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick2	display_feature_label	yes
-s3.s3.2.2020.5000.2.tick2	feature_label	23
-s3.s3.2.2020.5000.2.tick2	pos_feature_label	right_medium
-s3.s3.2.2020.5000.2.tick2	label_rotate_angle	0
-s3.s3.2.2020.5000.2.tick2	feature_label_size	6
-s3.s3.2.2020.5000.2.tick2	padding_feature_label	1.8
-s3.s3.2.2020.5000.2.tick2	feature_label_auto_angle_flag	0
-
-s3.s3.2.2020.5000.2.tick2	feature_color	green
-
-s3.s3.2.2020.5000.2.tick2	feature_opacity	0.6
-
-
-s3.s3.2.2020.5000.2.tick3.hgrid	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick3.hgrid	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick3.hgrid	feature_shape	rect
-s3.s3.2.2020.5000.2.tick3.hgrid	display_feature_label	no
-s3.s3.2.2020.5000.2.tick3.hgrid	feature_opacity	0.3
-s3.s3.2.2020.5000.2.tick3.hgrid	feature_shift_y	-45
-s3.s3.2.2020.5000.2.tick3.hgrid	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick3.hgrid	feature_color	green
-
-s3.s3.2.2020.5000.2.tick3	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick3	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick3	feature_shape	rect
-s3.s3.2.2020.5000.2.tick3	feature_shift_x	80
-s3.s3.2.2020.5000.2.tick3	feature_shift_y	-45
-s3.s3.2.2020.5000.2.tick3	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick3	display_feature_label	yes
-s3.s3.2.2020.5000.2.tick3	feature_label	25
-s3.s3.2.2020.5000.2.tick3	pos_feature_label	right_medium
-s3.s3.2.2020.5000.2.tick3	label_rotate_angle	0
-s3.s3.2.2020.5000.2.tick3	feature_label_size	6
-s3.s3.2.2020.5000.2.tick3	padding_feature_label	1.8
-s3.s3.2.2020.5000.2.tick3	feature_label_auto_angle_flag	0
-
-s3.s3.2.2020.5000.2.tick3	feature_color	green
-
-s3.s3.2.2020.5000.2.tick3	feature_opacity	0.6
-
-
-s3.s3.2.2020.5000.2.tick4.hgrid	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick4.hgrid	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick4.hgrid	feature_shape	rect
-s3.s3.2.2020.5000.2.tick4.hgrid	display_feature_label	no
-s3.s3.2.2020.5000.2.tick4.hgrid	feature_opacity	0.3
-s3.s3.2.2020.5000.2.tick4.hgrid	feature_shift_y	-55
-s3.s3.2.2020.5000.2.tick4.hgrid	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick4.hgrid	feature_color	green
-
-s3.s3.2.2020.5000.2.tick4	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick4	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick4	feature_shape	rect
-s3.s3.2.2020.5000.2.tick4	feature_shift_x	80
-s3.s3.2.2020.5000.2.tick4	feature_shift_y	-55
-s3.s3.2.2020.5000.2.tick4	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick4	display_feature_label	yes
-s3.s3.2.2020.5000.2.tick4	feature_label	27
-s3.s3.2.2020.5000.2.tick4	pos_feature_label	right_medium
-s3.s3.2.2020.5000.2.tick4	label_rotate_angle	0
-s3.s3.2.2020.5000.2.tick4	feature_label_size	6
-s3.s3.2.2020.5000.2.tick4	padding_feature_label	1.8
-s3.s3.2.2020.5000.2.tick4	feature_label_auto_angle_flag	0
-
-s3.s3.2.2020.5000.2.tick4	feature_color	green
-
-s3.s3.2.2020.5000.2.tick4	feature_opacity	0.6
-
-
-s3.s3.2.2020.5000.2.tick5.hgrid	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick5.hgrid	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick5.hgrid	feature_shape	rect
-s3.s3.2.2020.5000.2.tick5.hgrid	display_feature_label	no
-s3.s3.2.2020.5000.2.tick5.hgrid	feature_opacity	0.3
-s3.s3.2.2020.5000.2.tick5.hgrid	feature_shift_y	-65
-s3.s3.2.2020.5000.2.tick5.hgrid	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick5.hgrid	feature_color	green
-
-s3.s3.2.2020.5000.2.tick5	feature_height_ratio	1
-
-s3.s3.2.2020.5000.2.tick5	feature_height_unit	percent
-s3.s3.2.2020.5000.2.tick5	feature_shape	rect
-s3.s3.2.2020.5000.2.tick5	feature_shift_x	80
-s3.s3.2.2020.5000.2.tick5	feature_shift_y	-65
-s3.s3.2.2020.5000.2.tick5	feature_shift_y_unit	percent
-s3.s3.2.2020.5000.2.tick5	display_feature_label	yes
-s3.s3.2.2020.5000.2.tick5	feature_label	29
-s3.s3.2.2020.5000.2.tick5	pos_feature_label	right_medium
-s3.s3.2.2020.5000.2.tick5	label_rotate_angle	0
-s3.s3.2.2020.5000.2.tick5	feature_label_size	6
-s3.s3.2.2020.5000.2.tick5	padding_feature_label	1.8
-s3.s3.2.2020.5000.2.tick5	feature_label_auto_angle_flag	0
-
-s3.s3.2.2020.5000.2.tick5	feature_color	green
-
-s3.s3.2.2020.5000.2.tick5	feature_opacity	0.6
-
-
-s3.s3.2.hist.0	feature_height_ratio	26.675
-
-s3.s3.2.hist.0	feature_height_unit	percent
-s3.s3.2.hist.0	feature_shape	rect
-s3.s3.2.hist.0	feature_shift_y	-28.3375
-s3.s3.2.hist.0	feature_shift_y_unit	percent
-s3.s3.2.hist.0	display_feature_label	no
-s3.s3.2.hist.0	feature_color	green
-s3.s3.2.hist.0	feature_opacity	1
-
-s3.s3.2.hist.1	feature_height_ratio	22.88
-
-s3.s3.2.hist.1	feature_height_unit	percent
-s3.s3.2.hist.1	feature_shape	rect
-s3.s3.2.hist.1	feature_shift_y	-26.44
-s3.s3.2.hist.1	feature_shift_y_unit	percent
-s3.s3.2.hist.1	display_feature_label	no
-s3.s3.2.hist.1	feature_color	green
-s3.s3.2.hist.1	feature_opacity	1
-
-s3.s3.2.hist.2	feature_height_ratio	37.675
-
-s3.s3.2.hist.2	feature_height_unit	percent
-s3.s3.2.hist.2	feature_shape	rect
-s3.s3.2.hist.2	feature_shift_y	-33.8375
-s3.s3.2.hist.2	feature_shift_y_unit	percent
-s3.s3.2.hist.2	display_feature_label	no
-s3.s3.2.hist.2	feature_color	green
-s3.s3.2.hist.2	feature_opacity	1
-
-s3.s3.2.hist.3	feature_height_ratio	39.435
-
-s3.s3.2.hist.3	feature_height_unit	percent
-s3.s3.2.hist.3	feature_shape	rect
-s3.s3.2.hist.3	feature_shift_y	-34.7175
-s3.s3.2.hist.3	feature_shift_y_unit	percent
-s3.s3.2.hist.3	display_feature_label	no
-s3.s3.2.hist.3	feature_color	green
-s3.s3.2.hist.3	feature_opacity	1
-
-s3.s3.2.hist.4	feature_height_ratio	25.63
-
-s3.s3.2.hist.4	feature_height_unit	percent
-s3.s3.2.hist.4	feature_shape	rect
-s3.s3.2.hist.4	feature_shift_y	-27.815
-s3.s3.2.hist.4	feature_shift_y_unit	percent
-s3.s3.2.hist.4	display_feature_label	no
-s3.s3.2.hist.4	feature_color	green
-s3.s3.2.hist.4	feature_opacity	1
-
-s3.s3.2.hist.5	feature_height_ratio	38.995
-
-s3.s3.2.hist.5	feature_height_unit	percent
-s3.s3.2.hist.5	feature_shape	rect
-s3.s3.2.hist.5	feature_shift_y	-34.4975
-s3.s3.2.hist.5	feature_shift_y_unit	percent
-s3.s3.2.hist.5	display_feature_label	no
-s3.s3.2.hist.5	feature_color	green
-s3.s3.2.hist.5	feature_opacity	1
-
-s3.s3.2.hist.6	feature_height_ratio	20.46
-
-s3.s3.2.hist.6	feature_height_unit	percent
-s3.s3.2.hist.6	feature_shape	rect
-s3.s3.2.hist.6	feature_shift_y	-25.23
-s3.s3.2.hist.6	feature_shift_y_unit	percent
-s3.s3.2.hist.6	display_feature_label	no
-s3.s3.2.hist.6	feature_color	green
-s3.s3.2.hist.6	feature_opacity	1
-
-s3.s3.2.hist.7	feature_height_ratio	50.05
-
-s3.s3.2.hist.7	feature_height_unit	percent
-s3.s3.2.hist.7	feature_shape	rect
-s3.s3.2.hist.7	feature_shift_y	-40.025
-s3.s3.2.hist.7	feature_shift_y_unit	percent
-s3.s3.2.hist.7	display_feature_label	no
-s3.s3.2.hist.7	feature_color	green
-s3.s3.2.hist.7	feature_opacity	1
-
-s3.s3.2.hist.8	feature_height_ratio	29.645
-
-s3.s3.2.hist.8	feature_height_unit	percent
-s3.s3.2.hist.8	feature_shape	rect
-s3.s3.2.hist.8	feature_shift_y	-29.8225
-s3.s3.2.hist.8	feature_shift_y_unit	percent
-s3.s3.2.hist.8	display_feature_label	no
-s3.s3.2.hist.8	feature_color	green
-s3.s3.2.hist.8	feature_opacity	1
-
-s3.s3.2.hist.9	feature_height_ratio	39.27
-
-s3.s3.2.hist.9	feature_height_unit	percent
-s3.s3.2.hist.9	feature_shape	rect
-s3.s3.2.hist.9	feature_shift_y	-34.635
-s3.s3.2.hist.9	feature_shift_y_unit	percent
-s3.s3.2.hist.9	display_feature_label	no
-s3.s3.2.hist.9	feature_color	green
-s3.s3.2.hist.9	feature_opacity	1
-
-s3.s3.2.hist.10	feature_height_ratio	42.35
-
-s3.s3.2.hist.10	feature_height_unit	percent
-s3.s3.2.hist.10	feature_shape	rect
-s3.s3.2.hist.10	feature_shift_y	-36.175
-s3.s3.2.hist.10	feature_shift_y_unit	percent
-s3.s3.2.hist.10	display_feature_label	no
-s3.s3.2.hist.10	feature_color	green
-s3.s3.2.hist.10	feature_opacity	1
-
-s3.s3.2.hist.11	feature_height_ratio	30.305
-
-s3.s3.2.hist.11	feature_height_unit	percent
-s3.s3.2.hist.11	feature_shape	rect
-s3.s3.2.hist.11	feature_shift_y	-30.1525
-s3.s3.2.hist.11	feature_shift_y_unit	percent
-s3.s3.2.hist.11	display_feature_label	no
-s3.s3.2.hist.11	feature_color	green
-s3.s3.2.hist.11	feature_opacity	1
-
-s3.s3.2.hist.12	feature_height_ratio	19.25
-
-s3.s3.2.hist.12	feature_height_unit	percent
-s3.s3.2.hist.12	feature_shape	rect
-s3.s3.2.hist.12	feature_shift_y	-24.625
-s3.s3.2.hist.12	feature_shift_y_unit	percent
-s3.s3.2.hist.12	display_feature_label	no
-s3.s3.2.hist.12	feature_color	green
-s3.s3.2.hist.12	feature_opacity	1
-
-s3.s3.2.hist.13	feature_height_ratio	19.635
-
-s3.s3.2.hist.13	feature_height_unit	percent
-s3.s3.2.hist.13	feature_shape	rect
-s3.s3.2.hist.13	feature_shift_y	-24.8175
-s3.s3.2.hist.13	feature_shift_y_unit	percent
-s3.s3.2.hist.13	display_feature_label	no
-s3.s3.2.hist.13	feature_color	green
-s3.s3.2.hist.13	feature_opacity	1
-
-s3.s3.2.hist.14	feature_height_ratio	12.43
-
-s3.s3.2.hist.14	feature_height_unit	percent
-s3.s3.2.hist.14	feature_shape	rect
-s3.s3.2.hist.14	feature_shift_y	-21.215
-s3.s3.2.hist.14	feature_shift_y_unit	percent
-s3.s3.2.hist.14	display_feature_label	no
-s3.s3.2.hist.14	feature_color	green
-s3.s3.2.hist.14	feature_opacity	1
-
-s3.s3.2.hist.15	feature_height_ratio	15.18
-
-s3.s3.2.hist.15	feature_height_unit	percent
-s3.s3.2.hist.15	feature_shape	rect
-s3.s3.2.hist.15	feature_shift_y	-22.59
-s3.s3.2.hist.15	feature_shift_y_unit	percent
-s3.s3.2.hist.15	display_feature_label	no
-s3.s3.2.hist.15	feature_color	green
-s3.s3.2.hist.15	feature_opacity	1
-
-s3.s3.2.hist.16	feature_height_ratio	11.22
-
-s3.s3.2.hist.16	feature_height_unit	percent
-s3.s3.2.hist.16	feature_shape	rect
-s3.s3.2.hist.16	feature_shift_y	-20.61
-s3.s3.2.hist.16	feature_shift_y_unit	percent
-s3.s3.2.hist.16	display_feature_label	no
-s3.s3.2.hist.16	feature_color	green
-s3.s3.2.hist.16	feature_opacity	1
-
-s3.s3.2.hist.17	feature_height_ratio	42.075
-
-s3.s3.2.hist.17	feature_height_unit	percent
-s3.s3.2.hist.17	feature_shape	rect
-s3.s3.2.hist.17	feature_shift_y	-36.0375
-s3.s3.2.hist.17	feature_shift_y_unit	percent
-s3.s3.2.hist.17	display_feature_label	no
-s3.s3.2.hist.17	feature_color	green
-s3.s3.2.hist.17	feature_opacity	1
-
-s3.s3.2.hist.18	feature_height_ratio	29.81
-
-s3.s3.2.hist.18	feature_height_unit	percent
-s3.s3.2.hist.18	feature_shape	rect
-s3.s3.2.hist.18	feature_shift_y	-29.905
-s3.s3.2.hist.18	feature_shift_y_unit	percent
-s3.s3.2.hist.18	display_feature_label	no
-s3.s3.2.hist.18	feature_color	green
-s3.s3.2.hist.18	feature_opacity	1
-
-s3.s3.2.hist.19	feature_height_ratio	22.88
-
-s3.s3.2.hist.19	feature_height_unit	percent
-s3.s3.2.hist.19	feature_shape	rect
-s3.s3.2.hist.19	feature_shift_y	-26.44
-s3.s3.2.hist.19	feature_shift_y_unit	percent
-s3.s3.2.hist.19	display_feature_label	no
-s3.s3.2.hist.19	feature_color	green
-s3.s3.2.hist.19	feature_opacity	1
-
-s3.s3.2.hist.20	feature_height_ratio	36.08
-
-s3.s3.2.hist.20	feature_height_unit	percent
-s3.s3.2.hist.20	feature_shape	rect
-s3.s3.2.hist.20	feature_shift_y	-33.04
-s3.s3.2.hist.20	feature_shift_y_unit	percent
-s3.s3.2.hist.20	display_feature_label	no
-s3.s3.2.hist.20	feature_color	green
-s3.s3.2.hist.20	feature_opacity	1
-
-s3.s3.2.hist.21	feature_height_ratio	22.77
-
-s3.s3.2.hist.21	feature_height_unit	percent
-s3.s3.2.hist.21	feature_shape	rect
-s3.s3.2.hist.21	feature_shift_y	-26.385
-s3.s3.2.hist.21	feature_shift_y_unit	percent
-s3.s3.2.hist.21	display_feature_label	no
-s3.s3.2.hist.21	feature_color	green
-s3.s3.2.hist.21	feature_opacity	1
-
-s3.s3.2.hist.22	feature_height_ratio	38.665
-
-s3.s3.2.hist.22	feature_height_unit	percent
-s3.s3.2.hist.22	feature_shape	rect
-s3.s3.2.hist.22	feature_shift_y	-34.3325
-s3.s3.2.hist.22	feature_shift_y_unit	percent
-s3.s3.2.hist.22	display_feature_label	no
-s3.s3.2.hist.22	feature_color	green
-s3.s3.2.hist.22	feature_opacity	1
-
-s3.s3.2.hist.23	feature_height_ratio	37.73
-
-s3.s3.2.hist.23	feature_height_unit	percent
-s3.s3.2.hist.23	feature_shape	rect
-s3.s3.2.hist.23	feature_shift_y	-33.865
-s3.s3.2.hist.23	feature_shift_y_unit	percent
-s3.s3.2.hist.23	display_feature_label	no
-s3.s3.2.hist.23	feature_color	green
-s3.s3.2.hist.23	feature_opacity	1
-
-s3.s3.2.hist.24	feature_height_ratio	55
-
-s3.s3.2.hist.24	feature_height_unit	percent
-s3.s3.2.hist.24	feature_shape	rect
-s3.s3.2.hist.24	feature_shift_y	-42.5
-s3.s3.2.hist.24	feature_shift_y_unit	percent
-s3.s3.2.hist.24	display_feature_label	yes
-s3.s3.2.hist.24	feature_color	green
-s3.s3.2.hist.24	feature_opacity	1
-s3.s3.2.hist.24	pos_feature_label	left_up
-s3.s3.2.hist.24	feature_label	30
-s3.s3.2.hist.24	label_rotate_angle	0
-s3.s3.2.hist.24	feature_label_auto_angle_flag	0
-
-s3.s3.2.hist.24	feature_label_size	6
-s3.s3.2.hist.24	padding_feature_label	+1
-
-s3.s3.2.hist.25	feature_height_ratio	17.6
-
-s3.s3.2.hist.25	feature_height_unit	percent
-s3.s3.2.hist.25	feature_shape	rect
-s3.s3.2.hist.25	feature_shift_y	-23.8
-s3.s3.2.hist.25	feature_shift_y_unit	percent
-s3.s3.2.hist.25	display_feature_label	no
-s3.s3.2.hist.25	feature_color	green
-s3.s3.2.hist.25	feature_opacity	1
-
-s3.s3.2.hist.26	feature_height_ratio	24.915
-
-s3.s3.2.hist.26	feature_height_unit	percent
-s3.s3.2.hist.26	feature_shape	rect
-s3.s3.2.hist.26	feature_shift_y	-27.4575
-s3.s3.2.hist.26	feature_shift_y_unit	percent
-s3.s3.2.hist.26	display_feature_label	no
-s3.s3.2.hist.26	feature_color	green
-s3.s3.2.hist.26	feature_opacity	1
-
-s3.s3.2.hist.27	feature_height_ratio	19.58
-
-s3.s3.2.hist.27	feature_height_unit	percent
-s3.s3.2.hist.27	feature_shape	rect
-s3.s3.2.hist.27	feature_shift_y	-24.79
-s3.s3.2.hist.27	feature_shift_y_unit	percent
-s3.s3.2.hist.27	display_feature_label	no
-s3.s3.2.hist.27	feature_color	green
-s3.s3.2.hist.27	feature_opacity	1
-
-s3.s3.2.hist.28	feature_height_ratio	29.095
-
-s3.s3.2.hist.28	feature_height_unit	percent
-s3.s3.2.hist.28	feature_shape	rect
-s3.s3.2.hist.28	feature_shift_y	-29.5475
-s3.s3.2.hist.28	feature_shift_y_unit	percent
-s3.s3.2.hist.28	display_feature_label	no
-s3.s3.2.hist.28	feature_color	green
-s3.s3.2.hist.28	feature_opacity	1
-
-s3.s3.2.hist.29	feature_height_ratio	38.7716049382716
-
-s3.s3.2.hist.29	feature_height_unit	percent
-s3.s3.2.hist.29	feature_shape	rect
-s3.s3.2.hist.29	feature_shift_y	-34.3858024691358
-s3.s3.2.hist.29	feature_shift_y_unit	percent
-s3.s3.2.hist.29	display_feature_label	no
-s3.s3.2.hist.29	feature_color	green
-s3.s3.2.hist.29	feature_opacity	1
-
-s3.s3.3.5100.9609.3	feature_height_ratio	50
-
-s3.s3.3.5100.9609.3	feature_height_unit	percent
-s3.s3.3.5100.9609.3	feature_shape	rect
-s3.s3.3.5100.9609.3	feature_shift_x	20
-s3.s3.3.5100.9609.3	feature_shift_y	-55.5
-s3.s3.3.5100.9609.3	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3	display_feature_label	no
-s3.s3.3.5100.9609.3	pos_feature_label	right_medium
-s3.s3.3.5100.9609.3	feature_label	ytick_label
-s3.s3.3.5100.9609.3	feature_color	black
-s3.s3.3.5100.9609.3	feature_opacity	1
-
-s3.s3.3.5100.9609.3.tick0.hgrid	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick0.hgrid	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick0.hgrid	feature_shape	rect
-s3.s3.3.5100.9609.3.tick0.hgrid	display_feature_label	no
-s3.s3.3.5100.9609.3.tick0.hgrid	feature_opacity	0.3
-s3.s3.3.5100.9609.3.tick0.hgrid	feature_shift_y	-30
-s3.s3.3.5100.9609.3.tick0.hgrid	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick0.hgrid	feature_color	green
-
-s3.s3.3.5100.9609.3.tick0	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick0	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick0	feature_shape	rect
-s3.s3.3.5100.9609.3.tick0	feature_shift_x	80
-s3.s3.3.5100.9609.3.tick0	feature_shift_y	-30
-s3.s3.3.5100.9609.3.tick0	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick0	display_feature_label	yes
-s3.s3.3.5100.9609.3.tick0	feature_label	20
-s3.s3.3.5100.9609.3.tick0	pos_feature_label	right_medium
-s3.s3.3.5100.9609.3.tick0	label_rotate_angle	0
-s3.s3.3.5100.9609.3.tick0	feature_label_size	7
-s3.s3.3.5100.9609.3.tick0	padding_feature_label	2.1
-s3.s3.3.5100.9609.3.tick0	feature_label_auto_angle_flag	0
-
-s3.s3.3.5100.9609.3.tick0	feature_color	black
-
-s3.s3.3.5100.9609.3.tick0	feature_opacity	1
-
-
-s3.s3.3.5100.9609.3.tick1.hgrid	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick1.hgrid	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick1.hgrid	feature_shape	rect
-s3.s3.3.5100.9609.3.tick1.hgrid	display_feature_label	no
-s3.s3.3.5100.9609.3.tick1.hgrid	feature_opacity	0.3
-s3.s3.3.5100.9609.3.tick1.hgrid	feature_shift_y	-40
-s3.s3.3.5100.9609.3.tick1.hgrid	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick1.hgrid	feature_color	green
-
-s3.s3.3.5100.9609.3.tick1	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick1	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick1	feature_shape	rect
-s3.s3.3.5100.9609.3.tick1	feature_shift_x	80
-s3.s3.3.5100.9609.3.tick1	feature_shift_y	-40
-s3.s3.3.5100.9609.3.tick1	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick1	display_feature_label	yes
-s3.s3.3.5100.9609.3.tick1	feature_label	22
-s3.s3.3.5100.9609.3.tick1	pos_feature_label	right_medium
-s3.s3.3.5100.9609.3.tick1	label_rotate_angle	0
-s3.s3.3.5100.9609.3.tick1	feature_label_size	7
-s3.s3.3.5100.9609.3.tick1	padding_feature_label	2.1
-s3.s3.3.5100.9609.3.tick1	feature_label_auto_angle_flag	0
-
-s3.s3.3.5100.9609.3.tick1	feature_color	black
-
-s3.s3.3.5100.9609.3.tick1	feature_opacity	1
-
-
-s3.s3.3.5100.9609.3.tick2.hgrid	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick2.hgrid	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick2.hgrid	feature_shape	rect
-s3.s3.3.5100.9609.3.tick2.hgrid	display_feature_label	no
-s3.s3.3.5100.9609.3.tick2.hgrid	feature_opacity	0.3
-s3.s3.3.5100.9609.3.tick2.hgrid	feature_shift_y	-50
-s3.s3.3.5100.9609.3.tick2.hgrid	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick2.hgrid	feature_color	green
-
-s3.s3.3.5100.9609.3.tick2	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick2	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick2	feature_shape	rect
-s3.s3.3.5100.9609.3.tick2	feature_shift_x	80
-s3.s3.3.5100.9609.3.tick2	feature_shift_y	-50
-s3.s3.3.5100.9609.3.tick2	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick2	display_feature_label	yes
-s3.s3.3.5100.9609.3.tick2	feature_label	24
-s3.s3.3.5100.9609.3.tick2	pos_feature_label	right_medium
-s3.s3.3.5100.9609.3.tick2	label_rotate_angle	0
-s3.s3.3.5100.9609.3.tick2	feature_label_size	7
-s3.s3.3.5100.9609.3.tick2	padding_feature_label	2.1
-s3.s3.3.5100.9609.3.tick2	feature_label_auto_angle_flag	0
-
-s3.s3.3.5100.9609.3.tick2	feature_color	black
-
-s3.s3.3.5100.9609.3.tick2	feature_opacity	1
-
-
-s3.s3.3.5100.9609.3.tick3.hgrid	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick3.hgrid	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick3.hgrid	feature_shape	rect
-s3.s3.3.5100.9609.3.tick3.hgrid	display_feature_label	no
-s3.s3.3.5100.9609.3.tick3.hgrid	feature_opacity	0.3
-s3.s3.3.5100.9609.3.tick3.hgrid	feature_shift_y	-60
-s3.s3.3.5100.9609.3.tick3.hgrid	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick3.hgrid	feature_color	green
-
-s3.s3.3.5100.9609.3.tick3	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick3	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick3	feature_shape	rect
-s3.s3.3.5100.9609.3.tick3	feature_shift_x	80
-s3.s3.3.5100.9609.3.tick3	feature_shift_y	-60
-s3.s3.3.5100.9609.3.tick3	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick3	display_feature_label	yes
-s3.s3.3.5100.9609.3.tick3	feature_label	26
-s3.s3.3.5100.9609.3.tick3	pos_feature_label	right_medium
-s3.s3.3.5100.9609.3.tick3	label_rotate_angle	0
-s3.s3.3.5100.9609.3.tick3	feature_label_size	7
-s3.s3.3.5100.9609.3.tick3	padding_feature_label	2.1
-s3.s3.3.5100.9609.3.tick3	feature_label_auto_angle_flag	0
-
-s3.s3.3.5100.9609.3.tick3	feature_color	black
-
-s3.s3.3.5100.9609.3.tick3	feature_opacity	1
-
-
-s3.s3.3.5100.9609.3.tick4.hgrid	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick4.hgrid	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick4.hgrid	feature_shape	rect
-s3.s3.3.5100.9609.3.tick4.hgrid	display_feature_label	no
-s3.s3.3.5100.9609.3.tick4.hgrid	feature_opacity	0.3
-s3.s3.3.5100.9609.3.tick4.hgrid	feature_shift_y	-70
-s3.s3.3.5100.9609.3.tick4.hgrid	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick4.hgrid	feature_color	green
-
-s3.s3.3.5100.9609.3.tick4	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick4	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick4	feature_shape	rect
-s3.s3.3.5100.9609.3.tick4	feature_shift_x	80
-s3.s3.3.5100.9609.3.tick4	feature_shift_y	-70
-s3.s3.3.5100.9609.3.tick4	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick4	display_feature_label	yes
-s3.s3.3.5100.9609.3.tick4	feature_label	28
-s3.s3.3.5100.9609.3.tick4	pos_feature_label	right_medium
-s3.s3.3.5100.9609.3.tick4	label_rotate_angle	0
-s3.s3.3.5100.9609.3.tick4	feature_label_size	7
-s3.s3.3.5100.9609.3.tick4	padding_feature_label	2.1
-s3.s3.3.5100.9609.3.tick4	feature_label_auto_angle_flag	0
-
-s3.s3.3.5100.9609.3.tick4	feature_color	black
-
-s3.s3.3.5100.9609.3.tick4	feature_opacity	1
-
-
-s3.s3.3.5100.9609.3.tick5.hgrid	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick5.hgrid	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick5.hgrid	feature_shape	rect
-s3.s3.3.5100.9609.3.tick5.hgrid	display_feature_label	no
-s3.s3.3.5100.9609.3.tick5.hgrid	feature_opacity	0.3
-s3.s3.3.5100.9609.3.tick5.hgrid	feature_shift_y	-80
-s3.s3.3.5100.9609.3.tick5.hgrid	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick5.hgrid	feature_color	green
-
-s3.s3.3.5100.9609.3.tick5	feature_height_ratio	1
-
-s3.s3.3.5100.9609.3.tick5	feature_height_unit	percent
-s3.s3.3.5100.9609.3.tick5	feature_shape	rect
-s3.s3.3.5100.9609.3.tick5	feature_shift_x	80
-s3.s3.3.5100.9609.3.tick5	feature_shift_y	-80
-s3.s3.3.5100.9609.3.tick5	feature_shift_y_unit	percent
-s3.s3.3.5100.9609.3.tick5	display_feature_label	yes
-s3.s3.3.5100.9609.3.tick5	feature_label	30
-s3.s3.3.5100.9609.3.tick5	pos_feature_label	right_medium
-s3.s3.3.5100.9609.3.tick5	label_rotate_angle	0
-s3.s3.3.5100.9609.3.tick5	feature_label_size	7
-s3.s3.3.5100.9609.3.tick5	padding_feature_label	2.1
-s3.s3.3.5100.9609.3.tick5	feature_label_auto_angle_flag	0
-
-s3.s3.3.5100.9609.3.tick5	feature_color	black
-
-s3.s3.3.5100.9609.3.tick5	feature_opacity	1
-
-
-s3.s3.3.hist.0	feature_height_ratio	34.1
-
-s3.s3.3.hist.0	feature_height_unit	percent
-s3.s3.3.hist.0	feature_shape	rect
-s3.s3.3.hist.0	feature_shift_y	-47.05
-s3.s3.3.hist.0	feature_shift_y_unit	percent
-s3.s3.3.hist.0	display_feature_label	no
-s3.s3.3.hist.0	feature_color	green
-s3.s3.3.hist.0	feature_opacity	1
-
-s3.s3.3.hist.1	feature_height_ratio	35.2
-
-s3.s3.3.hist.1	feature_height_unit	percent
-s3.s3.3.hist.1	feature_shape	rect
-s3.s3.3.hist.1	feature_shift_y	-47.6
-s3.s3.3.hist.1	feature_shift_y_unit	percent
-s3.s3.3.hist.1	display_feature_label	no
-s3.s3.3.hist.1	feature_color	green
-s3.s3.3.hist.1	feature_opacity	1
-
-s3.s3.3.hist.2	feature_height_ratio	27.35
-
-s3.s3.3.hist.2	feature_height_unit	percent
-s3.s3.3.hist.2	feature_shape	rect
-s3.s3.3.hist.2	feature_shift_y	-43.675
-s3.s3.3.hist.2	feature_shift_y_unit	percent
-s3.s3.3.hist.2	display_feature_label	no
-s3.s3.3.hist.2	feature_color	green
-s3.s3.3.hist.2	feature_opacity	1
-
-s3.s3.3.hist.3	feature_height_ratio	31.7
-
-s3.s3.3.hist.3	feature_height_unit	percent
-s3.s3.3.hist.3	feature_shape	rect
-s3.s3.3.hist.3	feature_shift_y	-45.85
-s3.s3.3.hist.3	feature_shift_y_unit	percent
-s3.s3.3.hist.3	display_feature_label	no
-s3.s3.3.hist.3	feature_color	green
-s3.s3.3.hist.3	feature_opacity	1
-
-s3.s3.3.hist.4	feature_height_ratio	31.15
-
-s3.s3.3.hist.4	feature_height_unit	percent
-s3.s3.3.hist.4	feature_shape	rect
-s3.s3.3.hist.4	feature_shift_y	-45.575
-s3.s3.3.hist.4	feature_shift_y_unit	percent
-s3.s3.3.hist.4	display_feature_label	no
-s3.s3.3.hist.4	feature_color	green
-s3.s3.3.hist.4	feature_opacity	1
-
-s3.s3.3.hist.5	feature_height_ratio	29
-
-s3.s3.3.hist.5	feature_height_unit	percent
-s3.s3.3.hist.5	feature_shape	rect
-s3.s3.3.hist.5	feature_shift_y	-44.5
-s3.s3.3.hist.5	feature_shift_y_unit	percent
-s3.s3.3.hist.5	display_feature_label	no
-s3.s3.3.hist.5	feature_color	green
-s3.s3.3.hist.5	feature_opacity	1
-
-s3.s3.3.hist.6	feature_height_ratio	23.9
-
-s3.s3.3.hist.6	feature_height_unit	percent
-s3.s3.3.hist.6	feature_shape	rect
-s3.s3.3.hist.6	feature_shift_y	-41.95
-s3.s3.3.hist.6	feature_shift_y_unit	percent
-s3.s3.3.hist.6	display_feature_label	no
-s3.s3.3.hist.6	feature_color	green
-s3.s3.3.hist.6	feature_opacity	1
-
-s3.s3.3.hist.7	feature_height_ratio	29.1
-
-s3.s3.3.hist.7	feature_height_unit	percent
-s3.s3.3.hist.7	feature_shape	rect
-s3.s3.3.hist.7	feature_shift_y	-44.55
-s3.s3.3.hist.7	feature_shift_y_unit	percent
-s3.s3.3.hist.7	display_feature_label	no
-s3.s3.3.hist.7	feature_color	green
-s3.s3.3.hist.7	feature_opacity	1
-
-s3.s3.3.hist.8	feature_height_ratio	32.8
-
-s3.s3.3.hist.8	feature_height_unit	percent
-s3.s3.3.hist.8	feature_shape	rect
-s3.s3.3.hist.8	feature_shift_y	-46.4
-s3.s3.3.hist.8	feature_shift_y_unit	percent
-s3.s3.3.hist.8	display_feature_label	no
-s3.s3.3.hist.8	feature_color	green
-s3.s3.3.hist.8	feature_opacity	1
-
-s3.s3.3.hist.9	feature_height_ratio	38.15
-
-s3.s3.3.hist.9	feature_height_unit	percent
-s3.s3.3.hist.9	feature_shape	rect
-s3.s3.3.hist.9	feature_shift_y	-49.075
-s3.s3.3.hist.9	feature_shift_y_unit	percent
-s3.s3.3.hist.9	display_feature_label	no
-s3.s3.3.hist.9	feature_color	green
-s3.s3.3.hist.9	feature_opacity	1
-
-s3.s3.3.hist.10	feature_height_ratio	22
-
-s3.s3.3.hist.10	feature_height_unit	percent
-s3.s3.3.hist.10	feature_shape	rect
-s3.s3.3.hist.10	feature_shift_y	-41
-s3.s3.3.hist.10	feature_shift_y_unit	percent
-s3.s3.3.hist.10	display_feature_label	no
-s3.s3.3.hist.10	feature_color	green
-s3.s3.3.hist.10	feature_opacity	1
-
-s3.s3.3.hist.11	feature_height_ratio	27
-
-s3.s3.3.hist.11	feature_height_unit	percent
-s3.s3.3.hist.11	feature_shape	rect
-s3.s3.3.hist.11	feature_shift_y	-43.5
-s3.s3.3.hist.11	feature_shift_y_unit	percent
-s3.s3.3.hist.11	display_feature_label	no
-s3.s3.3.hist.11	feature_color	green
-s3.s3.3.hist.11	feature_opacity	1
-
-s3.s3.3.hist.12	feature_height_ratio	31.05
-
-s3.s3.3.hist.12	feature_height_unit	percent
-s3.s3.3.hist.12	feature_shape	rect
-s3.s3.3.hist.12	feature_shift_y	-45.525
-s3.s3.3.hist.12	feature_shift_y_unit	percent
-s3.s3.3.hist.12	display_feature_label	no
-s3.s3.3.hist.12	feature_color	green
-s3.s3.3.hist.12	feature_opacity	1
-
-s3.s3.3.hist.13	feature_height_ratio	34.5
-
-s3.s3.3.hist.13	feature_height_unit	percent
-s3.s3.3.hist.13	feature_shape	rect
-s3.s3.3.hist.13	feature_shift_y	-47.25
-s3.s3.3.hist.13	feature_shift_y_unit	percent
-s3.s3.3.hist.13	display_feature_label	no
-s3.s3.3.hist.13	feature_color	green
-s3.s3.3.hist.13	feature_opacity	1
-
-s3.s3.3.hist.14	feature_height_ratio	35.3
-
-s3.s3.3.hist.14	feature_height_unit	percent
-s3.s3.3.hist.14	feature_shape	rect
-s3.s3.3.hist.14	feature_shift_y	-47.65
-s3.s3.3.hist.14	feature_shift_y_unit	percent
-s3.s3.3.hist.14	display_feature_label	no
-s3.s3.3.hist.14	feature_color	green
-s3.s3.3.hist.14	feature_opacity	1
-
-s3.s3.3.hist.15	feature_height_ratio	25.95
-
-s3.s3.3.hist.15	feature_height_unit	percent
-s3.s3.3.hist.15	feature_shape	rect
-s3.s3.3.hist.15	feature_shift_y	-42.975
-s3.s3.3.hist.15	feature_shift_y_unit	percent
-s3.s3.3.hist.15	display_feature_label	no
-s3.s3.3.hist.15	feature_color	green
-s3.s3.3.hist.15	feature_opacity	1
-
-s3.s3.3.hist.16	feature_height_ratio	31.45
-
-s3.s3.3.hist.16	feature_height_unit	percent
-s3.s3.3.hist.16	feature_shape	rect
-s3.s3.3.hist.16	feature_shift_y	-45.725
-s3.s3.3.hist.16	feature_shift_y_unit	percent
-s3.s3.3.hist.16	display_feature_label	no
-s3.s3.3.hist.16	feature_color	green
-s3.s3.3.hist.16	feature_opacity	1
-
-s3.s3.3.hist.17	feature_height_ratio	26.85
-
-s3.s3.3.hist.17	feature_height_unit	percent
-s3.s3.3.hist.17	feature_shape	rect
-s3.s3.3.hist.17	feature_shift_y	-43.425
-s3.s3.3.hist.17	feature_shift_y_unit	percent
-s3.s3.3.hist.17	display_feature_label	no
-s3.s3.3.hist.17	feature_color	green
-s3.s3.3.hist.17	feature_opacity	1
-
-s3.s3.3.hist.18	feature_height_ratio	32.5
-
-s3.s3.3.hist.18	feature_height_unit	percent
-s3.s3.3.hist.18	feature_shape	rect
-s3.s3.3.hist.18	feature_shift_y	-46.25
-s3.s3.3.hist.18	feature_shift_y_unit	percent
-s3.s3.3.hist.18	display_feature_label	no
-s3.s3.3.hist.18	feature_color	green
-s3.s3.3.hist.18	feature_opacity	1
-
-s3.s3.3.hist.19	feature_height_ratio	31.1
-
-s3.s3.3.hist.19	feature_height_unit	percent
-s3.s3.3.hist.19	feature_shape	rect
-s3.s3.3.hist.19	feature_shift_y	-45.55
-s3.s3.3.hist.19	feature_shift_y_unit	percent
-s3.s3.3.hist.19	display_feature_label	no
-s3.s3.3.hist.19	feature_color	green
-s3.s3.3.hist.19	feature_opacity	1
-
-s3.s3.3.hist.20	feature_height_ratio	30.8
-
-s3.s3.3.hist.20	feature_height_unit	percent
-s3.s3.3.hist.20	feature_shape	rect
-s3.s3.3.hist.20	feature_shift_y	-45.4
-s3.s3.3.hist.20	feature_shift_y_unit	percent
-s3.s3.3.hist.20	display_feature_label	no
-s3.s3.3.hist.20	feature_color	green
-s3.s3.3.hist.20	feature_opacity	1
-
-s3.s3.3.hist.21	feature_height_ratio	26.3
-
-s3.s3.3.hist.21	feature_height_unit	percent
-s3.s3.3.hist.21	feature_shape	rect
-s3.s3.3.hist.21	feature_shift_y	-43.15
-s3.s3.3.hist.21	feature_shift_y_unit	percent
-s3.s3.3.hist.21	display_feature_label	no
-s3.s3.3.hist.21	feature_color	green
-s3.s3.3.hist.21	feature_opacity	1
-
-s3.s3.3.hist.22	feature_height_ratio	31.95
-
-s3.s3.3.hist.22	feature_height_unit	percent
-s3.s3.3.hist.22	feature_shape	rect
-s3.s3.3.hist.22	feature_shift_y	-45.975
-s3.s3.3.hist.22	feature_shift_y_unit	percent
-s3.s3.3.hist.22	display_feature_label	no
-s3.s3.3.hist.22	feature_color	green
-s3.s3.3.hist.22	feature_opacity	1
-
-s3.s3.3.hist.23	feature_height_ratio	9.8
-
-s3.s3.3.hist.23	feature_height_unit	percent
-s3.s3.3.hist.23	feature_shape	rect
-s3.s3.3.hist.23	feature_shift_y	-34.9
-s3.s3.3.hist.23	feature_shift_y_unit	percent
-s3.s3.3.hist.23	display_feature_label	no
-s3.s3.3.hist.23	feature_color	green
-s3.s3.3.hist.23	feature_opacity	1
-
-s3.s3.3.hist.24	feature_height_ratio	26.8
-
-s3.s3.3.hist.24	feature_height_unit	percent
-s3.s3.3.hist.24	feature_shape	rect
-s3.s3.3.hist.24	feature_shift_y	-43.4
-s3.s3.3.hist.24	feature_shift_y_unit	percent
-s3.s3.3.hist.24	display_feature_label	no
-s3.s3.3.hist.24	feature_color	green
-s3.s3.3.hist.24	feature_opacity	1
-
-s3.s3.3.hist.25	feature_height_ratio	16.3
-
-s3.s3.3.hist.25	feature_height_unit	percent
-s3.s3.3.hist.25	feature_shape	rect
-s3.s3.3.hist.25	feature_shift_y	-38.15
-s3.s3.3.hist.25	feature_shift_y_unit	percent
-s3.s3.3.hist.25	display_feature_label	no
-s3.s3.3.hist.25	feature_color	green
-s3.s3.3.hist.25	feature_opacity	1
-
-s3.s3.3.hist.26	feature_height_ratio	27.25
-
-s3.s3.3.hist.26	feature_height_unit	percent
-s3.s3.3.hist.26	feature_shape	rect
-s3.s3.3.hist.26	feature_shift_y	-43.625
-s3.s3.3.hist.26	feature_shift_y_unit	percent
-s3.s3.3.hist.26	display_feature_label	no
-s3.s3.3.hist.26	feature_color	green
-s3.s3.3.hist.26	feature_opacity	1
-
-s3.s3.3.hist.27	feature_height_ratio	23.95
-
-s3.s3.3.hist.27	feature_height_unit	percent
-s3.s3.3.hist.27	feature_shape	rect
-s3.s3.3.hist.27	feature_shift_y	-41.975
-s3.s3.3.hist.27	feature_shift_y_unit	percent
-s3.s3.3.hist.27	display_feature_label	no
-s3.s3.3.hist.27	feature_color	green
-s3.s3.3.hist.27	feature_opacity	1
-
-s3.s3.3.hist.28	feature_height_ratio	35.85
-
-s3.s3.3.hist.28	feature_height_unit	percent
-s3.s3.3.hist.28	feature_shape	rect
-s3.s3.3.hist.28	feature_shift_y	-47.925
-s3.s3.3.hist.28	feature_shift_y_unit	percent
-s3.s3.3.hist.28	display_feature_label	no
-s3.s3.3.hist.28	feature_color	green
-s3.s3.3.hist.28	feature_opacity	1
-
-s3.s3.3.hist.29	feature_height_ratio	34.75
-
-s3.s3.3.hist.29	feature_height_unit	percent
-s3.s3.3.hist.29	feature_shape	rect
-s3.s3.3.hist.29	feature_shift_y	-47.375
-s3.s3.3.hist.29	feature_shift_y_unit	percent
-s3.s3.3.hist.29	display_feature_label	no
-s3.s3.3.hist.29	feature_color	green
-s3.s3.3.hist.29	feature_opacity	1
-
-s3.s3.3.hist.30	feature_height_ratio	39.95
-
-s3.s3.3.hist.30	feature_height_unit	percent
-s3.s3.3.hist.30	feature_shape	rect
-s3.s3.3.hist.30	feature_shift_y	-49.975
-s3.s3.3.hist.30	feature_shift_y_unit	percent
-s3.s3.3.hist.30	display_feature_label	no
-s3.s3.3.hist.30	feature_color	green
-s3.s3.3.hist.30	feature_opacity	1
-
-s3.s3.3.hist.31	feature_height_ratio	31.7
-
-s3.s3.3.hist.31	feature_height_unit	percent
-s3.s3.3.hist.31	feature_shape	rect
-s3.s3.3.hist.31	feature_shift_y	-45.85
-s3.s3.3.hist.31	feature_shift_y_unit	percent
-s3.s3.3.hist.31	display_feature_label	no
-s3.s3.3.hist.31	feature_color	green
-s3.s3.3.hist.31	feature_opacity	1
-
-s3.s3.3.hist.32	feature_height_ratio	31.5
-
-s3.s3.3.hist.32	feature_height_unit	percent
-s3.s3.3.hist.32	feature_shape	rect
-s3.s3.3.hist.32	feature_shift_y	-45.75
-s3.s3.3.hist.32	feature_shift_y_unit	percent
-s3.s3.3.hist.32	display_feature_label	no
-s3.s3.3.hist.32	feature_color	green
-s3.s3.3.hist.32	feature_opacity	1
-
-s3.s3.3.hist.33	feature_height_ratio	30.5
-
-s3.s3.3.hist.33	feature_height_unit	percent
-s3.s3.3.hist.33	feature_shape	rect
-s3.s3.3.hist.33	feature_shift_y	-45.25
-s3.s3.3.hist.33	feature_shift_y_unit	percent
-s3.s3.3.hist.33	display_feature_label	no
-s3.s3.3.hist.33	feature_color	green
-s3.s3.3.hist.33	feature_opacity	1
-
-s3.s3.3.hist.34	feature_height_ratio	29.75
-
-s3.s3.3.hist.34	feature_height_unit	percent
-s3.s3.3.hist.34	feature_shape	rect
-s3.s3.3.hist.34	feature_shift_y	-44.875
-s3.s3.3.hist.34	feature_shift_y_unit	percent
-s3.s3.3.hist.34	display_feature_label	no
-s3.s3.3.hist.34	feature_color	green
-s3.s3.3.hist.34	feature_opacity	1
-
-s3.s3.3.hist.35	feature_height_ratio	26.6
-
-s3.s3.3.hist.35	feature_height_unit	percent
-s3.s3.3.hist.35	feature_shape	rect
-s3.s3.3.hist.35	feature_shift_y	-43.3
-s3.s3.3.hist.35	feature_shift_y_unit	percent
-s3.s3.3.hist.35	display_feature_label	no
-s3.s3.3.hist.35	feature_color	green
-s3.s3.3.hist.35	feature_opacity	1
-
-s3.s3.3.hist.36	feature_height_ratio	50
-
-s3.s3.3.hist.36	feature_height_unit	percent
-s3.s3.3.hist.36	feature_shape	rect
-s3.s3.3.hist.36	feature_shift_y	-55
-s3.s3.3.hist.36	feature_shift_y_unit	percent
-s3.s3.3.hist.36	display_feature_label	yes
-s3.s3.3.hist.36	feature_color	green
-s3.s3.3.hist.36	feature_opacity	1
-s3.s3.3.hist.36	pos_feature_label	left_up
-s3.s3.3.hist.36	feature_label	30
-s3.s3.3.hist.36	label_rotate_angle	0
-s3.s3.3.hist.36	feature_label_auto_angle_flag	0
-
-s3.s3.3.hist.36	feature_label_size	7
-s3.s3.3.hist.36	padding_feature_label	+1
-
-s3.s3.3.hist.37	feature_height_ratio	20.65
-
-s3.s3.3.hist.37	feature_height_unit	percent
-s3.s3.3.hist.37	feature_shape	rect
-s3.s3.3.hist.37	feature_shift_y	-40.325
-s3.s3.3.hist.37	feature_shift_y_unit	percent
-s3.s3.3.hist.37	display_feature_label	no
-s3.s3.3.hist.37	feature_color	green
-s3.s3.3.hist.37	feature_opacity	1
-
-s3.s3.3.hist.38	feature_height_ratio	33.1
-
-s3.s3.3.hist.38	feature_height_unit	percent
-s3.s3.3.hist.38	feature_shape	rect
-s3.s3.3.hist.38	feature_shift_y	-46.55
-s3.s3.3.hist.38	feature_shift_y_unit	percent
-s3.s3.3.hist.38	display_feature_label	no
-s3.s3.3.hist.38	feature_color	green
-s3.s3.3.hist.38	feature_opacity	1
-
-s3.s3.3.hist.39	feature_height_ratio	37.85
-
-s3.s3.3.hist.39	feature_height_unit	percent
-s3.s3.3.hist.39	feature_shape	rect
-s3.s3.3.hist.39	feature_shift_y	-48.925
-s3.s3.3.hist.39	feature_shift_y_unit	percent
-s3.s3.3.hist.39	display_feature_label	no
-s3.s3.3.hist.39	feature_color	green
-s3.s3.3.hist.39	feature_opacity	1
-
-s3.s3.3.hist.40	feature_height_ratio	26
-
-s3.s3.3.hist.40	feature_height_unit	percent
-s3.s3.3.hist.40	feature_shape	rect
-s3.s3.3.hist.40	feature_shift_y	-43
-s3.s3.3.hist.40	feature_shift_y_unit	percent
-s3.s3.3.hist.40	display_feature_label	no
-s3.s3.3.hist.40	feature_color	green
-s3.s3.3.hist.40	feature_opacity	1
-
-s3.s3.3.hist.41	feature_height_ratio	14.2
-
-s3.s3.3.hist.41	feature_height_unit	percent
-s3.s3.3.hist.41	feature_shape	rect
-s3.s3.3.hist.41	feature_shift_y	-37.1
-s3.s3.3.hist.41	feature_shift_y_unit	percent
-s3.s3.3.hist.41	display_feature_label	no
-s3.s3.3.hist.41	feature_color	green
-s3.s3.3.hist.41	feature_opacity	1
-
-s3.s3.3.hist.42	feature_height_ratio	24.3
-
-s3.s3.3.hist.42	feature_height_unit	percent
-s3.s3.3.hist.42	feature_shape	rect
-s3.s3.3.hist.42	feature_shift_y	-42.15
-s3.s3.3.hist.42	feature_shift_y_unit	percent
-s3.s3.3.hist.42	display_feature_label	no
-s3.s3.3.hist.42	feature_color	green
-s3.s3.3.hist.42	feature_opacity	1
-
-s3.s3.3.hist.43	feature_height_ratio	28.65
-
-s3.s3.3.hist.43	feature_height_unit	percent
-s3.s3.3.hist.43	feature_shape	rect
-s3.s3.3.hist.43	feature_shift_y	-44.325
-s3.s3.3.hist.43	feature_shift_y_unit	percent
-s3.s3.3.hist.43	display_feature_label	no
-s3.s3.3.hist.43	feature_color	green
-s3.s3.3.hist.43	feature_opacity	1
-
-s3.s3.3.hist.44	feature_height_ratio	44.35
-
-s3.s3.3.hist.44	feature_height_unit	percent
-s3.s3.3.hist.44	feature_shape	rect
-s3.s3.3.hist.44	feature_shift_y	-52.175
-s3.s3.3.hist.44	feature_shift_y_unit	percent
-s3.s3.3.hist.44	display_feature_label	no
-s3.s3.3.hist.44	feature_color	green
-s3.s3.3.hist.44	feature_opacity	1
-
-s3.s3.3.hist.45	feature_height_ratio	4.49999999999999
-
-s3.s3.3.hist.45	feature_height_unit	percent
-s3.s3.3.hist.45	feature_shape	rect
-s3.s3.3.hist.45	feature_shift_y	-32.25
-s3.s3.3.hist.45	feature_shift_y_unit	percent
-s3.s3.3.hist.45	display_feature_label	no
-s3.s3.3.hist.45	feature_color	green
-s3.s3.3.hist.45	feature_opacity	1
+s3.s3.1.hist.0.1	feature_height_ratio	15.15
+
+s3.s3.1.hist.0.1	feature_height_unit	percent
+s3.s3.1.hist.0.1	feature_shape	rect
+s3.s3.1.hist.0.1	feature_shift_y	-12.575
+s3.s3.1.hist.0.1	feature_shift_y_unit	percent
+s3.s3.1.hist.0.1	display_feature_label	no
+s3.s3.1.hist.0.1	feature_color	green
+s3.s3.1.hist.0.1	feature_opacity	1
+
+s3.s3.1.hist.1.1	feature_height_ratio	40.35
+
+s3.s3.1.hist.1.1	feature_height_unit	percent
+s3.s3.1.hist.1.1	feature_shape	rect
+s3.s3.1.hist.1.1	feature_shift_y	-25.175
+s3.s3.1.hist.1.1	feature_shift_y_unit	percent
+s3.s3.1.hist.1.1	display_feature_label	no
+s3.s3.1.hist.1.1	feature_color	green
+s3.s3.1.hist.1.1	feature_opacity	1
+
+s3.s3.1.hist.2.1	feature_height_ratio	12.45
+
+s3.s3.1.hist.2.1	feature_height_unit	percent
+s3.s3.1.hist.2.1	feature_shape	rect
+s3.s3.1.hist.2.1	feature_shift_y	-11.225
+s3.s3.1.hist.2.1	feature_shift_y_unit	percent
+s3.s3.1.hist.2.1	display_feature_label	no
+s3.s3.1.hist.2.1	feature_color	green
+s3.s3.1.hist.2.1	feature_opacity	1
+
+s3.s3.1.hist.3.1	feature_height_ratio	31.75
+
+s3.s3.1.hist.3.1	feature_height_unit	percent
+s3.s3.1.hist.3.1	feature_shape	rect
+s3.s3.1.hist.3.1	feature_shift_y	-20.875
+s3.s3.1.hist.3.1	feature_shift_y_unit	percent
+s3.s3.1.hist.3.1	display_feature_label	no
+s3.s3.1.hist.3.1	feature_color	green
+s3.s3.1.hist.3.1	feature_opacity	1
+
+s3.s3.1.hist.4.1	feature_height_ratio	26.85
+
+s3.s3.1.hist.4.1	feature_height_unit	percent
+s3.s3.1.hist.4.1	feature_shape	rect
+s3.s3.1.hist.4.1	feature_shift_y	-18.425
+s3.s3.1.hist.4.1	feature_shift_y_unit	percent
+s3.s3.1.hist.4.1	display_feature_label	no
+s3.s3.1.hist.4.1	feature_color	green
+s3.s3.1.hist.4.1	feature_opacity	1
+
+s3.s3.1.hist.5.1	feature_height_ratio	23.8
+
+s3.s3.1.hist.5.1	feature_height_unit	percent
+s3.s3.1.hist.5.1	feature_shape	rect
+s3.s3.1.hist.5.1	feature_shift_y	-16.9
+s3.s3.1.hist.5.1	feature_shift_y_unit	percent
+s3.s3.1.hist.5.1	display_feature_label	no
+s3.s3.1.hist.5.1	feature_color	green
+s3.s3.1.hist.5.1	feature_opacity	1
+
+s3.s3.1.hist.6.1	feature_height_ratio	20.85
+
+s3.s3.1.hist.6.1	feature_height_unit	percent
+s3.s3.1.hist.6.1	feature_shape	rect
+s3.s3.1.hist.6.1	feature_shift_y	-15.425
+s3.s3.1.hist.6.1	feature_shift_y_unit	percent
+s3.s3.1.hist.6.1	display_feature_label	no
+s3.s3.1.hist.6.1	feature_color	green
+s3.s3.1.hist.6.1	feature_opacity	1
+
+s3.s3.1.hist.7.1	feature_height_ratio	27.6
+
+s3.s3.1.hist.7.1	feature_height_unit	percent
+s3.s3.1.hist.7.1	feature_shape	rect
+s3.s3.1.hist.7.1	feature_shift_y	-18.8
+s3.s3.1.hist.7.1	feature_shift_y_unit	percent
+s3.s3.1.hist.7.1	display_feature_label	no
+s3.s3.1.hist.7.1	feature_color	green
+s3.s3.1.hist.7.1	feature_opacity	1
+
+s3.s3.1.hist.8.1	feature_height_ratio	38
+
+s3.s3.1.hist.8.1	feature_height_unit	percent
+s3.s3.1.hist.8.1	feature_shape	rect
+s3.s3.1.hist.8.1	feature_shift_y	-24
+s3.s3.1.hist.8.1	feature_shift_y_unit	percent
+s3.s3.1.hist.8.1	display_feature_label	no
+s3.s3.1.hist.8.1	feature_color	green
+s3.s3.1.hist.8.1	feature_opacity	1
+
+s3.s3.1.hist.9.1	feature_height_ratio	25.05
+
+s3.s3.1.hist.9.1	feature_height_unit	percent
+s3.s3.1.hist.9.1	feature_shape	rect
+s3.s3.1.hist.9.1	feature_shift_y	-17.525
+s3.s3.1.hist.9.1	feature_shift_y_unit	percent
+s3.s3.1.hist.9.1	display_feature_label	no
+s3.s3.1.hist.9.1	feature_color	green
+s3.s3.1.hist.9.1	feature_opacity	1
+
+s3.s3.1.hist.10.1	feature_height_ratio	32.65
+
+s3.s3.1.hist.10.1	feature_height_unit	percent
+s3.s3.1.hist.10.1	feature_shape	rect
+s3.s3.1.hist.10.1	feature_shift_y	-21.325
+s3.s3.1.hist.10.1	feature_shift_y_unit	percent
+s3.s3.1.hist.10.1	display_feature_label	no
+s3.s3.1.hist.10.1	feature_color	green
+s3.s3.1.hist.10.1	feature_opacity	1
+
+s3.s3.1.hist.11.1	feature_height_ratio	20.45
+
+s3.s3.1.hist.11.1	feature_height_unit	percent
+s3.s3.1.hist.11.1	feature_shape	rect
+s3.s3.1.hist.11.1	feature_shift_y	-15.225
+s3.s3.1.hist.11.1	feature_shift_y_unit	percent
+s3.s3.1.hist.11.1	display_feature_label	no
+s3.s3.1.hist.11.1	feature_color	green
+s3.s3.1.hist.11.1	feature_opacity	1
+
+s3.s3.1.hist.12.1	feature_height_ratio	32.4
+
+s3.s3.1.hist.12.1	feature_height_unit	percent
+s3.s3.1.hist.12.1	feature_shape	rect
+s3.s3.1.hist.12.1	feature_shift_y	-21.2
+s3.s3.1.hist.12.1	feature_shift_y_unit	percent
+s3.s3.1.hist.12.1	display_feature_label	no
+s3.s3.1.hist.12.1	feature_color	green
+s3.s3.1.hist.12.1	feature_opacity	1
+
+s3.s3.1.hist.13.1	feature_height_ratio	15.7
+
+s3.s3.1.hist.13.1	feature_height_unit	percent
+s3.s3.1.hist.13.1	feature_shape	rect
+s3.s3.1.hist.13.1	feature_shift_y	-12.85
+s3.s3.1.hist.13.1	feature_shift_y_unit	percent
+s3.s3.1.hist.13.1	display_feature_label	no
+s3.s3.1.hist.13.1	feature_color	green
+s3.s3.1.hist.13.1	feature_opacity	1
+
+s3.s3.1.hist.14.1	feature_height_ratio	26.05
+
+s3.s3.1.hist.14.1	feature_height_unit	percent
+s3.s3.1.hist.14.1	feature_shape	rect
+s3.s3.1.hist.14.1	feature_shift_y	-18.025
+s3.s3.1.hist.14.1	feature_shift_y_unit	percent
+s3.s3.1.hist.14.1	display_feature_label	no
+s3.s3.1.hist.14.1	feature_color	green
+s3.s3.1.hist.14.1	feature_opacity	1
+
+s3.s3.1.hist.15.1	feature_height_ratio	26.75
+
+s3.s3.1.hist.15.1	feature_height_unit	percent
+s3.s3.1.hist.15.1	feature_shape	rect
+s3.s3.1.hist.15.1	feature_shift_y	-18.375
+s3.s3.1.hist.15.1	feature_shift_y_unit	percent
+s3.s3.1.hist.15.1	display_feature_label	no
+s3.s3.1.hist.15.1	feature_color	green
+s3.s3.1.hist.15.1	feature_opacity	1
+
+s3.s3.1.hist.16.1	feature_height_ratio	8.95
+
+s3.s3.1.hist.16.1	feature_height_unit	percent
+s3.s3.1.hist.16.1	feature_shape	rect
+s3.s3.1.hist.16.1	feature_shift_y	-9.475
+s3.s3.1.hist.16.1	feature_shift_y_unit	percent
+s3.s3.1.hist.16.1	display_feature_label	no
+s3.s3.1.hist.16.1	feature_color	green
+s3.s3.1.hist.16.1	feature_opacity	1
+
+s3.s3.1.hist.17.1	feature_height_ratio	26.9
+
+s3.s3.1.hist.17.1	feature_height_unit	percent
+s3.s3.1.hist.17.1	feature_shape	rect
+s3.s3.1.hist.17.1	feature_shift_y	-18.45
+s3.s3.1.hist.17.1	feature_shift_y_unit	percent
+s3.s3.1.hist.17.1	display_feature_label	no
+s3.s3.1.hist.17.1	feature_color	green
+s3.s3.1.hist.17.1	feature_opacity	1
+
+s3.s3.1.hist.18.1	feature_height_ratio	12.4
+
+s3.s3.1.hist.18.1	feature_height_unit	percent
+s3.s3.1.hist.18.1	feature_shape	rect
+s3.s3.1.hist.18.1	feature_shift_y	-11.2
+s3.s3.1.hist.18.1	feature_shift_y_unit	percent
+s3.s3.1.hist.18.1	display_feature_label	no
+s3.s3.1.hist.18.1	feature_color	green
+s3.s3.1.hist.18.1	feature_opacity	1
+
+s3.s3.1.hist.19.1	feature_height_ratio	34.05
+
+s3.s3.1.hist.19.1	feature_height_unit	percent
+s3.s3.1.hist.19.1	feature_shape	rect
+s3.s3.1.hist.19.1	feature_shift_y	-22.025
+s3.s3.1.hist.19.1	feature_shift_y_unit	percent
+s3.s3.1.hist.19.1	display_feature_label	no
+s3.s3.1.hist.19.1	feature_color	green
+s3.s3.1.hist.19.1	feature_opacity	1
+
+s3.s3.1.11.2010.2	feature_height_ratio	30
+
+s3.s3.1.11.2010.2	feature_height_unit	percent
+s3.s3.1.11.2010.2	feature_shape	rect
+s3.s3.1.11.2010.2	feature_shift_x	20
+s3.s3.1.11.2010.2	feature_shift_y	-80.5
+s3.s3.1.11.2010.2	feature_shift_y_unit	percent
+s3.s3.1.11.2010.2	display_feature_label	no
+s3.s3.1.11.2010.2	pos_feature_label	right_medium
+s3.s3.1.11.2010.2	feature_label	ytick_label
+s3.s3.1.11.2010.2	feature_color	green
+s3.s3.1.11.2010.2	feature_opacity	1
+
+s3.s3.1.11.2010.2.tick0.hgrid	feature_height_ratio	0.5
+
+s3.s3.1.11.2010.2.tick0.hgrid	feature_height_unit	percent
+s3.s3.1.11.2010.2.tick0.hgrid	feature_shape	rect
+s3.s3.1.11.2010.2.tick0.hgrid	display_feature_label	no
+s3.s3.1.11.2010.2.tick0.hgrid	feature_opacity	0.5
+s3.s3.1.11.2010.2.tick0.hgrid	feature_shift_y	-65
+s3.s3.1.11.2010.2.tick0.hgrid	feature_shift_y_unit	percent
+s3.s3.1.11.2010.2.tick0.hgrid	feature_color	black
+
+s3.s3.1.11.2010.2.tick0	feature_height_ratio	1
+
+s3.s3.1.11.2010.2.tick0	feature_height_unit	percent
+s3.s3.1.11.2010.2.tick0	feature_shape	rect
+s3.s3.1.11.2010.2.tick0	feature_shift_x	80
+s3.s3.1.11.2010.2.tick0	feature_shift_y	-65
+s3.s3.1.11.2010.2.tick0	feature_shift_y_unit	percent
+s3.s3.1.11.2010.2.tick0	display_feature_label	yes
+s3.s3.1.11.2010.2.tick0	feature_label	20
+s3.s3.1.11.2010.2.tick0	pos_feature_label	right_medium
+s3.s3.1.11.2010.2.tick0	label_rotate_angle	0
+s3.s3.1.11.2010.2.tick0	feature_label_size	6
+s3.s3.1.11.2010.2.tick0	padding_feature_label	1.8
+s3.s3.1.11.2010.2.tick0	feature_label_auto_angle_flag	0
+
+s3.s3.1.11.2010.2.tick0	feature_color	green
+
+s3.s3.1.11.2010.2.tick0	feature_opacity	1
+
+
+s3.s3.1.11.2010.2.tick1.hgrid	feature_height_ratio	0.5
+
+s3.s3.1.11.2010.2.tick1.hgrid	feature_height_unit	percent
+s3.s3.1.11.2010.2.tick1.hgrid	feature_shape	rect
+s3.s3.1.11.2010.2.tick1.hgrid	display_feature_label	no
+s3.s3.1.11.2010.2.tick1.hgrid	feature_opacity	0.5
+s3.s3.1.11.2010.2.tick1.hgrid	feature_shift_y	-75
+s3.s3.1.11.2010.2.tick1.hgrid	feature_shift_y_unit	percent
+s3.s3.1.11.2010.2.tick1.hgrid	feature_color	black
+
+s3.s3.1.11.2010.2.tick1	feature_height_ratio	1
+
+s3.s3.1.11.2010.2.tick1	feature_height_unit	percent
+s3.s3.1.11.2010.2.tick1	feature_shape	rect
+s3.s3.1.11.2010.2.tick1	feature_shift_x	80
+s3.s3.1.11.2010.2.tick1	feature_shift_y	-75
+s3.s3.1.11.2010.2.tick1	feature_shift_y_unit	percent
+s3.s3.1.11.2010.2.tick1	display_feature_label	yes
+s3.s3.1.11.2010.2.tick1	feature_label	23
+s3.s3.1.11.2010.2.tick1	pos_feature_label	right_medium
+s3.s3.1.11.2010.2.tick1	label_rotate_angle	0
+s3.s3.1.11.2010.2.tick1	feature_label_size	6
+s3.s3.1.11.2010.2.tick1	padding_feature_label	1.8
+s3.s3.1.11.2010.2.tick1	feature_label_auto_angle_flag	0
+
+s3.s3.1.11.2010.2.tick1	feature_color	green
+
+s3.s3.1.11.2010.2.tick1	feature_opacity	1
+
+
+s3.s3.1.11.2010.2.tick2.hgrid	feature_height_ratio	0.5
+
+s3.s3.1.11.2010.2.tick2.hgrid	feature_height_unit	percent
+s3.s3.1.11.2010.2.tick2.hgrid	feature_shape	rect
+s3.s3.1.11.2010.2.tick2.hgrid	display_feature_label	no
+s3.s3.1.11.2010.2.tick2.hgrid	feature_opacity	0.5
+s3.s3.1.11.2010.2.tick2.hgrid	feature_shift_y	-85
+s3.s3.1.11.2010.2.tick2.hgrid	feature_shift_y_unit	percent
+s3.s3.1.11.2010.2.tick2.hgrid	feature_color	black
+
+s3.s3.1.11.2010.2.tick2	feature_height_ratio	1
+
+s3.s3.1.11.2010.2.tick2	feature_height_unit	percent
+s3.s3.1.11.2010.2.tick2	feature_shape	rect
+s3.s3.1.11.2010.2.tick2	feature_shift_x	80
+s3.s3.1.11.2010.2.tick2	feature_shift_y	-85
+s3.s3.1.11.2010.2.tick2	feature_shift_y_unit	percent
+s3.s3.1.11.2010.2.tick2	display_feature_label	yes
+s3.s3.1.11.2010.2.tick2	feature_label	26
+s3.s3.1.11.2010.2.tick2	pos_feature_label	right_medium
+s3.s3.1.11.2010.2.tick2	label_rotate_angle	0
+s3.s3.1.11.2010.2.tick2	feature_label_size	6
+s3.s3.1.11.2010.2.tick2	padding_feature_label	1.8
+s3.s3.1.11.2010.2.tick2	feature_label_auto_angle_flag	0
+
+s3.s3.1.11.2010.2.tick2	feature_color	green
+
+s3.s3.1.11.2010.2.tick2	feature_opacity	1
+
+
+s3.s3.1.11.2010.2.tick3.hgrid	feature_height_ratio	0.5
+
+s3.s3.1.11.2010.2.tick3.hgrid	feature_height_unit	percent
+s3.s3.1.11.2010.2.tick3.hgrid	feature_shape	rect
+s3.s3.1.11.2010.2.tick3.hgrid	display_feature_label	no
+s3.s3.1.11.2010.2.tick3.hgrid	feature_opacity	0.5
+s3.s3.1.11.2010.2.tick3.hgrid	feature_shift_y	-95
+s3.s3.1.11.2010.2.tick3.hgrid	feature_shift_y_unit	percent
+s3.s3.1.11.2010.2.tick3.hgrid	feature_color	black
+
+s3.s3.1.11.2010.2.tick3	feature_height_ratio	1
+
+s3.s3.1.11.2010.2.tick3	feature_height_unit	percent
+s3.s3.1.11.2010.2.tick3	feature_shape	rect
+s3.s3.1.11.2010.2.tick3	feature_shift_x	80
+s3.s3.1.11.2010.2.tick3	feature_shift_y	-95
+s3.s3.1.11.2010.2.tick3	feature_shift_y_unit	percent
+s3.s3.1.11.2010.2.tick3	display_feature_label	yes
+s3.s3.1.11.2010.2.tick3	feature_label	30
+s3.s3.1.11.2010.2.tick3	pos_feature_label	right_medium
+s3.s3.1.11.2010.2.tick3	label_rotate_angle	0
+s3.s3.1.11.2010.2.tick3	feature_label_size	6
+s3.s3.1.11.2010.2.tick3	padding_feature_label	1.8
+s3.s3.1.11.2010.2.tick3	feature_label_auto_angle_flag	0
+
+s3.s3.1.11.2010.2.tick3	feature_color	green
+
+s3.s3.1.11.2010.2.tick3	feature_opacity	1
+
+
+s3.s3.1.hist.0.2	feature_height_ratio	9.09
+
+s3.s3.1.hist.0.2	feature_height_unit	percent
+s3.s3.1.hist.0.2	feature_shape	rect
+s3.s3.1.hist.0.2	feature_shift_y	-69.545
+s3.s3.1.hist.0.2	feature_shift_y_unit	percent
+s3.s3.1.hist.0.2	display_feature_label	no
+s3.s3.1.hist.0.2	feature_color	green
+s3.s3.1.hist.0.2	feature_opacity	1
+
+s3.s3.1.hist.1.2	feature_height_ratio	24.21
+
+s3.s3.1.hist.1.2	feature_height_unit	percent
+s3.s3.1.hist.1.2	feature_shape	rect
+s3.s3.1.hist.1.2	feature_shift_y	-77.105
+s3.s3.1.hist.1.2	feature_shift_y_unit	percent
+s3.s3.1.hist.1.2	display_feature_label	no
+s3.s3.1.hist.1.2	feature_color	green
+s3.s3.1.hist.1.2	feature_opacity	1
+
+s3.s3.1.hist.2.2	feature_height_ratio	7.47
+
+s3.s3.1.hist.2.2	feature_height_unit	percent
+s3.s3.1.hist.2.2	feature_shape	rect
+s3.s3.1.hist.2.2	feature_shift_y	-68.735
+s3.s3.1.hist.2.2	feature_shift_y_unit	percent
+s3.s3.1.hist.2.2	display_feature_label	no
+s3.s3.1.hist.2.2	feature_color	green
+s3.s3.1.hist.2.2	feature_opacity	1
+
+s3.s3.1.hist.3.2	feature_height_ratio	19.05
+
+s3.s3.1.hist.3.2	feature_height_unit	percent
+s3.s3.1.hist.3.2	feature_shape	rect
+s3.s3.1.hist.3.2	feature_shift_y	-74.525
+s3.s3.1.hist.3.2	feature_shift_y_unit	percent
+s3.s3.1.hist.3.2	display_feature_label	no
+s3.s3.1.hist.3.2	feature_color	green
+s3.s3.1.hist.3.2	feature_opacity	1
+
+s3.s3.1.hist.4.2	feature_height_ratio	16.11
+
+s3.s3.1.hist.4.2	feature_height_unit	percent
+s3.s3.1.hist.4.2	feature_shape	rect
+s3.s3.1.hist.4.2	feature_shift_y	-73.055
+s3.s3.1.hist.4.2	feature_shift_y_unit	percent
+s3.s3.1.hist.4.2	display_feature_label	no
+s3.s3.1.hist.4.2	feature_color	green
+s3.s3.1.hist.4.2	feature_opacity	1
+
+s3.s3.1.hist.5.2	feature_height_ratio	14.28
+
+s3.s3.1.hist.5.2	feature_height_unit	percent
+s3.s3.1.hist.5.2	feature_shape	rect
+s3.s3.1.hist.5.2	feature_shift_y	-72.14
+s3.s3.1.hist.5.2	feature_shift_y_unit	percent
+s3.s3.1.hist.5.2	display_feature_label	no
+s3.s3.1.hist.5.2	feature_color	green
+s3.s3.1.hist.5.2	feature_opacity	1
+
+s3.s3.1.hist.6.2	feature_height_ratio	12.51
+
+s3.s3.1.hist.6.2	feature_height_unit	percent
+s3.s3.1.hist.6.2	feature_shape	rect
+s3.s3.1.hist.6.2	feature_shift_y	-71.255
+s3.s3.1.hist.6.2	feature_shift_y_unit	percent
+s3.s3.1.hist.6.2	display_feature_label	no
+s3.s3.1.hist.6.2	feature_color	green
+s3.s3.1.hist.6.2	feature_opacity	1
+
+s3.s3.1.hist.7.2	feature_height_ratio	16.56
+
+s3.s3.1.hist.7.2	feature_height_unit	percent
+s3.s3.1.hist.7.2	feature_shape	rect
+s3.s3.1.hist.7.2	feature_shift_y	-73.28
+s3.s3.1.hist.7.2	feature_shift_y_unit	percent
+s3.s3.1.hist.7.2	display_feature_label	no
+s3.s3.1.hist.7.2	feature_color	green
+s3.s3.1.hist.7.2	feature_opacity	1
+
+s3.s3.1.hist.8.2	feature_height_ratio	22.8
+
+s3.s3.1.hist.8.2	feature_height_unit	percent
+s3.s3.1.hist.8.2	feature_shape	rect
+s3.s3.1.hist.8.2	feature_shift_y	-76.4
+s3.s3.1.hist.8.2	feature_shift_y_unit	percent
+s3.s3.1.hist.8.2	display_feature_label	no
+s3.s3.1.hist.8.2	feature_color	green
+s3.s3.1.hist.8.2	feature_opacity	1
+
+s3.s3.1.hist.9.2	feature_height_ratio	15.03
+
+s3.s3.1.hist.9.2	feature_height_unit	percent
+s3.s3.1.hist.9.2	feature_shape	rect
+s3.s3.1.hist.9.2	feature_shift_y	-72.515
+s3.s3.1.hist.9.2	feature_shift_y_unit	percent
+s3.s3.1.hist.9.2	display_feature_label	no
+s3.s3.1.hist.9.2	feature_color	green
+s3.s3.1.hist.9.2	feature_opacity	1
+
+s3.s3.1.hist.10.2	feature_height_ratio	19.59
+
+s3.s3.1.hist.10.2	feature_height_unit	percent
+s3.s3.1.hist.10.2	feature_shape	rect
+s3.s3.1.hist.10.2	feature_shift_y	-74.795
+s3.s3.1.hist.10.2	feature_shift_y_unit	percent
+s3.s3.1.hist.10.2	display_feature_label	no
+s3.s3.1.hist.10.2	feature_color	green
+s3.s3.1.hist.10.2	feature_opacity	1
+
+s3.s3.1.hist.11.2	feature_height_ratio	12.27
+
+s3.s3.1.hist.11.2	feature_height_unit	percent
+s3.s3.1.hist.11.2	feature_shape	rect
+s3.s3.1.hist.11.2	feature_shift_y	-71.135
+s3.s3.1.hist.11.2	feature_shift_y_unit	percent
+s3.s3.1.hist.11.2	display_feature_label	no
+s3.s3.1.hist.11.2	feature_color	green
+s3.s3.1.hist.11.2	feature_opacity	1
+
+s3.s3.1.hist.12.2	feature_height_ratio	19.44
+
+s3.s3.1.hist.12.2	feature_height_unit	percent
+s3.s3.1.hist.12.2	feature_shape	rect
+s3.s3.1.hist.12.2	feature_shift_y	-74.72
+s3.s3.1.hist.12.2	feature_shift_y_unit	percent
+s3.s3.1.hist.12.2	display_feature_label	no
+s3.s3.1.hist.12.2	feature_color	green
+s3.s3.1.hist.12.2	feature_opacity	1
+
+s3.s3.1.hist.13.2	feature_height_ratio	9.42
+
+s3.s3.1.hist.13.2	feature_height_unit	percent
+s3.s3.1.hist.13.2	feature_shape	rect
+s3.s3.1.hist.13.2	feature_shift_y	-69.71
+s3.s3.1.hist.13.2	feature_shift_y_unit	percent
+s3.s3.1.hist.13.2	display_feature_label	no
+s3.s3.1.hist.13.2	feature_color	green
+s3.s3.1.hist.13.2	feature_opacity	1
+
+s3.s3.1.hist.14.2	feature_height_ratio	15.63
+
+s3.s3.1.hist.14.2	feature_height_unit	percent
+s3.s3.1.hist.14.2	feature_shape	rect
+s3.s3.1.hist.14.2	feature_shift_y	-72.815
+s3.s3.1.hist.14.2	feature_shift_y_unit	percent
+s3.s3.1.hist.14.2	display_feature_label	no
+s3.s3.1.hist.14.2	feature_color	green
+s3.s3.1.hist.14.2	feature_opacity	1
+
+s3.s3.1.hist.15.2	feature_height_ratio	16.05
+
+s3.s3.1.hist.15.2	feature_height_unit	percent
+s3.s3.1.hist.15.2	feature_shape	rect
+s3.s3.1.hist.15.2	feature_shift_y	-73.025
+s3.s3.1.hist.15.2	feature_shift_y_unit	percent
+s3.s3.1.hist.15.2	display_feature_label	no
+s3.s3.1.hist.15.2	feature_color	green
+s3.s3.1.hist.15.2	feature_opacity	1
+
+s3.s3.1.hist.16.2	feature_height_ratio	5.37
+
+s3.s3.1.hist.16.2	feature_height_unit	percent
+s3.s3.1.hist.16.2	feature_shape	rect
+s3.s3.1.hist.16.2	feature_shift_y	-67.685
+s3.s3.1.hist.16.2	feature_shift_y_unit	percent
+s3.s3.1.hist.16.2	display_feature_label	no
+s3.s3.1.hist.16.2	feature_color	green
+s3.s3.1.hist.16.2	feature_opacity	1
+
+s3.s3.1.hist.17.2	feature_height_ratio	16.14
+
+s3.s3.1.hist.17.2	feature_height_unit	percent
+s3.s3.1.hist.17.2	feature_shape	rect
+s3.s3.1.hist.17.2	feature_shift_y	-73.07
+s3.s3.1.hist.17.2	feature_shift_y_unit	percent
+s3.s3.1.hist.17.2	display_feature_label	no
+s3.s3.1.hist.17.2	feature_color	green
+s3.s3.1.hist.17.2	feature_opacity	1
+
+s3.s3.1.hist.18.2	feature_height_ratio	7.44
+
+s3.s3.1.hist.18.2	feature_height_unit	percent
+s3.s3.1.hist.18.2	feature_shape	rect
+s3.s3.1.hist.18.2	feature_shift_y	-68.72
+s3.s3.1.hist.18.2	feature_shift_y_unit	percent
+s3.s3.1.hist.18.2	display_feature_label	no
+s3.s3.1.hist.18.2	feature_color	green
+s3.s3.1.hist.18.2	feature_opacity	1
+
+s3.s3.1.hist.19.2	feature_height_ratio	20.43
+
+s3.s3.1.hist.19.2	feature_height_unit	percent
+s3.s3.1.hist.19.2	feature_shape	rect
+s3.s3.1.hist.19.2	feature_shift_y	-75.215
+s3.s3.1.hist.19.2	feature_shift_y_unit	percent
+s3.s3.1.hist.19.2	display_feature_label	no
+s3.s3.1.hist.19.2	feature_color	green
+s3.s3.1.hist.19.2	feature_opacity	1
+
+s3.s3.2.2020.5000.3	feature_height_ratio	55
+
+s3.s3.2.2020.5000.3	feature_height_unit	percent
+s3.s3.2.2020.5000.3	feature_shape	rect
+s3.s3.2.2020.5000.3	feature_shift_x	20
+s3.s3.2.2020.5000.3	feature_shift_y	-43
+s3.s3.2.2020.5000.3	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3	display_feature_label	no
+s3.s3.2.2020.5000.3	pos_feature_label	right_medium
+s3.s3.2.2020.5000.3	feature_label	ytick_label
+s3.s3.2.2020.5000.3	feature_color	green
+s3.s3.2.2020.5000.3	feature_opacity	0.6
+
+s3.s3.2.2020.5000.3.tick0.hgrid	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick0.hgrid	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick0.hgrid	feature_shape	rect
+s3.s3.2.2020.5000.3.tick0.hgrid	display_feature_label	no
+s3.s3.2.2020.5000.3.tick0.hgrid	feature_opacity	0.3
+s3.s3.2.2020.5000.3.tick0.hgrid	feature_shift_y	-15
+s3.s3.2.2020.5000.3.tick0.hgrid	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick0.hgrid	feature_color	green
+
+s3.s3.2.2020.5000.3.tick0	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick0	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick0	feature_shape	rect
+s3.s3.2.2020.5000.3.tick0	feature_shift_x	80
+s3.s3.2.2020.5000.3.tick0	feature_shift_y	-15
+s3.s3.2.2020.5000.3.tick0	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick0	display_feature_label	yes
+s3.s3.2.2020.5000.3.tick0	feature_label	20
+s3.s3.2.2020.5000.3.tick0	pos_feature_label	right_medium
+s3.s3.2.2020.5000.3.tick0	label_rotate_angle	0
+s3.s3.2.2020.5000.3.tick0	feature_label_size	6
+s3.s3.2.2020.5000.3.tick0	padding_feature_label	1.8
+s3.s3.2.2020.5000.3.tick0	feature_label_auto_angle_flag	0
+
+s3.s3.2.2020.5000.3.tick0	feature_color	green
+
+s3.s3.2.2020.5000.3.tick0	feature_opacity	0.6
+
+
+s3.s3.2.2020.5000.3.tick1.hgrid	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick1.hgrid	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick1.hgrid	feature_shape	rect
+s3.s3.2.2020.5000.3.tick1.hgrid	display_feature_label	no
+s3.s3.2.2020.5000.3.tick1.hgrid	feature_opacity	0.3
+s3.s3.2.2020.5000.3.tick1.hgrid	feature_shift_y	-25
+s3.s3.2.2020.5000.3.tick1.hgrid	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick1.hgrid	feature_color	green
+
+s3.s3.2.2020.5000.3.tick1	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick1	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick1	feature_shape	rect
+s3.s3.2.2020.5000.3.tick1	feature_shift_x	80
+s3.s3.2.2020.5000.3.tick1	feature_shift_y	-25
+s3.s3.2.2020.5000.3.tick1	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick1	display_feature_label	yes
+s3.s3.2.2020.5000.3.tick1	feature_label	21
+s3.s3.2.2020.5000.3.tick1	pos_feature_label	right_medium
+s3.s3.2.2020.5000.3.tick1	label_rotate_angle	0
+s3.s3.2.2020.5000.3.tick1	feature_label_size	6
+s3.s3.2.2020.5000.3.tick1	padding_feature_label	1.8
+s3.s3.2.2020.5000.3.tick1	feature_label_auto_angle_flag	0
+
+s3.s3.2.2020.5000.3.tick1	feature_color	green
+
+s3.s3.2.2020.5000.3.tick1	feature_opacity	0.6
+
+
+s3.s3.2.2020.5000.3.tick2.hgrid	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick2.hgrid	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick2.hgrid	feature_shape	rect
+s3.s3.2.2020.5000.3.tick2.hgrid	display_feature_label	no
+s3.s3.2.2020.5000.3.tick2.hgrid	feature_opacity	0.3
+s3.s3.2.2020.5000.3.tick2.hgrid	feature_shift_y	-35
+s3.s3.2.2020.5000.3.tick2.hgrid	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick2.hgrid	feature_color	green
+
+s3.s3.2.2020.5000.3.tick2	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick2	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick2	feature_shape	rect
+s3.s3.2.2020.5000.3.tick2	feature_shift_x	80
+s3.s3.2.2020.5000.3.tick2	feature_shift_y	-35
+s3.s3.2.2020.5000.3.tick2	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick2	display_feature_label	yes
+s3.s3.2.2020.5000.3.tick2	feature_label	23
+s3.s3.2.2020.5000.3.tick2	pos_feature_label	right_medium
+s3.s3.2.2020.5000.3.tick2	label_rotate_angle	0
+s3.s3.2.2020.5000.3.tick2	feature_label_size	6
+s3.s3.2.2020.5000.3.tick2	padding_feature_label	1.8
+s3.s3.2.2020.5000.3.tick2	feature_label_auto_angle_flag	0
+
+s3.s3.2.2020.5000.3.tick2	feature_color	green
+
+s3.s3.2.2020.5000.3.tick2	feature_opacity	0.6
+
+
+s3.s3.2.2020.5000.3.tick3.hgrid	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick3.hgrid	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick3.hgrid	feature_shape	rect
+s3.s3.2.2020.5000.3.tick3.hgrid	display_feature_label	no
+s3.s3.2.2020.5000.3.tick3.hgrid	feature_opacity	0.3
+s3.s3.2.2020.5000.3.tick3.hgrid	feature_shift_y	-45
+s3.s3.2.2020.5000.3.tick3.hgrid	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick3.hgrid	feature_color	green
+
+s3.s3.2.2020.5000.3.tick3	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick3	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick3	feature_shape	rect
+s3.s3.2.2020.5000.3.tick3	feature_shift_x	80
+s3.s3.2.2020.5000.3.tick3	feature_shift_y	-45
+s3.s3.2.2020.5000.3.tick3	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick3	display_feature_label	yes
+s3.s3.2.2020.5000.3.tick3	feature_label	25
+s3.s3.2.2020.5000.3.tick3	pos_feature_label	right_medium
+s3.s3.2.2020.5000.3.tick3	label_rotate_angle	0
+s3.s3.2.2020.5000.3.tick3	feature_label_size	6
+s3.s3.2.2020.5000.3.tick3	padding_feature_label	1.8
+s3.s3.2.2020.5000.3.tick3	feature_label_auto_angle_flag	0
+
+s3.s3.2.2020.5000.3.tick3	feature_color	green
+
+s3.s3.2.2020.5000.3.tick3	feature_opacity	0.6
+
+
+s3.s3.2.2020.5000.3.tick4.hgrid	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick4.hgrid	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick4.hgrid	feature_shape	rect
+s3.s3.2.2020.5000.3.tick4.hgrid	display_feature_label	no
+s3.s3.2.2020.5000.3.tick4.hgrid	feature_opacity	0.3
+s3.s3.2.2020.5000.3.tick4.hgrid	feature_shift_y	-55
+s3.s3.2.2020.5000.3.tick4.hgrid	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick4.hgrid	feature_color	green
+
+s3.s3.2.2020.5000.3.tick4	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick4	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick4	feature_shape	rect
+s3.s3.2.2020.5000.3.tick4	feature_shift_x	80
+s3.s3.2.2020.5000.3.tick4	feature_shift_y	-55
+s3.s3.2.2020.5000.3.tick4	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick4	display_feature_label	yes
+s3.s3.2.2020.5000.3.tick4	feature_label	27
+s3.s3.2.2020.5000.3.tick4	pos_feature_label	right_medium
+s3.s3.2.2020.5000.3.tick4	label_rotate_angle	0
+s3.s3.2.2020.5000.3.tick4	feature_label_size	6
+s3.s3.2.2020.5000.3.tick4	padding_feature_label	1.8
+s3.s3.2.2020.5000.3.tick4	feature_label_auto_angle_flag	0
+
+s3.s3.2.2020.5000.3.tick4	feature_color	green
+
+s3.s3.2.2020.5000.3.tick4	feature_opacity	0.6
+
+
+s3.s3.2.2020.5000.3.tick5.hgrid	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick5.hgrid	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick5.hgrid	feature_shape	rect
+s3.s3.2.2020.5000.3.tick5.hgrid	display_feature_label	no
+s3.s3.2.2020.5000.3.tick5.hgrid	feature_opacity	0.3
+s3.s3.2.2020.5000.3.tick5.hgrid	feature_shift_y	-65
+s3.s3.2.2020.5000.3.tick5.hgrid	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick5.hgrid	feature_color	green
+
+s3.s3.2.2020.5000.3.tick5	feature_height_ratio	1
+
+s3.s3.2.2020.5000.3.tick5	feature_height_unit	percent
+s3.s3.2.2020.5000.3.tick5	feature_shape	rect
+s3.s3.2.2020.5000.3.tick5	feature_shift_x	80
+s3.s3.2.2020.5000.3.tick5	feature_shift_y	-65
+s3.s3.2.2020.5000.3.tick5	feature_shift_y_unit	percent
+s3.s3.2.2020.5000.3.tick5	display_feature_label	yes
+s3.s3.2.2020.5000.3.tick5	feature_label	29
+s3.s3.2.2020.5000.3.tick5	pos_feature_label	right_medium
+s3.s3.2.2020.5000.3.tick5	label_rotate_angle	0
+s3.s3.2.2020.5000.3.tick5	feature_label_size	6
+s3.s3.2.2020.5000.3.tick5	padding_feature_label	1.8
+s3.s3.2.2020.5000.3.tick5	feature_label_auto_angle_flag	0
+
+s3.s3.2.2020.5000.3.tick5	feature_color	green
+
+s3.s3.2.2020.5000.3.tick5	feature_opacity	0.6
+
+
+s3.s3.2.hist.0.3	feature_height_ratio	26.675
+
+s3.s3.2.hist.0.3	feature_height_unit	percent
+s3.s3.2.hist.0.3	feature_shape	rect
+s3.s3.2.hist.0.3	feature_shift_y	-28.3375
+s3.s3.2.hist.0.3	feature_shift_y_unit	percent
+s3.s3.2.hist.0.3	display_feature_label	no
+s3.s3.2.hist.0.3	feature_color	green
+s3.s3.2.hist.0.3	feature_opacity	1
+
+s3.s3.2.hist.1.3	feature_height_ratio	22.88
+
+s3.s3.2.hist.1.3	feature_height_unit	percent
+s3.s3.2.hist.1.3	feature_shape	rect
+s3.s3.2.hist.1.3	feature_shift_y	-26.44
+s3.s3.2.hist.1.3	feature_shift_y_unit	percent
+s3.s3.2.hist.1.3	display_feature_label	no
+s3.s3.2.hist.1.3	feature_color	green
+s3.s3.2.hist.1.3	feature_opacity	1
+
+s3.s3.2.hist.2.3	feature_height_ratio	37.675
+
+s3.s3.2.hist.2.3	feature_height_unit	percent
+s3.s3.2.hist.2.3	feature_shape	rect
+s3.s3.2.hist.2.3	feature_shift_y	-33.8375
+s3.s3.2.hist.2.3	feature_shift_y_unit	percent
+s3.s3.2.hist.2.3	display_feature_label	no
+s3.s3.2.hist.2.3	feature_color	green
+s3.s3.2.hist.2.3	feature_opacity	1
+
+s3.s3.2.hist.3.3	feature_height_ratio	39.435
+
+s3.s3.2.hist.3.3	feature_height_unit	percent
+s3.s3.2.hist.3.3	feature_shape	rect
+s3.s3.2.hist.3.3	feature_shift_y	-34.7175
+s3.s3.2.hist.3.3	feature_shift_y_unit	percent
+s3.s3.2.hist.3.3	display_feature_label	no
+s3.s3.2.hist.3.3	feature_color	green
+s3.s3.2.hist.3.3	feature_opacity	1
+
+s3.s3.2.hist.4.3	feature_height_ratio	25.63
+
+s3.s3.2.hist.4.3	feature_height_unit	percent
+s3.s3.2.hist.4.3	feature_shape	rect
+s3.s3.2.hist.4.3	feature_shift_y	-27.815
+s3.s3.2.hist.4.3	feature_shift_y_unit	percent
+s3.s3.2.hist.4.3	display_feature_label	no
+s3.s3.2.hist.4.3	feature_color	green
+s3.s3.2.hist.4.3	feature_opacity	1
+
+s3.s3.2.hist.5.3	feature_height_ratio	38.995
+
+s3.s3.2.hist.5.3	feature_height_unit	percent
+s3.s3.2.hist.5.3	feature_shape	rect
+s3.s3.2.hist.5.3	feature_shift_y	-34.4975
+s3.s3.2.hist.5.3	feature_shift_y_unit	percent
+s3.s3.2.hist.5.3	display_feature_label	no
+s3.s3.2.hist.5.3	feature_color	green
+s3.s3.2.hist.5.3	feature_opacity	1
+
+s3.s3.2.hist.6.3	feature_height_ratio	20.46
+
+s3.s3.2.hist.6.3	feature_height_unit	percent
+s3.s3.2.hist.6.3	feature_shape	rect
+s3.s3.2.hist.6.3	feature_shift_y	-25.23
+s3.s3.2.hist.6.3	feature_shift_y_unit	percent
+s3.s3.2.hist.6.3	display_feature_label	no
+s3.s3.2.hist.6.3	feature_color	green
+s3.s3.2.hist.6.3	feature_opacity	1
+
+s3.s3.2.hist.7.3	feature_height_ratio	50.05
+
+s3.s3.2.hist.7.3	feature_height_unit	percent
+s3.s3.2.hist.7.3	feature_shape	rect
+s3.s3.2.hist.7.3	feature_shift_y	-40.025
+s3.s3.2.hist.7.3	feature_shift_y_unit	percent
+s3.s3.2.hist.7.3	display_feature_label	no
+s3.s3.2.hist.7.3	feature_color	green
+s3.s3.2.hist.7.3	feature_opacity	1
+
+s3.s3.2.hist.8.3	feature_height_ratio	29.645
+
+s3.s3.2.hist.8.3	feature_height_unit	percent
+s3.s3.2.hist.8.3	feature_shape	rect
+s3.s3.2.hist.8.3	feature_shift_y	-29.8225
+s3.s3.2.hist.8.3	feature_shift_y_unit	percent
+s3.s3.2.hist.8.3	display_feature_label	no
+s3.s3.2.hist.8.3	feature_color	green
+s3.s3.2.hist.8.3	feature_opacity	1
+
+s3.s3.2.hist.9.3	feature_height_ratio	39.27
+
+s3.s3.2.hist.9.3	feature_height_unit	percent
+s3.s3.2.hist.9.3	feature_shape	rect
+s3.s3.2.hist.9.3	feature_shift_y	-34.635
+s3.s3.2.hist.9.3	feature_shift_y_unit	percent
+s3.s3.2.hist.9.3	display_feature_label	no
+s3.s3.2.hist.9.3	feature_color	green
+s3.s3.2.hist.9.3	feature_opacity	1
+
+s3.s3.2.hist.10.3	feature_height_ratio	42.35
+
+s3.s3.2.hist.10.3	feature_height_unit	percent
+s3.s3.2.hist.10.3	feature_shape	rect
+s3.s3.2.hist.10.3	feature_shift_y	-36.175
+s3.s3.2.hist.10.3	feature_shift_y_unit	percent
+s3.s3.2.hist.10.3	display_feature_label	no
+s3.s3.2.hist.10.3	feature_color	green
+s3.s3.2.hist.10.3	feature_opacity	1
+
+s3.s3.2.hist.11.3	feature_height_ratio	30.305
+
+s3.s3.2.hist.11.3	feature_height_unit	percent
+s3.s3.2.hist.11.3	feature_shape	rect
+s3.s3.2.hist.11.3	feature_shift_y	-30.1525
+s3.s3.2.hist.11.3	feature_shift_y_unit	percent
+s3.s3.2.hist.11.3	display_feature_label	no
+s3.s3.2.hist.11.3	feature_color	green
+s3.s3.2.hist.11.3	feature_opacity	1
+
+s3.s3.2.hist.12.3	feature_height_ratio	19.25
+
+s3.s3.2.hist.12.3	feature_height_unit	percent
+s3.s3.2.hist.12.3	feature_shape	rect
+s3.s3.2.hist.12.3	feature_shift_y	-24.625
+s3.s3.2.hist.12.3	feature_shift_y_unit	percent
+s3.s3.2.hist.12.3	display_feature_label	no
+s3.s3.2.hist.12.3	feature_color	green
+s3.s3.2.hist.12.3	feature_opacity	1
+
+s3.s3.2.hist.13.3	feature_height_ratio	19.635
+
+s3.s3.2.hist.13.3	feature_height_unit	percent
+s3.s3.2.hist.13.3	feature_shape	rect
+s3.s3.2.hist.13.3	feature_shift_y	-24.8175
+s3.s3.2.hist.13.3	feature_shift_y_unit	percent
+s3.s3.2.hist.13.3	display_feature_label	no
+s3.s3.2.hist.13.3	feature_color	green
+s3.s3.2.hist.13.3	feature_opacity	1
+
+s3.s3.2.hist.14.3	feature_height_ratio	12.43
+
+s3.s3.2.hist.14.3	feature_height_unit	percent
+s3.s3.2.hist.14.3	feature_shape	rect
+s3.s3.2.hist.14.3	feature_shift_y	-21.215
+s3.s3.2.hist.14.3	feature_shift_y_unit	percent
+s3.s3.2.hist.14.3	display_feature_label	no
+s3.s3.2.hist.14.3	feature_color	green
+s3.s3.2.hist.14.3	feature_opacity	1
+
+s3.s3.2.hist.15.3	feature_height_ratio	15.18
+
+s3.s3.2.hist.15.3	feature_height_unit	percent
+s3.s3.2.hist.15.3	feature_shape	rect
+s3.s3.2.hist.15.3	feature_shift_y	-22.59
+s3.s3.2.hist.15.3	feature_shift_y_unit	percent
+s3.s3.2.hist.15.3	display_feature_label	no
+s3.s3.2.hist.15.3	feature_color	green
+s3.s3.2.hist.15.3	feature_opacity	1
+
+s3.s3.2.hist.16.3	feature_height_ratio	11.22
+
+s3.s3.2.hist.16.3	feature_height_unit	percent
+s3.s3.2.hist.16.3	feature_shape	rect
+s3.s3.2.hist.16.3	feature_shift_y	-20.61
+s3.s3.2.hist.16.3	feature_shift_y_unit	percent
+s3.s3.2.hist.16.3	display_feature_label	no
+s3.s3.2.hist.16.3	feature_color	green
+s3.s3.2.hist.16.3	feature_opacity	1
+
+s3.s3.2.hist.17.3	feature_height_ratio	42.075
+
+s3.s3.2.hist.17.3	feature_height_unit	percent
+s3.s3.2.hist.17.3	feature_shape	rect
+s3.s3.2.hist.17.3	feature_shift_y	-36.0375
+s3.s3.2.hist.17.3	feature_shift_y_unit	percent
+s3.s3.2.hist.17.3	display_feature_label	no
+s3.s3.2.hist.17.3	feature_color	green
+s3.s3.2.hist.17.3	feature_opacity	1
+
+s3.s3.2.hist.18.3	feature_height_ratio	29.81
+
+s3.s3.2.hist.18.3	feature_height_unit	percent
+s3.s3.2.hist.18.3	feature_shape	rect
+s3.s3.2.hist.18.3	feature_shift_y	-29.905
+s3.s3.2.hist.18.3	feature_shift_y_unit	percent
+s3.s3.2.hist.18.3	display_feature_label	no
+s3.s3.2.hist.18.3	feature_color	green
+s3.s3.2.hist.18.3	feature_opacity	1
+
+s3.s3.2.hist.19.3	feature_height_ratio	22.88
+
+s3.s3.2.hist.19.3	feature_height_unit	percent
+s3.s3.2.hist.19.3	feature_shape	rect
+s3.s3.2.hist.19.3	feature_shift_y	-26.44
+s3.s3.2.hist.19.3	feature_shift_y_unit	percent
+s3.s3.2.hist.19.3	display_feature_label	no
+s3.s3.2.hist.19.3	feature_color	green
+s3.s3.2.hist.19.3	feature_opacity	1
+
+s3.s3.2.hist.20.3	feature_height_ratio	36.08
+
+s3.s3.2.hist.20.3	feature_height_unit	percent
+s3.s3.2.hist.20.3	feature_shape	rect
+s3.s3.2.hist.20.3	feature_shift_y	-33.04
+s3.s3.2.hist.20.3	feature_shift_y_unit	percent
+s3.s3.2.hist.20.3	display_feature_label	no
+s3.s3.2.hist.20.3	feature_color	green
+s3.s3.2.hist.20.3	feature_opacity	1
+
+s3.s3.2.hist.21.3	feature_height_ratio	22.77
+
+s3.s3.2.hist.21.3	feature_height_unit	percent
+s3.s3.2.hist.21.3	feature_shape	rect
+s3.s3.2.hist.21.3	feature_shift_y	-26.385
+s3.s3.2.hist.21.3	feature_shift_y_unit	percent
+s3.s3.2.hist.21.3	display_feature_label	no
+s3.s3.2.hist.21.3	feature_color	green
+s3.s3.2.hist.21.3	feature_opacity	1
+
+s3.s3.2.hist.22.3	feature_height_ratio	38.665
+
+s3.s3.2.hist.22.3	feature_height_unit	percent
+s3.s3.2.hist.22.3	feature_shape	rect
+s3.s3.2.hist.22.3	feature_shift_y	-34.3325
+s3.s3.2.hist.22.3	feature_shift_y_unit	percent
+s3.s3.2.hist.22.3	display_feature_label	no
+s3.s3.2.hist.22.3	feature_color	green
+s3.s3.2.hist.22.3	feature_opacity	1
+
+s3.s3.2.hist.23.3	feature_height_ratio	37.73
+
+s3.s3.2.hist.23.3	feature_height_unit	percent
+s3.s3.2.hist.23.3	feature_shape	rect
+s3.s3.2.hist.23.3	feature_shift_y	-33.865
+s3.s3.2.hist.23.3	feature_shift_y_unit	percent
+s3.s3.2.hist.23.3	display_feature_label	no
+s3.s3.2.hist.23.3	feature_color	green
+s3.s3.2.hist.23.3	feature_opacity	1
+
+s3.s3.2.hist.24.3	feature_height_ratio	55
+
+s3.s3.2.hist.24.3	feature_height_unit	percent
+s3.s3.2.hist.24.3	feature_shape	rect
+s3.s3.2.hist.24.3	feature_shift_y	-42.5
+s3.s3.2.hist.24.3	feature_shift_y_unit	percent
+s3.s3.2.hist.24.3	display_feature_label	yes
+s3.s3.2.hist.24.3	feature_color	green
+s3.s3.2.hist.24.3	feature_opacity	1
+s3.s3.2.hist.24.3	pos_feature_label	left_up
+s3.s3.2.hist.24.3	feature_label	30
+s3.s3.2.hist.24.3	label_rotate_angle	0
+s3.s3.2.hist.24.3	feature_label_auto_angle_flag	0
+
+s3.s3.2.hist.24.3	feature_label_size	6
+s3.s3.2.hist.24.3	padding_feature_label	+1
+
+s3.s3.2.hist.25.3	feature_height_ratio	17.6
+
+s3.s3.2.hist.25.3	feature_height_unit	percent
+s3.s3.2.hist.25.3	feature_shape	rect
+s3.s3.2.hist.25.3	feature_shift_y	-23.8
+s3.s3.2.hist.25.3	feature_shift_y_unit	percent
+s3.s3.2.hist.25.3	display_feature_label	no
+s3.s3.2.hist.25.3	feature_color	green
+s3.s3.2.hist.25.3	feature_opacity	1
+
+s3.s3.2.hist.26.3	feature_height_ratio	24.915
+
+s3.s3.2.hist.26.3	feature_height_unit	percent
+s3.s3.2.hist.26.3	feature_shape	rect
+s3.s3.2.hist.26.3	feature_shift_y	-27.4575
+s3.s3.2.hist.26.3	feature_shift_y_unit	percent
+s3.s3.2.hist.26.3	display_feature_label	no
+s3.s3.2.hist.26.3	feature_color	green
+s3.s3.2.hist.26.3	feature_opacity	1
+
+s3.s3.2.hist.27.3	feature_height_ratio	19.58
+
+s3.s3.2.hist.27.3	feature_height_unit	percent
+s3.s3.2.hist.27.3	feature_shape	rect
+s3.s3.2.hist.27.3	feature_shift_y	-24.79
+s3.s3.2.hist.27.3	feature_shift_y_unit	percent
+s3.s3.2.hist.27.3	display_feature_label	no
+s3.s3.2.hist.27.3	feature_color	green
+s3.s3.2.hist.27.3	feature_opacity	1
+
+s3.s3.2.hist.28.3	feature_height_ratio	29.095
+
+s3.s3.2.hist.28.3	feature_height_unit	percent
+s3.s3.2.hist.28.3	feature_shape	rect
+s3.s3.2.hist.28.3	feature_shift_y	-29.5475
+s3.s3.2.hist.28.3	feature_shift_y_unit	percent
+s3.s3.2.hist.28.3	display_feature_label	no
+s3.s3.2.hist.28.3	feature_color	green
+s3.s3.2.hist.28.3	feature_opacity	1
+
+s3.s3.2.hist.29.3	feature_height_ratio	38.7716049382716
+
+s3.s3.2.hist.29.3	feature_height_unit	percent
+s3.s3.2.hist.29.3	feature_shape	rect
+s3.s3.2.hist.29.3	feature_shift_y	-34.3858024691358
+s3.s3.2.hist.29.3	feature_shift_y_unit	percent
+s3.s3.2.hist.29.3	display_feature_label	no
+s3.s3.2.hist.29.3	feature_color	green
+s3.s3.2.hist.29.3	feature_opacity	1
+
+s3.s3.3.5100.9609.4	feature_height_ratio	50
+
+s3.s3.3.5100.9609.4	feature_height_unit	percent
+s3.s3.3.5100.9609.4	feature_shape	rect
+s3.s3.3.5100.9609.4	feature_shift_x	20
+s3.s3.3.5100.9609.4	feature_shift_y	-55.5
+s3.s3.3.5100.9609.4	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4	display_feature_label	no
+s3.s3.3.5100.9609.4	pos_feature_label	right_medium
+s3.s3.3.5100.9609.4	feature_label	ytick_label
+s3.s3.3.5100.9609.4	feature_color	black
+s3.s3.3.5100.9609.4	feature_opacity	1
+
+s3.s3.3.5100.9609.4.tick0.hgrid	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick0.hgrid	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick0.hgrid	feature_shape	rect
+s3.s3.3.5100.9609.4.tick0.hgrid	display_feature_label	no
+s3.s3.3.5100.9609.4.tick0.hgrid	feature_opacity	0.3
+s3.s3.3.5100.9609.4.tick0.hgrid	feature_shift_y	-30
+s3.s3.3.5100.9609.4.tick0.hgrid	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick0.hgrid	feature_color	green
+
+s3.s3.3.5100.9609.4.tick0	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick0	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick0	feature_shape	rect
+s3.s3.3.5100.9609.4.tick0	feature_shift_x	80
+s3.s3.3.5100.9609.4.tick0	feature_shift_y	-30
+s3.s3.3.5100.9609.4.tick0	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick0	display_feature_label	yes
+s3.s3.3.5100.9609.4.tick0	feature_label	20
+s3.s3.3.5100.9609.4.tick0	pos_feature_label	right_medium
+s3.s3.3.5100.9609.4.tick0	label_rotate_angle	0
+s3.s3.3.5100.9609.4.tick0	feature_label_size	7
+s3.s3.3.5100.9609.4.tick0	padding_feature_label	2.1
+s3.s3.3.5100.9609.4.tick0	feature_label_auto_angle_flag	0
+
+s3.s3.3.5100.9609.4.tick0	feature_color	black
+
+s3.s3.3.5100.9609.4.tick0	feature_opacity	1
+
+
+s3.s3.3.5100.9609.4.tick1.hgrid	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick1.hgrid	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick1.hgrid	feature_shape	rect
+s3.s3.3.5100.9609.4.tick1.hgrid	display_feature_label	no
+s3.s3.3.5100.9609.4.tick1.hgrid	feature_opacity	0.3
+s3.s3.3.5100.9609.4.tick1.hgrid	feature_shift_y	-40
+s3.s3.3.5100.9609.4.tick1.hgrid	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick1.hgrid	feature_color	green
+
+s3.s3.3.5100.9609.4.tick1	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick1	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick1	feature_shape	rect
+s3.s3.3.5100.9609.4.tick1	feature_shift_x	80
+s3.s3.3.5100.9609.4.tick1	feature_shift_y	-40
+s3.s3.3.5100.9609.4.tick1	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick1	display_feature_label	yes
+s3.s3.3.5100.9609.4.tick1	feature_label	22
+s3.s3.3.5100.9609.4.tick1	pos_feature_label	right_medium
+s3.s3.3.5100.9609.4.tick1	label_rotate_angle	0
+s3.s3.3.5100.9609.4.tick1	feature_label_size	7
+s3.s3.3.5100.9609.4.tick1	padding_feature_label	2.1
+s3.s3.3.5100.9609.4.tick1	feature_label_auto_angle_flag	0
+
+s3.s3.3.5100.9609.4.tick1	feature_color	black
+
+s3.s3.3.5100.9609.4.tick1	feature_opacity	1
+
+
+s3.s3.3.5100.9609.4.tick2.hgrid	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick2.hgrid	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick2.hgrid	feature_shape	rect
+s3.s3.3.5100.9609.4.tick2.hgrid	display_feature_label	no
+s3.s3.3.5100.9609.4.tick2.hgrid	feature_opacity	0.3
+s3.s3.3.5100.9609.4.tick2.hgrid	feature_shift_y	-50
+s3.s3.3.5100.9609.4.tick2.hgrid	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick2.hgrid	feature_color	green
+
+s3.s3.3.5100.9609.4.tick2	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick2	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick2	feature_shape	rect
+s3.s3.3.5100.9609.4.tick2	feature_shift_x	80
+s3.s3.3.5100.9609.4.tick2	feature_shift_y	-50
+s3.s3.3.5100.9609.4.tick2	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick2	display_feature_label	yes
+s3.s3.3.5100.9609.4.tick2	feature_label	24
+s3.s3.3.5100.9609.4.tick2	pos_feature_label	right_medium
+s3.s3.3.5100.9609.4.tick2	label_rotate_angle	0
+s3.s3.3.5100.9609.4.tick2	feature_label_size	7
+s3.s3.3.5100.9609.4.tick2	padding_feature_label	2.1
+s3.s3.3.5100.9609.4.tick2	feature_label_auto_angle_flag	0
+
+s3.s3.3.5100.9609.4.tick2	feature_color	black
+
+s3.s3.3.5100.9609.4.tick2	feature_opacity	1
+
+
+s3.s3.3.5100.9609.4.tick3.hgrid	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick3.hgrid	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick3.hgrid	feature_shape	rect
+s3.s3.3.5100.9609.4.tick3.hgrid	display_feature_label	no
+s3.s3.3.5100.9609.4.tick3.hgrid	feature_opacity	0.3
+s3.s3.3.5100.9609.4.tick3.hgrid	feature_shift_y	-60
+s3.s3.3.5100.9609.4.tick3.hgrid	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick3.hgrid	feature_color	green
+
+s3.s3.3.5100.9609.4.tick3	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick3	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick3	feature_shape	rect
+s3.s3.3.5100.9609.4.tick3	feature_shift_x	80
+s3.s3.3.5100.9609.4.tick3	feature_shift_y	-60
+s3.s3.3.5100.9609.4.tick3	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick3	display_feature_label	yes
+s3.s3.3.5100.9609.4.tick3	feature_label	26
+s3.s3.3.5100.9609.4.tick3	pos_feature_label	right_medium
+s3.s3.3.5100.9609.4.tick3	label_rotate_angle	0
+s3.s3.3.5100.9609.4.tick3	feature_label_size	7
+s3.s3.3.5100.9609.4.tick3	padding_feature_label	2.1
+s3.s3.3.5100.9609.4.tick3	feature_label_auto_angle_flag	0
+
+s3.s3.3.5100.9609.4.tick3	feature_color	black
+
+s3.s3.3.5100.9609.4.tick3	feature_opacity	1
+
+
+s3.s3.3.5100.9609.4.tick4.hgrid	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick4.hgrid	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick4.hgrid	feature_shape	rect
+s3.s3.3.5100.9609.4.tick4.hgrid	display_feature_label	no
+s3.s3.3.5100.9609.4.tick4.hgrid	feature_opacity	0.3
+s3.s3.3.5100.9609.4.tick4.hgrid	feature_shift_y	-70
+s3.s3.3.5100.9609.4.tick4.hgrid	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick4.hgrid	feature_color	green
+
+s3.s3.3.5100.9609.4.tick4	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick4	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick4	feature_shape	rect
+s3.s3.3.5100.9609.4.tick4	feature_shift_x	80
+s3.s3.3.5100.9609.4.tick4	feature_shift_y	-70
+s3.s3.3.5100.9609.4.tick4	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick4	display_feature_label	yes
+s3.s3.3.5100.9609.4.tick4	feature_label	28
+s3.s3.3.5100.9609.4.tick4	pos_feature_label	right_medium
+s3.s3.3.5100.9609.4.tick4	label_rotate_angle	0
+s3.s3.3.5100.9609.4.tick4	feature_label_size	7
+s3.s3.3.5100.9609.4.tick4	padding_feature_label	2.1
+s3.s3.3.5100.9609.4.tick4	feature_label_auto_angle_flag	0
+
+s3.s3.3.5100.9609.4.tick4	feature_color	black
+
+s3.s3.3.5100.9609.4.tick4	feature_opacity	1
+
+
+s3.s3.3.5100.9609.4.tick5.hgrid	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick5.hgrid	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick5.hgrid	feature_shape	rect
+s3.s3.3.5100.9609.4.tick5.hgrid	display_feature_label	no
+s3.s3.3.5100.9609.4.tick5.hgrid	feature_opacity	0.3
+s3.s3.3.5100.9609.4.tick5.hgrid	feature_shift_y	-80
+s3.s3.3.5100.9609.4.tick5.hgrid	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick5.hgrid	feature_color	green
+
+s3.s3.3.5100.9609.4.tick5	feature_height_ratio	1
+
+s3.s3.3.5100.9609.4.tick5	feature_height_unit	percent
+s3.s3.3.5100.9609.4.tick5	feature_shape	rect
+s3.s3.3.5100.9609.4.tick5	feature_shift_x	80
+s3.s3.3.5100.9609.4.tick5	feature_shift_y	-80
+s3.s3.3.5100.9609.4.tick5	feature_shift_y_unit	percent
+s3.s3.3.5100.9609.4.tick5	display_feature_label	yes
+s3.s3.3.5100.9609.4.tick5	feature_label	30
+s3.s3.3.5100.9609.4.tick5	pos_feature_label	right_medium
+s3.s3.3.5100.9609.4.tick5	label_rotate_angle	0
+s3.s3.3.5100.9609.4.tick5	feature_label_size	7
+s3.s3.3.5100.9609.4.tick5	padding_feature_label	2.1
+s3.s3.3.5100.9609.4.tick5	feature_label_auto_angle_flag	0
+
+s3.s3.3.5100.9609.4.tick5	feature_color	black
+
+s3.s3.3.5100.9609.4.tick5	feature_opacity	1
+
+
+s3.s3.3.hist.0.4	feature_height_ratio	34.1
+
+s3.s3.3.hist.0.4	feature_height_unit	percent
+s3.s3.3.hist.0.4	feature_shape	rect
+s3.s3.3.hist.0.4	feature_shift_y	-47.05
+s3.s3.3.hist.0.4	feature_shift_y_unit	percent
+s3.s3.3.hist.0.4	display_feature_label	no
+s3.s3.3.hist.0.4	feature_color	green
+s3.s3.3.hist.0.4	feature_opacity	1
+
+s3.s3.3.hist.1.4	feature_height_ratio	35.2
+
+s3.s3.3.hist.1.4	feature_height_unit	percent
+s3.s3.3.hist.1.4	feature_shape	rect
+s3.s3.3.hist.1.4	feature_shift_y	-47.6
+s3.s3.3.hist.1.4	feature_shift_y_unit	percent
+s3.s3.3.hist.1.4	display_feature_label	no
+s3.s3.3.hist.1.4	feature_color	green
+s3.s3.3.hist.1.4	feature_opacity	1
+
+s3.s3.3.hist.2.4	feature_height_ratio	27.35
+
+s3.s3.3.hist.2.4	feature_height_unit	percent
+s3.s3.3.hist.2.4	feature_shape	rect
+s3.s3.3.hist.2.4	feature_shift_y	-43.675
+s3.s3.3.hist.2.4	feature_shift_y_unit	percent
+s3.s3.3.hist.2.4	display_feature_label	no
+s3.s3.3.hist.2.4	feature_color	green
+s3.s3.3.hist.2.4	feature_opacity	1
+
+s3.s3.3.hist.3.4	feature_height_ratio	31.7
+
+s3.s3.3.hist.3.4	feature_height_unit	percent
+s3.s3.3.hist.3.4	feature_shape	rect
+s3.s3.3.hist.3.4	feature_shift_y	-45.85
+s3.s3.3.hist.3.4	feature_shift_y_unit	percent
+s3.s3.3.hist.3.4	display_feature_label	no
+s3.s3.3.hist.3.4	feature_color	green
+s3.s3.3.hist.3.4	feature_opacity	1
+
+s3.s3.3.hist.4.4	feature_height_ratio	31.15
+
+s3.s3.3.hist.4.4	feature_height_unit	percent
+s3.s3.3.hist.4.4	feature_shape	rect
+s3.s3.3.hist.4.4	feature_shift_y	-45.575
+s3.s3.3.hist.4.4	feature_shift_y_unit	percent
+s3.s3.3.hist.4.4	display_feature_label	no
+s3.s3.3.hist.4.4	feature_color	green
+s3.s3.3.hist.4.4	feature_opacity	1
+
+s3.s3.3.hist.5.4	feature_height_ratio	29
+
+s3.s3.3.hist.5.4	feature_height_unit	percent
+s3.s3.3.hist.5.4	feature_shape	rect
+s3.s3.3.hist.5.4	feature_shift_y	-44.5
+s3.s3.3.hist.5.4	feature_shift_y_unit	percent
+s3.s3.3.hist.5.4	display_feature_label	no
+s3.s3.3.hist.5.4	feature_color	green
+s3.s3.3.hist.5.4	feature_opacity	1
+
+s3.s3.3.hist.6.4	feature_height_ratio	23.9
+
+s3.s3.3.hist.6.4	feature_height_unit	percent
+s3.s3.3.hist.6.4	feature_shape	rect
+s3.s3.3.hist.6.4	feature_shift_y	-41.95
+s3.s3.3.hist.6.4	feature_shift_y_unit	percent
+s3.s3.3.hist.6.4	display_feature_label	no
+s3.s3.3.hist.6.4	feature_color	green
+s3.s3.3.hist.6.4	feature_opacity	1
+
+s3.s3.3.hist.7.4	feature_height_ratio	29.1
+
+s3.s3.3.hist.7.4	feature_height_unit	percent
+s3.s3.3.hist.7.4	feature_shape	rect
+s3.s3.3.hist.7.4	feature_shift_y	-44.55
+s3.s3.3.hist.7.4	feature_shift_y_unit	percent
+s3.s3.3.hist.7.4	display_feature_label	no
+s3.s3.3.hist.7.4	feature_color	green
+s3.s3.3.hist.7.4	feature_opacity	1
+
+s3.s3.3.hist.8.4	feature_height_ratio	32.8
+
+s3.s3.3.hist.8.4	feature_height_unit	percent
+s3.s3.3.hist.8.4	feature_shape	rect
+s3.s3.3.hist.8.4	feature_shift_y	-46.4
+s3.s3.3.hist.8.4	feature_shift_y_unit	percent
+s3.s3.3.hist.8.4	display_feature_label	no
+s3.s3.3.hist.8.4	feature_color	green
+s3.s3.3.hist.8.4	feature_opacity	1
+
+s3.s3.3.hist.9.4	feature_height_ratio	38.15
+
+s3.s3.3.hist.9.4	feature_height_unit	percent
+s3.s3.3.hist.9.4	feature_shape	rect
+s3.s3.3.hist.9.4	feature_shift_y	-49.075
+s3.s3.3.hist.9.4	feature_shift_y_unit	percent
+s3.s3.3.hist.9.4	display_feature_label	no
+s3.s3.3.hist.9.4	feature_color	green
+s3.s3.3.hist.9.4	feature_opacity	1
+
+s3.s3.3.hist.10.4	feature_height_ratio	22
+
+s3.s3.3.hist.10.4	feature_height_unit	percent
+s3.s3.3.hist.10.4	feature_shape	rect
+s3.s3.3.hist.10.4	feature_shift_y	-41
+s3.s3.3.hist.10.4	feature_shift_y_unit	percent
+s3.s3.3.hist.10.4	display_feature_label	no
+s3.s3.3.hist.10.4	feature_color	green
+s3.s3.3.hist.10.4	feature_opacity	1
+
+s3.s3.3.hist.11.4	feature_height_ratio	27
+
+s3.s3.3.hist.11.4	feature_height_unit	percent
+s3.s3.3.hist.11.4	feature_shape	rect
+s3.s3.3.hist.11.4	feature_shift_y	-43.5
+s3.s3.3.hist.11.4	feature_shift_y_unit	percent
+s3.s3.3.hist.11.4	display_feature_label	no
+s3.s3.3.hist.11.4	feature_color	green
+s3.s3.3.hist.11.4	feature_opacity	1
+
+s3.s3.3.hist.12.4	feature_height_ratio	31.05
+
+s3.s3.3.hist.12.4	feature_height_unit	percent
+s3.s3.3.hist.12.4	feature_shape	rect
+s3.s3.3.hist.12.4	feature_shift_y	-45.525
+s3.s3.3.hist.12.4	feature_shift_y_unit	percent
+s3.s3.3.hist.12.4	display_feature_label	no
+s3.s3.3.hist.12.4	feature_color	green
+s3.s3.3.hist.12.4	feature_opacity	1
+
+s3.s3.3.hist.13.4	feature_height_ratio	34.5
+
+s3.s3.3.hist.13.4	feature_height_unit	percent
+s3.s3.3.hist.13.4	feature_shape	rect
+s3.s3.3.hist.13.4	feature_shift_y	-47.25
+s3.s3.3.hist.13.4	feature_shift_y_unit	percent
+s3.s3.3.hist.13.4	display_feature_label	no
+s3.s3.3.hist.13.4	feature_color	green
+s3.s3.3.hist.13.4	feature_opacity	1
+
+s3.s3.3.hist.14.4	feature_height_ratio	35.3
+
+s3.s3.3.hist.14.4	feature_height_unit	percent
+s3.s3.3.hist.14.4	feature_shape	rect
+s3.s3.3.hist.14.4	feature_shift_y	-47.65
+s3.s3.3.hist.14.4	feature_shift_y_unit	percent
+s3.s3.3.hist.14.4	display_feature_label	no
+s3.s3.3.hist.14.4	feature_color	green
+s3.s3.3.hist.14.4	feature_opacity	1
+
+s3.s3.3.hist.15.4	feature_height_ratio	25.95
+
+s3.s3.3.hist.15.4	feature_height_unit	percent
+s3.s3.3.hist.15.4	feature_shape	rect
+s3.s3.3.hist.15.4	feature_shift_y	-42.975
+s3.s3.3.hist.15.4	feature_shift_y_unit	percent
+s3.s3.3.hist.15.4	display_feature_label	no
+s3.s3.3.hist.15.4	feature_color	green
+s3.s3.3.hist.15.4	feature_opacity	1
+
+s3.s3.3.hist.16.4	feature_height_ratio	31.45
+
+s3.s3.3.hist.16.4	feature_height_unit	percent
+s3.s3.3.hist.16.4	feature_shape	rect
+s3.s3.3.hist.16.4	feature_shift_y	-45.725
+s3.s3.3.hist.16.4	feature_shift_y_unit	percent
+s3.s3.3.hist.16.4	display_feature_label	no
+s3.s3.3.hist.16.4	feature_color	green
+s3.s3.3.hist.16.4	feature_opacity	1
+
+s3.s3.3.hist.17.4	feature_height_ratio	26.85
+
+s3.s3.3.hist.17.4	feature_height_unit	percent
+s3.s3.3.hist.17.4	feature_shape	rect
+s3.s3.3.hist.17.4	feature_shift_y	-43.425
+s3.s3.3.hist.17.4	feature_shift_y_unit	percent
+s3.s3.3.hist.17.4	display_feature_label	no
+s3.s3.3.hist.17.4	feature_color	green
+s3.s3.3.hist.17.4	feature_opacity	1
+
+s3.s3.3.hist.18.4	feature_height_ratio	32.5
+
+s3.s3.3.hist.18.4	feature_height_unit	percent
+s3.s3.3.hist.18.4	feature_shape	rect
+s3.s3.3.hist.18.4	feature_shift_y	-46.25
+s3.s3.3.hist.18.4	feature_shift_y_unit	percent
+s3.s3.3.hist.18.4	display_feature_label	no
+s3.s3.3.hist.18.4	feature_color	green
+s3.s3.3.hist.18.4	feature_opacity	1
+
+s3.s3.3.hist.19.4	feature_height_ratio	31.1
+
+s3.s3.3.hist.19.4	feature_height_unit	percent
+s3.s3.3.hist.19.4	feature_shape	rect
+s3.s3.3.hist.19.4	feature_shift_y	-45.55
+s3.s3.3.hist.19.4	feature_shift_y_unit	percent
+s3.s3.3.hist.19.4	display_feature_label	no
+s3.s3.3.hist.19.4	feature_color	green
+s3.s3.3.hist.19.4	feature_opacity	1
+
+s3.s3.3.hist.20.4	feature_height_ratio	30.8
+
+s3.s3.3.hist.20.4	feature_height_unit	percent
+s3.s3.3.hist.20.4	feature_shape	rect
+s3.s3.3.hist.20.4	feature_shift_y	-45.4
+s3.s3.3.hist.20.4	feature_shift_y_unit	percent
+s3.s3.3.hist.20.4	display_feature_label	no
+s3.s3.3.hist.20.4	feature_color	green
+s3.s3.3.hist.20.4	feature_opacity	1
+
+s3.s3.3.hist.21.4	feature_height_ratio	26.3
+
+s3.s3.3.hist.21.4	feature_height_unit	percent
+s3.s3.3.hist.21.4	feature_shape	rect
+s3.s3.3.hist.21.4	feature_shift_y	-43.15
+s3.s3.3.hist.21.4	feature_shift_y_unit	percent
+s3.s3.3.hist.21.4	display_feature_label	no
+s3.s3.3.hist.21.4	feature_color	green
+s3.s3.3.hist.21.4	feature_opacity	1
+
+s3.s3.3.hist.22.4	feature_height_ratio	31.95
+
+s3.s3.3.hist.22.4	feature_height_unit	percent
+s3.s3.3.hist.22.4	feature_shape	rect
+s3.s3.3.hist.22.4	feature_shift_y	-45.975
+s3.s3.3.hist.22.4	feature_shift_y_unit	percent
+s3.s3.3.hist.22.4	display_feature_label	no
+s3.s3.3.hist.22.4	feature_color	green
+s3.s3.3.hist.22.4	feature_opacity	1
+
+s3.s3.3.hist.23.4	feature_height_ratio	9.8
+
+s3.s3.3.hist.23.4	feature_height_unit	percent
+s3.s3.3.hist.23.4	feature_shape	rect
+s3.s3.3.hist.23.4	feature_shift_y	-34.9
+s3.s3.3.hist.23.4	feature_shift_y_unit	percent
+s3.s3.3.hist.23.4	display_feature_label	no
+s3.s3.3.hist.23.4	feature_color	green
+s3.s3.3.hist.23.4	feature_opacity	1
+
+s3.s3.3.hist.24.4	feature_height_ratio	26.8
+
+s3.s3.3.hist.24.4	feature_height_unit	percent
+s3.s3.3.hist.24.4	feature_shape	rect
+s3.s3.3.hist.24.4	feature_shift_y	-43.4
+s3.s3.3.hist.24.4	feature_shift_y_unit	percent
+s3.s3.3.hist.24.4	display_feature_label	no
+s3.s3.3.hist.24.4	feature_color	green
+s3.s3.3.hist.24.4	feature_opacity	1
+
+s3.s3.3.hist.25.4	feature_height_ratio	16.3
+
+s3.s3.3.hist.25.4	feature_height_unit	percent
+s3.s3.3.hist.25.4	feature_shape	rect
+s3.s3.3.hist.25.4	feature_shift_y	-38.15
+s3.s3.3.hist.25.4	feature_shift_y_unit	percent
+s3.s3.3.hist.25.4	display_feature_label	no
+s3.s3.3.hist.25.4	feature_color	green
+s3.s3.3.hist.25.4	feature_opacity	1
+
+s3.s3.3.hist.26.4	feature_height_ratio	27.25
+
+s3.s3.3.hist.26.4	feature_height_unit	percent
+s3.s3.3.hist.26.4	feature_shape	rect
+s3.s3.3.hist.26.4	feature_shift_y	-43.625
+s3.s3.3.hist.26.4	feature_shift_y_unit	percent
+s3.s3.3.hist.26.4	display_feature_label	no
+s3.s3.3.hist.26.4	feature_color	green
+s3.s3.3.hist.26.4	feature_opacity	1
+
+s3.s3.3.hist.27.4	feature_height_ratio	23.95
+
+s3.s3.3.hist.27.4	feature_height_unit	percent
+s3.s3.3.hist.27.4	feature_shape	rect
+s3.s3.3.hist.27.4	feature_shift_y	-41.975
+s3.s3.3.hist.27.4	feature_shift_y_unit	percent
+s3.s3.3.hist.27.4	display_feature_label	no
+s3.s3.3.hist.27.4	feature_color	green
+s3.s3.3.hist.27.4	feature_opacity	1
+
+s3.s3.3.hist.28.4	feature_height_ratio	35.85
+
+s3.s3.3.hist.28.4	feature_height_unit	percent
+s3.s3.3.hist.28.4	feature_shape	rect
+s3.s3.3.hist.28.4	feature_shift_y	-47.925
+s3.s3.3.hist.28.4	feature_shift_y_unit	percent
+s3.s3.3.hist.28.4	display_feature_label	no
+s3.s3.3.hist.28.4	feature_color	green
+s3.s3.3.hist.28.4	feature_opacity	1
+
+s3.s3.3.hist.29.4	feature_height_ratio	34.75
+
+s3.s3.3.hist.29.4	feature_height_unit	percent
+s3.s3.3.hist.29.4	feature_shape	rect
+s3.s3.3.hist.29.4	feature_shift_y	-47.375
+s3.s3.3.hist.29.4	feature_shift_y_unit	percent
+s3.s3.3.hist.29.4	display_feature_label	no
+s3.s3.3.hist.29.4	feature_color	green
+s3.s3.3.hist.29.4	feature_opacity	1
+
+s3.s3.3.hist.30.4	feature_height_ratio	39.95
+
+s3.s3.3.hist.30.4	feature_height_unit	percent
+s3.s3.3.hist.30.4	feature_shape	rect
+s3.s3.3.hist.30.4	feature_shift_y	-49.975
+s3.s3.3.hist.30.4	feature_shift_y_unit	percent
+s3.s3.3.hist.30.4	display_feature_label	no
+s3.s3.3.hist.30.4	feature_color	green
+s3.s3.3.hist.30.4	feature_opacity	1
+
+s3.s3.3.hist.31.4	feature_height_ratio	31.7
+
+s3.s3.3.hist.31.4	feature_height_unit	percent
+s3.s3.3.hist.31.4	feature_shape	rect
+s3.s3.3.hist.31.4	feature_shift_y	-45.85
+s3.s3.3.hist.31.4	feature_shift_y_unit	percent
+s3.s3.3.hist.31.4	display_feature_label	no
+s3.s3.3.hist.31.4	feature_color	green
+s3.s3.3.hist.31.4	feature_opacity	1
+
+s3.s3.3.hist.32.4	feature_height_ratio	31.5
+
+s3.s3.3.hist.32.4	feature_height_unit	percent
+s3.s3.3.hist.32.4	feature_shape	rect
+s3.s3.3.hist.32.4	feature_shift_y	-45.75
+s3.s3.3.hist.32.4	feature_shift_y_unit	percent
+s3.s3.3.hist.32.4	display_feature_label	no
+s3.s3.3.hist.32.4	feature_color	green
+s3.s3.3.hist.32.4	feature_opacity	1
+
+s3.s3.3.hist.33.4	feature_height_ratio	30.5
+
+s3.s3.3.hist.33.4	feature_height_unit	percent
+s3.s3.3.hist.33.4	feature_shape	rect
+s3.s3.3.hist.33.4	feature_shift_y	-45.25
+s3.s3.3.hist.33.4	feature_shift_y_unit	percent
+s3.s3.3.hist.33.4	display_feature_label	no
+s3.s3.3.hist.33.4	feature_color	green
+s3.s3.3.hist.33.4	feature_opacity	1
+
+s3.s3.3.hist.34.4	feature_height_ratio	29.75
+
+s3.s3.3.hist.34.4	feature_height_unit	percent
+s3.s3.3.hist.34.4	feature_shape	rect
+s3.s3.3.hist.34.4	feature_shift_y	-44.875
+s3.s3.3.hist.34.4	feature_shift_y_unit	percent
+s3.s3.3.hist.34.4	display_feature_label	no
+s3.s3.3.hist.34.4	feature_color	green
+s3.s3.3.hist.34.4	feature_opacity	1
+
+s3.s3.3.hist.35.4	feature_height_ratio	26.6
+
+s3.s3.3.hist.35.4	feature_height_unit	percent
+s3.s3.3.hist.35.4	feature_shape	rect
+s3.s3.3.hist.35.4	feature_shift_y	-43.3
+s3.s3.3.hist.35.4	feature_shift_y_unit	percent
+s3.s3.3.hist.35.4	display_feature_label	no
+s3.s3.3.hist.35.4	feature_color	green
+s3.s3.3.hist.35.4	feature_opacity	1
+
+s3.s3.3.hist.36.4	feature_height_ratio	50
+
+s3.s3.3.hist.36.4	feature_height_unit	percent
+s3.s3.3.hist.36.4	feature_shape	rect
+s3.s3.3.hist.36.4	feature_shift_y	-55
+s3.s3.3.hist.36.4	feature_shift_y_unit	percent
+s3.s3.3.hist.36.4	display_feature_label	yes
+s3.s3.3.hist.36.4	feature_color	green
+s3.s3.3.hist.36.4	feature_opacity	1
+s3.s3.3.hist.36.4	pos_feature_label	left_up
+s3.s3.3.hist.36.4	feature_label	30
+s3.s3.3.hist.36.4	label_rotate_angle	0
+s3.s3.3.hist.36.4	feature_label_auto_angle_flag	0
+
+s3.s3.3.hist.36.4	feature_label_size	7
+s3.s3.3.hist.36.4	padding_feature_label	+1
+
+s3.s3.3.hist.37.4	feature_height_ratio	20.65
+
+s3.s3.3.hist.37.4	feature_height_unit	percent
+s3.s3.3.hist.37.4	feature_shape	rect
+s3.s3.3.hist.37.4	feature_shift_y	-40.325
+s3.s3.3.hist.37.4	feature_shift_y_unit	percent
+s3.s3.3.hist.37.4	display_feature_label	no
+s3.s3.3.hist.37.4	feature_color	green
+s3.s3.3.hist.37.4	feature_opacity	1
+
+s3.s3.3.hist.38.4	feature_height_ratio	33.1
+
+s3.s3.3.hist.38.4	feature_height_unit	percent
+s3.s3.3.hist.38.4	feature_shape	rect
+s3.s3.3.hist.38.4	feature_shift_y	-46.55
+s3.s3.3.hist.38.4	feature_shift_y_unit	percent
+s3.s3.3.hist.38.4	display_feature_label	no
+s3.s3.3.hist.38.4	feature_color	green
+s3.s3.3.hist.38.4	feature_opacity	1
+
+s3.s3.3.hist.39.4	feature_height_ratio	37.85
+
+s3.s3.3.hist.39.4	feature_height_unit	percent
+s3.s3.3.hist.39.4	feature_shape	rect
+s3.s3.3.hist.39.4	feature_shift_y	-48.925
+s3.s3.3.hist.39.4	feature_shift_y_unit	percent
+s3.s3.3.hist.39.4	display_feature_label	no
+s3.s3.3.hist.39.4	feature_color	green
+s3.s3.3.hist.39.4	feature_opacity	1
+
+s3.s3.3.hist.40.4	feature_height_ratio	26
+
+s3.s3.3.hist.40.4	feature_height_unit	percent
+s3.s3.3.hist.40.4	feature_shape	rect
+s3.s3.3.hist.40.4	feature_shift_y	-43
+s3.s3.3.hist.40.4	feature_shift_y_unit	percent
+s3.s3.3.hist.40.4	display_feature_label	no
+s3.s3.3.hist.40.4	feature_color	green
+s3.s3.3.hist.40.4	feature_opacity	1
+
+s3.s3.3.hist.41.4	feature_height_ratio	14.2
+
+s3.s3.3.hist.41.4	feature_height_unit	percent
+s3.s3.3.hist.41.4	feature_shape	rect
+s3.s3.3.hist.41.4	feature_shift_y	-37.1
+s3.s3.3.hist.41.4	feature_shift_y_unit	percent
+s3.s3.3.hist.41.4	display_feature_label	no
+s3.s3.3.hist.41.4	feature_color	green
+s3.s3.3.hist.41.4	feature_opacity	1
+
+s3.s3.3.hist.42.4	feature_height_ratio	24.3
+
+s3.s3.3.hist.42.4	feature_height_unit	percent
+s3.s3.3.hist.42.4	feature_shape	rect
+s3.s3.3.hist.42.4	feature_shift_y	-42.15
+s3.s3.3.hist.42.4	feature_shift_y_unit	percent
+s3.s3.3.hist.42.4	display_feature_label	no
+s3.s3.3.hist.42.4	feature_color	green
+s3.s3.3.hist.42.4	feature_opacity	1
+
+s3.s3.3.hist.43.4	feature_height_ratio	28.65
+
+s3.s3.3.hist.43.4	feature_height_unit	percent
+s3.s3.3.hist.43.4	feature_shape	rect
+s3.s3.3.hist.43.4	feature_shift_y	-44.325
+s3.s3.3.hist.43.4	feature_shift_y_unit	percent
+s3.s3.3.hist.43.4	display_feature_label	no
+s3.s3.3.hist.43.4	feature_color	green
+s3.s3.3.hist.43.4	feature_opacity	1
+
+s3.s3.3.hist.44.4	feature_height_ratio	44.35
+
+s3.s3.3.hist.44.4	feature_height_unit	percent
+s3.s3.3.hist.44.4	feature_shape	rect
+s3.s3.3.hist.44.4	feature_shift_y	-52.175
+s3.s3.3.hist.44.4	feature_shift_y_unit	percent
+s3.s3.3.hist.44.4	display_feature_label	no
+s3.s3.3.hist.44.4	feature_color	green
+s3.s3.3.hist.44.4	feature_opacity	1
+
+s3.s3.3.hist.45.4	feature_height_ratio	4.49999999999999
+
+s3.s3.3.hist.45.4	feature_height_unit	percent
+s3.s3.3.hist.45.4	feature_shape	rect
+s3.s3.3.hist.45.4	feature_shift_y	-32.25
+s3.s3.3.hist.45.4	feature_shift_y_unit	percent
+s3.s3.3.hist.45.4	display_feature_label	no
+s3.s3.3.hist.45.4	feature_color	green
+s3.s3.3.hist.45.4	feature_opacity	1
 #those options default are:feature_id 10 black medium_up	-45 1
 #feature_label_size,feature_label_color,pos_feature_label,label_rotate_angle,padding_feature_label,feature_order,feature_label_order,feature_height_ratio
 
