@@ -89,16 +89,16 @@ sub plot_depth(){
             next if($scf ne $scfs[0]);
             if($ytick_flag){
                 my @yaxis_list=split(/->/,$yaxis);
-                die "error:yaxis_list neet two elements\n" if(@yaxis_list!=2);
+                die "error:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[\d\.]+->[\d\.]+/);
                 my @yaxis_show_list=split(/->/,$yaxis_show);
-                die "error:yaxis_list neet two elements\n" if(@yaxis_show_list!=2);
+                die "error:yaxis_list neet three elements, not $yaxis_show, sholud like 10->30->5\n" if(@yaxis_show_list!=3 || $yaxis_show!~ /[\d\.]+->[\d\.]+->[\d\.]+/);
                 
-                my $tick="$yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label";
+		#my $tick="$yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label";
                 my @label_sizes=split(/:/,$label_size);
                 die "error:label_size $label_size format like 6:6 for $k\n" if(@label_sizes!=2);
                 my ($depth_label_size, $tick_label_size)=@label_sizes;
 
-                my ($ytick_gff, $ytick_setting_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size);
+                my ($ytick_gff, $ytick_setting_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size);
                 my $out_ytick_gff="$sample.$scf.$block_index.$k_index.ytick.gff";
                 print "output $out_ytick_gff\n";
                 push @{$outname{$sample}{gff}},$out_ytick_gff;
@@ -116,7 +116,7 @@ sub plot_depth(){
 		#next;
 
 
-                my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&plot_depth_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type);
+                my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&plot_depth_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type);
                 my $out_depth_gff="$sample.$scf.$block_index.$k_index.depth.gff";
                 print "output $out_depth_gff\n";
                 push @{$outname{$sample}{gff}},$out_depth_gff;
@@ -155,7 +155,7 @@ sub plot_depth(){
 
 
 sub plot_depth_run(){
-    my ($s1, $e1, $s2, $e2, $title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type)=@_;
+    my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type)=@_;
     my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block}->{start};
     my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block}->{end};
     print "info is $info\n";
@@ -318,7 +318,7 @@ sub read_depth_file(){
 }
 
 sub feature_ytick(){
-    my ($s1, $e1, $s2, $e2,$title, $ytick_sample, $ytick_scf, $block, $gff, $kk, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $info, $tick_label_size) = @_;
+    my ($s1, $e1, $s2, $e2, $axis_gap, $title, $ytick_sample, $ytick_scf, $block, $gff, $kk, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $info, $tick_label_size) = @_;
     my ($ytick_gff, $ytick_setting_conf);
     my @tick_colors=split(/:/,$tick_color);
     die "error:$tick_color format like: green:black for $info\n" if(@tick_colors!=2);
@@ -364,7 +364,7 @@ sub feature_ytick(){
     $ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_color\t$tick_colors[0]\n";
     $ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_opacity\t$tick_opacitys[0]\n";
     #print "\n2ytick_gff is $ytick_gff\n\n";
-    my $ytick_unit=1;
+    my $ytick_unit=$axis_gap;
     #my $ytick_unit_real = $ytick_height/($e1-$s1)*$ytick_unit;
     my $ytick_nums = int((abs($e2-$s2)) /$ytick_unit);
     $ytick_unit=$ytick_unit * (abs($e1-$s1))/(abs($e2-$s2));
