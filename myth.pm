@@ -266,7 +266,7 @@ sub draw_genes(){
 	}elsif($feature_shift_y=~ /^\s*0/){
 		$shift_y +=0
 	}else{
-		die "error: for $feature_id, feature_shift_y should be like +1 or -1, +2, so on\n"
+		die "error: for $feature_id, feature_shift_y is $feature_shift_y, but should be like +1 or -1, +2, so on\n"
 	}
 	my $order_f=&get_para("feature_order", $feature_id, $conf);
 	my $order_f_label=&get_para("feature_label_order", $feature_id, $conf);

@@ -89,9 +89,9 @@ sub plot_depth(){
             next if($scf ne $scfs[0]);
             if($ytick_flag){
                 my @yaxis_list=split(/->/,$yaxis);
-                die "error:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[\d\.]+->[\d\.]+/);
+                die "error:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[-\d\.]+->[-\d\.]+/);
                 my @yaxis_show_list=split(/->/,$yaxis_show);
-                die "error:yaxis_list neet three elements, not $yaxis_show, sholud like 10->30->5\n" if(@yaxis_show_list!=3 || $yaxis_show!~ /[\d\.]+->[\d\.]+->[\d\.]+/);
+                die "error:yaxis_list neet three elements, not $yaxis_show, sholud like 10->30->5\n" if(@yaxis_show_list!=3 || $yaxis_show!~ /[-\d\.]+->[-\d\.]+->[-\d\.]+/);
                 
 		#my $tick="$yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label";
                 my @label_sizes=split(/:/,$label_size);
@@ -214,7 +214,7 @@ sub plot_depth_run(){
     	if($depth_type eq "hist"){
         	if($e1=~ /-/){
 	            $depth_shift_y=$s1-0.5*$depth_height;
-        	    $depth_shift_y="+$depth_shift_y";
+        	    $depth_shift_y=~ s/-+/+/;
 	            $padding_depth_label="-1";
         	}else{
 	            $depth_shift_y=$s1+0.5*$depth_height;
@@ -231,10 +231,12 @@ sub plot_depth_run(){
 	}elsif($depth_type=~ /^scatter/){
         	if($e1=~ /-/){
 	            $depth_shift_y=$s1-$depth_height;
+		    $depth_shift_y=abs($depth_shift_y);
         	    $depth_shift_y="+$depth_shift_y";
 	            $padding_depth_label="-1";
         	}else{
 	            $depth_shift_y=$s1+$depth_height;
+		    $depth_shift_y=abs($depth_shift_y);
         	    $depth_shift_y="-$depth_shift_y";
 	            $padding_depth_label="+1";
         	}
@@ -384,6 +386,7 @@ sub feature_ytick(){
         my $tick_label;
 
         #s1 e1 s2 e2        
+        $feature_tick_shift_y =abs($feature_tick_shift_y);
         if($ytick_orientation=~ /up/i){
             $feature_tick_shift_y ="-$feature_tick_shift_y";
             $tick_label=$s2 + $k*$ytick_unit*$ytick_ratio;
