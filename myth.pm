@@ -227,8 +227,8 @@ sub draw_genes(){
 			die "error: $c for @arr_cols of $feature_id is wrong color format\n";
 		}
 	}
-    my $feature_opacity=&get_para("feature_opacity", $feature_id, $conf);
-    #my $feature_opacity=1;
+	my $feature_opacity=&get_para("feature_opacity", $feature_id, $conf);
+	#my $feature_opacity=1;
 	my $shape=&get_para("feature_shape", $feature_id, $conf);
 	my $feature_shift_y_unit=&get_para("feature_shift_y_unit", $feature_id, $conf);
 	my $feature_shift_x=&get_para("feature_shift_x", $feature_id, $conf);
@@ -238,23 +238,25 @@ sub draw_genes(){
 	}
 	$shift_x+=$feature_shift_x*$ratio;
 	my $shift_unit=$id_line_height;
+    	my @feature_shift_y_units = ("radius", "backbone", "percent");
 	if($shape=~ /^circle_point/){
 		if($feature_shift_y_unit=~ /radius/){
 			$shift_unit=($end-$start)*$ratio;
 		}elsif($feature_shift_y_unit=~ /backbone/){
 			$shift_unit=$id_line_height;
+		}elsif($feature_shift_y_unit=~ /percent/){
+        		$shift_unit=($sample_single_height-$id_line_height-1)/100;
 		}else{
-			die "error: only support radius or backbone for feature_shift_y_unit, but not $feature_shift_y_unit\n";
+			die "error: only support @feature_shift_y_units for feature_shift_y_unit, but not $feature_shift_y_unit\n";
 		}
 		#print "circle shift_unit is $shift_unit\n";
 	}
-    my @feature_shift_y_units = ("radius", "backbone", "percent");
-    die "\nerror: not support $feature_shift_y_unit for $feature_id. only support @feature_shift_y_units\n" if(! grep(/^$feature_shift_y_unit$/, @feature_shift_y_units));
-    if($feature_shift_y_unit=~ /percent/){
-        $shift_unit=($sample_single_height-$id_line_height-1)/100;
-    }
+	die "\nerror: not support $feature_shift_y_unit for $feature_id. only support @feature_shift_y_units\n" if(! grep(/^$feature_shift_y_unit$/, @feature_shift_y_units));
+	if($feature_shift_y_unit=~ /percent/){
+        	$shift_unit=($sample_single_height-$id_line_height-1)/100;
+	}
 
-    $feature_shift_y=~ s/^([1-9].*)/\+$1/;
+	$feature_shift_y=~ s/^([1-9].*)/\+$1/;
 	if($feature_shift_y=~ /^([+-])([\d\.]+)/){
 		if($1 eq "+" || $1 eq ""){
 			$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height;
@@ -630,7 +632,7 @@ sub default_setting(){
 	$conf{legend_height_percent} ||= 0.2; # legends的高度占整个图高度的比例
 	$conf{legend_width_margin} ||= 0.1; # legends左右两侧的margin
 	$conf{legend_width_textpercent} ||= 0.6; # l
-	$conf{feature_shape} ||= 'round_rect';
+	$conf{feature_shape} ||= 'arrow'; # arrow or rect or circle_point, not support round_rect yet
 	$conf{track_style} ||="fill:green";
 	$conf{padding_feature_label} ||= 3;
 	$conf{pos_feature_label} ||="medium_up";
@@ -680,8 +682,8 @@ sub default_setting(){
 	$conf{cross_link_height_ellipse} ||="10,8";
 	$conf{svg_background_color} ||="white";
 	$conf{feature_label_auto_angle_flag} =(exists $conf{feature_label_auto_angle_flag})? $conf{feature_label_auto_angle_flag}:1;
-	#$conf{feature_ytick_region} ||="0-3:0-10;";
-	$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
+	##$conf{feature_ytick_region} ||="0-3:0-10;";
+	##$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
 
 	if($conf{track_style}!~ /:/){
 		die "error: track_style format like  fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9\n";
@@ -847,7 +849,7 @@ sub check_track_order(){
 
 sub check_para(){
     my (%conf)=@_;
-    my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend","depth_hist","depth_scatter","depth_scatter_line","display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit","feature_ytick_hgrid_line","feature_ytick_region","genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent","lr_mapping","padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","sr_mapping","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2");
+    my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "plot_depth", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent","lr_mapping","padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","sr_mapping","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2");
     for my $k (keys %conf){
         die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
     }

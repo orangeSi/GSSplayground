@@ -1,9 +1,7 @@
-perl ../prepare.data.pl --list list5 --prefix out9 --outdir . --conf main.10.conf
-+ perl ../prepare.data.pl --list list5 --prefix out9 --outdir . --conf main.10.conf
 svg_width_height -> 1500,400
 pdf_dpi -> 100
 svg_background_color -> white
-feature_keywords -> gene,circle,ytick,depth_hist,xxxxx
+feature_keywords -> gene,circle,ytick,plot_depth,xxxxx
 feature_setting -> feature.color.label.conf10.new
 width_ratio_ref_cluster_legend -> 0.1-0.75-0.15
 feature_shape -> arrow
@@ -35,8 +33,6 @@ connect_stroke_dasharray -> 2,5
 connect_stroke_width -> 2
 connect_stroke_color -> black
 absolute_postion_in_title -> yes
-feature_ytick_region -> s2:s2000:10:40:0:10:r:(the detph1);50:80:1:5:l:(the depth2) s4:s40000:20:80:90:100:r:(the depth3)
-feature_ytick_hgrid_line -> 0
 distance_closed_feature -> 200
 shift_angle_closed_feature -> 10
 top_bottom_margin -> 0.2
@@ -53,7 +49,7 @@ legend_height_space -> 0.1
 legend_width_textpercent -> 0.7
 legend_stroke_color -> black
 legend_stroke_width -> 0.5
-crossing_link -> feature.crossing.link.conf9
+crossing_link -> feature.crossing.link.conf9.new
 cross_link_color -> #FF8C00
 cross_link_opacity -> 1
 cross_link_anchor_pos -> low_up
@@ -72,11 +68,11 @@ scale_tick_height -> 0.01
 scale_order -> -1
 scale_tick_padding_y -> 10
 scale_tick_fontsize -> 13
-depth_hist -> s3,s3,1,100,s3.s3.depth.txt,10->60,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,1:0.5
-depth_hist -> s3,s3,2,100,s3.s3.depth.txt,15->70,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1
-depth_hist -> s3,s3,3,100,s3.s3.depth.txt,30->80,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,1:1
-depth_scatter -> ee
-depth_scatter_line -> ee
+plot_depth -> hist,s3,s3,1,100,s3.s3.depth.txt,5->55,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,3:3	highlight:26:2:green,hightlight:28:2:black
+plot_depth -> hist,s3,s3,1,100,s3.s3.depth.txt,65->95,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,2:2
+plot_depth -> hist,s3,s3,2,100,s3.s3.depth.txt,15->70,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.3:0.3,3:3
+plot_depth -> scatter_line,s3,s3,3,50,s3.s3.depth.txt,5->50,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,0.3:0.3,3:3
+plot_depth -> hist,s3,s3,3,50,s3.s3.depth.txt,55->90,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,0.3:0.3,3:3
 sr_mapping -> s2,s2000,0,path_sr_map.sort.bam,rainbow_or_hline,10->50
 lr_mapping -> s2,s2000,0,path_sr_map.sort.bam,rainbow_or_hline,10->50
 check done
@@ -84,256 +80,85 @@ s1
 s2
 s3
 s4
-depth_hist start
-1 is s3,s3,1,100,s3.s3.depth.txt,10->60,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,1:0.5
+plot_depth start
+1 is hist,s3,s3,1,100,s3.s3.depth.txt,5->55,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,3:3	highlight:26:2:green,hightlight:28:2:black
 
-block_index is 5,s3
-block_index is 2,s3
-block_index is 3,s3
-block_index is 4,s3
 block_index is 1,s3
-info is s3,s3,1,100,s3.s3.depth.txt,10->60,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,1:0.5
-is:s3.s3.depth.txt, s3, s3,11, 2010,100, s3,s3,1,100,s3.s3.depth.txt,10->60,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,1:0.5
-iis 0,23.03
-iis 1,28.07
-iis 2,22.49
-iis 3,26.35
-iis 4,25.37
-iis 5,24.76
-iis 6,24.17
-iis 7,25.52
-iis 8,27.6
-iis 9,25.01
-iis 10,26.53
-iis 11,24.09
-iis 12,26.48
-iis 13,23.14
-iis 14,25.21
-iis 15,25.35
-iis 16,21.79
-iis 17,25.38
-iis 18,22.48
-iis 19,26.81
-output s3.s3.1.1.hist.gff
-output s3.s3.1.1.hist.setting.conf
-s1 is 10, e1 is 60
+s1 is 5, e1 is 55
 output s3.s3.1.1.ytick.gff
 output s3.s3.1.1.ytick.setting.conf
-2 is s3,s3,2,100,s3.s3.depth.txt,15->70,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1
-
+info is hist,s3,s3,1,100,s3.s3.depth.txt,5->55,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,3:3	highlight:26:2:green,hightlight:28:2:black
+is:s3.s3.depth.txt, s3, s3,11, 2010,100, hist,s3,s3,1,100,s3.s3.depth.txt,5->55,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,3:3	highlight:26:2:green,hightlight:28:2:black
+output s3.s3.1.1.depth.gff
+output s3.s3.1.1.depth.setting.conf
+block_index is 3,s3
 block_index is 5,s3
 block_index is 2,s3
-info is s3,s3,2,100,s3.s3.depth.txt,15->70,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1
-is:s3.s3.depth.txt, s3, s3,2020, 5000,100, s3,s3,2,100,s3.s3.depth.txt,15->70,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1
-iis 0,24.85
-iis 1,24.16
-iis 2,26.85
-iis 3,27.17
-iis 4,24.66
-iis 5,27.09
-iis 6,23.72
-iis 7,29.1
-iis 8,25.39
-iis 9,27.14
-iis 10,27.7
-iis 11,25.51
-iis 12,23.5
-iis 13,23.57
-iis 14,22.26
-iis 15,22.76
-iis 16,22.04
-iis 17,27.65
-iis 18,25.42
-iis 19,24.16
-iis 20,26.56
-iis 21,24.14
-iis 22,27.03
-iis 23,26.86
-iis 24,30.02
-iis 25,23.2
-iis 26,24.53
-iis 27,23.56
-iis 28,25.29
-3error is 5019
-iis 29,27.0493827160494
-output s3.s3.2.2.hist.gff
-output s3.s3.2.2.hist.setting.conf
+block_index is 4,s3
+2 is hist,s3,s3,1,100,s3.s3.depth.txt,65->95,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,2:2
+
+block_index is 1,s3
+s1 is 65, e1 is 95
+output s3.s3.1.2.ytick.gff
+output s3.s3.1.2.ytick.setting.conf
+info is hist,s3,s3,1,100,s3.s3.depth.txt,65->95,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,2:2
+is:s3.s3.depth.txt, s3, s3,11, 2010,100, hist,s3,s3,1,100,s3.s3.depth.txt,65->95,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,2:2
+output s3.s3.1.2.depth.gff
+output s3.s3.1.2.depth.setting.conf
+block_index is 3,s3
+block_index is 5,s3
+block_index is 2,s3
+block_index is 4,s3
+3 is hist,s3,s3,2,100,s3.s3.depth.txt,15->70,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.3:0.3,3:3
+
+block_index is 1,s3
+block_index is 3,s3
+block_index is 5,s3
+block_index is 2,s3
 s1 is 15, e1 is 70
-output s3.s3.2.2.ytick.gff
-output s3.s3.2.2.ytick.setting.conf
-block_index is 3,s3
+output s3.s3.2.3.ytick.gff
+output s3.s3.2.3.ytick.setting.conf
+info is hist,s3,s3,2,100,s3.s3.depth.txt,15->70,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.3:0.3,3:3
+is:s3.s3.depth.txt, s3, s3,2020, 5000,100, hist,s3,s3,2,100,s3.s3.depth.txt,15->70,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.3:0.3,3:3
+3error is 5019
+output s3.s3.2.3.depth.gff
+output s3.s3.2.3.depth.setting.conf
 block_index is 4,s3
-block_index is 1,s3
-3 is s3,s3,3,100,s3.s3.depth.txt,30->80,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,1:1
+4 is scatter_line,s3,s3,3,50,s3.s3.depth.txt,5->50,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,0.3:0.3,3:3
 
+block_index is 1,s3
+block_index is 3,s3
+s1 is 5, e1 is 50
+output s3.s3.3.4.ytick.gff
+output s3.s3.3.4.ytick.setting.conf
+info is scatter_line,s3,s3,3,50,s3.s3.depth.txt,5->50,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,0.3:0.3,3:3
+is:s3.s3.depth.txt, s3, s3,5100, 9609,50, scatter_line,s3,s3,3,50,s3.s3.depth.txt,5->50,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,0.3:0.3,3:3
+3error is 9649
+output s3.s3.3.4.depth.gff
+output s3.s3.3.4.depth.setting.conf
+output s3.s3.3.4.depth.crosslink.conf
 block_index is 5,s3
 block_index is 2,s3
-block_index is 3,s3
-info is s3,s3,3,100,s3.s3.depth.txt,30->80,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,1:1
-is:s3.s3.depth.txt, s3, s3,5100, 9609,100, s3,s3,3,100,s3.s3.depth.txt,30->80,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,1:1
-iis 0,26.82
-iis 1,27.04
-iis 2,25.47
-iis 3,26.34
-iis 4,26.23
-iis 5,25.8
-iis 6,24.78
-iis 7,25.82
-iis 8,26.56
-iis 9,27.63
-iis 10,24.4
-iis 11,25.4
-iis 12,26.21
-iis 13,26.9
-iis 14,27.06
-iis 15,25.19
-iis 16,26.29
-iis 17,25.37
-iis 18,26.5
-iis 19,26.22
-iis 20,26.16
-iis 21,25.26
-iis 22,26.39
-iis 23,21.96
-iis 24,25.36
-iis 25,23.26
-iis 26,25.45
-iis 27,24.79
-iis 28,27.17
-iis 29,26.95
-iis 30,27.99
-iis 31,26.34
-iis 32,26.3
-iis 33,26.1
-iis 34,25.95
-iis 35,25.32
-iis 36,30.56
-iis 37,24.13
-iis 38,26.62
-iis 39,27.57
-iis 40,25.2
-iis 41,22.84
-iis 42,24.86
-iis 43,25.73
-iis 44,28.87
-3error is 9699
-iis 45,20.9
-output s3.s3.3.3.hist.gff
-output s3.s3.3.3.hist.setting.conf
-s1 is 30, e1 is 80
-output s3.s3.3.3.ytick.gff
-output s3.s3.3.3.ytick.setting.conf
 block_index is 4,s3
+5 is hist,s3,s3,3,50,s3.s3.depth.txt,55->90,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,0.3:0.3,3:3
+
 block_index is 1,s3
-+ cat s3.s3.1.1.hist.gff s3.s3.1.1.ytick.gff s3.s3.2.2.hist.gff s3.s3.2.2.ytick.gff s3.s3.3.3.hist.gff s3.s3.3.3.ytick.gff
-+ cat s3.s3.1.1.hist.setting.conf s3.s3.1.1.ytick.setting.conf s3.s3.2.2.hist.setting.conf s3.s3.2.2.ytick.setting.conf s3.s3.3.3.hist.setting.conf s3.s3.3.3.ytick.setting.conf
-+ echo cat done
-Undefined subroutine &main::depth_scatter called at ../prepare.data.pl line 45.
-depth_hist end
-cat s3.depth_hist.setting.conf feature.color.label.conf10 >  feature.color.label.conf10.new
-+ cat s3.depth_hist.setting.conf feature.color.label.conf10
-perl ../plot.genome.featureCluster.pl --list list5.ytick --prefix out10 --outdir . --conf main.10.conf
-+ perl ../plot.genome.featureCluster.pl --list list5.ytick --prefix out10 --outdir . --conf main.10.conf
-svg_width_height -> 1500,400
-pdf_dpi -> 100
-svg_background_color -> white
-feature_keywords -> gene,circle,ytick,depth_hist,xxxxx
-feature_setting -> feature.color.label.conf10.new
-width_ratio_ref_cluster_legend -> 0.1-0.75-0.15
-feature_shape -> arrow
-feature_arrow_width_extent -> 0.3
-feature_label_size -> 10
-feature_label_color -> black
-feature_shift_y -> 0
-feature_shift_y_unit -> backbone
-feature_shift_x -> 0
-feature_height_ratio -> 10
-track_style -> fill:blue;opacity:0.2
-feature_color -> rgb(50,205,50)
-feature_border_size -> 0
-feature_border_color -> black
-genome_height_ratio -> 0.2
-feature_arrow_sharp_extent -> 5
-track_order -> 1
-feature_order -> 2
-feature_label_order -> 4
-cross_link_order -> 0
-display_feature -> yes
-display_feature_label -> no
-pos_feature_label -> right_low
-padding_feature_label -> 0.01
-label_rotate_angle -> 0
-feature_label_auto_angle_flag -> 1
-connect_with_same_scaffold -> no
-connect_stroke_dasharray -> 2,5
-connect_stroke_width -> 2
-connect_stroke_color -> black
-absolute_postion_in_title -> yes
-feature_ytick_region -> s2:s2000:10:40:0:10:r:(the detph1);50:80:1:5:l:(the depth2) s4:s40000:20:80:90:100:r:(the depth3)
-feature_ytick_hgrid_line -> 0
-distance_closed_feature -> 200
-shift_angle_closed_feature -> 10
-top_bottom_margin -> 0.2
-space_between_blocks -> 500
-default_legend -> other
-sample_name_old2new -> sample.name.new.conf
-sample_name_color_default -> black
-sample_name_font_size_default -> 15
-display_legend -> yes
-legend_font_size -> 20
-legend_height_ratio -> 0.7
-legend_width_margin -> 0.15
-legend_height_space -> 0.1
-legend_width_textpercent -> 0.7
-legend_stroke_color -> black
-legend_stroke_width -> 0.5
-crossing_link -> feature.crossing.link.conf9
-cross_link_color -> #FF8C00
-cross_link_opacity -> 1
-cross_link_anchor_pos -> low_up
-ignore_sharp_arrow -> no
-cross_link_orientation_ellipse -> up
-cross_link_shape -> quadrilateral
-cross_link_height_ellipse -> 10,8
-scale_display -> yes
-scale_position -> low
-scale_color -> green
-scale_width -> 0.5
-scale_ratio -> 2000
-scale_padding_y -> 0.6
-scale_tick_opacity -> 1
-scale_tick_height -> 0.01
-scale_order -> -1
-scale_tick_padding_y -> 10
-scale_tick_fontsize -> 13
-depth_hist -> s3,s3,1,100,s3.s3.depth.txt,10->60,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:black,1:0.5,1:0.5
-depth_hist -> s3,s3,2,100,s3.s3.depth.txt,15->70,ytick_flag,20->30,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1
-depth_hist -> s3,s3,3,100,s3.s3.depth.txt,30->80,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,1:1
-depth_scatter -> ee
-depth_scatter_line -> ee
-sr_mapping -> s2,s2000,0,path_sr_map.sort.bam,rainbow_or_hline,10->50
-lr_mapping -> s2,s2000,0,path_sr_map.sort.bam,rainbow_or_hline,10->50
-check done
-s1
-s2
-s3
-s4
-ytick_region_ratio is 0.5
-draw sample name s1
-draw sample name s2
-draw sample name s3
-draw sample name s4
-downid is gene_s4020000, up is is gene_s404000
-downid is gene_s4060000, up is is gene_s406000
-downid is gene_s406000, up is is gene_s403000
-lengend start
-disply scale
-ticks number is 12
-order is -1
-order is 0
-order is 1
-order is 2
-order is 4
-outfile is  ./out10.svg
-+ convert ./out10.svg ./out10.png
-无效参数 - /out10.svg
+block_index is 3,s3
+s1 is 55, e1 is 90
+output s3.s3.3.5.ytick.gff
+output s3.s3.3.5.ytick.setting.conf
+info is hist,s3,s3,3,50,s3.s3.depth.txt,55->90,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,0.3:0.3,3:3
+is:s3.s3.depth.txt, s3, s3,5100, 9609,50, hist,s3,s3,3,50,s3.s3.depth.txt,55->90,ytick_flag,20->30,ytick_label_text,hgrid_flag,black:green,1:0.3,0.3:0.3,3:3
+3error is 9649
+output s3.s3.3.5.depth.gff
+output s3.s3.3.5.depth.setting.conf
+block_index is 5,s3
+block_index is 2,s3
+block_index is 4,s3
++ cat s3.s3.1.1.ytick.gff s3.s3.1.1.depth.gff s3.s3.1.2.ytick.gff s3.s3.1.2.depth.gff s3.s3.2.3.ytick.gff s3.s3.2.3.depth.gff s3.s3.3.4.ytick.gff s3.s3.3.4.depth.gff s3.s3.3.5.ytick.gff s3.s3.3.5.depth.gff
++ cat s3.s3.1.1.ytick.setting.conf s3.s3.1.1.depth.setting.conf s3.s3.1.2.ytick.setting.conf s3.s3.1.2.depth.setting.conf s3.s3.2.3.ytick.setting.conf s3.s3.2.3.depth.setting.conf s3.s3.3.4.ytick.setting.conf s3.s3.3.4.depth.setting.conf s3.s3.3.5.ytick.setting.conf s3.s3.3.5.depth.setting.conf
++ echo cat done1
++ cat s3.s3.3.4.depth.crosslink.conf
++ echo cat done2
+Undefined subroutine &main::sr_mapping called at ../prepare.data.pl line 45.
+plot_depth end
