@@ -26,7 +26,7 @@ if(! -d "$outdir"){
 }
 
 my @track_reorder;
-my @funcs=("plot_depth", "sr_mapping", "lr_mapping");
+my @funcs=("plot_depth", "reads_mapping", "sr_mapping", "lr_mapping");
 #my %conf = &read_conf($confile, @funcs);
 my %conf = &read_conf($confile, @funcs);
 ($conf, $track_reorder) = &default_setting(%conf);
@@ -47,6 +47,104 @@ for my $f (@funcs){
 
 print "\ndata done\n";
 
+sub reads_mapping(){
+    my ($gff, $conf)=@_;
+    my $ex="";
+    unless(exists $conf->{reads_mapping} && $conf->{reads_mapping}){
+        print "reads_mapping not\n";
+        return 0;
+    }
+    print "reads_mapping start\n";
+    my $k_index;
+    my (%outname);
+    for my $k (@{$conf->{reads_mapping}}){
+        $k_index++;
+        print "$k_index is $k\n\n";
+        @ks = split(/\t+/, $k);
+        my @infos=split(/,/, $ks[0]);
+        my $infos_len=scalar(@infos);
+        if($infos_len != 15){
+            die "error: reads_mapping should have 15 colums for reads_mappinig=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
+        }
+        my ($reads_type,$sample,$scf,$block_flag,$mapping_file,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
+        my @depth_types=("short_reads", "long_reads", "vcf", "vcf_bam");
+        die "error: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
+        die "error: $depth_file not exists for plot_depth=$k\n" if(! -f $depth_file);
+        for($i=0;$i<$infos_len;$i++){
+            next if($i==8);
+            $infos[$i]=~ s/\s//g;
+        }
+        die "error: block_flag should >=0, 0 mean all\n" if($block_flag<0 ||$block_flag!~ /^\d+$/);
+        die "error: $sample or $scf not are friends in $k\n" if(not exists $gff->{$sample}->{scf}->{$scf});
+        die "error: $sample don't have $block_flag fragments in $k\n" if($block_flag!=0 && not exists $gff->{$sample}->{chooselen_single}->{$block_flag});
+        for my $block_index(keys %{$gff->{$sample}->{chooselen_single}}){
+            print "block_index is $block_index,$sample\n";
+            next if($block_flag != 0 && $block_flag != $block_index);
+            my @scfs=keys %{$gff->{$sample}->{block}->{$block_index}};
+            next if($scf ne $scfs[0]);
+            my @yaxis_list=split(/->/,$yaxis);
+            die "error:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[-\d\.]+->[-\d\.]+/);
+            my @yaxis_show_list=split(/->/,$yaxis_show);
+            die "error:yaxis_list neet three elements, not $yaxis_show, sholud like 10->30->5\n" if(@yaxis_show_list!=3 || $yaxis_show!~ /[-\d\.]+->[-\d\.]+->[-\d\.]+/);
+
+#my $tick="$yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label";
+            my @label_sizes=split(/:/,$label_size);
+            die "error:label_size $label_size format like 6:6 for $k\n" if(@label_sizes!=2);
+            my ($depth_label_size, $tick_label_size)=@label_sizes;
+
+            if($ytick_flag){
+                my ($ytick_gff, $ytick_setting_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size);
+                my $out_ytick_gff="$sample.$scf.$block_index.$k_index.ytick.gff";
+                print "output $out_ytick_gff\n";
+                push @{$outname{$sample}{gff}},$out_ytick_gff;
+                open GFF,">$out_ytick_gff" or die "$!";
+                print GFF "$ytick_gff";
+                close GFF;
+                my $out_ytick_conf="$sample.$scf.$block_index.$k_index.ytick.setting.conf";
+                push @{$outname{$sample}{conf}},$out_ytick_conf;
+                print "output $out_ytick_conf\n";
+                open CONF,">$out_ytick_conf" or die "$!";
+                print CONF "$ytick_setting_conf";
+                close CONF;
+            }
+
+#next;
+
+            my ($reads_gff, $depth_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $reads_type);
+            my $out_depth_gff="$sample.$scf.$block_index.$k_index.depth.gff";
+            print "output $out_depth_gff\n";
+            push @{$outname{$sample}{gff}},$out_depth_gff;
+            open GFF,">$out_depth_gff" or die "$!";
+            print GFF "$depth_gff";
+            close GFF;
+            my $out_depth_conf="$sample.$scf.$block_index.$k_index.depth.setting.conf";
+            push @{$outname{$sample}{conf}},$out_depth_conf;
+            print "output $out_depth_conf\n";
+            open CONF,">$out_depth_conf" or die "$!";
+            print CONF "$depth_setting_conf";
+            close CONF;
+            next unless($cross_link_conf);
+            my $out_depth_crosslink_conf="$sample.$scf.$block_index.$k_index.depth.crosslink.conf";
+            push @{$outname{$sample}{crosslink}},$out_depth_crosslink_conf;
+            print "output $out_depth_crosslink_conf\n";
+            open CONF,">$out_depth_crosslink_conf" or die "$!";
+            print CONF "$cross_link_conf";
+            close CONF;
+
+        }
+    }
+
+
+
+	for my $s(keys %outname){
+		`set -vex;cat @{$outname{$s}{gff}} >$s.plot_depth.gff; cat @{$outname{$s}{conf}} > $s.plot_depth.setting.conf; rm @{$outname{$s}{gff}} @{$outname{$s}{conf}};echo cat done1`;
+		if(exists $outname{$s}{crosslink}){
+			`set -vex;cat @{$outname{$s}{crosslink}} >$s.plot_depth.crosslink;rm @{$outname{$s}{crosslink}};echo cat done2`;
+		}
+	}
+	print "reads_mapping end\n";
+}
+
 
 
 #@my @funcs=("plot_depth", "sr_mapping", "lr_mapping");
@@ -64,15 +162,16 @@ sub plot_depth(){
     for my $k (@{$conf->{plot_depth}}){
         $k_index++;
         print "$k_index is $k\n\n";
-	@ks = split(/\t+/, $k);
+        @ks = split(/\t+/, $k);
         my @infos=split(/,/, $ks[0]);
+#highlight_hgrid->26:2:green,28:2:black    highlight_columns->0:20:green:0.7,20:100:black:0.5 start_end_xaxis->61:661,711:1311,1361:1961
         my $infos_len=scalar(@infos);
         if($infos_len != 15){
             die "error: plot_depth should have 15 colums for plot_depth=$k, but only have $infos_len\nvalid like plot_depth=$ex\n";
         }
         my ($depth_type,$sample,$scf,$block_flag,$window_size,$depth_file,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
-	my @depth_types=("hist", "scatter", "scatter_line");
-	die "error: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
+        my @depth_types=("hist", "scatter", "scatter_line");
+        die "error: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
         die "error: $depth_file not exists for plot_depth=$k\n" if(! -f $depth_file);
         for($i=0;$i<$infos_len;$i++){
             next if($i==8);
@@ -85,19 +184,21 @@ sub plot_depth(){
         for my $block_index(keys %{$gff->{$sample}->{chooselen_single}}){
             print "block_index is $block_index,$sample\n";
             next if($block_flag != 0 && $block_flag != $block_index);
-		    my @scfs=keys %{$gff->{$sample}->{block}->{$block_index}};
+            my @scfs=keys %{$gff->{$sample}->{block}->{$block_index}};
             next if($scf ne $scfs[0]);
-            if($ytick_flag){
-                my @yaxis_list=split(/->/,$yaxis);
-                die "error:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[-\d\.]+->[-\d\.]+/);
-                my @yaxis_show_list=split(/->/,$yaxis_show);
-                die "error:yaxis_list neet three elements, not $yaxis_show, sholud like 10->30->5\n" if(@yaxis_show_list!=3 || $yaxis_show!~ /[-\d\.]+->[-\d\.]+->[-\d\.]+/);
-                
-		#my $tick="$yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label";
-                my @label_sizes=split(/:/,$label_size);
-                die "error:label_size $label_size format like 6:6 for $k\n" if(@label_sizes!=2);
-                my ($depth_label_size, $tick_label_size)=@label_sizes;
+            my @yaxis_list=split(/->/,$yaxis);
+            die "error:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[-\d\.]+->[-\d\.]+/);
+            my @yaxis_show_list=split(/->/,$yaxis_show);
+            die "error:yaxis_list neet three elements, not $yaxis_show, sholud like 10->30->5\n" if(@yaxis_show_list!=3 || $yaxis_show!~ /[-\d\.]+->[-\d\.]+->[-\d\.]+/);
 
+#my $tick="$yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label";
+            my @label_sizes=split(/:/,$label_size);
+            die "error:label_size $label_size format like 6:6 for $k\n" if(@label_sizes!=2);
+            my ($depth_label_size, $tick_label_size)=@label_sizes;
+  	    my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{start};
+	    my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
+
+            if($ytick_flag){
                 my ($ytick_gff, $ytick_setting_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size);
                 my $out_ytick_gff="$sample.$scf.$block_index.$k_index.ytick.gff";
                 print "output $out_ytick_gff\n";
@@ -111,71 +212,146 @@ sub plot_depth(){
                 open CONF,">$out_ytick_conf" or die "$!";
                 print CONF "$ytick_setting_conf";
                 close CONF;
-		
-		
-		#next;
-
-
-                my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&plot_depth_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type);
-                my $out_depth_gff="$sample.$scf.$block_index.$k_index.depth.gff";
-                print "output $out_depth_gff\n";
-                push @{$outname{$sample}{gff}},$out_depth_gff;
-                open GFF,">$out_depth_gff" or die "$!";
-                print GFF "$depth_gff";
-                close GFF;
-                my $out_depth_conf="$sample.$scf.$block_index.$k_index.depth.setting.conf";
-                push @{$outname{$sample}{conf}},$out_depth_conf;
-                print "output $out_depth_conf\n";
-                open CONF,">$out_depth_conf" or die "$!";
-                print CONF "$depth_setting_conf";
-                close CONF;
-		next unless($cross_link_conf);
-                my $out_depth_crosslink_conf="$sample.$scf.$block_index.$k_index.depth.crosslink.conf";
-                push @{$outname{$sample}{crosslink}},$out_depth_crosslink_conf;
-                print "output $out_depth_crosslink_conf\n";
-                open CONF,">$out_depth_crosslink_conf" or die "$!";
-                print CONF "$cross_link_conf";
-                close CONF;
-
             }
+    	    my @highs=("highlight_columns", "highlight_hgrid", "start_end_xaxis");
+	    my %highss = &get_regions(\@highs,$k, $block_start_bp, $block_end_bp);
+	    my @start_end_xaxis = @{$highss{start_end_xaxis}};
+	    #my @highlight_columns = @{$highss{highlight_columns}};
+
+	    for my $rg(@start_end_xaxis){
+		    my ($rg_start, $rg_end)=split(/,/, $rg);
+		    print "rg is $rg,  :$rg_start,$rg_end\n";
+        	    my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&plot_depth_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type, $rg_start, $rg_end);
+	            my $prefix="$sample.$scf.$block_index.$k_index.$rg_start.$rg_end";
+	            my $out_depth_gff="$prefix.depth.gff";
+        	    print "output $out_depth_gff\n";
+	            push @{$outname{$sample}{gff}},$out_depth_gff;
+        	    open GFF,">$out_depth_gff" or die "$!";
+	            print GFF "$depth_gff";
+        	    close GFF;
+	            my $out_depth_conf="$prefix.depth.setting.conf";
+        	    push @{$outname{$sample}{conf}},$out_depth_conf;
+	            print "output $out_depth_conf\n";
+        	    open CONF,">$out_depth_conf" or die "$!";
+	            print CONF "$depth_setting_conf";
+        	    close CONF;
+	            next unless($cross_link_conf);
+        	    my $out_depth_crosslink_conf="$sample.$scf.$block_index.$k_index.depth.crosslink.conf";
+	            push @{$outname{$sample}{crosslink}},$out_depth_crosslink_conf;
+	            print "output $out_depth_crosslink_conf\n";
+        	    open CONF,">$out_depth_crosslink_conf" or die "$!";
+        	    print CONF "$cross_link_conf";
+	            close CONF;
+	    }
+
+
         }
-    
+
 
     }
-        for my $s(keys %outname){
-            `set -vex;cat @{$outname{$s}{gff}} >$s.plot_depth.gff; cat @{$outname{$s}{conf}} > $s.plot_depth.setting.conf;echo cat done1`;
-	    if(exists $outname{$s}{crosslink}){
-            	`set -vex;cat @{$outname{$s}{crosslink}} >$s.plot_depth.crosslink;echo cat done2`;
-	    }
+    for my $s(keys %outname){
+	`set -vex;cat @{$outname{$s}{gff}} >$s.plot_depth.gff; cat @{$outname{$s}{conf}} > $s.plot_depth.setting.conf; rm @{$outname{$s}{gff}} @{$outname{$s}{conf}};echo cat done1`;
+        if(exists $outname{$s}{crosslink}){
+            `set -vex;cat @{$outname{$s}{crosslink}} >$s.plot_depth.crosslink;rm @{$outname{$s}{crosslink}};echo cat done2`;
         }
+    }
     print "plot_depth end\n";
 }
 
+sub reads_mapping_run(){
+#sr_mapping=s2,s2000,0,path_sr_map.sort.bam,rainbow_or_hline,10->50,ytick_flag,20->30->2,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,3:3	highlight_hgrid->26:2:green,28:2:black  start_end_xaxis->61:661,711:1311,1361:1961
+    my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type)=@_;
+    my @regions;
+    #my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block}->{start};
+    #my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block}->{end};
+    my @highs=("highlight_vlines", "start_end_xaxis");
+    my ($start_ends, $high_vlines) = &get_regions(\@highsi,$info, $block_start_bp, $block_end_bp);
+    my @start_ends=@{$start_ends};
+    my @high_vlines=@{$high_vlines};
 
+    my $max_depth=&get_max_depth(\@start_ends,$bam_file,$sample,$scf);
+    my $one_read_height=(abs($s1-$e1))/$max_depth;
+
+    my $reads_gff;
+    for my $rg(@start_ends){
+        my ($start_rg, $end_rg)=split(/:/,$rg);
+        my $read_num=0;
+        my @reads=&get_mapping_reads($start_rg, $end_rg, $read_type);
+        my $previous_end=$start_rg-1;
+        for my $read(@reads){
+            $read_num++;
+            my $r1_start,$r1_end,$r2_start,$r2_end;
+            my $read_shift_y;
+            my $read_id="$sample.$scf.$block.$start_rg.$end_rg.$k_index.$read_type.$read_num";
+
+            if($read_type eq "short_reads"){
+                $reads_gff.="$scf\tadd\tsr_read\tstart\tend\t.\t+\t.\tID=$read_id;\n";
+            }elsif($read_type eq "long_reads"){
+                if($read_start>$previous_end){
+               		 
+                }
+            }elsif($read_type eq "vcf"){
+                 
+            }else{
+                die "die:\n"
+            }
+
+        }
+    }
+}
+
+sub get_regions(){
+    my ($highs,$info,$block_start,$block_end)=@_;
+    my @highs=@{$highs};
+    my @start_ends;
+    my @high_vlines;
+    my %hash;
+    if($info=~ /\s+(\S+)->/){
+        my @arr=$info=~ /\s+(\S+)->/g;
+        for my $a(@arr){
+            die "error: not support $a, only @highs\n" if(! grep(/^$a$/, @highs));
+            if($a eq "start_end_xaxis"){
+                $info=~ /\s+$a->(\S+)/;
+                my $poss=$1;
+                my @rgs=split(/,/, $poss);
+                for $rg(@rgs){
+                    if($rg=~ /^(\d+):(\d+)$/){
+			my ($start, $end)=($1,$2);
+			$start=$block_start if($start<$block_start);
+			$end=$block_end if($end>$block_end);
+			push @{$hash{$a}},"$start,$end";
+                    }else{
+                        die "error: \n"
+                    }
+                }
+            }elsif($a eq "highlight_columns"){
+	    	print ""
+	    
+	    }
+        }
+    }
+    if(not exists $hash{start_end_xaxis}){
+        push @{$hash{start_end_xaxis}},"$block_start,$block_end";
+    }
+    return %hash;
+}
 
 
 sub plot_depth_run(){
-    my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type)=@_;
-    my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block}->{start};
-    my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block}->{end};
+    my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type, $block_start_bp, $block_end_bp)=@_;
     print "info is $info\n";
     my %depths=&read_depth_file($depth_file, $sample, $scf,$block_start_bp, $block_end_bp, $window_size, $info);
     my ($depth_gff,$depth_setting_conf);
     my $max_depth=$depths{max_depth};
     my $depth_depth_ratio=(abs($s1-$e1)) / (abs($e2-$s2));
     my $depth_overflow_flag=0;    
-    if($depth_type eq "hist"){
-    }elsif($depth_type eq "scatter"){
-    }elsif($depth_type eq "scatter_line"){
-    }else{
-	    die "error:not support $depth_type\n";
-    }
+    
     my $previous_id;
     my $cross_link_conf="";
     for my $window(sort {$a<=>$b}keys %{$depths{window}}){
         my $depth=$depths{window}{$window};
-	$depth=int($depth);
-        #die "error:depth is $depth,window is $window\n"if(!$depth);
+        $depth=int($depth);
+#die "error:depth is $depth,window is $window\n"if(!$depth);
         my $diff_depth=$depth-abs($s2);
         next if($depth<abs($s2));
         my $depth_height=($diff_depth)*$depth_depth_ratio;
@@ -199,65 +375,65 @@ sub plot_depth_run(){
         }
         my $padding_depth_label=1;
 
-        my $depth_id="$sample.$scf.$block.$depth_type.$window.$k_index";
-	#print "iis $depth_id	$depth\n";
+        my $depth_id="$sample.$scf.$block.$depth_type.$window.$k_index.$block_start_bp.$block_end_bp";
+#print "iis $depth_id	$depth\n";
         $depth_gff.="$scf\tadd\tplot_depth\t$depth_start\t$depth_end\t.\t+\t.\tID=$depth_id;\n";
         $depth_setting_conf.="$depth_id\tdisplay_feature_label\t$display_feature_label\n";
-	$depth_setting_conf.="$depth_id\tfeature_color\t$depth_color\n";
+        $depth_setting_conf.="$depth_id\tfeature_color\t$depth_color\n";
         $depth_setting_conf.="$depth_id\tfeature_opacity\t$depth_opacity\n";
-	$depth_setting_conf.="$depth_id\tpos_feature_label\tleft_up\n" if($depth_overflow_flag);    
+        $depth_setting_conf.="$depth_id\tpos_feature_label\tleft_up\n" if($depth_overflow_flag);    
         $depth_setting_conf.="$depth_id\tfeature_label\t$depth\n" if($depth_overflow_flag);
-	$depth_setting_conf.="$depth_id\tlabel_rotate_angle\t0\n" if($depth_overflow_flag);
+        $depth_setting_conf.="$depth_id\tlabel_rotate_angle\t0\n" if($depth_overflow_flag);
         $depth_setting_conf.="$depth_id\tfeature_label_auto_angle_flag\t0\n\n" if($depth_overflow_flag);
-	$depth_setting_conf.="$depth_id\tfeature_label_size\t$depth_label_size\n" if($depth_overflow_flag);
+        $depth_setting_conf.="$depth_id\tfeature_label_size\t$depth_label_size\n" if($depth_overflow_flag);
 
-    	if($depth_type eq "hist"){
-        	if($e1=~ /-/){
-	            $depth_shift_y=$s1-0.5*$depth_height;
-        	    $depth_shift_y=~ s/-+/+/;
-	            $padding_depth_label="-1";
-        	}else{
-	            $depth_shift_y=$s1+0.5*$depth_height;
-        	    $depth_shift_y="-$depth_shift_y";
-	            $padding_depth_label="+1";
-        	}
-		$depth_setting_conf.="\n$depth_id\tfeature_height_ratio\t$depth_height\n";
-		$depth_setting_conf.="\n$depth_id\tfeature_height_unit\tpercent\n";
-	        $depth_setting_conf.="$depth_id\tfeature_shape\trect\n";
-        	$depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
-	        $depth_setting_conf.="$depth_id\tfeature_shift_y_unit\tpercent\n";
-        	$depth_setting_conf.="$depth_id\tpadding_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
+        if($depth_type eq "hist"){
+            if($e1=~ /-/){
+                $depth_shift_y=$s1-0.5*$depth_height;
+                $depth_shift_y=~ s/-+/+/;
+                $padding_depth_label="-1";
+            }else{
+                $depth_shift_y=$s1+0.5*$depth_height;
+                $depth_shift_y="-$depth_shift_y";
+                $padding_depth_label="+1";
+            }
+            $depth_setting_conf.="\n$depth_id\tfeature_height_ratio\t$depth_height\n";
+            $depth_setting_conf.="\n$depth_id\tfeature_height_unit\tpercent\n";
+            $depth_setting_conf.="$depth_id\tfeature_shape\trect\n";
+            $depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
+            $depth_setting_conf.="$depth_id\tfeature_shift_y_unit\tpercent\n";
+            $depth_setting_conf.="$depth_id\tpadding_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
 
-	}elsif($depth_type=~ /^scatter/){
-        	if($e1=~ /-/){
-	            $depth_shift_y=$s1-$depth_height;
-		    $depth_shift_y=abs($depth_shift_y);
-        	    $depth_shift_y="+$depth_shift_y";
-	            $padding_depth_label="-1";
-        	}else{
-	            $depth_shift_y=$s1+$depth_height;
-		    $depth_shift_y=abs($depth_shift_y);
-        	    $depth_shift_y="-$depth_shift_y";
-	            $padding_depth_label="+1";
-        	}
-	        $depth_setting_conf.="$depth_id\tfeature_shape\tcircle_point\n";
-        	$depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
-	        $depth_setting_conf.="$depth_id\tfeature_shift_y_unit\tpercent\n";
-        	$depth_setting_conf.="$depth_id\tpadding_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
-		if($depth_type eq "scatter_line"){
-			unless($previous_id){$previous_id=$depth_id; next}
-			my $cross_link_height_line=0.5;
-			$cross_link_conf.="$previous_id\t$depth_id\tcross_link_shape\tline\n";
-			$cross_link_conf.="$previous_id\t$depth_id\tcross_link_orientation_line\tmedium,medium\n";
-			$cross_link_conf.="$previous_id\t$depth_id\tcross_link_height_line\t$cross_link_height_line\n";
-			$cross_link_conf.="$previous_id\t$depth_id\tcross_link_anchor_pos\tmedium_medium\n";
-		}
-	}else{
-		die "error:not support $depth_type\n";
-	}
+        }elsif($depth_type=~ /^scatter/){
+            if($e1=~ /-/){
+                $depth_shift_y=$s1-$depth_height;
+                $depth_shift_y=abs($depth_shift_y);
+                $depth_shift_y="+$depth_shift_y";
+                $padding_depth_label="-1";
+            }else{
+                $depth_shift_y=$s1+$depth_height;
+                $depth_shift_y=abs($depth_shift_y);
+                $depth_shift_y="-$depth_shift_y";
+                $padding_depth_label="+1";
+            }
+            $depth_setting_conf.="$depth_id\tfeature_shape\tcircle_point\n";
+            $depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
+            $depth_setting_conf.="$depth_id\tfeature_shift_y_unit\tpercent\n";
+            $depth_setting_conf.="$depth_id\tpadding_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
+            if($depth_type eq "scatter_line"){
+                unless($previous_id){$previous_id=$depth_id; next}
+                my $cross_link_height_line=0.5;
+                $cross_link_conf.="$previous_id\t$depth_id\tcross_link_shape\tline\n";
+                $cross_link_conf.="$previous_id\t$depth_id\tcross_link_orientation_line\tmedium,medium\n";
+                $cross_link_conf.="$previous_id\t$depth_id\tcross_link_height_line\t$cross_link_height_line\n";
+                $cross_link_conf.="$previous_id\t$depth_id\tcross_link_anchor_pos\tmedium_medium\n";
+            }
+        }else{
+            die "error:not support $depth_type\n";
+        }
 
-	#print "pre is $previous_id\n";
-    	$previous_id=$depth_id;
+#print "pre is $previous_id\n";
+        $previous_id=$depth_id;
     }
     return ($depth_gff, $depth_setting_conf, $cross_link_conf);
 }
@@ -272,9 +448,9 @@ sub read_depth_file(){
     die "error:depth_file $depth_file not exists for $info\n" if(! -f $depth_file);
     if($depth_file=~ /.bam\s*$/){
         print "bam\n";
-    
+
     }else{
-        #s3      s3      3       10 #sample scf_id  pos depth
+#s3      s3      3       10 #sample scf_id  pos depth
         open IN,"$depth_file" or die "$!";
         while(<IN>){
             chomp;
@@ -282,11 +458,11 @@ sub read_depth_file(){
             next if($_=~ /^\s*#.*$/||$_=~ /^\s*$/);
             my @arr=split(/\s+/,$_);
             die "error:depth need 4 columns for $_\n" if(@arr!=4);
-            
+	    if(!$arr[2] || !$block_end_bp){die "is,$arr[2],$block_end_bp\n"}
             next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] > $block_end_bp || $arr[2]<$block_start_bp);
             die "error:$arr[2] or $arr[3]\n" if($arr[2]!~ /^\d+$/ || $arr[3]!~ /^\d+$/);
             $tmp{$arr[2]}=$arr[3];
-            #print "AAAis $arr[2], 3 is $arr[3]\n";
+#print "AAAis $arr[2], 3 is $arr[3]\n";
 
         }
         close IN;
@@ -299,19 +475,20 @@ sub read_depth_file(){
     for my $i(0..$window_num){
         my $start=$block_start_bp+$i*$window_size;
         my $end=$start+$window_size-1;
-        #print "2error:$start,$end,$block_start_bp,$block_end_bp\n";
-        #$end = $block_end_up if($end>$block_end_bp);
+#print "2error:$start,$end,$block_start_bp,$block_end_bp\n";
+#$end = $block_end_up if($end>$block_end_bp);
         if($end>$block_end_bp){    print "3error is $end\n"; $end=$block_end_bp}
         my $pos_all=0;
         die "1error:$start,$end,\n" if(!$end);
         for my $pos($start..$end){
+            $tmp{$pos}=0 if(not exists $tmp{$pos});
             $pos_all+=$tmp{$pos};
-            #die "error:pos is $pos,$start,$end,$block_start_bp,$block_end_bp\n" if (!$tmp{$pos});
+#die "error:pos is $pos,$start,$end,$block_start_bp,$block_end_bp\n" if (!$tmp{$pos});
         }
         my $avg_depth=$pos_all/($end-$start+1);
         $max=($avg_depth>$max)? $avg_depth:$max;
         $depths{window}{$i}=$avg_depth;
-	#print "info is $info,iis $i,$avg_depth\n";
+#print "info is $info,iis $i,$avg_depth\n";
 
     }
     $depths{max_depth}=$max;
@@ -336,7 +513,7 @@ sub feature_ytick(){
     my $block_start_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{start};
     my $block_end_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{end};
     my $ytick_feature_backbone_width = 20*$tick_borders[0]; # bp 
-    my $feature_backbone_shift_x = $ytick_feature_backbone_width; 
+        my $feature_backbone_shift_x = $ytick_feature_backbone_width; 
     my $ytick_feature_backbone_start = $block_end_bp - $ytick_feature_backbone_width;
     my $ytick_feature_backbone_end = $block_end_bp;
     my $ytick_feature_backbone_id = "$ytick_sample.$ytick_scf.$block.$block_start_bp.$block_end_bp.$kk";
@@ -350,7 +527,7 @@ sub feature_ytick(){
         die "die:\n";
     }
 
-    #print "\nfeature_ytick_region7\n\n";
+#print "\nfeature_ytick_region7\n\n";
 
     $ytick_gff.="$ytick_scf\tadd\tytick\t$ytick_feature_backbone_start\t$ytick_feature_backbone_end\t.\t+\t.\tID=$ytick_feature_backbone_id;\n";
 
@@ -365,14 +542,14 @@ sub feature_ytick(){
     $ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_label\tytick_label\n";
     $ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_color\t$tick_colors[0]\n";
     $ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_opacity\t$tick_opacitys[0]\n";
-    #print "\n2ytick_gff is $ytick_gff\n\n";
+#print "\n2ytick_gff is $ytick_gff\n\n";
     my $ytick_unit=$axis_gap;
-    #my $ytick_unit_real = $ytick_height/($e1-$s1)*$ytick_unit;
+#my $ytick_unit_real = $ytick_height/($e1-$s1)*$ytick_unit;
     my $ytick_nums = int((abs($e2-$s2)) /$ytick_unit);
     $ytick_unit=$ytick_unit * (abs($e1-$s1))/(abs($e2-$s2));
     for my $k (0..$ytick_nums){
         my $ytick_feature_tick_width = 80*$tick_borders[0]; # bp 
-        my $ytick_feature_tick_start=$block_end_bp - $ytick_feature_tick_width;
+            my $ytick_feature_tick_start=$block_end_bp - $ytick_feature_tick_width;
         my $ytick_feature_tick_end=$block_end_bp;
         my $ytick_feature_tick_height=1*$tick_borders[0];
         my $feature_label_size=$tick_label_size;
@@ -380,12 +557,12 @@ sub feature_ytick(){
         my $ytick_feature_tick_id="$ytick_feature_backbone_id.tick$k";
         my $feature_tick_shift_x=0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width - $ytick_feature_backbone_width*0.5; # bp 
 
-        #my $feature_tick_shift_y = 0.5 + $s1 + $k * $ytick_unit + 0.5*$ytick_feature_tick_height;
-        my $feature_tick_shift_y = $s1 + $k * $ytick_unit;
+#my $feature_tick_shift_y = 0.5 + $s1 + $k * $ytick_unit + 0.5*$ytick_feature_tick_height;
+            my $feature_tick_shift_y = $s1 + $k * $ytick_unit;
         my $ytick_ratio=(abs($e2-$s2)) / (abs($e1-$s1));
         my $tick_label;
 
-        #s1 e1 s2 e2        
+#s1 e1 s2 e2        
         $feature_tick_shift_y =abs($feature_tick_shift_y);
         if($ytick_orientation=~ /up/i){
             $feature_tick_shift_y ="-$feature_tick_shift_y";
@@ -409,7 +586,7 @@ sub feature_ytick(){
             $ytick_setting_conf.="$hgrid_id\tfeature_shift_y\t$feature_tick_shift_y\n";
             $ytick_setting_conf.="$hgrid_id\tfeature_shift_y_unit\tpercent\n";
             $ytick_setting_conf.="$hgrid_id\tfeature_color\t$tick_colors[1]\n";
-        
+
         }
         $ytick_gff.="$ytick_scf\tadd\tytick\t$ytick_feature_tick_start\t$ytick_feature_tick_end\t.\t+\t.\tID=$ytick_feature_tick_id;\n";
         $ytick_setting_conf.="\n$ytick_feature_tick_id\tfeature_height_ratio\t$ytick_feature_tick_height\n";
@@ -427,7 +604,7 @@ sub feature_ytick(){
         $ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label_auto_angle_flag\t0\n\n";
         $ytick_setting_conf.="$ytick_feature_tick_id\tfeature_color\t$tick_colors[0]\n\n";
         $ytick_setting_conf.="$ytick_feature_tick_id\tfeature_opacity\t$tick_opacitys[0]\n\n";
-        #feature_ytick_hgrid_line=1
+#feature_ytick_hgrid_line=1
 
     }
     return ($ytick_gff, $ytick_setting_conf);
