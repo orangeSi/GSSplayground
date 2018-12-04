@@ -1,0 +1,1 @@
+/home/sikaiwei/bwa.sh
