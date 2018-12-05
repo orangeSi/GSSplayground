@@ -23,5 +23,6 @@ bam=$2
 set -vex
 $samtools view -bS $sam > ${sam}.bam 
 $samtools sort ${sam}.bam -o ${bam}.sort.bam
+$samtools index ${bam}.sort.bam
 rm ${sam}.bam $sam
 

@@ -37,10 +37,11 @@ set -vex
 r1=$r1
 r2=$r2
 $bwa index $ref
-$bwa mem $ref $r1 -t $cpu >$out.sam
+$bwa mem $ref $r1 $r2 -t $cpu >$out.sam
 sam=$out.sam
 $samtools view -bS \$sam > \$sam.bam 
 $samtools sort \$sam.bam -o \$sam.sorted.bam
+$samtools index \$sam.sorted.bam
 rm \$sam.bam \$sam
 touch $outdir/${prefix}.bwa.sh.sign
 " >$outdir/${prefix}.bwa.sh
