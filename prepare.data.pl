@@ -57,6 +57,8 @@ sub reads_mapping(){
     print "reads_mapping start\n";
     my $k_index;
     my (%outname);
+    my @env=("samtool")
+    &check_env_exist(@env);
     for my $k (@{$conf->{reads_mapping}}){
         $k_index++;
         print "$k_index is $k\n\n";
@@ -67,6 +69,7 @@ sub reads_mapping(){
             die "error: reads_mapping should have 15 colums for reads_mappinig=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
         }
         my ($reads_type,$sample,$scf,$block_flag,$mapping_file,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
+	&check_sort_bam($mapping_file);
         my @depth_types=("short_reads", "long_reads", "vcf", "vcf_bam");
         die "error: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
         die "error: $depth_file not exists for plot_depth=$k\n" if(! -f $depth_file);
@@ -152,7 +155,32 @@ sub reads_mapping(){
 	print "reads_mapping end\n";
 }
 
+sub check_env_exist(){
+	my @envs=$_;
+	for my $env(@envs){
+		`which $env 2>/dev/null`;
+		die "error: $env not exists by which $env, should add $env path to PATH\n" if($?);
+	 }
+}
+sub check_sort_bam(){
+	my ($mapping_file)=@_;
+	die "error: $mapping_file is a sorted bam file? if true, please rename it to *sort*.bam\n" if($mapping_file!~ /.*sort.*.bam$/);
 
+}
+
+sub get_max_depth(){
+	my ($start_end_xaxis, $mapping_file,$sample,$scf)=@_;
+	my @start_end_xaxis=@$start_end_xaxis;
+	my $max_depth=0;
+	for my $rg (@start_end_xaxis){
+		my ($rg_start, $rg_end)=split(/,/, $rg);
+		my $cmd="samtools depth  -r $scf:$rg_start-$rg_end|awk '{print \$NF}'|sort -k 1nr|head -1";
+		my $rg_depth=`$cmd`;
+		die "error:$cmd\n" if($?);
+		$max_depth=$rg_depth if($max_depth < $rg_depth);
+	}
+	return $max_depth;
+}
 
 #@my @funcs=("plot_depth", "sr_mapping", "lr_mapping");
 sub plot_depth(){
@@ -338,14 +366,57 @@ sub reads_mapping_run(){
 sub get_mapping_reads(){
 	my ($scf, $bam_file, $rg_start, $rg_end, $read_type)=@_;
 	my %reads;
+	my $min_mapq=0;
 	use Storable;
-	my $tmpf="$bam_file.$scf.$rg_start.$rg_end.reads.txt";
+	my $tmpf="$bam_file.$scf.$rg_start.$rg_end.reads.hash";
 	if(-f "$tmpf"){
 		# Retrieve the hash from the file.
+		print "using $tmpf, if you reupdate the $bam_file, please remove the $tmpf file\n"
 		my $reads = retrieve("$tmpf");
 		%reads=%$reads;
+		open BAM,"samtools view $bam_file|awk '\$1!~ /^@/ && \$3!=\"*\" && \$3==\"$scf\"'|" or die "error: samtools view $bam_file\n";
+		while(<BAM>){
+			chomp;
+			#print "line is $_\n";
+			my @arr=split(/\t/,$_);
+			my ($r_id, $flag, $ref_id, $ref_start_pos, $mapq, $cigar, $rnext, $pnext)=@arr[0..7];
+			next if($mapq < $min_mapq);
+			my @ref_consumes=("M","D","N","=","x");
+			my @reads_consumes=("M","I","S","=","x");
+			
+			if($read_type eq "long_reads"){
+				# default output multi-alignments, need to supply paramter whether display this or choose the best hit by MAPQ
+				my $ref_consumes_length=&consumes_length($cigar, \@ref_consumes);
+				my $reads_consumes_length=&consumes_length($cigar, \@reads_consumes);
+				my $strand=($flag & 16); # if ture, mean read reverse
+				if($strand){
+					$reads{$r_id}{ref_end}=$ref_start_pos;
+					$reads{$r_id}{ref_start}=$ref_start_pos - $ref_consumes_length+1;
+					$reads{$r_id}{strand}="-";
+				}else{
+					$reads{$r_id}{ref_start}=$ref_start_pos;
+					$reads{$r_id}{ref_end}=$ref_start_pos + $ref_consumes_length -1;
+					$reads{$r_id}{strand}="+";
+				}
+				
+				
+				
+				
+			}elsif($read_type eq "short_reads"){
+				next if($rnext eq "*"); 
+				# bwa default don't output multi-alignments, ignore soap2 yet.
+				my $ref_consumes_length=&consumes_length($cigar, \@ref_consumes);
+				my $reads_consumes_length=&consumes_length($cigar, \@reads_consumes);
 
-	   
+				
+
+			}else{
+				die "error: not support $read_type\n";
+			}
+			
+	
+		}
+		close BAM;
 	}else{
 		# Save the hash to a file:
 		store \%reads, "$tmpf";
@@ -353,6 +424,16 @@ sub get_mapping_reads(){
 
 	return %reads;
 }
+
+sub consumes_length(){
+	my ($cigar,$consumes)=@_;
+	my $length=0;
+	for my $c(@$consumes){
+		$length+=$1 if($cigar=~ /(\d+)$c/);
+	}
+	return $length;
+}
+
 sub get_regions(){
     my ($highs,$info,$block_start,$block_end)=@_;
     my @highs=@{$highs};
@@ -501,6 +582,7 @@ sub read_depth_file(){
     die "error:depth_file $depth_file not exists for $info\n" if(! -f $depth_file);
     if($depth_file=~ /.bam\s*$/){
         print "bam\n";
+    	&check_sort_bam($depth_file);
 
     }else{
 #s3      s3      3       10 #sample scf_id  pos depth

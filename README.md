@@ -34,6 +34,15 @@
 &nbsp;&nbsp;&nbsp;&nbsp;5. embed svg in svg to make heatmap or scatter or line or histogram more easy to product, like example/out.svg*svg or \<foreignObject\> <br> <br>
 
 
+#### denpence <br>
+```
+perl
+Bio::DB::Sam ( install with cpan)
+```
+<br>
+
+
+
 ![gene cluster image](example/out.svg)
 <br><br><br>
 ![gene cluster image](example/out2.svg)
