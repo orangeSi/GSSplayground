@@ -57,7 +57,7 @@ sub reads_mapping(){
     print "reads_mapping start\n";
     my $k_index;
     my (%outname);
-    my @env=("samtool")
+    my @env=("samtool");
     &check_env_exist(@env);
     for my $k (@{$conf->{reads_mapping}}){
         $k_index++;
@@ -305,7 +305,7 @@ sub reads_mapping_run(){
     #my $previous_end=$rg_start-1;
     my $read_shift_y;
     my $updown;
-    if($s1=~ /^+?(\d+)/){
+    if($s1=~ /^\+?(\d+)/){
 	    $read_shift_y = 0.5*$one_read_height+$s1;
 	    $read_shift_y = "+$read_shift_y";
 	    $updown=-1;
@@ -319,7 +319,7 @@ sub reads_mapping_run(){
     my %shift_y;
     my $shift_y_index=abs($read_shift_y);
     $shift_y{$shift_y_index}=$rg_start-1;
-    for my $read_id(sort {$reads{$a}{start}<=>$reads{$b}{start}} keys @reads){
+    for my $read_id(sort {$reads{$a}{start}<=>$reads{$b}{start}} keys %reads){
             $read_num++;
 	    my $portion_height=0.5; # reads height portion
 	    my $feature_height=$one_read_height*$portion_height;
@@ -371,9 +371,10 @@ sub get_mapping_reads(){
 	my $tmpf="$bam_file.$scf.$rg_start.$rg_end.reads.hash";
 	if(-f "$tmpf"){
 		# Retrieve the hash from the file.
-		print "using $tmpf, if you reupdate the $bam_file, please remove the $tmpf file\n"
+		print "using $tmpf, if you reupdate the $bam_file, please remove the $tmpf file\n";
 		my $reads = retrieve("$tmpf");
 		%reads=%$reads;
+	}else{
 		open BAM,"samtools view $bam_file|awk '\$1!~ /^@/ && \$3!=\"*\" && \$3==\"$scf\"'|" or die "error: samtools view $bam_file\n";
 		while(<BAM>){
 			chomp;
@@ -383,24 +384,20 @@ sub get_mapping_reads(){
 			next if($mapq < $min_mapq);
 			my @ref_consumes=("M","D","N","=","x");
 			my @reads_consumes=("M","I","S","=","x");
-			
+			my $read_order=0;
 			if($read_type eq "long_reads"){
 				# default output multi-alignments, need to supply paramter whether display this or choose the best hit by MAPQ
 				my $ref_consumes_length=&consumes_length($cigar, \@ref_consumes);
-				my $reads_consumes_length=&consumes_length($cigar, \@reads_consumes);
+				#my $reads_consumes_length=&consumes_length($cigar, \@reads_consumes);
 				my $strand=($flag & 16); # if ture, mean read reverse
-				if($strand){
-					$reads{$r_id}{ref_end}=$ref_start_pos;
-					$reads{$r_id}{ref_start}=$ref_start_pos - $ref_consumes_length+1;
-					$reads{$r_id}{strand}="-";
-				}else{
-					$reads{$r_id}{ref_start}=$ref_start_pos;
-					$reads{$r_id}{ref_end}=$ref_start_pos + $ref_consumes_length -1;
-					$reads{$r_id}{strand}="+";
-				}
-				
-				
-				
+				%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $read_order, $r_id, \%reads);
+				#$reads{$r_id}{cigar}{0}{type}=$2;
+				#$reads{$r_id}{cigar}{0}{start}=$ref_start_pos-$1;
+				#$reads{$r_id}{cigar}{0}{end}=$ref_start_pos-1;
+				#$reads{$r_id}{cigar}{0}{order}=$read_order;
+				$reads{$r_id}{ref_start}=$ref_start_pos;
+				$reads{$r_id}{ref_end}=$ref_start_pos + $ref_consumes_length -1;
+				$reads{$r_id}{strand}=$strand;
 				
 			}elsif($read_type eq "short_reads"){
 				next if($rnext eq "*"); 
@@ -417,13 +414,68 @@ sub get_mapping_reads(){
 	
 		}
 		close BAM;
-	}else{
 		# Save the hash to a file:
 		store \%reads, "$tmpf";
 	}
 
 	return %reads;
 }
+
+sub detail_cigar(){
+	my ($strand, $cigar, $ref_start_pos, $read_order, $r_id, $reads)=@_;
+	my %reads=%$reads;
+	my @cigars=$cigar=~ /(\d+[^\d])/g;
+	my $M_index=0;
+	my $cigars_len=scalar(@cigars);
+	my @ref_consumes=("M","D","N","=","x");
+	my @reads_consumes=("M","I","S","=","x");
+	# 4H3S6M1P1I4M
+	my $complete_match=0;
+	for my $cs(0..$cigars_len-1){
+		if($cigars[$cs]=~ /M/){
+			$M_index=$cs;
+			last;
+		}
+	}
+	die "error:cigar=$cigar error\n" if($M_index>=2);
+	my $previous_end=$ref_start_pos-1;
+	my $cs_end;
+	my $cs_start=$ref_start_pos;
+	for my $cs(0..$cigars_len-1){
+		if($cs < $M_index){
+			$cigars[0]=~ /^(\d+)([^\d]+)$/;
+			$reads{$r_id}{cigar}{0}{type}=$2;
+			$reads{$r_id}{cigar}{0}{start}=$ref_start_pos-$1;
+			$reads{$r_id}{cigar}{0}{end}=$ref_start_pos-1;
+			$reads{$r_id}{cigar}{0}{order}=$read_order;
+			$cs_start=$reads{$r_id}{cigar}{0}{start};
+		}else{
+			$cigars[$cs]=~ /^(\d+)([^\d]+)$/;
+			my $step=$1;
+			$reads{$r_id}{cigar}{$cs}{type}=$2;
+			$reads{$r_id}{cigar}{$cs}{start}=$previous_end+1;
+			$cs_end = $reads{$r_id}{cigar}{$cs}{start};
+			if(grep(/^$reads{$r_id}{cigar}{$cs}{type}$/, @reads_consumes)){
+				$cs_end = $reads{$r_id}{cigar}{$cs}{start} + $step -1;
+			}
+			$reads{$r_id}{cigar}{$cs}{end}=$cs_end;
+			$reads{$r_id}{cigar}{$cs}{order}=$read_order;
+			
+			$previous_end=$cs_end;
+		}	
+	}
+
+
+	if($strand){ # if is reverse strand
+		$reads{$r_id}{cigar}{-1}{type}="reverse_bg";
+		$reads{$r_id}{cigar}{-1}{start}=$cs_start;
+		$reads{$r_id}{cigar}{-1}{end}=$previous_end;
+		$reads{$r_id}{cigar}{-1}{order}=$read_order-1;	
+	}
+
+	return 	%reads;
+}
+
 
 sub consumes_length(){
 	my ($cigar,$consumes)=@_;
