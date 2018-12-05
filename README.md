@@ -6,6 +6,7 @@
   cat test.sh 
 ```
 
+
 &nbsp;&nbsp;&nbsp;&nbsp;plot gene clusters of many samples, one track means one sample, one track contain more than one fragments. one fragment contain gene cluster. you can defined every gene or feature(rotation,color,label,order depth,font size) in clusters. And add crossing link for any pair of genes.<br>
 
 #### main feature:<br>
