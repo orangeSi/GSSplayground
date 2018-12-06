@@ -5,7 +5,11 @@ then
 fi
 commit=$1
 add=$2
-find $add  -type f -exec grep -Iq . {} \; -and -print|xargs -L 1 -I {} dos2unix {}
+uname=`uname|grep MINGW|wc -l`
+if [ "$uname" -eq 1 ];
+then
+	find $add  -type f -exec grep -Iq . {} \; -and -print|xargs -L 1 -I {} dos2unix {}
+fi
 set -vex
 git add $add
 git commit -m "$commit"

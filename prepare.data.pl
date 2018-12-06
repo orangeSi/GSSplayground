@@ -66,15 +66,16 @@ sub reads_mapping(){
 		@ks = split(/\t+/, $k);
 		my @infos=split(/,/, $ks[0]);
 		my $infos_len=scalar(@infos);
-		if($infos_len != 15){
-			die "error: reads_mapping should have 15 colums for reads_mappinig=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
+		if($infos_len != 16){
+			die "error: reads_mapping should have 16 colums for reads_mappinig=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
 		}
-		my ($reads_type,$sample,$scf,$block_flag,$mapping_file,$show_type,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
+		my ($reads_type,$depth_order,$sample,$scf,$block_flag,$mapping_file,$show_type,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
+		die "error: depth_order should be number, not $depth_order\n" if($depth_order!~ /^-?\d+$/);
 #reads_mapping=long_reads,s2,s2000,0,../data/s2.seq.longreads.map2ref.sort.bam,rainbow_or_hline,10->50,ytick_flag,20->30->2,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,3:3	highlight_hgrid->26:2:green,28:2:black  start_end_xaxis->61:661,711:1311,1361:1961
 		&check_sort_bam($mapping_file);
 		my @mapping_types=("short_reads", "long_reads", "vcf", "vcf_bam");
 		die "error: not support $reads_type~ only support @mapping_types\n" if(! grep(/^$reads_type$/, @mapping_types));
-		die "error: $mapping_file not exists for plot_depth=$k\n" if(! -f $mapping_file);
+		die "error: $mapping_file not exists for $k\n" if(! -f $mapping_file);
 		for($i=0;$i<$infos_len;$i++){
 			next if($i==8);
 			$infos[$i]=~ s/\s//g;
@@ -115,7 +116,7 @@ sub reads_mapping(){
 			for my $rg(@start_end_xaxis){
 				my ($rg_start, $rg_end)=split(/,/, $rg);
 				print "rg is $rg,  :$rg_start,$rg_end\n";
-				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth);
+				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth,$depth_order);
 
 				my $prefix="$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.mapping";	
 				%outname = &gather_gff_conf_link($prefix,$mapping_gff,$mapping_setting_conf,$cross_link_conf, \%outname, $sample);
@@ -210,10 +211,11 @@ sub plot_depth(){
 		my @infos=split(/,/, $ks[0]);
 #highlight_hgrid->26:2:green,28:2:black    highlight_columns->0:20:green:0.7,20:100:black:0.5 start_end_xaxis->61:661,711:1311,1361:1961
 		my $infos_len=scalar(@infos);
-		if($infos_len != 15){
-			die "error: plot_depth should have 15 colums for plot_depth=$k, but only have $infos_len\nvalid like plot_depth=$ex\n";
+		if($infos_len != 16){
+			die "error: plot_depth should have 16 colums for plot_depth=$k, but only have $infos_len\nvalid like plot_depth=$ex\n";
 		}
-		my ($depth_type,$sample,$scf,$block_flag,$window_size,$depth_file,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
+		my ($depth_type,$depth_order,$sample,$scf,$block_flag,$window_size,$depth_file,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
+		die "error: depth_order should be number, not $depth_order\n" if($depth_order!~ /^-?\d+$/);
 		my @depth_types=("hist", "scatter", "scatter_line");
 		die "error: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
 		die "error: $depth_file not exists for plot_depth=$k\n" if(! -f $depth_file);
@@ -255,7 +257,7 @@ sub plot_depth(){
 			for my $rg(@start_end_xaxis){
 				my ($rg_start, $rg_end)=split(/,/, $rg);
 				print "rg is $rg  :$rg_start,$rg_end\n";
-				my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&plot_depth_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type, $rg_start, $rg_end);
+				my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&plot_depth_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type, $rg_start, $rg_end, $depth_order);
 				my $prefix="$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.depth";	
 				%outname = &gather_gff_conf_link($prefix,$depth_gff,$depth_setting_conf,$cross_link_conf, \%outname, $sample);
 			}
@@ -266,10 +268,10 @@ sub plot_depth(){
 
 sub reads_mapping_run(){
 #&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth);
-	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth)=@_;
+	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$depth_order)=@_;
 	my $one_read_height=1;
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
-	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type);
+	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type,$depth_order);
 	my @max_depths=(1);
 	for my $tmp(0..1){
 		#my $one_read_height=(abs($s1-$e1))/$max_depth;
@@ -319,12 +321,14 @@ sub reads_mapping_run(){
 #my $map_pos_start_self=$reads{$read_id}{start_self};
 #my $map_pos_end_self=$reads{$read_id}{end_self};
 #my $read_length=$reads{$read_id}{read_length};
-				my ($cr_id, $map_pos_start_cr, $map_pos_end_cr);
+				my ($cr_id, $map_pos_start_cr, $map_pos_end_cr, $cr_type,$cr_order);
 				$map_pos_strand_cr=$reads{$read_id}{strand};
 				for my $cr(keys %{$reads{$read_id}{cigar}}){
-					$feature_color=&cs_color($reads{$read_id}{cigar}{$cr}{type});
+					$cr_type=$reads{$read_id}{cigar}{$cr}{type};
+					$feature_color=&cs_color($cr_type);
 					$map_pos_start_cr=$reads{$read_id}{cigar}{$cr}{start};
 					$map_pos_end_cr=$reads{$read_id}{cigar}{$cr}{end};
+					$cr_order=$reads{$read_id}{cigar}{$cr}{order};
 
 					if($cr == $reads{$read_id}{leftest_cs}){
 						my $shift_y_flag=0;
@@ -350,7 +354,9 @@ sub reads_mapping_run(){
 					}
 
 					if($tmp == 1){
-						$cr_id="$read_id.cr.$cr";
+						my $cr_len=abs($reads{$read_id}{cigar}{$cr}{end}-$reads{$read_id}{cigar}{$cr}{start});
+						#print "cr_len:cr_type: $cr_len:$cr_type\n";
+						$cr_id="$read_id.cr.$cr.$cr_len$cr_type";
 						$reads_gff.="$scf\tadd\tlong_read\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";
 						$reads_setting_conf.="$cr_id\tfeature_shape\trect\n";
 						$reads_setting_conf.="$cr_id\tfeature_height_ratio\t$feature_height\n";
@@ -358,6 +364,7 @@ sub reads_mapping_run(){
 						$reads_setting_conf.="$cr_id\tfeature_color\t$feature_color\n";
 						$reads_setting_conf.="$cr_id\tfeature_shift_y\t$read_shift_y\n";		
 						$reads_setting_conf.="$cr_id\tfeature_shift_y_unit\tpercent\n";
+						$reads_setting_conf.="$cr_id\tfeature_order\t$cr_order\n";
 					}
 
 #$previous_end=$map_pos_end_ref;
@@ -373,7 +380,7 @@ sub reads_mapping_run(){
 
 }
 sub get_mapping_reads(){
-	my ($scf, $bam_file, $rg_start, $rg_end, $read_type)=@_;
+	my ($scf, $bam_file, $rg_start, $rg_end, $read_type,$depth_order)=@_;
 	my %reads;
 	my $min_mapq=0;
 	use Storable;
@@ -409,7 +416,7 @@ sub get_mapping_reads(){
 					die "r_id. is $r_id.\n";
 				}
 				my $strand=($flag & 16); # if ture, mean read reverse
-					%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, \%reads);
+					%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, \%reads, $depth_order);
 
 #$reads{$r_id}{cigar}{0}{type}=$2;
 #$reads{$r_id}{cigar}{0}{start}=$ref_start_pos-$1;
@@ -461,7 +468,7 @@ sub cs_color(){
 	return $feature_color;
 }
 sub detail_cigar(){
-	my ($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, $reads)=@_;
+	my ($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, $reads,$depth_order)=@_;
 	my %reads=%$reads;
 	my @cigars=$cigar=~ /(\d+[^\d])/g;
 	my $M_index=0;
@@ -520,14 +527,17 @@ sub detail_cigar(){
 			}else{
 				delete $reads{$r_id}{cigar}{$cs};
 			}
-		}elsif($reads{$r_id}{cigar}{$cs}{end} > $rg_end){
+		}
+		if($reads{$r_id}{cigar}{$cs}{end} > $rg_end){
 			if($reads{$r_id}{cigar}{$cs}{start} <= $rg_end){
 				$reads{$r_id}{cigar}{$cs}{end} = $rg_end;
 			}else{
 				delete $reads{$r_id}{cigar}{$cs};
 			}
 		}
+		#if(exists $reads{$r_id}{cigar}{$cs}){print "isis $reads{$r_id}{cigar}{$cs}{start}\t$reads{$r_id}{cigar}{$cs}{end}\n"}
 	}
+
 	my @css=sort {$reads{$r_id}{cigar}{$a}{start}<=>$reads{$r_id}{cigar}{$b}{start}} keys %{$reads{$r_id}{cigar}};
 	$reads{$r_id}{leftest_cs}=$css[0];
 	$reads{$r_id}{rightest_cs}=$css[-1];
@@ -592,7 +602,7 @@ sub get_regions(){
 
 
 sub plot_depth_run(){
-	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type, $block_start_bp, $block_end_bp)=@_;
+	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type, $block_start_bp, $block_end_bp,$depth_order)=@_;
 	print "info is $info\n";
 	my %depths=&read_depth_file($depth_file, $sample, $scf,$block_start_bp, $block_end_bp, $window_size, $info);
 	my ($depth_gff,$depth_setting_conf);
@@ -635,6 +645,7 @@ sub plot_depth_run(){
 		$depth_setting_conf.="$depth_id\tdisplay_feature_label\t$display_feature_label\n";
 		$depth_setting_conf.="$depth_id\tfeature_color\t$depth_color\n";
 		$depth_setting_conf.="$depth_id\tfeature_opacity\t$depth_opacity\n";
+		$depth_setting_conf.="$depth_id\tfeature_order\t$depth_order\n";
 		$depth_setting_conf.="$depth_id\tpos_feature_label\tleft_up\n" if($depth_overflow_flag);    
 		$depth_setting_conf.="$depth_id\tfeature_label\t$depth\n" if($depth_overflow_flag);
 		$depth_setting_conf.="$depth_id\tlabel_rotate_angle\t0\n" if($depth_overflow_flag);
