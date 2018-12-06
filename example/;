@@ -27,7 +27,7 @@ if(! -d "$outdir"){
 }
 
 my @track_reorder;
-my @funcs=("plot_depth", "reads_mapping");
+my @funcs=("plot_depth", "reads_mapping", "sr_mapping", "lr_mapping");
 #my %conf = &read_conf($confile, @funcs);
 my %conf = &read_conf($confile, @funcs);
 ($conf, $track_reorder) = &default_setting(%conf);
@@ -100,9 +100,19 @@ sub reads_mapping(){
 			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
 
 			if($ytick_flag){
-				my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size);
-				my $prefix="$sample.$scf.$block_index.$k_index.ytick";
-				%outname = &gather_gff_conf_link($prefix,$ytick_gff,$ytick_setting_conf,$cross_link_conf, \%outname, $sample);
+				my ($ytick_gff, $ytick_setting_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size);
+				my $out_ytick_gff="$sample.$scf.$block_index.$k_index.ytick.gff";
+				print "output $out_ytick_gff\n";
+				push @{$outname{$sample}{gff}},$out_ytick_gff;
+				open GFF,">$out_ytick_gff" or die "$!";
+				print GFF "$ytick_gff";
+				close GFF;
+				my $out_ytick_conf="$sample.$scf.$block_index.$k_index.ytick.setting.conf";
+				push @{$outname{$sample}{conf}},$out_ytick_conf;
+				print "output $out_ytick_conf\n";
+				open CONF,">$out_ytick_conf" or die "$!";
+				print CONF "$ytick_setting_conf";
+				close CONF;
 			}
 
 			my @highs=("highlight_vlines", "start_end_xaxis");
@@ -118,7 +128,7 @@ sub reads_mapping(){
 				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth);
 
 				my $prefix="$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.mapping";	
-				%outname = &gather_gff_conf_link($prefix,$mapping_gff,$mapping_setting_conf,$cross_link_conf, \%outname, $sample);
+				@outname = &gather_gff_conf_link($prefix,$mapping_gff,$mapping_setting_conf,$cross_link_conf, \@outname, $sample);
 			}
 
 		}
@@ -140,7 +150,7 @@ sub write_gff_conf_link(){
 }
 sub gather_gff_conf_link(){
 	my ($prefix,$gff,$setting_conf,$cross_link_conf, $outname, $sample)=@_;
-	my %outnames=%$outname;
+	my @outnames=@$outname;
 
 	my $out_gff="$prefix.gff";
 	print "output $out_gff\n";
@@ -154,14 +164,14 @@ sub gather_gff_conf_link(){
 	open CONF,">$out_conf" or die "$!";
 	print CONF "$setting_conf";
 	close CONF;
-	return %outnames unless($cross_link_conf);
+	return @outnames unless($cross_link_conf);
 	my $out_crosslink_conf="$prefix.crosslink.conf";
 	push @{$outnames{$sample}{crosslink}},$out_crosslink_conf;
 	print "output $out_crosslink_conf\n";
 	open CONF,">$out_crosslink_conf" or die "$!";
 	print CONF "$cross_link_conf";
 	close CONF;
-	return %outnames;
+	return @outnames;
 }
 sub check_env_exist(){
 	my @envs=@_;
@@ -243,9 +253,19 @@ sub plot_depth(){
 			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
 
 			if($ytick_flag){
-				my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size);
-				my $prefix="$sample.$scf.$block_index.$k_index.ytick";
-				%outname = &gather_gff_conf_link($prefix,$ytick_gff,$ytick_setting_conf,$cross_link_conf, \%outname, $sample);
+				my ($ytick_gff, $ytick_setting_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size);
+				my $out_ytick_gff="$sample.$scf.$block_index.$k_index.ytick.gff";
+				print "output $out_ytick_gff\n";
+				push @{$outname{$sample}{gff}},$out_ytick_gff;
+				open GFF,">$out_ytick_gff" or die "$!";
+				print GFF "$ytick_gff";
+				close GFF;
+				my $out_ytick_conf="$sample.$scf.$block_index.$k_index.ytick.setting.conf";
+				push @{$outname{$sample}{conf}},$out_ytick_conf;
+				print "output $out_ytick_conf\n";
+				open CONF,">$out_ytick_conf" or die "$!";
+				print CONF "$ytick_setting_conf";
+				close CONF;
 			}
 			my @highs=("highlight_columns", "highlight_hgrid", "start_end_xaxis");
 			my %highss = &get_regions(\@highs,$k, $block_start_bp, $block_end_bp);
@@ -257,7 +277,7 @@ sub plot_depth(){
 				print "rg is $rg  :$rg_start,$rg_end\n";
 				my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&plot_depth_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type, $rg_start, $rg_end);
 				my $prefix="$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.depth";	
-				%outname = &gather_gff_conf_link($prefix,$depth_gff,$depth_setting_conf,$cross_link_conf, \%outname, $sample);
+				@outname = &gather_gff_conf_link($prefix,$depth_gff,$depth_setting_conf,$cross_link_conf, \@outname, $sample);
 			}
 		}
 	}
@@ -265,46 +285,40 @@ sub plot_depth(){
 }
 
 sub reads_mapping_run(){
-#&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth);
+	#&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth);
 	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth)=@_;
-	my $one_read_height=1;
+	my $one_read_height=(abs($s1-$e1))/$max_depth;
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
+
+	my $read_num;
 	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type);
-	my @max_depths=(1);
-	for my $tmp(0..1){
-		#my $one_read_height=(abs($s1-$e1))/$max_depth;
-		$max_depth=max(@max_depths);
-		$one_read_height=(0.99 * abs($s1-$e1))/$max_depth if($tmp ==1);
-		print "max_depth is $max_depth\n";
-		my $read_num;
-		#my $previous_end=$rg_start-1;
-		my $read_shift_y;
-		my $updown;
-		if($s1=~ /^\+?(\d+)/){
-			$read_shift_y = 0.5*$one_read_height+$s1;
-			$read_shift_y = "-$read_shift_y";
-			$updown=-1;
-		}elsif($s1=~ /^-(\d+)/){
-			my $read_shift_y = -0.5*$one_read_height+$s1;
-			$read_shift_y = "+$read_shift_y";
-			$updown=1;
-		}else{
-			die "error:11\n";
-		}
-		print "read_shift_y is $read_shift_y\n";
-		my %shift_y;
-		my $shift_y_index=abs($read_shift_y);
-		$shift_y{$shift_y_index}=$rg_start-1;
-		my $portion_height=0.4; # reads height portion
-		my $feature_height=$one_read_height*$portion_height;
+#my $previous_end=$rg_start-1;
+	my $read_shift_y;
+	my $updown;
+	if($s1=~ /^\+?(\d+)/){
+		$read_shift_y = 0.5*$one_read_height+$s1;
+		$read_shift_y = "+$read_shift_y";
+		$updown=-1;
+	}elsif($s1=~ /^-(\d+)/){
+		my $read_shift_y = -0.5*$one_read_height+$s1;
+		$read_shift_y = "-$read_shift_y";
+		$updown=1;
+	}else{
+		die "error:11\n";
+	}
+	my %shift_y;
+	my $shift_y_index=abs($read_shift_y);
+	$shift_y{$shift_y_index}=$rg_start-1;
+	for my $read_id(sort {$reads{$a}{ref_start}<=>$reads{$b}{ref_start}} keys %reads){
+		$read_num++;
+		my $portion_height=0.5; # reads height portion
+			my $feature_height=$one_read_height*$portion_height;
 		my $feature_color="black";
-		for my $read_id(sort {$reads{$a}{ref_start}<=>$reads{$b}{ref_start}} keys %reads){
-			$read_num++;
 #my $read_id="$sample.$scf.$block.$rg_start.$rg_end.$k_index.$read_type.$read_num";
-			if($read_type eq "short_reads"){
-				my ($r1_start,$r1_end,$r2_start,$r2_end);
-				$reads_gff.="$scf\tadd\tsr_read\tstart\tend\t.\t+\t.\tID=$read_id;\n";
-			}elsif($read_type eq "long_reads"){
+		if($read_type eq "short_reads"){
+			my ($r1_start,$r1_end,$r2_start,$r2_end);
+			$reads_gff.="$scf\tadd\tsr_read\tstart\tend\t.\t+\t.\tID=$read_id;\n";
+		}elsif($read_type eq "long_reads"){
 #$reads{$r_id}{cigar}{0}{type}=$2;
 #$reads{$r_id}{cigar}{0}{start}=$ref_start_pos-$1;
 #$reads{$r_id}{cigar}{0}{end}=$ref_start_pos-1;
@@ -319,56 +333,46 @@ sub reads_mapping_run(){
 #my $map_pos_start_self=$reads{$read_id}{start_self};
 #my $map_pos_end_self=$reads{$read_id}{end_self};
 #my $read_length=$reads{$read_id}{read_length};
-				my ($cr_id, $map_pos_start_cr, $map_pos_end_cr);
-				$map_pos_strand_cr=$reads{$read_id}{strand};
-				for my $cr(keys %{$reads{$read_id}{cigar}}){
-					$feature_color=&cs_color($reads{$read_id}{cigar}{$cr}{type});
-					$map_pos_start_cr=$reads{$read_id}{cigar}{$cr}{start};
-					$map_pos_end_cr=$reads{$read_id}{cigar}{$cr}{end};
+			my ($cr_id, $map_pos_start_cr, $map_pos_end_cr);
+			$map_pos_strand_cr=$reads{$read_id}{strand};
+			for my $cr(keys %{$reads{$read_id}{cigar}}){
+				$feature_color=&cs_color($reads{$read_id}{cigar}{$cr}{type});
+				$map_pos_start_cr=$reads{$read_id}{cigar}{$cr}{start};
+				$map_pos_end_cr=$reads{$read_id}{cigar}{$cr}{end};
 
-					if($cr == $reads{$read_id}{leftest_cs}){
-						my $shift_y_flag=0;
-						for my $index(sort {$a<=>$b} keys %shift_y){
-							if ($map_pos_start_cr > $shift_y{$index}){
-								push @max_depths,(abs($read_shift_y) - abs($s1))/$one_read_height;
-								#print "d error is max_depths is @max_depths, read_shift_y is $read_shift_y\n";
-								$read_shift_y=($updown == 1)? "+$index": "-$index";
-								#print "read_shift_y2 is $read_shift_y\n";
-								$shift_y{$index}=$map_pos_end_cr;
-								$shift_y_flag=1;
-								last;
-							}
-						}	
-						if(!$shift_y_flag){
-							$read_shift_y= $read_shift_y +  $updown * $one_read_height;
+				if($cr == $reads{$read_id}{leftest_cs}){
+					my $shift_y_flag=0;
+					for my $index(sort {$a<=>$b} keys %shift_y){
+						if ($map_pos_start_cr > $shift_y{$index}){
+							$read_shift_y=($updown)? "+$index": "-$index";
+							$shift_y{$index}=$map_pos_end_cr;
+							$shift_y_flag=1;
+							last;
 						}
+					}	
+					$read_shift_y= $read_shift_y +  $updown * $one_read_height if(!$shift_y_flag);
+				}elsif($cr == $reads{$read_id}{rightest_cs}){
+					$shift_y_index=abs($read_shift_y);
+					$shift_y{$shift_y_index}=$map_pos_end_cr;
+				}
 
-						#print "read_shift_y3 is $read_shift_y\n";
-					}elsif($cr == $reads{$read_id}{rightest_cs}){
-						$shift_y_index=abs($read_shift_y);
-						$shift_y{$shift_y_index}=$map_pos_end_cr;
-					}
 
-					if($tmp == 1){
-						$cr_id="$read_id.cr.$cr";
-						$reads_gff.="$scf\tadd\tlong_read\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";
-						$reads_setting_conf.="$cr_id\tfeature_shape\trect\n";
-						$reads_setting_conf.="$cr_id\tfeature_height_ratio\t$feature_height\n";
-						$reads_setting_conf.="$cr_id\tfeature_height_unitt\tpercent\n";
-						$reads_setting_conf.="$cr_id\tfeature_color\t$feature_color\n";
-						$reads_setting_conf.="$cr_id\tfeature_shift_y\t$read_shift_y\n";		
-						$reads_setting_conf.="$cr_id\tfeature_shift_y_unit\tpercent\n";
-					}
+				$cr_id="$read_id.cr.$cr";
+				$reads_gff.="$scf\tadd\tlong_read\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";
+				$reads_setting_conf.="$cr_id\tfeature_shape\trect\n";
+				$reads_setting_conf.="$cr_id\tfeature_height\t$feature_height\n";
+				$reads_setting_conf.="$cr_id\tfeature_color\t$feature_color\n";
+				$reads_setting_conf.="$cr_id\tfeature_shift_y\t$read_shift_y\n";		
 
 #$previous_end=$map_pos_end_ref;
-				}
-			}elsif($read_type eq "vcf"){
-
-			}else{
-				die "die:\n"
 			}
-		}    
-	}
+		}elsif($read_type eq "vcf"){
+
+		}else{
+			die "die:\n"
+		}
+	}    
+
 	return ($reads_gff, $reads_setting_conf, $cross_link_conf);
 
 }
@@ -378,7 +382,7 @@ sub get_mapping_reads(){
 	my $min_mapq=0;
 	use Storable;
 	my $tmpf="$bam_file.$scf.$rg_start.$rg_end.reads.$read_type.hash";
-	if(-f "$tmpf" && 0){
+	if(-f "$tmpf"){
 # Retrieve the hash from the file.
 		print "using $tmpf, if you reupdate the $bam_file, please remove the $tmpf file\n";
 		my $reads = retrieve("$tmpf");
@@ -401,12 +405,10 @@ sub get_mapping_reads(){
 				next if($skip_flag);
 
 ## for multil alignment give different read id
-				$r_id="$r_id.$scf.$rg_start.$rg_end";
 				my $multil_align=1;
 				while(exists $reads{$r_id}){
 					$multil_align++;
 					$r_id.=".multia.$multil_align";
-					die "r_id. is $r_id.\n";
 				}
 				my $strand=($flag & 16); # if ture, mean read reverse
 					%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, \%reads);
@@ -513,7 +515,6 @@ sub detail_cigar(){
 
 
 	for my $cs(keys %{$reads{$r_id}{cigar}}){
-#print "r_id:$r_id,cs:$cs, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end\n";
 		if($reads{$r_id}{cigar}{$cs}{start} < $rg_start){
 			if($reads{$r_id}{cigar}{$cs}{end} >= $rg_start){
 				$reads{$r_id}{cigar}{$cs}{start} = $rg_start;
@@ -562,7 +563,7 @@ sub get_regions(){
 				my @rgs=split(/,/, $poss);
 				for $rg(@rgs){
 					if($rg=~ /^(\d+):(\d+)$/){
-#print "\nrgrg is $rg, info is $info\n";
+						#print "\nrgrg is $rg, info is $info\n";
 						my ($start, $end)=($1,$2);
 						$flag=0;
 						$skip_flag=&check_reads_ref_overlap($start,$end,$block_start,$block_end);
@@ -580,12 +581,9 @@ sub get_regions(){
 			}
 		}
 	}
-	if(not exists $hash{start_end_xaxis}){
-		if($flag ==1){
-			push @{$hash{start_end_xaxis}},"$block_start,$block_end";
-		}else{
-			die "\nerror:here,$flag,$info\n";
-		}
+	if(not exists $hash{start_end_xaxis} && $flag){
+		die "die;here\n";
+		push @{$hash{start_end_xaxis}},"$block_start,$block_end";
 	}
 	return %hash;
 }
@@ -763,7 +761,7 @@ sub read_depth_file(){
 
 sub feature_ytick(){
 	my ($s1, $e1, $s2, $e2, $axis_gap, $title, $ytick_sample, $ytick_scf, $block, $gff, $kk, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $info, $tick_label_size) = @_;
-	my ($ytick_gff, $ytick_setting_conf, $cross_link_conf);
+	my ($ytick_gff, $ytick_setting_conf);
 	my @tick_colors=split(/:/,$tick_color);
 	die "error:$tick_color format like: green:black for $info\n" if(@tick_colors!=2);
 	my @tick_opacitys=split(/:/,$tick_opacity);
@@ -872,7 +870,7 @@ sub feature_ytick(){
 #feature_ytick_hgrid_line=1
 
 	}
-	return ($ytick_gff, $ytick_setting_conf, $cross_link_conf);
+	return ($ytick_gff, $ytick_setting_conf);
 }
 
 
