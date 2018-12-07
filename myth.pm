@@ -304,6 +304,8 @@ sub draw_genes(){
 		$start_title=$start_raw;
 		$end_title=$end_raw;
 	}
+	my $fake=0;
+	$fake=1 if($end==$start);
 	if($shape=~ /arrow/){
 
 		if($strand){
@@ -312,7 +314,7 @@ sub draw_genes(){
 			$x2=$x1;$y2=$y1+$gene_height_medium;
 			$x3=$x2+(1-$gene_width_arrow)*($end -$start)*$ratio;$y3=$y2;#gene_width_arrow指横向的arrow箭头的宽度
 			$x4=$x3;$y4=$y3+$gene_height_top; ##gene_height_top是指arrow中间之外的一边尖尖的高度
-			$x5=$x2+($end -$start)*$ratio;$y5=0.5*$sample_single_height+$shift_y;
+			$x5=$x2+($end -$start+$fake)*$ratio;$y5=0.5*$sample_single_height+$shift_y;
 			$x6=$x4;$y6=$y4 - 2*$gene_height_top - $gene_height_medium;
 			$x7=$x3;$y7=$y1;
 			$label_y=$y6+$label_y_shift;
@@ -323,9 +325,9 @@ sub draw_genes(){
 		}else{
 			#负链以arrow左边尖尖为起始点，逆时针旋转一周
 			$x1=($start*$ratio+$shift_x);$y1=0.5*$sample_single_height+$shift_y;
-			$x2=$x1+$gene_width_arrow*($end -$start)*$ratio;$y2=$y1+0.5*$gene_height_medium+$gene_height_top;
+			$x2=$x1+$gene_width_arrow*($end -$start+$fake)*$ratio;$y2=$y1+0.5*$gene_height_medium+$gene_height_top;
 			$x3=$x2;$y3=$y2 -$gene_height_top;
-			$x4=$x3+(1-$gene_width_arrow)*($end -$start)*$ratio;$y4=$y3;
+			$x4=$x3+(1-$gene_width_arrow)*($end -$start+$fake)*$ratio;$y4=$y3;
 			$x5=$x4;$y5=$y4-$gene_height_medium;
 			$x6=$x3;$y6=$y5;
 			$x7=$x2;$y7=$y2 -2*$gene_height_top - $gene_height_medium;
@@ -397,7 +399,7 @@ sub draw_genes(){
 			#以左上角为起始点，逆时针转一圈
 			$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
 			$x2=$x1;$y2=$y1+$gene_height_medium;
-			$x3=$x2+($end -$start)*$ratio;$y3=$y2;
+			$x3=$x2+($end -$start+$fake)*$ratio;$y3=$y2;
 			$x4=$x3;$y4=$y1;
 
 			$label_y=$y4+$label_y_shift;
@@ -409,7 +411,7 @@ sub draw_genes(){
 			#以左上角为起始点，逆时针转一圈
 			$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
 			$x2=$x1;$y2=$y1+$gene_height_medium;
-			$x3=$x2+($end -$start)*$ratio;$y3=$y2;
+			$x3=$x2+($end -$start+$fake)*$ratio;$y3=$y2;
 			$x4=$x3;$y4=$y1;
 
 			$label_y=$y4+$label_y_shift;
@@ -481,9 +483,9 @@ sub draw_genes(){
 	}elsif($shape=~ /^circle_point/){
 		my $center_point_x=$start*$ratio + $shift_x + ($end - $start)*$ratio*0.5;
 		my $center_point_y=($sample_single_height - $gene_height_medium)/2 + $shift_y + 0.5*$gene_height_medium ;
-		my $radius= ($end - $start)*$ratio*0.5 ; # 0.5*$gene_height_medium;
+		my $radius= ($end - $start+$fake)*$ratio*0.5 ; # 0.5*$gene_height_medium;
 		my $x1=$start*$ratio+$shift_x;
-		my $x4=$x1+($end-$start)*$ratio;
+		my $x4=$x1+($end-$start+$fake)*$ratio;
 		my $crossing_link_start_x=$center_point_x;
 		my $crossing_link_start_y=$center_point_y-$radius;
 		my $crossing_link_end_x=$center_point_x;

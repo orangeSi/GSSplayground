@@ -323,7 +323,7 @@ sub reads_mapping_run(){
 #my $read_length=$reads{$read_id}{read_length};
 				my ($cr_id, $map_pos_start_cr, $map_pos_end_cr, $cr_type,$cr_order);
 				$map_pos_strand_cr=$reads{$read_id}{strand};
-				for my $cr(keys %{$reads{$read_id}{cigar}}){
+				for my $cr(sort {$a<=>$b} keys %{$reads{$read_id}{cigar}}){
 					$cr_type=$reads{$read_id}{cigar}{$cr}{type};
 					$feature_color=&cs_color($cr_type);
 					$map_pos_start_cr=$reads{$read_id}{cigar}{$cr}{start};
@@ -348,13 +348,14 @@ sub reads_mapping_run(){
 						}
 
 						#print "read_shift_y3 is $read_shift_y\n";
-					}elsif($cr == $reads{$read_id}{rightest_cs}){
+					}
+					if($cr == $reads{$read_id}{rightest_cs}){
 						$shift_y_index=abs($read_shift_y);
 						$shift_y{$shift_y_index}=$map_pos_end_cr;
 					}
 
 					if($tmp == 1){
-						my $cr_len=abs($reads{$read_id}{cigar}{$cr}{end}-$reads{$read_id}{cigar}{$cr}{start});
+						my $cr_len=abs($reads{$read_id}{cigar}{$cr}{end}-$reads{$read_id}{cigar}{$cr}{start})+1;
 						#print "cr_len:cr_type: $cr_len:$cr_type\n";
 						$cr_id="$read_id.cr.$cr.$cr_len$cr_type";
 						$reads_gff.="$scf\tadd\tlong_read\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";
@@ -387,6 +388,7 @@ sub get_mapping_reads(){
 	my $tmpf="$bam_file.$scf.$rg_start.$rg_end.reads.$read_type.hash";
 	if(-f "$tmpf" && 0){
 # Retrieve the hash from the file.
+		die "die:get_mapping_reads\n";
 		print "using $tmpf, if you reupdate the $bam_file, please remove the $tmpf file\n";
 		my $reads = retrieve("$tmpf");
 		%reads=%$reads;
@@ -528,6 +530,7 @@ sub detail_cigar(){
 				delete $reads{$r_id}{cigar}{$cs};
 			}
 		}
+		next if(not exists $reads{$r_id}{cigar}{$cs});
 		if($reads{$r_id}{cigar}{$cs}{end} > $rg_end){
 			if($reads{$r_id}{cigar}{$cs}{start} <= $rg_end){
 				$reads{$r_id}{cigar}{$cs}{end} = $rg_end;
@@ -580,8 +583,9 @@ sub get_regions(){
 						$start=$block_start if($start<$block_start);
 						$end=$block_end if($end>$block_end);
 						push @{$hash{$a}},"$start,$end";
+						#print "\nisis $start,$end $block_start,$block_end \n\n";
 					}else{
-						die "error: \n"
+						die "error:rg $rg  \n"
 					}
 				}
 			}elsif($a eq "highlight_columns"){
@@ -716,7 +720,7 @@ sub read_depth_file(){
 		if(! -f "$bam_depth_file"){
 			print "bam\n";
 			&check_sort_bam($depth_file);
-			my $cmd="samtools depth  -r $scf:$block_start_bp-$block_end_bp $depth_file|awk '{print $sample\" \"\$0}'|sed -r 's/\\s/\t/g'";
+			my $cmd="samtools depth  -r $scf:$block_start_bp-$block_end_bp $depth_file|awk '{print \"$sample\\t\"\$0}'|sed -r 's/\\s/\\t/g' >$bam_depth_file";
 			print "cmd is $cmd\n";
 			my $rg_depth=`$cmd`;
 			die "error:$cmd\n" if($?);
@@ -727,7 +731,7 @@ sub read_depth_file(){
 		$depth_file=$bam_depth_file;
 	}
 #s3      s3      3       10 #sample scf_id  pos depth
-	open IN,"$depth_file" or die "$!";
+	open IN,"$depth_file" or die "can open $depth_file";
 	while(<IN>){
 		chomp;
 		$_=~ s/\s+$//g;
