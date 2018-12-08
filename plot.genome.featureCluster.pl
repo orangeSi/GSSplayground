@@ -76,15 +76,14 @@ my %orders;
 my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_width\" height=\"$svg_height\" style=\"background-color:$conf{svg_background_color};\">\n";
 my $top_distance=$top_bottom_margin/2*$svg_height;
 my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$sample_num; # 每个track的高度
-my $genome_height_raw=0.05;
-my $id_line_height = $genome_height_raw*$conf{genome_height_ratio} * 2 * $sample_single_height; # 每个block的genome的高度
+my $id_line_height = $sample_single_height/100 * $conf{genome_height_ratio}; # 每个block的genome的高度
 
 my $ref_name_right_gap=0.1;
 #my $left_distance_init = (1 - 0.1) * $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
 my $left_distance_init = $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
 
 
-my $ytick_region_ratio = 0.5 / ($genome_height_raw*$conf{genome_height_ratio})/100;
+my $ytick_region_ratio = $sample_single_height/100;
 print "ytick_region_ratio is $ytick_region_ratio\n";
 
 while(@track_order){
@@ -95,7 +94,7 @@ while(@track_order){
 	my $flag;
 	my $left_distance = $left_distance_init ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
 	#my $line_to_sample_single_top_dis=0.45; #track cluster顶部 y 轴在一个track高度的0.45，即cluster的y轴的底部在0.55，即一个cluster高度是整个track的0.55-0.45=0.1
-	my $line_to_sample_single_top_dis = 0.5 - $genome_height_raw*$conf{genome_height_ratio}/2;#genome_height_ratio
+	my $line_to_sample_single_top_dis = 0.5 - $conf{genome_height_ratio}/2/100;#genome_height_ratio
 	my $shift_x = $left_distance;
 
 	# write sample name for track
@@ -105,11 +104,11 @@ while(@track_order){
 	#my $ref_name_y = $top_distance + (0.5 + 0.05*$conf{genome_height_ratio}) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
 	my $ref_name_y;
 	if($conf{genome_height_ratio} < 0.05){
-		$ref_name_y = $top_distance + (0.5 + $genome_height_raw*$conf{genome_height_ratio}*1.5) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
+		$ref_name_y = $top_distance + (0.5 + 0.003) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
 	}elsif($conf{genome_height_ratio} < 0.2){
-		$ref_name_y = $top_distance + (0.5 + $genome_height_raw*$conf{genome_height_ratio}*0.5) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
+		$ref_name_y = $top_distance + (0.5 + 0.002) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
 	}else{
-		$ref_name_y = $top_distance + (0.5 + $genome_height_raw*$conf{genome_height_ratio}*0.2) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
+		$ref_name_y = $top_distance + (0.5 + 0.001) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
 	}
 
 	if(not exists $conf{sample_name_old2new2}{$sample}{new_name}){
@@ -125,7 +124,8 @@ while(@track_order){
 	foreach my $block_index(sort {$a<=>$b} keys %{$gff{$sample}{block}}){ # one block_index ---> one scaffold ---> one cluster of genes
 		#print "block_index is $block_index, sample is $sample\n";
 		$flag++;
-        my $shift_angle_closed_feature=0;
+	        my $shift_angle_closed_feature=0;
+		#print "block_index is $block_index, sample is $sample\n";
 		my @scf = keys %{$gff{$sample}{block}{$block_index}};
 		my $id_line_x=$left_distance; # 每个block的genome的起点的x,y坐标
 		my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
@@ -141,7 +141,7 @@ while(@track_order){
 			#print "f is $f\n\n";
 			my $start_f=$conf{feature_setting2}{$f}{start};
 			my $end_f=$conf{feature_setting2}{$f}{end};
-			if($start_f>=$gff{$sample}{chooselen_single}{$block_index}{start} && $end_f<=$gff{$sample}{chooselen_single}{$block_index}{end}){
+			if($start_f >= $gff{$sample}{chooselen_single}{$block_index}{start} && $end_f<=$gff{$sample}{chooselen_single}{$block_index}{end}){
 				$track_order=$conf{feature_setting2}{$f}{track_order};
 				#print "$conf{feature_setting}{$f}{track_order}, $conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample;track_order is $track_order;sample is $sample, scf is @scf\n\n\n";
 			}
@@ -179,7 +179,8 @@ while(@track_order){
 			#print "here $sample $block_index $scf[0] $index\n";
 			my $gene_height_medium;
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
-			#print "index id is $index_id\n";
+			#print "index_id is $index_id\n";
+			#print "\nindex id is $index_id\n";
 			die "die:index_id is $index_id,$sample $block_index $scf[0] $index\n" if(not $index_id);
 			my $index_start = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{start};
 			my $index_end = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{end};
@@ -205,7 +206,7 @@ while(@track_order){
             }elsif($feature_height_unit=~ /backbone/){
     			$gene_height_medium = $id_line_height * $feature_height_ratio;
             }else{
-                print "error:feature_height_unit only support percent or backbone, but $feature_height_unit for $index_id\n"
+                die "error:feature_height_unit only support percent or backbone, but $feature_height_unit for $index_id\n"
             }
 
 			#print "index_label_angle is $index_label_angle\n";
@@ -270,16 +271,26 @@ while(@track_order){
 
 }
 
+
+print "\n\n";
+#for my $id(keys %{$conf{crossing_link2}{position}}){
+#	print "1id is $id\n"
+#}
+
+print "\n\n";
+
+
 # draw crossing_links for feature crosslink
 foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 	#$conf{crossing_link2}{index}{"$arr[0],$arr[1]"}{$arr[2]} = $arr[3];
 	my ($up_id, $down_id) = split(",", $pair);
+	#print "2id is $up_id\n";
 	my $color=(exists $conf{crossing_link2}{index}{$pair}{cross_link_color})? $conf{crossing_link2}{index}{$pair}{cross_link_color}:$conf{cross_link_color};
 	my $cross_link_orientation=(exists $conf{crossing_link2}{index}{$pair}{cross_link_orientation})? $conf{crossing_link2}{index}{$pair}{cross_link_orientation}:$conf{cross_link_orientation};
 	my $cross_link_opacity=(exists $conf{crossing_link2}{index}{$pair}{cross_link_opacity})? $conf{crossing_link2}{index}{$pair}{cross_link_opacity}:$conf{cross_link_opacity};
 	my $cross_link_order=(exists $conf{crossing_link2}{index}{$pair}{cross_link_order})? $conf{crossing_link2}{index}{$pair}{cross_link_order}:$conf{cross_link_order};
 	my $cross_link_anchor_pos=(exists $conf{crossing_link2}{index}{$pair}{cross_link_anchor_pos})? $conf{crossing_link2}{index}{$pair}{cross_link_anchor_pos}:$conf{cross_link_anchor_pos};
-	die "error: $up_id of crosslink is not in --list regions, please try to check it\n" if(not exists $conf{crossing_link2}{position}{$up_id}{start}{x});
+	die "error: $up_id of crosslink is not in --list regions, please try to check it, conf{crossing_link2}{position}{$up_id}{start}{x}\n" if(not exists $conf{crossing_link2}{position}{$up_id}{start}{x});
 	my $left_up_x = $conf{crossing_link2}{position}{$up_id}{start}{x};
 	my $left_up_y = $conf{crossing_link2}{position}{$up_id}{start}{y};
 	my $right_up_x = $conf{crossing_link2}{position}{$up_id}{end}{x};
@@ -332,8 +343,10 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 		my $r1_rev=($left_down_x - $right_up_x)/2;
 		my ($r2, $r2_rev)=split(",", $cross_link_height_ellipse); # r1 and r2 is radius of elipse
 		#print "ytick_region_ratio is $ytick_region_ratio\n";
-		$r2 = $r2*$id_line_height * $ytick_region_ratio;
-		$r2_rev = $r2_rev*$id_line_height * $ytick_region_ratio;
+		#$r2 = $r2*$id_line_height * $ytick_region_ratio;
+		#$r2_rev = $r2_rev*$id_line_height * $ytick_region_ratio;
+		$r2 = $r2 * $ytick_region_ratio;
+		$r2_rev = $r2_rev * $ytick_region_ratio;
 		my $rotate=0;
 		my $rotate_rev=0;
 		my ($large_arc_flag, $sweep_flag, $large_arc_flag_rev, $sweep_flag_rev)=split(",", $cross_link_orientation_ellipse); #http://xahlee.info/js/svg_path_ellipse_arc.html
@@ -558,7 +571,7 @@ for my $order(sort {$a<=>$b}keys %orders){
 print SVG "</svg>";
 close SVG;
 print "outfile is  $outdir/$prefix.svg\n";
-`set -vex;convert  $outdir/$prefix.svg $outdir/$prefix.png ; echo outfile is $outdir/$prefix.png; convert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf;echo outfile is $outdir/$prefix.dpi$conf{pdf_dpi}.pdf`;
+`set -vex;convert  $outdir/$prefix.svg $outdir/$prefix.png ; echo outfile is $outdir/$prefix.png;exit; convert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf;echo outfile is $outdir/$prefix.dpi$conf{pdf_dpi}.pdf`;
 
 
 

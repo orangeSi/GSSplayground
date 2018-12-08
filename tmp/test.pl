@@ -9,6 +9,7 @@ my @arr2=(5,6,7,8);
 
 &sub1("dd", \%a);
 
+exit;
 
 my ($a, $a2) = &sub2(%a);
 @a2=@$a2;
