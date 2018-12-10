@@ -271,7 +271,7 @@ sub reads_mapping_run(){
 	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$depth_order)=@_;
 	my $one_read_height=1;
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
-	my $color_height_cs="M:green:opacity0.8:height0.5:1bp,I:red:opacity1:height0.9:6bp,D:black:opacity1:height0.9:3bp,N:blue:opacity1:height0.2:1bp,S:blue:opacity0.6:height0.4:1bp,H:blue:opacity0.6:height0.2:1bp,P:blue:opacity1:height0.2:1bp,X:grey:opacity1:height0.6:1bp,reverse:#1E90FF:opacity0.8:height0.8:6bp,forward:green:opacity0.8:height0.8:1bp"; #yellow
+	my $color_height_cs="M:green:opacity0.8:height0.5:1bp,I:red:opacity1:height0.9:6bp,D:black:opacity1:height0.8:1bp,N:blue:opacity1:height0.2:1bp,S:blue:opacity0.6:height0.4:1bp,H:blue:opacity0.6:height0.2:1bp,P:blue:opacity1:height0.2:1bp,X:grey:opacity1:height0.6:1bp,reverse:#1E90FF:opacity0.6:height0.8:6bp,forward:green:opacity0.6:height0.8:1bp"; #yellow
 	my %colors_height = &cigar_setting($color_height_cs);
 	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type,$depth_order, \%colors_height);
 #my $read_num=scalar(keys %reads);
@@ -280,7 +280,7 @@ sub reads_mapping_run(){
 	for my $tmp(0..1){
 		my $new_depth=0;
 #my $one_read_height=(abs($s1-$e1))/$max_depth;
-		$max_depth=max(@max_depths);
+		$max_depth=max(@max_depths)+0.5;
 		$one_read_height=(0.99 * abs($s1-$e1))/$max_depth if($tmp ==1);
 		print "max_depth is $max_depth, max_depths is @max_depths\n";
 		my $read_num;
@@ -376,9 +376,39 @@ sub reads_mapping_run(){
 #print "read_id $read_id $cr_type $read_shift_y\n";
 #print "cr_len:cr_type: $cr_len:$cr_type\n";
 						$cr_id="$read_id.cr.$cr.$cg";
-#die "die: $cr_id\n" if(!$read_shift_y);
+#die "die: $cr_id\n" if(!$read_shift_y);	
+						my $feature_shape="rect";
+						if($cr_type=~ /reverse/ || $cr_type=~ /forward/){
+							$feature_shape="arrow";
+							$reads_setting_conf.="$cr_id\tfeature_arrow_sharp_extent\t0\n";
+							$reads_setting_conf.="$cr_id\tfeature_arrow_width_extent\t0.01\n";
+							
+						}
+						if($cg=~ /^(\d+)I$/){
+							my $insert_height_tail_portion=0.1;
+							my $insert_feature_height=$insert_height_tail_portion * $feature_height;
+							my $insert_shift_y;
+							
+							for my $tail(0..1){
+								my $insert_cr_id="$cr_id.$tail";
+								my $insert_map_pos_start_cr=$map_pos_start_cr- ($1-($map_pos_end_cr-$map_pos_start_cr))/10/2;
+								my $insert_map_pos_end_cr=$map_pos_end_cr + ($1-($map_pos_end_cr-$map_pos_start_cr))/10/2;
+								$insert_shift_y=($tail)? $read_shift_y+ $updown * (1-$insert_height_tail_portion)*$feature_height:$read_shift_y;
+								$reads_gff.="$scf\tadd\tlong_read\t$insert_map_pos_start_cr\t$insert_map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$insert_cr_id;\n";
+								$reads_setting_conf.="$insert_cr_id\tfeature_shape\t$feature_shape\n";
+								$reads_setting_conf.="$insert_cr_id\tfeature_height_ratio\t$insert_feature_height\n";
+								$reads_setting_conf.="$insert_cr_id\tfeature_height_unitt\tpercent\n";
+								$reads_setting_conf.="$insert_cr_id\tfeature_color\t$feature_color\n";
+								$reads_setting_conf.="$insert_cr_id\tfeature_shift_y\t$insert_shift_y\n";		
+								$reads_setting_conf.="$insert_cr_id\tfeature_shift_y_unit\tpercent\n";
+								$reads_setting_conf.="$insert_cr_id\tfeature_order\t$cr_order\n";
+								$reads_setting_conf.="$insert_cr_id\tfeature_opacity\t$feature_opacity\n";
+							}
+							
+						}
 						$reads_gff.="$scf\tadd\tlong_read\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";
-						$reads_setting_conf.="$cr_id\tfeature_shape\trect\n";
+						$reads_setting_conf.="$cr_id\tfeature_x_extent\t-0.5bp,+0.5bp\n";
+						$reads_setting_conf.="$cr_id\tfeature_shape\t$feature_shape\n";
 						$reads_setting_conf.="$cr_id\tfeature_height_ratio\t$feature_height\n";
 						$reads_setting_conf.="$cr_id\tfeature_height_unitt\tpercent\n";
 						$reads_setting_conf.="$cr_id\tfeature_color\t$feature_color\n";
@@ -670,6 +700,10 @@ sub detail_cigar(){
 
 
 	for my $cs(keys %{$reads{$r_id}{cigar}}){
+		if($reads{$r_id}{cigar}{$cs}{type} eq "M"){
+			delete $reads{$r_id}{cigar}{$cs};
+			next
+		} # not display M
 #print "r_id:$r_id,cs:$cs, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end\n";
 #print "r_id is $r_id  cs3.8 is $cs $reads{$r_id}{cigar}{$cs}{cr} start=$reads{$r_id}{cigar}{$cs}{start} \n" if($tmp_flag == 1);
 		if($reads{$r_id}{cigar}{$cs}{start} < $rg_start){
@@ -820,11 +854,11 @@ sub plot_depth_run(){
 
 		if($depth_type eq "hist"){
 			if($e1=~ /-/){
-				$depth_shift_y=$s1-0.5*$depth_height;
+				$depth_shift_y=$s1;
 				$depth_shift_y=~ s/-+/+/;
 				$padding_depth_label="-1";
 			}else{
-				$depth_shift_y=$s1+0.5*$depth_height;
+				$depth_shift_y=$s1;
 				$depth_shift_y="-$depth_shift_y";
 				$padding_depth_label="+1";
 			}
@@ -946,7 +980,7 @@ sub feature_ytick(){
 	my @tick_opacitys=split(/:/,$tick_opacity);
 	die "error:$tick_opacity format like: 0.8:0.2 for $info\n" if(@tick_opacitys!=2 || $tick_opacity!~ /^[\d\.]+:[\d\.]+$/);
 	my @tick_borders=split(/:/,$tick_border);
-	die "error:$tick_border format like: 1:0.5 for $info\n" if(@tick_borders!=2 || $tick_border!~ /^[\d\.]+:[\d\.]+$/);
+	die "error:$tick_border format like: 5:5:0.5:0 for $info\n" if(@tick_borders!=4 || $tick_border!~ /^[\d\.]+:[\d\.]+:[\d\.]+:[\d\.]+$/);
 
 	print "s1 is $s1, e1 is $e1\n";
 	my $ytick_orientation="up";
@@ -954,7 +988,7 @@ sub feature_ytick(){
 
 	my $block_start_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{start};
 	my $block_end_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{end};
-	my $ytick_feature_backbone_width = 20*$tick_borders[0]; # bp 
+	my $ytick_feature_backbone_width = $tick_borders[0]; # bp 
 		my $feature_backbone_shift_x = $ytick_feature_backbone_width+1; 
 	my $ytick_feature_backbone_start = $block_end_bp - $ytick_feature_backbone_width;
 	my $ytick_feature_backbone_end = $block_end_bp;
@@ -990,10 +1024,10 @@ sub feature_ytick(){
 	my $ytick_nums = int((abs($e2-$s2)) /$ytick_unit);
 	$ytick_unit=$ytick_unit * (abs($e1-$s1))/(abs($e2-$s2));
 	for my $k (0..$ytick_nums){
-		my $ytick_feature_tick_width = 80*$tick_borders[0]; # bp 
+		my $ytick_feature_tick_width = $tick_borders[1]; # bp 
 			my $ytick_feature_tick_start=$block_end_bp - $ytick_feature_tick_width;
 		my $ytick_feature_tick_end=$block_end_bp;
-		my $ytick_feature_tick_height=1*$tick_borders[0];
+		my $ytick_feature_tick_height=$tick_borders[2];
 		my $feature_label_size=$tick_label_size;
 		my $padding_feature_label=$feature_label_size*0.3;
 		my $ytick_feature_tick_id="$ytick_feature_backbone_id.tick$k";
@@ -1018,7 +1052,7 @@ sub feature_ytick(){
 
 		if($hgrid_flag){
 			my $hgrid_id="$ytick_feature_tick_id.hgrid";
-			my $hgrid_height=$ytick_feature_tick_height*$tick_borders[1];
+			my $hgrid_height=$ytick_feature_tick_height*$tick_borders[3];
 			$ytick_gff.="$ytick_scf\tadd\tytick\t$block_start_bp\t$block_end_bp\t.\t+\t.\tID=$hgrid_id;\n";
 			$ytick_setting_conf.="\n$hgrid_id\tfeature_height_ratio\t$hgrid_height\n";
 			$ytick_setting_conf.="\n$hgrid_id\tfeature_height_unit\tpercent\n";

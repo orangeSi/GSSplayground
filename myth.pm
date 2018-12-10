@@ -4,9 +4,44 @@ use warnings;
 
 use Exporter qw(import);
 
-our @EXPORT_OK = qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para);
+our @EXPORT_OK = qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks);
 
+sub shift_tracks(){
+	my ($para, $track_order)=@_; # para="s1,block_index,+0.3;s2,block_index,-0.3;"
+	my @track_order=@$track_order;
+	$para=~ s/;\s*$//g;
+	my @paras=split(/;/, $para);
+	my %tracks_shift_y;
+	$tracks_shift_y{num}=0;
+	if($para=~ /^\s*$/){
+		for my $track(@track_order){
+			$tracks_shift_y{$track}{shift_y}=1;
+			$tracks_shift_y{num}++;
+		}
+	}else{
+		for my $p(@paras){
+			my @arr=split(/,/, $p);
+			die "error: $p format error for tracks_shift_y=$para\n" if(@arr!=3);
+			die "error: you have already specify  $arr[0] for more than one time in $para\n" if(exists $tracks_shift_y{$arr[0]});
+			die "error: $arr[0] not in sample list: @track_order\n" if(!grep(/^$arr[0]$/, @track_order));
+			die "error: $arr[2] in $p of $para error format\n"if($arr[2]!~ /^[\d\.\+-]+$/);
+			$tracks_shift_y{$arr[0]}{shift_y}=1+$arr[2];
+		}
+		for my $track(@track_order){
+			if(exists $tracks_shift_y{$track}){
+				
+				$tracks_shift_y{num}+=$tracks_shift_y{$track}{shift_y};
+			}else{
+				$tracks_shift_y{num}++;
+			}
 
+		}
+	}
+	
+
+	return %tracks_shift_y;
+	
+}
 sub format_scale(){
 	my ($last_tick_label)=@_;
 	$last_tick_label=reverse($last_tick_label);
@@ -41,7 +76,7 @@ sub read_list(){
 		}
 		print "$sample\n";
 
-		open GE,"$genome" or die "$!";
+		open GE,"$genome" or die "can not open $genome\n";
 		$/=">";<GE>;
 		while(<GE>){
 			chomp;
@@ -308,13 +343,22 @@ sub draw_genes(){
 	}
 
 	$feature_shift_y=~ s/^([1-9].*)/\+$1/;
+	my $circle_point=0;
+	$circle_point=1 if($shape=~ /^circle_point/);
 	if($feature_shift_y=~ /^([+-])([\d\.]+)/){
 		if($1 eq "+"){
 			#print "shift_y is $shift_y\n";
-			$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height + 0.5 *$gene_height_medium;
-			#die "die: feature_shift_y $feature_shift_y, shift_y is $shift_y, 1 * $2 * $shift_unit + 0.5 * $id_line_height\n";
+			if($circle_point){
+				$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height;
+			}else{
+				$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height + 0.5 *$gene_height_medium;
+			}
 		}elsif($1 eq "-"){
-			$shift_y += -1 * $2 * $shift_unit - 0.5 * $id_line_height - 0.5 * $gene_height_medium;
+			if($circle_point){
+				$shift_y += -1 * $2 * $shift_unit - 0.5 * $id_line_height;
+			}else{
+				$shift_y += -1 * $2 * $shift_unit - 0.5 * $id_line_height - 0.5 * $gene_height_medium;
+			}
 		}else{
 			die "die:feature_shift_y \n";
 		}
@@ -330,7 +374,8 @@ sub draw_genes(){
 	my $display_feature_label=&get_para("display_feature_label", $feature_id, $conf);
 	my $feature_stroke_color=&get_para("feature_border_color", $feature_id, $conf);
 	my $feature_stroke_size=&get_para("feature_border_size", $feature_id, $conf);
-
+	my $feature_x_extent=&get_para("feature_x_extent", $feature_id, $conf);
+	
 
 	my ($back,$x1,$y1,$x2,$y2,$x3,$y3,$x4,$y4,$x5,$y5,$x6,$y6,$x7,$y7,$label_x,$label_y,$index_col_start,$index_col_end,$crossing_link_start_x,$crossing_link_start_y,$crossing_link_end_x,$crossing_link_end_y);
 	my ($label_y_shift, $label_roat_angle);
@@ -359,8 +404,14 @@ sub draw_genes(){
 		$start_title=$start_raw;
 		$end_title=$end_raw;
 	}
+	if($feature_x_extent=~ /^([\d\.\+-]+)bp,([\d\.\+-]+)bp$/){
+		$start += $1;
+		$end += $2;
+	}else{
+		die "error: feature_x_extent=$feature_x_extent format error, shoule like 0bp,0bp or -1bp,+1bp or +1bp,+2bp \n";	
+	}
 	my $fake=0;
-	$fake=0 if($end==$start);
+	#$fake=0 if($end==$start);
 	if($shape=~ /arrow/){
 
 		if($strand){
@@ -439,7 +490,7 @@ sub draw_genes(){
 ## draw label of feature
 		$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='start'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\">$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
 # check this feature if is in crossing_link
- 			print "ssfeature_id is $feature_id\n";
+ 			#print "ssfeature_id is $feature_id\n";
 			if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
 #print "crossing_link $feature_id\n";
 				$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{x}=$crossing_link_start_x;
@@ -642,7 +693,7 @@ sub display_conf(){
 sub read_conf(){
 	my ($conf,@funcs) = @_;
 	my %confs;
-	open IN, "$conf" or die "$!";
+	open IN, "$conf" or die "can not open $conf\n";
 	while(<IN>){
 		chomp;
 		next if($_=~ /^#/ || $_=~ /^\s*$/);
@@ -740,7 +791,10 @@ sub default_setting(){
 	$conf{cross_link_shape} ||="quadrilateral";
 	$conf{cross_link_height_ellipse} ||="10,8";
 	$conf{svg_background_color} ||="white";
+	$conf{feature_x_extent} ||="0bp,0bp";
 	$conf{feature_label_auto_angle_flag} =(exists $conf{feature_label_auto_angle_flag})? $conf{feature_label_auto_angle_flag}:1;
+	$conf{tracks_shift_y} ||=""; # sample2,block_index2,+0.3;sample2,block_index2,-0.1
+	$conf{tracks_shift_x} ||="";
 ##$conf{feature_ytick_region} ||="0-3:0-10;";
 ##$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
 
@@ -835,7 +889,7 @@ sub default_setting(){
 				chomp;
 				next if($_=~ /^#/ || $_=~ /^\s*$/);
 				last if($_=~ /^\s*exit\s*$/);
-				print "isis $_\n";
+				#print "isis $_\n";
 				$_=~ s/#\s+\S+.*$//;
 				$_=~ s/\s+$//;
 				my @arr;
@@ -857,7 +911,7 @@ sub default_setting(){
 				}
 				foreach my $k(@arr){
 					$conf{crossing_link2}{features}{$k} = '';
-					print "kk is $k\n";
+					#print "kk is $k\n";
 				}
 			}
 			close IN;
@@ -896,7 +950,7 @@ sub default_setting(){
 sub check_track_order(){
 	my @track_order=@{$_[0]};
 	my @track_reorder=@{$_[1]};
-	return 1 if(@track_reorder ==0);
+	return @track_order if(@track_reorder ==0);
 	my $len = scalar(@track_order);
 	my $len_re = scalar(@track_reorder);
 	if($len != $len_re){
@@ -911,7 +965,7 @@ sub check_track_order(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "plot_depth", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "plot_depth", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

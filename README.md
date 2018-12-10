@@ -13,6 +13,8 @@
 - you can draw crosslink or sysnteny among features of different tracks<br><br>
 
 ### update feture:<br>
+#### 2018-12-10:<br>
+- add  plot depth and pabio read mapping of bam file, as example/out11.svg or out10.svg <br>
 #### 2018-11-12:<br>
 - rewrite feature.crossing.link.conf so that defined color and opactity or order or anchor position of every pair of links.<br>
 - add tracks_reorder to plot tracks by new order, otherwise you must adjust --list file <br>
@@ -35,15 +37,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;5. embed svg in svg to make heatmap or scatter or line or histogram more easy to product, like example/out.svg*svg or \<foreignObject\> <br> <br>
 
 
-#### denpence <br>
-```
-perl
-Bio::DB::Sam ( install with cpan)
-```
-<br>
 
 
-
+![gene cluster image](example/out11.svg)
+<br><br><br>
+![gene cluster image](example/out10.svg)
+<br><br><br>
 ![gene cluster image](example/out.svg)
 <br><br><br>
 ![gene cluster image](example/out2.svg)
@@ -52,8 +51,6 @@ Bio::DB::Sam ( install with cpan)
 <br><br>
 ![gene cluster image](example/out3.2.svg)
 <br><br>
-![gene cluster image](example/out10.svg)
-<br><br><br>
 ![gene cluster image](example/out6.svg)
 <br><br><br>
 ![gene cluster image](example/out8.svg)
