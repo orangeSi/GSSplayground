@@ -78,6 +78,8 @@ my $top_distance=$top_bottom_margin/2*$svg_height;
 #tracks_shift_y=chr14,0,+1 #sampl
 #die "track_order is @track_order\n";
 my %tracks_shift_y = &shift_tracks($conf{tracks_shift_y}, \@track_order);
+
+
 my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$tracks_shift_y{num}; # 每个track的高度
 #die "num is $tracks_shift_y{num}\n";
 my $id_line_height = $sample_single_height/100 * $conf{genome_height_ratio}; # 每个block的genome的高度
@@ -94,7 +96,7 @@ while(@track_order){
 	$index++;
 	my $sample = shift @track_order;
 	#die "num is $tracks_shift_y{num}, $sample_single_height * $tracks_shift_y{$sample}{shift_y}\n";
-	$top_distance+=$sample_single_height * ($tracks_shift_y{$sample}{shift_y}-1) if($index == 1);
+	#$top_distance+=$sample_single_height * ($tracks_shift_y{$sample}{shift_y}-1) if($index == 1);
 	die "error: sample :$sample: is not in gff file of --list \n" if (not exists $gff{$sample});
 	my $block_distance = $space_len*$ratio; # block_distance 是每个block的间距
 	my $flag;
@@ -270,7 +272,8 @@ while(@track_order){
 		}
 		$shift_x+=($id_line_width+$block_distance);
 	}
-	$top_distance+=$sample_single_height * $tracks_shift_y{$track_order[0]}{shift_y};
+	$top_distance+=$sample_single_height * $tracks_shift_y{$sample};
+	print "top_distance is $top_distance+=$sample_single_height * $tracks_shift_y{$sample}\n";
 	#$gff{$sample}{id}{$arr[0]}{$gene_index}{end}=$arr[4]
 
 

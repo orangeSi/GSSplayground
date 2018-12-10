@@ -25,14 +25,14 @@ sub shift_tracks(){
 			die "error: you have already specify  $arr[0] for more than one time in $para\n" if(exists $tracks_shift_y{$arr[0]});
 			die "error: $arr[0] not in sample list: @track_order\n" if(!grep(/^$arr[0]$/, @track_order));
 			die "error: $arr[2] in $p of $para error format\n"if($arr[2]!~ /^[\d\.\+-]+$/);
-			$tracks_shift_y{$arr[0]}{shift_y}=1+$arr[2];
+			$tracks_shift_y{$arr[0]}=1+$arr[2];
 		}
 		for my $track(@track_order){
 			if(exists $tracks_shift_y{$track}){
-				
-				$tracks_shift_y{num}+=$tracks_shift_y{$track}{shift_y};
+				$tracks_shift_y{num}+=$tracks_shift_y{$track};
 			}else{
 				$tracks_shift_y{num}++;
+				$tracks_shift_y{$track}=1;
 			}
 
 		}
