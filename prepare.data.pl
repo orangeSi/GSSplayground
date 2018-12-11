@@ -272,7 +272,7 @@ sub reads_mapping_run(){
 	my $one_read_height=1;
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
 	my $color_height_cs="M:green:opacity0.8:height0.5:1bp,I:red:opacity1:height0.9:6bp,D:black:opacity1:height0.8:1bp,N:blue:opacity1:height0.2:1bp,S:blue:opacity0.6:height0.4:1bp,H:blue:opacity0.6:height0.2:1bp,P:blue:opacity1:height0.2:1bp,X:grey:opacity1:height0.6:1bp,reverse:#1E90FF:opacity0.6:height0.8:6bp,forward:green:opacity0.6:height0.8:1bp"; #yellow
-	my %colors_height = &cigar_setting($color_height_cs);
+		my %colors_height = &cigar_setting($color_height_cs);
 	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type,$depth_order, \%colors_height);
 #my $read_num=scalar(keys %reads);
 #die "read_num is $read_num\n";
@@ -305,7 +305,7 @@ sub reads_mapping_run(){
 #my $read_id="$sample.$scf.$block.$rg_start.$rg_end.$k_index.$read_type.$read_num";
 			if($read_type eq "short_reads"){
 				my ($r1_start,$r1_end,$r2_start,$r2_end);
-				$reads_gff.="$scf\tadd\tsr_read\tstart\tend\t.\t+\t.\tID=$read_id;\n";
+				$reads_gff.="$scf\tadd\t$read_type\tstart\tend\t.\t+\t.\tID=$read_id;\n";
 			}elsif($read_type eq "long_reads"){
 #$reads{$r_id}{cigar}{0}{type}=$2;
 #$reads{$r_id}{cigar}{0}{start}=$ref_start_pos-$1;
@@ -375,26 +375,26 @@ sub reads_mapping_run(){
 #abs($reads{$read_id}{cigar}{$cr}{end}-$reads{$read_id}{cigar}{$cr}{start})+1;
 #print "read_id $read_id $cr_type $read_shift_y\n";
 #print "cr_len:cr_type: $cr_len:$cr_type\n";
-						$cr_id="$read_id.cr.$cr.$cg";
+						$cr_id="$read_id.cr.$cr.$cg.$updown.$k_index";
 #die "die: $cr_id\n" if(!$read_shift_y);	
 						my $feature_shape="rect";
 						if($cr_type=~ /reverse/ || $cr_type=~ /forward/){
 							$feature_shape="arrow";
 							$reads_setting_conf.="$cr_id\tfeature_arrow_sharp_extent\t0\n";
 							$reads_setting_conf.="$cr_id\tfeature_arrow_width_extent\t0.01\n";
-							
+
 						}
 						if($cg=~ /^(\d+)I$/){
 							my $insert_height_tail_portion=0.1;
 							my $insert_feature_height=$insert_height_tail_portion * $feature_height;
 							my $insert_shift_y;
-							
+
 							for my $tail(0..1){
 								my $insert_cr_id="$cr_id.$tail";
 								my $insert_map_pos_start_cr=$map_pos_start_cr- ($1-($map_pos_end_cr-$map_pos_start_cr))/10/2;
 								my $insert_map_pos_end_cr=$map_pos_end_cr + ($1-($map_pos_end_cr-$map_pos_start_cr))/10/2;
 								$insert_shift_y=($tail)? $read_shift_y+ $updown * (1-$insert_height_tail_portion)*$feature_height:$read_shift_y;
-								$reads_gff.="$scf\tadd\tlong_read\t$insert_map_pos_start_cr\t$insert_map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$insert_cr_id;\n";
+								$reads_gff.="$scf\tadd\t$read_type\t$insert_map_pos_start_cr\t$insert_map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$insert_cr_id;\n";
 								$reads_setting_conf.="$insert_cr_id\tfeature_shape\t$feature_shape\n";
 								$reads_setting_conf.="$insert_cr_id\tfeature_height_ratio\t$insert_feature_height\n";
 								$reads_setting_conf.="$insert_cr_id\tfeature_height_unitt\tpercent\n";
@@ -404,9 +404,9 @@ sub reads_mapping_run(){
 								$reads_setting_conf.="$insert_cr_id\tfeature_order\t$cr_order\n";
 								$reads_setting_conf.="$insert_cr_id\tfeature_opacity\t$feature_opacity\n";
 							}
-							
+
 						}
-						$reads_gff.="$scf\tadd\tlong_read\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";
+						$reads_gff.="$scf\tadd\t$read_type\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";
 						$reads_setting_conf.="$cr_id\tfeature_x_extent\t-0.5bp,+0.5bp\n";
 						$reads_setting_conf.="$cr_id\tfeature_shape\t$feature_shape\n";
 						$reads_setting_conf.="$cr_id\tfeature_height_ratio\t$feature_height\n";
@@ -435,7 +435,7 @@ sub get_mapping_reads(){
 	my $min_mapq=0;
 	use Storable;
 	my $tmpf="$bam_file.$scf.$rg_start.$rg_end.reads.$read_type.hash";
-		
+
 
 	if(-f "$tmpf" && 0){
 # Retrieve the hash from the file.
@@ -447,51 +447,50 @@ sub get_mapping_reads(){
 		open BAM,"samtools view $bam_file|awk '\$1!~ /^@/ && \$3!=\"*\" && \$3==\"$scf\"'|" or die "error: samtools view $bam_file\n";
 		while(<BAM>){
 			chomp;
-#print "line is $_\n";
 			my @arr=split(/\t/,$_);
 			my ($r_id, $flag, $ref_id, $ref_start_pos, $mapq, $cigar, $rnext, $pnext)=@arr[0..7];
 			next if($mapq < $min_mapq);
 			my @ref_consumes=("M","D","N","=","x");
 			my @reads_consumes=("M","I","S","=","x");
 			my $read_order=0;
-			if($read_type eq "long_reads"){
-# default output multi-alignments, need to supply paramter whether display this or choose the best hit by MAPQ
-				my $ref_consumes_length=&consumes_length($cigar, \@ref_consumes);
-#die "$r_id ref_consumes_length is $ref_consumes_length\n" if($r_id=~ /5776_15063/);
-#print "Read_id is $r_id\t$rg_start $rg_end\t$ref_start_pos\t$cigar\t$ref_consumes_length+$ref_start_pos-1\n";
-				my $skip_flag=&check_reads_ref_overlap($rg_start,$rg_end,$ref_start_pos,$ref_consumes_length+$ref_start_pos-1);
-				next if($skip_flag);
-#print "read_id is $r_id\n";
-## for multil alignment give different read id
-				$r_id="$r_id.$scf.$rg_start.$rg_end";
-				my $multil_align=1;
-				while(exists $reads{$r_id}){
-					$multil_align++;
-					$r_id.=".multia.$multil_align";
-					die "r_id. is $r_id.\n";
-				}
-				my $strand=($flag & 16); # if ture, mean read reverse
+			my $r1_r2=($flag & 64)? "r1":"r2";
+			$r1_r2=($flag & 192)? $r1_r2:"unpair";
+			# default output multi-alignments, need to supply paramter whether display this or choose the best hit by MAPQ
+			my $ref_consumes_length=&consumes_length($cigar, \@ref_consumes);
+			#die "$r_id ref_consumes_length is $ref_consumes_length\n" if($r_id=~ /5776_15063/);
+			#print "Read_id is $r_id\t$rg_start $rg_end\t$ref_start_pos\t$cigar\t$ref_consumes_length+$ref_start_pos-1\n";
+			my $skip_flag=&check_reads_ref_overlap($rg_start,$rg_end,$ref_start_pos,$ref_consumes_length+$ref_start_pos-1);
+			next if($skip_flag);
+			#print "read_id is $r_id\n";
+			## for multil alignment give different read id
+			$r_id="$r_id.$scf.$rg_start.$rg_end.$r1_r2";
+			my $multil_align=1;
+			while(exists $reads{$r_id}){
+				$multil_align++;
+				$r_id.=".multialign.$multil_align";
+				#die "error:r_id. is $r_id.\n";
+			}
+			my $strand=($flag & 16); # if ture, mean read reverse
 				$cigar=&convert_cigar($cigar, $colors_height);
-				#die " cigar cigar is $cigar\n";
-				%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, \%reads, $depth_order);
+			%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, \%reads, $depth_order);
+			$reads{$r_id}{ref_start}=$ref_start_pos;
+			$reads{$r_id}{ref_end}=$ref_start_pos + $ref_consumes_length -1;
 
-#$reads{$r_id}{cigar}{0}{type}=$2;
-#$reads{$r_id}{cigar}{0}{start}=$ref_start_pos-$1;
-#$reads{$r_id}{cigar}{0}{end}=$ref_start_pos-1;
-#$reads{$r_id}{cigar}{0}{order}=$read_order;
-				$reads{$r_id}{ref_start}=$ref_start_pos;
-				$reads{$r_id}{ref_end}=$ref_start_pos + $ref_consumes_length -1;
-
+			if($read_type eq "long_reads"){
+				print "";
 			}elsif($read_type eq "short_reads"){
-				next if($rnext eq "*"); 
-# bwa default don't output multi-alignments, ignore soap2 yet.
+				#next if($rnext eq "*"); 
+				# bwa default don't output multi-alignments, ignore soap2 yet.
+				#print "short_reads \n";
+				my $pe_or_se="pe";
+				$pe_or_se="se" if($rnext eq "*");
 				my $ref_consumes_length=&consumes_length($cigar, \@ref_consumes);
 				my $reads_consumes_length=&consumes_length($cigar, \@reads_consumes);
 
 
 
 			}else{
-				die "error: not support $read_type\n";
+				die "error: not support $read_type, only support long_reads or short_reads\n";
 			}
 
 
@@ -506,10 +505,10 @@ sub get_mapping_reads(){
 
 sub cigar_setting(){
 	my ($color_height_cs)=@_;
-	#my $color_height_cs="M:green:0.5:1bp,I:red:0.7:6bp,D:black:0.7:5bp,N:blue:0.2:1bp,S:blue:0.2:1bp,H:blue:0.2:1bp,P:blue:0.2:1bp,X:grey:0.6:1bp,reverse:#D2691E:0.8:6bp";
-	#my $color_height_cs_usage="M:green:opacity0.8:height0.5:1bp,I:red:opacity1:height0.9:6bp,D:black:opacity1:height0.9:3bp,N:blue:opacity1:height0.2:1bp,S:blue:opacity0.6:height0.4:1bp,H:blue:opacity0.6:0.2:1bp,P:blue:opacity1:height0.2:1bp,X:grey:opacity1:height0.6:1bp,reverse:#1E90FF:opacity0.8:height0.8:6bp,forward:green:opacity0.8:height0.8:1bp"; #yellow
+#my $color_height_cs="M:green:0.5:1bp,I:red:0.7:6bp,D:black:0.7:5bp,N:blue:0.2:1bp,S:blue:0.2:1bp,H:blue:0.2:1bp,P:blue:0.2:1bp,X:grey:0.6:1bp,reverse:#D2691E:0.8:6bp";
+#my $color_height_cs_usage="M:green:opacity0.8:height0.5:1bp,I:red:opacity1:height0.9:6bp,D:black:opacity1:height0.9:3bp,N:blue:opacity1:height0.2:1bp,S:blue:opacity0.6:height0.4:1bp,H:blue:opacity0.6:0.2:1bp,P:blue:opacity1:height0.2:1bp,X:grey:opacity1:height0.6:1bp,reverse:#1E90FF:opacity0.8:height0.8:6bp,forward:green:opacity0.8:height0.8:1bp"; #yellow
 	my $color_height_cs_usage="M:green:opacity0.8:height0.5:1bp,I:red:opacity1:height0.9:6bp,D:black:opacity1:height0.9:3bp,N:blue:opacity1:height0.2:1bp,S:blue:opacity0.6:height0.4:1bp,H:blue:opacity0.6:height0.2:1bp,P:blue:opacity1:height0.2:1bp,X:grey:opacity1:height0.6:1bp,reverse:#1E90FF:opacity0.8:height0.8:6bp,forward:green:opacity0.8:height0.8:1bp"; #yellow
-	my (%colors_height);
+		my (%colors_height);
 	$color_height_cs=~ s/\s//g;
 	my @color_height_cses=split(/,/, $color_height_cs);
 	for my $ch(@color_height_cses){
@@ -523,7 +522,7 @@ sub cigar_setting(){
 		$colors_height{$cg}{height}=$height;
 		$colors_height{$cg}{opacity}=$opacity;
 		$colors_height{$cg}{limit_len}=$limit_len;
-		#print "cg is $cg\n\n";
+#print "cg is $cg\n\n";
 	}
 	return %colors_height;
 }
@@ -540,8 +539,8 @@ sub convert_cigar(){
 	$cigars_len=scalar(@cigars);
 	for my $i(0..$cigars_len-1){
 		die "i is $i, isis $cigars[$i],$cigars[$i+1] cg is,$cg,\n" if($cigars[$i]!~ /(\d+)([^\d]+)/);
-		#$cigars[$i]=~ /(\d+)([^\d]+)/);
-		#print "isis $cigars[$i]\n";
+#$cigars[$i]=~ /(\d+)([^\d]+)/);
+#print "isis $cigars[$i]\n";
 		my ($cg_len, $cg_type)= ($1,$2);
 		die "error:not support cigar_type $cg_type for $cigars[$i], cg is \n" if(not exists $colors_height->{$cg_type});
 		if(grep(/^$cg_type$/,@ref_consumes)){
@@ -555,7 +554,7 @@ sub convert_cigar(){
 		}
 	}
 	$cg=join "", @cigars;
-	#print "cggg1 is $cg\n";
+#print "cggg1 is $cg\n";
 	while($cg_before ne $cg){
 		$cg_before=$cg;
 		$cg=~ s/(\d+)M(\d+)M/$1+$2M/g;
@@ -572,7 +571,7 @@ sub convert_cigar(){
 		}
 	}
 	$cg=join "", @cigars;
-	#die "cggg2 is $cg\n";
+#die "cggg2 is $cg\n";
 	return $cg;
 }
 
@@ -637,7 +636,7 @@ sub detail_cigar(){
 	my $complete_match=0;
 	my $tmp_flag=0;
 	$tmp_flag=1 if($r_id=~ /5776_15063/);
-	#if($tmp_flag == 1){die "cigar is $cigar\n"}
+#if($tmp_flag == 1){die "cigar is $cigar\n"}
 #if($tmp_flag == 1){print "r_id is $r_id cigar is $cigar\n"}
 
 	for my $cs(0..$cigars_len-1){
@@ -684,7 +683,7 @@ sub detail_cigar(){
 
 			$reads{$r_id}{cigar}{$cs}{end}=$cs_end;
 			$reads{$r_id}{cigar}{$cs}{order}=$read_order;
-			#print "r_id is $r_id M_index is $M_index  cs44 is $cs $reads{$r_id}{cigar}{$cs}{cr} start=$reads{$r_id}{cigar}{$cs}{start},end=$reads{$r_id}{cigar}{$cs}{end} < 66902368 ,ref_start_pos is $ref_start_pos\n" if($tmp_flag == 1);
+#print "r_id is $r_id M_index is $M_index  cs44 is $cs $reads{$r_id}{cigar}{$cs}{cr} start=$reads{$r_id}{cigar}{$cs}{start},end=$reads{$r_id}{cigar}{$cs}{end} < 66902368 ,ref_start_pos is $ref_start_pos\n" if($tmp_flag == 1);
 			$previous_end=$cs_end+$shift_cs;
 		}	
 	}
@@ -984,17 +983,18 @@ sub feature_ytick(){
 
 	print "s1 is $s1, e1 is $e1\n";
 	my $ytick_orientation="up";
-	$ytick_orientation="down" if($e1=~ /-/);
+	$ytick_orientation="down" if($s1=~ /-/ && $e1=~ /-/);
 
 	my $block_start_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{start};
 	my $block_end_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{end};
 	my $ytick_feature_backbone_width = $tick_borders[0]; # bp 
-		my $feature_backbone_shift_x = $ytick_feature_backbone_width+1; 
+		my $tick_gap_with_backbone=3; # ytick 和染色体之间的空隙
+		my $feature_backbone_shift_x = $ytick_feature_backbone_width+$tick_gap_with_backbone; 
 	my $ytick_feature_backbone_start = $block_end_bp - $ytick_feature_backbone_width;
 	my $ytick_feature_backbone_end = $block_end_bp;
 	my $ytick_feature_backbone_id = "$ytick_sample.$ytick_scf.$block.$block_start_bp.$block_end_bp.$kk";
-	my $ytick_feature_backbone_height = $e1-$s1;
-	my $feature_backbone_shift_y = $s1;
+	my $ytick_feature_backbone_height = abs($e1-$s1);
+	my $feature_backbone_shift_y = abs($s1);
 	if($ytick_orientation=~ /up/i){
 		$feature_backbone_shift_y *=-1;
 	}elsif($ytick_orientation=~ /down/i){
@@ -1031,7 +1031,7 @@ sub feature_ytick(){
 		my $feature_label_size=$tick_label_size;
 		my $padding_feature_label=$feature_label_size*0.3;
 		my $ytick_feature_tick_id="$ytick_feature_backbone_id.tick$k";
-		my $feature_tick_shift_x=0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width - $ytick_feature_backbone_width*0.5+1; # bp 
+		my $feature_tick_shift_x=0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width - $ytick_feature_backbone_width*0.5+$tick_gap_with_backbone; # bp 
 
 #my $feature_tick_shift_y = 0.5 + $s1 + $k * $ytick_unit + 0.5*$ytick_feature_tick_height;
 			my $feature_tick_shift_y = $s1 + $k * $ytick_unit;

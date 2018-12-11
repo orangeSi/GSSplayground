@@ -97,6 +97,7 @@ while(@track_order){
 	my $sample = shift @track_order;
 	#die "num is $tracks_shift_y{num}, $sample_single_height * $tracks_shift_y{$sample}{shift_y}\n";
 	#$top_distance+=$sample_single_height * ($tracks_shift_y{$sample}{shift_y}-1) if($index == 1);
+	$top_distance+=$tracks_shift_y{sample}{$sample}{shift_y_up} * $sample_single_height;
 	die "error: sample :$sample: is not in gff file of --list \n" if (not exists $gff{$sample});
 	my $block_distance = $space_len*$ratio; # block_distance 是每个block的间距
 	my $flag;
@@ -272,8 +273,7 @@ while(@track_order){
 		}
 		$shift_x+=($id_line_width+$block_distance);
 	}
-	$top_distance+=$sample_single_height * $tracks_shift_y{$sample};
-	print "top_distance is $top_distance+=$sample_single_height * $tracks_shift_y{$sample}\n";
+	$top_distance+=$sample_single_height * $tracks_shift_y{sample}{$sample}{shift_y_down};
 	#$gff{$sample}{id}{$arr[0]}{$gene_index}{end}=$arr[4]
 
 

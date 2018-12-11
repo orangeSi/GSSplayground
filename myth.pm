@@ -15,7 +15,8 @@ sub shift_tracks(){
 	$tracks_shift_y{num}=0;
 	if($para=~ /^\s*$/){
 		for my $track(@track_order){
-			$tracks_shift_y{$track}{shift_y}=1;
+			$tracks_shift_y{sample}{$track}{shift_y_up}=0;
+			$tracks_shift_y{sample}{$track}{shift_y_down}=1;
 			$tracks_shift_y{num}++;
 		}
 	}else{
@@ -24,17 +25,16 @@ sub shift_tracks(){
 			die "error: $p format error for tracks_shift_y=$para\n" if(@arr!=3);
 			die "error: you have already specify  $arr[0] for more than one time in $para\n" if(exists $tracks_shift_y{$arr[0]});
 			die "error: $arr[0] not in sample list: @track_order\n" if(!grep(/^$arr[0]$/, @track_order));
-			die "error: $arr[2] in $p of $para error format\n"if($arr[2]!~ /^[\d\.\+-]+$/);
-			$tracks_shift_y{$arr[0]}=1+$arr[2];
+			die "error: $arr[2] in $p of $para error format, should like: +0.5:+0.5\n"if($arr[2]!~ /^([\d\.\+-]+):([\d\.\+-]+)$/);
+			$tracks_shift_y{sample}{$arr[0]}{shift_y_up}=$1;
+			$tracks_shift_y{sample}{$arr[0]}{shift_y_down}=1+$2;
 		}
 		for my $track(@track_order){
-			if(exists $tracks_shift_y{$track}){
-				$tracks_shift_y{num}+=$tracks_shift_y{$track};
-			}else{
-				$tracks_shift_y{num}++;
-				$tracks_shift_y{$track}=1;
+			if(not exists $tracks_shift_y{sample}{$track}){
+				$tracks_shift_y{sample}{$track}{shift_y_up}=0;
+				$tracks_shift_y{sample}{$track}{shift_y_down}=1;
 			}
-
+			$tracks_shift_y{num}+=$tracks_shift_y{sample}{$track}{shift_y_up}+$tracks_shift_y{sample}{$track}{shift_y_down};
 		}
 	}
 	

@@ -5,9 +5,13 @@
   cd  example 
   cat test.sh 
 ```
-
 &nbsp;&nbsp;&nbsp;&nbsp;plot gene clusters of many samples, one track means one sample, one track contain more than one fragments. one fragment contain gene cluster. you can defined every gene or feature(rotation,color,label,order depth,font size) in clusters. And add crossing link for any pair of genes.<br>
 
+#### dependence<br>
+```
+samtools # add this to PATH
+```
+<br>
 #### main feature:<br>
 - every track mean one sample , one sample can has more than one fragments. you can defind the feature color/lable font size/label color/label rotaion in feature.color.label.conf <br>
 - you can draw crosslink or sysnteny among features of different tracks<br><br>
