@@ -413,7 +413,7 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 			die "error: only strat or end or medium, but get $ss,$ee\n"
 		}
 		my $stroke_width=$cross_link_height_line*$id_line_height;
-		$orders{$cross_link_order}.="$title_clink<line x1=\"$x1\" y1=\"$y1\" x2=\"$x2\" y2=\"$y2\" style=\"stroke:$color;stroke-width:$stroke_width;opacity:$cross_link_opacity\" /></g>\n"; #crossing link of features
+		$orders{$cross_link_order}.="$title_clink<line x1=\"$x1\" y1=\"$y1\" x2=\"$x2\" y2=\"$y2\" style=\"fill:$color;stroke:$color;stroke-width:$stroke_width;opacity:$cross_link_opacity\" /></g>\n"; #crossing link of features
 	}else{
 		die "error:not support cross_link_shape=$cross_link_shape: for $up_id and $down_id, only support quadrilateral or w or ellipse or line\n";
 	}
