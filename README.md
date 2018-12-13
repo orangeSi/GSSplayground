@@ -18,7 +18,7 @@ samtools # add this to PATH
 
 ### update feture:<br>
 #### 2018-12-10:<br>
-- add  plot depth and pabio read mapping of bam file, as example/out11.svg or out10.svg <br>
+- add  plot depth and pabio read mapping of bam file, as example/out11.svg or out10.svg , inspired by  https://github.com/nspies/genomeview <br>
 #### 2018-11-12:<br>
 - rewrite feature.crossing.link.conf so that defined color and opactity or order or anchor position of every pair of links.<br>
 - add tracks_reorder to plot tracks by new order, otherwise you must adjust --list file <br>
