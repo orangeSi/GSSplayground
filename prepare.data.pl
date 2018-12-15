@@ -27,7 +27,7 @@ if(! -d "$outdir"){
 }
 
 my @track_reorder;
-my @funcs=("plot_depth", "reads_mapping");
+my @funcs=("hist_scatter_line", "reads_mapping");
 #my %conf = &read_conf($confile, @funcs);
 my %conf = &read_conf($confile, @funcs);
 ($conf, $track_reorder) = &default_setting(%conf);
@@ -72,17 +72,17 @@ sub reads_mapping(){
 		@ks = split(/\t+/, $k);
 		my @infos=split(/,/, $ks[0]);
 		my $infos_len=scalar(@infos);
-		if($infos_len != 16){
-			die "error: reads_mapping should separate by \\t, and have 16 colums for reads_mappinig=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
+		if($infos_len != 17){
+			die "error: reads_mapping should separate by \\t, and have 17 colums for reads_mappinig=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
 		}
-		my ($reads_type,$reads_order,$sample,$scf,$block_flag,$mapping_file,$show_type,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
+		my ($reads_type,$reads_order,$sample,$scf,$block_flag,$mapping_file,$show_type,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size,$min_mapq) = @infos;
 		die "error: reads_order should be number, not $reads_order\n" if($reads_order!~ /^-?\d+$/);
 #reads_mapping=long_reads,s2,s2000,0,../data/s2.seq.longreads.map2ref.sort.bam,rainbow_or_hline,10->50,ytick_flag,20->30->2,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,3:3	highlight_hgrid->26:2:green,28:2:black  start_end_xaxis->61:661,711:1311,1361:1961
 		&check_sort_bam($mapping_file);
 		die "error: not support $reads_type~ only support @mapping_types\n" if(! grep(/^$reads_type$/, @mapping_types));
 		die "error: $mapping_file not exists for $k\n" if(! -f $mapping_file);
 		&show_type_check($show_type,\@{$show_types{$reads_type}});
-
+		die "error: min_mapq $min_mapq should be number which >=0 \n" if($min_mapq!~ /^\d+$/);
 		for($i=0;$i<$infos_len;$i++){
 			next if($i==8);
 			$infos[$i]=~ s/\s//g;
@@ -122,7 +122,7 @@ sub reads_mapping(){
 			for my $rg(@start_end_xaxis){
 				my ($rg_start, $rg_end)=split(/,/, $rg);
 				print "rg is $rg,  :$rg_start,$rg_end\n";
-				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth,$reads_order, $highss{color_height_cs}, $show_type);
+				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth,$reads_order, $highss{color_height_cs}, $show_type, $min_mapq);
 
 				my $prefix="$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.mapping";	
 				%outname = &gather_gff_conf_link($prefix,$mapping_gff,$mapping_setting_conf,$cross_link_conf, \%outname, $sample);
@@ -219,20 +219,20 @@ sub get_max_depth(){
 	return $max_depth;
 }
 
-#@my @funcs=("plot_depth", "sr_mapping", "lr_mapping");
-sub plot_depth(){
+#@my @funcs=("hist_scatter_line", "sr_mapping", "lr_mapping");
+sub hist_scatter_line(){
 	my ($gff, $conf)=@_;
 	my $ex="s2,s2000,0,100,path_map.sort.bam,10->50,ytick_flag,20->30,ytick_label_text,hgrid_flag,tick_color\n#sample,scf,block_flag,window_size,depth_file,yaxis,ytick_flag,yaxis_show,ytick_label,hgrid_flag,tick_color";
 
-	unless(exists $conf->{plot_depth} && $conf->{plot_depth}){
-		print "plot_depth not\n";
+	unless(exists $conf->{hist_scatter_line} && $conf->{hist_scatter_line}){
+		print "hist_scatter_line not\n";
 		return 0;
 	}
-	print "plot_depth start\n";
+	print "hist_scatter_line start\n";
 	my $k_index;
 	my (%outname);
 	my @highs=("highlight_columns", "highlight_hgrid", "start_end_xaxis");
-	for my $k (@{$conf->{plot_depth}}){
+	for my $k (@{$conf->{hist_scatter_line}}){
 		$k_index++;
 		&check_highs(\@highs,$k);
 		print "$k_index is $k\n\n";
@@ -240,14 +240,18 @@ sub plot_depth(){
 		my @infos=split(/,/, $ks[0]);
 #highlight_hgrid->26:2:green,28:2:black    highlight_columns->0:20:green:0.7,20:100:black:0.5 start_end_xaxis->61:661,711:1311,1361:1961
 		my $infos_len=scalar(@infos);
-		if($infos_len != 16){
-			die "error: plot_depth should have 16 colums for plot_depth=$k, but only have $infos_len\nvalid like plot_depth=$ex\n";
+		if($infos_len != 17){
+			die "error: hist_scatter_line should have 17 colums for hist_scatter_line=$k, but only have $infos_len\nvalid like hist_scatter_line=$ex\n";
 		}
-		my ($depth_type,$depth_order,$sample,$scf,$block_flag,$window_size,$depth_file,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
+		my ($depth_type,$depth_order,$sample,$scf,$block_flag,$window_size,$depth_file,$color_opacity,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
+		die "error:color_opacity $color_opacity should be like color->green:opacity->0.9\n" if($color_opacity!~ /^color->([^:]+):opacity->([\d\.+])$/);
+		my $the_color=$1;
+		my $the_opacity=$2;
+
 		die "error: depth_order should be number, not $depth_order\n" if($depth_order!~ /^-?\d+$/);
 		my @depth_types=("hist", "scatter", "scatter_line");
 		die "error: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
-		die "error: $depth_file not exists for plot_depth=$k\n" if(! -f $depth_file);
+		die "error: $depth_file not exists for hist_scatter_line=$k\n" if(! -f $depth_file);
 		for($i=0;$i<$infos_len;$i++){
 			next if($i==8);
 			$infos[$i]=~ s/\s//g;
@@ -286,23 +290,23 @@ sub plot_depth(){
 			for my $rg(@start_end_xaxis){
 				my ($rg_start, $rg_end)=split(/,/, $rg);
 				print "rg is $rg  :$rg_start,$rg_end\n";
-				my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&plot_depth_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type, $rg_start, $rg_end, $depth_order);
+				my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&hist_scatter_line_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type, $rg_start, $rg_end, $depth_order, $the_color, $the_opacity);
 				my $prefix="$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.depth";	
 				%outname = &gather_gff_conf_link($prefix,$depth_gff,$depth_setting_conf,$cross_link_conf, \%outname, $sample);
 			}
 		}
 	}
-	&write_gff_conf_link(\%outname, "plot_depth");
+	&write_gff_conf_link(\%outname, "hist_scatter_line");
 }
 
 sub reads_mapping_run(){
 #&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth);
-	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$reads_order, $color_height_cs, $show_type)=@_;
+	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$reads_order, $color_height_cs, $show_type,$min_mapq)=@_;
 	my $one_read_height=1;
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
 	$color_height_cs="M:green:opacity0.8:height0.5:1bp,I:red:opacity1:height0.9:6bp,D:black:opacity1:height0.8:1bp,N:blue:opacity1:height0.2:1bp,S:blue:opacity0.6:height0.4:1bp,H:blue:opacity0.6:height0.2:1bp,P:blue:opacity1:height0.2:1bp,X:grey:opacity1:height0.6:1bp,reverse:#1E90FF:opacity0.6:height0.8:6bp,forward:green:opacity0.6:height0.8:1bp,fake:white:opacity1:height0:0bp" if(!$color_height_cs); #yellow
 		my %colors_height = &cigar_setting($color_height_cs);
-	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, \%colors_height, $show_type);
+	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, \%colors_height, $show_type, $min_mapq);
 #my $read_num=scalar(keys %reads);
 #die "read_num is $read_num\n";
 
@@ -607,9 +611,8 @@ sub get_reads_depth(){
 
 
 sub get_mapping_reads(){
-	my ($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, $colors_height, $show_type)=@_;
+	my ($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, $colors_height, $show_type, $min_mapq)=@_;
 	my %reads;
-	my $min_mapq=0;
 	use Storable;
 	my $tmpf="$bam_file.$scf.$rg_start.$rg_end.reads.$read_type.hash";
 	$read_type="long_reads" if($show_type eq "stack");
@@ -1022,8 +1025,8 @@ sub get_regions(){
 }
 
 
-sub plot_depth_run(){
-	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type, $block_start_bp, $block_end_bp,$depth_order)=@_;
+sub hist_scatter_line_run(){
+	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type, $block_start_bp, $block_end_bp,$depth_order, $the_color, $the_opacity)=@_;
 	print "info is $info\n";
 	my %depths=&read_depth_file($depth_file, $sample, $scf,$block_start_bp, $block_end_bp, $window_size, $info);
 	my ($depth_gff,$depth_setting_conf);
@@ -1034,9 +1037,8 @@ sub plot_depth_run(){
 	my $previous_id;
 	my $cross_link_conf="";
 	for my $window(sort {$a<=>$b}keys %{$depths{window}}){
-		my $depth=$depths{window}{$window};
+		my $depth=$depths{window}{$window}{depth};
 		$depth=int($depth);
-#die "error:depth is $depth,window is $window\n"if(!$depth);
 		my $diff_depth=$depth-abs($s2);
 		next if($depth<abs($s2));
 		my $depth_height=($diff_depth)*$depth_depth_ratio;
@@ -1049,20 +1051,15 @@ sub plot_depth_run(){
 			$depth_overflow_flag=0;    
 		}
 		my $depth_shift_y;
-		my $depth_color="green";
-		my $depth_opacity=0.8;
-		my $depth_start=$block_start_bp+$window*$window_size;
-		my $depth_end=$depth_start+$window_size;
-		if($depth_end>$block_end_bp){
-			$depth_end=$block_end_bp
-		}else{
-			$depth_end=$depth_start+$window_size
-		}
+		my $depth_color=$the_color;
+		my $depth_opacity=$the_opacity;
+		my $depth_start=$depths{window}{$window}{start};
+		my $depth_end=$depths{window}{$window}{end};
+		next if($depth_end >$block_end_bp && $depth_start < $block_start_bp);
 		my $padding_depth_label=1;
 
 		my $depth_id="$sample.$scf.$block.$depth_type.$window.$k_index.$block_start_bp.$block_end_bp";
-#print "scf\t$scf\t$depth_start\t$depth_end\t$depth\n";
-		$depth_gff.="$scf\tadd\tplot_depth\t$depth_start\t$depth_end\t.\t+\t.\tID=$depth_id;\n";
+		$depth_gff.="$scf\tadd\thist_scatter_line\t$depth_start\t$depth_end\t.\t+\t.\tID=$depth_id;\n";
 		$depth_setting_conf.="$depth_id\tdisplay_feature_label\t$display_feature_label\n";
 		$depth_setting_conf.="$depth_id\tfeature_color\t$depth_color\n";
 		$depth_setting_conf.="$depth_id\tfeature_opacity\t$depth_opacity\n";
@@ -1129,7 +1126,9 @@ sub read_depth_file(){
 	my ($depth_file, $sample, $scf,$block_start_bp, $block_end_bp,$window_size, $info)=@_;
 	print "is:$depth_file, $sample, $scf,$block_start_bp, $block_end_bp,$window_size, $info\n";
 	my %tmp;
-	my %depths;
+	my %depths;		
+	my %windows;
+	my $max=0;
 	die "error:window_size $window_size need >=1\n" if($window_size<0 or $window_size=~ /[^\d^\.]+/);
 	die "error:depth_file $depth_file not exists for $info\n" if(! -f $depth_file);
 	if($depth_file=~ /.bam\s*$/){
@@ -1154,21 +1153,32 @@ sub read_depth_file(){
 		$_=~ s/\s+$//g;
 		next if($_=~ /^\s*#.*$/||$_=~ /^\s*$/);
 		my @arr=split(/\s+/,$_);
-		die "error:depth need 4 columns for $_\n" if(@arr!=4);
-		if(!$arr[2] || !$block_end_bp){die "is,$arr[2],$block_end_bp\n"}
-		next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] > $block_end_bp || $arr[2]<$block_start_bp);
-		die "error:$arr[2] or $arr[3]\n" if($arr[2]!~ /^\d+$/ || $arr[3]!~ /^\d+$/);
-		$tmp{$arr[2]}=$arr[3];
+		if(@arr==4){
+			if(!$arr[2] || !$block_end_bp){die "is,$arr[2],$block_end_bp\n"};
+			next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] > $block_end_bp || $arr[2]<$block_start_bp);
+			die "error:$arr[2] or $arr[3]\n" if($arr[2]!~ /^\d+$/ || $arr[3]!~ /^\d+$/);
+			$tmp{$arr[2]}=$arr[3];
+		}elsif(@arr==5){
+			next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] < $block_start_bp || $arr[3] > $block_end_bp);
+			$depths{window}{$.}{depth}=$arr[4];
+			$depths{window}{$.}{start}=$arr[2];
+			$depths{window}{$.}{end}=$arr[3];								
+			$max=$arr[4] if($arr[4]>$max);
+		}else{
+			die "error:depth need 4 or 5 columns for $_\nsample	scaffold_id	pos	depth\nor\nsample     scaffold_id     start	end     depth\n";
+		}
 #print "AAAis $arr[2], 3 is $arr[3]\n";
 
 	}
 	close IN;
 
+	if(exists $depths{window}){	
+		$depths{max_depth}=$max;
+		return %depths;	
+	}
 
 
 	my $window_num=int(((abs($block_end_bp-$block_start_bp))+1)/$window_size);
-	my %windows;
-	my $max=0;
 	for my $i(0..$window_num){
 		my $start=$block_start_bp+$i*$window_size;
 		my $end=$start+$window_size-1;
@@ -1184,7 +1194,9 @@ sub read_depth_file(){
 		}
 		my $avg_depth=$pos_all/($end-$start+1);
 		$max=($avg_depth>$max)? $avg_depth:$max;
-		$depths{window}{$i}=$avg_depth;
+		$depths{window}{$i}{depth}=$avg_depth;
+		$depths{window}{$i}{start}=$start;
+		$depths{window}{$i}{end}=$end;
 #print "info is $info,iis $i,$avg_depth\n";
 
 	}
