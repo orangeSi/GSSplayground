@@ -43,7 +43,7 @@ samtools # add this to PATH
 
 
 
-![gene cluster image](example/out11.svg)
+![gene cluster image](example/out11.png)
 <br><br><br>
 ![gene cluster image](example/out10.svg)
 <br><br><br>
