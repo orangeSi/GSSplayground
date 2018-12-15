@@ -14,5 +14,3 @@ perl ../plot.genome.featureCluster.pl --list list5 --prefix out3.1 --outdir . --
 perl ../plot.genome.featureCluster.pl --list list5 --prefix out3.2 --outdir . --conf main.3.2.conf
 perl ../plot.genome.featureCluster.pl --list list5 --prefix out9 --outdir . --conf main.9.conf
 #cairosvg  out.svg.in.svg.svg -o out.svg.in.svg.pdf
-perl ../prepare.data.pl --list list5 --prefix out9 --outdir . --conf main.10.conf
-perl ../plot.genome.featureCluster.pl --list list5.ytick --prefix out10 --outdir . --conf main.10.conf.new

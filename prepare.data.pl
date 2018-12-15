@@ -60,8 +60,14 @@ sub reads_mapping(){
 	my (%outname);
 	my @env=("samtools");
 	&check_env_exist(@env);
+	my %show_types;
+	@{$show_types{short_reads}}=(qr/^rainbow:color->[^:]+:opacity->[\d\.]+:cross_link_width_ellipse->[\d\.]+/,"stack",qr/^paired:color->[^:]+:opacity->[\d\.]+:cross_link_height_line->[\d\.]+/);
+	@{$show_types{long_reads}}=("stack");
+	my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs");
+	my @mapping_types=("short_reads", "long_reads", "vcf");
 	for my $k (@{$conf->{reads_mapping}}){
 		$k_index++;
+		&check_highs(\@highs,$k);
 		print "$k_index is $k\n\n";
 		@ks = split(/\t+/, $k);
 		my @infos=split(/,/, $ks[0]);
@@ -69,13 +75,14 @@ sub reads_mapping(){
 		if($infos_len != 16){
 			die "error: reads_mapping should separate by \\t, and have 16 colums for reads_mappinig=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
 		}
-		my ($reads_type,$depth_order,$sample,$scf,$block_flag,$mapping_file,$show_type,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
-		die "error: depth_order should be number, not $depth_order\n" if($depth_order!~ /^-?\d+$/);
+		my ($reads_type,$reads_order,$sample,$scf,$block_flag,$mapping_file,$show_type,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
+		die "error: reads_order should be number, not $reads_order\n" if($reads_order!~ /^-?\d+$/);
 #reads_mapping=long_reads,s2,s2000,0,../data/s2.seq.longreads.map2ref.sort.bam,rainbow_or_hline,10->50,ytick_flag,20->30->2,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,3:3	highlight_hgrid->26:2:green,28:2:black  start_end_xaxis->61:661,711:1311,1361:1961
 		&check_sort_bam($mapping_file);
-		my @mapping_types=("short_reads", "long_reads", "vcf", "vcf_bam");
 		die "error: not support $reads_type~ only support @mapping_types\n" if(! grep(/^$reads_type$/, @mapping_types));
 		die "error: $mapping_file not exists for $k\n" if(! -f $mapping_file);
+		&show_type_check($show_type,\@{$show_types{$reads_type}});
+
 		for($i=0;$i<$infos_len;$i++){
 			next if($i==8);
 			$infos[$i]=~ s/\s//g;
@@ -101,12 +108,11 @@ sub reads_mapping(){
 			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
 
 			if($ytick_flag){
-				my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size);
+				my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size, $reads_type);
 				my $prefix="$sample.$scf.$block_index.$k_index.ytick";
 				%outname = &gather_gff_conf_link($prefix,$ytick_gff,$ytick_setting_conf,$cross_link_conf, \%outname, $sample);
 			}
 
-			my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs");
 			my %highss = &get_regions(\@highs, $k, $block_start_bp, $block_end_bp);
 			next if(not exists $highss{start_end_xaxis});
 			my @start_end_xaxis = @{$highss{start_end_xaxis}};
@@ -116,7 +122,7 @@ sub reads_mapping(){
 			for my $rg(@start_end_xaxis){
 				my ($rg_start, $rg_end)=split(/,/, $rg);
 				print "rg is $rg,  :$rg_start,$rg_end\n";
-				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth,$depth_order, $highss{color_height_cs});
+				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth,$reads_order, $highss{color_height_cs}, $show_type);
 
 				my $prefix="$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.mapping";	
 				%outname = &gather_gff_conf_link($prefix,$mapping_gff,$mapping_setting_conf,$cross_link_conf, \%outname, $sample);
@@ -126,6 +132,27 @@ sub reads_mapping(){
 	}
 
 	&write_gff_conf_link(\%outname, "read_mapping");
+}
+
+sub show_type_check(){
+	my ($show_type,$show_types)=@_;
+	my @show_types=@$show_types;
+	my $show_type_flag=0;
+	for my $t(@show_types){
+		$show_type_flag++ if($show_type=~ /$t/);
+	}
+	die "error: $show_type not supported, only support @show_types\n" if($show_type_flag!=1);
+}
+
+
+sub check_highs(){
+	my ($highs,$k)=@_;
+	my @highs=@$highs;
+	for my $h(@highs){
+		die "error: $h in $k should like $h->\n" if($k=~ /\s$h/ && $k!~ /\s$h->/);
+		die "error: $h in $k should use \\t to seprate ->\n" if($k=~ / $h->/);
+	}
+	return 0;
 }
 
 sub write_gff_conf_link(){
@@ -204,8 +231,10 @@ sub plot_depth(){
 	print "plot_depth start\n";
 	my $k_index;
 	my (%outname);
+	my @highs=("highlight_columns", "highlight_hgrid", "start_end_xaxis");
 	for my $k (@{$conf->{plot_depth}}){
 		$k_index++;
+		&check_highs(\@highs,$k);
 		print "$k_index is $k\n\n";
 		@ks = split(/\t+/, $k);
 		my @infos=split(/,/, $ks[0]);
@@ -245,11 +274,11 @@ sub plot_depth(){
 			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
 
 			if($ytick_flag){
-				my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size);
+				my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size, $depth_type);
 				my $prefix="$sample.$scf.$block_index.$k_index.ytick";
 				%outname = &gather_gff_conf_link($prefix,$ytick_gff,$ytick_setting_conf,$cross_link_conf, \%outname, $sample);
 			}
-			my @highs=("highlight_columns", "highlight_hgrid", "start_end_xaxis");
+
 			my %highss = &get_regions(\@highs,$k, $block_start_bp, $block_end_bp);
 			next if(not exists $highss{start_end_xaxis});
 			my @start_end_xaxis = @{$highss{start_end_xaxis}};
@@ -268,16 +297,16 @@ sub plot_depth(){
 
 sub reads_mapping_run(){
 #&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth);
-	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$depth_order, $color_height_cs)=@_;
+	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$reads_order, $color_height_cs, $show_type)=@_;
 	my $one_read_height=1;
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
 	$color_height_cs="M:green:opacity0.8:height0.5:1bp,I:red:opacity1:height0.9:6bp,D:black:opacity1:height0.8:1bp,N:blue:opacity1:height0.2:1bp,S:blue:opacity0.6:height0.4:1bp,H:blue:opacity0.6:height0.2:1bp,P:blue:opacity1:height0.2:1bp,X:grey:opacity1:height0.6:1bp,reverse:#1E90FF:opacity0.6:height0.8:6bp,forward:green:opacity0.6:height0.8:1bp,fake:white:opacity1:height0:0bp" if(!$color_height_cs); #yellow
 		my %colors_height = &cigar_setting($color_height_cs);
-	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type,$depth_order, \%colors_height);
+	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, \%colors_height, $show_type);
 #my $read_num=scalar(keys %reads);
 #die "read_num is $read_num\n";
 
-	my %reads_depth = &get_reads_depth(\%reads, $s1, $e1, $rg_start,$read_type);
+	my %reads_depth = &get_reads_depth(\%reads, $s1, $e1, $rg_start,$read_type, $show_type);
 	my %cross_link_pairs;	
 	my $new_depth=0;
 #my $one_read_height=(abs($s1-$e1))/$max_depth;
@@ -299,17 +328,28 @@ sub reads_mapping_run(){
 	my $feature_height=1;
 	my $feature_opacity=1;
 	my $feature_color="black";
+	my $read_type_raw=$read_type;
+	$read_type="long_reads" if($show_type eq "stack");
 	for my $read_id(sort {$reads{$a}{ref_start}<=>$reads{$b}{ref_start}} keys %reads){
 #print "read_id is $read_id\n";
 		$read_num++;
 #my $read_id="$sample.$scf.$block.$rg_start.$rg_end.$k_index.$read_type.$read_num";
+		if($show_type =~ /^rainbow/){
+			next if($reads{$read_id}{mate_read_id} eq "null"|| $reads{$read_id}{mate_ref} ne $reads{$read_id}{ref_id});
+			my $mate=$reads{$read_id}{mate_read_id};
+			next if($reads{$mate}{cigar}{-1}{type} eq "fake"||$reads{$read_id}{cigar}{-1}{type} eq "fake");
+#next if(($reads{$read_id}{cigar}{-1}{end}-$reads{$read_id}{cigar}{-1}{start})<147||($reads{$mate}{cigar}{-1}{end}-$reads{$mate}{cigar}{-1}{start})<147);
+#next if($read_id!~ /90847/ && $read_id!~ /40151/);
+		}		
 		if($read_type eq "short_reads" || $read_type eq "long_reads"){
 			my ($r1_start,$r1_end,$r2_start,$r2_end);
-# mate_read_id		
+# mate_read_id			
 			my ($cr_id, $map_pos_start_cr, $map_pos_end_cr, $cr_type,$cr_order);
 			$map_pos_strand_cr=$reads{$read_id}{strand};
 			my $read_shift_y_depth = $reads_depth{depth}{$read_id};
+			$read_shift_y_depth=0 if($show_type =~ /^rainbow/);
 			for my $cr(sort {$a<=>$b} keys %{$reads{$read_id}{cigar}}){
+
 				$cr_type=$reads{$read_id}{cigar}{$cr}{type};
 				my $cg=$reads{$read_id}{cigar}{$cr}{cr};
 				($feature_color, $feature_height,$feature_opacity)=&cs_color_height($cg, \%colors_height, $map_pos_strand_cr, $map_pos_strand_cr);
@@ -324,7 +364,7 @@ sub reads_mapping_run(){
 				my $feature_shape="rect";
 				if($cr_type=~ /reverse/ || $cr_type=~ /forward/){
 					$feature_shape="arrow";
-					my $feature_arrow_sharp_extent=($read_type eq "short_reads")? 0.03:0.01;
+					my $feature_arrow_sharp_extent=($read_type eq "short_reads")? 0.08:0.01;
 					$reads_setting_conf.="$cr_id\tfeature_arrow_sharp_extent\t0\n";
 					$reads_setting_conf.="$cr_id\tfeature_arrow_width_extent\t$feature_arrow_sharp_extent\n";
 
@@ -339,7 +379,7 @@ sub reads_mapping_run(){
 						my $insert_map_pos_start_cr=$map_pos_start_cr- ($1-($map_pos_end_cr-$map_pos_start_cr))/10/2;
 						my $insert_map_pos_end_cr=$map_pos_end_cr + ($1-($map_pos_end_cr-$map_pos_start_cr))/10/2;
 						$insert_shift_y=($tail)? $read_shift_y+ $updown * (1-$insert_height_tail_portion)*$feature_height:$read_shift_y;
-						$reads_gff.="$scf\tadd\t$read_type\t$insert_map_pos_start_cr\t$insert_map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$insert_cr_id;\n";
+						$reads_gff.="$scf\tadd\t$read_type_raw\t$insert_map_pos_start_cr\t$insert_map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$insert_cr_id;\n";
 						$reads_setting_conf.="$insert_cr_id\tfeature_shape\t$feature_shape\n";
 						$reads_setting_conf.="$insert_cr_id\tfeature_height_ratio\t$insert_feature_height\n";
 						$reads_setting_conf.="$insert_cr_id\tfeature_height_unitt\tpercent\n";
@@ -352,7 +392,7 @@ sub reads_mapping_run(){
 
 				}
 				die "error: cr_id is $cr_id\n" if($map_pos_start_cr eq "start");
-				$reads_gff.="$scf\tadd\t$read_type\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";					    
+				$reads_gff.="$scf\tadd\t$read_type_raw\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";					    
 				if($cr_type ne "fake"){
 					$reads_setting_conf.="$cr_id\tfeature_x_extent\t-0.5bp,+0.5bp\n";
 				}
@@ -364,16 +404,44 @@ sub reads_mapping_run(){
 				$reads_setting_conf.="$cr_id\tfeature_shift_y_unit\tpercent\n";
 				$reads_setting_conf.="$cr_id\tfeature_order\t$cr_order\n";
 				$reads_setting_conf.="$cr_id\tfeature_opacity\t$feature_opacity\n";
-				if($read_type eq "short_reads" && $cr == -1){
+				if($read_type eq "short_reads" && $cr == -1 && $reads{$read_id}{mate_read_id} ne "null"  &&  ($reads{$read_id}{mate_ref} eq "=" || $reads{$read_id}{ref_id} eq $reads{$read_id}{mate_ref}) ){
+					next if(exists $reads{$read_id}{flag} && ($reads{$read_id}{flag} & 8));
 					my $mate_id=$reads{$read_id}{mate_read_id};
+#die "ssread_id is $read_id, flag is $reads{$read_id}{flag}\n" if(!$mate_id);
 					my $mate_cg=$reads{$mate_id}{cigar}{$cr}{cr};
 					my $mate_cr_id="$mate_id.cr.$cr.$mate_cg.$updown.$k_index";
-					my $cross_link_order=$reads{$read_id}{cigar}{-1}{order}-1;
+					my $cross_link_order=$reads{$read_id}{cigar}{-1}{order};
 					next if(exists $cross_link_pairs{"$mate_id,$read_id"} || $reads{$read_id}{cigar}{$cr}{end} > $reads{$mate_id}{cigar}{$cr}{end});
-					$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_height_line\t0.3\n";
-					$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_anchor_pos\tmedium_medium\n";
-					$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_shape\tline\n";
-					$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_orientation_line\tend,start\n";
+					my $cross_link_height_line=0.3;
+					my $cross_link_anchor_pos="medium_medium";
+					my $cross_link_shape="line";
+					my $cross_link_orientation_line="end,start";
+					my $cross_link_width_ellipse;
+
+					if($show_type=~ /^rainbow:color->([^:]+):opacity->([\d\.]+):cross_link_width_ellipse->([\d\.]+)/){
+#rainbow:green:opacity1:cross_link_width_ellipse:0.01
+						my $cross_link_color=$1;
+						my $cross_link_opacity=$2;
+						$cross_link_width_ellipse=$3;	
+						my $out_r=abs($e1) - $one_read_height- abs($s1);
+						my $inner_r=abs($e1) - $one_read_height - abs($e1-$s1)*0.02-abs($s1);
+						$cross_link_height_ellipse="$out_r,$inner_r";
+						$cross_link_anchor_pos=($updown == -1)? "up_up":"low_low";	
+						$cross_link_shape="ellipse";
+						my $cross_link_orientation_ellipse=($updown == -1)? "up":"down";
+						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_orientation_ellipse\t$cross_link_orientation_ellipse\n";
+						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_height_ellipse\t$cross_link_height_ellipse\n";
+						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_width_ellipse\t$cross_link_width_ellipse\n";
+						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_color\t$cross_link_color\n";
+						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_opacity\t$cross_link_opacity\n";
+					}elsif($show_type=~ /^paired:color->([^:]+):opacity->([\d\.]+):cross_link_height_line->([\d\.]+)/){
+						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_color\t$1\n";
+						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_opacity\t$2\n";
+						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_height_line\t$3\n";
+						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_orientation_line\t$cross_link_orientation_line\n";
+					}
+					$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_anchor_pos\t$cross_link_anchor_pos\n";
+					$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_shape\t$cross_link_shape\n";
 					$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_order\t$cross_link_order\n";
 					$cross_link_pairs{"$read_id,$mate_id"}="" if(not exists $cross_link_pairs{"$read_id,$mate_id"});
 				}
@@ -394,7 +462,7 @@ sub reads_mapping_run(){
 
 
 sub get_reads_depth(){
-	my ($reads, $s1, $e1, $rg_start, $read_type)=@_;
+	my ($reads, $s1, $e1, $rg_start, $read_type, $show_type)=@_;
 	my %reads=%$reads;
 	my %reads_depth;
 	my @max_depths=(1);
@@ -421,48 +489,56 @@ sub get_reads_depth(){
 	my $feature_color="black";
 	print "shift_y start\n";
 	my $rightest_pos;
-	for my $read_id(sort {$reads->{$a}->{ref_start}<=>$reads->{$b}->{ref_start}} keys %reads){
+	$read_type="long_reads" if($show_type eq "stack");
+	for my $read_id(sort {$reads{$a}{ref_start}<=>$reads{$b}{ref_start}} keys %reads){
 #print "read_id is $read_id\n";
 		$read_num++;
 #my $read_id="$sample.$scf.$block.$rg_start.$rg_end.$k_index.$read_type.$read_num";
 		if($read_type eq "short_reads" || $read_type eq "long_reads"){
 			my ($r1_start,$r1_end,$r2_start,$r2_end);
 # mate_read_id
-			#print "read_idis1 $read_id,$reads{$read_id}{mate_pos},$reads{$read_id}{ref_end}\n";
-			next if($read_type eq "short_reads" && $reads{$read_id}{mate_ref} ne "*" && $reads{$read_id}{mate_pos} < $reads{$read_id}{ref_end});
-			#print "read_idis2 $read_id,$reads{$read_id}{mate_pos},$reads{$read_id}{ref_end}\n";
+#print "read_idis1 $read_id,$reads{$read_id}{mate_pos},$reads{$read_id}{ref_end}\n";
+#die "error: read_id is $read_id, ref_id is $reads{$read_id}{ref_id}\n" if(!$reads{$read_id}{ref_id});
+			#die "mate_read_id is , read_id $read_id\n" if(!$reads{$read_id}{mate_read_id});
+			next if($read_type eq "short_reads" && $reads{$read_id}{mate_read_id} ne "null" && $reads{$read_id}{mate_pos} < $reads{$read_id}{ref_end} && $reads{$read_id}{mate_pos} < $reads{$read_id}{ref_start});
+#print "read_idis2 $read_id,$reads{$read_id}{mate_pos},$reads{$read_id}{ref_end}\n";
 			my ($cr_id, $map_pos_start_cr, $map_pos_end_cr, $cr_type,$cr_order);
-			$map_pos_strand_cr=$reads->{$read_id}->{strand};
+			$map_pos_strand_cr=$reads{$read_id}{strand};
 
 			my $cr=-1;
-			$cr_type=$reads->{$read_id}->{cigar}->{$cr}->{type};
-			my $cg=$reads->{$read_id}->{cigar}->{$cr}->{cr};
+			$cr_type=$reads{$read_id}{cigar}{$cr}{type};
+			my $cg=$reads{$read_id}{cigar}{$cr}{cr};
 
 			$feature_height *= $one_read_height;
 			$map_pos_start_cr=$reads{$read_id}{cigar}{$cr}{start};
 			$map_pos_end_cr=$reads{$read_id}{cigar}{$cr}{end};
 			$cr_order=$reads{$read_id}{cigar}{$cr}{order};
 
-
+#my $flagxx=0;
+#$flagxx=1 if($read_id=~ /40151/||$read_id=~ /90847/);
 			my $shift_y_flag=0;
 			for my $depth(sort {$a<=>$b} keys %shift_y){
 				if ($map_pos_start_cr > $shift_y{$depth}){
 					push @max_depths,$new_depth;
-					$read_shift_y_depth=$depth;	
-					#print "depth1,$depth,$shift_y{$depth},$read_id\n";
-					if($read_type eq "short_reads" && $reads{$read_id}{mate_ref} ne "*"){
+					$read_shift_y_depth=$depth;
+#print "\n" if($flagxx);	
+#print "depth1,$depth,$shift_y{$depth},$read_id\n";
+					if($read_type eq "short_reads" && $reads{$read_id}{mate_read_id} ne "null"){
+#print "0read_id is $read_id, map_pos_start_cr is $map_pos_start_cr, shift_y{$depth} is $shift_y{$depth}\n" if($flagxx);	
 						my $mate=$reads{$read_id}{mate_read_id};
-						#if($read_id=~ /:61360\./){die "error: 61360 $read_id, $map_pos_start_cr.  depth is $depth,$shift_y{$depth}\n"}
+#if($read_id=~ /:61360\./){die "error: 61360 $read_id, $map_pos_start_cr.  depth is $depth,$shift_y{$depth}\n"}
 						die "mate is $mate, read_id is $read_id\n" if(!$mate);
-						#$shift_y{$depth}=max($reads{$mate}{cigar}{-1}{end},$reads{$read_id}{cigar}{-1}{end});
+#$shift_y{$depth}=max($reads{$mate}{cigar}{-1}{end},$reads{$read_id}{cigar}{-1}{end});
 						$shift_y{$depth}=$reads{$mate}{cigar}{-1}{end};
-						if($read_id=~ /:61360\./){print "error: 61360 $read_id, $map_pos_start_cr.  depth is $depth,$shift_y{$depth}\n"}
-						#print "depth3,$depth,$shift_y{$depth},$read_id\n";
+#print "1read_id is $read_id, map_pos_start_cr is $map_pos_start_cr, shift_y{$depth} is $shift_y{$depth}\n" if($flagxx);	
+#if($read_id=~ /:61360\./){print "error: 61360 $read_id, $map_pos_start_cr.  depth is $depth,$shift_y{$depth}\n"}
+#print "depth3,$depth,$shift_y{$depth},$read_id\n";
 
 					}else{
-						#print "else,ddepth,$depth,$shift_y{$depth},$read_id\n";
+#print "else,ddepth,$depth,$shift_y{$depth},$read_id\n";
 						$shift_y{$depth}=$map_pos_end_cr;
-						#print "depth4,$depth,$shift_y{$depth},$read_id\n";
+#print "depth4,$depth,$shift_y{$depth},$read_id\n";
+#print "2read_id is $read_id, map_pos_start_cr is $map_pos_start_cr, shift_y{$depth} is $shift_y{$depth}\n" if($flagxx);	
 					}
 					$shift_y_flag=1;
 					last;
@@ -472,19 +548,21 @@ sub get_reads_depth(){
 				$new_depth++;
 				$read_shift_y_depth=$new_depth;
 				push @max_depths,$new_depth;
-				if(exists $reads{$read_id}{mate_read_id}){
+				if($reads{$read_id}{mate_read_id} ne "null"){
 					my $mate=$reads{$read_id}{mate_read_id};
 					$shift_y{$read_shift_y_depth}=max($reads{$mate}{cigar}{-1}{end}, $reads{$read_id}{cigar}{-1}{end});
 				}else{
 					$shift_y{$read_shift_y_depth}=$map_pos_end_cr;
 				}
-				#print "depth2,$read_shift_y_depth,$shift_y{$read_shift_y_depth},$read_id\n";
+#print "depth2,$read_shift_y_depth,$shift_y{$read_shift_y_depth},$read_id\n";
+#print "3read_id is $read_id, shift_y{$read_shift_y_depth} is $shift_y{$read_shift_y_depth}\n" if($flagxx);	
 			}
 
 			$read_shift_y = abs($s1) + $one_read_height * $read_shift_y_depth + ($one_read_height - $feature_height)/2;
 			$read_shift_y = ($updown == 1)? "+$read_shift_y":"-$read_shift_y";
 
 			$reads_depth{depth}{$read_id}=$read_shift_y_depth;
+#print "4read_id is $read_id, shift_y{$read_shift_y_depth} is $shift_y{$read_shift_y_depth}\n" if($flagxx);	
 #print "read_id is $read_id $read_shift_y_depth\n";
 
 		}else{
@@ -493,29 +571,32 @@ sub get_reads_depth(){
 	}
 	$reads_depth{max_depth}=max(@max_depths);
 #die "error:max_depths is @max_depths\n";
-	for my $read(keys %reads){
-		next if($reads->{$read}{mate_ref} eq "*");
-		if(exists $reads->{$read}{mate_read_id}){
-			my $mate=$reads->{$read}{mate_read_id};
-			$reads_depth{depth}{$read}=0 if(not exists $reads_depth{depth}{$read});
-			$reads_depth{depth}{$mate}=0 if(not exists $reads_depth{depth}{$mate});
-			my $max=max($reads_depth{depth}{$read},$reads_depth{depth}{$mate});
-			$reads_depth{depth}{$read}=$max;
-			$reads_depth{depth}{$mate}=$max;
-		}else{
-			die "error:read $read not have mate_read_id \n";
+	if($read_type ne "long_reads"){
+		for my $read(keys %reads){
+			next if($reads{$read}{mate_read_id} eq "null");
+			next if($reads{$read}{mate_ref} eq "*" || ($reads{$read}{mate_ref} ne "=" && $reads{$read}{mate_ref} ne $reads{$read}{ref_id}));
+			if(exists $reads{$read}{mate_read_id}){
+				my $mate=$reads{$read}{mate_read_id};
+				$reads_depth{depth}{$read}=0 if(not exists $reads_depth{depth}{$read});
+				$reads_depth{depth}{$mate}=0 if(not exists $reads_depth{depth}{$mate});
+				my $max=max($reads_depth{depth}{$read},$reads_depth{depth}{$mate});
+				$reads_depth{depth}{$read}=$max;
+				$reads_depth{depth}{$mate}=$max;
+			}else{
+				die "error:read $read not have mate_read_id \n";
+			}
 		}
 	}
-	#for my $d(keys %shift_y){
-	#	print "shift_y\t$d\t$shift_y{$d}\n";
-	#}
-	#for my $read(keys %reads){
-	#	next if($reads->{$read}{mate_ref} eq "*");
-	#	my $mate=$reads->{$read}{mate_read_id};
-	#	my $max=max($reads_depth{depth}{$read},$reads_depth{depth}{$mate});
-	#	$reads_depth{depth}{$read}=$max;
-	#	$reads_depth{depth}{$mate}=$max;
-	#}
+#for my $d(keys %shift_y){
+#	print "shift_y\t$d\t$shift_y{$d}\n";
+#}
+#for my $read(keys %reads){
+#	next if($reads->{$read}{mate_ref} eq "*");
+#	my $mate=$reads->{$read}{mate_read_id};
+#	my $max=max($reads_depth{depth}{$read},$reads_depth{depth}{$mate});
+#	$reads_depth{depth}{$read}=$max;
+#	$reads_depth{depth}{$mate}=$max;
+#}
 	return %reads_depth;
 }
 
@@ -526,12 +607,12 @@ sub get_reads_depth(){
 
 
 sub get_mapping_reads(){
-	my ($scf, $bam_file, $rg_start, $rg_end, $read_type,$depth_order, $colors_height)=@_;
+	my ($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, $colors_height, $show_type)=@_;
 	my %reads;
 	my $min_mapq=0;
 	use Storable;
 	my $tmpf="$bam_file.$scf.$rg_start.$rg_end.reads.$read_type.hash";
-
+	$read_type="long_reads" if($show_type eq "stack");
 
 	if(-f "$tmpf" && 0){
 # Retrieve the hash from the file.
@@ -545,10 +626,11 @@ sub get_mapping_reads(){
 			chomp;
 			my @arr=split(/\t/,$_);
 			my ($r_id, $flag, $ref_id, $ref_start_pos, $mapq, $cigar, $rnext, $pnext)=@arr[0..7];
+			next if($flag & 4);
 			next if($mapq < $min_mapq);
+			next if($cigar eq "*");
 			my @ref_consumes=("M","D","N","=","x");
 			my @reads_consumes=("M","I","S","=","x");
-			my $read_order=0;
 			my $r1_r2=($flag & 64)? "r1":"r2";
 			$r1_r2=($flag & 192)? $r1_r2:"unpair";
 			my $reverse_flag=16;
@@ -572,23 +654,22 @@ sub get_mapping_reads(){
 			}
 			my $strand=($flag & $reverse_flag); # if ture, mean read reverse
 				$cigar=&convert_cigar($cigar, $colors_height);
-			%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, \%reads, $depth_order);
+			%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $reads_order, $r_id, $rg_start, $rg_end, \%reads, $_);
 			$reads{$r_id}{ref_start}=$ref_start_pos;
 			$reads{$r_id}{ref_end}=$ref_start_pos + $ref_consumes_length -1;
+			$reads{$r_id}{ref_id}="$ref_id"; # "*0"
+				$reads{$r_id}{mate_ref}=($rnext eq "=")? $ref_id:$rnext;
+			$reads{$r_id}{mate_pos}="$pnext"; # "*0"
+				$reads{$r_id}{read_id}="$read_id_raw";
+			$reads{$r_id}{flag}=$flag;
 
-			if($read_type eq "long_reads"){
-				$reads{$r_id}{mate_ref}=($rnext eq "=")? $ref_id:$rnext;
-			}elsif($read_type eq "short_reads"){
-#print "strand is $strand line is $_\n";
-				$reads{$r_id}{mate_ref}=($rnext eq "=")? $ref_id:$rnext;
-				$reads{$r_id}{mate_pos}="$pnext"; # "*0"
-					$reads{$r_id}{ref_id}="$ref_id"; # "*0"
-					$reads{$r_id}{read_id}="$read_id_raw";
-#if($_=~ /MC/)
-# bwa default don't output multi-alignments, ignore soap2 yet.
-			}else{
-				die "error: not support $read_type, only support long_reads or short_reads\n";
-			}
+			$reads{$r_id}{mate_read_id}="null" if($flag & 8 || $reads{$r_id}{mate_ref} ne $reads{$r_id}{ref_id} || $reads{$r_id}{mate_ref} eq "*" || $show_type eq "stack");
+#if($read_type eq "long_reads"){
+
+#}elsif($read_type eq "short_reads"){
+#}else{
+#	die "error: not support $read_type, only support long_reads or short_reads\n";
+#}
 
 
 		}
@@ -596,7 +677,7 @@ sub get_mapping_reads(){
 		if($read_type eq "short_reads"){
 			my @readss=keys %reads;
 			for my $r(@readss){
-				next if ($reads{$r}{mate_ref} eq "*");
+				next if(exists $reads{$r}{mate_read_id} && $reads{$r}{mate_read_id} eq "null");
 				for my $rr(@readss){
 					next if($r eq $rr);
 #die "error:mate_read_id exists r is $r, rr is $rr,  mate of r is $reads{$r}{mate_read_id}\n" if(exists $reads{$r}{mate_read_id} );
@@ -626,6 +707,7 @@ sub get_mapping_reads(){
 				$reads{$fake_mate_id}{ref_start}=$fake_start;
 				$reads{$fake_mate_id}{ref_end}=$fake_start;
 				$reads{$fake_mate_id}{mate_read_id}=$r;
+				$reads{$fake_mate_id}{ref_id}=$reads{$r}{mate_ref};
 
 				$reads{$fake_mate_id}{strand}="+";
 				$reads{$fake_mate_id}{mate_pos}=($reads{$r}{ref_start}<$rg_start)? $rg_start:$reads{$r}{ref_start};
@@ -761,7 +843,7 @@ sub cs_color_height(){
 
 
 sub detail_cigar(){
-	my ($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, $reads,$depth_order)=@_;
+	my ($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, $reads, $line)=@_;
 	my %reads=%$reads;
 	my @cigars=$cigar=~ /(\d+[^\d])/g;
 	my $M_index=0;
@@ -783,7 +865,7 @@ sub detail_cigar(){
 			last;
 		}
 	}
-	die "error:cigar=$cigar error\n" if($M_index>=2);
+	die "error:cigar=$cigar error, line is $line\n" if($M_index>=2);
 	my $previous_end=$ref_start_pos;
 	my $cs_end;
 	my $shift_cs;
@@ -824,7 +906,7 @@ sub detail_cigar(){
 			$previous_end=$cs_end+$shift_cs;
 		}	
 	}
-
+	die "error: shift_cs,cigar is $cigar, line is $line\n" if(not defined $shift_cs);
 	my $forw_rev=($strand>0)? "reverse":"forward";
 	$reads{$r_id}{cigar}{-1}{start}=$cs_start;
 	$reads{$r_id}{cigar}{-1}{end}=$previous_end-$shift_cs;
@@ -979,7 +1061,7 @@ sub plot_depth_run(){
 		my $padding_depth_label=1;
 
 		my $depth_id="$sample.$scf.$block.$depth_type.$window.$k_index.$block_start_bp.$block_end_bp";
-#print "iis $depth_id	$depth\n";
+#print "scf\t$scf\t$depth_start\t$depth_end\t$depth\n";
 		$depth_gff.="$scf\tadd\tplot_depth\t$depth_start\t$depth_end\t.\t+\t.\tID=$depth_id;\n";
 		$depth_setting_conf.="$depth_id\tdisplay_feature_label\t$display_feature_label\n";
 		$depth_setting_conf.="$depth_id\tfeature_color\t$depth_color\n";
@@ -1084,7 +1166,7 @@ sub read_depth_file(){
 
 
 
-	my $window_num=int(abs($block_end_bp-$block_start_bp)/$window_size);
+	my $window_num=int(((abs($block_end_bp-$block_start_bp))+1)/$window_size);
 	my %windows;
 	my $max=0;
 	for my $i(0..$window_num){
@@ -1092,7 +1174,7 @@ sub read_depth_file(){
 		my $end=$start+$window_size-1;
 #print "2error:$start,$end,$block_start_bp,$block_end_bp\n";
 #$end = $block_end_up if($end>$block_end_bp);
-		if($end>$block_end_bp){    print "3error is $end\n"; $end=$block_end_bp}
+		last if($end>$block_end_bp);
 		my $pos_all=0;
 		die "1error:$start,$end,\n" if(!$end);
 		for my $pos($start..$end){
@@ -1112,7 +1194,7 @@ sub read_depth_file(){
 }
 
 sub feature_ytick(){
-	my ($s1, $e1, $s2, $e2, $axis_gap, $title, $ytick_sample, $ytick_scf, $block, $gff, $kk, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $info, $tick_label_size) = @_;
+	my ($s1, $e1, $s2, $e2, $axis_gap, $title, $ytick_sample, $ytick_scf, $block, $gff, $kk, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $info, $tick_label_size, $type) = @_;
 	my ($ytick_gff, $ytick_setting_conf, $cross_link_conf);
 	my @tick_colors=split(/:/,$tick_color);
 	die "error:$tick_color format like: green:black for $info\n" if(@tick_colors!=2);
@@ -1132,7 +1214,7 @@ sub feature_ytick(){
 		my $feature_backbone_shift_x = $ytick_feature_backbone_width+$tick_gap_with_backbone; 
 	my $ytick_feature_backbone_start = $block_end_bp - $ytick_feature_backbone_width;
 	my $ytick_feature_backbone_end = $block_end_bp;
-	my $ytick_feature_backbone_id = "$ytick_sample.$ytick_scf.$block.$block_start_bp.$block_end_bp.$kk";
+	my $ytick_feature_backbone_id = "$ytick_sample.$ytick_scf.$block.$block_start_bp.$block_end_bp.$type.ytickbackbone$kk";
 	my $ytick_feature_backbone_height = abs($e1-$s1);
 	my $feature_backbone_shift_y = abs($s1);
 	if($ytick_orientation=~ /up/i){
@@ -1171,35 +1253,39 @@ sub feature_ytick(){
 		my $feature_label_size=$tick_label_size;
 		my $padding_feature_label=$feature_label_size*0.3;
 		my $ytick_feature_tick_id="$ytick_feature_backbone_id.tick$k";
-		my $feature_tick_shift_x=0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width - $ytick_feature_backbone_width*0.5+$tick_gap_with_backbone; # bp 
+#my $feature_tick_shift_x=0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width - $ytick_feature_backbone_width*0.5+$tick_gap_with_backbone; # bp 
+		my $feature_tick_shift_x=$tick_gap_with_backbone+0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width; # bp 
 
 #my $feature_tick_shift_y = 0.5 + $s1 + $k * $ytick_unit + 0.5*$ytick_feature_tick_height;
-			my $feature_tick_shift_y = $s1 + $k * $ytick_unit;
+			my $feature_tick_shift_y = $s1 + $k * $ytick_unit - $ytick_feature_tick_height/2;
 		my $ytick_ratio=(abs($e2-$s2)) / (abs($e1-$s1));
 		my $tick_label;
 
 #s1 e1 s2 e2        
+
 		$feature_tick_shift_y =abs($feature_tick_shift_y);
+		my $hgrid_id="$ytick_feature_tick_id.hgrid";
+		my $hgrid_height=$ytick_feature_tick_height*$tick_borders[3];
+		my $hgrid_shift_y=$feature_tick_shift_y+($ytick_feature_tick_height-$hgrid_height)/2;
 		if($ytick_orientation=~ /up/i){
 			$feature_tick_shift_y ="-$feature_tick_shift_y";
 			$tick_label=$s2 + $k*$ytick_unit*$ytick_ratio;
+			$hgrid_shift_y="-$hgrid_shift_y";
 		}elsif($ytick_orientation=~ /down/i){
 			$feature_tick_shift_y ="+$feature_tick_shift_y";
 			$tick_label=$s2 - $k*$ytick_unit*$ytick_ratio;
+			$hgrid_shift_y="+$hgrid_shift_y";
 		}else{
 			die "die:\n";
 		}
-
 		if($hgrid_flag){
-			my $hgrid_id="$ytick_feature_tick_id.hgrid";
-			my $hgrid_height=$ytick_feature_tick_height*$tick_borders[3];
 			$ytick_gff.="$ytick_scf\tadd\tytick\t$block_start_bp\t$block_end_bp\t.\t+\t.\tID=$hgrid_id;\n";
 			$ytick_setting_conf.="\n$hgrid_id\tfeature_height_ratio\t$hgrid_height\n";
 			$ytick_setting_conf.="\n$hgrid_id\tfeature_height_unit\tpercent\n";
 			$ytick_setting_conf.="$hgrid_id\tfeature_shape\trect\n";
 			$ytick_setting_conf.="$hgrid_id\tdisplay_feature_label\tno\n";
 			$ytick_setting_conf.="$hgrid_id\tfeature_opacity\t$tick_opacitys[1]\n";
-			$ytick_setting_conf.="$hgrid_id\tfeature_shift_y\t$feature_tick_shift_y\n";
+			$ytick_setting_conf.="$hgrid_id\tfeature_shift_y\t$hgrid_shift_y\n";
 			$ytick_setting_conf.="$hgrid_id\tfeature_shift_y_unit\tpercent\n";
 			$ytick_setting_conf.="$hgrid_id\tfeature_color\t$tick_colors[1]\n";
 

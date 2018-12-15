@@ -27,4 +27,3 @@ s3	add	plot_depth	4520	4620	.	+	.	ID=s3.s3.2.hist.25.3.2020.5000;
 s3	add	plot_depth	4620	4720	.	+	.	ID=s3.s3.2.hist.26.3.2020.5000;
 s3	add	plot_depth	4720	4820	.	+	.	ID=s3.s3.2.hist.27.3.2020.5000;
 s3	add	plot_depth	4820	4920	.	+	.	ID=s3.s3.2.hist.28.3.2020.5000;
-s3	add	plot_depth	4920	5000	.	+	.	ID=s3.s3.2.hist.29.3.2020.5000;

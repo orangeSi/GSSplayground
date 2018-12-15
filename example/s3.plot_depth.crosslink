@@ -354,7 +354,3 @@ s3.s3.3.scatter_line.88.4.5100.9609	s3.s3.3.scatter_line.89.4.5100.9609	cross_li
 s3.s3.3.scatter_line.88.4.5100.9609	s3.s3.3.scatter_line.89.4.5100.9609	cross_link_orientation_line	medium,medium
 s3.s3.3.scatter_line.88.4.5100.9609	s3.s3.3.scatter_line.89.4.5100.9609	cross_link_height_line	0.5
 s3.s3.3.scatter_line.88.4.5100.9609	s3.s3.3.scatter_line.89.4.5100.9609	cross_link_anchor_pos	medium_medium
-s3.s3.3.scatter_line.89.4.5100.9609	s3.s3.3.scatter_line.90.4.5100.9609	cross_link_shape	line
-s3.s3.3.scatter_line.89.4.5100.9609	s3.s3.3.scatter_line.90.4.5100.9609	cross_link_orientation_line	medium,medium
-s3.s3.3.scatter_line.89.4.5100.9609	s3.s3.3.scatter_line.90.4.5100.9609	cross_link_height_line	0.5
-s3.s3.3.scatter_line.89.4.5100.9609	s3.s3.3.scatter_line.90.4.5100.9609	cross_link_anchor_pos	medium_medium

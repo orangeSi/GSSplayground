@@ -16,25 +16,26 @@ sub shift_tracks(){
 	if($para=~ /^\s*$/){
 		for my $track(@track_order){
 			$tracks_shift_y{sample}{$track}{shift_y_up}=0;
-			$tracks_shift_y{sample}{$track}{shift_y_down}=1;
+			$tracks_shift_y{sample}{$track}{shift_y_down}=0;
 			$tracks_shift_y{num}++;
 		}
 	}else{
 		for my $p(@paras){
 			my @arr=split(/,/, $p);
-			die "error: $p format error for tracks_shift_y=$para\n" if(@arr!=3);
+			die "error: $p format error for tracks_shift_y=$para, should liketracks_shift_y=s2,0,+5:+0;s3,0,+5:+0;\n" if(@arr!=3);
 			die "error: you have already specify  $arr[0] for more than one time in $para\n" if(exists $tracks_shift_y{$arr[0]});
 			die "error: $arr[0] not in sample list: @track_order\n" if(!grep(/^$arr[0]$/, @track_order));
 			die "error: $arr[2] in $p of $para error format, should like: +0.5:+0.5\n"if($arr[2]!~ /^([\d\.\+-]+):([\d\.\+-]+)$/);
+			die "error: $1 or $2 in $arr[-2] should not < -0.5\n" if($1 < -0.5 || $2 < -0.5);
 			$tracks_shift_y{sample}{$arr[0]}{shift_y_up}=$1;
-			$tracks_shift_y{sample}{$arr[0]}{shift_y_down}=1+$2;
+			$tracks_shift_y{sample}{$arr[0]}{shift_y_down}=$2;
 		}
 		for my $track(@track_order){
 			if(not exists $tracks_shift_y{sample}{$track}){
 				$tracks_shift_y{sample}{$track}{shift_y_up}=0;
-				$tracks_shift_y{sample}{$track}{shift_y_down}=1;
+				$tracks_shift_y{sample}{$track}{shift_y_down}=0;
 			}
-			$tracks_shift_y{num}+=$tracks_shift_y{sample}{$track}{shift_y_up}+$tracks_shift_y{sample}{$track}{shift_y_down};
+			$tracks_shift_y{num}+=$tracks_shift_y{sample}{$track}{shift_y_up}+$tracks_shift_y{sample}{$track}{shift_y_down}+1;
 		}
 	}
 	
@@ -303,7 +304,7 @@ sub get_para(){
 
 sub draw_genes(){
 #draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag, $conf, $ratio, $id_line_height, $shift_angle_closed_feature, $orders)=@_;
+	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag, $conf, $ratio, $id_line_height, $shift_angle_closed_feature, $orders, $up_percent_unit, $down_percent_unit)=@_;
 	if($index_color=~ /rgb\(\d+,\d+,\d+\),[^,]/ or $index_color=~ /[^,],rgb\(\d+,\d+,\d+\)/){
 		die "\nerror: should use ,, instead of , to separate the $index_color\n";
 	}
@@ -328,18 +329,18 @@ sub draw_genes(){
 	if($shape=~ /^circle_point/){
 		if($feature_shift_y_unit=~ /radius/){
 			$shift_unit=($end-$start)*$ratio;
-		}elsif($feature_shift_y_unit=~ /backbone/){
-			$shift_unit=$id_line_height;
-		}elsif($feature_shift_y_unit=~ /percent/){
-			$shift_unit=($sample_single_height-$id_line_height-1)/100;
-		}else{
+		}elsif($feature_shift_y_unit!~ /backbone/ && $feature_shift_y_unit!~ /percent/){
 			die "error: only support @feature_shift_y_units for feature_shift_y_unit, but not $feature_shift_y_unit\n";
 		}
 #print "circle shift_unit is $shift_unit\n";
 	}
 	die "\nerror: not support $feature_shift_y_unit for $feature_id. only support @feature_shift_y_units\n" if(! grep(/^$feature_shift_y_unit$/, @feature_shift_y_units));
 	if($feature_shift_y_unit=~ /percent/){
-		$shift_unit=($sample_single_height-$id_line_height-1)/100;
+		if($feature_shift_y=~ /^\d/ || $feature_shift_y=~ /^\+\d/){
+			$shift_unit=$down_percent_unit;
+		}else{
+			$shift_unit=$up_percent_unit;
+		}
 	}
 
 	$feature_shift_y=~ s/^([1-9].*)/\+$1/;
@@ -787,9 +788,11 @@ sub default_setting(){
 	$conf{cross_link_color} ||="#FF8C00";
 	$conf{cross_link_color_reverse} ||="#3CB371";
 	$conf{feature_shift_y_unit} ||="backbone"; # radius or backbone or percent
-		$conf{cross_link_orientation_ellipse} ||="up";
+	$conf{cross_link_orientation_ellipse} ||="up";
 	$conf{cross_link_shape} ||="quadrilateral";
 	$conf{cross_link_height_ellipse} ||="10,8";
+	$conf{cross_link_width_ellipse} ||=0.2;
+	$conf{correct_ellipse_coordinate} ||="no";
 	$conf{svg_background_color} ||="white";
 	$conf{feature_x_extent} ||="0bp,0bp";
 	$conf{feature_label_auto_angle_flag} =(exists $conf{feature_label_auto_angle_flag})? $conf{feature_label_auto_angle_flag}:1;
@@ -965,7 +968,7 @@ sub check_track_order(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "plot_depth", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "plot_depth", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

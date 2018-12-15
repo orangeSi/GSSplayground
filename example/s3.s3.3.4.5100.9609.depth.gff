@@ -88,4 +88,3 @@ s3	add	plot_depth	9400	9450	.	+	.	ID=s3.s3.3.scatter_line.86.4.5100.9609;
 s3	add	plot_depth	9450	9500	.	+	.	ID=s3.s3.3.scatter_line.87.4.5100.9609;
 s3	add	plot_depth	9500	9550	.	+	.	ID=s3.s3.3.scatter_line.88.4.5100.9609;
 s3	add	plot_depth	9550	9600	.	+	.	ID=s3.s3.3.scatter_line.89.4.5100.9609;
-s3	add	plot_depth	9600	9609	.	+	.	ID=s3.s3.3.scatter_line.90.4.5100.9609;

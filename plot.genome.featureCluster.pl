@@ -1,6 +1,7 @@
 #!/usr/bin/env perl -w
 use Getopt::Long;
 use FindBin qw($Bin);
+use List::Util qw(max min);
 use lib "$Bin";
 use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks);
 
@@ -89,8 +90,7 @@ my $ref_name_right_gap=0.1;
 my $left_distance_init = $ref_name_width_ratio * $svg_width ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
 
 
-my $ytick_region_ratio = $sample_single_height/100;
-print "ytick_region_ratio is $ytick_region_ratio\n";
+my ($down_percent_unit,$up_percent_unit,$ytick_region_ratio);
 
 while(@track_order){
 	$index++;
@@ -98,6 +98,9 @@ while(@track_order){
 	#die "num is $tracks_shift_y{num}, $sample_single_height * $tracks_shift_y{$sample}{shift_y}\n";
 	#$top_distance+=$sample_single_height * ($tracks_shift_y{$sample}{shift_y}-1) if($index == 1);
 	$top_distance+=$tracks_shift_y{sample}{$sample}{shift_y_up} * $sample_single_height;
+	$up_percent_unit=(($sample_single_height-$id_line_height)/2 -1 + $tracks_shift_y{sample}{$sample}{shift_y_up} * $sample_single_height)/100;
+	$down_percent_unit=(($sample_single_height-$id_line_height)/2 -1 + $tracks_shift_y{sample}{$sample}{shift_y_down} * $sample_single_height)/100;
+
 	die "error: sample :$sample: is not in gff file of --list \n" if (not exists $gff{$sample});
 	my $block_distance = $space_len*$ratio; # block_distance 是每个block的间距
 	my $flag;
@@ -210,8 +213,13 @@ while(@track_order){
             my $feature_height_ratio = &get_para("feature_height_ratio", $index_id, \%conf);
             my $feature_height_unit = &get_para("feature_height_unit", $index_id, \%conf);
 	        
+            my $feature_shift_y = &get_para("feature_shift_y", $index_id, \%conf);
             if($feature_height_unit=~ /percent/){
-                $gene_height_medium=($sample_single_height-$id_line_height-1)/100*$feature_height_ratio;
+			if($feature_shift_y=~ /^\d/||$feature_shift_y=~ /^\+\d/){
+		                $gene_height_medium=$down_percent_unit*$feature_height_ratio;
+			}else{
+		                $gene_height_medium=$up_percent_unit*$feature_height_ratio;
+			}
             }elsif($feature_height_unit=~ /backbone/){
     			$gene_height_medium = $id_line_height * $feature_height_ratio;
             }else{
@@ -227,7 +235,6 @@ while(@track_order){
             $conf{feature_setting2}{$index_id}{cross_link_shift_y}=0.5*$gene_height_medium + $sharp_len;
             
             my $gene_width_arrow = &get_para("feature_arrow_width_extent", $index_id, \%conf);
-            my $feature_shift_y = &get_para("feature_shift_y", $index_id, \%conf);
 
 			if(not $conf{feature_label_auto_angle_flag}){
 				$angle_flag = 0;
@@ -264,7 +271,7 @@ while(@track_order){
 				$index_label_col,
 				$index_label_position,
 				$index_label_angle,
-				$angle_flag, \%conf, $ratio, $id_line_height, $shift_angle_closed_feature, \%orders); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
+				$angle_flag, \%conf, $ratio, $id_line_height, $shift_angle_closed_feature, \%orders, $up_percent_unit, $down_percent_unit); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
             $svg.=$svg_gene;
             %orders=%$orders;
 			$pre_index_end = $index_end;
@@ -273,7 +280,7 @@ while(@track_order){
 		}
 		$shift_x+=($id_line_width+$block_distance);
 	}
-	$top_distance+=$sample_single_height * $tracks_shift_y{sample}{$sample}{shift_y_down};
+	$top_distance+=$sample_single_height * (1+$tracks_shift_y{sample}{$sample}{shift_y_down});
 	#$gff{$sample}{id}{$arr[0]}{$gene_index}{end}=$arr[4]
 
 
@@ -299,6 +306,8 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 	my $cross_link_opacity=(exists $conf{crossing_link2}{index}{$pair}{cross_link_opacity})? $conf{crossing_link2}{index}{$pair}{cross_link_opacity}:$conf{cross_link_opacity};
 	my $cross_link_order=(exists $conf{crossing_link2}{index}{$pair}{cross_link_order})? $conf{crossing_link2}{index}{$pair}{cross_link_order}:$conf{cross_link_order};
 	my $cross_link_anchor_pos=(exists $conf{crossing_link2}{index}{$pair}{cross_link_anchor_pos})? $conf{crossing_link2}{index}{$pair}{cross_link_anchor_pos}:$conf{cross_link_anchor_pos};
+	my $cross_link_width_ellipse=(exists $conf{crossing_link2}{index}{$pair}{cross_link_width_ellipse})? $conf{crossing_link2}{index}{$pair}{cross_link_width_ellipse}:$conf{cross_link_width_ellipse};
+	die "error: cross_link_width_ellipse $cross_link_width_ellipse should be number\n" if($cross_link_width_ellipse!~ /^[\d\.]+$/);
 	die "error: $up_id of crosslink is not in --list regions, please try to check it, conf{crossing_link2}{position}{$up_id}{start}{x}\n" if(not exists $conf{crossing_link2}{position}{$up_id}{start}{x});
 	my $left_up_x = $conf{crossing_link2}{position}{$up_id}{start}{x};
 	my $left_up_y = $conf{crossing_link2}{position}{$up_id}{start}{y};
@@ -337,9 +346,11 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 	}
 
 	if($cross_link_orientation_ellipse=~ /up/i){
-		$cross_link_orientation_ellipse="0,1,1,0"
+		$cross_link_orientation_ellipse="0,1,1,0";
+		$ytick_region_ratio=$up_percent_unit;
 	}elsif($cross_link_orientation_ellipse=~ /down/i){
-		$cross_link_orientation_ellipse="1,0,0,1"
+		$cross_link_orientation_ellipse="1,0,0,1";
+		$ytick_region_ratio=$down_percent_unit;
 	}else{
 		die "error: not support cross_link_orientation_ellipse=$cross_link_orientation_ellipse for $up_id and $down_id\n"
 	}
@@ -348,22 +359,49 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 	#if($fts{$up_id}{sample} eq $fts{$down_id}{sample} && $fts{$up_id}{scf} eq $fts{$down_id}{scf} && $cross_link_shape=~ /ellipse/i){
 	$cross_link_shape=~ s/\s+//g;
 	if($cross_link_shape=~ /ellipse/i){
+		die "error:cross_link_width_ellipse $cross_link_width_ellipse should <=1\n" if($cross_link_width_ellipse>1 || $cross_link_width_ellipse <0);
+		my $correct_ellipse_coordinate=(exists $conf{crossing_link2}{index}{$pair}{correct_ellipse_coordinate})? $conf{crossing_link2}{index}{$pair}{correct_ellipse_coordinate}:$conf{correct_ellipse_coordinate};
+		#$left_up_x=(1-$cross_link_width_ellipse)/2*($right_up_x-$left_up_x);
+		my $max=max($right_up_x-$left_up_x, $right_down_x-$left_down_x);
+		my $min=max($right_up_x-$left_up_x, $right_down_x-$left_down_x);
+		$cross_link_width_ellipse=($max*$cross_link_width_ellipse > $min)? $min:$max*$cross_link_width_ellipse;
+		$right_up_x=$left_up_x+$cross_link_width_ellipse;
+		$left_down_x=$right_down_x-$cross_link_width_ellipse;
+		if($correct_ellipse_coordinate=~ /yes/){
+			print "$left_up_x, $right_up_x, $left_down_x, $right_down_x\n";
+			my @tmp=($left_up_x, $right_up_x, $left_down_x, $right_down_x);
+			@tmp = sort {$a<=>$b} @tmp;
+			($left_up_x, $right_up_x, $left_down_x, $right_down_x)=@tmp;
+			my $flag=0;
+			while($flag < ($right_down_x-$left_down_x)/10){
+				$flag+=0.1;
+			}
+			$left_down_x-=$flag;
+			$flag+=0.1;
+			@tmp=($left_up_x, $right_up_x, $left_down_x, $right_down_x);
+			@tmp = sort {$a<=>$b} @tmp;
+			($left_up_x, $right_up_x, $left_down_x, $right_down_x)=@tmp;
+			die "$left_up_x, $right_up_x, $left_down_x, $right_down_x\n"
+		}elsif($correct_ellipse_coordinate!~ /no/){
+			die "error:correct_ellipse_coordinate only support yes or no\n, but $correct_ellipse_coordinate\n";
+		}
 		my $r1=($right_down_x - $left_up_x)/2;
 		my $r1_rev=($left_down_x - $right_up_x)/2;
 		my ($r2, $r2_rev)=split(",", $cross_link_height_ellipse); # r1 and r2 is radius of elipse
 		#print "ytick_region_ratio is $ytick_region_ratio\n";
 		#$r2 = $r2*$id_line_height * $ytick_region_ratio;
 		#$r2_rev = $r2_rev*$id_line_height * $ytick_region_ratio;
+
 		$r2 = $r2 * $ytick_region_ratio;
 		$r2_rev = $r2_rev * $ytick_region_ratio;
 		my $rotate=0;
 		my $rotate_rev=0;
 		my ($large_arc_flag, $sweep_flag, $large_arc_flag_rev, $sweep_flag_rev)=split(",", $cross_link_orientation_ellipse); #http://xahlee.info/js/svg_path_ellipse_arc.html
 
-
 		$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"fill:$color;opacity:$cross_link_opacity\" /></g>";
-		print "downid is $down_id, up is is $up_id\n";
-		next
+		#$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"fill:white;stroke:black;stroke-width:0.5;fill-opacity:0;stroke-opacity:1\" /></g>";
+		#print "downid is $down_id, up is is $up_id\n";
+		next;
 	}elsif($cross_link_shape=~ /quadrilateral/i){
 		if($cross_link_orientation=~ /reverse/i){
 			$color=(exists $conf{crossing_link2}{index}{$pair}{cross_link_color_reverse})? $conf{crossing_link2}{index}{$pair}{cross_link_color_reverse}:$conf{cross_link_color_reverse};

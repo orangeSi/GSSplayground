@@ -8,10 +8,12 @@ our @EXPORT_OK = qw(sub1 sub2 sub3 sub4 sub5);
 
 sub sub1(){
     my ($tmp, $a)=@_;
+    my %a=%$a;
     #&sub3($tmp, $a);
     print "sub1 $_[0]\n";
     print "sub1 again $_[0]\n";
     print "$a->{1}=2\n\n";
+    print "$a{1}=2\n\n";
     
 }
 sub sub2(){
