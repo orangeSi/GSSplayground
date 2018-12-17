@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1500" height="800" >
-<text x="150" y="139" font-size="15px" fill="black"  text-anchor='end'>s1</text>
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M303.910824930142,130 L326.462762726279,130" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M463.870125136678,130 L486.422062932815,130" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M1062.15708905358,130 L1084.70902684971,130" /></g><text x="150" y="319" font-size="15px" fill="black"  text-anchor='end'>s2</text>
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M985.161584254647,310 L1007.71352205078,310" /></g><text x="150" y="499" font-size="15px" fill="black"  text-anchor='end'>s3</text>
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M396.897703802697,490 L419.449641598834,490" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M556.401409306281,490 L578.953347102418,490" /></g><text x="150" y="679" font-size="15px" fill="black"  text-anchor='end'>s4</text>
-<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M689.025027335682,670 L711.576965131819,670" /></g>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1500" height="800" style="background-color:white;">
+<text x="135" y="130.18" font-size="15px" fill="black"  text-anchor='end'>s1</text>
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M291.775853517401,130 L314.792923865421,130" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M455.034306026287,130 L478.051376374308,130" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M1065.66090766306,130 L1088.67797801108,130" /></g><text x="135" y="310.18" font-size="15px" fill="black"  text-anchor='end'>s2</text>
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M987.077374555675,310 L1010.0944449037,310" /></g><text x="135" y="490.18" font-size="15px" fill="black"  text-anchor='end'>s3</text>
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M242.998264032405,490 L266.015334380425,490" /></g><g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M404.861742580805,490 L427.878812928825,490" /></g><text x="135" y="670.18" font-size="15px" fill="black"  text-anchor='end'>s4</text>
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M684.83301645036,670 L707.85008679838,670" /></g>
 			<defs>
 			<linearGradient id="blue--green" x1="0%" y1="0%" x2="0%" y2="100%">
 			<stop offset="0%" style="stop-color:blue;stop-opacity:1"/>
@@ -12,8 +12,8 @@
 			</linearGradient>
 			</defs>
 			<g style="fill:none">
-			<rect x="1312.125" y="345.82" width="47.25" height="25.2" style="fill:url(#blue--green);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1" />
-			</g><text x="1365.45" y="369.76" font-size="20px" fill="black" text-anchor='start'>legend.s1i</text>
+			<rect x="1312.125" y="394.582" width="47.25" height="2.52" style="fill:url(#blue--green);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1" />
+			</g><text x="1365.45" y="396.976" font-size="20px" fill="black" text-anchor='start'>legend.s1i</text>
 			<defs>
 			<linearGradient id="red--blue" x1="0%" y1="0%" x2="0%" y2="100%">
 			<stop offset="0%" style="stop-color:red;stop-opacity:1"/>
@@ -22,8 +22,8 @@
 			</linearGradient>
 			</defs>
 			<g style="fill:none">
-			<rect x="1312.125" y="373.54" width="47.25" height="25.2" style="fill:url(#red--blue);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1" />
-			</g><text x="1365.45" y="397.48" font-size="20px" fill="black" text-anchor='start'>legend.s1</text><rect x="1312.125" y="401.26" width="47.25" height="25.2" style="fill:rgb(255,165,0);stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="425.2" font-size="20px" fill="black" text-anchor='start'>legend.s2</text>
+			<rect x="1312.125" y="397.354" width="47.25" height="2.52" style="fill:url(#red--blue);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1" />
+			</g><text x="1365.45" y="399.748" font-size="20px" fill="black" text-anchor='start'>legend.s1</text><rect x="1312.125" y="400.126" width="47.25" height="2.52" style="fill:rgb(255,165,0);stroke:black;stroke-width:0.5;fill-opacity:1;stroke-opacity:1" /><text x="1365.45" y="402.52" font-size="20px" fill="black" text-anchor='start'>legend.s2</text>
 			<defs>
 			<linearGradient id="rgb-255-165-0---black" x1="0%" y1="0%" x2="0%" y2="100%">
 			<stop offset="0%" style="stop-color:rgb(255,165,0);stop-opacity:1"/>
@@ -32,1067 +32,1050 @@
 			</linearGradient>
 			</defs>
 			<g style="fill:none">
-			<rect x="1312.125" y="428.98" width="47.25" height="25.2" style="fill:url(#rgb-255-165-0---black);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1" />
-			</g><text x="1365.45" y="452.92" font-size="20px" fill="black" text-anchor='start'>legend.s2</text>
-<line x1="165" y1="752" x2="1290" y2="752" style="stroke:green;stroke-width:0.5"/>
-<line x1="165" y1="744" x2="165" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="165" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
-<line x1="256.118940590451" y1="744" x2="256.118940590451" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="256.118940590451" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
-<line x1="347.237881180901" y1="744" x2="347.237881180901" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="347.237881180901" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
-<line x1="438.356821771352" y1="744" x2="438.356821771352" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="438.356821771352" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
-<line x1="529.475762361803" y1="744" x2="529.475762361803" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="529.475762361803" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
-<line x1="620.594702952254" y1="744" x2="620.594702952254" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="620.594702952254" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
-<line x1="711.713643542704" y1="744" x2="711.713643542704" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="711.713643542704" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
-<line x1="802.832584133155" y1="744" x2="802.832584133155" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="802.832584133155" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
-<line x1="893.951524723606" y1="744" x2="893.951524723606" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="893.951524723606" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
-<line x1="985.070465314057" y1="744" x2="985.070465314057" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="985.070465314057" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
-<line x1="1076.18940590451" y1="744" x2="1076.18940590451" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1076.18940590451" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
-<line x1="1167.30834649496" y1="744" x2="1167.30834649496" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1167.30834649496" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
-<line x1="1258.42728708541" y1="744" x2="1258.42728708541" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1258.42728708541" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24000</text>
-<line x1="1290" y1="744" x2="1290" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1290" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24693</text>
-<line x1="165" y1="24" x2="1290" y2="24" style="stroke:green;stroke-width:0.5"/>
-<line x1="165" y1="32" x2="165" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="165" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
-<line x1="256.118940590451" y1="32" x2="256.118940590451" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="256.118940590451" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2000</text>
-<line x1="347.237881180901" y1="32" x2="347.237881180901" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="347.237881180901" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4000</text>
-<line x1="438.356821771352" y1="32" x2="438.356821771352" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="438.356821771352" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6000</text>
-<line x1="529.475762361803" y1="32" x2="529.475762361803" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="529.475762361803" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8000</text>
-<line x1="620.594702952254" y1="32" x2="620.594702952254" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="620.594702952254" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10000</text>
-<line x1="711.713643542704" y1="32" x2="711.713643542704" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="711.713643542704" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12000</text>
-<line x1="802.832584133155" y1="32" x2="802.832584133155" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="802.832584133155" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14000</text>
-<line x1="893.951524723606" y1="32" x2="893.951524723606" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="893.951524723606" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16000</text>
-<line x1="985.070465314057" y1="32" x2="985.070465314057" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="985.070465314057" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18000</text>
-<line x1="1076.18940590451" y1="32" x2="1076.18940590451" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1076.18940590451" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20000</text>
-<line x1="1167.30834649496" y1="32" x2="1167.30834649496" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1167.30834649496" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22000</text>
-<line x1="1258.42728708541" y1="32" x2="1258.42728708541" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1258.42728708541" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24000</text>
-<line x1="1290" y1="32" x2="1290" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text x="1290" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24693</text>
-
-
-<text x="926.480986514397" y="182.8" font-size="15px" fill="green"  text-anchor='start'   transform="rotate(60 926.480986514397 182.8)" font-family="Times New Roman">gene_s1030000.label</text>
-<polygon points="582.734783136921,160.6 595.126959057223,160.6 545.877171668084,279.4 533.484995747783,279.4" style="fill:#00BFFF;stroke:#000000;stroke-width:0;opacity:0.8"/>
-<polygon points="298.261450613534,310 307.099987850808,310 297.805855910582,490 306.644393147856,490" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:0.5"/>
-<polygon points="297.805855910582,520.6 306.644393147856,520.6 216.026606730652,639.4 207.188069493379,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="487.834406511967,160.6 506.787146154781,160.6 438.584619122828,279.4 457.537358765642,279.4" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1008.16911675374,160.6 1057.05442838051,160.6 1115.50722876929,279.4 1103.11505284899,279.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="609.478192200219,520.6 652.21297533714,520.6 598.133884096708,639.4 617.086623739521,639.4" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="298.261450613534,340.6 307.099987850808,340.6 458.311869760661,459.4 441.409306281132,459.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="438.584619122828,340.6 457.537358765642,340.6 598.407240918479,459.4 579.454501275665,459.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="1103.11505284899,340.6 1115.50722876929,340.6 728.251731259871,639.4 715.85955533957,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.3"/>
-<polygon points="533.484995747783,340.6 545.877171668084,340.6 686.747053820921,459.4 674.35487790062,459.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-<polygon points="674.35487790062,520.6 686.747053820921,520.6 542.323532985057,639.4 522.414044466043,639.4" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/>
-
-
-<g><title>s1,2,3050</title><rect x="165" y="121" width="138.910824930142" height="18" style="fill:blue"   /></g>
-<g><title>s1,3000,6010</title><rect x="326.690560077755" y="121" width="137.179565058924" height="18" style="fill:blue"   /></g>
-<g><title>s1,5980,9609</title><rect x="486.649860284291" y="121" width="165.380877171668" height="18" style="fill:blue"   /></g>
-<g><title>s1000,2000,6000</title><rect x="674.810472603572" y="121" width="182.283440651197" height="18" style="fill:blue"   /></g>
-
-			<defs>
-			<linearGradient id="blue--green" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:blue;stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:green;stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:blue;stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s103000,s1,s1000,2925,3119,1</title>
-			<polygon points="716.998542096951,112 716.998542096951,148 723.185518163042,148 723.185518163042,160.6 725.837079334224,130 723.185518163042,99.4 723.185518163042,112" style="fill:url(#blue--green);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-<text x="721.417810715587" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 721.417810715587 97.4)" font-family="Times New Roman">gene_s103000.label</text>
-<g><title>s10000,6000,10000</title><rect x="1084.93682420119" y="121" width="182.283440651197" height="18" style="fill:blue"   /></g>
-<g><title>s2,1,9000</title><rect x="165" y="301" width="410.035232657028" height="18" style="fill:blue"   /></g>
-<g><title>s2000,2000,6000</title><rect x="597.814967804641" y="301" width="182.283440651197" height="18" style="fill:blue"   /></g>
-<g><title>s20000,2000,6000</title><rect x="802.87814360345" y="301" width="182.283440651197" height="18" style="fill:blue"   /></g>
-<g><title>s20000,6000,10000</title><rect x="1007.94131940226" y="301" width="182.283440651197" height="18" style="fill:blue"   /></g>
-<g><title>s3,11,5100</title><rect x="165" y="481" width="231.897703802697" height="18" style="fill:blue"   /></g>
-<g><title>s3,3000,6000</title><rect x="419.67743895031" y="481" width="136.723970355971" height="18" style="fill:blue"   /></g>
-<g><title>s3,6000,9609</title><rect x="579.181144453894" y="481" width="164.469687765764" height="18" style="fill:blue"   /></g>
-<g><title>s3000,2000,6000</title><rect x="766.43056736727" y="481" width="182.283440651197" height="18" style="fill:blue"   /></g>
-<g><title>s30000,2000,6000</title><rect x="971.49374316608" y="481" width="182.283440651197" height="18" style="fill:blue"   /></g>
-<g><title>s4000,2000,6000</title><rect x="165" y="661" width="182.283440651197" height="18" style="fill:blue"   /></g>
-<g><title>s40000,1000,8000</title><rect x="370.063175798809" y="661" width="318.961851536873" height="18" style="fill:blue"   /></g>
-<g><title>s40000,8000,9609</title><rect x="711.804762483295" y="661" width="73.3507471753128" height="18" style="fill:blue"   /></g>
-
-
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s101,s1,s1,87,1109,1</title>
-			<polygon points="168.918114445389,112 168.918114445389,148 201.511359494594,148 201.511359494594,160.6 215.47989308711,130 201.511359494594,99.4 201.511359494594,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s102,s1,s1,1106,1888,1</title>
-			<polygon points="215.343214676224,112 215.343214676224,148 240.28246871583,148 240.28246871583,160.6 250.97072044709,130 240.28246871583,99.4 240.28246871583,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s104,s1,s1,3486,3857,1</title>
-			<polygon points="348.87802211153,112 348.87802211153,148 360.7098165472,148 360.7098165472,160.6 365.780585591058,130 360.7098165472,99.4 360.7098165472,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s105,s1,s1,4343,4780,1</title>
-			<polygon points="387.922488154538,112 387.922488154538,148 401.859130117847,148 401.859130117847,160.6 407.831976673551,130 401.859130117847,99.4 401.859130117847,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s106,s1,s1,4815,5888,0</title>
-			<polygon points="409.426558133884,130 424.092151621917,160.6 424.092151621917,148 458.311869760661,148 458.311869760661,112 424.092151621917,112 424.092151621917,99.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s107,s1,s1,6005,6421,1</title>
-			<polygon points="487.834406511967,112 487.834406511967,148 501.101324261937,148 501.101324261937,160.6 506.787146154781,130 501.101324261937,99.4 501.101324261937,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s108,s1,s1,6664,7602,1</title>
-			<polygon points="517.858097436521,112 517.858097436521,148 547.772445632365,148 547.772445632365,160.6 560.592880573442,130 547.772445632365,99.4 547.772445632365,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s109,s1,s1,7789,8088,0</title>
-			<polygon points="569.112501518649,130 573.199186004131,160.6 573.199186004131,148 582.734783136921,148 582.734783136921,112 573.199186004131,112 573.199186004131,99.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s110,s1,s1,8088,8360,0</title>
-			<polygon points="582.734783136921,130 586.452435913012,160.6 586.452435913012,148 595.126959057223,148 595.126959057223,112 586.452435913012,112 586.452435913012,99.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s104000,s1,s1000,3486,3857,1</title>
-			<polygon points="742.557404932572,112 742.557404932572,148 754.389199368242,148 754.389199368242,160.6 759.459968412101,130 754.389199368242,99.4 754.389199368242,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s105000,s1,s1000,4343,4780,1</title>
-			<polygon points="781.60187097558,112 781.60187097558,148 795.53851293889,148 795.53851293889,160.6 801.511359494594,130 795.53851293889,99.4 795.53851293889,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s106000,s1,s1000,4815,5888,0</title>
-			<polygon points="803.105940954927,130 817.77153444296,160.6 817.77153444296,148 851.991252581704,148 851.991252581704,112 817.77153444296,112 817.77153444296,99.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s1040000,s1,s10000,3486,3857,1</title>
-			<polygon points="947.620580731382,112 947.620580731382,148 959.452375167052,148 959.452375167052,160.6 964.52314421091,130 959.452375167052,99.4 959.452375167052,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s1050000,s1,s10000,4343,4780,1</title>
-			<polygon points="986.66504677439,112 986.66504677439,148 1000.6016887377,148 1000.6016887377,160.6 1006.5745352934,130 1000.6016887377,99.4 1000.6016887377,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s1060000,s1,s10000,4815,5888,0</title>
-			<polygon points="1008.16911675374,130 1022.83471024177,160.6 1022.83471024177,148 1057.05442838051,148 1057.05442838051,112 1022.83471024177,112 1022.83471024177,99.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s1070000,s1,s10000,6005,6421,1</title>
-			<polygon points="1085.21018102296,112 1085.21018102296,148 1098.47709877293,148 1098.47709877293,160.6 1104.16292066578,130 1098.47709877293,99.4 1098.47709877293,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s1080000,s1,s10000,6664,7602,1</title>
-			<polygon points="1115.23387194752,112 1115.23387194752,148 1145.14822014336,148 1145.14822014336,160.6 1157.96865508444,130 1145.14822014336,99.4 1145.14822014336,112" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s1090000,s1,s10000,7789,8088,0</title>
-			<polygon points="1166.48827602964,130 1170.57496051513,160.6 1170.57496051513,148 1180.11055764792,148 1180.11055764792,112 1170.57496051513,112 1170.57496051513,99.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s1100000,s1,s10000,8088,8360,0</title>
-			<polygon points="1180.11055764792,130 1183.82821042401,160.6 1183.82821042401,148 1192.50273356822,148 1192.50273356822,112 1183.82821042401,112 1183.82821042401,99.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s11000001,s1,s10000,8361,8560,0</title>
-			<polygon points="1192.54829303851,130 1195.26819341514,160.6 1195.26819341514,148 1201.61462762726,148 1201.61462762726,112 1195.26819341514,112 1195.26819341514,99.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s201,s2,s2,87,1109,1</title>
-			<polygon points="168.963673915685,292 168.963673915685,328 201.556918964889,328 201.556918964889,340.6 215.525452557405,310 201.556918964889,279.4 201.556918964889,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s202,s2,s2,1106,1888,1</title>
-			<polygon points="215.388774146519,292 215.388774146519,328 240.328028186126,328 240.328028186126,340.6 251.016279917386,310 240.328028186126,279.4 240.328028186126,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s203,s2,s2,2925,3119,1</title>
-			<polygon points="298.261450613534,292 298.261450613534,328 304.448426679626,328 304.448426679626,340.6 307.099987850808,310 304.448426679626,279.4 304.448426679626,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s204,s2,s2,3486,3857,1</title>
-			<polygon points="323.820313449156,292 323.820313449156,328 335.652107884826,328 335.652107884826,340.6 340.722876928684,310 335.652107884826,279.4 335.652107884826,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s205,s2,s2,4343,4780,1</title>
-			<polygon points="362.864779492164,292 362.864779492164,328 376.801421455473,328 376.801421455473,340.6 382.774268011177,310 376.801421455473,279.4 376.801421455473,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s206,s2,s2,4815,5888,0</title>
-			<polygon points="384.36884947151,310 399.034442959543,340.6 399.034442959543,328 433.254161098287,328 433.254161098287,292 399.034442959543,292 399.034442959543,279.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<g style="fill:none">
-			<title>gene_s207,s2,s2,6005,6421,1</title>
-			<polygon points="438.584619122828,292 438.584619122828,328 438.584619122828,328 438.584619122828,340.6 457.537358765642,310 438.584619122828,279.4 438.584619122828,292" style="fill:rgb(255,165,0);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s208,s2,s2,6664,7602,1</title>
-			<polygon points="468.608310047382,292 468.608310047382,328 498.522658243227,328 498.522658243227,340.6 511.343093184303,310 498.522658243227,279.4 498.522658243227,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s209,s2,s2,7789,8088,0</title>
-			<polygon points="519.86271412951,310 523.949398614992,340.6 523.949398614992,328 533.484995747783,328 533.484995747783,292 523.949398614992,292 523.949398614992,279.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s210,s2,s2,8088,8360,0</title>
-			<polygon points="533.484995747783,310 537.202648523873,340.6 537.202648523873,328 545.877171668084,328 545.877171668084,292 537.202648523873,292 537.202648523873,279.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s203000,s2,s2000,2925,3119,1</title>
-			<polygon points="640.00303729802,292 640.00303729802,328 646.190013364111,328 646.190013364111,340.6 648.841574535293,310 646.190013364111,279.4 646.190013364111,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s204000,s2,s2000,3486,3857,1</title>
-			<polygon points="665.561900133641,292 665.561900133641,328 677.393694569311,328 677.393694569311,340.6 682.46446361317,310 677.393694569311,279.4 677.393694569311,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s205000,s2,s2000,4343,4780,1</title>
-			<polygon points="704.606366176649,292 704.606366176649,328 718.543008139959,328 718.543008139959,340.6 724.515854695663,310 718.543008139959,279.4 718.543008139959,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-255-165-0---black" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(255,165,0);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:black;stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(255,165,0);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s206000,s2,s2000,4815,5888,0</title>
-			<polygon points="726.110436155996,292 726.110436155996,328 774.995747782772,328 774.995747782772,292 " style="fill:url(#rgb-255-165-0---black);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s2030000,s2,s20000,2925,3119,1</title>
-			<polygon points="845.066213096829,292 845.066213096829,328 851.253189162921,328 851.253189162921,340.6 853.904750334103,310 851.253189162921,279.4 851.253189162921,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s2040000,s2,s20000,3486,3857,1</title>
-			<polygon points="870.625075932451,292 870.625075932451,328 882.456870368121,328 882.456870368121,340.6 887.527639411979,310 882.456870368121,279.4 882.456870368121,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s2050000,s2,s20000,4343,4780,1</title>
-			<polygon points="909.669541975459,292 909.669541975459,328 923.606183938768,328 923.606183938768,340.6 929.579030494472,310 923.606183938768,279.4 923.606183938768,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s2060000,s2,s20000,4815,5888,0</title>
-			<polygon points="931.173611954805,310 945.839205442838,340.6 945.839205442838,328 980.058923581582,328 980.058923581582,292 945.839205442838,292 945.839205442838,279.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<g style="fill:none">
-			<title>gene_s2070000,s2,s20000,6005,6421,1</title>
-			<polygon points="1008.21467622403,292 1008.21467622403,328 1021.481593974,328 1021.481593974,340.6 1027.16741586684,310 1021.481593974,279.4 1021.481593974,292" style="fill:rgb(255,165,0);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s2080000,s2,s20000,6664,7602,1</title>
-			<polygon points="1038.23836714858,292 1038.23836714858,328 1068.15271534443,328 1068.15271534443,340.6 1080.97315028551,310 1068.15271534443,279.4 1068.15271534443,292" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s2090000,s2,s20000,7789,8088,0</title>
-			<polygon points="1089.49277123071,310 1093.5794557162,340.6 1093.5794557162,328 1103.11505284899,328 1103.11505284899,292 1093.5794557162,292 1093.5794557162,279.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s2100000,s2,s20000,8088,8360,0</title>
-			<polygon points="1103.11505284899,310 1106.83270562508,340.6 1106.83270562508,328 1115.50722876929,328 1115.50722876929,292 1106.83270562508,292 1106.83270562508,279.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s301,s3,s3,87,1109,1</title>
-			<polygon points="168.508079212732,472 168.508079212732,508 201.101324261937,508 201.101324261937,520.6 215.069857854453,490 201.101324261937,459.4 201.101324261937,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s302,s3,s3,1106,1888,1</title>
-			<polygon points="214.933179443567,472 214.933179443567,508 239.872433483173,508 239.872433483173,520.6 250.560685214433,490 239.872433483173,459.4 239.872433483173,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s303,s3,s3,2925,3119,1</title>
-			<polygon points="297.805855910582,472 297.805855910582,508 303.992831976674,508 303.992831976674,520.6 306.644393147856,490 303.992831976674,459.4 303.992831976674,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s304,s3,s3,3486,3857,1</title>
-			<polygon points="441.409306281132,472 441.409306281132,508 453.241100716802,508 453.241100716802,520.6 458.311869760661,490 453.241100716802,459.4 453.241100716802,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s305,s3,s3,4343,4780,1</title>
-			<polygon points="480.45377232414,472 480.45377232414,508 494.39041428745,508 494.39041428745,520.6 500.363260843154,490 494.39041428745,459.4 494.39041428745,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s306,s3,s3,4815,5888,0</title>
-			<polygon points="502.413437006439,490 517.079030494472,520.6 517.079030494472,508 551.298748633216,508 551.298748633216,472 517.079030494472,472 517.079030494472,459.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s307,s3,s3,6005,6421,1</title>
-			<polygon points="579.454501275665,472 579.454501275665,508 592.721419025635,508 592.721419025635,520.6 598.407240918479,490 592.721419025635,459.4 592.721419025635,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s308,s3,s3,6664,7602,1</title>
-			<polygon points="609.478192200219,472 609.478192200219,508 639.392540396064,508 639.392540396064,520.6 652.21297533714,490 639.392540396064,459.4 639.392540396064,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s309,s3,s3,7789,8088,0</title>
-			<polygon points="660.732596282347,490 664.819280767829,520.6 664.819280767829,508 674.35487790062,508 674.35487790062,472 664.819280767829,472 664.819280767829,459.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s310,s3,s3,8088,8360,0</title>
-			<polygon points="674.35487790062,490 678.07253067671,520.6 678.07253067671,508 686.747053820921,508 686.747053820921,472 678.07253067671,472 678.07253067671,459.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s303000,s3,s3000,2925,3119,1</title>
-			<polygon points="808.618636860649,472 808.618636860649,508 814.80561292674,508 814.80561292674,520.6 817.457174097923,490 814.80561292674,459.4 814.80561292674,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s304000,s3,s3000,3486,3857,1</title>
-			<polygon points="834.17749969627,472 834.17749969627,508 846.00929413194,508 846.00929413194,520.6 851.080063175799,490 846.00929413194,459.4 846.00929413194,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s305000,s3,s3000,4343,4780,1</title>
-			<polygon points="873.221965739278,472 873.221965739278,508 887.158607702588,508 887.158607702588,520.6 893.131454258292,490 887.158607702588,459.4 887.158607702588,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s306000,s3,s3000,4815,5888,0</title>
-			<polygon points="894.726035718625,490 909.391629206658,520.6 909.391629206658,508 943.611347345402,508 943.611347345402,472 909.391629206658,472 909.391629206658,459.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s3030000,s3,s30000,2925,3119,1</title>
-			<polygon points="1013.68181265946,472 1013.68181265946,508 1019.86878872555,508 1019.86878872555,520.6 1022.52034989673,490 1019.86878872555,459.4 1019.86878872555,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s3040000,s3,s30000,3486,3857,1</title>
-			<polygon points="1039.24067549508,472 1039.24067549508,508 1051.07246993075,508 1051.07246993075,520.6 1056.14323897461,490 1051.07246993075,459.4 1051.07246993075,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s3050000,s3,s30000,4343,4780,1</title>
-			<polygon points="1078.28514153809,472 1078.28514153809,508 1092.2217835014,508 1092.2217835014,520.6 1098.1946300571,490 1092.2217835014,459.4 1092.2217835014,472" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s3060000,s3,s30000,4815,5888,0</title>
-			<polygon points="1099.78921151743,490 1114.45480500547,520.6 1114.45480500547,508 1148.67452314421,508 1148.67452314421,472 1114.45480500547,472 1114.45480500547,459.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s403000,s4,s4000,2925,3119,1</title>
-			<polygon points="207.188069493379,652 207.188069493379,688 213.37504555947,688 213.37504555947,700.6 216.026606730652,670 213.37504555947,639.4 213.37504555947,652" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s404000,s4,s4000,3486,3857,1</title>
-			<polygon points="232.746932329,652 232.746932329,688 244.57872676467,688 244.57872676467,700.6 249.649495808529,670 244.57872676467,639.4 244.57872676467,652" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s405000,s4,s4000,4343,4780,1</title>
-			<polygon points="271.791398372008,652 271.791398372008,688 285.728040335318,688 285.728040335318,700.6 291.700886891022,670 285.728040335318,639.4 285.728040335318,652" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s406000,s4,s4000,4815,5888,0</title>
-			<polygon points="293.295468351355,670 307.961061839388,700.6 307.961061839388,688 342.180779978131,688 342.180779978131,652 307.961061839388,652 307.961061839388,639.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s4020000,s4,s40000,1106,1888,1</title>
-			<polygon points="374.938039120399,652 374.938039120399,688 399.877293160005,688 399.877293160005,700.6 410.565544891265,670 399.877293160005,639.4 399.877293160005,652" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s4030000,s4,s40000,2925,3119,1</title>
-			<polygon points="457.810715587413,652 457.810715587413,688 463.997691653505,688 463.997691653505,700.6 466.649252824687,670 463.997691653505,639.4 463.997691653505,652" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s4040000,s4,s40000,3486,3857,1</title>
-			<polygon points="483.369578423035,652 483.369578423035,688 495.201372858705,688 495.201372858705,700.6 500.272141902564,670 495.201372858705,639.4 495.201372858705,652" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s4050000,s4,s40000,4343,4780,1</title>
-			<polygon points="522.414044466043,652 522.414044466043,688 536.350686429352,688 536.350686429352,700.6 542.323532985057,670 536.350686429352,639.4 536.350686429352,652" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s4060000,s4,s40000,4815,5888,0</title>
-			<polygon points="543.918114445389,670 558.583707933422,700.6 558.583707933422,688 592.803426072166,688 592.803426072166,652 558.583707933422,652 558.583707933422,639.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s4070000,s4,s40000,6005,6421,1</title>
-			<polygon points="598.133884096708,652 598.133884096708,688 611.400801846677,688 611.400801846677,700.6 617.086623739521,670 611.400801846677,639.4 611.400801846677,652" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s4080000,s4,s40000,6664,7602,1</title>
-			<polygon points="628.157575021261,652 628.157575021261,688 658.071923217106,688 658.071923217106,700.6 670.892358158183,670 658.071923217106,639.4 658.071923217106,652" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s4100000,s4,s40000,8088,8360,0</title>
-			<polygon points="715.85955533957,670 719.57720811566,700.6 719.57720811566,688 728.251731259871,688 728.251731259871,652 719.57720811566,652 719.57720811566,639.4" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-			<defs>
-			<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s410000000,s4,s40000,8188,8260,1</title>
-			<polygon points="720.415502369092,652 720.415502369092,688 722.711699671972,688 722.711699671972,700.6 723.695784230349,670 722.711699671972,639.4 722.711699671972,652" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
-
-
-<text x="192.19900376625" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 192.19900376625 97.4)" font-family="Times New Roman">gene_s101</text>
-<text x="233.156967561657" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 233.156967561657 97.4)" font-family="Times New Roman">gene_s102</text>
-<text x="357.329303851294" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 357.329303851294 97.4)" font-family="Times New Roman">gene_s104</text>
-<text x="397.877232414044" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 397.877232414044 97.4)" font-family="Times New Roman">gene_s105</text>
-<text x="433.869213947273" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 433.869213947273 97.4)" font-family="Times New Roman">gene_s106</text>
-<text x="497.310776333374" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 497.310776333374 97.4)" font-family="Times New Roman">gene_s107</text>
-<text x="539.225489004981" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 539.225489004981 97.4)" font-family="Times New Roman">gene_s108</text>
-<text x="575.923642327785" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 575.923642327785 97.4)" font-family="Times New Roman">gene_s109</text>
-<text x="588.930871097072" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-30 588.930871097072 97.4)" font-family="Times New Roman">gene_s110</text>
-<text x="751.008686672336" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 751.008686672336 97.4)" font-family="Times New Roman">gene_s104000</text>
-<text x="791.556615235087" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 791.556615235087 97.4)" font-family="Times New Roman">gene_s105000</text>
-<text x="827.548596768315" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 827.548596768315 97.4)" font-family="Times New Roman">gene_s106000</text>
-<text x="956.071862471146" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 956.071862471146 97.4)" font-family="Times New Roman">gene_s1040000</text>
-<text x="996.619791033896" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 996.619791033896 97.4)" font-family="Times New Roman">gene_s1050000</text>
-<text x="1032.61177256712" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1032.61177256712 97.4)" font-family="Times New Roman">gene_s1060000</text>
-<text x="1094.68655084437" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1094.68655084437 97.4)" font-family="Times New Roman">gene_s1070000</text>
-<text x="1136.60126351598" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1136.60126351598 97.4)" font-family="Times New Roman">gene_s1080000</text>
-<text x="1173.29941683878" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 1173.29941683878 97.4)" font-family="Times New Roman">gene_s1090000</text>
-<text x="1186.30664560807" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-30 1186.30664560807 97.4)" font-family="Times New Roman">gene_s1100000</text>
-<text x="1197.08146033289" y="97.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-20 1197.08146033289 97.4)" font-family="Times New Roman">gene_s11000001</text>
-<text x="192.244563236545" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 192.244563236545 277.4)" font-family="Times New Roman">gene_s201</text>
-<text x="233.202527031952" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 233.202527031952 277.4)" font-family="Times New Roman">gene_s202</text>
-<text x="302.680719232171" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 302.680719232171 277.4)" font-family="Times New Roman">gene_s203</text>
-<text x="332.27159518892" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 332.27159518892 277.4)" font-family="Times New Roman">gene_s204</text>
-<text x="372.819523751671" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 372.819523751671 277.4)" font-family="Times New Roman">gene_s205</text>
-<text x="408.811505284899" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 408.811505284899 277.4)" font-family="Times New Roman">gene_s206</text>
-<text x="448.060988944235" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 448.060988944235 277.4)" font-family="Times New Roman">gene_s207.label</text>
-<text x="489.975701615843" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 489.975701615843 277.4)" font-family="Times New Roman">gene_s208</text>
-<text x="526.673854938647" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 526.673854938647 277.4)" font-family="Times New Roman">gene_s209</text>
-<text x="539.681083707933" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-30 539.681083707933 277.4)" font-family="Times New Roman">gene_s210</text>
-<text x="644.422305916657" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 644.422305916657 277.4)" font-family="Times New Roman">gene_s203000</text>
-<text x="674.013181873406" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 674.013181873406 277.4)" font-family="Times New Roman">gene_s204000</text>
-<text x="714.561110436156" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 714.561110436156 277.4)" font-family="Times New Roman">gene_s205000</text>
-<text x="750.553091969384" y="290" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 750.553091969384 290)" font-family="Times New Roman">gene_s206000.label</text>
-<text x="849.485481715466" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 849.485481715466 277.4)" font-family="Times New Roman">gene_s2030000</text>
-<text x="879.076357672215" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 879.076357672215 277.4)" font-family="Times New Roman">gene_s2040000</text>
-<text x="919.624286234965" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 919.624286234965 277.4)" font-family="Times New Roman">gene_s2050000</text>
-<text x="955.616267768194" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 955.616267768194 277.4)" font-family="Times New Roman">gene_s2060000</text>
-<text x="1017.69104604544" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1017.69104604544 277.4)" font-family="Times New Roman">gene_s2070000.label</text>
-<text x="1059.60575871705" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1059.60575871705 277.4)" font-family="Times New Roman">gene_s2080000</text>
-<text x="1096.30391203985" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 1096.30391203985 277.4)" font-family="Times New Roman">gene_s2090000</text>
-<text x="1109.31114080914" y="277.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-30 1109.31114080914 277.4)" font-family="Times New Roman">gene_s2100000</text>
-<text x="191.788968533593" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 191.788968533593 457.4)" font-family="Times New Roman">gene_s301</text>
-<text x="232.746932329" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 232.746932329 457.4)" font-family="Times New Roman">gene_s302</text>
-<text x="302.225124529219" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 302.225124529219 457.4)" font-family="Times New Roman">gene_s303</text>
-<text x="449.860588020897" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 449.860588020897 457.4)" font-family="Times New Roman">gene_s304</text>
-<text x="490.408516583647" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 490.408516583647 457.4)" font-family="Times New Roman">gene_s305</text>
-<text x="526.856092819827" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 526.856092819827 457.4)" font-family="Times New Roman">gene_s306</text>
-<text x="588.930871097072" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 588.930871097072 457.4)" font-family="Times New Roman">gene_s307</text>
-<text x="630.845583768679" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 630.845583768679 457.4)" font-family="Times New Roman">gene_s308</text>
-<text x="667.543737091483" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 667.543737091483 457.4)" font-family="Times New Roman">gene_s309</text>
-<text x="680.55096586077" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-30 680.55096586077 457.4)" font-family="Times New Roman">gene_s310</text>
-<text x="813.037905479286" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 813.037905479286 457.4)" font-family="Times New Roman">gene_s303000</text>
-<text x="842.628781436035" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 842.628781436035 457.4)" font-family="Times New Roman">gene_s304000</text>
-<text x="883.176709998785" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 883.176709998785 457.4)" font-family="Times New Roman">gene_s305000</text>
-<text x="919.168691532013" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 919.168691532013 457.4)" font-family="Times New Roman">gene_s306000</text>
-<text x="1018.1010812781" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1018.1010812781 457.4)" font-family="Times New Roman">gene_s3030000</text>
-<text x="1047.69195723484" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1047.69195723484 457.4)" font-family="Times New Roman">gene_s3040000</text>
-<text x="1088.23988579759" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1088.23988579759 457.4)" font-family="Times New Roman">gene_s3050000</text>
-<text x="1124.23186733082" y="457.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1124.23186733082 457.4)" font-family="Times New Roman">gene_s3060000</text>
-<text x="211.607338112016" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 211.607338112016 637.4)" font-family="Times New Roman">gene_s403000</text>
-<text x="241.198214068764" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 241.198214068764 637.4)" font-family="Times New Roman">gene_s404000</text>
-<text x="281.746142631515" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 281.746142631515 637.4)" font-family="Times New Roman">gene_s405000</text>
-<text x="317.738124164743" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 317.738124164743 637.4)" font-family="Times New Roman">gene_s406000</text>
-<text x="392.751792005832" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 392.751792005832 637.4)" font-family="Times New Roman">gene_s4020000</text>
-<text x="462.22998420605" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 462.22998420605 637.4)" font-family="Times New Roman">gene_s4030000</text>
-<text x="491.820860162799" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 491.820860162799 637.4)" font-family="Times New Roman">gene_s4040000</text>
-<text x="532.36878872555" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 532.36878872555 637.4)" font-family="Times New Roman">gene_s4050000</text>
-<text x="568.360770258778" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 568.360770258778 637.4)" font-family="Times New Roman">gene_s4060000</text>
-<text x="607.610253918114" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 607.610253918114 637.4)" font-family="Times New Roman">gene_s4070000</text>
-<text x="649.524966589722" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 649.524966589722 637.4)" font-family="Times New Roman">gene_s4080000</text>
-<text x="722.055643299721" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 722.055643299721 637.4)" font-family="Times New Roman">gene_s4100000</text>
-<text x="722.055643299721" y="637.4" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 722.055643299721 637.4)" font-family="Times New Roman">gene_s410000000</text>
-
-
-<g><title>s10000,2000,6000</title><rect x="879.873648402381" y="121" width="182.283440651197" height="18" style="fill:blue"   /></g>
-
-
-
-			<defs>
-			<linearGradient id="red--blue" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%" style="stop-color:red;stop-opacity:1"/>
-			<stop offset="50%" style="stop-color:blue;stop-opacity:1"/>
-			<stop offset="100%" style="stop-color:red;stop-opacity:1"/>
-			</linearGradient>
-			</defs>
-			<g style="fill:none">
-			<title>gene_s1030000,s1,s10000,2925,3119,1</title>
-			<polygon points="922.06171789576,94 922.06171789576,166 922.06171789576,166 922.06171789576,176.8 930.900255133034,130 922.06171789576,83.2 922.06171789576,94" style="fill:url(#red--blue);stroke:black;stroke-width:0;opacity:1"/> 
-			</g>
+			<rect x="1312.125" y="402.898" width="47.25" height="2.52" style="fill:url(#rgb-255-165-0---black);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1" />
+			</g><text x="1365.45" y="405.292" font-size="20px" fill="black" text-anchor='start'>legend.s2</text>
+<line x1="150" y1="752" x2="1275" y2="752" style="stroke:green;stroke-width:0.5"/>
+<line x1="150" y1="744" x2="150" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="150" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="242.998264032405" y1="744" x2="242.998264032405" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="242.998264032405" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2,000</text>
+<line x1="335.996528064809" y1="744" x2="335.996528064809" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="335.996528064809" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4,000</text>
+<line x1="428.994792097214" y1="744" x2="428.994792097214" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="428.994792097214" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6,000</text>
+<line x1="521.993056129619" y1="744" x2="521.993056129619" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="521.993056129619" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8,000</text>
+<line x1="614.991320162024" y1="744" x2="614.991320162024" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="614.991320162024" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10,000</text>
+<line x1="707.989584194428" y1="744" x2="707.989584194428" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="707.989584194428" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12,000</text>
+<line x1="800.987848226833" y1="744" x2="800.987848226833" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="800.987848226833" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14,000</text>
+<line x1="893.986112259238" y1="744" x2="893.986112259238" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="893.986112259238" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16,000</text>
+<line x1="986.984376291643" y1="744" x2="986.984376291643" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="986.984376291643" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18,000</text>
+<line x1="1079.98264032405" y1="744" x2="1079.98264032405" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1079.98264032405" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20,000</text>
+<line x1="1172.98090435645" y1="744" x2="1172.98090435645" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1172.98090435645" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22,000</text>
+<line x1="1275" y1="744" x2="1275" y2="752" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1275" y="767" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24,194bp</text>
+<line x1="150" y1="24" x2="1275" y2="24" style="stroke:green;stroke-width:0.5"/>
+<line x1="150" y1="32" x2="150" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="150" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="242.998264032405" y1="32" x2="242.998264032405" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="242.998264032405" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2,000</text>
+<line x1="335.996528064809" y1="32" x2="335.996528064809" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="335.996528064809" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4,000</text>
+<line x1="428.994792097214" y1="32" x2="428.994792097214" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="428.994792097214" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6,000</text>
+<line x1="521.993056129619" y1="32" x2="521.993056129619" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="521.993056129619" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8,000</text>
+<line x1="614.991320162024" y1="32" x2="614.991320162024" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="614.991320162024" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10,000</text>
+<line x1="707.989584194428" y1="32" x2="707.989584194428" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="707.989584194428" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12,000</text>
+<line x1="800.987848226833" y1="32" x2="800.987848226833" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="800.987848226833" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14,000</text>
+<line x1="893.986112259238" y1="32" x2="893.986112259238" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="893.986112259238" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16,000</text>
+<line x1="986.984376291643" y1="32" x2="986.984376291643" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="986.984376291643" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18,000</text>
+<line x1="1079.98264032405" y1="32" x2="1079.98264032405" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1079.98264032405" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20,000</text>
+<line x1="1172.98090435645" y1="32" x2="1172.98090435645" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1172.98090435645" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22,000</text>
+<line x1="1275" y1="32" x2="1275" y2="24" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1275" y="21" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24,194bp</text>
+
+
+<text x="927.186492518806" y="140.68" font-size="15px" fill="green"  text-anchor='start'   transform="rotate(60 927.186492518806 140.68)" font-family="Times New Roman">gene_s1030000.label</text>
+<g><title>gene_s203 -> gene_s303</title><polygon points="286.009961147392,310 295.030792758535,310 308.376043647185,490 317.396875258329,490" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:0.5"/></g>
+<g><title>gene_s110 -> gene_s210</title><polygon points="576.350541456559,133.06 588.998305364966,133.06 538.732743655452,306.94 526.084979747045,306.94" style="fill:#00BFFF;stroke:#000000;stroke-width:0;opacity:0.8"/></g>
+<g><title>gene_s203 -> gene_s304</title><polygon points="286.009961147392,313.06 295.030792758535,313.06 351.713234686286,486.94 334.462056708275,486.94" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s2100000 -> gene_s4100000</title><polygon points="1107.46362734562,313.06 1120.11139125403,313.06 724.86876911631,666.94 712.221005207903,666.94" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:0.3"/></g>
+<g><title>gene_s303 -> gene_s403000</title><polygon points="308.376043647185,493.06 317.396875258329,493.06 202.079027858147,666.94 193.058196247003,666.94" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s210 -> gene_s310</title><polygon points="526.084979747045,313.06 538.732743655452,313.06 579.744978093742,486.94 567.097214185335,486.94" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s1060000 -> gene_s2100000</title><polygon points="1010.55943622386,133.06 1060.45300487724,133.06 1120.11139125403,306.94 1107.46362734562,306.94" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s107 -> gene_s207</title><polygon points="479.49284946681,133.06 498.83648838555,133.06 429.227287757295,306.94 448.570926676035,306.94" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s308 -> gene_s4070000</title><polygon points="500.882450194263,493.06 544.498636025461,493.06 592.067248078036,666.94 611.410886996776,666.94" style="fill:#3CB371;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s207 -> gene_s307</title><polygon points="429.227287757295,313.06 448.570926676035,313.06 489.583161114326,486.94 470.239522195586,486.94" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+<g><title>gene_s310 -> gene_s4050000</title><polygon points="567.097214185335,493.06 579.744978093742,493.06 535.105811358188,666.94 514.785690667108,666.94" style="fill:#FF8C00;stroke:#000000;stroke-width:0;opacity:1"/></g>
+
+
+<g><title>s1,2,3050</title><rect x="150" y="129.1" width="141.775853517401" height="1.8" style="fill:blue"   /></g>
+<g><title>s1,3000,6010</title><rect x="315.025419525502" y="129.1" width="140.008886500785" height="1.8" style="fill:blue"   /></g>
+<g><title>s1,5980,9609</title><rect x="478.283872034389" y="129.1" width="168.791849218815" height="1.8" style="fill:blue"   /></g>
+<g><title>s1000,2000,6000</title><rect x="670.325287261304" y="129.1" width="186.043027196826" height="1.8" style="fill:blue"   /></g>
+
+				<defs>
+				<linearGradient id="blue--green" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:blue;stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:green;stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:blue;stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s103000,s1,s1000,2925,3119,1</title>
+				<polygon points="713.383483508308,128.2 713.383483508308,131.8 719.698065636108,131.8 719.698065636108,133.06 722.404315119451,130 719.698065636108,126.94 719.698065636108,128.2" style="fill:url(#blue--green);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+<text x="717.893899313879" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 717.893899313879 124.94)" font-family="Times New Roman">gene_s103000.label</text>
+<g><title>s10000,6000,10000</title><rect x="1088.91047367116" y="129.1" width="186.043027196826" height="1.8" style="fill:blue"   /></g>
+<g><title>s2,1,9000</title><rect x="150" y="309.1" width="418.492188145821" height="1.8" style="fill:blue"   /></g>
+<g><title>s2000,2000,6000</title><rect x="591.741754153922" y="309.1" width="186.043027196826" height="1.8" style="fill:blue"   /></g>
+<g><title>s20000,2000,6000</title><rect x="801.034347358849" y="309.1" width="186.043027196826" height="1.8" style="fill:blue"   /></g>
+<g><title>s20000,6000,10000</title><rect x="1010.32694056378" y="309.1" width="186.043027196826" height="1.8" style="fill:blue"   /></g>
+<g><title>s3,11,2010</title><rect x="150" y="489.1" width="92.9982640324047" height="1.8" style="fill:blue"   /></g>
+<g><title>s3,2020,5000</title><rect x="266.247830040506" y="489.1" width="138.613912540299" height="1.8" style="fill:blue"   /></g>
+<g><title>s3,5100,9609</title><rect x="428.111308588906" y="489.1" width="209.711085393073" height="1.8" style="fill:blue"   /></g>
+<g><title>s3000,2000,6000</title><rect x="661.07195999008" y="489.1" width="186.043027196826" height="1.8" style="fill:blue"   /></g>
+<g><title>s30000,2000,6000</title><rect x="870.364553195007" y="489.1" width="186.043027196826" height="1.8" style="fill:blue"   /></g>
+<g><title>s4000,2000,6000</title><rect x="150" y="669.1" width="186.043027196826" height="1.8" style="fill:blue"   /></g>
+<g><title>s40000,1000,8000</title><rect x="359.292593204927" y="669.1" width="325.540423245433" height="1.8" style="fill:blue"   /></g>
+<g><title>s40000,8000,9609</title><rect x="708.082582458461" y="669.1" width="74.8636025460858" height="1.8" style="fill:blue"   /></g>
+
+
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s101,s1,s1,87,1109,1</title>
+				<polygon points="153.998925353393,128.2 153.998925353393,131.8 187.264404397785,131.8 187.264404397785,133.06 201.521038273952,130 187.264404397785,126.94 187.264404397785,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s102,s1,s1,1106,1888,1</title>
+				<polygon points="201.381540877904,128.2 201.381540877904,131.8 226.835165743573,131.8 226.835165743573,133.06 237.743862114574,130 226.835165743573,126.94 226.835165743573,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s104,s1,s1,3486,3857,1</title>
+				<polygon points="337.670496817393,128.2 337.670496817393,131.8 349.746321402,131.8 349.746321402,133.06 354.921674795404,130 349.746321402,126.94 349.746321402,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s105,s1,s1,4343,4780,1</title>
+				<polygon points="377.520252955278,128.2 377.520252955278,131.8 391.744337439034,131.8 391.744337439034,133.06 397.840373646359,130 391.744337439034,126.94 391.744337439034,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s106,s1,s1,4815,5888,0</title>
+				<polygon points="399.467843266926,130 414.435913862941,133.06 414.435913862941,131.8 449.361411920311,131.8 449.361411920311,128.2 414.435913862941,128.2 414.435913862941,126.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s107,s1,s1,6005,6421,1</title>
+				<polygon points="479.49284946681,128.2 479.49284946681,131.8 493.033396709928,131.8 493.033396709928,133.06 498.83648838555,130 493.033396709928,126.94 493.033396709928,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s108,s1,s1,6664,7602,1</title>
+				<polygon points="510.135777465487,128.2 510.135777465487,131.8 540.667107547326,131.8 540.667107547326,133.06 553.751963296685,130 540.667107547326,126.94 540.667107547326,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s109,s1,s1,7789,8088,0</title>
+				<polygon points="562.447300983715,130 566.618273125568,133.06 566.618273125568,131.8 576.350541456559,131.8 576.350541456559,128.2 566.618273125568,128.2 566.618273125568,126.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s110,s1,s1,8088,8360,0</title>
+				<polygon points="576.350541456559,130 580.144870629082,133.06 580.144870629082,131.8 588.998305364966,131.8 588.998305364966,128.2 580.144870629082,128.2 580.144870629082,126.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s104000,s1,s1000,3486,3857,1</title>
+				<polygon points="739.469496569397,128.2 739.469496569397,131.8 751.545321154005,131.8 751.545321154005,133.06 756.720674547408,130 751.545321154005,126.94 751.545321154005,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s105000,s1,s1000,4343,4780,1</title>
+				<polygon points="779.319252707283,128.2 779.319252707283,131.8 793.543337191039,131.8 793.543337191039,133.06 799.639373398363,130 793.543337191039,126.94 793.543337191039,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s106000,s1,s1000,4815,5888,0</title>
+				<polygon points="801.26684301893,130 816.234913614946,133.06 816.234913614946,131.8 851.160411672315,131.8 851.160411672315,128.2 816.234913614946,128.2 816.234913614946,126.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s1040000,s1,s10000,3486,3857,1</title>
+				<polygon points="948.762089774324,128.2 948.762089774324,131.8 960.837914358932,131.8 960.837914358932,133.06 966.013267752335,130 960.837914358932,126.94 960.837914358932,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s1050000,s1,s10000,4343,4780,1</title>
+				<polygon points="988.61184591221,128.2 988.61184591221,131.8 1002.83593039597,131.8 1002.83593039597,133.06 1008.93196660329,130 1002.83593039597,126.94 1002.83593039597,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s1060000,s1,s10000,4815,5888,0</title>
+				<polygon points="1010.55943622386,130 1025.52750681987,133.06 1025.52750681987,131.8 1060.45300487724,131.8 1060.45300487724,128.2 1025.52750681987,128.2 1025.52750681987,126.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s1070000,s1,s10000,6005,6421,1</title>
+				<polygon points="1089.18946846326,128.2 1089.18946846326,131.8 1102.73001570637,131.8 1102.73001570637,133.06 1108.533107382,130 1102.73001570637,126.94 1102.73001570637,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s1080000,s1,s10000,6664,7602,1</title>
+				<polygon points="1119.83239646193,128.2 1119.83239646193,131.8 1150.36372654377,131.8 1150.36372654377,133.06 1163.44858229313,130 1150.36372654377,126.94 1150.36372654377,128.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s1090000,s1,s10000,7789,8088,0</title>
+				<polygon points="1172.14391998016,130 1176.31489212201,133.06 1176.31489212201,131.8 1186.047160453,131.8 1186.047160453,128.2 1176.31489212201,128.2 1176.31489212201,126.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s1100000,s1,s10000,8088,8360,0</title>
+				<polygon points="1186.047160453,130 1189.84148962553,133.06 1189.84148962553,131.8 1198.69492436141,131.8 1198.69492436141,128.2 1189.84148962553,128.2 1189.84148962553,126.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s11000001,s1,s10000,8361,8560,0</title>
+				<polygon points="1198.74142349343,130 1201.5174216748,133.06 1201.5174216748,131.8 1207.99475076465,131.8 1207.99475076465,128.2 1201.5174216748,128.2 1201.5174216748,126.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s201,s2,s2,87,1109,1</title>
+				<polygon points="154.04542448541,308.2 154.04542448541,311.8 187.310903529801,311.8 187.310903529801,313.06 201.567537405968,310 187.310903529801,306.94 187.310903529801,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s202,s2,s2,1106,1888,1</title>
+				<polygon points="201.42804000992,308.2 201.42804000992,311.8 226.881664875589,311.8 226.881664875589,313.06 237.79036124659,310 226.881664875589,306.94 226.881664875589,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s203,s2,s2,2925,3119,1</title>
+				<polygon points="286.009961147392,308.2 286.009961147392,311.8 292.324543275192,311.8 292.324543275192,313.06 295.030792758535,310 292.324543275192,306.94 292.324543275192,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s204,s2,s2,3486,3857,1</title>
+				<polygon points="312.095974208481,308.2 312.095974208481,311.8 324.171798793089,311.8 324.171798793089,313.06 329.347152186493,310 324.171798793089,306.94 324.171798793089,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s205,s2,s2,4343,4780,1</title>
+				<polygon points="351.945730346367,308.2 351.945730346367,311.8 366.169814830123,311.8 366.169814830123,313.06 372.265851037447,310 366.169814830123,306.94 366.169814830123,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s206,s2,s2,4815,5888,0</title>
+				<polygon points="373.893320658014,310 388.86139125403,313.06 388.86139125403,311.8 423.786889311399,311.8 423.786889311399,308.2 388.86139125403,308.2 388.86139125403,306.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<g style="fill:none">
+				<title>gene_s207,s2,s2,6005,6421,1</title>
+				<polygon points="429.227287757295,308.2 429.227287757295,311.8 429.227287757295,311.8 429.227287757295,313.06 448.570926676035,310 429.227287757295,306.94 429.227287757295,308.2" style="fill:rgb(255,165,0);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s208,s2,s2,6664,7602,1</title>
+				<polygon points="459.870215755973,308.2 459.870215755973,311.8 490.401545837811,311.8 490.401545837811,313.06 503.48640158717,310 490.401545837811,306.94 490.401545837811,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s209,s2,s2,7789,8088,0</title>
+				<polygon points="512.1817392742,310 516.352711416054,313.06 516.352711416054,311.8 526.084979747045,311.8 526.084979747045,308.2 516.352711416054,308.2 516.352711416054,306.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s210,s2,s2,8088,8360,0</title>
+				<polygon points="526.084979747045,310 529.879308919567,313.06 529.879308919567,311.8 538.732743655452,311.8 538.732743655452,308.2 529.879308919567,308.2 529.879308919567,306.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s203000,s2,s2000,2925,3119,1</title>
+				<polygon points="634.799950400926,308.2 634.799950400926,311.8 641.114532528726,311.8 641.114532528726,313.06 643.820782012069,310 641.114532528726,306.94 641.114532528726,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s204000,s2,s2000,3486,3857,1</title>
+				<polygon points="660.885963462015,308.2 660.885963462015,311.8 672.961788046623,311.8 672.961788046623,313.06 678.137141440026,310 672.961788046623,306.94 672.961788046623,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s205000,s2,s2000,4343,4780,1</title>
+				<polygon points="700.735719599901,308.2 700.735719599901,311.8 714.959804083657,311.8 714.959804083657,313.06 721.055840290981,310 714.959804083657,306.94 714.959804083657,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-255-165-0---black" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(255,165,0);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:black;stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(255,165,0);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s206000,s2,s2000,4815,5888,0</title>
+				<polygon points="722.683309911548,308.2 722.683309911548,311.8 772.576878564934,311.8 772.576878564934,308.2 " style="fill:url(#rgb-255-165-0---black);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s2030000,s2,s20000,2925,3119,1</title>
+				<polygon points="844.092543605853,308.2 844.092543605853,311.8 850.407125733653,311.8 850.407125733653,313.06 853.113375216996,310 850.407125733653,306.94 850.407125733653,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s2040000,s2,s20000,3486,3857,1</title>
+				<polygon points="870.178556666942,308.2 870.178556666942,311.8 882.25438125155,311.8 882.25438125155,313.06 887.429734644953,310 882.25438125155,306.94 882.25438125155,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s2050000,s2,s20000,4343,4780,1</title>
+				<polygon points="910.028312804828,308.2 910.028312804828,311.8 924.252397288584,311.8 924.252397288584,313.06 930.348433495908,310 924.252397288584,306.94 924.252397288584,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s2060000,s2,s20000,4815,5888,0</title>
+				<polygon points="931.975903116475,310 946.943973712491,313.06 946.943973712491,311.8 981.86947176986,311.8 981.86947176986,308.2 946.943973712491,308.2 946.943973712491,306.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<g style="fill:none">
+				<title>gene_s2070000,s2,s20000,6005,6421,1</title>
+				<polygon points="1010.60593535587,308.2 1010.60593535587,311.8 1024.14648259899,311.8 1024.14648259899,313.06 1029.94957427461,310 1024.14648259899,306.94 1024.14648259899,308.2" style="fill:rgb(255,165,0);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s2080000,s2,s20000,6664,7602,1</title>
+				<polygon points="1041.24886335455,308.2 1041.24886335455,311.8 1071.78019343639,311.8 1071.78019343639,313.06 1084.86504918575,310 1071.78019343639,306.94 1071.78019343639,308.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s2090000,s2,s20000,7789,8088,0</title>
+				<polygon points="1093.56038687278,310 1097.73135901463,313.06 1097.73135901463,311.8 1107.46362734562,311.8 1107.46362734562,308.2 1097.73135901463,308.2 1097.73135901463,306.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s2100000,s2,s20000,8088,8360,0</title>
+				<polygon points="1107.46362734562,310 1111.25795651814,313.06 1111.25795651814,311.8 1120.11139125403,311.8 1120.11139125403,308.2 1111.25795651814,308.2 1111.25795651814,306.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s301,s3,s3,87,1109,1</title>
+				<polygon points="153.580433165248,488.2 153.580433165248,491.8 186.845912209639,491.8 186.845912209639,493.06 201.102546085806,490 186.845912209639,486.94 186.845912209639,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s302,s3,s3,1106,1888,1</title>
+				<polygon points="200.963048689758,488.2 200.963048689758,491.8 226.416673555427,491.8 226.416673555427,493.06 237.325369926428,490 226.416673555427,486.94 226.416673555427,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s303,s3,s3,2925,3119,1</title>
+				<polygon points="308.376043647185,488.2 308.376043647185,491.8 314.690625774986,491.8 314.690625774986,493.06 317.396875258329,490 314.690625774986,486.94 314.690625774986,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s304,s3,s3,3486,3857,1</title>
+				<polygon points="334.462056708275,488.2 334.462056708275,491.8 346.537881292883,491.8 346.537881292883,493.06 351.713234686286,490 346.537881292883,486.94 346.537881292883,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s305,s3,s3,4343,4780,1</title>
+				<polygon points="374.31181284616,488.2 374.31181284616,491.8 388.535897329917,491.8 388.535897329917,493.06 394.631933537241,490 388.535897329917,486.94 388.535897329917,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s307,s3,s3,6005,6421,1</title>
+				<polygon points="470.239522195586,488.2 470.239522195586,491.8 483.780069438704,491.8 483.780069438704,493.06 489.583161114326,490 483.780069438704,486.94 483.780069438704,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s308,s3,s3,6664,7602,1</title>
+				<polygon points="500.882450194263,488.2 500.882450194263,491.8 531.413780276102,491.8 531.413780276102,493.06 544.498636025461,490 531.413780276102,486.94 531.413780276102,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s309,s3,s3,7789,8088,0</title>
+				<polygon points="553.193973712491,490 557.364945854344,493.06 557.364945854344,491.8 567.097214185335,491.8 567.097214185335,488.2 557.364945854344,488.2 557.364945854344,486.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s310,s3,s3,8088,8360,0</title>
+				<polygon points="567.097214185335,490 570.891543357857,493.06 570.891543357857,491.8 579.744978093742,491.8 579.744978093742,488.2 570.891543357857,488.2 570.891543357857,486.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s303000,s3,s3000,2925,3119,1</title>
+				<polygon points="704.130156237083,488.2 704.130156237083,491.8 710.444738364884,491.8 710.444738364884,493.06 713.150987848227,490 710.444738364884,486.94 710.444738364884,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s304000,s3,s3000,3486,3857,1</title>
+				<polygon points="730.216169298173,488.2 730.216169298173,491.8 742.291993882781,491.8 742.291993882781,493.06 747.467347276184,490 742.291993882781,486.94 742.291993882781,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s305000,s3,s3000,4343,4780,1</title>
+				<polygon points="770.065925436058,488.2 770.065925436058,491.8 784.290009919815,491.8 784.290009919815,493.06 790.386046127139,490 784.290009919815,486.94 784.290009919815,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s306000,s3,s3000,4815,5888,0</title>
+				<polygon points="792.013515747706,490 806.981586343721,493.06 806.981586343721,491.8 841.907084401091,491.8 841.907084401091,488.2 806.981586343721,488.2 806.981586343721,486.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s3030000,s3,s30000,2925,3119,1</title>
+				<polygon points="913.42274944201,488.2 913.42274944201,491.8 919.737331569811,491.8 919.737331569811,493.06 922.443581053154,490 919.737331569811,486.94 919.737331569811,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s3040000,s3,s30000,3486,3857,1</title>
+				<polygon points="939.5087625031,488.2 939.5087625031,491.8 951.584587087708,491.8 951.584587087708,493.06 956.759940481111,490 951.584587087708,486.94 951.584587087708,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s3050000,s3,s30000,4343,4780,1</title>
+				<polygon points="979.358518640985,488.2 979.358518640985,491.8 993.582603124742,491.8 993.582603124742,493.06 999.678639332066,490 993.582603124742,486.94 993.582603124742,488.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s3060000,s3,s30000,4815,5888,0</title>
+				<polygon points="1001.30610895263,490 1016.27417954865,493.06 1016.27417954865,491.8 1051.19967760602,491.8 1051.19967760602,488.2 1016.27417954865,488.2 1016.27417954865,486.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s403000,s4,s4000,2925,3119,1</title>
+				<polygon points="193.058196247003,668.2 193.058196247003,671.8 199.372778374804,671.8 199.372778374804,673.06 202.079027858147,670 199.372778374804,666.94 199.372778374804,668.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s404000,s4,s4000,3486,3857,1</title>
+				<polygon points="219.144209308093,668.2 219.144209308093,671.8 231.220033892701,671.8 231.220033892701,673.06 236.395387286104,670 231.220033892701,666.94 231.220033892701,668.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s405000,s4,s4000,4343,4780,1</title>
+				<polygon points="258.993965445978,668.2 258.993965445978,671.8 273.218049929735,671.8 273.218049929735,673.06 279.314086137059,670 273.218049929735,666.94 273.218049929735,668.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s406000,s4,s4000,4815,5888,0</title>
+				<polygon points="280.941555757626,670 295.909626353641,673.06 295.909626353641,671.8 330.835124411011,671.8 330.835124411011,668.2 295.909626353641,668.2 295.909626353641,666.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s4020000,s4,s40000,1106,1888,1</title>
+				<polygon points="364.26800033066,668.2 364.26800033066,671.8 389.72162519633,671.8 389.72162519633,673.06 400.630321567331,670 389.72162519633,666.94 389.72162519633,668.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s4030000,s4,s40000,2925,3119,1</title>
+				<polygon points="448.849921468133,668.2 448.849921468133,671.8 455.164503595933,671.8 455.164503595933,673.06 457.870753079276,670 455.164503595933,666.94 455.164503595933,668.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s4040000,s4,s40000,3486,3857,1</title>
+				<polygon points="474.935934529222,668.2 474.935934529222,671.8 487.01175911383,671.8 487.01175911383,673.06 492.187112507233,670 487.01175911383,666.94 487.01175911383,668.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s4050000,s4,s40000,4343,4780,1</title>
+				<polygon points="514.785690667108,668.2 514.785690667108,671.8 529.009775150864,671.8 529.009775150864,673.06 535.105811358188,670 529.009775150864,666.94 529.009775150864,668.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s4060000,s4,s40000,4815,5888,0</title>
+				<polygon points="536.733280978755,670 551.701351574771,673.06 551.701351574771,671.8 586.62684963214,671.8 586.62684963214,668.2 551.701351574771,668.2 551.701351574771,666.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s4070000,s4,s40000,6005,6421,1</title>
+				<polygon points="592.067248078036,668.2 592.067248078036,671.8 605.607795321154,671.8 605.607795321154,673.06 611.410886996776,670 605.607795321154,666.94 605.607795321154,668.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s4080000,s4,s40000,6664,7602,1</title>
+				<polygon points="622.710176076713,668.2 622.710176076713,671.8 653.241506158552,671.8 653.241506158552,673.06 666.326361907911,670 653.241506158552,666.94 653.241506158552,668.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s4100000,s4,s40000,8088,8360,0</title>
+				<polygon points="712.221005207903,670 716.015334380425,673.06 716.015334380425,671.8 724.86876911631,671.8 724.86876911631,668.2 716.015334380425,668.2 716.015334380425,666.94" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+				<defs>
+				<linearGradient id="rgb-50-215-50---rgb-50-100-50-" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:rgb(50,100,50);stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:rgb(50,215,50);stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s410000000,s4,s40000,8188,8260,1</title>
+				<polygon points="716.870918409523,668.2 716.870918409523,671.8 719.21447466314,671.8 719.21447466314,673.06 720.21885591469,670 719.21447466314,666.94 719.21447466314,668.2" style="fill:url(#rgb-50-215-50---rgb-50-100-50-);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
+
+
+<text x="177.759981813673" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 177.759981813673 124.94)" font-family="Times New Roman">gene_s101</text>
+<text x="219.562701496239" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 219.562701496239 124.94)" font-family="Times New Roman">gene_s102</text>
+<text x="346.296085806398" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 346.296085806398 124.94)" font-family="Times New Roman">gene_s104</text>
+<text x="387.680313300818" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 387.680313300818 124.94)" font-family="Times New Roman">gene_s105</text>
+<text x="424.414627593618" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 424.414627593618 124.94)" font-family="Times New Roman">gene_s106</text>
+<text x="489.16466892618" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 489.16466892618 124.94)" font-family="Times New Roman">gene_s107</text>
+<text x="531.943870381086" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 531.943870381086 124.94)" font-family="Times New Roman">gene_s108</text>
+<text x="569.398921220137" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 569.398921220137 124.94)" font-family="Times New Roman">gene_s109</text>
+<text x="582.674423410763" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-30 582.674423410763 124.94)" font-family="Times New Roman">gene_s110</text>
+<text x="748.095085558403" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 748.095085558403 124.94)" font-family="Times New Roman">gene_s104000</text>
+<text x="789.479313052823" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 789.479313052823 124.94)" font-family="Times New Roman">gene_s105000</text>
+<text x="826.213627345623" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 826.213627345623 124.94)" font-family="Times New Roman">gene_s106000</text>
+<text x="957.38767876333" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 957.38767876333 124.94)" font-family="Times New Roman">gene_s1040000</text>
+<text x="998.77190625775" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 998.77190625775 124.94)" font-family="Times New Roman">gene_s1050000</text>
+<text x="1035.50622055055" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1035.50622055055 124.94)" font-family="Times New Roman">gene_s1060000</text>
+<text x="1098.86128792263" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1098.86128792263 124.94)" font-family="Times New Roman">gene_s1070000</text>
+<text x="1141.64048937753" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1141.64048937753 124.94)" font-family="Times New Roman">gene_s1080000</text>
+<text x="1179.09554021658" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 1179.09554021658 124.94)" font-family="Times New Roman">gene_s1090000</text>
+<text x="1192.37104240721" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-30 1192.37104240721 124.94)" font-family="Times New Roman">gene_s1100000</text>
+<text x="1203.36808712904" y="124.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-20 1203.36808712904 124.94)" font-family="Times New Roman">gene_s11000001</text>
+<text x="177.806480945689" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 177.806480945689 304.94)" font-family="Times New Roman">gene_s201</text>
+<text x="219.609200628255" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 219.609200628255 304.94)" font-family="Times New Roman">gene_s202</text>
+<text x="290.520376952964" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 290.520376952964 304.94)" font-family="Times New Roman">gene_s203</text>
+<text x="320.721563197487" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 320.721563197487 304.94)" font-family="Times New Roman">gene_s204</text>
+<text x="362.105790691907" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 362.105790691907 304.94)" font-family="Times New Roman">gene_s205</text>
+<text x="398.840104984707" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 398.840104984707 304.94)" font-family="Times New Roman">gene_s206</text>
+<text x="438.899107216665" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 438.899107216665 304.94)" font-family="Times New Roman">gene_s207.label</text>
+<text x="481.678308671571" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 481.678308671571 304.94)" font-family="Times New Roman">gene_s208</text>
+<text x="519.133359510623" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 519.133359510623 304.94)" font-family="Times New Roman">gene_s209</text>
+<text x="532.408861701248" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-30 532.408861701248 304.94)" font-family="Times New Roman">gene_s210</text>
+<text x="639.310366206497" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 639.310366206497 304.94)" font-family="Times New Roman">gene_s203000</text>
+<text x="669.511552451021" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 669.511552451021 304.94)" font-family="Times New Roman">gene_s204000</text>
+<text x="710.895779945441" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 710.895779945441 304.94)" font-family="Times New Roman">gene_s205000</text>
+<text x="747.630094238241" y="306.2" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 747.630094238241 306.2)" font-family="Times New Roman">gene_s206000.label</text>
+<text x="848.602959411424" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 848.602959411424 304.94)" font-family="Times New Roman">gene_s2030000</text>
+<text x="878.804145655948" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 878.804145655948 304.94)" font-family="Times New Roman">gene_s2040000</text>
+<text x="920.188373150368" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 920.188373150368 304.94)" font-family="Times New Roman">gene_s2050000</text>
+<text x="956.922687443168" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 956.922687443168 304.94)" font-family="Times New Roman">gene_s2060000</text>
+<text x="1020.27775481524" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1020.27775481524 304.94)" font-family="Times New Roman">gene_s2070000.label</text>
+<text x="1063.05695627015" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1063.05695627015 304.94)" font-family="Times New Roman">gene_s2080000</text>
+<text x="1100.5120071092" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 1100.5120071092 304.94)" font-family="Times New Roman">gene_s2090000</text>
+<text x="1113.78750929983" y="304.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-30 1113.78750929983 304.94)" font-family="Times New Roman">gene_s2100000</text>
+<text x="177.341489625527" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 177.341489625527 484.94)" font-family="Times New Roman">gene_s301</text>
+<text x="219.144209308093" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 219.144209308093 484.94)" font-family="Times New Roman">gene_s302</text>
+<text x="312.886459452757" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 312.886459452757 484.94)" font-family="Times New Roman">gene_s303</text>
+<text x="343.08764569728" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 343.08764569728 484.94)" font-family="Times New Roman">gene_s304</text>
+<text x="384.4718731917" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 384.4718731917 484.94)" font-family="Times New Roman">gene_s305</text>
+<text x="479.911341654956" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 479.911341654956 484.94)" font-family="Times New Roman">gene_s307</text>
+<text x="522.690543109862" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 522.690543109862 484.94)" font-family="Times New Roman">gene_s308</text>
+<text x="560.145593948913" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 560.145593948913 484.94)" font-family="Times New Roman">gene_s309</text>
+<text x="573.421096139539" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-30 573.421096139539 484.94)" font-family="Times New Roman">gene_s310</text>
+<text x="708.640572042655" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 708.640572042655 484.94)" font-family="Times New Roman">gene_s303000</text>
+<text x="738.841758287179" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 738.841758287179 484.94)" font-family="Times New Roman">gene_s304000</text>
+<text x="780.225985781599" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 780.225985781599 484.94)" font-family="Times New Roman">gene_s305000</text>
+<text x="816.960300074398" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 816.960300074398 484.94)" font-family="Times New Roman">gene_s306000</text>
+<text x="917.933165247582" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 917.933165247582 484.94)" font-family="Times New Roman">gene_s3030000</text>
+<text x="948.134351492105" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 948.134351492105 484.94)" font-family="Times New Roman">gene_s3040000</text>
+<text x="989.518578986525" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 989.518578986525 484.94)" font-family="Times New Roman">gene_s3050000</text>
+<text x="1026.25289327933" y="484.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 1026.25289327933 484.94)" font-family="Times New Roman">gene_s3060000</text>
+<text x="197.568612052575" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 197.568612052575 664.94)" font-family="Times New Roman">gene_s403000</text>
+<text x="227.769798297098" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 227.769798297098 664.94)" font-family="Times New Roman">gene_s404000</text>
+<text x="269.154025791519" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 269.154025791519 664.94)" font-family="Times New Roman">gene_s405000</text>
+<text x="305.888340084318" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 305.888340084318 664.94)" font-family="Times New Roman">gene_s406000</text>
+<text x="382.449160948996" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 382.449160948996 664.94)" font-family="Times New Roman">gene_s4020000</text>
+<text x="453.360337273704" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 453.360337273704 664.94)" font-family="Times New Roman">gene_s4030000</text>
+<text x="483.561523518228" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 483.561523518228 664.94)" font-family="Times New Roman">gene_s4040000</text>
+<text x="524.945751012648" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 524.945751012648 664.94)" font-family="Times New Roman">gene_s4050000</text>
+<text x="561.680065305448" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 561.680065305448 664.94)" font-family="Times New Roman">gene_s4060000</text>
+<text x="601.739067537406" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 601.739067537406 664.94)" font-family="Times New Roman">gene_s4070000</text>
+<text x="644.518268992312" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 644.518268992312 664.94)" font-family="Times New Roman">gene_s4080000</text>
+<text x="718.544887162106" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-50 718.544887162106 664.94)" font-family="Times New Roman">gene_s4100000</text>
+<text x="718.544887162106" y="664.94" font-size="10px" fill="black"  text-anchor='start'   transform="rotate(-40 718.544887162106 664.94)" font-family="Times New Roman">gene_s410000000</text>
+
+
+<g><title>s10000,2000,6000</title><rect x="879.617880466231" y="129.1" width="186.043027196826" height="1.8" style="fill:blue"   /></g>
+
+
+
+				<defs>
+				<linearGradient id="red--blue" x1="0%" y1="0%" x2="0%" y2="100%">
+				<stop offset="0%" style="stop-color:red;stop-opacity:1"/>
+				<stop offset="50%" style="stop-color:blue;stop-opacity:1"/>
+				<stop offset="100%" style="stop-color:red;stop-opacity:1"/>
+				</linearGradient>
+				</defs>
+				<g style="fill:none">
+				<title>gene_s1030000,s1,s10000,2925,3119,1</title>
+				<polygon points="922.676076713235,126.4 922.676076713235,133.6 922.676076713235,133.6 922.676076713235,134.68 931.696908324378,130 922.676076713235,125.32 922.676076713235,126.4" style="fill:url(#red--blue);stroke:black;stroke-width:0;opacity:1"/> 
+				</g>
 
 </svg>

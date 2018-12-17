@@ -66,6 +66,7 @@ sub read_list(){
 		$sample_num++;
 		my $block_index=1;
 		my %scf_block_id;
+		my $scf_block_id_flag=0;
 		my $list_line=$_;
 		my ($sample,$gffs,$genome,@arrs)=split(/\s+/,$_); # $seq_id,$seq_draw_start,$seq_draw_end
 			push @track_order, $sample;
@@ -87,22 +88,36 @@ sub read_list(){
 			$seq=~ s/\s+//g;
 			my $len=length $seq;
 			$genome{$sample}{$id}{len}=$len;
+			if(not exists $scf_block_id{$id}){
+				$scf_block_id_flag++;
+				$scf_block_id{$id}=$scf_block_id_flag;
+			}
 		}
 		close GE;
 
 		if(@arrs%3){
 			die "error:$list line $. error format:$_, should be separated by \\t \n"; 
 		}elsif(@arrs!=0){
-			print "1dd $list_line\n";
+			#print "1dd $list_line\n";
 			my ($gff, $fts, $gene_index_tmp, @arr_tmp);
 			($gff, $fts, $block_index, $conf, $gene_index_tmp, $genome) = &parse_arrs(\@arrs, 0, \@arr_tmp, \%genome, $block_index, \%gff, $gffs, \%fts, $conf, 0, 0, 0, 0, "", $sample, $space_len);
-			print "2dd $list_line\n";
+			#($gff, $fts, $block_index, $conf, $gene_index, $genome) = &parse_arrs(\@arrs, \%all_seq_id, \@arr, \%genome, $block_index, \%gff, $gffs, \%fts, $conf, $gene_index, $., $start_f, $end_f, $_, $sample, $space_len);
+			#print "2dd $list_line\n";
 			%genome=%$genome;
 			%gff=%$gff;
 			%fts=%$fts;
+			# return $gff->{$sample}->{chooselen_single}{$block_index} and %{$gff->{$sample}->{block2}->{$block_index}}
 		}else{
-			die "die: wait\n";
-
+			print "";
+			#die "die: wait\n";
+			#for my $scf(keys %{$genome{$sample}}){
+			#	print "scf is $scf\n";
+				#my ($gff, $fts, @arr_tmp,$gene_index);
+				#@arr_tmp=("$scf");
+				#($gff, $fts, $block_index, $conf, $gene_index) = &parse_all_seq(\%scf_block_id, $block_index, \%gff, $sample, \@arr_tmp, \%genome, $space_len, $conf, 0, \%fts, $gffs, 0,0,0,"");
+				#%gff=%$gff;
+				#%fts=%$fts;
+			#}
 		}
 
 
@@ -153,9 +168,11 @@ sub read_list(){
 
 				}else{ # list里面没有定义seq_id/start/end,即要画full-length of scaffold
 					my ($gff, $fts);
-					($gff, $fts, $block_index, $conf, $gene_index) = &parse_all_seq(\%scf_block_id, $block_index, \%gff, $sample, \@arr, \%genome, $space_len, $conf, $gene_index, $fts, $gffs, $start_f,$end_f,$.,$_);
+					#print "conf3 is $conf\n";
+					($gff, $fts, $conf, $gene_index) = &parse_all_seq(\%scf_block_id, \%gff, $sample, \@arr, \%genome, $space_len, $conf, $gene_index, $fts, $gffs, $start_f, $end_f, $., $_);
 					%gff=%$gff;
 					%fts=%$fts;
+					#print "conf4 is $conf\n";
 				}
 
 			}
@@ -163,7 +180,8 @@ sub read_list(){
 		}
 	}
 	close LI;
-	return (\%genome, \%gff, \@track_order, $sample_num, \%fts);
+	#$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}
+	return (\%genome, \%gff, \@track_order, $sample_num, \%fts, $conf);
 ####end:get scaffold length in genome file and scaffold length  in gff file
 }
 
@@ -219,13 +237,11 @@ sub parse_arrs(){
 }
 
 sub parse_all_seq(){
-	my ($scf_block_id, $block_index, $gff, $sample, $arr, $genome, $space_len, $conf, $gene_index, $fts, $gffs,$start_f,$end_f,$line_num,$line, $arrs)=@_;
+	my ($scf_block_id, $gff, $sample, $arr, $genome, $space_len, $conf, $gene_index, $fts, $gffs,$start_f,$end_f,$line_num,$line, $arrs)=@_;
 	my @arr=@$arr;
-	if(not exists $scf_block_id->{$arr[0]}){
-		$block_index++;
-		$scf_block_id->{$arr[0]}="";
-	}
-	$block_index=1 if($block_index==0);
+	my $block_index=$scf_block_id->{$arr[0]};
+	#print "parse_all_seq conf1 is $conf\n";
+	die "error:scf_block_id not have $arr[0]\n" if(not exists $scf_block_id->{$arr[0]});
 	#$gff->{$sample}->{block2}->{$block_index}{$seq_id}="";	
 	if(not exists  $gff->{$sample}->{chooselen_single}->{$block_index}){
 		$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $genome->{$sample}->{$arr[0]}->{len};
@@ -239,20 +255,26 @@ sub parse_all_seq(){
 
 #my ($gff,$fts);
 	($conf, $gff, $block_index, $gene_index, $fts) = &go_line($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, $arr, $arrs, $line, $gene_index, $fts);
-	return ($gff, $fts, $block_index, $conf, $gene_index);
+	#print "parse_all_seq conf2 is $conf\n";
+	return ($gff, $fts, $conf, $gene_index);
 
 }
 
 sub go_line(){
 	my ($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, $arr, $arrs, $line, $gene_index, $fts)=@_;
 	my @arr=@$arr;
-	my @arrs=@$arrs;
-
+	#my @arrs=@$arrs;
+	#print "conf1 is $conf\n";
+	if($line eq ""){
+		$gff->{$sample}->{block2}->{$block_index}{$arr[0]}="";
+		return ($conf, $gff, $block_index, $gene_index, $fts);
+	}
 	#print "4parse_arrs line is $line\n";
 	$line=~ /\sID=(\S+)/;
 	my $feature_id=$1;
 	$feature_id=~ s/\s//g;
 	$feature_id=~ s/;.*//g;
+	die "error: feature_id format should like ID=gene1; in gff, instead of $line\n" if(!$feature_id);
 	die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);
 	if(exists $fts->{$feature_id}){
 		die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
@@ -269,18 +291,22 @@ sub go_line(){
 	$gff->{$sample}->{block}->{$block_index}->{$arr[0]}->{$gene_index}->{end_raw}=$end_f;
 	$gff->{$sample}->{block}->{$block_index}->{$arr[0]}->{$gene_index}->{id}=$feature_id;
 	$gff->{$sample}->{block2}->{$block_index}{$arr[0]}="";	
+	#print "feature_id is $feature_id\n";
 	#print "5parse_arrs line is $line\n";
 	#print "ssfeature_id is $feature_id\n";
 	$gff->{$sample}->{scf}->{$arr[0]}="";
 	if(!$feature_id){die "die:line is $line\n"}
 	$gff->{$sample}->{block}->{$block_index}->{$arr[0]}->{$gene_index}->{strand}=($arr[6]=~ /\+/)? 1:0;
-	$conf->{feature_setting2}->{$feature_id}->{start}=$start_f;
+	#print "line is $line\n";
+	#print "feature_id is $feature_id, $conf\n";
+	$conf->{feature_setting2}->{$feature_id}->{start}=$start_f; 
 	$conf->{feature_setting2}->{$feature_id}->{end}=$end_f;
 	$conf->{feature_setting2}->{$feature_id}->{sample}=$sample;
 	$conf->{feature_setting2}->{$feature_id}->{scf_id}=$arr[0];
 	$conf->{feature_setting2}->{$feature_id}->{type}=$arr[2];
 	die "error: sample $sample should not have : char\n" if($sample=~ /:/);
 	die "error: scaffold_id $arr[0] should not have : char\n" if($arr[0]=~ /:/);
+	#print "conf2 is $conf\n";
 
 	return ($conf, $gff, $block_index, $gene_index, $fts);
 }
@@ -305,6 +331,7 @@ sub get_para(){
 sub draw_genes(){
 #draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag, $conf, $ratio, $id_line_height, $shift_angle_closed_feature, $orders, $up_percent_unit, $down_percent_unit)=@_;
+	#print "draw $feature_id\n";
 	if($index_color=~ /rgb\(\d+,\d+,\d+\),[^,]/ or $index_color=~ /[^,],rgb\(\d+,\d+,\d+\)/){
 		die "\nerror: should use ,, instead of , to separate the $index_color\n";
 	}

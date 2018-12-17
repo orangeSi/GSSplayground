@@ -73,7 +73,7 @@ sub reads_mapping(){
 		my @infos=split(/,/, $ks[0]);
 		my $infos_len=scalar(@infos);
 		if($infos_len != 17){
-			die "error: reads_mapping should separate by \\t, and have 17 colums for reads_mappinig=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
+			die "error: reads_mapping should separate by \\t, and have 17 colums for reads_mapping=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
 		}
 		my ($reads_type,$reads_order,$sample,$scf,$block_flag,$mapping_file,$show_type,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size,$min_mapq) = @infos;
 		die "error: reads_order should be number, not $reads_order\n" if($reads_order!~ /^-?\d+$/);

@@ -52,13 +52,16 @@ if($ref_name_width_ratio+$cluster_width_ratio+$legend_width_ratio !=1){
 
 
 ###start:get scaffold length in genome file and scaffold length  in gff file of list 
-my ($genome, $gff, $track_order, $sample_num, $fts) = &read_list($list, \%conf);
+my ($genome, $gff, $track_order, $sample_num, $fts, $conf) = &read_list($list, \%conf);
 my %genome=%$genome;
 my %gff=%$gff;
 my %fts=%$fts;
+%conf=%$conf;
 my @track_order=@$track_order;
 #die "track_order is @track_order, track_reorder is @track_reorder\n";
 @track_order=&check_track_order(\@track_order, \@track_reorder);
+
+
 
 my $ends_extend_ratio = 0.1;
 my $max_length;
@@ -139,6 +142,8 @@ while(@track_order){
 	        my $shift_angle_closed_feature=0;
 		#print "block_index is $block_index, sample is $sample\n";
 		my @scf = keys %{$gff{$sample}{block}{$block_index}};
+		#print "scff is @scf, $block_index\n";
+		die "error:block_index $block_index should not have two scf\n" if(@scf!=1);
 		my $id_line_x=$left_distance; # 每个block的genome的起点的x,y坐标
 		my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
 		my $id_line_width=$gff{$sample}{chooselen_single}{$block_index}{len} * $ratio; # 每个block的genome的宽度
@@ -186,12 +191,15 @@ while(@track_order){
 		my $angle_flag=0;
 		my $pre_index_end=0;
 		my $pre_scf_id="";
+		
+
 		foreach my $index(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){
 			#next if($index eq "len");
 			#print "here $sample $block_index $scf[0] $index\n";
 			my $gene_height_medium;
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
-			#print "index_id is $index_id\n";
+			#print "index_id is $index_id, sample is $sample\n";
+			#$gff{$sample}{block}{$block}{$scf}{$gene}{id}
 			#print "\nindex id is $index_id\n";
 			die "die:index_id is $index_id,$sample $block_index $scf[0] $index\n" if(not $index_id);
 			my $index_start = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{start};
@@ -249,6 +257,11 @@ while(@track_order){
 			#print "angle is $angle_flag\n";
 			## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
             my $svg_gene; 
+	   #for my $scf(keys %{$gff{$sample}{block}{$block_index}}){				
+	#				for my $gene(keys %{$gff{$sample}{block}{$block_index}{$scf}}){
+	#					print "isis4 $sample $block_index $scf $gene, $gff{$sample}{block}{$block_index}{$scf}{$gene}{id}\n";
+	#				}
+	#			}
             ($svg_gene, $shift_angle_closed_feature, $orders)=&draw_genes(
 				$index_id,
 				$index_start, 
@@ -287,7 +300,6 @@ while(@track_order){
 
 }
 
-
 print "\n\n";
 #for my $id(keys %{$conf{crossing_link2}{position}}){
 #	print "1id is $id\n"
@@ -308,7 +320,7 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 	my $cross_link_anchor_pos=(exists $conf{crossing_link2}{index}{$pair}{cross_link_anchor_pos})? $conf{crossing_link2}{index}{$pair}{cross_link_anchor_pos}:$conf{cross_link_anchor_pos};
 	my $cross_link_width_ellipse=(exists $conf{crossing_link2}{index}{$pair}{cross_link_width_ellipse})? $conf{crossing_link2}{index}{$pair}{cross_link_width_ellipse}:$conf{cross_link_width_ellipse};
 	die "error: cross_link_width_ellipse $cross_link_width_ellipse should be number\n" if($cross_link_width_ellipse!~ /^[\d\.]+$/);
-	die "error: $up_id of crosslink is not in --list regions, please try to check it, conf{crossing_link2}{position}{$up_id}{start}{x}\n" if(not exists $conf{crossing_link2}{position}{$up_id}{start}{x});
+	die "error1: $up_id of crosslink is not in --list regions, please try to check it, conf{crossing_link2}{position}{$up_id}{start}{x}\n" if(not exists $conf{crossing_link2}{position}{$up_id}{start}{x});
 	my $left_up_x = $conf{crossing_link2}{position}{$up_id}{start}{x};
 	my $left_up_y = $conf{crossing_link2}{position}{$up_id}{start}{y};
 	my $right_up_x = $conf{crossing_link2}{position}{$up_id}{end}{x};
