@@ -23,7 +23,15 @@ gene_s1030000	feature_arrow_width_extent	1
 gene_s1030000	feature_arrow_sharp_extent	0.6
 
 
-
+#gene_s201	label_text_anchor	middle
+#gene_s201	pos_feature_label	medium_low_skip_arrow_sharp
+gene_s201	label_text_anchor	start
+gene_s201	pos_feature_label	left_low_skip_arrow_sharp
+gene_s201	label_rotate_angle	0
+gene_s201	padding_feature_label	0
+gene_s201	feature_label	GENE201
+gene_s201	feature_label_size	5
+gene_s201	feature_arrow_sharp_extent	1
 
 gene_s207	feature_color	rgb(255,165,0)
 gene_s207	legend_label	legend.s2

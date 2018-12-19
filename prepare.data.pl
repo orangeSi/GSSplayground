@@ -63,7 +63,8 @@ sub reads_mapping(){
 	my %show_types;
 	@{$show_types{short_reads}}=(qr/^rainbow:color->[^:]+:opacity->[\d\.]+:cross_link_width_ellipse->[\d\.]+/,"stack",qr/^paired:color->[^:]+:opacity->[\d\.]+:cross_link_height_line->[\d\.]+/);
 	@{$show_types{long_reads}}=("stack");
-	my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs");
+	@{$show_types{vcf}}=("stack");
+	my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel");
 	my @mapping_types=("short_reads", "long_reads", "vcf");
 	for my $k (@{$conf->{reads_mapping}}){
 		$k_index++;
@@ -76,11 +77,12 @@ sub reads_mapping(){
 			die "error: reads_mapping should separate by \\t, and have 17 colums for reads_mapping=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
 		}
 		my ($reads_type,$reads_order,$sample,$scf,$block_flag,$mapping_file,$show_type,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size,$min_mapq) = @infos;
+		#ylabel->illuminate read depth,fontsize:10,color:black
 		die "error: reads_order should be number, not $reads_order\n" if($reads_order!~ /^-?\d+$/);
 #reads_mapping=long_reads,s2,s2000,0,../data/s2.seq.longreads.map2ref.sort.bam,rainbow_or_hline,10->50,ytick_flag,20->30->2,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,3:3	highlight_hgrid->26:2:green,28:2:black  start_end_xaxis->61:661,711:1311,1361:1961
-		&check_sort_bam($mapping_file);
+		my $refasta;
+		($mapping_file, $refasta)=&check_sort_bam($mapping_file, $reads_type);
 		die "error: not support $reads_type~ only support @mapping_types\n" if(! grep(/^$reads_type$/, @mapping_types));
-		die "error: $mapping_file not exists for $k\n" if(! -f $mapping_file);
 		&show_type_check($show_type,\@{$show_types{$reads_type}});
 		die "error: min_mapq $min_mapq should be number which >=0 \n" if($min_mapq!~ /^\d+$/);
 		for($i=0;$i<$infos_len;$i++){
@@ -107,6 +109,10 @@ sub reads_mapping(){
 			my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{start};
 			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
 
+			my ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf)=&plot_ylabel($k, $block_start_bp, $block_end_bp, $sample, $block_index, $scf, $k_index, $yaxis, $reads_type, \@yaxis_list);
+			my $prefix_ylabel="$sample.$scf.$block_index.$k_index.$reads_type.ylabel";
+			%outname = &gather_gff_conf_link($prefix_ylabel,$ylabel_gff,$ylabel_setting_conf,$ylabel_cross_link_conf, \%outname, $sample);
+
 			if($ytick_flag){
 				my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size, $reads_type);
 				my $prefix="$sample.$scf.$block_index.$k_index.ytick";
@@ -117,12 +123,12 @@ sub reads_mapping(){
 			next if(not exists $highss{start_end_xaxis});
 			my @start_end_xaxis = @{$highss{start_end_xaxis}};
 			print "start_end_xaxis is @start_end_xaxis\n";
-			my $max_depth=&get_max_depth(\@start_end_xaxis,$mapping_file,$sample,$scf);
+			my $max_depth=&get_max_depth(\@start_end_xaxis,$mapping_file,$sample,$scf, $reads_type);
 			print "max_depth max_depth is $max_depth\n";
 			for my $rg(@start_end_xaxis){
 				my ($rg_start, $rg_end)=split(/,/, $rg);
 				print "rg is $rg,  :$rg_start,$rg_end\n";
-				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth,$reads_order, $highss{color_height_cs}, $show_type, $min_mapq);
+				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth,$reads_order, $highss{color_height_cs}, $show_type, $min_mapq,$refasta);
 
 				my $prefix="$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.mapping";	
 				%outname = &gather_gff_conf_link($prefix,$mapping_gff,$mapping_setting_conf,$cross_link_conf, \%outname, $sample);
@@ -142,6 +148,49 @@ sub show_type_check(){
 		$show_type_flag++ if($show_type=~ /$t/);
 	}
 	die "error: $show_type not supported, only support @show_types\n" if($show_type_flag!=1);
+}
+
+sub plot_ylabel(){
+	my ($k, $block_start_bp, $block_end_bp, $sample, $block_index, $scf, $k_index, $yaxis, $type, $yaxis_list)=@_;
+	my $ylabel_gff="";
+	my $ylabel_setting_conf="";
+	my $ylabel_cross_link_conf="";	
+	my @yaxis_list=@$yaxis_list;
+	my $feature_shift_x;
+	my $feature_shift_y;
+	if($yaxis_list[0]=~ /^\+?\d/ && $yaxis_list[1]=~ /^\+?\d/){
+		$feature_shift_y=(abs($yaxis_list[0])+abs($yaxis_list[1]))/2;
+		$feature_shift_y="-$feature_shift_y";
+	}elsif($yaxis_list[0]=~ /^-\d/ && $yaxis_list[1]=~ /^-\d/){
+		$feature_shift_y=(abs($yaxis_list[0])+abs($yaxis_list[1]))/2;
+		$feature_shift_y="+$feature_shift_y";
+	}else{
+		die "error:plot_ylabel @yaxis_list\n";
+	}
+	if($k=~ /\sylabel->([^,]+),gap:([\d\.]+)bp,fontsize:([\d\.]+),color:(\S+)/){
+		my $ylabel_content=$1;
+		my $gap=$2;
+		my $ylabel_fontsize=$3;
+		my $ylabel_color=$4;
+		my $ylabel_id="$sample.$scf.$block_index.$block_start_bp.$block_end_bp.$k_index.$type.ylabel";
+		$ylabel_id.=($yaxis=~ /^\d/)? "+":"-";
+		my $feature_shift_x=5+$gap;
+		$ylabel_gff.="$scf\tadd\tylabel\t$block_end_bp\t$block_end_bp\t.\t+\t.\tID=$ylabel_id;\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeatyyure_label_color\t$ylabel_color\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeature_shift_x\t$feature_shift_x\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeature_height_ratio\t0\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeature_height_unit\tpercent\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeature_label_size\t$ylabel_fontsize\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeature_shift_y\t$feature_shift_y\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeature_shift_y_unit\tpercent\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeature_label\t$ylabel_content\n";
+		$ylabel_setting_conf.="$ylabel_id\tdisplay_feature_label\tyes\n";
+		$ylabel_setting_conf.="$ylabel_id\tpos_feature_label\tright_low\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeature_label_auto_angle_flag\t0\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeature_color\twhite\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeature_shape\trect\n";
+	}
+	return ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf);
 }
 
 
@@ -169,7 +218,7 @@ sub write_gff_conf_link(){
 sub gather_gff_conf_link(){
 	my ($prefix,$gff,$setting_conf,$cross_link_conf, $outname, $sample)=@_;
 	my %outnames=%$outname;
-
+	return %outnames if(!$gff && !$setting_conf && !$cross_link_conf);
 	my $out_gff="$prefix.gff";
 	print "output $out_gff\n";
 	push @{$outnames{$sample}{gff}},$out_gff;
@@ -199,15 +248,22 @@ sub check_env_exist(){
 	}
 }
 sub check_sort_bam(){
-	my ($mapping_file)=@_;
-	die "error: $mapping_file is a sorted bam file? if true, please rename it to *sort*.bam\n" if($mapping_file!~ /.*sort.*.bam$/);
+	my ($mapping_file, $reads_type)=@_;
+	die "error: $mapping_file is a sorted bam file? if true, please rename it to *sort*.bam\n" if($mapping_file!~ /.*sort.*.bam/ && $reads_type ne "vcf");
+	die "error:$mapping_file should like xx.mapping.bam:xx.ref.fa\n" if($mapping_file!~ /^(\S+):(\S+)$/);
+	my @arr=split(/:/,$mapping_file);
+	for my $f(@arr){
+		die "error: file $f in $mapping_file not exists\n" if(! -f "$f");
+	}
+	return @arr;
 
 }
 
 sub get_max_depth(){
-	my ($start_end_xaxis, $mapping_file,$sample,$scf)=@_;
+	my ($start_end_xaxis, $mapping_file,$sample,$scf, $reads_type)=@_;
 	my @start_end_xaxis=@$start_end_xaxis;
 	my $max_depth=0;
+	return 1 if($reads_type eq "vcf");
 	for my $rg (@start_end_xaxis){
 		my ($rg_start, $rg_end)=split(/,/, $rg);
 		my $cmd="samtools depth  -r $scf:$rg_start-$rg_end $mapping_file|awk '{print \$NF}'|sort -k 1nr|head -1";
@@ -231,7 +287,7 @@ sub hist_scatter_line(){
 	print "hist_scatter_line start\n";
 	my $k_index;
 	my (%outname);
-	my @highs=("highlight_columns", "highlight_hgrid", "start_end_xaxis");
+	my @highs=("highlight_columns", "highlight_hgrid", "start_end_xaxis", "ylabel");
 	for my $k (@{$conf->{hist_scatter_line}}){
 		$k_index++;
 		&check_highs(\@highs,$k);
@@ -251,7 +307,9 @@ sub hist_scatter_line(){
 		die "error: depth_order should be number, not $depth_order\n" if($depth_order!~ /^-?\d+$/);
 		my @depth_types=("hist", "scatter", "scatter_line");
 		die "error: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
-		die "error: $depth_file not exists for hist_scatter_line=$k\n" if(! -f $depth_file);
+		$depth_file=~ /^([^:]+):([^:]+)$/;
+		die "error: $1 not exists for hist_scatter_line=$k\n" if(! -f $1);
+		die "error: $2 not exists for hist_scatter_line=$k\n" if(! -f $2);
 		for($i=0;$i<$infos_len;$i++){
 			next if($i==8);
 			$infos[$i]=~ s/\s//g;
@@ -276,6 +334,10 @@ sub hist_scatter_line(){
 			my ($depth_label_size, $tick_label_size)=@label_sizes;
 			my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{start};
 			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
+			
+			my ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf)=&plot_ylabel($k, $block_start_bp, $block_end_bp, $sample, $block_index, $scf, $k_index, $yaxis, $depth_type, \@yaxis_list);
+			my $prefix_ylabel="$sample.$scf.$block_index.$k_index.$depth_type.ylabel";
+			%outname = &gather_gff_conf_link($prefix_ylabel,$ylabel_gff,$ylabel_setting_conf,$ylabel_cross_link_conf, \%outname, $sample);
 
 			if($ytick_flag){
 				my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size, $depth_type);
@@ -301,12 +363,16 @@ sub hist_scatter_line(){
 
 sub reads_mapping_run(){
 #&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth);
-	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$reads_order, $color_height_cs, $show_type,$min_mapq)=@_;
+	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$reads_order, $color_height_cs, $show_type,$min_mapq, $refasta)=@_;
 	my $one_read_height=1;
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
-	$color_height_cs="M:green:opacity0.8:height0.5:1bp,I:red:opacity1:height0.9:6bp,D:black:opacity1:height0.8:1bp,N:blue:opacity1:height0.2:1bp,S:blue:opacity0.6:height0.4:1bp,H:blue:opacity0.6:height0.2:1bp,P:blue:opacity1:height0.2:1bp,X:grey:opacity1:height0.6:1bp,reverse:#1E90FF:opacity0.6:height0.8:6bp,forward:green:opacity0.6:height0.8:1bp,fake:white:opacity1:height0:0bp" if(!$color_height_cs); #yellow
-		my %colors_height = &cigar_setting($color_height_cs);
-	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, \%colors_height, $show_type, $min_mapq);
+	$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0:0bp:rect" if(!$color_height_cs); #yellow
+	my %colors_height = &cigar_setting($color_height_cs);
+	if($read_type eq "vcf"){
+		($reads_gff, $reads_setting_conf, $cross_link_conf) = &check_vcf(\%colors_height, $bam_file, $sample, $scf, $rg_start, $rg_end, $k_index, $read_type, $s1, $e1, $info);
+		return ($reads_gff, $reads_setting_conf, $cross_link_conf);
+	}
+	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, \%colors_height, $show_type, $min_mapq, $refasta);
 #my $read_num=scalar(keys %reads);
 #die "read_num is $read_num\n";
 
@@ -332,8 +398,10 @@ sub reads_mapping_run(){
 	my $feature_height=1;
 	my $feature_opacity=1;
 	my $feature_color="black";
+	my $feature_shape="rect";
 	my $read_type_raw=$read_type;
 	$read_type="long_reads" if($show_type eq "stack");
+
 	for my $read_id(sort {$reads{$a}{ref_start}<=>$reads{$b}{ref_start}} keys %reads){
 #print "read_id is $read_id\n";
 		$read_num++;
@@ -356,7 +424,7 @@ sub reads_mapping_run(){
 
 				$cr_type=$reads{$read_id}{cigar}{$cr}{type};
 				my $cg=$reads{$read_id}{cigar}{$cr}{cr};
-				($feature_color, $feature_height,$feature_opacity)=&cs_color_height($cg, \%colors_height, $map_pos_strand_cr, $map_pos_strand_cr);
+				($feature_color, $feature_height,$feature_opacity, $feature_shape)=&cs_color_height($cg, \%colors_height, $map_pos_strand_cr, $map_pos_strand_cr);
 				$feature_height *= $one_read_height;
 				$map_pos_start_cr=$reads{$read_id}{cigar}{$cr}{start};
 				$map_pos_end_cr=$reads{$read_id}{cigar}{$cr}{end};
@@ -365,9 +433,9 @@ sub reads_mapping_run(){
 				$read_shift_y = ($updown == 1)? "+$read_shift_y":"-$read_shift_y";
 
 				$cr_id="$read_id.cr.$cr.$cg.$updown.$k_index";
-				my $feature_shape="rect";
+				#my $feature_shape="rect";
 				if($cr_type=~ /reverse/ || $cr_type=~ /forward/){
-					$feature_shape="arrow";
+					#$feature_shape="arrow";
 					my $feature_arrow_sharp_extent=($read_type eq "short_reads")? 0.08:0.01;
 					$reads_setting_conf.="$cr_id\tfeature_arrow_sharp_extent\t0\n";
 					$reads_setting_conf.="$cr_id\tfeature_arrow_width_extent\t$feature_arrow_sharp_extent\n";
@@ -386,7 +454,7 @@ sub reads_mapping_run(){
 						$reads_gff.="$scf\tadd\t$read_type_raw\t$insert_map_pos_start_cr\t$insert_map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$insert_cr_id;\n";
 						$reads_setting_conf.="$insert_cr_id\tfeature_shape\t$feature_shape\n";
 						$reads_setting_conf.="$insert_cr_id\tfeature_height_ratio\t$insert_feature_height\n";
-						$reads_setting_conf.="$insert_cr_id\tfeature_height_unitt\tpercent\n";
+						$reads_setting_conf.="$insert_cr_id\tfeature_height_unit\tpercent\n";
 						$reads_setting_conf.="$insert_cr_id\tfeature_color\t$feature_color\n";
 						$reads_setting_conf.="$insert_cr_id\tfeature_shift_y\t$insert_shift_y\n";		
 						$reads_setting_conf.="$insert_cr_id\tfeature_shift_y_unit\tpercent\n";
@@ -397,9 +465,9 @@ sub reads_mapping_run(){
 				}
 				die "error: cr_id is $cr_id\n" if($map_pos_start_cr eq "start");
 				$reads_gff.="$scf\tadd\t$read_type_raw\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";					    
-				if($cr_type ne "fake"){
-					$reads_setting_conf.="$cr_id\tfeature_x_extent\t-0.5bp,+0.5bp\n";
-				}
+				#if($cr_type ne "fake"){
+				#	$reads_setting_conf.="$cr_id\tfeature_x_extent\t-0.5bp,+0.5bp\n";
+				#}
 				$reads_setting_conf.="$cr_id\tfeature_shape\t$feature_shape\n";
 				$reads_setting_conf.="$cr_id\tfeature_height_ratio\t$feature_height\n";
 				$reads_setting_conf.="$cr_id\tfeature_height_unitt\tpercent\n";
@@ -451,8 +519,6 @@ sub reads_mapping_run(){
 				}
 
 			}
-		}elsif($read_type eq "vcf"){
-			die "die:vcf\n";
 		}else{
 			die "die:\n";
 		}
@@ -463,7 +529,94 @@ sub reads_mapping_run(){
 }
 
 
+sub check_vcf(){
+	my ($colors_height, $vcf_file, $sample, $scf, $rg_start, $rg_end, $k_index, $read_type, $s1, $e1, $info)=@_;
+	my %colors_height=%$colors_height;
+	my $reads_gff="";
+	my $reads_setting_conf="";
+	my $cross_link_conf="";
+	my $feature_shift_y;
+	if($s1=~ /^\+?(\d+)/){
+		$feature_shift_y="-$1";
+	}elsif($s1=~ /^-(\d+)/){
+		$feature_shift_y="+$1";
+	}else{
+		die "error:check_vcf s1 $s1 format error\n";
+	}
+	my $display_feature_label="yes";
+	$display_feature_label="no" if($info=~ /\sdisplay_feature_label->no/);
+	die "\nerror: feature_x_extent should like feature_x_extent->-1bp,+1bp in $info\n" if($info=~ /\sfeature_x_extent/ && $info!~ /\sfeature_x_extent->[\d\.\+-]+bp,[\d\.\+-]+bp/);
+	if($vcf_file=~ /\.gz$/){
+		open VCF,"gzip -dc $vcf_file|" or die "open $vcf_file error $?\n";
+	}else{	
+		open VCF,"$vcf_file" or die "open $vcf_file error $?\n";
+	}
+	while(<VCF>){
+		chomp;
+		next if($_=~ /^#/||$_=~ /^\s*$/);
+		##CHROM  POS       ID           REF  ALT    QUAL  FILTER
+		my ($chr,$pos,$snpid,$ref_base,$query_base,$qual,$filter)=split(/\t/,$_);
+		next if($chr ne $scf || $pos < $rg_start || $pos > $rg_end || $ref_base eq $query_base);
+		#print "line is $_\n";
+		my $vcf_id="$sample.$scf.vcf.$pos.$ref_base.to.$query_base.$snpid.$k_index";
+		my $feature_label="$pos:$ref_base.to.$query_base";
+		my ($mutation_type, $mutation_length, $start, $end)=&check_vcf_mutation_type($ref_base, $query_base, $pos);
+		my $feature_color=$colors_height{$mutation_type}{color};
+		my $feature_height=$colors_height{$mutation_type}{height}*abs($s1-$e1);
+		my $feature_opacity=$colors_height{$mutation_type}{opacity};
+		if($mutation_length < $colors_height{$mutation_type}{limit_len}){
+			print "\nwarning:skip $_ in $vcf_file, because mutation_length is $mutation_length bp < $colors_height{$mutation_type}{limit_len} bp which is set in color_height_cs\n\n";
+			next;
+		}
+		die "error:color or height or opacity in colors_height for $mutation_type not exists, in vcf\n" if(not exists $colors_height{$mutation_type}{color}|| not exists $colors_height{$mutation_type}{height} || not exists $colors_height{$mutation_type}{opacity});
+		my $pos_feature_label=($s1=~ /^\+?(\d+)/)? "medium_up":"medium_low";
+		$reads_gff.="$scf\tadd\t$read_type\t$start\t$end\t.\t+\t.\tID=$vcf_id\n";
+		#$reads_setting_conf.="$vcf_id\tfeature_x_extent\t-1bp,+1bp\n";
+		$reads_setting_conf.="$vcf_id\tfeature_color\t$feature_color\n";
+		$reads_setting_conf.="$vcf_id\tfeature_label_color\t$feature_color\n";
+		$reads_setting_conf.="$vcf_id\tfeature_shape\trect\n";
+		$reads_setting_conf.="$vcf_id\tfeature_height_ratio\t$feature_height\n";
+		$reads_setting_conf.="$vcf_id\tfeature_height_unit\tpercent\n";
+		$reads_setting_conf.="$vcf_id\tfeature_shift_y\t$feature_shift_y\n";
+		$reads_setting_conf.="$vcf_id\tfeature_shift_y_unit\tpercent\n";
+		$reads_setting_conf.="$vcf_id\tfeature_opacity\t$feature_opacity\n";
+		$reads_setting_conf.="$vcf_id\tfeature_label\t$feature_label\n";
+		$reads_setting_conf.="$vcf_id\tdisplay_feature_label\t$display_feature_label\n";
+		$reads_setting_conf.="$vcf_id\tpadding_feature_label\t0.1\n";
+		$reads_setting_conf.="$vcf_id\tpos_feature_label\t$pos_feature_label\n";
+		$reads_setting_conf.="$vcf_id\tfeature_label_auto_angle_flag\t0\n";
+		$reads_setting_conf.="$vcf_id\tlabel_rotate_angle\t-15\n";
+		$reads_setting_conf.="$vcf_id\tfeature_label_size\t2\n";
+		$reads_setting_conf.="$vcf_id\tfeature_x_extent\t$1\n" if($info=~ /\sfeature_x_extent->(\S+)/);
+	}
+	close VCF;
+	$cross_link_conf="";
+	die "error: check_vcf $vcf_file null?\n" if(!$reads_gff || !$reads_setting_conf);
+	return ($reads_gff, $reads_setting_conf, $cross_link_conf);
+}
 
+sub check_vcf_mutation_type(){
+	my ($ref_base, $query_base, $pos)=@_;
+	my ($mutation_type, $mutation_length, $start, $end);
+	if(length($ref_base) == length($query_base)){ # snp
+		die "error:$ref_base  == $query_base \n" if($ref_base eq $query_base);
+		$mutation_type="X";
+		$mutation_length=1;
+		$start=$pos;
+		$end=$pos;
+	}elsif(length($ref_base) > length($query_base)){ # delete
+		$mutation_type="D";
+		$mutation_length=length($ref_base) -1;
+		$start=$pos;
+		$end=$pos+$mutation_length;
+	}else{ # insert
+		$mutation_type="I";
+		$mutation_length=length($query_base) -1;
+		$start=$pos;
+		$end=$pos;
+	}
+	return ($mutation_type, $mutation_length, $start, $end);
+}
 
 sub get_reads_depth(){
 	my ($reads, $s1, $e1, $rg_start, $read_type, $show_type)=@_;
@@ -611,7 +764,7 @@ sub get_reads_depth(){
 
 
 sub get_mapping_reads(){
-	my ($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, $colors_height, $show_type, $min_mapq)=@_;
+	my ($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, $colors_height, $show_type, $min_mapq, $refasta)=@_;
 	my %reads;
 	use Storable;
 	my $tmpf="$bam_file.$scf.$rg_start.$rg_end.reads.$read_type.hash";
@@ -625,6 +778,8 @@ sub get_mapping_reads(){
 		%reads=%$reads;
 	}else{
 		open BAM,"samtools view $bam_file|awk '\$1!~ /^@/ && \$3!=\"*\" && \$3==\"$scf\"'|" or die "error: samtools view $bam_file\n";
+		my $header_bam=`samtools view -h $bam_file|grep \'^@\' >$bam_file.header && echo $bam_file.header`; chomp $header_bam;
+		die "error:header_bam is $header_bam\n" if(!-f "$header_bam");
 		while(<BAM>){
 			chomp;
 			my @arr=split(/\t/,$_);
@@ -657,7 +812,7 @@ sub get_mapping_reads(){
 			}
 			my $strand=($flag & $reverse_flag); # if ture, mean read reverse
 				$cigar=&convert_cigar($cigar, $colors_height);
-			%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $reads_order, $r_id, $rg_start, $rg_end, \%reads, $_);
+			%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $reads_order, $r_id, $rg_start, $rg_end, \%reads, $_, $header_bam, $scf, $refasta);
 			$reads{$r_id}{ref_start}=$ref_start_pos;
 			$reads{$r_id}{ref_end}=$ref_start_pos + $ref_consumes_length -1;
 			$reads{$r_id}{ref_id}="$ref_id"; # "*0"
@@ -727,16 +882,14 @@ sub get_mapping_reads(){
 
 sub cigar_setting(){
 	my ($color_height_cs)=@_;
-#my $color_height_cs="M:green:0.5:1bp,I:red:0.7:6bp,D:black:0.7:5bp,N:blue:0.2:1bp,S:blue:0.2:1bp,H:blue:0.2:1bp,P:blue:0.2:1bp,X:grey:0.6:1bp,reverse:#D2691E:0.8:6bp";
-#my $color_height_cs_usage="M:green:opacity0.8:height0.5:1bp,I:red:opacity1:height0.9:6bp,D:black:opacity1:height0.9:3bp,N:blue:opacity1:height0.2:1bp,S:blue:opacity0.6:height0.4:1bp,H:blue:opacity0.6:0.2:1bp,P:blue:opacity1:height0.2:1bp,X:grey:opacity1:height0.6:1bp,reverse:#1E90FF:opacity0.8:height0.8:6bp,forward:green:opacity0.8:height0.8:1bp"; #yellow
-	my $color_height_cs_usage="M:green:opacity0.8:height0.5:1bp,I:red:opacity1:height0.9:6bp,D:black:opacity1:height0.9:3bp,N:blue:opacity1:height0.2:1bp,S:blue:opacity0.6:height0.4:1bp,H:blue:opacity0.6:height0.2:1bp,P:blue:opacity1:height0.2:1bp,X:grey:opacity1:height0.6:1bp,reverse:#1E90FF:opacity0.8:height0.8:6bp,forward:green:opacity0.8:height0.8:1bp"; #yellow
-		my (%colors_height);
+	my $color_height_cs_usage="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0:0bp:rect" if(!$color_height_cs); #yellow
+	my (%colors_height);
 	$color_height_cs=~ s/\s//g;
 	my @color_height_cses=split(/,/, $color_height_cs);
 	for my $ch(@color_height_cses){
 		my @arr=split(/:/, $ch);
-		die "error:cigar_setting $ch                         of $color_height_cs format is wrong, should like $color_height_cs_usage\n" if(@arr!=5 || $ch!~ /^[^:]+:[^:]+:opacity[\d\.]+:height[\d\.]+:\d+bp$/);
-		my ($cg,$color,$opacity,$height,$limit_len)=@arr;
+		die "error:cigar_setting $ch                         of $color_height_cs format is wrong, should like $color_height_cs_usage\n" if(@arr!=6 || $ch!~ /^[^:]+:[^:]+:opacity[\d\.]+:height[\d\.]+:\d+bp:\S+$/);
+		my ($cg,$color,$opacity,$height,$limit_len,$feature_shape)=@arr;
 		$limit_len=~ s/bp//g;
 		$opacity=~ s/opacity//g;
 		$height=~ s/height//g;
@@ -744,6 +897,7 @@ sub cigar_setting(){
 		$colors_height{$cg}{height}=$height;
 		$colors_height{$cg}{opacity}=$opacity;
 		$colors_height{$cg}{limit_len}=$limit_len;
+		$colors_height{$cg}{shape}=$feature_shape;
 #print "cg is $cg\n\n";
 	}
 	return %colors_height;
@@ -813,22 +967,25 @@ sub cs_color_height(){
 	$cg=~ /(\d+)([^\d]+)/;
 	my $cg_len=$1;
 	my $cg_type=$2;
-	my ($cs_color, $cs_height, $cs_opacity);
+	my ($cs_color, $cs_height, $cs_opacity,$cs_shape);
 
 	if(exists $colors_height->{$cg_type}){
 		if($map_pos_strand_cr eq "+"){
 			$cs_color=$colors_height{$cg_type}{color};
 			$cs_height=$colors_height{$cg_type}{height};
 			$cs_opacity=$colors_height{$cg_type}{opacity};
+			$cs_shape=$colors_height{$cg_type}{shape};
 		}elsif($map_pos_strand_cr eq "-"){
 			if($cg_type eq "M"){
 				$cs_color=$colors_height{reverse}{color};
 				$cs_height=$colors_height{reverse}{height};
 				$cs_opacity=$colors_height{reverse}{opacity};
+				$cs_shape=$colors_height{$cg_type}{shape};
 			}else{
 				$cs_color=$colors_height{$cg_type}{color};
 				$cs_height=$colors_height{$cg_type}{height};
 				$cs_opacity=$colors_height{$cg_type}{opacity};
+				$cs_shape=$colors_height{$cg_type}{shape};
 			}
 		}else{
 			die "error: strand is $map_pos_strand_cr\n";
@@ -836,7 +993,7 @@ sub cs_color_height(){
 	}else{
 		die "error:not support cigar $cg_type\n";
 	}
-	return ($cs_color, $cs_height, $cs_opacity);
+	return ($cs_color, $cs_height, $cs_opacity, $cs_shape);
 
 
 
@@ -846,7 +1003,7 @@ sub cs_color_height(){
 
 
 sub detail_cigar(){
-	my ($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, $reads, $line)=@_;
+	my ($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, $reads, $line, $header_bam, $scf, $refasta)=@_;
 	my %reads=%$reads;
 	my @cigars=$cigar=~ /(\d+[^\d])/g;
 	my $M_index=0;
@@ -957,6 +1114,17 @@ sub detail_cigar(){
 #$reads{$r_id}{leftest_cs}=$css[0];
 #$reads{$r_id}{rightest_cs}=$css[-1];
 	$reads{$r_id}{strand}=($strand)? "-":"+";
+
+	# call snp # MD:Z:12C135 
+	if($line=~ /MD:\S*\d[ATCG]/ && 0 ){
+		my $call="cp $header_bam $header_bam.tmp && echo -e \"$line\" >> $header_bam.tmp && samtools mpileup -u --skip-indels -t DP $header_bam.tmp -f $refasta 2>/dev/null|bcftools view -v snps |grep \"^$scf\"";
+		open SNP,"$call|" or die "error:$call error!\n";
+		while(<SNP>){
+			chomp;
+			print "$_\n";
+		}
+		close SNP;
+	}
 	return 	%reads;
 }
 
@@ -1064,21 +1232,26 @@ sub hist_scatter_line_run(){
 		$depth_setting_conf.="$depth_id\tfeature_color\t$depth_color\n";
 		$depth_setting_conf.="$depth_id\tfeature_opacity\t$depth_opacity\n";
 		$depth_setting_conf.="$depth_id\tfeature_order\t$depth_order\n";
-		$depth_setting_conf.="$depth_id\tpos_feature_label\tleft_up\n" if($depth_overflow_flag);    
-		$depth_setting_conf.="$depth_id\tfeature_label\t$depth\n" if($depth_overflow_flag);
-		$depth_setting_conf.="$depth_id\tlabel_rotate_angle\t0\n" if($depth_overflow_flag);
-		$depth_setting_conf.="$depth_id\tfeature_label_auto_angle_flag\t0\n\n" if($depth_overflow_flag);
-		$depth_setting_conf.="$depth_id\tfeature_label_size\t$depth_label_size\n" if($depth_overflow_flag);
+		$depth_setting_conf.="$depth_id\tpos_feature_label\tmedium_up\n";
+		if($depth_overflow_flag){
+			$depth_setting_conf.="$depth_id\tpos_feature_label\tmedium_up\n";
+			$depth_setting_conf.="$depth_id\tfeature_label\t$depth\n";
+			$depth_setting_conf.="$depth_id\tlabel_text_anchor\tmiddle\n";
+			$depth_setting_conf.="$depth_id\tlabel_rotate_angle\t0\n";
+			$depth_setting_conf.="$depth_id\tfeature_label_auto_angle_flag\t0\n\n";
+			$depth_setting_conf.="$depth_id\tfeature_label_size\t$depth_label_size\n";
+			#$depth_setting_conf.="$depth_id\tpadding_feature_label\t0.01\n";
+		}
 
 		if($depth_type eq "hist"){
 			if($e1=~ /-/){
 				$depth_shift_y=$s1;
 				$depth_shift_y=~ s/-+/+/;
-				$padding_depth_label="-1";
+				$padding_depth_label="-0.01";
 			}else{
 				$depth_shift_y=$s1;
 				$depth_shift_y="-$depth_shift_y";
-				$padding_depth_label="+1";
+				$padding_depth_label="+0.01";
 			}
 			$depth_setting_conf.="\n$depth_id\tfeature_height_ratio\t$depth_height\n";
 			$depth_setting_conf.="\n$depth_id\tfeature_height_unit\tpercent\n";
@@ -1092,12 +1265,12 @@ sub hist_scatter_line_run(){
 				$depth_shift_y=$s1-$depth_height;
 				$depth_shift_y=abs($depth_shift_y);
 				$depth_shift_y="+$depth_shift_y";
-				$padding_depth_label="-1";
+				$padding_depth_label="-0.01";
 			}else{
 				$depth_shift_y=$s1+$depth_height;
 				$depth_shift_y=abs($depth_shift_y);
 				$depth_shift_y="-$depth_shift_y";
-				$padding_depth_label="+1";
+				$padding_depth_label="+0.01";
 			}
 			$depth_setting_conf.="$depth_id\tfeature_shape\tcircle_point\n";
 			$depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
@@ -1130,12 +1303,15 @@ sub read_depth_file(){
 	my %windows;
 	my $max=0;
 	die "error:window_size $window_size need >=1\n" if($window_size<0 or $window_size=~ /[^\d^\.]+/);
+	$depth_file=~/^([^:]+):/;
+	$depth_file=$1;
 	die "error:depth_file $depth_file not exists for $info\n" if(! -f $depth_file);
 	if($depth_file=~ /.bam\s*$/){
 		my $bam_depth_file="$depth_file.$scf.$block_start_bp.$block_end_bp.depth";
 		if(! -f "$bam_depth_file"){
 			print "bam\n";
-			&check_sort_bam($depth_file);
+			my @tmps=&check_sort_bam($depth_file);
+			$depth_file=$tmps[0];
 			my $cmd="samtools depth  -r $scf:$block_start_bp-$block_end_bp $depth_file|awk '{print \"$sample\\t\"\$0}'|sed -r 's/\\s/\\t/g' >$bam_depth_file";
 			print "cmd is $cmd\n";
 			my $rg_depth=`$cmd`;
@@ -1146,8 +1322,12 @@ sub read_depth_file(){
 		}
 		$depth_file=$bam_depth_file;
 	}
-#s3      s3      3       10 #sample scf_id  pos depth
-	open IN,"$depth_file" or die "can open $depth_file";
+	#s3      s3      3       10 #sample scf_id  pos depth
+	if($depth_file=~ /\.gz$/){
+		open IN,"gzip -dc $depth_file|" or die "can not open $depth_file\n";
+	}else{
+		open IN,"$depth_file" or die "can not open $depth_file\n";
+	}
 	while(<IN>){
 		chomp;
 		$_=~ s/\s+$//g;
