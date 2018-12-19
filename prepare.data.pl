@@ -176,7 +176,7 @@ sub plot_ylabel(){
 		$ylabel_id.=($yaxis=~ /^\d/)? "+":"-";
 		my $feature_shift_x=5+$gap;
 		$ylabel_gff.="$scf\tadd\tylabel\t$block_end_bp\t$block_end_bp\t.\t+\t.\tID=$ylabel_id;\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeatyyure_label_color\t$ylabel_color\n";
+		$ylabel_setting_conf.="$ylabel_id\tfeature_label_color\t$ylabel_color\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_shift_x\t$feature_shift_x\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_height_ratio\t0\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_height_unit\tpercent\n";
@@ -189,6 +189,8 @@ sub plot_ylabel(){
 		$ylabel_setting_conf.="$ylabel_id\tfeature_label_auto_angle_flag\t0\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_color\twhite\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_shape\trect\n";
+	}elsif($k=~ /\sylabel->/){
+		die "error:k is $k\n";
 	}
 	return ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf);
 }
@@ -470,7 +472,7 @@ sub reads_mapping_run(){
 				#}
 				$reads_setting_conf.="$cr_id\tfeature_shape\t$feature_shape\n";
 				$reads_setting_conf.="$cr_id\tfeature_height_ratio\t$feature_height\n";
-				$reads_setting_conf.="$cr_id\tfeature_height_unitt\tpercent\n";
+				$reads_setting_conf.="$cr_id\tfeature_height_unit\tpercent\n";
 				$reads_setting_conf.="$cr_id\tfeature_color\t$feature_color\n";
 				$reads_setting_conf.="$cr_id\tfeature_shift_y\t$read_shift_y\n";		
 				$reads_setting_conf.="$cr_id\tfeature_shift_y_unit\tpercent\n";
