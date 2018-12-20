@@ -611,7 +611,7 @@ if($conf{scale_display}=~ /yes/i){
 		my $tick_y1= $y_scale + $tick_height; #single tick hegith
 			my $tick_y2= $y_scale ;
 		my $tick_label_y=$y_scale+$y_tick_shift;
-		my $scale_start=0;
+		my $scale_start=1;
 		if(scalar(keys %gff) == 1){
 			my @ss=keys %gff;
 			$scale_start = $start_once if(scalar (keys %{$gff{$ss[0]}{chooselen_single}}) == 1)
@@ -622,8 +622,6 @@ if($conf{scale_display}=~ /yes/i){
 			last if( ($max_length - $tick_label) < $conf{scale_ratio} );
 			$tick_label+=($scale_start-1);
 			$tick_label=&format_scale($tick_label);
-			#print "<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # ticks
-			#print "<text x=\"$tick_x\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$tick_label</text>\n"; # label of feature
 			$orders{$conf{scale_order}}.="<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # ticks
 			$orders{$conf{scale_order}}.= "<text x=\"$tick_x\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$tick_label</text>\n"; # label of feature
 
@@ -649,8 +647,8 @@ for my $order(sort {$a<=>$b}keys %orders){
 }
 print SVG "</svg>";
 close SVG;
-print "outfile is  $outdir/$prefix.svg\n";
-print "if you want png or pdf format,you could do:\n\tconvert  -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.png\n\tconvert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf\n\n";
+print "\noutfile is  $outdir/$prefix.svg\n";
+print "\nif you want png or pdf format,you could do:\n\tconvert  -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.png\n\tconvert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf\n\n";
 
 
 

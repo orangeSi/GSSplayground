@@ -768,12 +768,12 @@ sub get_reads_depth(){
 sub get_mapping_reads(){
 	my ($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, $colors_height, $show_type, $min_mapq, $refasta)=@_;
 	my %reads;
-	use Storable;
 	my $tmpf="$bam_file.$scf.$rg_start.$rg_end.reads.$read_type.hash";
 	$read_type="long_reads" if($show_type eq "stack");
 
 	if(-f "$tmpf" && 0){
-# Retrieve the hash from the file.
+		# Retrieve the hash from the file.
+		use Storable;
 		die "die:get_mapping_reads\n";
 		print "using $tmpf, if you reupdate the $bam_file, please remove the $tmpf file\n";
 		my $reads = retrieve("$tmpf");
@@ -875,8 +875,8 @@ sub get_mapping_reads(){
 
 			}
 		}
-# Save the hash to a file:
-		store \%reads, "$tmpf";
+		#Save the hash to a file:
+		#store \%reads, "$tmpf";
 	}
 
 	return %reads;

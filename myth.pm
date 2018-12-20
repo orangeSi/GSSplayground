@@ -83,8 +83,9 @@ sub read_list(){
 		while(<GE>){
 			chomp;
 			my ($id,$seq)=split(/\n/,$_,2);
-			$id=~ /^(\S+)/;
+			die "error:id $id is unvalid \n" if($id!~ /^(\S+)/);
 			$id=$1;
+			die "error:id is null for $_\n" if(!$id);
 			$seq=~ s/\s+//g;
 			my $len=length $seq;
 			$genome{$sample}{$id}{len}=$len;
@@ -177,6 +178,28 @@ sub read_list(){
 
 			}
 			close GFF;
+		}
+		if(@arrs==0){
+			#$scf_block_id{$id}=$scf_block_id_flag
+			for my $scf(keys %scf_block_id){
+				next if(exists $gff{$sample}{scf}{$scf});
+				print "sample is $sample ,scf is $scf\n";
+				my @block_indexs= sort {$b<=>$a} keys %{$gff{$sample}{block}};
+				my $block_index=$block_indexs[0]+1;
+				my $gene_index=1;
+				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{start}=1.00; # block_index 是指每行中每个cluster的左右顺序
+				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{start_raw}=1; # block_index 是指每行中每个cluster的左右顺序
+				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{end}=1.00;
+				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{end_raw}=1;
+				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{strand}="+";
+				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{id}="$sample.$block_index.$scf.null";
+				$gff{$sample}{block2}{$block_index}{$scf}="";	
+				$gff{$sample}{scf}{$scf}="";
+				$gff{$sample}{chooselen_single}{$block_index}{len}=$genome{$sample}{$scf}{len};
+				$gff{$sample}{chooselen_single}{$block_index}{start}=1;
+				$gff{$sample}{chooselen_single}{$block_index}{end}=$genome{$sample}{$scf}{len};
+			}
+
 		}
 	}
 	close LI;
@@ -1034,7 +1057,7 @@ sub check_track_order(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}
