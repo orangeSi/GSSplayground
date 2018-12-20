@@ -18,6 +18,8 @@ perl >=v5.10.1
 - you can draw crosslink or sysnteny among features of different tracks<br><br>
 
 ### update feture:<br>
+#### 2018-12-20:<br>
+- support indel of cigar or indel in vcf now, but not support snp yet. test is example/out11.sh<br>
 #### 2018-12-10:<br>
 - add  plot depth and pabio read mapping of bam file, as example/out11.svg or out10.svg , inspired by  https://github.com/nspies/genomeview <br>
 #### 2018-11-12:<br>
@@ -43,7 +45,9 @@ perl >=v5.10.1
 
 
 
-
+```
+sh example/out11.sh # output out11.svg and convert out11.svg to out11.png
+```
 ![gene cluster image](example/out11.png)
 <br><br><br>
 ![gene cluster image](example/out10.svg)
