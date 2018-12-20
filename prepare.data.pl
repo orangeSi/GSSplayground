@@ -310,8 +310,8 @@ sub hist_scatter_line(){
 		my @depth_types=("hist", "scatter", "scatter_line");
 		die "error: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
 		$depth_file=~ /^([^:]+):([^:]+)$/;
-		die "error: $1 not exists for hist_scatter_line=$k\n" if(! -f $1);
-		die "error: $2 not exists for hist_scatter_line=$k\n" if(! -f $2);
+		die "error: $1 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $1);
+		die "error: $2 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $2);
 		for($i=0;$i<$infos_len;$i++){
 			next if($i==8);
 			$infos[$i]=~ s/\s//g;

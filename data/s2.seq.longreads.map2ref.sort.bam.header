@@ -1,0 +1,5 @@
+@HD	VN:1.5	SO:coordinate
+@SQ	SN:s20000	LN:10809
+@SQ	SN:s2000	LN:9609
+@SQ	SN:s2	LN:9609
+@PG	ID:minimap2	PN:minimap2	VN:2.11-r797	CL:minimap2 -ax map-pb s2.seq s2.seq.longreads.fa
