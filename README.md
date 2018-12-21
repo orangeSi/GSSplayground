@@ -18,6 +18,8 @@ perl >=v5.10.1
 - you can draw crosslink or sysnteny among features of different tracks<br><br>
 
 ### update feture:<br>
+#### 2018-12-21:<br>
+- add synteny between genomes, only support paf(like minimap2 ouput) format yet. test is example/out7.sh<br>
 #### 2018-12-20:<br>
 - support indel of cigar or indel in vcf now, but not support snp yet. test is example/out11.sh<br>
 #### 2018-12-10:<br>
@@ -50,6 +52,8 @@ sh example/out11.sh # output out11.svg and convert out11.svg to out11.png
 ```
 ![gene cluster image](example/out11.png)
 <br><br><br>
+![gene cluster image](example/out7.svg)
+<br><br><br>
 ![gene cluster image](example/out10.svg)
 <br><br><br>
 ![gene cluster image](example/out.svg)
@@ -62,7 +66,6 @@ sh example/out11.sh # output out11.svg and convert out11.svg to out11.png
 <br><br>
 ![gene cluster image](example/out8.svg)
 <br><br><br>
-![gene cluster image](example/out7.svg)
 
 contact:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;QQ: 1522051171<br>

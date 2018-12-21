@@ -1,0 +1,12 @@
+s3	add	synteny	1	9609	.	+	.	ID=s3.s3.1.9609.2.+;
+s3000	add	synteny	1	9609	.	+	.	ID=s3.s3000.1.9609.2.+;
+s30000	add	synteny	1	9969	.	+	.	ID=s3.s30000.1.9969.2.+;
+s3	add	synteny	1	9609	.	+	.	ID=s3.s3.1.9609.2.+;
+s3000	add	synteny	1	9609	.	+	.	ID=s3.s3000.1.9609.2.+;
+s30000	add	synteny	1	9969	.	+	.	ID=s3.s30000.1.9969.2.+;
+s3	add	synteny	1	9609	.	+	.	ID=s3.s3.1.9609.2.+;
+s3000	add	synteny	1	9609	.	+	.	ID=s3.s3000.1.9609.2.+;
+s30000	add	synteny	1	9969	.	+	.	ID=s3.s30000.1.9969.2.+;
+s3	add	synteny	180	540	.	+	.	ID=s3.s3.180.540.2.+;
+s3000	add	synteny	180	540	.	+	.	ID=s3.s3000.180.540.2.+;
+s30000	add	synteny	180	540	.	+	.	ID=s3.s30000.180.540.2.+;

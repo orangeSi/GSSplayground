@@ -27,8 +27,7 @@ if(! -d "$outdir"){
 }
 
 my @track_reorder;
-my @funcs=("hist_scatter_line", "reads_mapping");
-#my %conf = &read_conf($confile, @funcs);
+my @funcs=("hist_scatter_line", "reads_mapping", "synteny");
 my %conf = &read_conf($confile, @funcs);
 ($conf, $track_reorder) = &default_setting(%conf);
 %conf=%$conf;
@@ -46,7 +45,141 @@ for my $f (@funcs){
 	&$f(\%gff, \%conf);
 }
 
+
+
 print "\ndata done\n";
+sub synteny(){
+	my ($gff, $conf)=@_;
+	my $ex="synteny=order->1,query->s1:target->s2,../data/s1.mapto.s2.paf.gz,paf,quadrilateral,forward->yellow->opacity1,reverse->blue->opacity1,cross_link_shift_y->+1:-1";
+	unless(exists $conf->{synteny} && $conf->{synteny}){
+		print "synteny not\n";
+		return 0;
+	}
+	print "synteny start\n";
+	my $k_index;
+	my (%outname);
+	my @show_types=("quadrilateral");
+	#my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel");
+	my @highs=();
+	my @align_types=("paf");
+	for my $k (@{$conf->{synteny}}){
+		$k_index++;
+		&check_highs(\@highs,$k);
+		print "$k_index is $k\n\n";
+		@ks = split(/\t+/, $k);
+		my @infos=split(/,/, $ks[0]);
+		my $infos_len=scalar(@infos);
+		if($infos_len != 8 ){
+			die "error: synteny should separate by \\t, and have 8 colums for synteny=$k, but only have $infos_len\nvalid like synteny=$ex\n";
+		}
+		my @arr=$ks[0]=~ /^order->(-?\d+),query->([^:]+):target->([^,]+),(\S+),(\S+),(\S+),forward->([^-]+)->opacity([\d\.]+),reverse->([^-]+)->opacity([\d\.]+),cross_link_shift_y->(\+[\d\.]+:-[\d\.]+)$/;
+		die "error: $ks[0] format error, should like $ex\n" if(@arr!=11);
+		my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y) = @arr;
+		die "error: not support $alignment_type, only support @align_types\n" if(! grep(/^$alignment_type$/, @align_types));
+		die "error: not support $crosslink_shape, only support @show_types\n" if(! grep(/^$crosslink_shape$/, @show_types));
+		die "error: $query_name not exists in --list\n" if(not exists $conf->{sample_scf}{$query_name});
+		die "error: $target_name not exists in --list\n" if(not exists $conf->{sample_scf}{$target_name});
+		#$conf{sample_scf}{$sample}{$id}="";
+		my ($synteny_gff_q, $synteny_setting_conf_q, $synteny_gff_t, $synteny_setting_conf_t,$cross_link_conf)=&synteny_run(\@arr, $conf,$k_index);
+
+		my $prefix="$query_name.$query_name.to.$target_name.$alignment_type.$crosslink_shape.$k_index.synteny";	
+		%outname = &gather_gff_conf_link($prefix,$synteny_gff_q,$synteny_setting_conf_q,"", \%outname, $query_name);
+		
+		$prefix="$target_name.$query_name.to.$target_name.$alignment_type.$crosslink_shape.$k_index.synteny";	
+		%outname = &gather_gff_conf_link($prefix,$synteny_gff_t,$synteny_setting_conf_t,"", \%outname, $target_name);
+		
+		$prefix="$query_name.to.$target_name.$alignment_type.$crosslink_shape.$k_index.synteny";	
+		%outname = &gather_gff_conf_link($prefix,"","",$cross_link_conf, \%outname, "$query_name.to.$target_name");
+		
+	}
+	&write_gff_conf_link(\%outname, "synteny");
+}
+
+sub synteny_run(){
+	my ($arr,$conf,$k_index)=@_;
+	my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y)=@$arr;
+	my ($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf);
+	my (%qid, %tid, $qtid);
+	#my $feature_color="white";
+	my $cross_link_opacity;
+	my $cross_link_color;
+	if($alignment_type eq "paf"){
+		if($alignment=~ /\.paf$/){
+			open PAF,"cat $alignment|sort -k 10nr,10nr -k 1,1 -k 6,6|" or die "$?";
+			print "$alignment is plain file\n";
+		}elsif($alignment=~ /\.gz/){
+			open PAF,"gzip -dc $alignment|sort -k 10nr,10nr -k 1,1 -k 6,6|" or die "$?";
+			print "$alignment is gz file\n";
+		}else{
+			die "error:$alignment should end with paf or gz\n";
+		}
+		while(<PAF>){
+			chomp;
+			next if($_=~ /^#/ ||$_=~ /^\s*$/);
+			#print "line$. is $_\n";
+			my @arr=split(/\s+/,$_);
+			my $query_scf=$arr[0];
+			my $target_scf=$arr[5];
+			my $query_start=($arr[2] ==0)? 1:$arr[2];
+			my $query_end=$arr[3];
+			my $target_start=($arr[7] ==0)? 1:$arr[7];
+			my $target_end=$arr[8];
+			my $strand=$arr[4];
+			die "error:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
+			die "error:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
+			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
+			if(not exists $qid{$query_feature_id}){
+				$synteny_gff_q.="$query_scf\tadd\tsynteny\t$query_start\t$query_end\t.\t$strand\t.\tID=$query_feature_id;\n";
+				$synteny_setting_conf_q.="$query_feature_id\tfeature_shape\trect\n";
+				$synteny_setting_conf_q.="$query_feature_id\tfeature_height_ratio\t1\n";
+				$synteny_setting_conf_q.="$query_feature_id\tfeature_height_unit\tbackbone\n";
+				#$synteny_setting_conf_q.="$query_feature_id\tfeature_color\t$feature_color\n";
+				$synteny_setting_conf_q.="$query_feature_id\tfeature_opacity\t0\n";
+				$synteny_setting_conf_q.="$query_feature_id\tdisplay_feature_label\tno\n";
+				$synteny_setting_conf_q.="$query_feature_id\tfeature_order\t$synteny_order\n";
+				$qid{$query_feature_id}="";
+			}
+			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
+			if(not exists $qid{$target_feature_id}){
+				$synteny_gff_t.="$target_scf\tadd\tsynteny\t$target_start\t$target_end\t.\t$strand\t.\tID=$target_feature_id;\n";
+				$synteny_setting_conf_t.="$target_feature_id\tfeature_shape\trect\n";
+				$synteny_setting_conf_t.="$target_feature_id\tfeature_height_ratio\t1\n";
+				$synteny_setting_conf_t.="$target_feature_id\tfeature_height_unit\tbackbone\n";
+				#$synteny_setting_conf_t.="$target_feature_id\tfeature_color\t$feature_color\n";
+				$synteny_setting_conf_t.="$target_feature_id\tfeature_opacity\t0\n";
+				$synteny_setting_conf_t.="$target_feature_id\tdisplay_feature_label\tno\n";
+				$synteny_setting_conf_t.="$target_feature_id\tfeature_order\t$synteny_order\n";
+				$tid{$target_feature_id}="";
+			}
+			if($strand eq "+"){
+				$cross_link_color=$forward_color;
+				$cross_link_opacity=$forward_opacity;
+			}elsif($strand eq "-"){
+				$cross_link_color=$reverse_color;
+				$cross_link_opacity=$reverse_opacity;
+			}else{
+				die "error:srand $strand\n";
+			}
+			$cross_link_opacity*=($arr[9]/$arr[10]);
+			#$my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity)=@$arr;
+			if(not exists $qtid{"$query_feature_id.$target_feature_id"}){
+				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shape\t$crosslink_shape\n";
+				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_anchor_pos\tlow_up\n";
+				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_color\t$cross_link_color\n";
+				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_opacity\t$cross_link_opacity\n";
+				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shift_y\t$cross_link_shift_y\n";
+				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcrosslink_stroke_style\tstroke:black;stroke-width:0.2;\n";
+				#$cross_link_conf.="$query_feature_id\t$target_feature_id\t\t\n";
+				$qtid{"$query_feature_id.$target_feature_id"}="";
+			}
+			#$conf{sample_scf}{$sample}{$id}="";	
+			
+		}
+		close PAF;		
+	}
+	return ($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf);
+}
+
 
 sub reads_mapping(){
 	my ($gff, $conf)=@_;
@@ -189,6 +322,7 @@ sub plot_ylabel(){
 		$ylabel_setting_conf.="$ylabel_id\tfeature_label_auto_angle_flag\t0\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_color\twhite\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_shape\trect\n";
+		$ylabel_setting_conf.="$ylabel_id\tlabel_text_alignment_baseline\tmiddle\n";
 	}elsif($k=~ /\sylabel->/){
 		die "error:k is $k\n";
 	}
@@ -210,9 +344,14 @@ sub write_gff_conf_link(){
 	my ($outname, $prefix)=@_;
 	my %outname=%$outname;
 	for my $s(keys %outname){
-		`set -vex;cat @{$outname{$s}{gff}} >$s.$prefix.gff;echo output $s.prefix.gff; cat @{$outname{$s}{conf}} > $s.$prefix.setting.conf;echo output $s.$prefix.setting.conf;echo rm @{$outname{$s}{gff}} @{$outname{$s}{conf}};echo cat $prefix done1`;
+		if($outname{$s}{gff}){
+			`set -vex;cat @{$outname{$s}{gff}} >$s.$prefix.gff;echo output $s.prefix.gff`;
+		}
+		if($outname{$s}{conf}){
+			`set -vex;cat @{$outname{$s}{conf}} > $s.$prefix.setting.conf;echo output $s.$prefix.setting.conf;echo rm @{$outname{$s}{gff}} @{$outname{$s}{conf}};`;
+		}
 		if(exists $outname{$s}{crosslink}){
-			`set -vex;cat @{$outname{$s}{crosslink}} >$s.$prefix.crosslink;rm @{$outname{$s}{crosslink}};echo output $s.$prefix.crosslink;echo cat $prefix done2`;
+			`set -vex;cat @{$outname{$s}{crosslink}} >$s.$prefix.crosslink;echo output $s.$prefix.crosslink;echo;rm @{$outname{$s}{crosslink}}`;
 		}
 	}
 	print "$prefix end\n";
@@ -220,26 +359,30 @@ sub write_gff_conf_link(){
 sub gather_gff_conf_link(){
 	my ($prefix,$gff,$setting_conf,$cross_link_conf, $outname, $sample)=@_;
 	my %outnames=%$outname;
-	return %outnames if(!$gff && !$setting_conf && !$cross_link_conf);
-	my $out_gff="$prefix.gff";
-	print "output $out_gff\n";
-	push @{$outnames{$sample}{gff}},$out_gff;
-	open GFF,">$out_gff" or die "$!";
-	print GFF "$gff";
-	close GFF;
-	my $out_conf="$prefix.setting.conf";
-	push @{$outnames{$sample}{conf}},$out_conf;
-	print "output $out_conf\n";
-	open CONF,">$out_conf" or die "$!";
-	print CONF "$setting_conf";
-	close CONF;
-	return %outnames unless($cross_link_conf);
-	my $out_crosslink_conf="$prefix.crosslink.conf";
-	push @{$outnames{$sample}{crosslink}},$out_crosslink_conf;
-	print "output $out_crosslink_conf\n";
-	open CONF,">$out_crosslink_conf" or die "$!";
-	print CONF "$cross_link_conf";
-	close CONF;
+	if($gff){
+		my $out_gff="$prefix.gff";
+		print "output $out_gff\n";
+		push @{$outnames{$sample}{gff}},$out_gff;
+		open GFF,">$out_gff" or die "$!";
+		print GFF "$gff";
+		close GFF;
+	}
+	if($setting_conf){
+		my $out_conf="$prefix.setting.conf";
+		push @{$outnames{$sample}{conf}},$out_conf;
+		print "output $out_conf\n";
+		open CONF,">$out_conf" or die "$!";
+		print CONF "$setting_conf";
+		close CONF;
+	}
+	if($cross_link_conf){
+		my $out_crosslink_conf="$prefix.crosslink.conf";
+		push @{$outnames{$sample}{crosslink}},$out_crosslink_conf;
+		print "output $out_crosslink_conf\n";
+		open CONF,">$out_crosslink_conf" or die "$!";
+		print CONF "$cross_link_conf";
+		close CONF;
+	}
 	return %outnames;
 }
 sub check_env_exist(){
@@ -277,7 +420,6 @@ sub get_max_depth(){
 	return $max_depth;
 }
 
-#@my @funcs=("hist_scatter_line", "sr_mapping", "lr_mapping");
 sub hist_scatter_line(){
 	my ($gff, $conf)=@_;
 	my $ex="s2,s2000,0,100,path_map.sort.bam,10->50,ytick_flag,20->30,ytick_label_text,hgrid_flag,tick_color\n#sample,scf,block_flag,window_size,depth_file,yaxis,ytick_flag,yaxis_show,ytick_label,hgrid_flag,tick_color";

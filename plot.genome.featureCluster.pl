@@ -97,6 +97,15 @@ my $left_distance_init = $ref_name_width_ratio * $svg_width ;#block左侧起点�
 
 my ($down_percent_unit,$up_percent_unit,$ytick_region_ratio,$start_once,$end_once);
 my $index_id_previous="";
+my $display_segment_name=$conf{display_segment_name};
+die "error:display_segment_name $display_segment_name format error, should like display_segment_name=yes,center,shift_y:+1,fontsize:10,color:black,order:5\n" if($display_segment_name!~ /^([^,]+),([^,]+),shift_y:([\+-\d\.]+),fontsize:([\d\.]+),color:(\S+),order:(\d+)/);
+my $display_segment_name_flag=$1;
+my $display_segment_name_pos=$2;
+my $display_segment_name_shift_y=$3*$sample_single_height/100;
+my $display_segment_name_fontsize=$4;
+my $display_segment_name_color=$5;
+my $display_segment_name_order=$6;
+
 while(@track_order){
 	$index++;
 	my $sample = shift @track_order;
@@ -119,22 +128,13 @@ while(@track_order){
 		$common_size = $text_size;
 	my $ref_name_x = (1- $ref_name_right_gap )* $svg_width * $ref_name_width_ratio; # sample name 右下角end的x和y轴
 #my $ref_name_y = $top_distance + (0.5 + 0.05*$conf{genome_height_ratio}) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
-		my $ref_name_y;
-	if($conf{genome_height_ratio} < 0.05){
-		$ref_name_y = $top_distance + (0.5 + 0.003) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
-	}elsif($conf{genome_height_ratio} < 0.2){
-		$ref_name_y = $top_distance + (0.5 + 0.002) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
-	}else{
-		$ref_name_y = $top_distance + (0.5 + 0.001) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
-	}
+	my $ref_name_y=$top_distance+0.5*$sample_single_height;
 
-	if(not exists $conf{sample_name_old2new2}{$sample}{new_name}){
-		$conf{sample_name_old2new2}{$sample}{new_name} = $sample;
-		$conf{sample_name_old2new2}{$sample}{new_color} = $conf{sample_name_color_default};
-		$conf{sample_name_old2new2}{$sample}{new_font_size} = $conf{sample_name_font_size_default};
-	}
-	$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"$conf{sample_name_old2new2}{$sample}{new_font_size}px\" fill=\"$conf{sample_name_old2new2}{$sample}{new_color}\"  text-anchor='end'>$conf{sample_name_old2new2}{$sample}{new_name}</text>\n"; # draw sample name
-		print "draw sample name $conf{sample_name_old2new2}{$sample}{new_name}\n";
+	$conf{sample_name_old2new2}{$sample}{new_name} = $sample if(not exists $conf{sample_name_old2new2}{$sample}{new_name});
+	$conf{sample_name_old2new2}{$sample}{new_color} = $conf{sample_name_color_default} if(not exists $conf{sample_name_old2new2}{$sample}{new_color});
+	$conf{sample_name_old2new2}{$sample}{new_font_size} = $conf{sample_name_font_size_default} if(not exists $conf{sample_name_old2new2}{$sample}{new_font_size});
+	$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"$conf{sample_name_old2new2}{$sample}{new_font_size}px\" fill=\"$conf{sample_name_old2new2}{$sample}{new_color}\"  text-anchor='end' alignment-baseline=\"middle\" >$conf{sample_name_old2new2}{$sample}{new_name}</text>\n"; # draw sample name
+	print "draw sample name $conf{sample_name_old2new2}{$sample}{new_name}\n";
 
 
 	my $pre_block='';
@@ -167,7 +167,47 @@ while(@track_order){
 		}
 		$start_once=$gff{$sample}{chooselen_single}{$block_index}{start};
 		$end_once=$gff{$sample}{chooselen_single}{$block_index}{end};
-		$orders{$track_order}.="<g><title>$scf[0],$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}</title><rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
+		$orders{$track_order}.="<g><title>$scf[0]:$gff{$sample}{chooselen_single}{$block_index}{start}-$gff{$sample}{chooselen_single}{$block_index}{end}</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
+		#$conf{display_segment_name} ||="yes,center,shift_y:+1,fontsize:10,color:black"
+		#	
+		#my $display_segment_name_flag=$1;
+		#my $display_segment_name_pos=$2;
+		#my $display_segment_name_shift_y=$3*$sample_single_height/100;
+		#my $display_segment_name_fontsize=$4;
+		#my $display_segment_name_color=$5;
+		if($display_segment_name_flag=~ /yes/i){
+			my $segment_baseline;
+			my $segment_text_anchor;
+			if($display_segment_name_pos eq "left"){
+				$segment_text_anchor="start";
+				$segment_name_x=$id_line_x;
+			}elsif($display_segment_name_pos eq "right"){
+				$segment_text_anchor="end";
+				$segment_name_x=$id_line_x+$id_line_width-1;
+			}elsif($display_segment_name_pos eq "center"){	
+				$segment_text_anchor="middle";
+				$segment_name_x=$id_line_x+0.5*$id_line_width-1;
+			}else{
+				die "error:display_segment_name_pos not support $display_segment_name_pos, only support left right center\n";
+			}
+
+			$segment_name_y=$id_line_y+0.5*$id_line_height;
+			if($display_segment_name_shift_y=~ /^[\+-]0$/){
+				$segment_baseline="middle";
+			}elsif($display_segment_name_shift_y=~ /^[\d\+\.]+$/){
+				$segment_baseline="hanging";
+				$segment_name_y+=$display_segment_name_shift_y;
+			}elsif($display_segment_name_shift_y=~ /^-([\d\.])+$/){	
+				$segment_baseline="baseline";
+				$segment_name_y+=$display_segment_name_shift_y;
+			}else{
+				die "error:display_segment_name_shift_y not support $display_segment_name_shift_y in $display_segment_name, should like +1 or -1 or 0\n";
+			}
+			my $segment_name=($gff{$sample}{chooselen_single}{$block_index}{len} == $gff{$sample}{scf}{$scf[0]})? "$scf[0]":"$scf[0]:$start_once-$end_once";
+			$orders{$display_segment_name_order}.="<text x=\"$segment_name_x\" y=\"$segment_name_y\" font-size=\"${display_segment_name_fontsize}px\" fill=\"$display_segment_name_color\"  text-anchor='$segment_text_anchor' alignment-baseline=\"$segment_baseline\" >$segment_name</text>\n"; # draw sample name
+		}elsif($display_segment_name_flag!~ /no/i){
+			die "error:$display_segment_name should be start with yes or no, not $display_segment_name_flag\n"
+		}
 ## 判断相邻的block是否来自同一条scaffold
 		if($scf[0] eq $pre_block and $conf{connect_with_same_scaffold}=~ /yes/i){
 			my $pre_x = $id_line_x - $block_distance;
@@ -329,18 +369,38 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 	my $cross_link_order=(exists $conf{crossing_link2}{index}{$pair}{cross_link_order})? $conf{crossing_link2}{index}{$pair}{cross_link_order}:$conf{cross_link_order};
 	my $cross_link_anchor_pos=(exists $conf{crossing_link2}{index}{$pair}{cross_link_anchor_pos})? $conf{crossing_link2}{index}{$pair}{cross_link_anchor_pos}:$conf{cross_link_anchor_pos};
 	my $cross_link_width_ellipse=(exists $conf{crossing_link2}{index}{$pair}{cross_link_width_ellipse})? $conf{crossing_link2}{index}{$pair}{cross_link_width_ellipse}:$conf{cross_link_width_ellipse};
+	my $crosslink_stroke_style=(exists $conf{crossing_link2}{index}{$pair}{crosslink_stroke_style})? $conf{crossing_link2}{index}{$pair}{crosslink_stroke_style}:$conf{crosslink_stroke_style};
 	die "error: cross_link_width_ellipse $cross_link_width_ellipse should be number\n" if($cross_link_width_ellipse!~ /^[\d\.]+$/);
 	die "error1: $up_id of crosslink is not in --list regions, please try to check it, conf{crossing_link2}{position}{$up_id}{start}{x}\n" if(not exists $conf{crossing_link2}{position}{$up_id}{start}{x});
+	die "error:crosslink_stroke_style=$crosslink_stroke_style format error, should be like crosslink_stroke_style=stroke:green;stroke-width:1\n" if($crosslink_stroke_style!~ /^stroke:[^;]+;stroke-width:[\d\.]+;$/);
+	if($conf{crossing_link2}{position}{$up_id}{start}{y} > $conf{crossing_link2}{position}{$down_id}{start}{y}){
+		my $up_id_tmp=$up_id;
+		my $down_id_tmp=$down_id;
+		$up_id=$down_id_tmp;
+		$down_id=$up_id_tmp;
+	}
+	my $cross_link_shift_y_pair_up=0;
+	my $cross_link_shift_y_pair_low=0;
+	if(exists $conf{crossing_link2}{index}{$pair}{cross_link_shift_y}){
+		die "error:cross_link_shift_y = $conf{crossing_link2}{index}{$pair}{cross_link_shift_y} for $pair is error formats, should like +1:-1\n" if($conf{crossing_link2}{index}{$pair}{cross_link_shift_y}!~ /^([\+\d\.]+):([-\d\.]+)$/);
+		$cross_link_shift_y_pair_up=$1*$sample_single_height/100;
+		$cross_link_shift_y_pair_low=$2*$sample_single_height/100;
+	}
+
 	my $left_up_x = $conf{crossing_link2}{position}{$up_id}{start}{x};
 	my $left_up_y = $conf{crossing_link2}{position}{$up_id}{start}{y};
 	my $right_up_x = $conf{crossing_link2}{position}{$up_id}{end}{x};
 	my $right_up_y = $conf{crossing_link2}{position}{$up_id}{end}{y};
 	if($cross_link_anchor_pos=~ /^up_/){
-		$left_up_y-=$conf{feature_setting2}{$up_id}{cross_link_shift_y};
-		$right_up_y-=$conf{feature_setting2}{$up_id}{cross_link_shift_y};
+		$left_up_y-=$conf{feature_setting2}{$up_id}{cross_link_shift_y} ;
+		$left_up_y+= $cross_link_shift_y_pair_up;
+		$right_up_y-=$conf{feature_setting2}{$up_id}{cross_link_shift_y} ;
+		$right_up_y+=$cross_link_shift_y_pair_up;
 	}elsif($cross_link_anchor_pos=~ /^low_/){
 		$left_up_y+=$conf{feature_setting2}{$up_id}{cross_link_shift_y};
+		$left_up_y+= $cross_link_shift_y_pair_up;
 		$right_up_y+=$conf{feature_setting2}{$up_id}{cross_link_shift_y};
+		$right_up_y+= $cross_link_shift_y_pair_up;
 	}elsif($cross_link_anchor_pos !~ /^medium_/){
 		die "error: 1not support cross_link_anchor_pos =$cross_link_anchor_pos yet~\n"
 	}
@@ -352,10 +412,14 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 	my $right_down_y = $conf{crossing_link2}{position}{$down_id}{end}{y};
 	if($cross_link_anchor_pos=~ /_low/){
 		$left_down_y+=$conf{feature_setting2}{$down_id}{cross_link_shift_y};
+		$left_down_y+= $cross_link_shift_y_pair_low;
 		$right_down_y+=$conf{feature_setting2}{$down_id}{cross_link_shift_y};
+		$right_down_y+= $cross_link_shift_y_pair_low;
 	}elsif($cross_link_anchor_pos=~ /_up/){
 		$left_down_y-=$conf{feature_setting2}{$down_id}{cross_link_shift_y};
+		$left_down_y+=$cross_link_shift_y_pair_low;
 		$right_down_y-=$conf{feature_setting2}{$down_id}{cross_link_shift_y};
+		$right_down_y+=$cross_link_shift_y_pair_low;
 	}elsif($cross_link_anchor_pos !~ /_medium/){
 		die "error: 2not support cross_link_anchor_pos=$cross_link_anchor_pos yet~\n"
 	}
@@ -377,7 +441,7 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 		die "error: not support cross_link_orientation_ellipse=$cross_link_orientation_ellipse for $up_id and $down_id\n"
 	}
 
-	my $title_clink="<g><title>$up_id -> $down_id</title>";
+	my $title_clink="\n<g><title>$up_id -> $down_id</title>\n";
 #if($fts{$up_id}{sample} eq $fts{$down_id}{sample} && $fts{$up_id}{scf} eq $fts{$down_id}{scf} && $cross_link_shape=~ /ellipse/i){
 	$cross_link_shape=~ s/\s+//g;
 	if($cross_link_shape=~ /ellipse/i){
@@ -420,16 +484,16 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 		my $rotate_rev=0;
 		my ($large_arc_flag, $sweep_flag, $large_arc_flag_rev, $sweep_flag_rev)=split(",", $cross_link_orientation_ellipse); #http://xahlee.info/js/svg_path_ellipse_arc.html
 
-			$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"fill:$color;opacity:$cross_link_opacity\" /></g>";
+			$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\" /></g>";
 #$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"fill:white;stroke:black;stroke-width:0.5;fill-opacity:0;stroke-opacity:1\" /></g>";
 #print "downid is $down_id, up is is $up_id\n";
 		next;
 	}elsif($cross_link_shape=~ /quadrilateral/i){
 		if($cross_link_orientation=~ /reverse/i){
 			$color=(exists $conf{crossing_link2}{index}{$pair}{cross_link_color_reverse})? $conf{crossing_link2}{index}{$pair}{cross_link_color_reverse}:$conf{cross_link_color_reverse};
-			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
+			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
 		}elsif($cross_link_orientation=~ /forward/i){
-			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"fill:$color;stroke:#000000;stroke-width:0;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
+			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
 		}else{
 			die "error: not support cross_link_orientation=$cross_link_orientation\n";
 		}
@@ -647,7 +711,11 @@ for my $order(sort {$a<=>$b}keys %orders){
 }
 print SVG "</svg>";
 close SVG;
-print "\noutfile is  $outdir/$prefix.svg\n";
+my $rm_title="set -vex;sed -e 's/^\\s*<g>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//'  $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
+`$rm_title`;
+die "\nerror:$rm_title\n\n" if($?);
+
+print "\noutfile is  $outdir/$prefix.svg and $outdir/$prefix.notitle.svg\n";
 print "\nif you want png or pdf format,you could do:\n\tconvert  -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.png\n\tconvert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf\n\n";
 
 

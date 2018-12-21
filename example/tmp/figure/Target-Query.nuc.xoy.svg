@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg height="699.74572884404" width="740" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<line stroke="black" stroke-width="1.25" x1="160" x2="660" y1="570.99572884404" y2="570.99572884404" />
+	<line stroke="black" stroke-width="1.25" x1="160" x2="660" y1="65" y2="65" />
+	<line stroke="black" stroke-width="2.5" x1="660" x2="160" y1="634.74572884404" y2="634.74572884404" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="middle" x="160" xml:space="preserve" y="659.74572884404">0
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="160" x2="160" y1="634.74572884404" y2="641.412395510707" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="middle" x="243.258400772638" xml:space="preserve" y="659.74572884404">5
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="243.258400772638" x2="243.258400772638" y1="634.74572884404" y2="641.412395510707" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="middle" x="326.516801545276" xml:space="preserve" y="659.74572884404">10
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="326.516801545276" x2="326.516801545276" y1="634.74572884404" y2="641.412395510707" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="middle" x="409.775202317914" xml:space="preserve" y="659.74572884404">15
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="409.775202317914" x2="409.775202317914" y1="634.74572884404" y2="641.412395510707" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="middle" x="493.033603090552" xml:space="preserve" y="659.74572884404">20
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="493.033603090552" x2="493.033603090552" y1="634.74572884404" y2="641.412395510707" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="middle" x="576.29200386319" xml:space="preserve" y="659.74572884404">25
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="576.29200386319" x2="576.29200386319" y1="634.74572884404" y2="641.412395510707" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="middle" x="659.550404635828" xml:space="preserve" y="659.74572884404">30
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="659.550404635828" x2="659.550404635828" y1="634.74572884404" y2="641.412395510707" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" x="665" xml:space="preserve" y="634.74572884404">Kb
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="158.75" x2="158.75" y1="65" y2="569.74572884404" />
+	<line stroke="black" stroke-width="1.25" x1="660" x2="660" y1="65" y2="569.74572884404" />
+	<line stroke="black" stroke-width="2.5" x1="80" x2="80" y1="65" y2="569.74572884404" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="end" x="73.3333333333333" xml:space="preserve" y="576.94572884404">0
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="80" x2="75" y1="569.74572884404" y2="569.74572884404" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="end" x="73.3333333333333" xml:space="preserve" y="493.687328071402">5
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="80" x2="75" y1="486.487328071402" y2="486.487328071402" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="end" x="73.3333333333333" xml:space="preserve" y="410.428927298764">10
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="80" x2="75" y1="403.228927298764" y2="403.228927298764" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="end" x="73.3333333333333" xml:space="preserve" y="327.170526526126">15
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="80" x2="75" y1="319.970526526126" y2="319.970526526126" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="end" x="73.3333333333333" xml:space="preserve" y="243.912125753488">20
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="80" x2="75" y1="236.712125753488" y2="236.712125753488" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="end" x="73.3333333333333" xml:space="preserve" y="160.65372498085">25
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="80" x2="75" y1="153.45372498085" y2="153.45372498085" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="end" x="73.3333333333333" xml:space="preserve" y="77.3953242082125">30
+	</text>
+	<line stroke="black" stroke-width="1.25" x1="80" x2="75" y1="70.1953242082125" y2="70.1953242082125" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" x="80" xml:space="preserve" y="60">Kb
+	</text>
+	<g fill="black" font-family="Arial" stroke="none">
+		<text font-size="20" text-anchor="middle" x="240.011323142505" xml:space="preserve" y="600.94572884404">s2
+		</text>
+	</g>
+	<line stroke="black" stroke-width="2" x1="160.016651680155" x2="160.016651680155" y1="569.74572884404" y2="576.412395510707" />
+	<g fill="black" font-family="Arial" stroke="none">
+		<text font-size="20" text-anchor="middle" x="400.017317747361" xml:space="preserve" y="600.94572884404">s2000
+		</text>
+	</g>
+	<line stroke="black" stroke-width="2" x1="320.02264628501" x2="320.02264628501" y1="569.74572884404" y2="576.412395510707" />
+	<line stroke="black" stroke-dasharray="3.2 3.2" stroke-width="2" x1="320.02264628501" x2="320.02264628501" y1="64.9999999999999" y2="569.74572884404" />
+	<g fill="black" font-family="Arial" stroke="none">
+		<text font-size="20" text-anchor="middle" x="570.014320444933" xml:space="preserve" y="600.94572884404">s20000
+		</text>
+	</g>
+	<line stroke="black" stroke-width="2" x1="480.028640889866" x2="480.028640889866" y1="569.74572884404" y2="576.412395510707" />
+	<line stroke="black" stroke-dasharray="3.2 3.2" stroke-width="2" x1="480.028640889866" x2="480.028640889866" y1="64.9999999999999" y2="569.74572884404" />
+	<g fill="black" font-family="Arial" stroke="none">
+		<text font-size="20" text-anchor="end" x="150" xml:space="preserve" y="496.934405701535">s1
+		</text>
+	</g>
+	<line stroke="black" stroke-width="2" x1="160" x2="153.333333333333" y1="569.729077163886" y2="569.729077163886" />
+	<g fill="black" font-family="Arial" stroke="none">
+		<text font-size="19.047619047619" text-anchor="end" x="150" xml:space="preserve" y="328.717635080808">s1000
+		</text>
+	</g>
+	<line stroke="black" stroke-width="1.9047619047619" x1="160" x2="153.333333333333" y1="409.72308255903" y2="409.72308255903" />
+	<line stroke="black" stroke-dasharray="3.2 3.2" stroke-width="1.9047619047619" x1="660" x2="160" y1="409.72308255903" y2="409.72308255903" />
+	<g fill="black" font-family="Arial" stroke="none">
+		<text font-size="16.6666666666667" text-anchor="end" x="150" xml:space="preserve" y="155.490625104073">s10000
+		</text>
+	</g>
+	<line stroke="black" stroke-width="1.66666666666667" x1="160" x2="153.333333333333" y1="233.981250208146" y2="233.981250208146" />
+	<line stroke="black" stroke-dasharray="3.2 3.2" stroke-width="1.66666666666667" x1="660" x2="160" y1="233.981250208146" y2="233.981250208146" />
+	<line stroke="red" stroke-width="2.5" x1="180.997768674859" x2="311.863323009292" y1="202.010024311453" y2="71.1444699770207" />
+	<line stroke="red" stroke-width="2.5" x1="163.013954107969" x2="180.981116994705" y1="233.981250208146" y2="216.014087321411" />
+	<line stroke="red" stroke-width="2.5" x1="313.878176307989" x2="320.005994604856" y1="71.1278182968661" y2="64.9999999999999" />
+	<line stroke="red" stroke-width="2.5" x1="236.947413994072" x2="242.925367169547" y1="208.004629167083" y2="202.026675991607" />
+	<line stroke="red" stroke-width="2.5" x1="171.006760582143" x2="173.987411329803" y1="215.997435641256" y2="213.016784893596" />
+	<line stroke="red" stroke-width="2.5" x1="184.994171911946" x2="186.975721850335" y1="212.00103240417" y2="210.019482465781" />
+	<line stroke="red" stroke-width="2.5" x1="341.003763279715" x2="471.869317614147" y1="202.010024311453" y2="71.1444699770207" />
+	<line stroke="red" stroke-width="2.5" x1="323.019948712825" x2="340.98711159956" y1="233.981250208146" y2="216.014087321411" />
+	<line stroke="red" stroke-width="2.5" x1="473.884170912845" x2="480.011989209711" y1="71.1278182968661" y2="64.9999999999999" />
+	<line stroke="red" stroke-width="2.5" x1="396.953408598928" x2="402.931361774403" y1="208.004629167083" y2="202.026675991607" />
+	<line stroke="red" stroke-width="2.5" x1="331.012755186998" x2="333.993405934659" y1="215.997435641256" y2="213.016784893596" />
+	<line stroke="red" stroke-width="2.5" x1="345.000166516802" x2="346.98171645519" y1="212.00103240417" y2="210.019482465781" />
+	<line stroke="red" stroke-width="2.5" x1="501.009757884571" x2="551.94724747727" y1="202.010024311453" y2="151.072534718753" />
+	<line stroke="red" stroke-width="2.5" x1="568.948612915043" x2="616.888800079928" y1="142.063975755154" y2="94.1237885902687" />
+	<line stroke="red" stroke-width="2.5" x1="622.900056615713" x2="645.862723548806" y1="94.1071369101142" y2="71.1444699770207" />
+	<line stroke="red" stroke-width="2.5" x1="483.025943317681" x2="500.993106204416" y1="233.981250208146" y2="216.014087321411" />
+	<line stroke="red" stroke-width="2.5" x1="647.877576847504" x2="654.00539514437" y1="71.1278182968661" y2="64.9999999999999" />
+	<line stroke="red" stroke-width="2.5" x1="616.888800079928" x2="622.883404935558" y1="146.077030672395" y2="140.082425816765" />
+	<line stroke="red" stroke-width="2.5" x1="552.962999966697" x2="558.940953142172" y1="152.05498384787" y2="146.077030672395" />
+	<line stroke="red" stroke-width="2.5" x1="616.905451760083" x2="622.883404935558" y1="208.004629167083" y2="202.026675991607" />
+	<line stroke="red" stroke-width="2.5" x1="654.022046824525" x2="660" y1="233.981250208146" y2="228.003297032671" />
+	<line stroke="red" stroke-width="2.5" x1="564.952209677956" x2="568.948612915043" y1="207.005528357811" y2="203.009125120725" />
+	<line stroke="red" stroke-width="2.5" x1="564.952209677956" x2="568.948612915043" y1="145.061278182969" y2="141.064874945882" />
+	<line stroke="red" stroke-width="2.5" x1="491.018749791854" x2="493.999400539514" y1="215.997435641256" y2="213.016784893596" />
+	<line stroke="red" stroke-width="2.5" x1="560.95580644087" x2="563.93645718853" y1="147.059479801512" y2="144.078829053852" />
+	<line stroke="red" stroke-width="2.5" x1="505.006161121657" x2="506.987711060046" y1="212.00103240417" y2="210.019482465781" />
+	<line stroke="red" stroke-width="2.5" x1="561.954907250142" x2="563.93645718853" y1="208.004629167083" y2="206.023079228694" />
+	<line stroke="red" stroke-width="2.5" x1="568.948612915043" x2="570.930162853432" y1="204.008225929996" y2="202.026675991607" />
+	<line stroke="red" stroke-width="2.5" x1="221.960901854997" x2="320.005994604856" y1="332.042994638159" y2="233.9979018883" />
+	<line stroke="red" stroke-width="2.5" x1="160.016651680155" x2="221.944250174843" y1="409.72308255903" y2="347.795484064342" />
+	<line stroke="red" stroke-width="2.5" x1="381.966896459853" x2="480.011989209711" y1="332.042994638159" y2="233.9979018883" />
+	<line stroke="red" stroke-width="2.5" x1="320.02264628501" x2="381.950244779698" y1="409.72308255903" y2="347.795484064342" />
+	<line stroke="red" stroke-width="2.5" x1="480.028640889866" x2="541.956239384554" y1="409.72308255903" y2="347.795484064342" />
+	<line stroke="red" stroke-width="2.5" x1="568.948612915043" x2="616.888800079928" y1="313.060079261997" y2="265.119892097113" />
+	<line stroke="red" stroke-width="2.5" x1="622.900056615713" x2="654.00539514437" y1="265.103240416958" y2="233.9979018883" />
+	<line stroke="red" stroke-width="2.5" x1="541.972891064708" x2="551.94724747727" y1="332.042994638159" y2="322.068638225597" />
+	<line stroke="red" stroke-width="2.5" x1="616.888800079928" x2="622.883404935558" y1="317.073134179239" y2="311.078529323609" />
+	<line stroke="red" stroke-width="2.5" x1="552.962999966697" x2="558.940953142172" y1="323.051087354714" y2="317.073134179239" />
+	<line stroke="red" stroke-width="2.5" x1="654.022046824525" x2="660" y1="406.725780131215" y2="400.74782695574" />
+	<line stroke="red" stroke-width="2.5" x1="564.952209677956" x2="568.948612915043" y1="316.057381689812" y2="312.060978452726" />
+	<line stroke="red" stroke-width="2.5" x1="560.95580644087" x2="563.93645718853" y1="318.055583308356" y2="315.074932560695" />
+	<line stroke="red" stroke-width="2.5" x1="160.016651680155" x2="320.005994604856" y1="569.729077163886" y2="409.739734239185" />
+	<line stroke="red" stroke-width="2.5" x1="320.02264628501" x2="480.011989209711" y1="569.729077163886" y2="409.739734239185" />
+	<line stroke="red" stroke-width="2.5" x1="480.028640889866" x2="551.94724747727" y1="569.729077163886" y2="497.810470576481" />
+	<line stroke="red" stroke-width="2.5" x1="568.948612915043" x2="616.888800079928" y1="488.801911612882" y2="440.861724447997" />
+	<line stroke="red" stroke-width="2.5" x1="622.900056615713" x2="654.00539514437" y1="440.845072767842" y2="409.739734239185" />
+	<line stroke="red" stroke-width="2.5" x1="616.888800079928" x2="622.883404935558" y1="492.814966530123" y2="486.820361674493" />
+	<line stroke="red" stroke-width="2.5" x1="552.962999966697" x2="558.940953142172" y1="498.792919705598" y2="492.814966530123" />
+	<line stroke="red" stroke-width="2.5" x1="654.022046824525" x2="660" y1="566.731774736071" y2="560.753821560595" />
+	<line stroke="red" stroke-width="2.5" x1="564.952209677956" x2="568.948612915043" y1="491.799214040697" y2="487.80281080361" />
+	<line stroke="red" stroke-width="2.5" x1="560.95580644087" x2="563.93645718853" y1="493.79741565924" y2="490.81676491158" />
+	<text fill="black" font-family="Arial" font-size="22.7272727272727" stroke="none" text-anchor="middle" x="410" xml:space="preserve" y="688.836637934949">Target
+	</text>
+	<g transform="rotate(-90,33.7818181818182,317.37286442202)">
+		<text fill="black" font-family="Arial" font-size="22.7272727272727" stroke="none" text-anchor="middle" x="33.7818181818182" xml:space="preserve" y="317.37286442202">Query
+		</text>
+	</g>
+	<line stroke="red" stroke-width="2.5" x1="170" x2="200" y1="45" y2="45" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="star" x="210" xml:space="preserve" y="52.2">Forward
+	</text>
+	<line stroke="blue" stroke-width="2.5" x1="290" x2="320" y1="45" y2="45" />
+	<text fill="black" font-family="Arial" font-size="20" stroke="none" text-anchor="star" x="330" xml:space="preserve" y="52.2">Reverse
+	</text><!-- 
+	Generated using the Perl SVG Module V2.33
+	by Ronan Oger, modifyed by fanwei
+	Info: http://www.roasp.com/
+ -->
+</svg>
