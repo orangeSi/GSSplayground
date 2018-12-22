@@ -98,7 +98,7 @@ sub read_list(){
 		close GE;
 
 		if(@arrs%3){
-			die "error:$list line $. error format:$_, should be separated by \\t \n"; 
+			die "error:$list line $. is $_, the format is error, should be separated by \\t \n"; 
 		}elsif(@arrs!=0){
 			my ($gff, $fts, $gene_index_tmp, @arr_tmp);
 			($gff, $fts, $block_index, $conf, $gene_index_tmp, $genome) = &parse_arrs(\@arrs, 0, \@arr_tmp, \%genome, $block_index, \%gff, $gffs, \%fts, $conf, 0, 0, 0, 0, "", $sample, $space_len);
@@ -408,6 +408,15 @@ sub draw_genes(){
 	my $feature_shift_y_unit=&get_para("feature_shift_y_unit", $feature_id, $conf);
 	my $feature_shift_x=&get_para("feature_shift_x", $feature_id, $conf);
 	my $label_text_alignment_baseline=&get_para("label_text_alignment_baseline", $feature_id, $conf);
+	my $feature_popup_title=&get_para("feature_popup_title", $feature_id, $conf);
+	if($feature_popup_title){
+		my @kvs=split(/;/, $feature_popup_title);
+		$feature_popup_title="\n";
+		for my $kv(@kvs){
+			$feature_popup_title.="<tspan>$kv</tspan>\n";	
+		}
+	}
+	chomp $feature_popup_title;
 	my @alignment_baseline=("auto","baseline","before-edge","text-before-edge","middle","central", "after-edge","text-after-edge","ideographic","alphabetic","hanging","mathematical","inherit");
 	die "error: not support label_text_alignment_baseline=$label_text_alignment_baseline, only support @alignment_baseline\n" if(!grep(/^$label_text_alignment_baseline$/, @alignment_baseline));
 	$label_text_alignment_baseline=($label_text_alignment_baseline eq "baseline")? "":" alignment-baseline=\"$label_text_alignment_baseline\" ";
@@ -529,7 +538,7 @@ sub draw_genes(){
 			$x7=$x3;$y7=$y1;
 			$label_y=$y6+$label_y_shift;
 			$crossing_link_start_x=$x1;
-			$crossing_link_start_y=$y1+0.5*$gene_height_medium;
+			$crossing_link_start_y=0.5*$sample_single_height+$shift_y;
 			$crossing_link_end_x=$x5;
 			$crossing_link_end_y=$y5;
 		}else{
@@ -544,7 +553,7 @@ sub draw_genes(){
 
 			$label_y=$y7+$label_y_shift;
 			$crossing_link_start_x=$x1;
-			$crossing_link_start_y=$y1;
+			$crossing_link_start_y=0.5*$sample_single_height+$shift_y;
 			$crossing_link_end_x=$x4;
 			$crossing_link_end_y=$y4-0.5*$gene_height_medium;
 
@@ -576,11 +585,11 @@ sub draw_genes(){
 				<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
 				</linearGradient>
 				</defs>
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan></title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
 				<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture arrow
 		}elsif($display_feature=~ /yes/i){
 			$orders->{$order_f}.="
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan></title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
 				<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture arrow
 
 		}
@@ -611,7 +620,7 @@ sub draw_genes(){
 
 			$label_y=$y4+$label_y_shift;
 			$crossing_link_start_x=$x1;
-			$crossing_link_start_y=$y1+0.5*$gene_height_medium;
+			$crossing_link_start_y=0.5*$sample_single_height+$shift_y;
 			$crossing_link_end_x=$x3;
 			$crossing_link_end_y=$crossing_link_start_y;
 		}else{
@@ -623,7 +632,7 @@ sub draw_genes(){
 
 			$label_y=$y4+$label_y_shift;
 			$crossing_link_start_x=$x1;
-			$crossing_link_start_y=$y1+0.5*$gene_height_medium;
+			$crossing_link_start_y=0.5*$sample_single_height+$shift_y;
 			$crossing_link_end_x=$x3;
 			$crossing_link_end_y=$crossing_link_start_y;
 		}
@@ -656,11 +665,11 @@ sub draw_genes(){
 				<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
 				</linearGradient>
 				</defs>
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan></title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
 				<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
 		}elsif($display_feature=~ /yes/i){
 			$orders->{$order_f}.="
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan></title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
 				<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
 
 		}
@@ -719,11 +728,11 @@ sub draw_genes(){
 				<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
 				</linearGradient>
 				</defs>
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan></title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
 				<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\" style=\"opacity:$feature_opacity\" /></g>\n"; ## feture rect
 		}elsif($display_feature=~ /yes/i){
 			$orders->{$order_f}.="
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan></title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
 				<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\" style=\"opacity:$feature_opacity\"/></g>\n"; ## feture rect
 
 		}
@@ -892,6 +901,7 @@ sub default_setting(){
 	$conf{label_text_alignment_baseline} ||="baseline";
 	$conf{crosslink_stroke_style} ||="stroke:black;stroke-width:0.1;";
 	$conf{display_segment_name} ||="no,center,shift_y:+1,fontsize:10,color:black,order:5";
+	$conf{feature_popup_title} ||="";
 ##$conf{feature_ytick_region} ||="0-3:0-10;";
 ##$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
 
@@ -956,7 +966,7 @@ sub default_setting(){
 				$_=~ s/\s+$//;
 
 				my @arr;
-				if($_=~ /\s+\S+_label\s+/){
+				if($_=~ /\s+\S+_label\s+/ || $_=~ /\sfeature_popup_title\s/){
 					@arr=split(/\t+/, $_);
 				}else{
 					@arr=split(/\s+/, $_);
@@ -1062,7 +1072,7 @@ sub check_track_order(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

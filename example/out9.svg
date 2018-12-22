@@ -32,28 +32,28 @@
 
 
 
-<g><title>gene_s203 -> gene_s303</title>
+<g><title><tspan>gene_s203 -> gene_s303</tspan></title>
 <polygon points="298.273104131933,328.16 308.157977740729,328.16 312.264002162844,481.76 302.379128554049,481.76" style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1"/></g>
 
-<g><title>gene_s404000 -> gene_s4020000</title>
+<g><title><tspan>gene_s404000 -> gene_s4020000</tspan></title>
 <path d="M233.316811607264 641.76 L225.378497724508 641.76 A88.8117875005632 39.42  0 0 1   403.002072725634 641.76 L395.063758842878 641.76 A80.8734736178074 31.536 0 1 0 233.316811607264 641.76 Z"  style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:0.5" /></g>
-<g><title>gene_s307 -> gene_s308</title>
+<g><title><tspan>gene_s307 -> gene_s308</tspan></title>
 <line x1="458.560131573018" y1="484.96" x2="491.965935204794" y2="484.96" style="fill:red;stroke:red;stroke-width:0.64;opacity:1" /></g>
 
-<g><title>gene_s2100000 -> gene_s4100000</title>
+<g><title><tspan>gene_s2100000 -> gene_s4100000</tspan></title>
 <polygon points="1132.96196999054,318.24 1146.80079304285,318.24 710.979250214031,645.319411526157 710.979250214031,631.480588473843" style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1"/></g>
 
-<g><title>gene_s303 -> gene_s403000</title>
+<g><title><tspan>gene_s303 -> gene_s403000</tspan></title>
 <polygon points="302.379128554049,488.16 312.264002162844,488.16 206.825350335691,641.76 196.940476726896,641.76" style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1"/></g>
 
-<g><title>gene_s406000 -> gene_s4060000</title>
+<g><title><tspan>gene_s406000 -> gene_s4060000</tspan></title>
 <path d="M303.636281710449 631.84 L292.747713242914 631.84 A156.51049880593 39.42  0 0 1   605.768710854774 631.84 L594.880142387239 631.84 A145.621930338395 31.536 0 1 0 303.636281710449 631.84 Z"  style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1" /></g>
-<g><title>gene_s208 -> gene_s304</title>
+<g><title><tspan>gene_s208 -> gene_s304</tspan></title>
 <line x1="511.608953273555" y1="324.96" x2="340.245798224665" y2="484.96" style="fill:#FF8C00;stroke:#FF8C00;stroke-width:0.64;opacity:1" /></g>
 
-<g><title>gene_s406000 -> gene_s403000</title>
+<g><title><tspan>gene_s406000 -> gene_s403000</tspan></title>
 <path d="M303.636281710449 638.24 L292.747713242914 638.24 A-42.9611814536115 15.768  0 1 0   206.825350335691 648.16 L195.936781868157 648.16 A-53.8497499211463 14.1912 0 0 1 303.636281710449 638.24 Z"  style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1" /></g>
-<g><title>gene_s1060000 -> gene_s2100000</title>
+<g><title><tspan>gene_s1060000 -> gene_s2100000</tspan></title>
 <polygon points="1007.04388771234,158.24 1061.48673005002,158.24 1146.80079304285,311.84 1132.96196999054,311.84" style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1"/></g>
 
 

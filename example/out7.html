@@ -1,0 +1,3102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+// svg-pan-zoom v3.6.0
+// https://github.com/ariutta/svg-pan-zoom
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var svgPanZoom = require('./svg-pan-zoom.js');
+
+// UMD module definition
+(function(window, document){
+  // AMD
+  if (typeof define === 'function' && define.amd) {
+    define('svg-pan-zoom', function () {
+      return svgPanZoom;
+    });
+  // CMD
+  } else if (typeof module !== 'undefined' && module.exports) {
+    module.exports = svgPanZoom;
+
+    // Browser
+    // Keep exporting globally as module.exports is available because of browserify
+    window.svgPanZoom = svgPanZoom;
+  }
+})(window, document)
+
+},{"./svg-pan-zoom.js":4}],2:[function(require,module,exports){
+var SvgUtils = require('./svg-utilities');
+
+module.exports = {
+  enable: function(instance) {
+    // Select (and create if necessary) defs
+    var defs = instance.svg.querySelector('defs')
+    if (!defs) {
+      defs = document.createElementNS(SvgUtils.svgNS, 'defs')
+      instance.svg.appendChild(defs)
+    }
+
+    // Check for style element, and create it if it doesn't exist
+    var styleEl = defs.querySelector('style#svg-pan-zoom-controls-styles');
+    if (!styleEl) {
+      var style = document.createElementNS(SvgUtils.svgNS, 'style')
+      style.setAttribute('id', 'svg-pan-zoom-controls-styles')
+      style.setAttribute('type', 'text/css')
+      style.textContent = '.svg-pan-zoom-control { cursor: pointer; fill: black; fill-opacity: 0.333; } .svg-pan-zoom-control:hover { fill-opacity: 0.8; } .svg-pan-zoom-control-background { fill: white; fill-opacity: 0.5; } .svg-pan-zoom-control-background { fill-opacity: 0.8; }'
+      defs.appendChild(style)
+    }
+
+    // Zoom Group
+    var zoomGroup = document.createElementNS(SvgUtils.svgNS, 'g');
+    zoomGroup.setAttribute('id', 'svg-pan-zoom-controls');
+    zoomGroup.setAttribute('transform', 'translate(' + ( instance.width - 70 ) + ' ' + ( instance.height - 76 ) + ') scale(0.75)');
+    zoomGroup.setAttribute('class', 'svg-pan-zoom-control');
+
+    // Control elements
+    zoomGroup.appendChild(this._createZoomIn(instance))
+    zoomGroup.appendChild(this._createZoomReset(instance))
+    zoomGroup.appendChild(this._createZoomOut(instance))
+
+    // Finally append created element
+    instance.svg.appendChild(zoomGroup)
+
+    // Cache control instance
+    instance.controlIcons = zoomGroup
+  }
+
+, _createZoomIn: function(instance) {
+    var zoomIn = document.createElementNS(SvgUtils.svgNS, 'g');
+    zoomIn.setAttribute('id', 'svg-pan-zoom-zoom-in');
+    zoomIn.setAttribute('transform', 'translate(30.5 5) scale(0.015)');
+    zoomIn.setAttribute('class', 'svg-pan-zoom-control');
+    zoomIn.addEventListener('click', function() {instance.getPublicInstance().zoomIn()}, false)
+    zoomIn.addEventListener('touchstart', function() {instance.getPublicInstance().zoomIn()}, false)
+
+    var zoomInBackground = document.createElementNS(SvgUtils.svgNS, 'rect'); // TODO change these background space fillers to rounded rectangles so they look prettier
+    zoomInBackground.setAttribute('x', '0');
+    zoomInBackground.setAttribute('y', '0');
+    zoomInBackground.setAttribute('width', '1500'); // larger than expected because the whole group is transformed to scale down
+    zoomInBackground.setAttribute('height', '1400');
+    zoomInBackground.setAttribute('class', 'svg-pan-zoom-control-background');
+    zoomIn.appendChild(zoomInBackground);
+
+    var zoomInShape = document.createElementNS(SvgUtils.svgNS, 'path');
+    zoomInShape.setAttribute('d', 'M1280 576v128q0 26 -19 45t-45 19h-320v320q0 26 -19 45t-45 19h-128q-26 0 -45 -19t-19 -45v-320h-320q-26 0 -45 -19t-19 -45v-128q0 -26 19 -45t45 -19h320v-320q0 -26 19 -45t45 -19h128q26 0 45 19t19 45v320h320q26 0 45 19t19 45zM1536 1120v-960 q0 -119 -84.5 -203.5t-203.5 -84.5h-960q-119 0 -203.5 84.5t-84.5 203.5v960q0 119 84.5 203.5t203.5 84.5h960q119 0 203.5 -84.5t84.5 -203.5z');
+    zoomInShape.setAttribute('class', 'svg-pan-zoom-control-element');
+    zoomIn.appendChild(zoomInShape);
+
+    return zoomIn
+  }
+
+, _createZoomReset: function(instance){
+    // reset
+    var resetPanZoomControl = document.createElementNS(SvgUtils.svgNS, 'g');
+    resetPanZoomControl.setAttribute('id', 'svg-pan-zoom-reset-pan-zoom');
+    resetPanZoomControl.setAttribute('transform', 'translate(5 35) scale(0.4)');
+    resetPanZoomControl.setAttribute('class', 'svg-pan-zoom-control');
+    resetPanZoomControl.addEventListener('click', function() {instance.getPublicInstance().reset()}, false);
+    resetPanZoomControl.addEventListener('touchstart', function() {instance.getPublicInstance().reset()}, false);
+
+    var resetPanZoomControlBackground = document.createElementNS(SvgUtils.svgNS, 'rect'); // TODO change these background space fillers to rounded rectangles so they look prettier
+    resetPanZoomControlBackground.setAttribute('x', '2');
+    resetPanZoomControlBackground.setAttribute('y', '2');
+    resetPanZoomControlBackground.setAttribute('width', '182'); // larger than expected because the whole group is transformed to scale down
+    resetPanZoomControlBackground.setAttribute('height', '58');
+    resetPanZoomControlBackground.setAttribute('class', 'svg-pan-zoom-control-background');
+    resetPanZoomControl.appendChild(resetPanZoomControlBackground);
+
+    var resetPanZoomControlShape1 = document.createElementNS(SvgUtils.svgNS, 'path');
+    resetPanZoomControlShape1.setAttribute('d', 'M33.051,20.632c-0.742-0.406-1.854-0.609-3.338-0.609h-7.969v9.281h7.769c1.543,0,2.701-0.188,3.473-0.562c1.365-0.656,2.048-1.953,2.048-3.891C35.032,22.757,34.372,21.351,33.051,20.632z');
+    resetPanZoomControlShape1.setAttribute('class', 'svg-pan-zoom-control-element');
+    resetPanZoomControl.appendChild(resetPanZoomControlShape1);
+
+    var resetPanZoomControlShape2 = document.createElementNS(SvgUtils.svgNS, 'path');
+    resetPanZoomControlShape2.setAttribute('d', 'M170.231,0.5H15.847C7.102,0.5,0.5,5.708,0.5,11.84v38.861C0.5,56.833,7.102,61.5,15.847,61.5h154.384c8.745,0,15.269-4.667,15.269-10.798V11.84C185.5,5.708,178.976,0.5,170.231,0.5z M42.837,48.569h-7.969c-0.219-0.766-0.375-1.383-0.469-1.852c-0.188-0.969-0.289-1.961-0.305-2.977l-0.047-3.211c-0.03-2.203-0.41-3.672-1.142-4.406c-0.732-0.734-2.103-1.102-4.113-1.102h-7.05v13.547h-7.055V14.022h16.524c2.361,0.047,4.178,0.344,5.45,0.891c1.272,0.547,2.351,1.352,3.234,2.414c0.731,0.875,1.31,1.844,1.737,2.906s0.64,2.273,0.64,3.633c0,1.641-0.414,3.254-1.242,4.84s-2.195,2.707-4.102,3.363c1.594,0.641,2.723,1.551,3.387,2.73s0.996,2.98,0.996,5.402v2.32c0,1.578,0.063,2.648,0.19,3.211c0.19,0.891,0.635,1.547,1.333,1.969V48.569z M75.579,48.569h-26.18V14.022h25.336v6.117H56.454v7.336h16.781v6H56.454v8.883h19.125V48.569z M104.497,46.331c-2.44,2.086-5.887,3.129-10.34,3.129c-4.548,0-8.125-1.027-10.731-3.082s-3.909-4.879-3.909-8.473h6.891c0.224,1.578,0.662,2.758,1.316,3.539c1.196,1.422,3.246,2.133,6.15,2.133c1.739,0,3.151-0.188,4.236-0.562c2.058-0.719,3.087-2.055,3.087-4.008c0-1.141-0.504-2.023-1.512-2.648c-1.008-0.609-2.607-1.148-4.796-1.617l-3.74-0.82c-3.676-0.812-6.201-1.695-7.576-2.648c-2.328-1.594-3.492-4.086-3.492-7.477c0-3.094,1.139-5.664,3.417-7.711s5.623-3.07,10.036-3.07c3.685,0,6.829,0.965,9.431,2.895c2.602,1.93,3.966,4.73,4.093,8.402h-6.938c-0.128-2.078-1.057-3.555-2.787-4.43c-1.154-0.578-2.587-0.867-4.301-0.867c-1.907,0-3.428,0.375-4.565,1.125c-1.138,0.75-1.706,1.797-1.706,3.141c0,1.234,0.561,2.156,1.682,2.766c0.721,0.406,2.25,0.883,4.589,1.43l6.063,1.43c2.657,0.625,4.648,1.461,5.975,2.508c2.059,1.625,3.089,3.977,3.089,7.055C108.157,41.624,106.937,44.245,104.497,46.331z M139.61,48.569h-26.18V14.022h25.336v6.117h-18.281v7.336h16.781v6h-16.781v8.883h19.125V48.569z M170.337,20.14h-10.336v28.43h-7.266V20.14h-10.383v-6.117h27.984V20.14z');
+    resetPanZoomControlShape2.setAttribute('class', 'svg-pan-zoom-control-element');
+    resetPanZoomControl.appendChild(resetPanZoomControlShape2);
+
+    return resetPanZoomControl
+  }
+
+, _createZoomOut: function(instance){
+    // zoom out
+    var zoomOut = document.createElementNS(SvgUtils.svgNS, 'g');
+    zoomOut.setAttribute('id', 'svg-pan-zoom-zoom-out');
+    zoomOut.setAttribute('transform', 'translate(30.5 70) scale(0.015)');
+    zoomOut.setAttribute('class', 'svg-pan-zoom-control');
+    zoomOut.addEventListener('click', function() {instance.getPublicInstance().zoomOut()}, false);
+    zoomOut.addEventListener('touchstart', function() {instance.getPublicInstance().zoomOut()}, false);
+
+    var zoomOutBackground = document.createElementNS(SvgUtils.svgNS, 'rect'); // TODO change these background space fillers to rounded rectangles so they look prettier
+    zoomOutBackground.setAttribute('x', '0');
+    zoomOutBackground.setAttribute('y', '0');
+    zoomOutBackground.setAttribute('width', '1500'); // larger than expected because the whole group is transformed to scale down
+    zoomOutBackground.setAttribute('height', '1400');
+    zoomOutBackground.setAttribute('class', 'svg-pan-zoom-control-background');
+    zoomOut.appendChild(zoomOutBackground);
+
+    var zoomOutShape = document.createElementNS(SvgUtils.svgNS, 'path');
+    zoomOutShape.setAttribute('d', 'M1280 576v128q0 26 -19 45t-45 19h-896q-26 0 -45 -19t-19 -45v-128q0 -26 19 -45t45 -19h896q26 0 45 19t19 45zM1536 1120v-960q0 -119 -84.5 -203.5t-203.5 -84.5h-960q-119 0 -203.5 84.5t-84.5 203.5v960q0 119 84.5 203.5t203.5 84.5h960q119 0 203.5 -84.5 t84.5 -203.5z');
+    zoomOutShape.setAttribute('class', 'svg-pan-zoom-control-element');
+    zoomOut.appendChild(zoomOutShape);
+
+    return zoomOut
+  }
+
+, disable: function(instance) {
+    if (instance.controlIcons) {
+      instance.controlIcons.parentNode.removeChild(instance.controlIcons)
+      instance.controlIcons = null
+    }
+  }
+}
+
+},{"./svg-utilities":5}],3:[function(require,module,exports){
+var SvgUtils = require('./svg-utilities')
+  , Utils = require('./utilities')
+  ;
+
+var ShadowViewport = function(viewport, options){
+  this.init(viewport, options)
+}
+
+/**
+ * Initialization
+ *
+ * @param  {SVGElement} viewport
+ * @param  {Object} options
+ */
+ShadowViewport.prototype.init = function(viewport, options) {
+  // DOM Elements
+  this.viewport = viewport
+  this.options = options
+
+  // State cache
+  this.originalState = {zoom: 1, x: 0, y: 0}
+  this.activeState = {zoom: 1, x: 0, y: 0}
+
+  this.updateCTMCached = Utils.proxy(this.updateCTM, this)
+
+  // Create a custom requestAnimationFrame taking in account refreshRate
+  this.requestAnimationFrame = Utils.createRequestAnimationFrame(this.options.refreshRate)
+
+  // ViewBox
+  this.viewBox = {x: 0, y: 0, width: 0, height: 0}
+  this.cacheViewBox()
+
+  // Process CTM
+  var newCTM = this.processCTM()
+
+  // Update viewport CTM and cache zoom and pan
+  this.setCTM(newCTM)
+
+  // Update CTM in this frame
+  this.updateCTM()
+}
+
+/**
+ * Cache initial viewBox value
+ * If no viewBox is defined, then use viewport size/position instead for viewBox values
+ */
+ShadowViewport.prototype.cacheViewBox = function() {
+  var svgViewBox = this.options.svg.getAttribute('viewBox')
+
+  if (svgViewBox) {
+    var viewBoxValues = svgViewBox.split(/[\s\,]/).filter(function(v){return v}).map(parseFloat)
+
+    // Cache viewbox x and y offset
+    this.viewBox.x = viewBoxValues[0]
+    this.viewBox.y = viewBoxValues[1]
+    this.viewBox.width = viewBoxValues[2]
+    this.viewBox.height = viewBoxValues[3]
+
+    var zoom = Math.min(this.options.width / this.viewBox.width, this.options.height / this.viewBox.height)
+
+    // Update active state
+    this.activeState.zoom = zoom
+    this.activeState.x = (this.options.width - this.viewBox.width * zoom) / 2
+    this.activeState.y = (this.options.height - this.viewBox.height * zoom) / 2
+
+    // Force updating CTM
+    this.updateCTMOnNextFrame()
+
+    this.options.svg.removeAttribute('viewBox')
+  } else {
+    this.simpleViewBoxCache()
+  }
+}
+
+/**
+ * Recalculate viewport sizes and update viewBox cache
+ */
+ShadowViewport.prototype.simpleViewBoxCache = function() {
+  var bBox = this.viewport.getBBox()
+
+  this.viewBox.x = bBox.x
+  this.viewBox.y = bBox.y
+  this.viewBox.width = bBox.width
+  this.viewBox.height = bBox.height
+}
+
+/**
+ * Returns a viewbox object. Safe to alter
+ *
+ * @return {Object} viewbox object
+ */
+ShadowViewport.prototype.getViewBox = function() {
+  return Utils.extend({}, this.viewBox)
+}
+
+/**
+ * Get initial zoom and pan values. Save them into originalState
+ * Parses viewBox attribute to alter initial sizes
+ *
+ * @return {CTM} CTM object based on options
+ */
+ShadowViewport.prototype.processCTM = function() {
+  var newCTM = this.getCTM()
+
+  if (this.options.fit || this.options.contain) {
+    var newScale;
+    if (this.options.fit) {
+      newScale = Math.min(this.options.width/this.viewBox.width, this.options.height/this.viewBox.height);
+    } else {
+      newScale = Math.max(this.options.width/this.viewBox.width, this.options.height/this.viewBox.height);
+    }
+
+    newCTM.a = newScale; //x-scale
+    newCTM.d = newScale; //y-scale
+    newCTM.e = -this.viewBox.x * newScale; //x-transform
+    newCTM.f = -this.viewBox.y * newScale; //y-transform
+  }
+
+  if (this.options.center) {
+    var offsetX = (this.options.width - (this.viewBox.width + this.viewBox.x * 2) * newCTM.a) * 0.5
+      , offsetY = (this.options.height - (this.viewBox.height + this.viewBox.y * 2) * newCTM.a) * 0.5
+
+    newCTM.e = offsetX
+    newCTM.f = offsetY
+  }
+
+  // Cache initial values. Based on activeState and fix+center opitons
+  this.originalState.zoom = newCTM.a
+  this.originalState.x = newCTM.e
+  this.originalState.y = newCTM.f
+
+  return newCTM
+}
+
+/**
+ * Return originalState object. Safe to alter
+ *
+ * @return {Object}
+ */
+ShadowViewport.prototype.getOriginalState = function() {
+  return Utils.extend({}, this.originalState)
+}
+
+/**
+ * Return actualState object. Safe to alter
+ *
+ * @return {Object}
+ */
+ShadowViewport.prototype.getState = function() {
+  return Utils.extend({}, this.activeState)
+}
+
+/**
+ * Get zoom scale
+ *
+ * @return {Float} zoom scale
+ */
+ShadowViewport.prototype.getZoom = function() {
+  return this.activeState.zoom
+}
+
+/**
+ * Get zoom scale for pubilc usage
+ *
+ * @return {Float} zoom scale
+ */
+ShadowViewport.prototype.getRelativeZoom = function() {
+  return this.activeState.zoom / this.originalState.zoom
+}
+
+/**
+ * Compute zoom scale for pubilc usage
+ *
+ * @return {Float} zoom scale
+ */
+ShadowViewport.prototype.computeRelativeZoom = function(scale) {
+  return scale / this.originalState.zoom
+}
+
+/**
+ * Get pan
+ *
+ * @return {Object}
+ */
+ShadowViewport.prototype.getPan = function() {
+  return {x: this.activeState.x, y: this.activeState.y}
+}
+
+/**
+ * Return cached viewport CTM value that can be safely modified
+ *
+ * @return {SVGMatrix}
+ */
+ShadowViewport.prototype.getCTM = function() {
+  var safeCTM = this.options.svg.createSVGMatrix()
+
+  // Copy values manually as in FF they are not itterable
+  safeCTM.a = this.activeState.zoom
+  safeCTM.b = 0
+  safeCTM.c = 0
+  safeCTM.d = this.activeState.zoom
+  safeCTM.e = this.activeState.x
+  safeCTM.f = this.activeState.y
+
+  return safeCTM
+}
+
+/**
+ * Set a new CTM
+ *
+ * @param {SVGMatrix} newCTM
+ */
+ShadowViewport.prototype.setCTM = function(newCTM) {
+  var willZoom = this.isZoomDifferent(newCTM)
+    , willPan = this.isPanDifferent(newCTM)
+
+  if (willZoom || willPan) {
+    // Before zoom
+    if (willZoom) {
+      // If returns false then cancel zooming
+      if (this.options.beforeZoom(this.getRelativeZoom(), this.computeRelativeZoom(newCTM.a)) === false) {
+        newCTM.a = newCTM.d = this.activeState.zoom
+        willZoom = false
+      } else {
+        this.updateCache(newCTM);
+        this.options.onZoom(this.getRelativeZoom())
+      }
+    }
+
+    // Before pan
+    if (willPan) {
+      var preventPan = this.options.beforePan(this.getPan(), {x: newCTM.e, y: newCTM.f})
+          // If prevent pan is an object
+        , preventPanX = false
+        , preventPanY = false
+
+      // If prevent pan is Boolean false
+      if (preventPan === false) {
+        // Set x and y same as before
+        newCTM.e = this.getPan().x
+        newCTM.f = this.getPan().y
+
+        preventPanX = preventPanY = true
+      } else if (Utils.isObject(preventPan)) {
+        // Check for X axes attribute
+        if (preventPan.x === false) {
+          // Prevent panning on x axes
+          newCTM.e = this.getPan().x
+          preventPanX = true
+        } else if (Utils.isNumber(preventPan.x)) {
+          // Set a custom pan value
+          newCTM.e = preventPan.x
+        }
+
+        // Check for Y axes attribute
+        if (preventPan.y === false) {
+          // Prevent panning on x axes
+          newCTM.f = this.getPan().y
+          preventPanY = true
+        } else if (Utils.isNumber(preventPan.y)) {
+          // Set a custom pan value
+          newCTM.f = preventPan.y
+        }
+      }
+
+      // Update willPan flag
+      // Check if newCTM is still different
+      if ((preventPanX && preventPanY) || !this.isPanDifferent(newCTM)) {
+        willPan = false
+      } else {
+        this.updateCache(newCTM);
+        this.options.onPan(this.getPan());
+      }
+    }
+
+    // Check again if should zoom or pan
+    if (willZoom || willPan) {
+      this.updateCTMOnNextFrame()
+    }
+  }
+}
+
+ShadowViewport.prototype.isZoomDifferent = function(newCTM) {
+  return this.activeState.zoom !== newCTM.a
+}
+
+ShadowViewport.prototype.isPanDifferent = function(newCTM) {
+  return this.activeState.x !== newCTM.e || this.activeState.y !== newCTM.f
+}
+
+
+/**
+ * Update cached CTM and active state
+ *
+ * @param {SVGMatrix} newCTM
+ */
+ShadowViewport.prototype.updateCache = function(newCTM) {
+  this.activeState.zoom = newCTM.a
+  this.activeState.x = newCTM.e
+  this.activeState.y = newCTM.f
+}
+
+ShadowViewport.prototype.pendingUpdate = false
+
+/**
+ * Place a request to update CTM on next Frame
+ */
+ShadowViewport.prototype.updateCTMOnNextFrame = function() {
+  if (!this.pendingUpdate) {
+    // Lock
+    this.pendingUpdate = true
+
+    // Throttle next update
+    this.requestAnimationFrame.call(window, this.updateCTMCached)
+  }
+}
+
+/**
+ * Update viewport CTM with cached CTM
+ */
+ShadowViewport.prototype.updateCTM = function() {
+  var ctm = this.getCTM()
+
+  // Updates SVG element
+  SvgUtils.setCTM(this.viewport, ctm, this.defs)
+
+  // Free the lock
+  this.pendingUpdate = false
+
+  // Notify about the update
+  if(this.options.onUpdatedCTM) {
+    this.options.onUpdatedCTM(ctm)
+  }
+}
+
+module.exports = function(viewport, options){
+  return new ShadowViewport(viewport, options)
+}
+
+},{"./svg-utilities":5,"./utilities":7}],4:[function(require,module,exports){
+var Wheel = require('./uniwheel')
+, ControlIcons = require('./control-icons')
+, Utils = require('./utilities')
+, SvgUtils = require('./svg-utilities')
+, ShadowViewport = require('./shadow-viewport')
+
+var SvgPanZoom = function(svg, options) {
+  this.init(svg, options)
+}
+
+var optionsDefaults = {
+  viewportSelector: '.svg-pan-zoom_viewport' // Viewport selector. Can be querySelector string or SVGElement
+, panEnabled: true // enable or disable panning (default enabled)
+, controlIconsEnabled: false // insert icons to give user an option in addition to mouse events to control pan/zoom (default disabled)
+, zoomEnabled: true // enable or disable zooming (default enabled)
+, dblClickZoomEnabled: true // enable or disable zooming by double clicking (default enabled)
+, mouseWheelZoomEnabled: true // enable or disable zooming by mouse wheel (default enabled)
+, preventMouseEventsDefault: true // enable or disable preventDefault for mouse events
+, zoomScaleSensitivity: 0.1 // Zoom sensitivity
+, minZoom: 0.5 // Minimum Zoom level
+, maxZoom: 10 // Maximum Zoom level
+, fit: true // enable or disable viewport fit in SVG (default true)
+, contain: false // enable or disable viewport contain the svg (default false)
+, center: true // enable or disable viewport centering in SVG (default true)
+, refreshRate: 'auto' // Maximum number of frames per second (altering SVG's viewport)
+, beforeZoom: null
+, onZoom: null
+, beforePan: null
+, onPan: null
+, customEventsHandler: null
+, eventsListenerElement: null
+, onUpdatedCTM: null
+}
+
+var passiveListenerOption = {passive: true};
+
+SvgPanZoom.prototype.init = function(svg, options) {
+  var that = this
+
+  this.svg = svg
+  this.defs = svg.querySelector('defs')
+
+  // Add default attributes to SVG
+  SvgUtils.setupSvgAttributes(this.svg)
+
+  // Set options
+  this.options = Utils.extend(Utils.extend({}, optionsDefaults), options)
+
+  // Set default state
+  this.state = 'none'
+
+  // Get dimensions
+  var boundingClientRectNormalized = SvgUtils.getBoundingClientRectNormalized(svg)
+  this.width = boundingClientRectNormalized.width
+  this.height = boundingClientRectNormalized.height
+
+  // Init shadow viewport
+  this.viewport = ShadowViewport(SvgUtils.getOrCreateViewport(this.svg, this.options.viewportSelector), {
+    svg: this.svg
+  , width: this.width
+  , height: this.height
+  , fit: this.options.fit
+  , contain: this.options.contain
+  , center: this.options.center
+  , refreshRate: this.options.refreshRate
+  // Put callbacks into functions as they can change through time
+  , beforeZoom: function(oldScale, newScale) {
+      if (that.viewport && that.options.beforeZoom) {return that.options.beforeZoom(oldScale, newScale)}
+    }
+  , onZoom: function(scale) {
+      if (that.viewport && that.options.onZoom) {return that.options.onZoom(scale)}
+    }
+  , beforePan: function(oldPoint, newPoint) {
+      if (that.viewport && that.options.beforePan) {return that.options.beforePan(oldPoint, newPoint)}
+    }
+  , onPan: function(point) {
+      if (that.viewport && that.options.onPan) {return that.options.onPan(point)}
+    }
+  , onUpdatedCTM: function(ctm) {
+      if (that.viewport && that.options.onUpdatedCTM) {return that.options.onUpdatedCTM(ctm)}
+    }
+  })
+
+  // Wrap callbacks into public API context
+  var publicInstance = this.getPublicInstance()
+  publicInstance.setBeforeZoom(this.options.beforeZoom)
+  publicInstance.setOnZoom(this.options.onZoom)
+  publicInstance.setBeforePan(this.options.beforePan)
+  publicInstance.setOnPan(this.options.onPan)
+  publicInstance.setOnUpdatedCTM(this.options.onUpdatedCTM)
+
+  if (this.options.controlIconsEnabled) {
+    ControlIcons.enable(this)
+  }
+
+  // Init events handlers
+  this.lastMouseWheelEventTime = Date.now()
+  this.setupHandlers()
+}
+
+/**
+ * Register event handlers
+ */
+SvgPanZoom.prototype.setupHandlers = function() {
+  var that = this
+    , prevEvt = null // use for touchstart event to detect double tap
+    ;
+
+  this.eventListeners = {
+    // Mouse down group
+    mousedown: function(evt) {
+      var result = that.handleMouseDown(evt, prevEvt);
+      prevEvt = evt
+      return result;
+    }
+  , touchstart: function(evt) {
+      var result = that.handleMouseDown(evt, prevEvt);
+      prevEvt = evt
+      return result;
+    }
+
+    // Mouse up group
+  , mouseup: function(evt) {
+      return that.handleMouseUp(evt);
+    }
+  , touchend: function(evt) {
+      return that.handleMouseUp(evt);
+    }
+
+    // Mouse move group
+  , mousemove: function(evt) {
+      return that.handleMouseMove(evt);
+    }
+  , touchmove: function(evt) {
+      return that.handleMouseMove(evt);
+    }
+
+    // Mouse leave group
+  , mouseleave: function(evt) {
+      return that.handleMouseUp(evt);
+    }
+  , touchleave: function(evt) {
+      return that.handleMouseUp(evt);
+    }
+  , touchcancel: function(evt) {
+      return that.handleMouseUp(evt);
+    }
+  }
+
+  // Init custom events handler if available
+  if (this.options.customEventsHandler != null) { // jshint ignore:line
+    this.options.customEventsHandler.init({
+      svgElement: this.svg
+    , eventsListenerElement: this.options.eventsListenerElement
+    , instance: this.getPublicInstance()
+    })
+
+    // Custom event handler may halt builtin listeners
+    var haltEventListeners = this.options.customEventsHandler.haltEventListeners
+    if (haltEventListeners && haltEventListeners.length) {
+      for (var i = haltEventListeners.length - 1; i >= 0; i--) {
+        if (this.eventListeners.hasOwnProperty(haltEventListeners[i])) {
+          delete this.eventListeners[haltEventListeners[i]]
+        }
+      }
+    }
+  }
+
+  // Bind eventListeners
+  for (var event in this.eventListeners) {
+    // Attach event to eventsListenerElement or SVG if not available
+    (this.options.eventsListenerElement || this.svg)
+      .addEventListener(event, this.eventListeners[event], !this.options.preventMouseEventsDefault ? passiveListenerOption : false)
+  }
+
+  // Zoom using mouse wheel
+  if (this.options.mouseWheelZoomEnabled) {
+    this.options.mouseWheelZoomEnabled = false // set to false as enable will set it back to true
+    this.enableMouseWheelZoom()
+  }
+}
+
+/**
+ * Enable ability to zoom using mouse wheel
+ */
+SvgPanZoom.prototype.enableMouseWheelZoom = function() {
+  if (!this.options.mouseWheelZoomEnabled) {
+    var that = this
+
+    // Mouse wheel listener
+    this.wheelListener = function(evt) {
+      return that.handleMouseWheel(evt);
+    }
+
+    // Bind wheelListener
+    var isPassiveListener = !this.options.preventMouseEventsDefault
+    Wheel.on(this.options.eventsListenerElement || this.svg, this.wheelListener, isPassiveListener)
+
+    this.options.mouseWheelZoomEnabled = true
+  }
+}
+
+/**
+ * Disable ability to zoom using mouse wheel
+ */
+SvgPanZoom.prototype.disableMouseWheelZoom = function() {
+  if (this.options.mouseWheelZoomEnabled) {
+    var isPassiveListener = !this.options.preventMouseEventsDefault
+    Wheel.off(this.options.eventsListenerElement || this.svg, this.wheelListener, isPassiveListener)
+    this.options.mouseWheelZoomEnabled = false
+  }
+}
+
+/**
+ * Handle mouse wheel event
+ *
+ * @param  {Event} evt
+ */
+SvgPanZoom.prototype.handleMouseWheel = function(evt) {
+  if (!this.options.zoomEnabled || this.state !== 'none') {
+    return;
+  }
+
+  if (this.options.preventMouseEventsDefault){
+    if (evt.preventDefault) {
+      evt.preventDefault();
+    } else {
+      evt.returnValue = false;
+    }
+  }
+
+  // Default delta in case that deltaY is not available
+  var delta = evt.deltaY || 1
+    , timeDelta = Date.now() - this.lastMouseWheelEventTime
+    , divider = 3 + Math.max(0, 30 - timeDelta)
+
+  // Update cache
+  this.lastMouseWheelEventTime = Date.now()
+
+  // Make empirical adjustments for browsers that give deltaY in pixels (deltaMode=0)
+  if ('deltaMode' in evt && evt.deltaMode === 0 && evt.wheelDelta) {
+    delta = evt.deltaY === 0 ? 0 :  Math.abs(evt.wheelDelta) / evt.deltaY
+  }
+
+  delta = -0.3 < delta && delta < 0.3 ? delta : (delta > 0 ? 1 : -1) * Math.log(Math.abs(delta) + 10) / divider
+
+  var inversedScreenCTM = this.svg.getScreenCTM().inverse()
+    , relativeMousePoint = SvgUtils.getEventPoint(evt, this.svg).matrixTransform(inversedScreenCTM)
+    , zoom = Math.pow(1 + this.options.zoomScaleSensitivity, (-1) * delta); // multiplying by neg. 1 so as to make zoom in/out behavior match Google maps behavior
+
+  this.zoomAtPoint(zoom, relativeMousePoint)
+}
+
+/**
+ * Zoom in at a SVG point
+ *
+ * @param  {SVGPoint} point
+ * @param  {Float} zoomScale    Number representing how much to zoom
+ * @param  {Boolean} zoomAbsolute Default false. If true, zoomScale is treated as an absolute value.
+ *                                Otherwise, zoomScale is treated as a multiplied (e.g. 1.10 would zoom in 10%)
+ */
+SvgPanZoom.prototype.zoomAtPoint = function(zoomScale, point, zoomAbsolute) {
+  var originalState = this.viewport.getOriginalState()
+
+  if (!zoomAbsolute) {
+    // Fit zoomScale in set bounds
+    if (this.getZoom() * zoomScale < this.options.minZoom * originalState.zoom) {
+      zoomScale = (this.options.minZoom * originalState.zoom) / this.getZoom()
+    } else if (this.getZoom() * zoomScale > this.options.maxZoom * originalState.zoom) {
+      zoomScale = (this.options.maxZoom * originalState.zoom) / this.getZoom()
+    }
+  } else {
+    // Fit zoomScale in set bounds
+    zoomScale = Math.max(this.options.minZoom * originalState.zoom, Math.min(this.options.maxZoom * originalState.zoom, zoomScale))
+    // Find relative scale to achieve desired scale
+    zoomScale = zoomScale/this.getZoom()
+  }
+
+  var oldCTM = this.viewport.getCTM()
+    , relativePoint = point.matrixTransform(oldCTM.inverse())
+    , modifier = this.svg.createSVGMatrix().translate(relativePoint.x, relativePoint.y).scale(zoomScale).translate(-relativePoint.x, -relativePoint.y)
+    , newCTM = oldCTM.multiply(modifier)
+
+  if (newCTM.a !== oldCTM.a) {
+    this.viewport.setCTM(newCTM)
+  }
+}
+
+/**
+ * Zoom at center point
+ *
+ * @param  {Float} scale
+ * @param  {Boolean} absolute Marks zoom scale as relative or absolute
+ */
+SvgPanZoom.prototype.zoom = function(scale, absolute) {
+  this.zoomAtPoint(scale, SvgUtils.getSvgCenterPoint(this.svg, this.width, this.height), absolute)
+}
+
+/**
+ * Zoom used by public instance
+ *
+ * @param  {Float} scale
+ * @param  {Boolean} absolute Marks zoom scale as relative or absolute
+ */
+SvgPanZoom.prototype.publicZoom = function(scale, absolute) {
+  if (absolute) {
+    scale = this.computeFromRelativeZoom(scale)
+  }
+
+  this.zoom(scale, absolute)
+}
+
+/**
+ * Zoom at point used by public instance
+ *
+ * @param  {Float} scale
+ * @param  {SVGPoint|Object} point    An object that has x and y attributes
+ * @param  {Boolean} absolute Marks zoom scale as relative or absolute
+ */
+SvgPanZoom.prototype.publicZoomAtPoint = function(scale, point, absolute) {
+  if (absolute) {
+    // Transform zoom into a relative value
+    scale = this.computeFromRelativeZoom(scale)
+  }
+
+  // If not a SVGPoint but has x and y then create a SVGPoint
+  if (Utils.getType(point) !== 'SVGPoint') {
+    if('x' in point && 'y' in point) {
+      point = SvgUtils.createSVGPoint(this.svg, point.x, point.y)
+    } else {
+      throw new Error('Given point is invalid')
+    }
+  }
+
+  this.zoomAtPoint(scale, point, absolute)
+}
+
+/**
+ * Get zoom scale
+ *
+ * @return {Float} zoom scale
+ */
+SvgPanZoom.prototype.getZoom = function() {
+  return this.viewport.getZoom()
+}
+
+/**
+ * Get zoom scale for public usage
+ *
+ * @return {Float} zoom scale
+ */
+SvgPanZoom.prototype.getRelativeZoom = function() {
+  return this.viewport.getRelativeZoom()
+}
+
+/**
+ * Compute actual zoom from public zoom
+ *
+ * @param  {Float} zoom
+ * @return {Float} zoom scale
+ */
+SvgPanZoom.prototype.computeFromRelativeZoom = function(zoom) {
+  return zoom * this.viewport.getOriginalState().zoom
+}
+
+/**
+ * Set zoom to initial state
+ */
+SvgPanZoom.prototype.resetZoom = function() {
+  var originalState = this.viewport.getOriginalState()
+
+  this.zoom(originalState.zoom, true);
+}
+
+/**
+ * Set pan to initial state
+ */
+SvgPanZoom.prototype.resetPan = function() {
+  this.pan(this.viewport.getOriginalState());
+}
+
+/**
+ * Set pan and zoom to initial state
+ */
+SvgPanZoom.prototype.reset = function() {
+  this.resetZoom()
+  this.resetPan()
+}
+
+/**
+ * Handle double click event
+ * See handleMouseDown() for alternate detection method
+ *
+ * @param {Event} evt
+ */
+SvgPanZoom.prototype.handleDblClick = function(evt) {
+  if (this.options.preventMouseEventsDefault) {
+    if (evt.preventDefault) {
+      evt.preventDefault()
+    } else {
+      evt.returnValue = false
+    }
+  }
+
+  // Check if target was a control button
+  if (this.options.controlIconsEnabled) {
+    var targetClass = evt.target.getAttribute('class') || ''
+    if (targetClass.indexOf('svg-pan-zoom-control') > -1) {
+      return false
+    }
+  }
+
+  var zoomFactor
+
+  if (evt.shiftKey) {
+    zoomFactor = 1/((1 + this.options.zoomScaleSensitivity) * 2) // zoom out when shift key pressed
+  } else {
+    zoomFactor = (1 + this.options.zoomScaleSensitivity) * 2
+  }
+
+  var point = SvgUtils.getEventPoint(evt, this.svg).matrixTransform(this.svg.getScreenCTM().inverse())
+  this.zoomAtPoint(zoomFactor, point)
+}
+
+/**
+ * Handle click event
+ *
+ * @param {Event} evt
+ */
+SvgPanZoom.prototype.handleMouseDown = function(evt, prevEvt) {
+  if (this.options.preventMouseEventsDefault) {
+    if (evt.preventDefault) {
+      evt.preventDefault()
+    } else {
+      evt.returnValue = false
+    }
+  }
+
+  Utils.mouseAndTouchNormalize(evt, this.svg)
+
+  // Double click detection; more consistent than ondblclick
+  if (this.options.dblClickZoomEnabled && Utils.isDblClick(evt, prevEvt)){
+    this.handleDblClick(evt)
+  } else {
+    // Pan mode
+    this.state = 'pan'
+    this.firstEventCTM = this.viewport.getCTM()
+    this.stateOrigin = SvgUtils.getEventPoint(evt, this.svg).matrixTransform(this.firstEventCTM.inverse())
+  }
+}
+
+/**
+ * Handle mouse move event
+ *
+ * @param  {Event} evt
+ */
+SvgPanZoom.prototype.handleMouseMove = function(evt) {
+  if (this.options.preventMouseEventsDefault) {
+    if (evt.preventDefault) {
+      evt.preventDefault()
+    } else {
+      evt.returnValue = false
+    }
+  }
+
+  if (this.state === 'pan' && this.options.panEnabled) {
+    // Pan mode
+    var point = SvgUtils.getEventPoint(evt, this.svg).matrixTransform(this.firstEventCTM.inverse())
+      , viewportCTM = this.firstEventCTM.translate(point.x - this.stateOrigin.x, point.y - this.stateOrigin.y)
+
+    this.viewport.setCTM(viewportCTM)
+  }
+}
+
+/**
+ * Handle mouse button release event
+ *
+ * @param {Event} evt
+ */
+SvgPanZoom.prototype.handleMouseUp = function(evt) {
+  if (this.options.preventMouseEventsDefault) {
+    if (evt.preventDefault) {
+      evt.preventDefault()
+    } else {
+      evt.returnValue = false
+    }
+  }
+
+  if (this.state === 'pan') {
+    // Quit pan mode
+    this.state = 'none'
+  }
+}
+
+/**
+ * Adjust viewport size (only) so it will fit in SVG
+ * Does not center image
+ */
+SvgPanZoom.prototype.fit = function() {
+  var viewBox = this.viewport.getViewBox()
+    , newScale = Math.min(this.width/viewBox.width, this.height/viewBox.height)
+
+  this.zoom(newScale, true)
+}
+
+/**
+ * Adjust viewport size (only) so it will contain the SVG
+ * Does not center image
+ */
+SvgPanZoom.prototype.contain = function() {
+  var viewBox = this.viewport.getViewBox()
+    , newScale = Math.max(this.width/viewBox.width, this.height/viewBox.height)
+
+  this.zoom(newScale, true)
+}
+
+/**
+ * Adjust viewport pan (only) so it will be centered in SVG
+ * Does not zoom/fit/contain image
+ */
+SvgPanZoom.prototype.center = function() {
+  var viewBox = this.viewport.getViewBox()
+    , offsetX = (this.width - (viewBox.width + viewBox.x * 2) * this.getZoom()) * 0.5
+    , offsetY = (this.height - (viewBox.height + viewBox.y * 2) * this.getZoom()) * 0.5
+
+  this.getPublicInstance().pan({x: offsetX, y: offsetY})
+}
+
+/**
+ * Update content cached BorderBox
+ * Use when viewport contents change
+ */
+SvgPanZoom.prototype.updateBBox = function() {
+  this.viewport.simpleViewBoxCache()
+}
+
+/**
+ * Pan to a rendered position
+ *
+ * @param  {Object} point {x: 0, y: 0}
+ */
+SvgPanZoom.prototype.pan = function(point) {
+  var viewportCTM = this.viewport.getCTM()
+  viewportCTM.e = point.x
+  viewportCTM.f = point.y
+  this.viewport.setCTM(viewportCTM)
+}
+
+/**
+ * Relatively pan the graph by a specified rendered position vector
+ *
+ * @param  {Object} point {x: 0, y: 0}
+ */
+SvgPanZoom.prototype.panBy = function(point) {
+  var viewportCTM = this.viewport.getCTM()
+  viewportCTM.e += point.x
+  viewportCTM.f += point.y
+  this.viewport.setCTM(viewportCTM)
+}
+
+/**
+ * Get pan vector
+ *
+ * @return {Object} {x: 0, y: 0}
+ */
+SvgPanZoom.prototype.getPan = function() {
+  var state = this.viewport.getState()
+
+  return {x: state.x, y: state.y}
+}
+
+/**
+ * Recalculates cached svg dimensions and controls position
+ */
+SvgPanZoom.prototype.resize = function() {
+  // Get dimensions
+  var boundingClientRectNormalized = SvgUtils.getBoundingClientRectNormalized(this.svg)
+  this.width = boundingClientRectNormalized.width
+  this.height = boundingClientRectNormalized.height
+
+  // Recalculate original state
+  var viewport = this.viewport
+  viewport.options.width = this.width
+  viewport.options.height = this.height
+  viewport.processCTM()
+
+  // Reposition control icons by re-enabling them
+  if (this.options.controlIconsEnabled) {
+    this.getPublicInstance().disableControlIcons()
+    this.getPublicInstance().enableControlIcons()
+  }
+}
+
+/**
+ * Unbind mouse events, free callbacks and destroy public instance
+ */
+SvgPanZoom.prototype.destroy = function() {
+  var that = this
+
+  // Free callbacks
+  this.beforeZoom = null
+  this.onZoom = null
+  this.beforePan = null
+  this.onPan = null
+  this.onUpdatedCTM = null
+
+  // Destroy custom event handlers
+  if (this.options.customEventsHandler != null) { // jshint ignore:line
+    this.options.customEventsHandler.destroy({
+      svgElement: this.svg
+    , eventsListenerElement: this.options.eventsListenerElement
+    , instance: this.getPublicInstance()
+    })
+  }
+
+  // Unbind eventListeners
+  for (var event in this.eventListeners) {
+    (this.options.eventsListenerElement || this.svg)
+      .removeEventListener(event, this.eventListeners[event], !this.options.preventMouseEventsDefault ? passiveListenerOption : false)
+  }
+
+  // Unbind wheelListener
+  this.disableMouseWheelZoom()
+
+  // Remove control icons
+  this.getPublicInstance().disableControlIcons()
+
+  // Reset zoom and pan
+  this.reset()
+
+  // Remove instance from instancesStore
+  instancesStore = instancesStore.filter(function(instance){
+    return instance.svg !== that.svg
+  })
+
+  // Delete options and its contents
+  delete this.options
+
+  // Delete viewport to make public shadow viewport functions uncallable
+  delete this.viewport
+
+  // Destroy public instance and rewrite getPublicInstance
+  delete this.publicInstance
+  delete this.pi
+  this.getPublicInstance = function(){
+    return null
+  }
+}
+
+/**
+ * Returns a public instance object
+ *
+ * @return {Object} Public instance object
+ */
+SvgPanZoom.prototype.getPublicInstance = function() {
+  var that = this
+
+  // Create cache
+  if (!this.publicInstance) {
+    this.publicInstance = this.pi = {
+      // Pan
+      enablePan: function() {that.options.panEnabled = true; return that.pi}
+    , disablePan: function() {that.options.panEnabled = false; return that.pi}
+    , isPanEnabled: function() {return !!that.options.panEnabled}
+    , pan: function(point) {that.pan(point); return that.pi}
+    , panBy: function(point) {that.panBy(point); return that.pi}
+    , getPan: function() {return that.getPan()}
+      // Pan event
+    , setBeforePan: function(fn) {that.options.beforePan = fn === null ? null : Utils.proxy(fn, that.publicInstance); return that.pi}
+    , setOnPan: function(fn) {that.options.onPan = fn === null ? null : Utils.proxy(fn, that.publicInstance); return that.pi}
+      // Zoom and Control Icons
+    , enableZoom: function() {that.options.zoomEnabled = true; return that.pi}
+    , disableZoom: function() {that.options.zoomEnabled = false; return that.pi}
+    , isZoomEnabled: function() {return !!that.options.zoomEnabled}
+    , enableControlIcons: function() {
+        if (!that.options.controlIconsEnabled) {
+          that.options.controlIconsEnabled = true
+          ControlIcons.enable(that)
+        }
+        return that.pi
+      }
+    , disableControlIcons: function() {
+        if (that.options.controlIconsEnabled) {
+          that.options.controlIconsEnabled = false;
+          ControlIcons.disable(that)
+        }
+        return that.pi
+      }
+    , isControlIconsEnabled: function() {return !!that.options.controlIconsEnabled}
+      // Double click zoom
+    , enableDblClickZoom: function() {that.options.dblClickZoomEnabled = true; return that.pi}
+    , disableDblClickZoom: function() {that.options.dblClickZoomEnabled = false; return that.pi}
+    , isDblClickZoomEnabled: function() {return !!that.options.dblClickZoomEnabled}
+      // Mouse wheel zoom
+    , enableMouseWheelZoom: function() {that.enableMouseWheelZoom(); return that.pi}
+    , disableMouseWheelZoom: function() {that.disableMouseWheelZoom(); return that.pi}
+    , isMouseWheelZoomEnabled: function() {return !!that.options.mouseWheelZoomEnabled}
+      // Zoom scale and bounds
+    , setZoomScaleSensitivity: function(scale) {that.options.zoomScaleSensitivity = scale; return that.pi}
+    , setMinZoom: function(zoom) {that.options.minZoom = zoom; return that.pi}
+    , setMaxZoom: function(zoom) {that.options.maxZoom = zoom; return that.pi}
+      // Zoom event
+    , setBeforeZoom: function(fn) {that.options.beforeZoom = fn === null ? null : Utils.proxy(fn, that.publicInstance); return that.pi}
+    , setOnZoom: function(fn) {that.options.onZoom = fn === null ? null : Utils.proxy(fn, that.publicInstance); return that.pi}
+      // Zooming
+    , zoom: function(scale) {that.publicZoom(scale, true); return that.pi}
+    , zoomBy: function(scale) {that.publicZoom(scale, false); return that.pi}
+    , zoomAtPoint: function(scale, point) {that.publicZoomAtPoint(scale, point, true); return that.pi}
+    , zoomAtPointBy: function(scale, point) {that.publicZoomAtPoint(scale, point, false); return that.pi}
+    , zoomIn: function() {this.zoomBy(1 + that.options.zoomScaleSensitivity); return that.pi}
+    , zoomOut: function() {this.zoomBy(1 / (1 + that.options.zoomScaleSensitivity)); return that.pi}
+    , getZoom: function() {return that.getRelativeZoom()}
+      // CTM update
+    , setOnUpdatedCTM: function(fn) {that.options.onUpdatedCTM = fn === null ? null : Utils.proxy(fn, that.publicInstance); return that.pi}
+      // Reset
+    , resetZoom: function() {that.resetZoom(); return that.pi}
+    , resetPan: function() {that.resetPan(); return that.pi}
+    , reset: function() {that.reset(); return that.pi}
+      // Fit, Contain and Center
+    , fit: function() {that.fit(); return that.pi}
+    , contain: function() {that.contain(); return that.pi}
+    , center: function() {that.center(); return that.pi}
+      // Size and Resize
+    , updateBBox: function() {that.updateBBox(); return that.pi}
+    , resize: function() {that.resize(); return that.pi}
+    , getSizes: function() {
+        return {
+          width: that.width
+        , height: that.height
+        , realZoom: that.getZoom()
+        , viewBox: that.viewport.getViewBox()
+        }
+      }
+      // Destroy
+    , destroy: function() {that.destroy(); return that.pi}
+    }
+  }
+
+  return this.publicInstance
+}
+
+/**
+ * Stores pairs of instances of SvgPanZoom and SVG
+ * Each pair is represented by an object {svg: SVGSVGElement, instance: SvgPanZoom}
+ *
+ * @type {Array}
+ */
+var instancesStore = []
+
+var svgPanZoom = function(elementOrSelector, options){
+  var svg = Utils.getSvg(elementOrSelector)
+
+  if (svg === null) {
+    return null
+  } else {
+    // Look for existent instance
+    for(var i = instancesStore.length - 1; i >= 0; i--) {
+      if (instancesStore[i].svg === svg) {
+        return instancesStore[i].instance.getPublicInstance()
+      }
+    }
+
+    // If instance not found - create one
+    instancesStore.push({
+      svg: svg
+    , instance: new SvgPanZoom(svg, options)
+    })
+
+    // Return just pushed instance
+    return instancesStore[instancesStore.length - 1].instance.getPublicInstance()
+  }
+}
+
+module.exports = svgPanZoom;
+
+},{"./control-icons":2,"./shadow-viewport":3,"./svg-utilities":5,"./uniwheel":6,"./utilities":7}],5:[function(require,module,exports){
+var Utils = require('./utilities')
+  , _browser = 'unknown'
+  ;
+
+// http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+if (/*@cc_on!@*/false || !!document.documentMode) { // internet explorer
+  _browser = 'ie';
+}
+
+module.exports = {
+  svgNS:  'http://www.w3.org/2000/svg'
+, xmlNS:  'http://www.w3.org/XML/1998/namespace'
+, xmlnsNS:  'http://www.w3.org/2000/xmlns/'
+, xlinkNS:  'http://www.w3.org/1999/xlink'
+, evNS:  'http://www.w3.org/2001/xml-events'
+
+  /**
+   * Get svg dimensions: width and height
+   *
+   * @param  {SVGSVGElement} svg
+   * @return {Object}     {width: 0, height: 0}
+   */
+, getBoundingClientRectNormalized: function(svg) {
+    if (svg.clientWidth && svg.clientHeight) {
+      return {width: svg.clientWidth, height: svg.clientHeight}
+    } else if (!!svg.getBoundingClientRect()) {
+      return svg.getBoundingClientRect();
+    } else {
+      throw new Error('Cannot get BoundingClientRect for SVG.');
+    }
+  }
+
+  /**
+   * Gets g element with class of "viewport" or creates it if it doesn't exist
+   *
+   * @param  {SVGSVGElement} svg
+   * @return {SVGElement}     g (group) element
+   */
+, getOrCreateViewport: function(svg, selector) {
+    var viewport = null
+
+    if (Utils.isElement(selector)) {
+      viewport = selector
+    } else {
+      viewport = svg.querySelector(selector)
+    }
+
+    // Check if there is just one main group in SVG
+    if (!viewport) {
+      var childNodes = Array.prototype.slice.call(svg.childNodes || svg.children).filter(function(el){
+        return el.nodeName !== 'defs' && el.nodeName !== '#text'
+      })
+
+      // Node name should be SVGGElement and should have no transform attribute
+      // Groups with transform are not used as viewport because it involves parsing of all transform possibilities
+      if (childNodes.length === 1 && childNodes[0].nodeName === 'g' && childNodes[0].getAttribute('transform') === null) {
+        viewport = childNodes[0]
+      }
+    }
+
+    // If no favorable group element exists then create one
+    if (!viewport) {
+      var viewportId = 'viewport-' + new Date().toISOString().replace(/\D/g, '');
+      viewport = document.createElementNS(this.svgNS, 'g');
+      viewport.setAttribute('id', viewportId);
+
+      // Internet Explorer (all versions?) can't use childNodes, but other browsers prefer (require?) using childNodes
+      var svgChildren = svg.childNodes || svg.children;
+      if (!!svgChildren && svgChildren.length > 0) {
+        for (var i = svgChildren.length; i > 0; i--) {
+          // Move everything into viewport except defs
+          if (svgChildren[svgChildren.length - i].nodeName !== 'defs') {
+            viewport.appendChild(svgChildren[svgChildren.length - i]);
+          }
+        }
+      }
+      svg.appendChild(viewport);
+    }
+
+    // Parse class names
+    var classNames = [];
+    if (viewport.getAttribute('class')) {
+      classNames = viewport.getAttribute('class').split(' ')
+    }
+
+    // Set class (if not set already)
+    if (!~classNames.indexOf('svg-pan-zoom_viewport')) {
+      classNames.push('svg-pan-zoom_viewport')
+      viewport.setAttribute('class', classNames.join(' '))
+    }
+
+    return viewport
+  }
+
+  /**
+   * Set SVG attributes
+   *
+   * @param  {SVGSVGElement} svg
+   */
+  , setupSvgAttributes: function(svg) {
+    // Setting default attributes
+    svg.setAttribute('xmlns', this.svgNS);
+    svg.setAttributeNS(this.xmlnsNS, 'xmlns:xlink', this.xlinkNS);
+    svg.setAttributeNS(this.xmlnsNS, 'xmlns:ev', this.evNS);
+
+    // Needed for Internet Explorer, otherwise the viewport overflows
+    if (svg.parentNode !== null) {
+      var style = svg.getAttribute('style') || '';
+      if (style.toLowerCase().indexOf('overflow') === -1) {
+        svg.setAttribute('style', 'overflow: hidden; ' + style);
+      }
+    }
+  }
+
+/**
+ * How long Internet Explorer takes to finish updating its display (ms).
+ */
+, internetExplorerRedisplayInterval: 300
+
+/**
+ * Forces the browser to redisplay all SVG elements that rely on an
+ * element defined in a 'defs' section. It works globally, for every
+ * available defs element on the page.
+ * The throttling is intentionally global.
+ *
+ * This is only needed for IE. It is as a hack to make markers (and 'use' elements?)
+ * visible after pan/zoom when there are multiple SVGs on the page.
+ * See bug report: https://connect.microsoft.com/IE/feedback/details/781964/
+ * also see svg-pan-zoom issue: https://github.com/ariutta/svg-pan-zoom/issues/62
+ */
+, refreshDefsGlobal: Utils.throttle(function() {
+    var allDefs = document.querySelectorAll('defs');
+    var allDefsCount = allDefs.length;
+    for (var i = 0; i < allDefsCount; i++) {
+      var thisDefs = allDefs[i];
+      thisDefs.parentNode.insertBefore(thisDefs, thisDefs);
+    }
+  }, this ? this.internetExplorerRedisplayInterval : null)
+
+  /**
+   * Sets the current transform matrix of an element
+   *
+   * @param {SVGElement} element
+   * @param {SVGMatrix} matrix  CTM
+   * @param {SVGElement} defs
+   */
+, setCTM: function(element, matrix, defs) {
+    var that = this
+      , s = 'matrix(' + matrix.a + ',' + matrix.b + ',' + matrix.c + ',' + matrix.d + ',' + matrix.e + ',' + matrix.f + ')';
+
+    element.setAttributeNS(null, 'transform', s);
+    if ('transform' in element.style) {
+      element.style.transform = s;
+    } else if ('-ms-transform' in element.style) {
+      element.style['-ms-transform'] = s;
+    } else if ('-webkit-transform' in element.style) {
+      element.style['-webkit-transform'] = s;
+    }
+
+    // IE has a bug that makes markers disappear on zoom (when the matrix "a" and/or "d" elements change)
+    // see http://stackoverflow.com/questions/17654578/svg-marker-does-not-work-in-ie9-10
+    // and http://srndolha.wordpress.com/2013/11/25/svg-line-markers-may-disappear-in-internet-explorer-11/
+    if (_browser === 'ie' && !!defs) {
+      // this refresh is intended for redisplaying the SVG during zooming
+      defs.parentNode.insertBefore(defs, defs);
+      // this refresh is intended for redisplaying the other SVGs on a page when panning a given SVG
+      // it is also needed for the given SVG itself, on zoomEnd, if the SVG contains any markers that
+      // are located under any other element(s).
+      window.setTimeout(function() {
+        that.refreshDefsGlobal();
+      }, that.internetExplorerRedisplayInterval);
+    }
+  }
+
+  /**
+   * Instantiate an SVGPoint object with given event coordinates
+   *
+   * @param {Event} evt
+   * @param  {SVGSVGElement} svg
+   * @return {SVGPoint}     point
+   */
+, getEventPoint: function(evt, svg) {
+    var point = svg.createSVGPoint()
+
+    Utils.mouseAndTouchNormalize(evt, svg)
+
+    point.x = evt.clientX
+    point.y = evt.clientY
+
+    return point
+  }
+
+  /**
+   * Get SVG center point
+   *
+   * @param  {SVGSVGElement} svg
+   * @return {SVGPoint}
+   */
+, getSvgCenterPoint: function(svg, width, height) {
+    return this.createSVGPoint(svg, width / 2, height / 2)
+  }
+
+  /**
+   * Create a SVGPoint with given x and y
+   *
+   * @param  {SVGSVGElement} svg
+   * @param  {Number} x
+   * @param  {Number} y
+   * @return {SVGPoint}
+   */
+, createSVGPoint: function(svg, x, y) {
+    var point = svg.createSVGPoint()
+    point.x = x
+    point.y = y
+
+    return point
+  }
+}
+
+},{"./utilities":7}],6:[function(require,module,exports){
+// uniwheel 0.1.2 (customized)
+// A unified cross browser mouse wheel event handler
+// https://github.com/teemualap/uniwheel
+
+module.exports = (function(){
+
+  //Full details: https://developer.mozilla.org/en-US/docs/Web/Reference/Events/wheel
+
+  var prefix = "", _addEventListener, _removeEventListener, support, fns = [];
+  var passiveOption = {passive: true};
+
+  // detect event model
+  if ( window.addEventListener ) {
+    _addEventListener = "addEventListener";
+    _removeEventListener = "removeEventListener";
+  } else {
+    _addEventListener = "attachEvent";
+    _removeEventListener = "detachEvent";
+    prefix = "on";
+  }
+
+  // detect available wheel event
+  support = "onwheel" in document.createElement("div") ? "wheel" : // Modern browsers support "wheel"
+            document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
+            "DOMMouseScroll"; // let's assume that remaining browsers are older Firefox
+
+
+  function createCallback(element,callback) {
+
+    var fn = function(originalEvent) {
+
+      !originalEvent && ( originalEvent = window.event );
+
+      // create a normalized event object
+      var event = {
+        // keep a ref to the original event object
+        originalEvent: originalEvent,
+        target: originalEvent.target || originalEvent.srcElement,
+        type: "wheel",
+        deltaMode: originalEvent.type == "MozMousePixelScroll" ? 0 : 1,
+        deltaX: 0,
+        delatZ: 0,
+        preventDefault: function() {
+          originalEvent.preventDefault ?
+            originalEvent.preventDefault() :
+            originalEvent.returnValue = false;
+        }
+      };
+
+      // calculate deltaY (and deltaX) according to the event
+      if ( support == "mousewheel" ) {
+        event.deltaY = - 1/40 * originalEvent.wheelDelta;
+        // Webkit also support wheelDeltaX
+        originalEvent.wheelDeltaX && ( event.deltaX = - 1/40 * originalEvent.wheelDeltaX );
+      } else {
+        event.deltaY = originalEvent.detail;
+      }
+
+      // it's time to fire the callback
+      return callback( event );
+
+    };
+
+    fns.push({
+      element: element,
+      fn: fn,
+    });
+
+    return fn;
+  }
+
+  function getCallback(element) {
+    for (var i = 0; i < fns.length; i++) {
+      if (fns[i].element === element) {
+        return fns[i].fn;
+      }
+    }
+    return function(){};
+  }
+
+  function removeCallback(element) {
+    for (var i = 0; i < fns.length; i++) {
+      if (fns[i].element === element) {
+        return fns.splice(i,1);
+      }
+    }
+  }
+
+  function _addWheelListener(elem, eventName, callback, isPassiveListener ) {
+    var cb;
+
+    if (support === "wheel") {
+      cb = callback;
+    } else {
+      cb = createCallback(elem, callback);
+    }
+
+    elem[_addEventListener](prefix + eventName, cb, isPassiveListener ? passiveOption : false);
+  }
+
+  function _removeWheelListener(elem, eventName, callback, isPassiveListener ) {
+
+    var cb;
+
+    if (support === "wheel") {
+      cb = callback;
+    } else {
+      cb = getCallback(elem);
+    }
+
+    elem[_removeEventListener](prefix + eventName, cb, isPassiveListener ? passiveOption : false);
+
+    removeCallback(elem);
+  }
+
+  function addWheelListener( elem, callback, isPassiveListener ) {
+    _addWheelListener(elem, support, callback, isPassiveListener );
+
+    // handle MozMousePixelScroll in older Firefox
+    if( support == "DOMMouseScroll" ) {
+      _addWheelListener(elem, "MozMousePixelScroll", callback, isPassiveListener );
+    }
+  }
+
+  function removeWheelListener(elem, callback, isPassiveListener){
+    _removeWheelListener(elem, support, callback, isPassiveListener);
+
+    // handle MozMousePixelScroll in older Firefox
+    if( support == "DOMMouseScroll" ) {
+      _removeWheelListener(elem, "MozMousePixelScroll", callback, isPassiveListener);
+    }
+  }
+
+  return {
+    on: addWheelListener,
+    off: removeWheelListener
+  };
+
+})();
+
+},{}],7:[function(require,module,exports){
+module.exports = {
+  /**
+   * Extends an object
+   *
+   * @param  {Object} target object to extend
+   * @param  {Object} source object to take properties from
+   * @return {Object}        extended object
+   */
+  extend: function(target, source) {
+    target = target || {};
+    for (var prop in source) {
+      // Go recursively
+      if (this.isObject(source[prop])) {
+        target[prop] = this.extend(target[prop], source[prop])
+      } else {
+        target[prop] = source[prop]
+      }
+    }
+    return target;
+  }
+
+  /**
+   * Checks if an object is a DOM element
+   *
+   * @param  {Object}  o HTML element or String
+   * @return {Boolean}   returns true if object is a DOM element
+   */
+, isElement: function(o){
+    return (
+      o instanceof HTMLElement || o instanceof SVGElement || o instanceof SVGSVGElement || //DOM2
+      (o && typeof o === 'object' && o !== null && o.nodeType === 1 && typeof o.nodeName === 'string')
+    );
+  }
+
+  /**
+   * Checks if an object is an Object
+   *
+   * @param  {Object}  o Object
+   * @return {Boolean}   returns true if object is an Object
+   */
+, isObject: function(o){
+    return Object.prototype.toString.call(o) === '[object Object]';
+  }
+
+  /**
+   * Checks if variable is Number
+   *
+   * @param  {Integer|Float}  n
+   * @return {Boolean}   returns true if variable is Number
+   */
+, isNumber: function(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+
+  /**
+   * Search for an SVG element
+   *
+   * @param  {Object|String} elementOrSelector DOM Element or selector String
+   * @return {Object|Null}                   SVG or null
+   */
+, getSvg: function(elementOrSelector) {
+    var element
+      , svg;
+
+    if (!this.isElement(elementOrSelector)) {
+      // If selector provided
+      if (typeof elementOrSelector === 'string' || elementOrSelector instanceof String) {
+        // Try to find the element
+        element = document.querySelector(elementOrSelector)
+
+        if (!element) {
+          throw new Error('Provided selector did not find any elements. Selector: ' + elementOrSelector)
+          return null
+        }
+      } else {
+        throw new Error('Provided selector is not an HTML object nor String')
+        return null
+      }
+    } else {
+      element = elementOrSelector
+    }
+
+    if (element.tagName.toLowerCase() === 'svg') {
+      svg = element;
+    } else {
+      if (element.tagName.toLowerCase() === 'object') {
+        svg = element.contentDocument.documentElement;
+      } else {
+        if (element.tagName.toLowerCase() === 'embed') {
+          svg = element.getSVGDocument().documentElement;
+        } else {
+          if (element.tagName.toLowerCase() === 'img') {
+            throw new Error('Cannot script an SVG in an "img" element. Please use an "object" element or an in-line SVG.');
+          } else {
+            throw new Error('Cannot get SVG.');
+          }
+          return null
+        }
+      }
+    }
+
+    return svg
+  }
+
+  /**
+   * Attach a given context to a function
+   * @param  {Function} fn      Function
+   * @param  {Object}   context Context
+   * @return {Function}           Function with certain context
+   */
+, proxy: function(fn, context) {
+    return function() {
+      return fn.apply(context, arguments)
+    }
+  }
+
+  /**
+   * Returns object type
+   * Uses toString that returns [object SVGPoint]
+   * And than parses object type from string
+   *
+   * @param  {Object} o Any object
+   * @return {String}   Object type
+   */
+, getType: function(o) {
+    return Object.prototype.toString.apply(o).replace(/^\[object\s/, '').replace(/\]$/, '')
+  }
+
+  /**
+   * If it is a touch event than add clientX and clientY to event object
+   *
+   * @param  {Event} evt
+   * @param  {SVGSVGElement} svg
+   */
+, mouseAndTouchNormalize: function(evt, svg) {
+    // If no clientX then fallback
+    if (evt.clientX === void 0 || evt.clientX === null) {
+      // Fallback
+      evt.clientX = 0
+      evt.clientY = 0
+
+      // If it is a touch event
+      if (evt.touches !== void 0 && evt.touches.length) {
+        if (evt.touches[0].clientX !== void 0) {
+          evt.clientX = evt.touches[0].clientX
+          evt.clientY = evt.touches[0].clientY
+        } else if (evt.touches[0].pageX !== void 0) {
+          var rect = svg.getBoundingClientRect();
+
+          evt.clientX = evt.touches[0].pageX - rect.left
+          evt.clientY = evt.touches[0].pageY - rect.top
+        }
+      // If it is a custom event
+      } else if (evt.originalEvent !== void 0) {
+        if (evt.originalEvent.clientX !== void 0) {
+          evt.clientX = evt.originalEvent.clientX
+          evt.clientY = evt.originalEvent.clientY
+        }
+      }
+    }
+  }
+
+  /**
+   * Check if an event is a double click/tap
+   * TODO: For touch gestures use a library (hammer.js) that takes in account other events
+   * (touchmove and touchend). It should take in account tap duration and traveled distance
+   *
+   * @param  {Event}  evt
+   * @param  {Event}  prevEvt Previous Event
+   * @return {Boolean}
+   */
+, isDblClick: function(evt, prevEvt) {
+    // Double click detected by browser
+    if (evt.detail === 2) {
+      return true;
+    }
+    // Try to compare events
+    else if (prevEvt !== void 0 && prevEvt !== null) {
+      var timeStampDiff = evt.timeStamp - prevEvt.timeStamp // should be lower than 250 ms
+        , touchesDistance = Math.sqrt(Math.pow(evt.clientX - prevEvt.clientX, 2) + Math.pow(evt.clientY - prevEvt.clientY, 2))
+
+      return timeStampDiff < 250 && touchesDistance < 10
+    }
+
+    // Nothing found
+    return false;
+  }
+
+  /**
+   * Returns current timestamp as an integer
+   *
+   * @return {Number}
+   */
+, now: Date.now || function() {
+    return new Date().getTime();
+  }
+
+  // From underscore.
+  // Returns a function, that, when invoked, will only be triggered at most once
+  // during a given window of time. Normally, the throttled function will run
+  // as much as it can, without ever going more than once per `wait` duration;
+  // but if you'd like to disable the execution on the leading edge, pass
+  // `{leading: false}`. To disable execution on the trailing edge, ditto.
+// jscs:disable
+// jshint ignore:start
+, throttle: function(func, wait, options) {
+    var that = this;
+    var context, args, result;
+    var timeout = null;
+    var previous = 0;
+    if (!options) options = {};
+    var later = function() {
+      previous = options.leading === false ? 0 : that.now();
+      timeout = null;
+      result = func.apply(context, args);
+      if (!timeout) context = args = null;
+    };
+    return function() {
+      var now = that.now();
+      if (!previous && options.leading === false) previous = now;
+      var remaining = wait - (now - previous);
+      context = this;
+      args = arguments;
+      if (remaining <= 0 || remaining > wait) {
+        clearTimeout(timeout);
+        timeout = null;
+        previous = now;
+        result = func.apply(context, args);
+        if (!timeout) context = args = null;
+      } else if (!timeout && options.trailing !== false) {
+        timeout = setTimeout(later, remaining);
+      }
+      return result;
+    };
+  }
+// jshint ignore:end
+// jscs:enable
+
+  /**
+   * Create a requestAnimationFrame simulation
+   *
+   * @param  {Number|String} refreshRate
+   * @return {Function}
+   */
+, createRequestAnimationFrame: function(refreshRate) {
+    var timeout = null
+
+    // Convert refreshRate to timeout
+    if (refreshRate !== 'auto' && refreshRate < 60 && refreshRate > 1) {
+      timeout = Math.floor(1000 / refreshRate)
+    }
+
+    if (timeout === null) {
+      return window.requestAnimationFrame || requestTimeout(33)
+    } else {
+      return requestTimeout(timeout)
+    }
+  }
+}
+
+/**
+ * Create a callback that will execute after a given timeout
+ *
+ * @param  {Function} timeout
+ * @return {Function}
+ */
+function requestTimeout(timeout) {
+  return function(callback) {
+    window.setTimeout(callback, timeout)
+  }
+}
+
+},{}]},{},[1]);
+</script>
+</head>
+<body>
+<h1>./out7, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>
+<div id='container' style="width: 1200px; height: 600px; border:1px solid black;">
+<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox="0 0 1200 600" version="1.1">
+<text x="108" y="63.75" font-size="15px" fill="green"  text-anchor='end' alignment-baseline="middle" >s1</text>
+<text x="108" y="131.25" font-size="15px" fill="blue"  text-anchor='end' alignment-baseline="middle" >s2</text>
+<text x="108" y="198.75" font-size="15px" fill="red"  text-anchor='end' alignment-baseline="middle" >s4</text>
+<text x="108" y="536.25" font-size="15px" fill="black"  text-anchor='end' alignment-baseline="middle" >s3</text>
+
+<line x1="120" y1="564" x2="1020" y2="564" style="stroke:green;stroke-width:0.5"/>
+<line x1="120" y1="324" x2="120" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="120" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="177.485947879407" y1="324" x2="177.485947879407" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="177.485947879407" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2,000</text>
+<line x1="234.971895758815" y1="324" x2="234.971895758815" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="234.971895758815" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4,000</text>
+<line x1="292.457843638222" y1="324" x2="292.457843638222" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="292.457843638222" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6,000</text>
+<line x1="349.943791517629" y1="324" x2="349.943791517629" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="349.943791517629" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8,000</text>
+<line x1="407.429739397036" y1="324" x2="407.429739397036" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="407.429739397036" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10,000</text>
+<line x1="464.915687276444" y1="324" x2="464.915687276444" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="464.915687276444" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12,000</text>
+<line x1="522.401635155851" y1="324" x2="522.401635155851" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="522.401635155851" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14,000</text>
+<line x1="579.887583035258" y1="324" x2="579.887583035258" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="579.887583035258" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16,000</text>
+<line x1="637.373530914665" y1="324" x2="637.373530914665" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="637.373530914665" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18,000</text>
+<line x1="694.859478794073" y1="324" x2="694.859478794073" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="694.859478794073" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20,000</text>
+<line x1="752.34542667348" y1="324" x2="752.34542667348" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="752.34542667348" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22,000</text>
+<line x1="809.831374552887" y1="324" x2="809.831374552887" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="809.831374552887" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24,000</text>
+<line x1="867.317322432294" y1="324" x2="867.317322432294" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="867.317322432294" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">26,000</text>
+<line x1="924.803270311702" y1="324" x2="924.803270311702" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="924.803270311702" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">28,000</text>
+<line x1="1020" y1="324" x2="1020" y2="564" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1020" y="579" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">31,312bp</text>
+<line x1="120" y1="18" x2="1020" y2="18" style="stroke:green;stroke-width:0.5"/>
+<line x1="120" y1="258" x2="120" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="120" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="177.485947879407" y1="258" x2="177.485947879407" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="177.485947879407" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2,000</text>
+<line x1="234.971895758815" y1="258" x2="234.971895758815" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="234.971895758815" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4,000</text>
+<line x1="292.457843638222" y1="258" x2="292.457843638222" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="292.457843638222" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6,000</text>
+<line x1="349.943791517629" y1="258" x2="349.943791517629" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="349.943791517629" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8,000</text>
+<line x1="407.429739397036" y1="258" x2="407.429739397036" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="407.429739397036" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10,000</text>
+<line x1="464.915687276444" y1="258" x2="464.915687276444" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="464.915687276444" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12,000</text>
+<line x1="522.401635155851" y1="258" x2="522.401635155851" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="522.401635155851" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14,000</text>
+<line x1="579.887583035258" y1="258" x2="579.887583035258" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="579.887583035258" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16,000</text>
+<line x1="637.373530914665" y1="258" x2="637.373530914665" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="637.373530914665" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18,000</text>
+<line x1="694.859478794073" y1="258" x2="694.859478794073" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="694.859478794073" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20,000</text>
+<line x1="752.34542667348" y1="258" x2="752.34542667348" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="752.34542667348" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22,000</text>
+<line x1="809.831374552887" y1="258" x2="809.831374552887" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="809.831374552887" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">24,000</text>
+<line x1="867.317322432294" y1="258" x2="867.317322432294" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="867.317322432294" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">26,000</text>
+<line x1="924.803270311702" y1="258" x2="924.803270311702" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="924.803270311702" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">28,000</text>
+<line x1="1020" y1="258" x2="1020" y2="18" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1020" y="15" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">31,312bp</text>
+
+
+
+				<g><title><tspan>feature_id -> s2.s20000.1.10449.2.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:1-10449,+</tspan></title>
+				<polygon points="120.02874297394,130.9125 120.02874297394,131.5875 420.364077669903,131.5875 420.364077669903,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s20000.10449.10809.2.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:10449-10809,+</tspan></title>
+				<polygon points="420.335334695963,130.9125 420.335334695963,131.5875 430.711548288196,131.5875 430.711548288196,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s2000.1.9609.2.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:1-9609,+</tspan></title>
+				<polygon points="445.083035258048,130.9125 445.083035258048,131.5875 721.27427184466,131.5875 721.27427184466,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s2.1.9609.2.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:1-9609,+</tspan></title>
+				<polygon points="735.645758814512,130.9125 735.645758814512,131.5875 1011.83699540112,131.5875 1011.83699540112,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s40000.1.9609.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:1-9609,+</tspan></title>
+				<polygon points="120.02874297394,198.4125 120.02874297394,199.0875 396.219979560552,199.0875 396.219979560552,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s40000.1.9609.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:1-9609,+</tspan></title>
+				<polygon points="120.02874297394,198.4125 120.02874297394,199.0875 396.219979560552,199.0875 396.219979560552,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s40000.1.9609.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:1-9609,+</tspan></title>
+				<polygon points="120.02874297394,198.4125 120.02874297394,199.0875 396.219979560552,199.0875 396.219979560552,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s40000.180.540.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:180-540,+</tspan></title>
+				<polygon points="125.173735309147,198.4125 125.173735309147,199.0875 135.54994890138,199.0875 135.54994890138,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s4000.1.9609.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:1-9609,+</tspan></title>
+				<polygon points="410.591466530404,198.4125 410.591466530404,199.0875 686.782703117016,199.0875 686.782703117016,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s4000.1.9609.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:1-9609,+</tspan></title>
+				<polygon points="410.591466530404,198.4125 410.591466530404,199.0875 686.782703117016,199.0875 686.782703117016,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s4000.1.9609.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:1-9609,+</tspan></title>
+				<polygon points="410.591466530404,198.4125 410.591466530404,199.0875 686.782703117016,199.0875 686.782703117016,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s4000.180.540.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:180-540,+</tspan></title>
+				<polygon points="415.736458865611,198.4125 415.736458865611,199.0875 426.112672457844,199.0875 426.112672457844,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s4.1.9609.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:1-9609,+</tspan></title>
+				<polygon points="701.154190086868,198.4125 701.154190086868,199.0875 977.34542667348,199.0875 977.34542667348,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s4.1.9609.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:1-9609,+</tspan></title>
+				<polygon points="701.154190086868,198.4125 701.154190086868,199.0875 977.34542667348,199.0875 977.34542667348,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s4.1.9609.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:1-9609,+</tspan></title>
+				<polygon points="701.154190086868,198.4125 701.154190086868,199.0875 977.34542667348,199.0875 977.34542667348,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s4.s4.180.540.2.+</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:180-540,+</tspan></title>
+				<polygon points="706.299182422075,198.4125 706.299182422075,199.0875 716.675396014308,199.0875 716.675396014308,198.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+<g><title><tspan>s1.s1000.4665.10554.1.+ -> s2.s20000.3720.10449.1.+</tspan>
+<tspan>query -> s1000:4665:10554</tspan>
+<tspan>target -> s20000:3720:10449</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 5889/6729=0.875167186803388</tspan>
+<tspan>coverage -> query:0.55798749289369</tspan>
+<tspan>target:0.622536774909797</tspan></title>
+<polygon points="560.169902912621,66.1125 729.466019417476,66.1125 420.364077669903,128.8875 226.923863055697,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.437583593401694"/></g>
+
+<g><title><tspan>s2.s2.1.9609.2.+ -> s4.s4.1.9609.2.+</tspan>
+<tspan>query -> s2:1:9609</tspan>
+<tspan>target -> s4:1:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/9609=1</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:1</tspan></title>
+<polygon points="735.645758814512,133.6125 1011.83699540112,133.6125 977.34542667348,196.3875 701.154190086868,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s1.s1.1.9609.1.+ -> s2.s20000.1.10449.1.+</tspan>
+<tspan>query -> s1:1:9609</tspan>
+<tspan>target -> s20000:1:10449</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/10449=0.919609532012633</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:0.96669442131557</tspan></title>
+<polygon points="743.837506387328,66.1125 1020.02874297394,66.1125 420.364077669903,128.8875 120.02874297394,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.459804766006316"/></g>
+
+<g><title><tspan>s1.s1000.1.3720.1.+ -> s2.s2000.1.3720.1.+</tspan>
+<tspan>query -> s1000:1:3720</tspan>
+<tspan>target -> s2000:1:3720</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 3720/3720=1</tspan>
+<tspan>coverage -> query:0.352472996020466</tspan>
+<tspan>target:0.387137059007181</tspan></title>
+<polygon points="426.112672457844,66.1125 533.036535513541,66.1125 552.006898313746,128.8875 445.083035258048,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s2.s2000.1.9609.2.+ -> s4.s4000.1.9609.2.+</tspan>
+<tspan>query -> s2000:1:9609</tspan>
+<tspan>target -> s4000:1:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/9609=1</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:1</tspan></title>
+<polygon points="445.083035258048,133.6125 721.27427184466,133.6125 686.782703117016,196.3875 410.591466530404,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s2.s20000.10449.10809.2.+ -> s4.s40000.180.540.2.+</tspan>
+<tspan>query -> s20000:10449:10809</tspan>
+<tspan>target -> s40000:180:540</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 360/360=1</tspan>
+<tspan>coverage -> query:0.0333055786844296</tspan>
+<tspan>target:0.0374648766781143</tspan></title>
+<polygon points="420.335334695963,133.6125 430.711548288196,133.6125 135.54994890138,196.3875 125.173735309147,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s2.s2000.1.9609.2.+ -> s4.s4.1.9609.2.+</tspan>
+<tspan>query -> s2000:1:9609</tspan>
+<tspan>target -> s4:1:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/9609=1</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:1</tspan></title>
+<polygon points="445.083035258048,133.6125 721.27427184466,133.6125 977.34542667348,196.3875 701.154190086868,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s2.s20000.1.10449.2.+ -> s4.s40000.1.9609.2.+</tspan>
+<tspan>query -> s20000:1:10449</tspan>
+<tspan>target -> s40000:1:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/10449=0.919609532012633</tspan>
+<tspan>coverage -> query:0.96669442131557</tspan>
+<tspan>target:1</tspan></title>
+<polygon points="120.02874297394,133.6125 420.364077669903,133.6125 396.219979560552,196.3875 120.02874297394,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.459804766006316"/></g>
+
+<g><title><tspan>s1.s10000.1.10149.1.+ -> s2.s2000.180.9609.1.+</tspan>
+<tspan>query -> s10000:1:10149</tspan>
+<tspan>target -> s2000:180:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9309/10269=0.90651475314052</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:0.981267561660943</tspan></title>
+<polygon points="120.02874297394,66.1125 411.741185487992,66.1125 721.27427184466,128.8875 450.228027593255,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.45325737657026"/></g>
+
+<g><title><tspan>s2.s2.1.9609.2.+ -> s4.s40000.1.9609.2.+</tspan>
+<tspan>query -> s2:1:9609</tspan>
+<tspan>target -> s40000:1:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/9609=1</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:1</tspan></title>
+<polygon points="735.645758814512,133.6125 1011.83699540112,133.6125 396.219979560552,196.3875 120.02874297394,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s1.s10000.1.10149.1.+ -> s2.s2.180.9609.1.+</tspan>
+<tspan>query -> s10000:1:10149</tspan>
+<tspan>target -> s2:180:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9309/10269=0.90651475314052</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:0.981267561660943</tspan></title>
+<polygon points="120.02874297394,66.1125 411.741185487992,66.1125 1011.83699540112,128.8875 740.790751149719,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.45325737657026"/></g>
+
+<g><title><tspan>s1.s1000.1.3720.1.+ -> s2.s20000.1.3720.1.+</tspan>
+<tspan>query -> s1000:1:3720</tspan>
+<tspan>target -> s20000:1:3720</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 3720/3720=1</tspan>
+<tspan>coverage -> query:0.352472996020466</tspan>
+<tspan>target:0.344157646405773</tspan></title>
+<polygon points="426.112672457844,66.1125 533.036535513541,66.1125 226.952606029637,128.8875 120.02874297394,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s2.s2000.1.9609.2.+ -> s4.s40000.1.9609.2.+</tspan>
+<tspan>query -> s2000:1:9609</tspan>
+<tspan>target -> s40000:1:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/9609=1</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:1</tspan></title>
+<polygon points="445.083035258048,133.6125 721.27427184466,133.6125 396.219979560552,196.3875 120.02874297394,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s1.s1000.4665.10554.1.+ -> s2.s2.3720.9609.1.+</tspan>
+<tspan>query -> s1000:4665:10554</tspan>
+<tspan>target -> s2:3720:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 5889/5889=1</tspan>
+<tspan>coverage -> query:0.55798749289369</tspan>
+<tspan>target:0.612862940992819</tspan></title>
+<polygon points="560.169902912621,66.1125 729.466019417476,66.1125 1011.83699540112,128.8875 842.54087889627,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s1.s1.1.9609.1.+ -> s2.s2000.1.9609.1.+</tspan>
+<tspan>query -> s1:1:9609</tspan>
+<tspan>target -> s2000:1:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/9609=1</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:1</tspan></title>
+<polygon points="743.837506387328,66.1125 1020.02874297394,66.1125 721.27427184466,128.8875 445.083035258048,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s2.s20000.10449.10809.2.+ -> s4.s4.180.540.2.+</tspan>
+<tspan>query -> s20000:10449:10809</tspan>
+<tspan>target -> s4:180:540</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 360/360=1</tspan>
+<tspan>coverage -> query:0.0333055786844296</tspan>
+<tspan>target:0.0374648766781143</tspan></title>
+<polygon points="420.335334695963,133.6125 430.711548288196,133.6125 716.675396014308,196.3875 706.299182422075,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s1.s1000.4665.10554.1.+ -> s2.s2000.3720.9609.1.+</tspan>
+<tspan>query -> s1000:4665:10554</tspan>
+<tspan>target -> s2000:3720:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 5889/5889=1</tspan>
+<tspan>coverage -> query:0.55798749289369</tspan>
+<tspan>target:0.612862940992819</tspan></title>
+<polygon points="560.169902912621,66.1125 729.466019417476,66.1125 721.27427184466,128.8875 551.978155339806,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s1.s1000.1.3720.1.+ -> s2.s2.1.3720.1.+</tspan>
+<tspan>query -> s1000:1:3720</tspan>
+<tspan>target -> s2:1:3720</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 3720/3720=1</tspan>
+<tspan>coverage -> query:0.352472996020466</tspan>
+<tspan>target:0.387137059007181</tspan></title>
+<polygon points="426.112672457844,66.1125 533.036535513541,66.1125 842.56962187021,128.8875 735.645758814512,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s2.s20000.1.10449.2.+ -> s4.s4000.1.9609.2.+</tspan>
+<tspan>query -> s20000:1:10449</tspan>
+<tspan>target -> s4000:1:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/10449=0.919609532012633</tspan>
+<tspan>coverage -> query:0.96669442131557</tspan>
+<tspan>target:1</tspan></title>
+<polygon points="120.02874297394,133.6125 420.364077669903,133.6125 686.782703117016,196.3875 410.591466530404,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.459804766006316"/></g>
+
+<g><title><tspan>s2.s2.1.9609.2.+ -> s4.s4000.1.9609.2.+</tspan>
+<tspan>query -> s2:1:9609</tspan>
+<tspan>target -> s4000:1:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/9609=1</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:1</tspan></title>
+<polygon points="735.645758814512,133.6125 1011.83699540112,133.6125 686.782703117016,196.3875 410.591466530404,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s2.s20000.10449.10809.2.+ -> s4.s4000.180.540.2.+</tspan>
+<tspan>query -> s20000:10449:10809</tspan>
+<tspan>target -> s4000:180:540</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 360/360=1</tspan>
+<tspan>coverage -> query:0.0333055786844296</tspan>
+<tspan>target:0.0374648766781143</tspan></title>
+<polygon points="420.335334695963,133.6125 430.711548288196,133.6125 426.112672457844,196.3875 415.736458865611,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s1.s1.1.9609.1.+ -> s2.s2.1.9609.1.+</tspan>
+<tspan>query -> s1:1:9609</tspan>
+<tspan>target -> s2:1:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/9609=1</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:1</tspan></title>
+<polygon points="743.837506387328,66.1125 1020.02874297394,66.1125 1011.83699540112,128.8875 735.645758814512,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/></g>
+
+<g><title><tspan>s1.s10000.1.10149.1.+ -> s2.s20000.180.10449.1.+</tspan>
+<tspan>query -> s10000:1:10149</tspan>
+<tspan>target -> s20000:180:10449</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9309/11109=0.837969214150689</tspan>
+<tspan>coverage -> query:1</tspan>
+<tspan>target:0.950041631973356</tspan></title>
+<polygon points="120.02874297394,66.1125 411.741185487992,66.1125 420.364077669903,128.8875 125.173735309147,128.8875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.418984607075344"/></g>
+
+<g><title><tspan>s2.s20000.1.10449.2.+ -> s4.s4.1.9609.2.+</tspan>
+<tspan>query -> s20000:1:10449</tspan>
+<tspan>target -> s4:1:9609</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 9609/10449=0.919609532012633</tspan>
+<tspan>coverage -> query:0.96669442131557</tspan>
+<tspan>target:1</tspan></title>
+<polygon points="120.02874297394,133.6125 420.364077669903,133.6125 977.34542667348,196.3875 701.154190086868,196.3875" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.459804766006316"/></g>
+
+
+<g><title>s10000:1-10149</title>
+<rect x="120" y="63.4125" width="291.712442514052" height="0.675" style="fill:blue"   /></g>
+
+				<g><title><tspan>feature_id -> s1.s10000.1.10149.1.+</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:1-10149,+</tspan></title>
+				<polygon points="120.02874297394,63.4125 120.02874297394,64.0875 411.741185487992,64.0875 411.741185487992,63.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+<g><title>s1000:1-10554</title>
+<rect x="426.083929483904" y="63.4125" width="303.353346959632" height="0.675" style="fill:blue"   /></g>
+
+				<g><title><tspan>feature_id -> s1.s1000.1.3720.1.+</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:1-3720,+</tspan></title>
+				<polygon points="426.112672457844,63.4125 426.112672457844,64.0875 533.036535513541,64.0875 533.036535513541,63.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s1.s1000.4665.10554.1.+</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:4665-10554,+</tspan></title>
+				<polygon points="560.169902912621,63.4125 560.169902912621,64.0875 729.466019417476,64.0875 729.466019417476,63.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+<g><title>s1:1-9609</title>
+<rect x="743.808763413388" y="63.4125" width="276.191236586612" height="0.675" style="fill:blue"   /></g>
+
+				<g><title><tspan>feature_id -> s1.s1.1.9609.1.+</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1:1-9609,+</tspan></title>
+				<polygon points="743.837506387328,63.4125 743.837506387328,64.0875 1020.02874297394,64.0875 1020.02874297394,63.4125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+<g><title>s20000:1-10809</title>
+<rect x="120" y="130.9125" width="310.682805314257" height="0.675" style="fill:blue"   /></g>
+
+				<g><title><tspan>feature_id -> s2.s20000.1.10449.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:1-10449,+</tspan></title>
+				<polygon points="120.02874297394,130.9125 120.02874297394,131.5875 420.364077669903,131.5875 420.364077669903,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s20000.1.3720.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:1-3720,+</tspan></title>
+				<polygon points="120.02874297394,130.9125 120.02874297394,131.5875 226.952606029637,131.5875 226.952606029637,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s20000.180.10449.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:180-10449,+</tspan></title>
+				<polygon points="125.173735309147,130.9125 125.173735309147,131.5875 420.364077669903,131.5875 420.364077669903,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s20000.3720.10449.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:3720-10449,+</tspan></title>
+				<polygon points="226.923863055697,130.9125 226.923863055697,131.5875 420.364077669903,131.5875 420.364077669903,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+<g><title>s2000:1-9609</title>
+<rect x="445.054292284108" y="130.9125" width="276.191236586612" height="0.675" style="fill:blue"   /></g>
+
+				<g><title><tspan>feature_id -> s2.s2000.1.9609.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:1-9609,+</tspan></title>
+				<polygon points="445.083035258048,130.9125 445.083035258048,131.5875 721.27427184466,131.5875 721.27427184466,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s2000.1.3720.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:1-3720,+</tspan></title>
+				<polygon points="445.083035258048,130.9125 445.083035258048,131.5875 552.006898313746,131.5875 552.006898313746,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s2000.180.9609.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:180-9609,+</tspan></title>
+				<polygon points="450.228027593255,130.9125 450.228027593255,131.5875 721.27427184466,131.5875 721.27427184466,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s2000.3720.9609.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:3720-9609,+</tspan></title>
+				<polygon points="551.978155339806,130.9125 551.978155339806,131.5875 721.27427184466,131.5875 721.27427184466,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+<g><title>s2:1-9609</title>
+<rect x="735.617015840572" y="130.9125" width="276.191236586612" height="0.675" style="fill:blue"   /></g>
+
+				<g><title><tspan>feature_id -> s2.s2.1.3720.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:1-3720,+</tspan></title>
+				<polygon points="735.645758814512,130.9125 735.645758814512,131.5875 842.56962187021,131.5875 842.56962187021,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s2.1.9609.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:1-9609,+</tspan></title>
+				<polygon points="735.645758814512,130.9125 735.645758814512,131.5875 1011.83699540112,131.5875 1011.83699540112,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s2.180.9609.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:180-9609,+</tspan></title>
+				<polygon points="740.790751149719,130.9125 740.790751149719,131.5875 1011.83699540112,131.5875 1011.83699540112,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s2.s2.3720.9609.1.+</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:3720-9609,+</tspan></title>
+				<polygon points="842.54087889627,130.9125 842.54087889627,131.5875 1011.83699540112,131.5875 1011.83699540112,130.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+<g><title>s40000:1-9609</title>
+<rect x="120" y="198.4125" width="276.191236586612" height="0.675" style="fill:blue"   /></g>
+<g><title>s4000:1-9609</title>
+<rect x="410.562723556464" y="198.4125" width="276.191236586612" height="0.675" style="fill:blue"   /></g>
+<g><title>s4:1-9609</title>
+<rect x="701.125447112928" y="198.4125" width="276.191236586612" height="0.675" style="fill:blue"   /></g>
+<g><title>s30000:1-9969</title>
+<rect x="120" y="535.9125" width="286.538707204905" height="0.675" style="fill:blue"   /></g>
+
+				<g><title><tspan>feature_id -> s3.s30000.1.9969.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:1-9969,+</tspan></title>
+				<polygon points="120.02874297394,535.9125 120.02874297394,536.5875 406.567450178845,536.5875 406.567450178845,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s3.s30000.1.9969.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:1-9969,+</tspan></title>
+				<polygon points="120.02874297394,535.9125 120.02874297394,536.5875 406.567450178845,536.5875 406.567450178845,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s3.s30000.1.9969.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:1-9969,+</tspan></title>
+				<polygon points="120.02874297394,535.9125 120.02874297394,536.5875 406.567450178845,536.5875 406.567450178845,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s3.s30000.180.540.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:180-540,+</tspan></title>
+				<polygon points="125.173735309147,535.9125 125.173735309147,536.5875 135.54994890138,536.5875 135.54994890138,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+<g><title>s3000:1-9609</title>
+<rect x="420.910194174757" y="535.9125" width="276.191236586612" height="0.675" style="fill:blue"   /></g>
+
+				<g><title><tspan>feature_id -> s3.s3000.1.9609.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:1-9609,+</tspan></title>
+				<polygon points="420.938937148697,535.9125 420.938937148697,536.5875 697.130173735309,536.5875 697.130173735309,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s3.s3000.1.9609.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:1-9609,+</tspan></title>
+				<polygon points="420.938937148697,535.9125 420.938937148697,536.5875 697.130173735309,536.5875 697.130173735309,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s3.s3000.1.9609.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:1-9609,+</tspan></title>
+				<polygon points="420.938937148697,535.9125 420.938937148697,536.5875 697.130173735309,536.5875 697.130173735309,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s3.s3000.180.540.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:180-540,+</tspan></title>
+				<polygon points="426.083929483904,535.9125 426.083929483904,536.5875 436.460143076137,536.5875 436.460143076137,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+<g><title>s3:1-9609</title>
+<rect x="711.472917731221" y="535.9125" width="276.191236586612" height="0.675" style="fill:blue"   /></g>
+
+				<g><title><tspan>feature_id -> s3.s3.1.9609.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:1-9609,+</tspan></title>
+				<polygon points="711.501660705161,535.9125 711.501660705161,536.5875 987.692897291773,536.5875 987.692897291773,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s3.s3.1.9609.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:1-9609,+</tspan></title>
+				<polygon points="711.501660705161,535.9125 711.501660705161,536.5875 987.692897291773,536.5875 987.692897291773,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s3.s3.1.9609.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:1-9609,+</tspan></title>
+				<polygon points="711.501660705161,535.9125 711.501660705161,536.5875 987.692897291773,536.5875 987.692897291773,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+				<g><title><tspan>feature_id -> s3.s3.180.540.2.+</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:180-540,+</tspan></title>
+				<polygon points="716.646653040368,535.9125 716.646653040368,536.5875 727.022866632601,536.5875 727.022866632601,535.9125 " style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0"/></g>
+
+
+
+				<g><title><tspan>feature_id -> gene_s1010000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:87-1109,+</tspan></title>
+				<polygon points="122.500638732754,62.4 122.500638732754,65.1 143.083482370976,65.1 143.083482370976,65.775 151.904701073071,63.75 143.083482370976,61.725 143.083482370976,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1020000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:1106-1888,+</tspan></title>
+				<polygon points="151.789729177312,62.4 151.789729177312,65.1 167.543753193664,65.1 167.543753193664,65.775 174.2954777721,63.75 167.543753193664,61.725 167.543753193664,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1030000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:2925-3119,+</tspan></title>
+				<polygon points="204.073198773633,62.4 204.073198773633,65.1 207.996614716403,65.1 207.996614716403,65.775 209.678078691875,63.75 207.996614716403,61.725 207.996614716403,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1040000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:3486-3857,+</tspan></title>
+				<polygon points="220.198007153807,62.4 220.198007153807,65.1 227.682677567706,65.1 227.682677567706,65.775 230.890393459377,63.75 227.682677567706,61.725 227.682677567706,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1050000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:4343-4780,+</tspan></title>
+				<polygon points="244.830735820133,62.4 244.830735820133,65.1 253.643331630046,65.1 253.643331630046,65.775 257.420158405723,63.75 253.643331630046,61.725 253.643331630046,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1060000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:4815-5888,-</tspan></title>
+				<polygon points="258.397419519673,63.75 267.658405723046,65.775 267.658405723046,65.1 289.267373530915,65.1 289.267373530915,62.4 267.658405723046,62.4 267.658405723046,61.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1070000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:6005-6421,+</tspan></title>
+				<polygon points="292.60155850792,62.4 292.60155850792,65.1 300.99163260092,65.1 300.99163260092,65.775 304.587378640777,63.75 300.99163260092,61.725 300.99163260092,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1080000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:6664-7602,+</tspan></title>
+				<polygon points="311.543178334185,62.4 311.543178334185,65.1 330.435935104752,65.1 330.435935104752,65.775 338.532830863567,63.75 330.435935104752,61.725 330.435935104752,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1090000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:7789-8088,-</tspan></title>
+				<polygon points="343.879024016352,63.75 346.465891670925,65.775 346.465891670925,65.1 352.501916198263,65.1 352.501916198263,62.4 346.465891670925,62.4 346.465891670925,61.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1100000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:8088-8360,-</tspan></title>
+				<polygon points="352.473173224323,63.75 354.827222789985,65.775 354.827222789985,65.1 360.320005109862,65.1 360.320005109862,62.4 354.827222789985,62.4 354.827222789985,61.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s11000001</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s10000:8361-8560,-</tspan></title>
+				<polygon points="360.320005109862,63.75 362.044583546244,65.775 362.044583546244,65.1 366.068599897803,65.1 366.068599897803,62.4 362.044583546244,62.4 362.044583546244,61.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s101000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:87-1109,+</tspan></title>
+				<polygon points="428.584568216658,62.4 428.584568216658,65.1 449.16741185488,65.1 449.16741185488,65.775 457.988630556975,63.75 449.16741185488,61.725 449.16741185488,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s102000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:1106-1888,+</tspan></title>
+				<polygon points="457.873658661216,62.4 457.873658661216,65.1 473.627682677568,65.1 473.627682677568,65.775 480.379407256004,63.75 473.627682677568,61.725 473.627682677568,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s103000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:2925-3119,+</tspan></title>
+				<polygon points="510.157128257537,62.4 510.157128257537,65.1 514.080544200307,65.1 514.080544200307,65.775 515.762008175779,63.75 514.080544200307,61.725 514.080544200307,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s104000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:3486-3857,+</tspan></title>
+				<polygon points="526.281936637711,62.4 526.281936637711,65.1 533.76660705161,65.1 533.76660705161,65.775 536.974322943281,63.75 533.76660705161,61.725 533.76660705161,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s105000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:4343-4780,+</tspan></title>
+				<polygon points="550.914665304037,62.4 550.914665304037,65.1 559.72726111395,65.1 559.72726111395,65.775 563.504087889627,63.75 559.72726111395,61.725 559.72726111395,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s106000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:4815-5888,-</tspan></title>
+				<polygon points="564.481349003577,63.75 573.742335206949,65.775 573.742335206949,65.1 595.351303014819,65.1 595.351303014819,62.4 573.742335206949,62.4 573.742335206949,61.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s107000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:6005-6421,+</tspan></title>
+				<polygon points="598.685487991824,62.4 598.685487991824,65.1 607.075562084824,65.1 607.075562084824,65.775 610.671308124681,63.75 607.075562084824,61.725 607.075562084824,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s108000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:6664-7602,+</tspan></title>
+				<polygon points="617.627107818089,62.4 617.627107818089,65.1 636.519864588656,65.1 636.519864588656,65.775 644.616760347471,63.75 636.519864588656,61.725 636.519864588656,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s109000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:7789-8088,-</tspan></title>
+				<polygon points="649.962953500255,63.75 652.549821154829,65.775 652.549821154829,65.1 658.585845682167,65.1 658.585845682167,62.4 652.549821154829,62.4 652.549821154829,61.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s110000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1000:8088-8360,-</tspan></title>
+				<polygon points="658.557102708227,63.75 660.911152273889,65.775 660.911152273889,65.1 666.403934593766,65.1 666.403934593766,62.4 660.911152273889,62.4 660.911152273889,61.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s101</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1:87-1109,+</tspan></title>
+				<polygon points="746.309402146142,62.4 746.309402146142,65.1 766.892245784364,65.1 766.892245784364,65.775 775.713464486459,63.75 766.892245784364,61.725 766.892245784364,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s102</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1:1106-1888,+</tspan></title>
+				<polygon points="775.5984925907,62.4 775.5984925907,65.1 791.352516607052,65.1 791.352516607052,65.775 798.104241185488,63.75 791.352516607052,61.725 791.352516607052,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s103</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1:2925-3119,+</tspan></title>
+				<polygon points="827.881962187021,62.4 827.881962187021,65.1 831.80537812979,65.1 831.80537812979,65.775 833.486842105263,63.75 831.80537812979,61.725 831.80537812979,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s104</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1:3486-3857,+</tspan></title>
+				<polygon points="844.006770567195,62.4 844.006770567195,65.1 851.491440981094,65.1 851.491440981094,65.775 854.699156872764,63.75 851.491440981094,61.725 851.491440981094,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s105</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1:4343-4780,+</tspan></title>
+				<polygon points="868.639499233521,62.4 868.639499233521,65.1 877.452095043434,65.1 877.452095043434,65.775 881.228921819111,63.75 877.452095043434,61.725 877.452095043434,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s106</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1:4815-5888,-</tspan></title>
+				<polygon points="882.206182933061,63.75 891.467169136433,65.775 891.467169136433,65.1 913.076136944302,65.1 913.076136944302,62.4 891.467169136433,62.4 891.467169136433,61.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s107</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1:6005-6421,+</tspan></title>
+				<polygon points="916.410321921308,62.4 916.410321921308,65.1 924.800396014308,65.1 924.800396014308,65.775 928.396142054165,63.75 924.800396014308,61.725 924.800396014308,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s108</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1:6664-7602,+</tspan></title>
+				<polygon points="935.351941747573,62.4 935.351941747573,65.1 954.24469851814,65.1 954.24469851814,65.775 962.341594276955,63.75 954.24469851814,61.725 954.24469851814,62.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s109</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1:7789-8088,-</tspan></title>
+				<polygon points="967.687787429739,63.75 970.274655084313,65.775 970.274655084313,65.1 976.31067961165,65.1 976.31067961165,62.4 970.274655084313,62.4 970.274655084313,61.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s110</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>position -> s1:8088-8360,-</tspan></title>
+				<polygon points="976.281936637711,63.75 978.635986203373,65.775 978.635986203373,65.1 984.12876852325,65.1 984.12876852325,62.4 978.635986203373,62.4 978.635986203373,61.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2010000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:87-1109,+</tspan></title>
+				<polygon points="122.500638732754,129.9 122.500638732754,132.6 143.083482370976,132.6 143.083482370976,133.275 151.904701073071,131.25 143.083482370976,129.225 143.083482370976,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2020000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:1106-1888,+</tspan></title>
+				<polygon points="151.789729177312,129.9 151.789729177312,132.6 167.543753193664,132.6 167.543753193664,133.275 174.2954777721,131.25 167.543753193664,129.225 167.543753193664,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2030000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:2925-3119,+</tspan></title>
+				<polygon points="204.073198773633,129.9 204.073198773633,132.6 207.996614716403,132.6 207.996614716403,133.275 209.678078691875,131.25 207.996614716403,129.225 207.996614716403,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2040000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:3486-3857,+</tspan></title>
+				<polygon points="220.198007153807,129.9 220.198007153807,132.6 227.682677567706,132.6 227.682677567706,133.275 230.890393459377,131.25 227.682677567706,129.225 227.682677567706,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2050000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:4343-4780,+</tspan></title>
+				<polygon points="244.830735820133,129.9 244.830735820133,132.6 253.643331630046,132.6 253.643331630046,133.275 257.420158405723,131.25 253.643331630046,129.225 253.643331630046,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2060000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:4815-5888,-</tspan></title>
+				<polygon points="258.397419519673,131.25 267.658405723046,133.275 267.658405723046,132.6 289.267373530915,132.6 289.267373530915,129.9 267.658405723046,129.9 267.658405723046,129.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2070000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:6005-6421,+</tspan></title>
+				<polygon points="292.60155850792,129.9 292.60155850792,132.6 300.99163260092,132.6 300.99163260092,133.275 304.587378640777,131.25 300.99163260092,129.225 300.99163260092,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2080000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:6664-7602,+</tspan></title>
+				<polygon points="311.543178334185,129.9 311.543178334185,132.6 330.435935104752,132.6 330.435935104752,133.275 338.532830863567,131.25 330.435935104752,129.225 330.435935104752,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2090000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:7789-8088,-</tspan></title>
+				<polygon points="343.879024016352,131.25 346.465891670925,133.275 346.465891670925,132.6 352.501916198263,132.6 352.501916198263,129.9 346.465891670925,129.9 346.465891670925,129.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2100000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s20000:8088-8360,-</tspan></title>
+				<polygon points="352.473173224323,131.25 354.827222789985,133.275 354.827222789985,132.6 360.320005109862,132.6 360.320005109862,129.9 354.827222789985,129.9 354.827222789985,129.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s201000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:87-1109,+</tspan></title>
+				<polygon points="447.554931016863,129.9 447.554931016863,132.6 468.137774655084,132.6 468.137774655084,133.275 476.958993357179,131.25 468.137774655084,129.225 468.137774655084,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s202000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:1106-1888,+</tspan></title>
+				<polygon points="476.844021461421,129.9 476.844021461421,132.6 492.598045477772,132.6 492.598045477772,133.275 499.349770056208,131.25 492.598045477772,129.225 492.598045477772,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s203000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:2925-3119,+</tspan></title>
+				<polygon points="529.127491057741,129.9 529.127491057741,132.6 533.050907000511,132.6 533.050907000511,133.275 534.732370975984,131.25 533.050907000511,129.225 533.050907000511,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s204000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:3486-3857,+</tspan></title>
+				<polygon points="545.252299437915,129.9 545.252299437915,132.6 552.736969851814,132.6 552.736969851814,133.275 555.944685743485,131.25 552.736969851814,129.225 552.736969851814,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s205000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:4343-4780,+</tspan></title>
+				<polygon points="569.885028104241,129.9 569.885028104241,132.6 578.697623914154,132.6 578.697623914154,133.275 582.474450689831,131.25 578.697623914154,129.225 578.697623914154,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s206000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:4815-5888,-</tspan></title>
+				<polygon points="583.451711803781,131.25 592.712698007154,133.275 592.712698007154,132.6 614.321665815023,132.6 614.321665815023,129.9 592.712698007154,129.9 592.712698007154,129.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s207000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:6005-6421,+</tspan></title>
+				<polygon points="617.655850792029,129.9 617.655850792029,132.6 626.045924885028,132.6 626.045924885028,133.275 629.641670924885,131.25 626.045924885028,129.225 626.045924885028,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s208000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:6664-7602,+</tspan></title>
+				<polygon points="636.597470618293,129.9 636.597470618293,132.6 655.49022738886,132.6 655.49022738886,133.275 663.587123147675,131.25 655.49022738886,129.225 655.49022738886,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s209000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:7789-8088,-</tspan></title>
+				<polygon points="668.93331630046,131.25 671.520183955033,133.275 671.520183955033,132.6 677.556208482371,132.6 677.556208482371,129.9 671.520183955033,129.9 671.520183955033,129.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s210000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2000:8088-8360,-</tspan></title>
+				<polygon points="677.527465508431,131.25 679.881515074093,133.275 679.881515074093,132.6 685.37429739397,132.6 685.37429739397,129.9 679.881515074093,129.9 679.881515074093,129.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s201</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:87-1109,+</tspan></title>
+				<polygon points="738.117654573326,129.9 738.117654573326,132.6 758.700498211548,132.6 758.700498211548,133.275 767.521716913643,131.25 758.700498211548,129.225 758.700498211548,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s202</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:1106-1888,+</tspan></title>
+				<polygon points="767.406745017885,129.9 767.406745017885,132.6 783.160769034236,132.6 783.160769034236,133.275 789.912493612673,131.25 783.160769034236,129.225 783.160769034236,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s203</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:2925-3119,+</tspan></title>
+				<polygon points="819.690214614205,129.9 819.690214614205,132.6 823.613630556975,132.6 823.613630556975,133.275 825.295094532448,131.25 823.613630556975,129.225 823.613630556975,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s204</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:3486-3857,+</tspan></title>
+				<polygon points="835.815022994379,129.9 835.815022994379,132.6 843.299693408278,132.6 843.299693408278,133.275 846.507409299949,131.25 843.299693408278,129.225 843.299693408278,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s205</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:4343-4780,+</tspan></title>
+				<polygon points="860.447751660705,129.9 860.447751660705,132.6 869.260347470618,132.6 869.260347470618,133.275 873.037174246295,131.25 869.260347470618,129.225 869.260347470618,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s206</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:4815-5888,-</tspan></title>
+				<polygon points="874.014435360245,131.25 883.275421563618,133.275 883.275421563618,132.6 904.884389371487,132.6 904.884389371487,129.9 883.275421563618,129.9 883.275421563618,129.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s207</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:6005-6421,+</tspan></title>
+				<polygon points="908.218574348493,129.9 908.218574348493,132.6 916.608648441492,132.6 916.608648441492,133.275 920.204394481349,131.25 916.608648441492,129.225 916.608648441492,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s208</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:6664-7602,+</tspan></title>
+				<polygon points="927.160194174757,129.9 927.160194174757,132.6 946.052950945324,132.6 946.052950945324,133.275 954.149846704139,131.25 946.052950945324,129.225 946.052950945324,129.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s209</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:7789-8088,-</tspan></title>
+				<polygon points="959.496039856924,131.25 962.082907511497,133.275 962.082907511497,132.6 968.118932038835,132.6 968.118932038835,129.9 962.082907511497,129.9 962.082907511497,129.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s210</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>position -> s2:8088-8360,-</tspan></title>
+				<polygon points="968.090189064895,131.25 970.444238630557,133.275 970.444238630557,132.6 975.937020950434,132.6 975.937020950434,129.9 970.444238630557,129.9 970.444238630557,129.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4010000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:87-1109,+</tspan></title>
+				<polygon points="122.500638732754,197.4 122.500638732754,200.1 143.083482370976,200.1 143.083482370976,200.775 151.904701073071,198.75 143.083482370976,196.725 143.083482370976,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4020000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:1106-1888,+</tspan></title>
+				<polygon points="151.789729177312,197.4 151.789729177312,200.1 167.543753193664,200.1 167.543753193664,200.775 174.2954777721,198.75 167.543753193664,196.725 167.543753193664,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4030000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:2925-3119,+</tspan></title>
+				<polygon points="204.073198773633,197.4 204.073198773633,200.1 207.996614716403,200.1 207.996614716403,200.775 209.678078691875,198.75 207.996614716403,196.725 207.996614716403,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4040000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:3486-3857,+</tspan></title>
+				<polygon points="220.198007153807,197.4 220.198007153807,200.1 227.682677567706,200.1 227.682677567706,200.775 230.890393459377,198.75 227.682677567706,196.725 227.682677567706,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4050000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:4343-4780,+</tspan></title>
+				<polygon points="244.830735820133,197.4 244.830735820133,200.1 253.643331630046,200.1 253.643331630046,200.775 257.420158405723,198.75 253.643331630046,196.725 253.643331630046,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4060000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:4815-5888,-</tspan></title>
+				<polygon points="258.397419519673,198.75 267.658405723046,200.775 267.658405723046,200.1 289.267373530915,200.1 289.267373530915,197.4 267.658405723046,197.4 267.658405723046,196.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4070000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:6005-6421,+</tspan></title>
+				<polygon points="292.60155850792,197.4 292.60155850792,200.1 300.99163260092,200.1 300.99163260092,200.775 304.587378640777,198.75 300.99163260092,196.725 300.99163260092,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4080000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:6664-7602,+</tspan></title>
+				<polygon points="311.543178334185,197.4 311.543178334185,200.1 330.435935104752,200.1 330.435935104752,200.775 338.532830863567,198.75 330.435935104752,196.725 330.435935104752,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4090000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:7789-8088,-</tspan></title>
+				<polygon points="343.879024016352,198.75 346.465891670925,200.775 346.465891670925,200.1 352.501916198263,200.1 352.501916198263,197.4 346.465891670925,197.4 346.465891670925,196.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4100000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:8088-8360,-</tspan></title>
+				<polygon points="352.473173224323,198.75 354.827222789985,200.775 354.827222789985,200.1 360.320005109862,200.1 360.320005109862,197.4 354.827222789985,197.4 354.827222789985,196.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s410000000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s40000:8188-8260,+</tspan></title>
+				<polygon points="355.347470618293,197.4 355.347470618293,200.1 356.816236586612,200.1 356.816236586612,200.775 357.445707715892,198.75 356.816236586612,196.725 356.816236586612,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s401000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:87-1109,+</tspan></title>
+				<polygon points="413.063362289218,197.4 413.063362289218,200.1 433.64620592744,200.1 433.64620592744,200.775 442.467424629535,198.75 433.64620592744,196.725 433.64620592744,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s402000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:1106-1888,+</tspan></title>
+				<polygon points="442.352452733776,197.4 442.352452733776,200.1 458.106476750128,200.1 458.106476750128,200.775 464.858201328564,198.75 458.106476750128,196.725 458.106476750128,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s403000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:2925-3119,+</tspan></title>
+				<polygon points="494.635922330097,197.4 494.635922330097,200.1 498.559338272867,200.1 498.559338272867,200.775 500.240802248339,198.75 498.559338272867,196.725 498.559338272867,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s404000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:3486-3857,+</tspan></title>
+				<polygon points="510.760730710271,197.4 510.760730710271,200.1 518.24540112417,200.1 518.24540112417,200.775 521.45311701584,198.75 518.24540112417,196.725 518.24540112417,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s405000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:4343-4780,+</tspan></title>
+				<polygon points="535.393459376597,197.4 535.393459376597,200.1 544.20605518651,200.1 544.20605518651,200.775 547.982881962187,198.75 544.20605518651,196.725 544.20605518651,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s406000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:4815-5888,-</tspan></title>
+				<polygon points="548.960143076137,198.75 558.221129279509,200.775 558.221129279509,200.1 579.830097087378,200.1 579.830097087378,197.4 558.221129279509,197.4 558.221129279509,196.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s407000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:6005-6421,+</tspan></title>
+				<polygon points="583.164282064384,197.4 583.164282064384,200.1 591.554356157384,200.1 591.554356157384,200.775 595.150102197241,198.75 591.554356157384,196.725 591.554356157384,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s408000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:6664-7602,+</tspan></title>
+				<polygon points="602.105901890649,197.4 602.105901890649,200.1 620.998658661216,200.1 620.998658661216,200.775 629.095554420031,198.75 620.998658661216,196.725 620.998658661216,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s409000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:7789-8088,-</tspan></title>
+				<polygon points="634.441747572816,198.75 637.028615227389,200.775 637.028615227389,200.1 643.064639754727,200.1 643.064639754727,197.4 637.028615227389,197.4 637.028615227389,196.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s410000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4000:8088-8360,-</tspan></title>
+				<polygon points="643.035896780787,198.75 645.389946346449,200.775 645.389946346449,200.1 650.882728666326,200.1 650.882728666326,197.4 645.389946346449,197.4 645.389946346449,196.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s401</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:87-1109,+</tspan></title>
+				<polygon points="703.626085845682,197.4 703.626085845682,200.1 724.208929483904,200.1 724.208929483904,200.775 733.030148185999,198.75 724.208929483904,196.725 724.208929483904,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s402</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:1106-1888,+</tspan></title>
+				<polygon points="732.91517629024,197.4 732.91517629024,200.1 748.669200306592,200.1 748.669200306592,200.775 755.420924885028,198.75 748.669200306592,196.725 748.669200306592,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s403</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:2925-3119,+</tspan></title>
+				<polygon points="785.198645886561,197.4 785.198645886561,200.1 789.122061829331,200.1 789.122061829331,200.775 790.803525804803,198.75 789.122061829331,196.725 789.122061829331,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s404</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:3486-3857,+</tspan></title>
+				<polygon points="801.323454266735,197.4 801.323454266735,200.1 808.808124680634,200.1 808.808124680634,200.775 812.015840572304,198.75 808.808124680634,196.725 808.808124680634,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s405</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:4343-4780,+</tspan></title>
+				<polygon points="825.956182933061,197.4 825.956182933061,200.1 834.768778742974,200.1 834.768778742974,200.775 838.545605518651,198.75 834.768778742974,196.725 834.768778742974,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s406</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:4815-5888,-</tspan></title>
+				<polygon points="839.522866632601,198.75 848.783852835973,200.775 848.783852835973,200.1 870.392820643842,200.1 870.392820643842,197.4 848.783852835973,197.4 848.783852835973,196.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s407</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:6005-6421,+</tspan></title>
+				<polygon points="873.727005620848,197.4 873.727005620848,200.1 882.117079713848,200.1 882.117079713848,200.775 885.712825753704,198.75 882.117079713848,196.725 882.117079713848,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s408</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:6664-7602,+</tspan></title>
+				<polygon points="892.668625447113,197.4 892.668625447113,200.1 911.56138221768,200.1 911.56138221768,200.775 919.658277976495,198.75 911.56138221768,196.725 911.56138221768,197.4" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s409</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:7789-8088,-</tspan></title>
+				<polygon points="925.004471129279,198.75 927.591338783853,200.775 927.591338783853,200.1 933.62736331119,200.1 933.62736331119,197.4 927.591338783853,197.4 927.591338783853,196.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s410</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>position -> s4:8088-8360,-</tspan></title>
+				<polygon points="933.598620337251,198.75 935.952669902913,200.775 935.952669902913,200.1 941.44545222279,200.1 941.44545222279,197.4 935.952669902913,197.4 935.952669902913,196.725" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3010000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:87-1109,+</tspan></title>
+				<polygon points="122.500638732754,534.9 122.500638732754,537.6 143.083482370976,537.6 143.083482370976,538.275 151.904701073071,536.25 143.083482370976,534.225 143.083482370976,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3020000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:1106-1888,+</tspan></title>
+				<polygon points="151.789729177312,534.9 151.789729177312,537.6 167.543753193664,537.6 167.543753193664,538.275 174.2954777721,536.25 167.543753193664,534.225 167.543753193664,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3030000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:2925-3119,+</tspan></title>
+				<polygon points="204.073198773633,534.9 204.073198773633,537.6 207.996614716403,537.6 207.996614716403,538.275 209.678078691875,536.25 207.996614716403,534.225 207.996614716403,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3040000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:3486-3857,+</tspan></title>
+				<polygon points="220.198007153807,534.9 220.198007153807,537.6 227.682677567706,537.6 227.682677567706,538.275 230.890393459377,536.25 227.682677567706,534.225 227.682677567706,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3050000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:4343-4780,+</tspan></title>
+				<polygon points="244.830735820133,534.9 244.830735820133,537.6 253.643331630046,537.6 253.643331630046,538.275 257.420158405723,536.25 253.643331630046,534.225 253.643331630046,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3060000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:4815-5888,-</tspan></title>
+				<polygon points="258.397419519673,536.25 267.658405723046,538.275 267.658405723046,537.6 289.267373530915,537.6 289.267373530915,534.9 267.658405723046,534.9 267.658405723046,534.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3070000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:6005-6421,+</tspan></title>
+				<polygon points="292.60155850792,534.9 292.60155850792,537.6 300.99163260092,537.6 300.99163260092,538.275 304.587378640777,536.25 300.99163260092,534.225 300.99163260092,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3080000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:6664-7602,+</tspan></title>
+				<polygon points="311.543178334185,534.9 311.543178334185,537.6 330.435935104752,537.6 330.435935104752,538.275 338.532830863567,536.25 330.435935104752,534.225 330.435935104752,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3090000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:7789-8088,-</tspan></title>
+				<polygon points="343.879024016352,536.25 346.465891670925,538.275 346.465891670925,537.6 352.501916198263,537.6 352.501916198263,534.9 346.465891670925,534.9 346.465891670925,534.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3100000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s30000:8088-8360,-</tspan></title>
+				<polygon points="352.473173224323,536.25 354.827222789985,538.275 354.827222789985,537.6 360.320005109862,537.6 360.320005109862,534.9 354.827222789985,534.9 354.827222789985,534.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s301000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:87-1109,+</tspan></title>
+				<polygon points="423.410832907511,534.9 423.410832907511,537.6 443.993676545733,537.6 443.993676545733,538.275 452.814895247828,536.25 443.993676545733,534.225 443.993676545733,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s302000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:1106-1888,+</tspan></title>
+				<polygon points="452.699923352069,534.9 452.699923352069,537.6 468.453947368421,537.6 468.453947368421,538.275 475.205671946857,536.25 468.453947368421,534.225 468.453947368421,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s303000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:2925-3119,+</tspan></title>
+				<polygon points="504.98339294839,534.9 504.98339294839,537.6 508.90680889116,537.6 508.90680889116,538.275 510.588272866633,536.25 508.90680889116,534.225 508.90680889116,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s304000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:3486-3857,+</tspan></title>
+				<polygon points="521.108201328564,534.9 521.108201328564,537.6 528.592871742463,537.6 528.592871742463,538.275 531.800587634134,536.25 528.592871742463,534.225 528.592871742463,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s305000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:4343-4780,+</tspan></title>
+				<polygon points="545.74092999489,534.9 545.74092999489,537.6 554.553525804803,537.6 554.553525804803,538.275 558.33035258048,536.25 554.553525804803,534.225 554.553525804803,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s306000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:4815-5888,-</tspan></title>
+				<polygon points="559.30761369443,536.25 568.568599897803,538.275 568.568599897803,537.6 590.177567705672,537.6 590.177567705672,534.9 568.568599897803,534.9 568.568599897803,534.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s307000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:6005-6421,+</tspan></title>
+				<polygon points="593.511752682678,534.9 593.511752682678,537.6 601.901826775677,537.6 601.901826775677,538.275 605.497572815534,536.25 601.901826775677,534.225 601.901826775677,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s308000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:6664-7602,+</tspan></title>
+				<polygon points="612.453372508942,534.9 612.453372508942,537.6 631.346129279509,537.6 631.346129279509,538.275 639.443025038324,536.25 631.346129279509,534.225 631.346129279509,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s309000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:7789-8088,-</tspan></title>
+				<polygon points="644.789218191109,536.25 647.376085845682,538.275 647.376085845682,537.6 653.41211037302,537.6 653.41211037302,534.9 647.376085845682,534.9 647.376085845682,534.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s310000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3000:8088-8360,-</tspan></title>
+				<polygon points="653.38336739908,536.25 655.737416964742,538.275 655.737416964742,537.6 661.230199284619,537.6 661.230199284619,534.9 655.737416964742,534.9 655.737416964742,534.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s301</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:87-1109,+</tspan></title>
+				<polygon points="713.973556463975,534.9 713.973556463975,537.6 734.556400102197,537.6 734.556400102197,538.275 743.377618804292,536.25 734.556400102197,534.225 734.556400102197,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s302</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:1106-1888,+</tspan></title>
+				<polygon points="743.262646908533,534.9 743.262646908533,537.6 759.016670924885,537.6 759.016670924885,538.275 765.768395503321,536.25 759.016670924885,534.225 759.016670924885,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s303</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:2925-3119,+</tspan></title>
+				<polygon points="795.546116504854,534.9 795.546116504854,537.6 799.469532447624,537.6 799.469532447624,538.275 801.150996423096,536.25 799.469532447624,534.225 799.469532447624,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s304</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:3486-3857,+</tspan></title>
+				<polygon points="811.670924885028,534.9 811.670924885028,537.6 819.155595298927,537.6 819.155595298927,538.275 822.363311190598,536.25 819.155595298927,534.225 819.155595298927,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s305</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:4343-4780,+</tspan></title>
+				<polygon points="836.303653551354,534.9 836.303653551354,537.6 845.116249361267,537.6 845.116249361267,538.275 848.893076136944,536.25 845.116249361267,534.225 845.116249361267,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s306</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:4815-5888,-</tspan></title>
+				<polygon points="849.870337250894,536.25 859.131323454267,538.275 859.131323454267,537.6 880.740291262136,537.6 880.740291262136,534.9 859.131323454267,534.9 859.131323454267,534.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s307</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:6005-6421,+</tspan></title>
+				<polygon points="884.074476239141,534.9 884.074476239141,537.6 892.464550332141,537.6 892.464550332141,538.275 896.060296371998,536.25 892.464550332141,534.225 892.464550332141,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s308</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:6664-7602,+</tspan></title>
+				<polygon points="903.016096065406,534.9 903.016096065406,537.6 921.908852835973,537.6 921.908852835973,538.275 930.005748594788,536.25 921.908852835973,534.225 921.908852835973,534.9" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s309</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:7789-8088,-</tspan></title>
+				<polygon points="935.351941747573,536.25 937.938809402146,538.275 937.938809402146,537.6 943.974833929484,537.6 943.974833929484,534.9 937.938809402146,534.9 937.938809402146,534.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+				<g><title><tspan>feature_id -> gene_s310</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>position -> s3:8088-8360,-</tspan></title>
+				<polygon points="943.946090955544,536.25 946.300140521206,538.275 946.300140521206,537.6 951.792922841083,537.6 951.792922841083,534.9 946.300140521206,534.9 946.300140521206,534.225" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:0.8"/></g>
+
+
+<text x="264.856221257026" y="65.1" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s10000</text>
+<text x="576.76060296372" y="65.1" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s1000</text>
+<text x="880.904381706694" y="65.1" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s1</text>
+<text x="274.341402657128" y="132.6" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s20000</text>
+<text x="582.149910577414" y="132.6" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s2000</text>
+<text x="872.712634133878" y="132.6" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s2</text>
+<text x="257.095618293306" y="200.1" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s40000</text>
+<text x="547.65834184977" y="200.1" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s4000</text>
+<text x="838.221065406234" y="200.1" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s4</text>
+<text x="262.269353602453" y="537.6" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s30000</text>
+<text x="558.005812468063" y="537.6" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s3000</text>
+<text x="848.568536024527" y="537.6" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" >s3</text>
+
+</svg>
+ </div>
+    <button id="enable" style='display:none'>enable</button>
+    <button id="disable" style='display:none'>disable</button>
+
+    <script>
+      // Don't use window.onLoad like this in production, because it can only listen to one function.
+      window.onload = function() {
+        // Expose to window namespase for testing purposes
+        window.zoomTiger = svgPanZoom('#demo-tiger', {
+          zoomEnabled: true,
+          controlIconsEnabled: true,
+          fit: true,
+          center: true,
+          // viewportSelector: document.getElementById('demo-tiger').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
+        });
+
+        document.getElementById('enable').addEventListener('click', function() {
+          window.zoomTiger.enableControlIcons();
+        })
+        document.getElementById('disable').addEventListener('click', function() {
+          window.zoomTiger.disableControlIcons();
+	alert('ddd')
+        })
+      };
+    </script>
+
+  </body>
+
+</html>

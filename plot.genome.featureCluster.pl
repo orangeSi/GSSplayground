@@ -98,7 +98,7 @@ my $left_distance_init = $ref_name_width_ratio * $svg_width ;#block左侧起点�
 my ($down_percent_unit,$up_percent_unit,$ytick_region_ratio,$start_once,$end_once);
 my $index_id_previous="";
 my $display_segment_name=$conf{display_segment_name};
-die "error:display_segment_name $display_segment_name format error, should like display_segment_name=yes,center,shift_y:+1,fontsize:10,color:black,order:5\n" if($display_segment_name!~ /^([^,]+),([^,]+),shift_y:([\+-\d\.]+),fontsize:([\d\.]+),color:(\S+),order:(\d+)/);
+die "error:display_segment_name $display_segment_name format error, should like display_segment_name=yes,center,shift_y:+1,fontsize:10,color:black,order:5\n" if($display_segment_name!~ /^([^,]+),([^,]+),shift_y:([-\+\d\.]+),fontsize:([\d\.]+),color:(\S+),order:(\d+)/);
 my $display_segment_name_flag=$1;
 my $display_segment_name_pos=$2;
 my $display_segment_name_shift_y=$3*$sample_single_height/100;
@@ -373,11 +373,26 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 	die "error: cross_link_width_ellipse $cross_link_width_ellipse should be number\n" if($cross_link_width_ellipse!~ /^[\d\.]+$/);
 	die "error1: $up_id of crosslink is not in --list regions, please try to check it, conf{crossing_link2}{position}{$up_id}{start}{x}\n" if(not exists $conf{crossing_link2}{position}{$up_id}{start}{x});
 	die "error:crosslink_stroke_style=$crosslink_stroke_style format error, should be like crosslink_stroke_style=stroke:green;stroke-width:1\n" if($crosslink_stroke_style!~ /^stroke:[^;]+;stroke-width:[\d\.]+;$/);
+	my $feature_popup_title=(exists $conf{crossing_link2}{index}{$pair}{feature_popup_title})? $conf{crossing_link2}{index}{$pair}{feature_popup_title}:$conf{feature_popup_title};
+	if($feature_popup_title){
+		my @kvs=split(/;/, $feature_popup_title);
+		$feature_popup_title="\n";
+		for my $kv(@kvs){
+			$feature_popup_title.="<tspan>$kv</tspan>\n";	
+		}
+	}
+	chomp $feature_popup_title;
 	if($conf{crossing_link2}{position}{$up_id}{start}{y} > $conf{crossing_link2}{position}{$down_id}{start}{y}){
+		if($up_id=~ /09:3303:59796/){
+			print "1 $up_id,$down_id, $conf{crossing_link2}{position}{$up_id}{start}{y} > $conf{crossing_link2}{position}{$down_id}{start}{y}\n";
+			my $tmp=$conf{crossing_link2}{position}{$up_id}{start}{y} - $conf{crossing_link2}{position}{$down_id}{start}{y};
+			print "diff is $tmp\n"
+		}
 		my $up_id_tmp=$up_id;
 		my $down_id_tmp=$down_id;
 		$up_id=$down_id_tmp;
 		$down_id=$up_id_tmp;
+		if($up_id=~ /09:3303:59796/){print "2 $up_id,$down_id\n"}
 	}
 	my $cross_link_shift_y_pair_up=0;
 	my $cross_link_shift_y_pair_low=0;
@@ -441,7 +456,7 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 		die "error: not support cross_link_orientation_ellipse=$cross_link_orientation_ellipse for $up_id and $down_id\n"
 	}
 
-	my $title_clink="\n<g><title>$up_id -> $down_id</title>\n";
+	my $title_clink="\n<g><title><tspan>$up_id -> $down_id</tspan>$feature_popup_title</title>\n";
 #if($fts{$up_id}{sample} eq $fts{$down_id}{sample} && $fts{$up_id}{scf} eq $fts{$down_id}{scf} && $cross_link_shape=~ /ellipse/i){
 	$cross_link_shape=~ s/\s+//g;
 	if($cross_link_shape=~ /ellipse/i){
@@ -718,5 +733,55 @@ die "\nerror:$rm_title\n\n" if($?);
 print "\noutfile is  $outdir/$prefix.svg and $outdir/$prefix.notitle.svg\n";
 print "\nif you want png or pdf format,you could do:\n\tconvert  -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.png\n\tconvert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf\n\n";
 
+&jstohtml("$Bin/svg-pan-zoom.js","$outdir/$prefix");
 
+
+
+
+sub jstohtml(){
+	my ($zoom,$prefix)=@_;
+	if(-f $zoom){
+		#my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_width\" height=\"$svg_height\" style=\"background-color:$conf{svg_background_color};\">\n";
+		open OUT,">$prefix.html";
+		print OUT "<!DOCTYPE html>\n<html>\n<head>\n<script>\n";
+		my $zoom_js=`cat $zoom`; chomp $zoom_js;
+		print OUT "$zoom_js\n";
+		print OUT "</script>\n</head>\n<body>\n<h1>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>\n<div id='container' style=\"width: ${svg_width}px; height: ${svg_height}px; border:1px solid black;\">\n<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox=\"0 0 $svg_width $svg_height\" version=\"1.1\">\n";
+		my $svg=`sed '1d' $prefix.svg`;chomp $svg;
+		print OUT "$svg\n";
+		print OUT " </div>
+    <button id=\"enable\" style='display:none'>enable</button>
+    <button id=\"disable\" style='display:none'>disable</button>
+
+    <script>
+      // Don't use window.onLoad like this in production, because it can only listen to one function.
+      window.onload = function() {
+        // Expose to window namespase for testing purposes
+        window.zoomTiger = svgPanZoom('#demo-tiger', {
+          zoomEnabled: true,
+          controlIconsEnabled: true,
+          fit: true,
+          center: true,
+          // viewportSelector: document.getElementById('demo-tiger').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
+        });
+
+        document.getElementById('enable').addEventListener('click', function() {
+          window.zoomTiger.enableControlIcons();
+        })
+        document.getElementById('disable').addEventListener('click', function() {
+          window.zoomTiger.disableControlIcons();
+	alert('ddd')
+        })
+      };
+    </script>
+
+  </body>
+
+</html>";
+		close OUT;
+		print "$zoom exists,\n	so output $prefix.html which you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom\n\n";
+	}else{
+		print "$zoom not exists,\n	so not output $prefix.html which you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom\n\n";
+	}
+}
 
