@@ -391,7 +391,7 @@ sub draw_genes(){
 	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag, $conf, $ratio, $id_line_height, $shift_angle_closed_feature, $orders, $up_percent_unit, $down_percent_unit)=@_;
 	#print "draw $feature_id\n";
 	#print "feature_id is $feature_id, $start, $end\n";
-	my $strand2=($strand)? "+":"-";
+	#my $strand2=($strand)? "+":"-";
 	if($index_color=~ /rgb\(\d+,\d+,\d+\),[^,]/ or $index_color=~ /[^,],rgb\(\d+,\d+,\d+\)/){
 		die "\nerror: should use ,, instead of , to separate the $index_color\n";
 	}
@@ -585,11 +585,11 @@ sub draw_genes(){
 				<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
 				</linearGradient>
 				</defs>
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
 				<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture arrow
 		}elsif($display_feature=~ /yes/i){
 			$orders->{$order_f}.="
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
 				<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture arrow
 
 		}
@@ -665,11 +665,11 @@ sub draw_genes(){
 				<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
 				</linearGradient>
 				</defs>
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
 				<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
 		}elsif($display_feature=~ /yes/i){
 			$orders->{$order_f}.="
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
 				<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
 
 		}
@@ -728,11 +728,11 @@ sub draw_genes(){
 				<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
 				</linearGradient>
 				</defs>
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
 				<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\" style=\"opacity:$feature_opacity\" /></g>\n"; ## feture rect
 		}elsif($display_feature=~ /yes/i){
 			$orders->{$order_f}.="
-				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>position -> $id:$start_title-$end_title,$strand2</tspan>$feature_popup_title</title>
+				<g><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
 				<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\" style=\"opacity:$feature_opacity\"/></g>\n"; ## feture rect
 
 		}

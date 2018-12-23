@@ -70,15 +70,15 @@ sub synteny(){
 		my @infos=split(/,/, $ks[0]);
 		my $infos_len=scalar(@infos);
 		if($infos_len != 8 ){
-			die "error: synteny should separate by \\t, and have 8 colums for synteny=$k, but only have $infos_len\nvalid like synteny=$ex\n";
+			die "\nerror: synteny should separate by \\t, and have 8 colums for synteny=$k, but only have $infos_len\nvalid like synteny=$ex\n";
 		}
 		my @arr=$ks[0]=~ /^order->(-?\d+),query->([^:]+):target->([^,]+),(\S+),(\S+),(\S+),forward->([^-]+)->opacity([\d\.]+),reverse->([^-]+)->opacity([\d\.]+),cross_link_shift_y->(\+[\d\.]+:-[\d\.]+)$/;
-		die "error: $ks[0] format error, should like $ex\n" if(@arr!=11);
+		die "\nerror: $ks[0] format \nerror, should like $ex\n" if(@arr!=11);
 		my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y) = @arr;
-		die "error: not support $alignment_type, only support @align_types\n" if(! grep(/^$alignment_type$/, @align_types));
-		die "error: not support $crosslink_shape, only support @show_types\n" if(! grep(/^$crosslink_shape$/, @show_types));
-		die "error: $query_name not exists in --list\n" if(not exists $conf->{sample_scf}{$query_name});
-		die "error: $target_name not exists in --list\n" if(not exists $conf->{sample_scf}{$target_name});
+		die "\nerror: not support $alignment_type, only support @align_types\n" if(! grep(/^$alignment_type$/, @align_types));
+		die "\nerror: not support $crosslink_shape, only support @show_types\n" if(! grep(/^$crosslink_shape$/, @show_types));
+		die "\nerror: $query_name not exists in --list\n" if(not exists $conf->{sample_scf}{$query_name});
+		die "\nerror: $target_name not exists in --list\n" if(not exists $conf->{sample_scf}{$target_name});
 		#$conf{sample_scf}{$sample}{$id}="";
 		my ($synteny_gff_q, $synteny_setting_conf_q, $synteny_gff_t, $synteny_setting_conf_t,$cross_link_conf)=&synteny_run(\@arr, $conf,$k_index);
 
@@ -111,7 +111,7 @@ sub synteny_run(){
 			open PAF,"gzip -dc $alignment|sort -k 10nr,10nr -k 1,1 -k 6,6|" or die "$?";
 			print "$alignment is gz file\n";
 		}else{
-			die "error:$alignment should end with paf or gz\n";
+			die "\nerror:$alignment should end with paf or gz\n";
 		}
 		while(<PAF>){
 			chomp;
@@ -125,8 +125,8 @@ sub synteny_run(){
 			my $target_start=($arr[7] ==0)? 1:$arr[7];
 			my $target_end=$arr[8];
 			my $strand=$arr[4];
-			die "error:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
-			die "error:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
+			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
+			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
 			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
 			if(not exists $qid{$query_feature_id}){
 				$synteny_gff_q.="$query_scf\tadd\tsynteny\t$query_start\t$query_end\t.\t$strand\t.\tID=$query_feature_id;\n";
@@ -158,7 +158,7 @@ sub synteny_run(){
 				$cross_link_color=$reverse_color;
 				$cross_link_opacity=$reverse_opacity;
 			}else{
-				die "error:srand $strand\n";
+				die "\nerror:srand $strand\n";
 			}
 			my $indentity=$arr[9]/$arr[10];
 			$cross_link_opacity*=$indentity;
@@ -213,37 +213,37 @@ sub reads_mapping(){
 		my @infos=split(/,/, $ks[0]);
 		my $infos_len=scalar(@infos);
 		if($infos_len != 17){
-			die "error: reads_mapping should separate by \\t, and have 17 colums for reads_mapping=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
+			die "\nerror: reads_mapping should separate by \\t, and have 17 colums for reads_mapping=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
 		}
 		my ($reads_type,$reads_order,$sample,$scf,$block_flag,$mapping_file,$show_type,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size,$mapqs) = @infos;
 		#ylabel->illuminate read depth,fontsize:10,color:black
-		die "error: reads_order should be number, not $reads_order\n" if($reads_order!~ /^-?\d+$/);
+		die "\nerror: reads_order should be number, not $reads_order\n" if($reads_order!~ /^-?\d+$/);
 #reads_mapping=long_reads,s2,s2000,0,../data/s2.seq.longreads.map2ref.sort.bam,rainbow_or_hline,10->50,ytick_flag,20->30->2,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,3:3	highlight_hgrid->26:2:green,28:2:black  start_end_xaxis->61:661,711:1311,1361:1961
 		my $refasta;
 		($mapping_file, $refasta)=&check_sort_bam($mapping_file, $reads_type);
-		die "error: not support $reads_type~ only support @mapping_types\n" if(! grep(/^$reads_type$/, @mapping_types));
+		die "\nerror: not support $reads_type~ only support @mapping_types\n" if(! grep(/^$reads_type$/, @mapping_types));
 		&show_type_check($show_type,\@{$show_types{$reads_type}});
-		die "error: mapqs $mapqs should be number which >=0 , and like 0:10:40 which mean will show mapping read which mapq>=0, if mapq>=40 will use the same opacity\n" if($mapqs!~ /^\d+:\d+:\d+$/);
+		die "\nerror: mapqs $mapqs should be number which >=0 , and like 0:10:40 which mean will show mapping read which mapq>=0, if mapq>=40 will use the same opacity\n" if($mapqs!~ /^\d+:\d+:\d+$/);
 		for($i=0;$i<$infos_len;$i++){
 			next if($i==8);
 			$infos[$i]=~ s/\s//g;
 		}
-		die "error: block_flag should >=0, 0 mean all\n" if($block_flag<0 ||$block_flag!~ /^\d+$/);
-		die "error: $sample or $scf not are friends in $k\n" if(not exists $gff->{$sample}->{scf}->{$scf});
-		die "error: $sample don't have $block_flag fragments in $k\n" if($block_flag!=0 && not exists $gff->{$sample}->{chooselen_single}->{$block_flag});
+		die "\nerror: block_flag should >=0, 0 mean all\n" if($block_flag<0 ||$block_flag!~ /^\d+$/);
+		die "\nerror: $sample or $scf not are friends in $k\n" if(not exists $gff->{$sample}->{scf}->{$scf});
+		die "\nerror: $sample don't have $block_flag fragments in $k\n" if($block_flag!=0 && not exists $gff->{$sample}->{chooselen_single}->{$block_flag});
 		for my $block_index(keys %{$gff->{$sample}->{chooselen_single}}){
 			print "block_index is $block_index,$sample\n";
 			next if($block_flag != 0 && $block_flag != $block_index);
 			my @scfs=keys %{$gff->{$sample}->{block2}->{$block_index}};
 			next if($scf ne $scfs[0]);
 			my @yaxis_list=split(/->/,$yaxis);
-			die "error:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[-\d\.]+->[-\d\.]+/);
+			die "\nerror:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[-\d\.]+->[-\d\.]+/);
 			my @yaxis_show_list=split(/->/,$yaxis_show);
-			die "error:yaxis_list neet three elements, not $yaxis_show, sholud like 10->30->5\n" if(@yaxis_show_list!=3 || $yaxis_show!~ /[-\d\.]+->[-\d\.]+->[-\d\.]+/);
+			die "\nerror:yaxis_list neet three elements, not $yaxis_show, sholud like 10->30->5\n" if(@yaxis_show_list!=3 || $yaxis_show!~ /[-\d\.]+->[-\d\.]+->[-\d\.]+/);
 
 #my $tick="$yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label";
 			my @label_sizes=split(/:/,$label_size);
-			die "error:label_size $label_size format like 6:6 for $k\n" if(@label_sizes!=2);
+			die "\nerror:label_size $label_size format like 6:6 for $k\n" if(@label_sizes!=2);
 			my ($mapping_label_size, $tick_label_size)=@label_sizes;
 			my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{start};
 			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
@@ -286,7 +286,7 @@ sub show_type_check(){
 	for my $t(@show_types){
 		$show_type_flag++ if($show_type=~ /$t/);
 	}
-	die "error: $show_type not supported, only support @show_types\n" if($show_type_flag!=1);
+	die "\nerror: $show_type not supported, only support @show_types\n" if($show_type_flag!=1);
 }
 
 sub plot_ylabel(){
@@ -304,7 +304,7 @@ sub plot_ylabel(){
 		$feature_shift_y=(abs($yaxis_list[0])+abs($yaxis_list[1]))/2;
 		$feature_shift_y="+$feature_shift_y";
 	}else{
-		die "error:plot_ylabel @yaxis_list\n";
+		die "\nerror:plot_ylabel @yaxis_list\n";
 	}
 	if($k=~ /\sylabel->([^,]+),gap:([\d\.]+)bp,fontsize:([\d\.]+),color:(\S+)/){
 		my $ylabel_content=$1;
@@ -330,7 +330,7 @@ sub plot_ylabel(){
 		$ylabel_setting_conf.="$ylabel_id\tfeature_shape\trect\n";
 		$ylabel_setting_conf.="$ylabel_id\tlabel_text_alignment_baseline\tmiddle\n";
 	}elsif($k=~ /\sylabel->/){
-		die "error:k is $k\n";
+		die "\nerror:k is $k\n";
 	}
 	return ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf);
 }
@@ -340,8 +340,8 @@ sub check_highs(){
 	my ($highs,$k)=@_;
 	my @highs=@$highs;
 	for my $h(@highs){
-		die "error: $h in $k should like $h->\n" if($k=~ /\s$h/ && $k!~ /\s$h->/);
-		die "error: should use \\t,not just space key, for $h in $k \n" if($k=~ / $h->/);
+		die "\nerror: $h in $k should like $h->\n" if($k=~ /\s$h/ && $k!~ /\s$h->/);
+		die "\nerror: should use \\t,not just space key, for $h in $k \n" if($k=~ / $h->/);
 	}
 	return 0;
 }
@@ -401,16 +401,16 @@ sub check_env_exist(){
 	my @envs=@_;
 	for my $env(@envs){
 		`which $env 2>/dev/null`;
-		die "error: $env not exists by which $env, should add $env path to PATH\n" if($?);
+		die "\nerror: $env not exists by which $env, should add $env path to PATH\n" if($?);
 	}
 }
 sub check_sort_bam(){
 	my ($mapping_file, $reads_type)=@_;
-	die "error: $mapping_file is a sorted bam file? if true, please rename it to *sort*.bam\n" if($mapping_file!~ /.*sort.*.bam/ && $reads_type ne "vcf");
-	die "error:$mapping_file should like xx.mapping.bam:xx.ref.fa\n" if($mapping_file!~ /^(\S+):(\S+)$/);
+	die "\nerror: $mapping_file is a sorted bam file? if true, please rename it to *sort*.bam\n" if($mapping_file!~ /.*sort.*.bam/ && $reads_type ne "vcf");
+	die "\nerror:$mapping_file should like xx.mapping.bam:xx.ref.fa\n" if($mapping_file!~ /^(\S+):(\S+)$/);
 	my @arr=split(/:/,$mapping_file);
 	for my $f(@arr){
-		die "error: file $f in $mapping_file not exists\n" if(! -f "$f");
+		die "\nerror: file $f in $mapping_file not exists\n" if(! -f "$f");
 	}
 	return @arr;
 
@@ -426,7 +426,7 @@ sub get_max_depth(){
 		my $cmd="samtools depth  -r $scf:$rg_start-$rg_end $mapping_file|awk '{print \$NF}'|sort -k 1nr|head -1";
 		print "cmd is $cmd\n";
 		my $rg_depth=`$cmd`;
-		die "error:$cmd\n" if($?);
+		die "\nerror:$cmd\n" if($?);
 		$max_depth=$rg_depth if($max_depth < $rg_depth);
 	}
 	return $max_depth;
@@ -453,40 +453,40 @@ sub hist_scatter_line(){
 #highlight_hgrid->26:2:green,28:2:black    highlight_columns->0:20:green:0.7,20:100:black:0.5 start_end_xaxis->61:661,711:1311,1361:1961
 		my $infos_len=scalar(@infos);
 		if($infos_len != 17){
-			die "error: hist_scatter_line should have 17 colums for hist_scatter_line=$k, but only have $infos_len\nvalid like hist_scatter_line=$ex\n";
+			die "\nerror: hist_scatter_line should have 17 colums for hist_scatter_line=$k, but only have $infos_len\nvalid like hist_scatter_line=$ex\n";
 		}
 		my ($depth_type,$depth_order,$sample,$scf,$block_flag,$window_size,$depth_file,$color_opacity,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
-		die "error:color_opacity $color_opacity should be like color->green:opacity->0.9\n" if($color_opacity!~ /^color->([^:]+):opacity->([\d\.+])$/);
+		die "\nerror:color_opacity $color_opacity should be like color->green:opacity->0.9\n" if($color_opacity!~ /^color->([^:]+):opacity->([\d\.+])$/);
 		my $the_color=$1;
 		my $the_opacity=$2;
 
-		die "error: depth_order should be number, not $depth_order\n" if($depth_order!~ /^-?\d+$/);
+		die "\nerror: depth_order should be number, not $depth_order\n" if($depth_order!~ /^-?\d+$/);
 		my @depth_types=("hist", "scatter", "scatter_line");
-		die "error: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
+		die "\nerror: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
 		$depth_file=~ /^([^:]+):([^:]+)$/;
-		die "error: $1 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $1);
-		die "error: $2 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $2);
+		die "\nerror: $1 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $1);
+		die "\nerror: $2 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $2);
 		for($i=0;$i<$infos_len;$i++){
 			next if($i==8);
 			$infos[$i]=~ s/\s//g;
 		}
-		die "error: block_flag should >=0, 0 mean all\n" if($block_flag<0 ||$block_flag!~ /^\d+$/);
-		die "error: window_size should >=1\n" if($window_size!~ /^\d+$/);
-		die "error: $sample or $scf not are friends in $k\n" if(not exists $gff->{$sample}->{scf}->{$scf});
-		die "error: $sample don't have $block_flag fragments in $k\n" if($block_flag!=0 && not exists $gff->{$sample}->{chooselen_single}->{$block_flag});
+		die "\nerror: block_flag should >=0, 0 mean all\n" if($block_flag<0 ||$block_flag!~ /^\d+$/);
+		die "\nerror: window_size should >=1\n" if($window_size!~ /^\d+$/);
+		die "\nerror: $sample or $scf not are friends in $k\n" if(not exists $gff->{$sample}->{scf}->{$scf});
+		die "\nerror: $sample don't have $block_flag fragments in $k\n" if($block_flag!=0 && not exists $gff->{$sample}->{chooselen_single}->{$block_flag});
 		for my $block_index(keys %{$gff->{$sample}->{chooselen_single}}){
 			print "block_index is $block_index,$sample\n";
 			next if($block_flag != 0 && $block_flag != $block_index);
 			my @scfs=keys %{$gff->{$sample}->{block2}->{$block_index}};
 			next if($scf ne $scfs[0]);
 			my @yaxis_list=split(/->/,$yaxis);
-			die "error:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[-\d\.]+->[-\d\.]+/);
+			die "\nerror:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[-\d\.]+->[-\d\.]+/);
 			my @yaxis_show_list=split(/->/,$yaxis_show);
-			die "error:yaxis_list neet three elements, not $yaxis_show, sholud like 10->30->5\n" if(@yaxis_show_list!=3 || $yaxis_show!~ /[-\d\.]+->[-\d\.]+->[-\d\.]+/);
+			die "\nerror:yaxis_list neet three elements, not $yaxis_show, sholud like 10->30->5\n" if(@yaxis_show_list!=3 || $yaxis_show!~ /[-\d\.]+->[-\d\.]+->[-\d\.]+/);
 
 #my $tick="$yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label";
 			my @label_sizes=split(/:/,$label_size);
-			die "error:label_size $label_size format like 6:6 for $k\n" if(@label_sizes!=2);
+			die "\nerror:label_size $label_size format like 6:6 for $k\n" if(@label_sizes!=2);
 			my ($depth_label_size, $tick_label_size)=@label_sizes;
 			my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{start};
 			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
@@ -548,7 +548,7 @@ sub reads_mapping_run(){
 	}elsif($s1=~ /^-(\d+)/){
 		$updown=1;
 	}else{
-		die "error:11\n";
+		die "\nerror:11\n";
 	}
 
 	my $feature_height=1;
@@ -557,18 +557,19 @@ sub reads_mapping_run(){
 	my $feature_shape="rect";
 	my $read_type_raw=$read_type;
 	$read_type="long_reads" if($show_type eq "stack");
-
+	my $read_number=scalar(keys %reads);
+	print "read number is $read_number\n";
 	for my $read_id(sort {$reads{$a}{ref_start}<=>$reads{$b}{ref_start}} keys %reads){
 #print "read_id is $read_id\n";
 		$read_num++;
 #my $read_id="$sample.$scf.$block.$rg_start.$rg_end.$k_index.$read_type.$read_num";
 		if($show_type =~ /^rainbow/){
-			#die "error:rainbow\n";
+			#die "\nerror:rainbow\n";
 			#next if($reads{$read_id}{mate_read_id} eq "null"|| $reads{$read_id}{mate_ref} ne $reads{$read_id}{ref_id});
 			next if($reads{$read_id}{mate_read_id} eq "null");
-			#die "error1:rainbow\n";
+			#die "\nerror1:rainbow\n";
 			next if($reads{$read_id}{mate_ref} ne $reads{$read_id}{ref_id});
-			#die "error2:rainbow\n";
+			#die "\nerror2:rainbow\n";
 			my $mate=$reads{$read_id}{mate_read_id};
 			next if($reads{$mate}{cigar}{-1}{type} eq "fake"||$reads{$read_id}{cigar}{-1}{type} eq "fake");
 #next if(($reads{$read_id}{cigar}{-1}{end}-$reads{$read_id}{cigar}{-1}{start})<147||($reads{$mate}{cigar}{-1}{end}-$reads{$mate}{cigar}{-1}{start})<147);
@@ -583,9 +584,6 @@ sub reads_mapping_run(){
 			my $read_shift_y_depth = $reads_depth{depth}{$read_id};
 			$read_shift_y_depth=0 if($show_type =~ /^rainbow/);
 			my $opacity_ratio_mapq=$reads{$read_id}{cigar}{-1}{mapq_percent};
-			#print "opacity_ratio_mapq is $opacity_ratio_mapq,read_id is $read_id\n";
-			#die "error:opacity_ratio_mapq is $opacity_ratio_mapq, read_id is $read_id\n"if($opacity_ratio_mapq eq "");
-			my $feature_popup_title="mapq -> $reads{$read_id}{cigar}{-1}{mapq};flag -> $reads{$read_id}{cigar}{-1}{flag};pos -> $reads{$read_id}{cigar}{-1}{pos};cigar ->$reads{$read_id}{cigar}{-1}{cigar}";
 			for my $cr(sort {$a<=>$b} keys %{$reads{$read_id}{cigar}}){
 
 				$cr_type=$reads{$read_id}{cigar}{$cr}{type};
@@ -597,6 +595,7 @@ sub reads_mapping_run(){
 				$map_pos_start_cr=$reads{$read_id}{cigar}{$cr}{start};
 				$map_pos_end_cr=$reads{$read_id}{cigar}{$cr}{end};
 				$cr_order=$reads{$read_id}{cigar}{$cr}{order};
+				my $feature_popup_title="strand -> $map_pos_strand_cr;mapq -> $reads{$read_id}{cigar}{-1}{mapq};flag -> $reads{$read_id}{cigar}{-1}{flag};pos -> $reads{$read_id}{cigar}{-1}{pos};cigar ->$reads{$read_id}{cigar}{-1}{cigar}";
 				$read_shift_y = abs($s1) + $one_read_height * $read_shift_y_depth + ($one_read_height - $feature_height)/2;
 				$read_shift_y = ($updown == 1)? "+$read_shift_y":"-$read_shift_y";
 
@@ -631,11 +630,12 @@ sub reads_mapping_run(){
 					}
 
 				}
-				die "error: cr_id is $cr_id\n" if($map_pos_start_cr eq "start");
+				die "\nerror: cr_id is $cr_id\n" if($map_pos_start_cr eq "start");
 				$reads_gff.="$scf\tadd\t$read_type_raw\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";					    
 				#if($cr_type ne "fake"){
 				#	$reads_setting_conf.="$cr_id\tfeature_x_extent\t-0.5bp,+0.5bp\n";
 				#}
+				$feature_popup_title="mutation -> $cg,$map_pos_start_cr:$map_pos_end_cr";
 				$reads_setting_conf.="$cr_id\tfeature_shape\t$feature_shape\n";
 				$reads_setting_conf.="$cr_id\tfeature_height_ratio\t$feature_height\n";
 				$reads_setting_conf.="$cr_id\tfeature_height_unit\tpercent\n";
@@ -644,6 +644,8 @@ sub reads_mapping_run(){
 				$reads_setting_conf.="$cr_id\tfeature_shift_y_unit\tpercent\n";
 				$reads_setting_conf.="$cr_id\tfeature_order\t$cr_order\n";
 				$reads_setting_conf.="$cr_id\tfeature_opacity\t$feature_opacity\n";
+				$reads_setting_conf.="$cr_id\tfeature_popup_title\t$feature_popup_title\n" if($cr_type!~ /reverse/ && $cr_type!~ /forward/);
+
 				if($read_type eq "short_reads" && $cr == -1 && $reads{$read_id}{mate_read_id} ne "null"  &&  ($reads{$read_id}{mate_ref} eq "=" || $reads{$read_id}{ref_id} eq $reads{$read_id}{mate_ref}) ){
 					next if(exists $reads{$read_id}{flag} && ($reads{$read_id}{flag} & 8));
 					
@@ -658,7 +660,7 @@ sub reads_mapping_run(){
 					my $cross_link_shape="line";
 					my $cross_link_orientation_line="end,start";
 					my $cross_link_width_ellipse;
-
+					$feature_popup_title="$reads{$read_id}{ref_id} -> $reads{$read_id}{cigar}{-1}{start}:$reads{$read_id}{cigar}{-1}{end}:$reads{$read_id}{cigar}{-1}{cigar} : $reads{$mate_id}{cigar}{-1}{start}:$reads{$mate_id}{cigar}{-1}{end}:$reads{$mate_id}{cigar}{-1}{cigar}";
 					if($show_type=~ /^rainbow:color->([^:]+):opacity->([\d\.]+):cross_link_width_ellipse->([\d\.]+)/){
 #rainbow:green:opacity1:cross_link_width_ellipse:0.01
 						my $cross_link_color=$1;
@@ -695,7 +697,7 @@ sub reads_mapping_run(){
 			die "die:\n";
 		}
 	}    
-	die "\nerror:$info is no feature to plot\n\n" if(!$reads_gff);
+	die "\n\nerror:$info is no feature to plot\n\n" if(!$reads_gff);
 	return ($reads_gff, $reads_setting_conf, $cross_link_conf);
 
 }
@@ -713,21 +715,23 @@ sub check_vcf(){
 	}elsif($s1=~ /^-(\d+)/){
 		$feature_shift_y="+$1";
 	}else{
-		die "error:check_vcf s1 $s1 format error\n";
+		die "\nerror:check_vcf s1 $s1 format \nerror\n";
 	}
 	my $display_feature_label="yes";
 	$display_feature_label="no" if($info=~ /\sdisplay_feature_label->no/);
-	die "\nerror: feature_x_extent should like feature_x_extent->-1bp,+1bp in $info\n" if($info=~ /\sfeature_x_extent/ && $info!~ /\sfeature_x_extent->[\d\.\+-]+bp,[\d\.\+-]+bp/);
+	die "\n\nerror: feature_x_extent should like feature_x_extent->-1bp,+1bp in $info\n" if($info=~ /\sfeature_x_extent/ && $info!~ /\sfeature_x_extent->[\d\.\+-]+bp,[\d\.\+-]+bp/);
 	if($vcf_file=~ /\.gz$/){
-		open VCF,"gzip -dc $vcf_file|" or die "open $vcf_file error $?\n";
+		open VCF,"gzip -dc $vcf_file|" or die "open $vcf_file \nerror $?\n";
 	}else{	
-		open VCF,"$vcf_file" or die "open $vcf_file error $?\n";
+		open VCF,"$vcf_file" or die "open $vcf_file \nerror $?\n";
 	}
 	while(<VCF>){
 		chomp;
 		next if($_=~ /^#/||$_=~ /^\s*$/);
 		##CHROM  POS       ID           REF  ALT    QUAL  FILTER
-		my ($chr,$pos,$snpid,$ref_base,$query_base,$qual,$filter)=split(/\t/,$_);
+		my @arr=split(/\t/,$_);
+		die "\nerror:vcf format \nerror in line$.:$_ in $vcf_file\n" if(@arr < 9);
+		my ($chr,$pos,$snpid,$ref_base,$query_base,$qual,$filter,$info,$format)=@arr[0..8];
 		next if($chr ne $scf || $pos < $rg_start || $pos > $rg_end || $ref_base eq $query_base);
 		#print "line is $_\n";
 		my $vcf_id="$sample.$scf.vcf.$pos.$ref_base.to.$query_base.$snpid.$k_index";
@@ -740,8 +744,10 @@ sub check_vcf(){
 			print "\nwarning:skip $_ in $vcf_file, because mutation_length is $mutation_length bp < $colors_height{$mutation_type}{limit_len} bp which is set in color_height_cs\n\n";
 			next;
 		}
-		die "error:color or height or opacity in colors_height for $mutation_type not exists, in vcf\n" if(not exists $colors_height{$mutation_type}{color}|| not exists $colors_height{$mutation_type}{height} || not exists $colors_height{$mutation_type}{opacity});
+		die "\nerror:color or height or opacity in colors_height for $mutation_type not exists, in vcf\n" if(not exists $colors_height{$mutation_type}{color}|| not exists $colors_height{$mutation_type}{height} || not exists $colors_height{$mutation_type}{opacity});
 		my $pos_feature_label=($s1=~ /^\+?(\d+)/)? "medium_up":"medium_low";
+		my $len=scalar@arr -1;
+		my $feature_popup_title="mutation: $chr:$pos:$snpid: $ref_base -> $query_base;qual=$qual,@arr[6..$len]";
 		$reads_gff.="$scf\tadd\t$read_type\t$start\t$end\t.\t+\t.\tID=$vcf_id\n";
 		#$reads_setting_conf.="$vcf_id\tfeature_x_extent\t-1bp,+1bp\n";
 		$reads_setting_conf.="$vcf_id\tfeature_color\t$feature_color\n";
@@ -759,11 +765,12 @@ sub check_vcf(){
 		$reads_setting_conf.="$vcf_id\tfeature_label_auto_angle_flag\t0\n";
 		$reads_setting_conf.="$vcf_id\tlabel_rotate_angle\t-15\n";
 		$reads_setting_conf.="$vcf_id\tfeature_label_size\t2\n";
+		$reads_setting_conf.="$vcf_id\tfeature_popup_title\t$feature_popup_title\n";
 		$reads_setting_conf.="$vcf_id\tfeature_x_extent\t$1\n" if($info=~ /\sfeature_x_extent->(\S+)/);
 	}
 	close VCF;
 	$cross_link_conf="";
-	die "error: check_vcf $vcf_file null?\n" if(!$reads_gff || !$reads_setting_conf);
+	die "\nerror: check_vcf $vcf_file null?\n" if(!$reads_gff || !$reads_setting_conf);
 	return ($reads_gff, $reads_setting_conf, $cross_link_conf);
 }
 
@@ -771,7 +778,7 @@ sub check_vcf_mutation_type(){
 	my ($ref_base, $query_base, $pos)=@_;
 	my ($mutation_type, $mutation_length, $start, $end);
 	if(length($ref_base) == length($query_base)){ # snp
-		die "error:$ref_base  == $query_base \n" if($ref_base eq $query_base);
+		die "\nerror:$ref_base  == $query_base \n" if($ref_base eq $query_base);
 		$mutation_type="X";
 		$mutation_length=1;
 		$start=$pos;
@@ -809,7 +816,7 @@ sub get_reads_depth(){
 	}elsif($s1=~ /^-(\d+)/){
 		$updown=1;
 	}else{
-		die "error:12 \n";
+		die "\nerror:12 \n";
 	}
 	my %shift_y;
 	$shift_y{$new_depth}=$rg_start-1;
@@ -827,7 +834,7 @@ sub get_reads_depth(){
 			my ($r1_start,$r1_end,$r2_start,$r2_end);
 # mate_read_id
 #print "read_idis1 $read_id,$reads{$read_id}{mate_pos},$reads{$read_id}{ref_end}\n";
-#die "error: read_id is $read_id, ref_id is $reads{$read_id}{ref_id}\n" if(!$reads{$read_id}{ref_id});
+#die "\nerror: read_id is $read_id, ref_id is $reads{$read_id}{ref_id}\n" if(!$reads{$read_id}{ref_id});
 			#die "mate_read_id is , read_id $read_id\n" if(!$reads{$read_id}{mate_read_id});
 			next if($read_type eq "short_reads" && $reads{$read_id}{mate_read_id} ne "null" && $reads{$read_id}{mate_pos} < $reads{$read_id}{ref_end} && $reads{$read_id}{mate_pos} < $reads{$read_id}{ref_start});
 #print "read_idis2 $read_id,$reads{$read_id}{mate_pos},$reads{$read_id}{ref_end}\n";
@@ -855,12 +862,12 @@ sub get_reads_depth(){
 					if($read_type eq "short_reads" && $reads{$read_id}{mate_read_id} ne "null"){
 #print "0read_id is $read_id, map_pos_start_cr is $map_pos_start_cr, shift_y{$depth} is $shift_y{$depth}\n" if($flagxx);	
 						my $mate=$reads{$read_id}{mate_read_id};
-#if($read_id=~ /:61360\./){die "error: 61360 $read_id, $map_pos_start_cr.  depth is $depth,$shift_y{$depth}\n"}
+#if($read_id=~ /:61360\./){die "\nerror: 61360 $read_id, $map_pos_start_cr.  depth is $depth,$shift_y{$depth}\n"}
 						die "mate is $mate, read_id is $read_id\n" if(!$mate);
 #$shift_y{$depth}=max($reads{$mate}{cigar}{-1}{end},$reads{$read_id}{cigar}{-1}{end});
 						$shift_y{$depth}=$reads{$mate}{cigar}{-1}{end};
 #print "1read_id is $read_id, map_pos_start_cr is $map_pos_start_cr, shift_y{$depth} is $shift_y{$depth}\n" if($flagxx);	
-#if($read_id=~ /:61360\./){print "error: 61360 $read_id, $map_pos_start_cr.  depth is $depth,$shift_y{$depth}\n"}
+#if($read_id=~ /:61360\./){print "\nerror: 61360 $read_id, $map_pos_start_cr.  depth is $depth,$shift_y{$depth}\n"}
 #print "depth3,$depth,$shift_y{$depth},$read_id\n";
 
 					}else{
@@ -899,7 +906,7 @@ sub get_reads_depth(){
 		}
 	}
 	$reads_depth{max_depth}=max(@max_depths);
-#die "error:max_depths is @max_depths\n";
+#die "\nerror:max_depths is @max_depths\n";
 	if($read_type ne "long_reads"){
 		for my $read(keys %reads){
 			next if($reads{$read}{mate_read_id} eq "null");
@@ -912,7 +919,7 @@ sub get_reads_depth(){
 				$reads_depth{depth}{$read}=$max;
 				$reads_depth{depth}{$mate}=$max;
 			}else{
-				die "error:read $read not have mate_read_id \n";
+				die "\nerror:read $read not have mate_read_id \n";
 			}
 		}
 	}
@@ -949,12 +956,12 @@ sub get_mapping_reads(){
 		my $reads = retrieve("$tmpf");
 		%reads=%$reads;
 	}else{
-		open BAM,"samtools view $bam_file|awk '\$1!~ /^@/ && \$3!=\"*\" && \$3==\"$scf\"'|" or die "error: samtools view $bam_file\n";
+		open BAM,"samtools view $bam_file|awk '\$1!~ /^@/ && \$3!=\"*\" && \$3==\"$scf\"'|" or die "\nerror: samtools view $bam_file\n";
 		my $header_bam=`samtools view -h $bam_file|grep \'^@\' >$bam_file.header && echo $bam_file.header`; chomp $header_bam;
-		die "error:header_bam is $header_bam\n" if(!-f "$header_bam");
+		die "\nerror:header_bam is $header_bam\n" if(!-f "$header_bam");
 		my $max_mapq=60;
 		my $mapq_percent;
-		die "error: mapqs $mapqs format error\n" if($mapqs!~ /^(\d+):(\d+):(\d+)$/);
+		die "\nerror: mapqs $mapqs format \nerror\n" if($mapqs!~ /^(\d+):(\d+):(\d+)$/);
 		my ($min_mapq,$bad_mapq,$good_mapq)=($1,$2,$3);
 		my $min_opacity=0.2;
 		while(<BAM>){
@@ -981,7 +988,7 @@ sub get_mapping_reads(){
 			}else{
 				$mapq_percent=$min_opacity;
 			}
-			die "error:mapq_percent\n" if(!$mapq_percent);
+			die "\nerror:mapq_percent\n" if(!$mapq_percent);
 # default output multi-alignments, need to supply paramter whether display this or choose the best hit by MAPQ
 			my $ref_consumes_length=&consumes_length($cigar, \@ref_consumes);
 #die "$r_id ref_consumes_length is $ref_consumes_length\n" if($r_id=~ /5776_15063/);
@@ -995,7 +1002,7 @@ sub get_mapping_reads(){
 			while(exists $reads{$r_id}){
 				$multil_align++;
 				$r_id.=".multialign.$multil_align";
-#die "error:r_id. is $r_id.\n";
+#die "\nerror:r_id. is $r_id.\n";
 			}
 			my $strand=($flag & $reverse_flag); # if ture, mean read reverse
 				$cigar=&convert_cigar($cigar, $colors_height);
@@ -1015,7 +1022,7 @@ sub get_mapping_reads(){
 
 #}elsif($read_type eq "short_reads"){
 #}else{
-#	die "error: not support $read_type, only support long_reads or short_reads\n";
+#	die "\nerror: not support $read_type, only support long_reads or short_reads\n";
 #}
 
 
@@ -1027,7 +1034,7 @@ sub get_mapping_reads(){
 				next if(exists $reads{$r}{mate_read_id} && $reads{$r}{mate_read_id} eq "null");
 				for my $rr(@readss){
 					next if($r eq $rr);
-#die "error:mate_read_id exists r is $r, rr is $rr,  mate of r is $reads{$r}{mate_read_id}\n" if(exists $reads{$r}{mate_read_id} );
+#die "\nerror:mate_read_id exists r is $r, rr is $rr,  mate of r is $reads{$r}{mate_read_id}\n" if(exists $reads{$r}{mate_read_id} );
 					next if(exists $reads{$r}{mate_read_id} && exists $reads{$rr}{mate_read_id});
 #print "r is $r,rr is $rr; $reads{$r}{read_id} eq $reads{$rr}{read_id} && $reads{$r}{mate_pos} eq $reads{$rr}{ref_start} && $reads{$r}{ref_start} eq $reads{$rr}{mate_pos} && $reads{$r}{ref_id} eq $reads{$rr}{mate_ref} && $reads{$r}{mate_ref} eq $reads{$rr}{ref_id}\n";
 					next unless ($reads{$r}{read_id} eq $reads{$rr}{read_id} && $reads{$r}{mate_pos} eq $reads{$rr}{ref_start} && $reads{$r}{ref_start} eq $reads{$rr}{mate_pos} && $reads{$r}{ref_id} eq $reads{$rr}{mate_ref} && $reads{$r}{mate_ref} eq $reads{$rr}{ref_id});
@@ -1043,7 +1050,7 @@ sub get_mapping_reads(){
 #	die "read_id2 is $r, mate is $reads{$r}{mate_read_id}\n";
 #}
 				my $fake_mate_id="$r.mate";
-				die "error: fake_mate_id=$fake_mate_id has exists\n" if(exists $reads{$fake_mate_id});
+				die "\nerror: fake_mate_id=$fake_mate_id has exists\n" if(exists $reads{$fake_mate_id});
 				$reads{$r}{mate_read_id}=$fake_mate_id;
 				my $fake_start;
 				$fake_start=($reads{$r}{mate_pos} >$reads{$r}{ref_start})? $rg_end:$rg_start;
@@ -1087,9 +1094,9 @@ sub cigar_setting(){
 	my @color_height_cses=split(/,/, $color_height_cs);
 	for my $ch(@color_height_cses){
 		my @arr=split(/:/, $ch);
-		die "error:cigar_setting $ch                         of $color_height_cs format is wrong, should like $color_height_cs_usage\n" if(@arr!=6 || $ch!~ /^[^:]+:[^:]+:opacity[\d\.]+:height[\d\.]+:\d+bp:\S+$/);
+		die "\nerror:cigar_setting $ch                         of $color_height_cs format is wrong, should like $color_height_cs_usage\n" if(@arr!=6 || $ch!~ /^[^:]+:[^:]+:opacity[\d\.]+:height[\d\.]+:\d+bp:\S+$/);
 		my ($cg,$color,$opacity,$height,$limit_len,$feature_shape)=@arr;
-		die "error: not support cg $cg in $color_height_cs, only support @cgs\n" if(!grep(/^$cg$/, @cgs));
+		die "\nerror: not support cg $cg in $color_height_cs, only support @cgs\n" if(!grep(/^$cg$/, @cgs));
 		$limit_len=~ s/bp//g;
 		$opacity=~ s/opacity//g;
 		$height=~ s/height//g;
@@ -1098,14 +1105,14 @@ sub cigar_setting(){
 		$colors_height{$cg}{opacity}=$opacity;
 		$colors_height{$cg}{limit_len}=$limit_len;
 		$colors_height{$cg}{shape}=$feature_shape;
-		die "error:only support arrow or rect, not $feature_shape in $color_height_cs\n" if($feature_shape ne "arrow" && $feature_shape ne "rect");
+		die "\nerror:only support arrow or rect, not $feature_shape in $color_height_cs\n" if($feature_shape ne "arrow" && $feature_shape ne "rect");
 #print "cg is $cg\n\n";
 	}
 	$tmp{$colors_height{forward}{height}}="";
 	$tmp{$colors_height{reverse}{height}}="";
 	$tmp{$colors_height{read1}{height}}="" if(exists $colors_height{read1}{height});
 	$tmp{$colors_height{read2}{height}}="" if(exists $colors_height{read2}{height});
-	die "error:height of(forward and reverse and fake and read1 and read2)  should be equal for color_height_cs->$color_height_cs\n" if(scalar(keys %tmp) !=1);
+	die "\nerror:height of(forward and reverse and fake and read1 and read2)  should be equal for color_height_cs->$color_height_cs\n" if(scalar(keys %tmp) !=1);
 	return %colors_height;
 }
 
@@ -1124,7 +1131,7 @@ sub convert_cigar(){
 #$cigars[$i]=~ /(\d+)([^\d]+)/);
 #print "isis $cigars[$i]\n";
 		my ($cg_len, $cg_type)= ($1,$2);
-		die "error:not support cigar_type $cg_type for $cigars[$i], cg is \n" if(not exists $colors_height->{$cg_type});
+		die "\nerror:not support cigar_type $cg_type for $cigars[$i], cg is \n" if(not exists $colors_height->{$cg_type});
 		if(grep(/^$cg_type$/,@ref_consumes)){
 			if($cg_len < $colors_height->{$cg_type}->{limit_len}){
 				$cigars[$i]="$cg_len"."M";
@@ -1169,7 +1176,7 @@ sub check_reads_ref_overlap(){
 sub cs_color_height(){
 	my ($cg, $colors_height, $map_pos_strand_cr, $cr, $r1r2)=@_;
 	my %colors_height=%$colors_height;
-	die "error: cg is $cg\n" if($cg!~ /^\d+[^\d]+$/);
+	die "\nerror: cg is $cg\n" if($cg!~ /^\d+[^\d]+$/);
 	$cg=~ /(\d+)([^\d]+)/;
 	my $cg_len=$1;
 	my $cg_type=$2;
@@ -1192,7 +1199,7 @@ sub cs_color_height(){
 		$cs_opacity=$colors_height{$cg_type}{opacity};
 		$cs_shape=$colors_height{$cg_type}{shape};
 	}else{
-		die "error:not support cigar $cg_type\n";
+		die "\nerror:not support cigar $cg_type\n";
 	}
 	return ($cs_color, $cs_height, $cs_opacity, $cs_shape);
 
@@ -1226,7 +1233,7 @@ sub detail_cigar(){
 			last;
 		}
 	}
-	die "error:cigar=$cigar error, line is $line\n" if($M_index>=2);
+	die "\nerror:cigar=$cigar \nerror, line is $line\n" if($M_index>=2);
 	my $previous_end=$ref_start_pos;
 	my $cs_end;
 	my $shift_cs;
@@ -1267,7 +1274,7 @@ sub detail_cigar(){
 			$previous_end=$cs_end+$shift_cs;
 		}	
 	}
-	die "error: shift_cs,cigar is $cigar, line is $line\n" if(not defined $shift_cs);
+	die "\nerror: shift_cs,cigar is $cigar, line is $line\n" if(not defined $shift_cs);
 	my $forw_rev=($strand>0)? "reverse":"forward";
 	$reads{$r_id}{cigar}{-1}{start}=$cs_start;
 	$reads{$r_id}{cigar}{-1}{end}=$previous_end-$shift_cs;
@@ -1325,7 +1332,7 @@ sub detail_cigar(){
 	# call snp # MD:Z:12C135 
 	if($line=~ /MD:\S*\d[ATCG]/ && 0 ){
 		my $call="cp $header_bam $header_bam.tmp && echo -e \"$line\" >> $header_bam.tmp && samtools mpileup -u --skip-indels -t DP $header_bam.tmp -f $refasta 2>/dev/null|bcftools view -v snps |grep \"^$scf\"";
-		open SNP,"$call|" or die "error:$call error!\n";
+		open SNP,"$call|" or die "\nerror:$call \nerror!\n";
 		while(<SNP>){
 			chomp;
 			print "$_\n";
@@ -1360,7 +1367,7 @@ sub get_regions(){
 	if($info=~ /\s+(\S+)->/){
 		my @arr=$info=~ /\s+(\S+)->/g;
 		for my $a(@arr){
-			die "error: not support $a, only @highs\n" if(! grep(/^$a$/, @highs));
+			die "\nerror: not support $a, only @highs\n" if(! grep(/^$a$/, @highs));
 			if($a eq "start_end_xaxis"){
 				$info=~ /\s+$a->(\S+)/;
 				my $poss=$1;
@@ -1377,7 +1384,7 @@ sub get_regions(){
 						push @{$hash{$a}},"$start,$end";
 #print "\nisis $start,$end $block_start,$block_end \n\n";
 					}else{
-						die "error:rg $rg  \n"
+						die "\nerror:rg $rg  \n"
 					}
 				}
 			}elsif($a eq "highlight_columns"){
@@ -1393,7 +1400,7 @@ sub get_regions(){
 		if($flag ==1){
 			push @{$hash{start_end_xaxis}},"$block_start,$block_end";
 		}else{
-			die "\nerror:here,$flag,$info\n";
+			die "\n\nerror:here,$flag,$info\n";
 		}
 	}
 	return %hash;
@@ -1413,7 +1420,7 @@ sub hist_scatter_line_run(){
 	my $cross_link_conf="";
 	for my $window(sort {$a<=>$b}keys %{$depths{window}}){
 		my $depth=$depths{window}{$window}{depth};
-		$depth=int($depth);
+		#$depth=int($depth);
 		my $diff_depth=$depth-abs($s2);
 		next if($depth<abs($s2));
 		my $depth_height=($diff_depth)*$depth_depth_ratio;
@@ -1432,14 +1439,15 @@ sub hist_scatter_line_run(){
 		my $depth_end=$depths{window}{$window}{end};
 		next if($depth_end >$block_end_bp && $depth_start < $block_start_bp);
 		my $padding_depth_label=1;
-
-		my $depth_id="$sample.$scf.$block.$depth_type.$window.$k_index.$block_start_bp.$block_end_bp";
+		my $feature_popup_title="value -> $depth";
+		my$depth_id="$sample.$scf.$block.$depth_type.$window.$k_index.$block_start_bp.$block_end_bp";
 		$depth_gff.="$scf\tadd\thist_scatter_line\t$depth_start\t$depth_end\t.\t+\t.\tID=$depth_id;\n";
 		$depth_setting_conf.="$depth_id\tdisplay_feature_label\t$display_feature_label\n";
 		$depth_setting_conf.="$depth_id\tfeature_color\t$depth_color\n";
 		$depth_setting_conf.="$depth_id\tfeature_opacity\t$depth_opacity\n";
 		$depth_setting_conf.="$depth_id\tfeature_order\t$depth_order\n";
 		$depth_setting_conf.="$depth_id\tpos_feature_label\tmedium_up\n";
+		$depth_setting_conf.="$depth_id\tfeature_popup_title\t$feature_popup_title\n";
 		if($depth_overflow_flag){
 			$depth_setting_conf.="$depth_id\tpos_feature_label\tmedium_up\n";
 			$depth_setting_conf.="$depth_id\tfeature_label\t$depth\n";
@@ -1492,7 +1500,7 @@ sub hist_scatter_line_run(){
 				$cross_link_conf.="$previous_id\t$depth_id\tcross_link_anchor_pos\tmedium_medium\n";
 			}
 		}else{
-			die "error:not support $depth_type\n";
+			die "\nerror:not support $depth_type\n";
 		}
 
 #print "pre is $previous_id\n";
@@ -1509,31 +1517,30 @@ sub read_depth_file(){
 	my %depths;		
 	my %windows;
 	my $max=0;
-	die "error:window_size $window_size need >=1\n" if($window_size<0 or $window_size=~ /[^\d^\.]+/);
-	$depth_file=~/^([^:]+):/;
-	$depth_file=$1;
-	die "error:depth_file $depth_file not exists for $info\n" if(! -f $depth_file);
-	if($depth_file=~ /.bam\s*$/){
+	die "\nerror:window_size $window_size need >=1\n" if($window_size<0 or $window_size=~ /[^\d^\.]+/);
+	if($depth_file=~ /\.bam:.*/){
+		my @tmps=&check_sort_bam($depth_file);
+		$depth_file=$tmps[0];
 		my $bam_depth_file="$depth_file.$scf.$block_start_bp.$block_end_bp.depth";
 		if(! -f "$bam_depth_file"){
 			print "bam\n";
-			my @tmps=&check_sort_bam($depth_file);
-			$depth_file=$tmps[0];
 			my $cmd="samtools depth  -r $scf:$block_start_bp-$block_end_bp $depth_file|awk '{print \"$sample\\t\"\$0}'|sed -r 's/\\s/\\t/g' >$bam_depth_file";
 			print "cmd is $cmd\n";
 			my $rg_depth=`$cmd`;
-			die "error:$cmd\n" if($?);
+			die "\nerror:$cmd\n" if($?);
 		}else{
 			print "$bam_depth_file exists already, using it\n";
 
 		}
 		$depth_file=$bam_depth_file;
 	}
+	$depth_file=~ /^([^:]+)/;
+	$depth_file=$1;
 	#s3      s3      3       10 #sample scf_id  pos depth
 	if($depth_file=~ /\.gz$/){
-		open IN,"gzip -dc $depth_file|" or die "can not open $depth_file\n";
+		open IN,"gzip -dc $depth_file|" or die "\ncan not open $depth_file\n";
 	}else{
-		open IN,"$depth_file" or die "can not open $depth_file\n";
+		open IN,"$depth_file" or die "\ncan not open $depth_file\n";
 	}
 	while(<IN>){
 		chomp;
@@ -1543,7 +1550,7 @@ sub read_depth_file(){
 		if(@arr==4){
 			if(!$arr[2] || !$block_end_bp){die "is,$arr[2],$block_end_bp\n"};
 			next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] > $block_end_bp || $arr[2]<$block_start_bp);
-			die "error:$arr[2] or $arr[3]\n" if($arr[2]!~ /^\d+$/ || $arr[3]!~ /^\d+$/);
+			die "\nerror:$arr[2] or $arr[3]\n" if($arr[2]!~ /^\d+$/ || $arr[3]!~ /^\d+$/);
 			$tmp{$arr[2]}=$arr[3];
 		}elsif(@arr==5){
 			next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] < $block_start_bp || $arr[3] > $block_end_bp);
@@ -1552,7 +1559,7 @@ sub read_depth_file(){
 			$depths{window}{$.}{end}=$arr[3];								
 			$max=$arr[4] if($arr[4]>$max);
 		}else{
-			die "error:depth need 4 or 5 columns for $_\nsample	scaffold_id	pos	depth\nor\nsample     scaffold_id     start	end     depth\n";
+			die "\nerror:depth need 4 or 5 columns for $_\nsample	scaffold_id	pos	depth\nor\nsample     scaffold_id     start	end     depth\n";
 		}
 #print "AAAis $arr[2], 3 is $arr[3]\n";
 
@@ -1569,15 +1576,15 @@ sub read_depth_file(){
 	for my $i(0..$window_num){
 		my $start=$block_start_bp+$i*$window_size;
 		my $end=$start+$window_size-1;
-#print "2error:$start,$end,$block_start_bp,$block_end_bp\n";
+#print "2\nerror:$start,$end,$block_start_bp,$block_end_bp\n";
 #$end = $block_end_up if($end>$block_end_bp);
 		last if($end>$block_end_bp);
 		my $pos_all=0;
-		die "1error:$start,$end,\n" if(!$end);
+		die "1\nerror:$start,$end,\n" if(!$end);
 		for my $pos($start..$end){
 			$tmp{$pos}=0 if(not exists $tmp{$pos});
 			$pos_all+=$tmp{$pos};
-#die "error:pos is $pos,$start,$end,$block_start_bp,$block_end_bp\n" if (!$tmp{$pos});
+#die "\nerror:pos is $pos,$start,$end,$block_start_bp,$block_end_bp\n" if (!$tmp{$pos});
 		}
 		my $avg_depth=$pos_all/($end-$start+1);
 		$max=($avg_depth>$max)? $avg_depth:$max;
@@ -1596,11 +1603,11 @@ sub feature_ytick(){
 	my ($s1, $e1, $s2, $e2, $axis_gap, $title, $ytick_sample, $ytick_scf, $block, $gff, $kk, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $info, $tick_label_size, $type) = @_;
 	my ($ytick_gff, $ytick_setting_conf, $cross_link_conf);
 	my @tick_colors=split(/:/,$tick_color);
-	die "error:$tick_color format like: green:black for $info\n" if(@tick_colors!=2);
+	die "\nerror:$tick_color format like: green:black for $info\n" if(@tick_colors!=2);
 	my @tick_opacitys=split(/:/,$tick_opacity);
-	die "error:$tick_opacity format like: 0.8:0.2 for $info\n" if(@tick_opacitys!=2 || $tick_opacity!~ /^[\d\.]+:[\d\.]+$/);
+	die "\nerror:$tick_opacity format like: 0.8:0.2 for $info\n" if(@tick_opacitys!=2 || $tick_opacity!~ /^[\d\.]+:[\d\.]+$/);
 	my @tick_borders=split(/:/,$tick_border);
-	die "error:$tick_border format like: 5:5:0.5:0 for $info\n" if(@tick_borders!=4 || $tick_border!~ /^[\d\.]+:[\d\.]+:[\d\.]+:[\d\.]+$/);
+	die "\nerror:$tick_border format like: 5:5:0.5:0 for $info\n" if(@tick_borders!=4 || $tick_border!~ /^[\d\.]+:[\d\.]+:[\d\.]+:[\d\.]+$/);
 
 	print "s1 is $s1, e1 is $e1\n";
 	my $ytick_orientation="up";

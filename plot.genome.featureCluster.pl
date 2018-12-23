@@ -779,7 +779,7 @@ sub jstohtml(){
 
 </html>";
 		close OUT;
-		print "$zoom exists,\n	so output $prefix.html which you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom\n\n";
+		print "$zoom exists,\n	so output $prefix.html, which you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom\n\n";
 	}else{
 		print "$zoom not exists,\n	so not output $prefix.html which you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom\n\n";
 	}
