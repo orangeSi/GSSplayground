@@ -83,7 +83,7 @@ sub read_list(){
 		while(<GE>){
 			chomp;
 			my ($id,$seq)=split(/\n/,$_,2);
-			die "error:id $id is unvalid \n" if($id!~ /^(\S+)/);
+			die "error:id $id is unvalid for $_\n" if($id!~ /^(\S+)/);
 			$id=$1;
 			die "error:id is null for $_\n" if(!$id);
 			$seq=~ s/\s+//g;
@@ -155,7 +155,7 @@ sub read_list(){
 				foreach my $f(@features){
 					next if ($f=~ /^\s*$/);
 					$f=~ s/\s//g;
-					$flag =0 if($arr[2]=~ /$f/);
+					$flag =0 if($arr[2]=~ /^$f$/);
 				}
 				next if($flag);
 
@@ -301,9 +301,8 @@ sub go_line(){
 		return ($conf, $gff, $block_index, $gene_index, $fts);
 	}
 	#print "4parse_arrs line is $line\n";
-	$line=~ /\sID=(\S+)/;
+	$line=~ /[\s;]ID=(\S+)/;
 	my $feature_id=$1;
-	$feature_id=~ s/\s//g;
 	$feature_id=~ s/;.*//g;
 	die "error: feature_id format should like ID=gene1; in gff, instead of $line\n" if(!$feature_id);
 	die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);

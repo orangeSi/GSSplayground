@@ -19,3 +19,5 @@ s4000	add	ytick	1	9609	.	+	.	ID=s4.s4000.2.1.9609.hist.ytickbackbone1.tick8.hgri
 s4000	add	ytick	9608.4	9609	.	+	.	ID=s4.s4000.2.1.9609.hist.ytickbackbone1.tick8;
 s4000	add	ytick	1	9609	.	+	.	ID=s4.s4000.2.1.9609.hist.ytickbackbone1.tick9.hgrid;
 s4000	add	ytick	9608.4	9609	.	+	.	ID=s4.s4000.2.1.9609.hist.ytickbackbone1.tick9;
+s4000	add	ytick	1	9609	.	+	.	ID=s4.s4000.2.1.9609.hist.ytickbackbone1.tick10.hgrid;
+s4000	add	ytick	9608.4	9609	.	+	.	ID=s4.s4000.2.1.9609.hist.ytickbackbone1.tick10;

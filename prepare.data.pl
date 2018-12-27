@@ -59,9 +59,9 @@ sub synteny(){
 	my $k_index;
 	my (%outname);
 	my @show_types=("quadrilateral");
-	#my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel");
+#my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel");
 	my @highs=();
-	my @align_types=("paf");
+	my @align_types=("paf", "blast");
 	for my $k (@{$conf->{synteny}}){
 		$k_index++;
 		&check_highs(\@highs,$k);
@@ -79,18 +79,18 @@ sub synteny(){
 		die "\nerror: not support $crosslink_shape, only support @show_types\n" if(! grep(/^$crosslink_shape$/, @show_types));
 		die "\nerror: $query_name not exists in --list\n" if(not exists $conf->{sample_scf}{$query_name});
 		die "\nerror: $target_name not exists in --list\n" if(not exists $conf->{sample_scf}{$target_name});
-		#$conf{sample_scf}{$sample}{$id}="";
+#$conf{sample_scf}{$sample}{$id}="";
 		my ($synteny_gff_q, $synteny_setting_conf_q, $synteny_gff_t, $synteny_setting_conf_t,$cross_link_conf)=&synteny_run(\@arr, $conf,$k_index);
 
 		my $prefix="$query_name.$query_name.to.$target_name.$alignment_type.$crosslink_shape.$k_index.synteny";	
 		%outname = &gather_gff_conf_link($prefix,$synteny_gff_q,$synteny_setting_conf_q,"", \%outname, $query_name);
-		
+
 		$prefix="$target_name.$query_name.to.$target_name.$alignment_type.$crosslink_shape.$k_index.synteny";	
 		%outname = &gather_gff_conf_link($prefix,$synteny_gff_t,$synteny_setting_conf_t,"", \%outname, $target_name);
-		
+
 		$prefix="$query_name.to.$target_name.$alignment_type.$crosslink_shape.$k_index.synteny";	
 		%outname = &gather_gff_conf_link($prefix,"","",$cross_link_conf, \%outname, "$query_name.to.$target_name");
-		
+
 	}
 	&write_gff_conf_link(\%outname, "synteny");
 }
@@ -100,9 +100,11 @@ sub synteny_run(){
 	my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y)=@$arr;
 	my ($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf);
 	my (%qid, %tid, $qtid);
-	#my $feature_color="white";
+#my $feature_color="white";
 	my $cross_link_opacity;
 	my $cross_link_color;
+	my %align;
+	my @pairs;
 	if($alignment_type eq "paf"){
 		if($alignment=~ /\.paf$/){
 			open PAF,"cat $alignment|sort -k 10nr,10nr -k 1,1 -k 6,6|" or die "$?";
@@ -116,7 +118,7 @@ sub synteny_run(){
 		while(<PAF>){
 			chomp;
 			next if($_=~ /^#/ ||$_=~ /^\s*$/);
-			#print "line$. is $_\n";
+#print "line$. is $_\n";
 			my @arr=split(/\s+/,$_);
 			my $query_scf=$arr[0];
 			my $target_scf=$arr[5];
@@ -128,64 +130,103 @@ sub synteny_run(){
 			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
 			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
 			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
-			if(not exists $qid{$query_feature_id}){
-				$synteny_gff_q.="$query_scf\tadd\tsynteny\t$query_start\t$query_end\t.\t$strand\t.\tID=$query_feature_id;\n";
-				$synteny_setting_conf_q.="$query_feature_id\tfeature_shape\trect\n";
-				$synteny_setting_conf_q.="$query_feature_id\tfeature_height_ratio\t1\n";
-				$synteny_setting_conf_q.="$query_feature_id\tfeature_height_unit\tbackbone\n";
-				#$synteny_setting_conf_q.="$query_feature_id\tfeature_color\t$feature_color\n";
-				$synteny_setting_conf_q.="$query_feature_id\tfeature_opacity\t0\n";
-				$synteny_setting_conf_q.="$query_feature_id\tdisplay_feature_label\tno\n";
-				$synteny_setting_conf_q.="$query_feature_id\tfeature_order\t$synteny_order\n";
-				$qid{$query_feature_id}="";
-			}
 			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
-			if(not exists $qid{$target_feature_id}){
-				$synteny_gff_t.="$target_scf\tadd\tsynteny\t$target_start\t$target_end\t.\t$strand\t.\tID=$target_feature_id;\n";
-				$synteny_setting_conf_t.="$target_feature_id\tfeature_shape\trect\n";
-				$synteny_setting_conf_t.="$target_feature_id\tfeature_height_ratio\t1\n";
-				$synteny_setting_conf_t.="$target_feature_id\tfeature_height_unit\tbackbone\n";
-				#$synteny_setting_conf_t.="$target_feature_id\tfeature_color\t$feature_color\n";
-				$synteny_setting_conf_t.="$target_feature_id\tfeature_opacity\t0\n";
-				$synteny_setting_conf_t.="$target_feature_id\tdisplay_feature_label\tno\n";
-				$synteny_setting_conf_t.="$target_feature_id\tfeature_order\t$synteny_order\n";
-				$tid{$target_feature_id}="";
-			}
-			if($strand eq "+"){
-				$cross_link_color=$forward_color;
-				$cross_link_opacity=$forward_opacity;
-			}elsif($strand eq "-"){
-				$cross_link_color=$reverse_color;
-				$cross_link_opacity=$reverse_opacity;
-			}else{
-				die "\nerror:srand $strand\n";
-			}
+			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
 			my $indentity=$arr[9]/$arr[10];
-			$cross_link_opacity*=$indentity;
-			#$my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity)=@$arr;
-			if(not exists $qtid{"$query_feature_id.$target_feature_id"}){
-				my $q_cov=abs($arr[2]-$arr[3])/$arr[1];
-				my $t_cov=abs($arr[7]-$arr[8])/$arr[6];
-				my $feature_popup_title="query -> $query_scf:$query_start:$query_end;target -> $target_scf:$target_start:$target_end;strand -> $strand;indentity -> $arr[9]/$arr[10]=$indentity;coverage -> query:$q_cov;target:$t_cov";
-				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shape\t$crosslink_shape\n";
-				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_anchor_pos\tlow_up\n";
-				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_color\t$cross_link_color\n";
-				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_opacity\t$cross_link_opacity\n";
-				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shift_y\t$cross_link_shift_y\n";
-				$cross_link_conf.="$query_feature_id\t$target_feature_id\tcrosslink_stroke_style\tstroke:black;stroke-width:0.2;\n";
-				$cross_link_conf.="$query_feature_id\t$target_feature_id\tfeature_popup_title\t$feature_popup_title\n";
-				
-				#$cross_link_conf.="$query_feature_id\t$target_feature_id\t\t\n";
-				$qtid{"$query_feature_id.$target_feature_id"}="";
-			}
-			#$conf{sample_scf}{$sample}{$id}="";	
-			
+			my $q_cov=abs($arr[2]-$arr[3])/$arr[1];
+			my $t_cov=abs($arr[7]-$arr[8])/$arr[6];
+			$align{query}{$query_feature_id}{query_scf}=$query_scf;
+			$align{query}{$query_feature_id}{query_start}=$query_start;
+			$align{query}{$query_feature_id}{query_end}=$query_end;
+			$align{qt}{$query_target_feature_id}{strand}=$strand;
+			$align{qt}{$query_target_feature_id}{indentity}=$indentity;
+			$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
+			$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+			$align{target}{$target_feature_id}{target_scf}=$target_scf;
+			$align{target}{$target_feature_id}{target_start}=$target_start;
+			$align{target}{$target_feature_id}{target_end}=$target_end;
+			push(@pairs,$query_target_feature_id);
 		}
 		close PAF;		
+	}elsif($alignment_type eq "blast"){
+		
+
+	}else{
+		die "error: not support alignment_type $alignment_type yet\n"
 	}
+
+	($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf) = &synteny_common_write(\@pairs, \%align, $arr);	
+
+
 	return ($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf);
 }
 
+sub synteny_common_write(){
+	my ($pairs, $align, $arr)=@_;
+	my @pairs=@$pairs;
+	my %align=%$align;
+	my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y)=@$arr;
+	my ($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf);
+	my $cross_link_opacity;
+	my $cross_link_color;
+	my (%qid, %tid, %qtid);
+	for my $pair(@pairs){
+		my ($query_feature_id, $target_feature_id)=split(/\s+->\s+/, $pair);
+		my $query_start=$align{query}{$query_feature_id}{query_start};
+		my $query_end=$align{query}{$query_feature_id}{query_end};
+		my $query_scf=$align{query}{$query_feature_id}{query_scf};
+		my $target_start=$align{target}{$target_feature_id}{target_start};
+		my $target_end=$align{target}{$target_feature_id}{target_end};
+		my $target_scf=$align{target}{$target_feature_id}{target_scf};
+		my $strand=$align{qt}{$pair}{strand};
+		if(not exists $qid{$query_feature_id}){
+			$synteny_gff_q.="$query_scf\tadd\tsynteny\t$query_start\t$query_end\t.\t$strand\t.\tID=$query_feature_id;\n";
+			$synteny_setting_conf_q.="$query_feature_id\tfeature_shape\trect\n";
+			$synteny_setting_conf_q.="$query_feature_id\tfeature_height_ratio\t1\n";
+			$synteny_setting_conf_q.="$query_feature_id\tfeature_height_unit\tbackbone\n";
+#$synteny_setting_conf_q.="$query_feature_id\tfeature_color\t$feature_color\n";
+			$synteny_setting_conf_q.="$query_feature_id\tfeature_opacity\t0\n";
+			$synteny_setting_conf_q.="$query_feature_id\tdisplay_feature_label\tno\n";
+			$synteny_setting_conf_q.="$query_feature_id\tfeature_order\t$synteny_order\n";
+			$qid{$query_feature_id}="";
+		}
+		if(not exists $tid{$target_feature_id}){
+			$synteny_gff_t.="$target_scf\tadd\tsynteny\t$target_start\t$target_end\t.\t$strand\t.\tID=$target_feature_id;\n";
+			$synteny_setting_conf_t.="$target_feature_id\tfeature_shape\trect\n";
+			$synteny_setting_conf_t.="$target_feature_id\tfeature_height_ratio\t1\n";
+			$synteny_setting_conf_t.="$target_feature_id\tfeature_height_unit\tbackbone\n";
+#$synteny_setting_conf_t.="$target_feature_id\tfeature_color\t$feature_color\n";
+			$synteny_setting_conf_t.="$target_feature_id\tfeature_opacity\t0\n";
+			$synteny_setting_conf_t.="$target_feature_id\tdisplay_feature_label\tno\n";
+			$synteny_setting_conf_t.="$target_feature_id\tfeature_order\t$synteny_order\n";
+			$tid{$target_feature_id}="";
+		}
+		if($strand eq "+"){
+			$cross_link_color=$forward_color;
+			$cross_link_opacity=$forward_opacity;
+		}elsif($strand eq "-"){
+			$cross_link_color=$reverse_color;
+			$cross_link_opacity=$reverse_opacity;
+		}else{
+			die "\nerror:srand $strand\n";
+		}
+		$cross_link_opacity*=$align{qt}{$pair}{indentity};
+		my $q_cov=$align{qt}{$pair}{q_cov};
+		my $t_cov=$align{qt}{$pair}{t_cov};
+		if(not exists $qtid{"$query_feature_id.$target_feature_id"}){
+			my $feature_popup_title="query -> $query_scf:$query_start:$query_end;target -> $target_scf:$target_start:$target_end;strand -> $strand;indentity -> $align{qt}{$pair}{indentity};coverage -> query:$q_cov;target:$t_cov";
+			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shape\t$crosslink_shape\n";
+			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_anchor_pos\tlow_up\n";
+			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_color\t$cross_link_color\n";
+			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_opacity\t$cross_link_opacity\n";
+			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shift_y\t$cross_link_shift_y\n";
+			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcrosslink_stroke_style\tstroke:black;stroke-width:0.2;\n";
+			$cross_link_conf.="$query_feature_id\t$target_feature_id\tfeature_popup_title\t$feature_popup_title\n";
+			$qtid{"$query_feature_id.$target_feature_id"}="";
+		}
+	}
+	return $synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf;
+}
 
 sub reads_mapping(){
 	my ($gff, $conf)=@_;
@@ -216,7 +257,7 @@ sub reads_mapping(){
 			die "\nerror: reads_mapping should separate by \\t, and have 17 colums for reads_mapping=$k, but only have $infos_len\nvalid like reads_mapping=$ex\n";
 		}
 		my ($reads_type,$reads_order,$sample,$scf,$block_flag,$mapping_file,$show_type,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size,$mapqs) = @infos;
-		#ylabel->illuminate read depth,fontsize:10,color:black
+#ylabel->illuminate read depth,fontsize:10,color:black
 		die "\nerror: reads_order should be number, not $reads_order\n" if($reads_order!~ /^-?\d+$/);
 #reads_mapping=long_reads,s2,s2000,0,../data/s2.seq.longreads.map2ref.sort.bam,rainbow_or_hline,10->50,ytick_flag,20->30->2,ytick_label_text,hgrid_flag,green:black,1:0.5,0.3:0.3,3:3	highlight_hgrid->26:2:green,28:2:black  start_end_xaxis->61:661,711:1311,1361:1961
 		my $refasta;
@@ -490,7 +531,7 @@ sub hist_scatter_line(){
 			my ($depth_label_size, $tick_label_size)=@label_sizes;
 			my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{start};
 			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
-			
+
 			my ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf)=&plot_ylabel($k, $block_start_bp, $block_end_bp, $sample, $block_index, $scf, $k_index, $yaxis, $depth_type, \@yaxis_list);
 			my $prefix_ylabel="$sample.$scf.$block_index.$k_index.$depth_type.ylabel";
 			%outname = &gather_gff_conf_link($prefix_ylabel,$ylabel_gff,$ylabel_setting_conf,$ylabel_cross_link_conf, \%outname, $sample);
@@ -523,7 +564,7 @@ sub reads_mapping_run(){
 	my $one_read_height=1;
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
 	$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect" if(!$color_height_cs); #yellow
-	my %colors_height = &cigar_setting($color_height_cs);
+		my %colors_height = &cigar_setting($color_height_cs);
 	if($read_type eq "vcf"){
 		($reads_gff, $reads_setting_conf, $cross_link_conf) = &check_vcf(\%colors_height, $bam_file, $sample, $scf, $rg_start, $rg_end, $k_index, $read_type, $s1, $e1, $info);
 		return ($reads_gff, $reads_setting_conf, $cross_link_conf);
@@ -564,19 +605,19 @@ sub reads_mapping_run(){
 		$read_num++;
 #my $read_id="$sample.$scf.$block.$rg_start.$rg_end.$k_index.$read_type.$read_num";
 		if($show_type =~ /^rainbow/){
-			#die "\nerror:rainbow\n";
-			#next if($reads{$read_id}{mate_read_id} eq "null"|| $reads{$read_id}{mate_ref} ne $reads{$read_id}{ref_id});
+#die "\nerror:rainbow\n";
+#next if($reads{$read_id}{mate_read_id} eq "null"|| $reads{$read_id}{mate_ref} ne $reads{$read_id}{ref_id});
 			next if($reads{$read_id}{mate_read_id} eq "null");
-			#die "\nerror1:rainbow\n";
+#die "\nerror1:rainbow\n";
 			next if($reads{$read_id}{mate_ref} ne $reads{$read_id}{ref_id});
-			#die "\nerror2:rainbow\n";
+#die "\nerror2:rainbow\n";
 			my $mate=$reads{$read_id}{mate_read_id};
 			next if($reads{$mate}{cigar}{-1}{type} eq "fake"||$reads{$read_id}{cigar}{-1}{type} eq "fake");
 #next if(($reads{$read_id}{cigar}{-1}{end}-$reads{$read_id}{cigar}{-1}{start})<147||($reads{$mate}{cigar}{-1}{end}-$reads{$mate}{cigar}{-1}{start})<147);
 #next if($read_id!~ /90847/ && $read_id!~ /40151/);
 		}		
 		if($read_type eq "short_reads" || $read_type eq "long_reads"){
-			#die "here\n" if($read_type eq "short_reads");
+#die "here\n" if($read_type eq "short_reads");
 			my ($r1_start,$r1_end,$r2_start,$r2_end);
 # mate_read_id			
 			my ($cr_id, $map_pos_start_cr, $map_pos_end_cr, $cr_type,$cr_order);
@@ -600,9 +641,9 @@ sub reads_mapping_run(){
 				$read_shift_y = ($updown == 1)? "+$read_shift_y":"-$read_shift_y";
 
 				$cr_id="$read_id.cr.$cr.$cg.$updown.$k_index";
-				#my $feature_shape="rect";
+#my $feature_shape="rect";
 				if($cr_type=~ /reverse/ || $cr_type=~ /forward/){
-					#$feature_shape="arrow";
+#$feature_shape="arrow";
 					my $feature_arrow_sharp_extent=($read_type eq "short_reads")? 0.08:0.01;
 					$reads_setting_conf.="$cr_id\tfeature_arrow_sharp_extent\t0\n";
 					$reads_setting_conf.="$cr_id\tfeature_arrow_width_extent\t$feature_arrow_sharp_extent\n";
@@ -632,9 +673,9 @@ sub reads_mapping_run(){
 				}
 				die "\nerror: cr_id is $cr_id\n" if($map_pos_start_cr eq "start");
 				$reads_gff.="$scf\tadd\t$read_type_raw\t$map_pos_start_cr\t$map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$cr_id;\n";					    
-				#if($cr_type ne "fake"){
-				#	$reads_setting_conf.="$cr_id\tfeature_x_extent\t-0.5bp,+0.5bp\n";
-				#}
+#if($cr_type ne "fake"){
+#	$reads_setting_conf.="$cr_id\tfeature_x_extent\t-0.5bp,+0.5bp\n";
+#}
 				$feature_popup_title="mutation -> $cg,$map_pos_start_cr:$map_pos_end_cr";
 				$reads_setting_conf.="$cr_id\tfeature_shape\t$feature_shape\n";
 				$reads_setting_conf.="$cr_id\tfeature_height_ratio\t$feature_height\n";
@@ -648,7 +689,7 @@ sub reads_mapping_run(){
 
 				if($read_type eq "short_reads" && $cr == -1 && $reads{$read_id}{mate_read_id} ne "null"  &&  ($reads{$read_id}{mate_ref} eq "=" || $reads{$read_id}{ref_id} eq $reads{$read_id}{mate_ref}) ){
 					next if(exists $reads{$read_id}{flag} && ($reads{$read_id}{flag} & 8));
-					
+
 					my $mate_id=$reads{$read_id}{mate_read_id};
 #die "ssread_id is $read_id, flag is $reads{$read_id}{flag}\n" if(!$mate_id);
 					my $mate_cg=$reads{$mate_id}{cigar}{$cr}{cr};
@@ -679,7 +720,7 @@ sub reads_mapping_run(){
 						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_opacity\t$cross_link_opacity\n";
 					}elsif($show_type=~ /^paired:color->([^:]+):opacity->([\d\.]+):cross_link_height_line->([\d\.]+)/){
 						my $cross_link_opacity=$2*$opacity_ratio_mapq;
-						#die "$cross_link_opacity, $opacity_ratio_mapq, crid is $cr_id\n\n" if($cr_id=~ /1:7770:55632.14.66901400.66903400.read1.mate.cr.-1.0fake.-1.2/);
+#die "$cross_link_opacity, $opacity_ratio_mapq, crid is $cr_id\n\n" if($cr_id=~ /1:7770:55632.14.66901400.66903400.read1.mate.cr.-1.0fake.-1.2/);
 						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_color\t$1\n";
 						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_opacity\t$cross_link_opacity\n";
 						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_height_line\t$3\n";
@@ -728,12 +769,12 @@ sub check_vcf(){
 	while(<VCF>){
 		chomp;
 		next if($_=~ /^#/||$_=~ /^\s*$/);
-		##CHROM  POS       ID           REF  ALT    QUAL  FILTER
+##CHROM  POS       ID           REF  ALT    QUAL  FILTER
 		my @arr=split(/\t/,$_);
 		die "\nerror:vcf format \nerror in line$.:$_ in $vcf_file\n" if(@arr < 9);
 		my ($chr,$pos,$snpid,$ref_base,$query_base,$qual,$filter,$info,$format)=@arr[0..8];
 		next if($chr ne $scf || $pos < $rg_start || $pos > $rg_end || $ref_base eq $query_base);
-		#print "line is $_\n";
+#print "line is $_\n";
 		my $vcf_id="$sample.$scf.vcf.$pos.$ref_base.to.$query_base.$snpid.$k_index";
 		my $feature_label="$pos:$ref_base.to.$query_base";
 		my ($mutation_type, $mutation_length, $start, $end)=&check_vcf_mutation_type($ref_base, $query_base, $pos);
@@ -749,7 +790,7 @@ sub check_vcf(){
 		my $len=scalar@arr -1;
 		my $feature_popup_title="mutation: $chr:$pos:$snpid: $ref_base -> $query_base;qual=$qual,@arr[6..$len]";
 		$reads_gff.="$scf\tadd\t$read_type\t$start\t$end\t.\t+\t.\tID=$vcf_id\n";
-		#$reads_setting_conf.="$vcf_id\tfeature_x_extent\t-1bp,+1bp\n";
+#$reads_setting_conf.="$vcf_id\tfeature_x_extent\t-1bp,+1bp\n";
 		$reads_setting_conf.="$vcf_id\tfeature_color\t$feature_color\n";
 		$reads_setting_conf.="$vcf_id\tfeature_label_color\t$feature_color\n";
 		$reads_setting_conf.="$vcf_id\tfeature_shape\trect\n";
@@ -835,7 +876,7 @@ sub get_reads_depth(){
 # mate_read_id
 #print "read_idis1 $read_id,$reads{$read_id}{mate_pos},$reads{$read_id}{ref_end}\n";
 #die "\nerror: read_id is $read_id, ref_id is $reads{$read_id}{ref_id}\n" if(!$reads{$read_id}{ref_id});
-			#die "mate_read_id is , read_id $read_id\n" if(!$reads{$read_id}{mate_read_id});
+#die "mate_read_id is , read_id $read_id\n" if(!$reads{$read_id}{mate_read_id});
 			next if($read_type eq "short_reads" && $reads{$read_id}{mate_read_id} ne "null" && $reads{$read_id}{mate_pos} < $reads{$read_id}{ref_end} && $reads{$read_id}{mate_pos} < $reads{$read_id}{ref_start});
 #print "read_idis2 $read_id,$reads{$read_id}{mate_pos},$reads{$read_id}{ref_end}\n";
 			my ($cr_id, $map_pos_start_cr, $map_pos_end_cr, $cr_type,$cr_order);
@@ -949,7 +990,7 @@ sub get_mapping_reads(){
 	$read_type="long_reads" if($show_type eq "stack");
 
 	if(-f "$tmpf" && 0){
-		# Retrieve the hash from the file.
+# Retrieve the hash from the file.
 		use Storable;
 		die "die:get_mapping_reads\n";
 		print "using $tmpf, if you reupdate the $bam_file, please remove the $tmpf file\n";
@@ -984,7 +1025,7 @@ sub get_mapping_reads(){
 			}elsif($mapq >=$bad_mapq){
 				$mapq_percent=1- ($good_mapq - $mapq)/($good_mapq-$bad_mapq);
 				$mapq_percent=$min_opacity+$mapq_percent*(1-$min_opacity-0.05);
-				#print "$mapq_percent=$min_opacity+$mapq_percent*(1-$min_opacity-0.05), id is $r_id\n";
+#print "$mapq_percent=$min_opacity+$mapq_percent*(1-$min_opacity-0.05), id is $r_id\n";
 			}else{
 				$mapq_percent=$min_opacity;
 			}
@@ -1038,7 +1079,7 @@ sub get_mapping_reads(){
 					next if(exists $reads{$r}{mate_read_id} && exists $reads{$rr}{mate_read_id});
 #print "r is $r,rr is $rr; $reads{$r}{read_id} eq $reads{$rr}{read_id} && $reads{$r}{mate_pos} eq $reads{$rr}{ref_start} && $reads{$r}{ref_start} eq $reads{$rr}{mate_pos} && $reads{$r}{ref_id} eq $reads{$rr}{mate_ref} && $reads{$r}{mate_ref} eq $reads{$rr}{ref_id}\n";
 					next unless ($reads{$r}{read_id} eq $reads{$rr}{read_id} && $reads{$r}{mate_pos} eq $reads{$rr}{ref_start} && $reads{$r}{ref_start} eq $reads{$rr}{mate_pos} && $reads{$r}{ref_id} eq $reads{$rr}{mate_ref} && $reads{$r}{mate_ref} eq $reads{$rr}{ref_id});
-					#die "" if($)
+#die "" if($)
 					$reads{$r}{mate_read_id}=$rr;
 					$reads{$rr}{mate_read_id}=$r;
 				}
@@ -1077,8 +1118,8 @@ sub get_mapping_reads(){
 
 			}
 		}
-		#Save the hash to a file:
-		#store \%reads, "$tmpf";
+#Save the hash to a file:
+#store \%reads, "$tmpf";
 	}
 
 	return %reads;
@@ -1087,7 +1128,7 @@ sub get_mapping_reads(){
 sub cigar_setting(){
 	my ($color_height_cs)=@_;
 	my $color_height_cs_usage="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:#1E90FF:opacity0.6:height0.8:6bp:arrow,read2:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect" if(!$color_height_cs); #yellow
-	my %tmp;
+		my %tmp;
 	my @cgs=("M","I","D","N","S","H","P","X","reverse","forward","fake","read1","read2");
 	my (%colors_height);
 	$color_height_cs=~ s/\s//g;
@@ -1287,7 +1328,7 @@ sub detail_cigar(){
 	$reads{$r_id}{cigar}{-1}{cigar}=$cigar;
 	$reads{$r_id}{cigar}{-1}{pos}=$ref_start_pos;
 	$reads{$r_id}{cigar}{-1}{flag}=$flag;
-	
+
 
 
 
@@ -1329,7 +1370,7 @@ sub detail_cigar(){
 #$reads{$r_id}{rightest_cs}=$css[-1];
 	$reads{$r_id}{strand}=($strand)? "-":"+";
 
-	# call snp # MD:Z:12C135 
+# call snp # MD:Z:12C135 
 	if($line=~ /MD:\S*\d[ATCG]/ && 0 ){
 		my $call="cp $header_bam $header_bam.tmp && echo -e \"$line\" >> $header_bam.tmp && samtools mpileup -u --skip-indels -t DP $header_bam.tmp -f $refasta 2>/dev/null|bcftools view -v snps |grep \"^$scf\"";
 		open SNP,"$call|" or die "\nerror:$call \nerror!\n";
@@ -1420,7 +1461,7 @@ sub hist_scatter_line_run(){
 	my $cross_link_conf="";
 	for my $window(sort {$a<=>$b}keys %{$depths{window}}){
 		my $depth=$depths{window}{$window}{depth};
-		#$depth=int($depth);
+#$depth=int($depth);
 		my $diff_depth=$depth-abs($s2);
 		next if($depth<abs($s2));
 		my $depth_height=($diff_depth)*$depth_depth_ratio;
@@ -1455,16 +1496,16 @@ sub hist_scatter_line_run(){
 			$depth_setting_conf.="$depth_id\tlabel_rotate_angle\t0\n";
 			$depth_setting_conf.="$depth_id\tfeature_label_auto_angle_flag\t0\n\n";
 			$depth_setting_conf.="$depth_id\tfeature_label_size\t$depth_label_size\n";
-			#$depth_setting_conf.="$depth_id\tpadding_feature_label\t0.01\n";
+#$depth_setting_conf.="$depth_id\tpadding_feature_label\t0.01\n";
 		}
 
 		if($depth_type eq "hist"){
 			if($e1=~ /-/){
-				$depth_shift_y=$s1;
-				$depth_shift_y=~ s/-+/+/;
+				$depth_shift_y=abs($e1)-$depth_height;
+				$depth_shift_y="+$depth_shift_y";
 				$padding_depth_label="-0.01";
 			}else{
-				$depth_shift_y=$s1;
+				$depth_shift_y=abs($s1);
 				$depth_shift_y="-$depth_shift_y";
 				$padding_depth_label="+0.01";
 			}
@@ -1536,7 +1577,7 @@ sub read_depth_file(){
 	}
 	$depth_file=~ /^([^:]+)/;
 	$depth_file=$1;
-	#s3      s3      3       10 #sample scf_id  pos depth
+#s3      s3      3       10 #sample scf_id  pos depth
 	if($depth_file=~ /\.gz$/){
 		open IN,"gzip -dc $depth_file|" or die "\ncan not open $depth_file\n";
 	}else{
@@ -1678,8 +1719,10 @@ sub feature_ytick(){
 			$tick_label=$s2 + $k*$ytick_unit*$ytick_ratio;
 			$hgrid_shift_y="-$hgrid_shift_y";
 		}elsif($ytick_orientation=~ /down/i){
+			$feature_tick_shift_y = abs($e1) - + $k * $ytick_unit + $ytick_feature_tick_height/2;
+			$hgrid_shift_y = $feature_tick_shift_y - ($ytick_feature_tick_height-$hgrid_height)/2;
 			$feature_tick_shift_y ="+$feature_tick_shift_y";
-			$tick_label=$s2 - $k*$ytick_unit*$ytick_ratio;
+			$tick_label=abs($s2) + $k*$ytick_unit*$ytick_ratio;
 			$hgrid_shift_y="+$hgrid_shift_y";
 		}else{
 			die "die:\n";
