@@ -1,5 +1,5 @@
 # ClustersPloter
-#### usage:<br>
+#### Usage:<br>
 ```
 %  git clone http://github.com/orangeSi/ClustersPloter.git
 %  cd  example 
@@ -8,17 +8,19 @@
 ```
 &nbsp;&nbsp;&nbsp;&nbsp;plot gene clusters of many samples, one track means one sample, one track contain more than one fragments. one fragment contain gene cluster. you can defined every gene or feature(rotation,color,label,order depth,font size) in clusters. And add crossing link for any pair of genes.<br>
 
-#### dependence<br>
+#### Dependence<br>
 ```
 samtools >=1.7 # add this to linux PATH 
 perl >=v5.10.1
 ```
 <br>
-#### main feature:<br>
+#### Main Function:<br>
 - every track mean one sample , one sample can has more than one fragments. you can defind the feature color/lable font size/label color/label rotaion in feature.color.label.conf <br>
 - you can draw crosslink or sysnteny among features of different tracks<br><br>
 
-### update feture:<br>
+### Update:<br>
+#### 2018-12-28:<br>
+- add html format output, so you can pan or zoom the svg in html<br>
 #### 2018-12-21:<br>
 - add synteny between genomes, only support paf(like minimap2 ouput) format yet. test is example/out7.sh<br>
 #### 2018-12-20:<br>
@@ -34,17 +36,16 @@ perl >=v5.10.1
 - redesign the the main.conf and feature.crossing.link.conf to make more freely to reset every feature, reset every link color and opacity one by one, and reset order depth of every feature or crosslink or track, reset feature height one by one as in out2.svg<br>
 - add rect for feature shape, now have arrow and rect, you can use arrow and rect at the same time<br>
 - remove the legend border line<br>
-
-#### bug:<br>
-&nbsp;&nbsp;&nbsp;&nbsp; welcome to call me at the issue<br>
+<br>
 
 
-
-#### todo:<br>
+#### ToDo:<br>
+&nbsp;&nbsp;**2018-12-28**:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1. add gtf fomrat, not only gff format<br>
 &nbsp;&nbsp;**2018-11-09**:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;3. sort by feature,so same feature of different tracks can align centre<br>
-&nbsp;&nbsp;&nbsp;&nbsp;4. add ratio scale in the bottom to recognise the approximate length of every feature <br>
-&nbsp;&nbsp;&nbsp;&nbsp;5. embed svg in svg to make heatmap or scatter or line or histogram more easy to product, like example/out.svg*svg or \<foreignObject\> <br> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;1. sort by feature,so same feature of different tracks can align centre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2. add ratio scale in the bottom to recognise the approximate length of every feature <br>
+&nbsp;&nbsp;&nbsp;&nbsp;3. embed svg in svg to make heatmap or scatter or line or histogram more easy to product, like example/out.svg*svg or \<foreignObject\> <br> <br>
 
 
 
