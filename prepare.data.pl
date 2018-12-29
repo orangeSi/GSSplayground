@@ -205,7 +205,7 @@ sub synteny_run(){
 			push(@pairs,$query_target_feature_id);
 		}
 		close BLAST;		
-	}elsif($alignment_type eq "blat_psl"){
+	}elsif($alignment_type eq "blat_psl"){ # https://genome.ucsc.edu/FAQ/FAQformat.html#format2
 		my $big=1;
 		my $detail=1;
 		if($k=~ /blat_block_show/){
@@ -290,6 +290,8 @@ sub synteny_run(){
 			push(@pairs,$query_target_feature_id);
 		}
 		close BLAT;		
+	}elsif($alignment_type eq "mummer4"){ # https://mummer4.github.io/tutorial/tutorial.html /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/mummer/mummer-4.0.0beta2/
+		die  "wait mummer4\n";
 	}else{
 		die "error: not support alignment_type $alignment_type yet\n"
 	}

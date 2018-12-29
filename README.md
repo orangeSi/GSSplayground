@@ -42,6 +42,7 @@ perl >=v5.10.1
 #### ToDo:<br>
 &nbsp;&nbsp;**2018-12-28**:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. add gtf fomrat, not only gff format<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2. add blat_spl and mummer4 fomrat, not only blast_m8 or paf format<br>
 &nbsp;&nbsp;**2018-11-09**:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. sort by feature,so same feature of different tracks can align centre<br>
 &nbsp;&nbsp;&nbsp;&nbsp;2. add ratio scale in the bottom to recognise the approximate length of every feature <br>
