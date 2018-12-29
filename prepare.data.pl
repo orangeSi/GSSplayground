@@ -60,8 +60,8 @@ sub synteny(){
 	my (%outname);
 	my @show_types=("quadrilateral");
 #my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel");
-	my @highs=();
-	my @align_types=("paf", "blast");
+	my @highs=("blat_block_show");
+	my @align_types=("paf", "blast_m8", "blat_psl", "mummer4");
 	for my $k (@{$conf->{synteny}}){
 		$k_index++;
 		&check_highs(\@highs,$k);
@@ -69,18 +69,18 @@ sub synteny(){
 		@ks = split(/\t+/, $k);
 		my @infos=split(/,/, $ks[0]);
 		my $infos_len=scalar(@infos);
-		if($infos_len != 8 ){
-			die "\nerror: synteny should separate by \\t, and have 8 colums for synteny=$k, but only have $infos_len\nvalid like synteny=$ex\n";
+		if($infos_len != 9 ){
+			die "\nerror: synteny should separate by \\t, and have 9 colums for synteny=$k, but only have $infos_len\nvalid like synteny=$ex\n";
 		}
-		my @arr=$ks[0]=~ /^order->(-?\d+),query->([^:]+):target->([^,]+),(\S+),(\S+),(\S+),forward->([^-]+)->opacity([\d\.]+),reverse->([^-]+)->opacity([\d\.]+),cross_link_shift_y->(\+[\d\.]+:-[\d\.]+)$/;
-		die "\nerror: $ks[0] format \nerror, should like $ex\n" if(@arr!=11);
-		my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y) = @arr;
+		my @arr=$ks[0]=~ /^order->(-?\d+),query->([^:]+):target->([^,]+),(\S+),(\S+),(\S+),forward->([^-]+)->opacity([\d\.]+),reverse->([^-]+)->opacity([\d\.]+),cross_link_shift_y->(\+[\d\.]+:-[\d\.]+),sort->([01])$/;
+		die "\nerror: $ks[0] format \nerror, should like $ex\n" if(@arr!=12);
+		my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y,$sort) = @arr;
 		die "\nerror: not support $alignment_type, only support @align_types\n" if(! grep(/^$alignment_type$/, @align_types));
 		die "\nerror: not support $crosslink_shape, only support @show_types\n" if(! grep(/^$crosslink_shape$/, @show_types));
 		die "\nerror: $query_name not exists in --list\n" if(not exists $conf->{sample_scf}{$query_name});
 		die "\nerror: $target_name not exists in --list\n" if(not exists $conf->{sample_scf}{$target_name});
 #$conf{sample_scf}{$sample}{$id}="";
-		my ($synteny_gff_q, $synteny_setting_conf_q, $synteny_gff_t, $synteny_setting_conf_t,$cross_link_conf)=&synteny_run(\@arr, $conf,$k_index);
+		my ($synteny_gff_q, $synteny_setting_conf_q, $synteny_gff_t, $synteny_setting_conf_t,$cross_link_conf)=&synteny_run(\@arr, $conf,$k_index, $k);
 
 		my $prefix="$query_name.$query_name.to.$target_name.$alignment_type.$crosslink_shape.$k_index.synteny";	
 		%outname = &gather_gff_conf_link($prefix,$synteny_gff_q,$synteny_setting_conf_q,"", \%outname, $query_name);
@@ -96,8 +96,8 @@ sub synteny(){
 }
 
 sub synteny_run(){
-	my ($arr,$conf,$k_index)=@_;
-	my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y)=@$arr;
+	my ($arr,$conf,$k_index, $k)=@_;
+	my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y, $sort)=@$arr;
 	my ($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf);
 	my (%qid, %tid, $qtid);
 #my $feature_color="white";
@@ -107,10 +107,18 @@ sub synteny_run(){
 	my @pairs;
 	if($alignment_type eq "paf"){
 		if($alignment=~ /\.paf$/){
-			open PAF,"cat $alignment|sort -k 10nr,10nr -k 1,1 -k 6,6|" or die "$?";
+			if($sort){
+				open PAF,"cat $alignment|sort -k 10nr,10nr -k 1,1 -k 6,6|" or die "$?";
+			}else{
+				open PAF,"$alignment" or die "$?";
+			}
 			print "$alignment is plain file\n";
 		}elsif($alignment=~ /\.gz/){
-			open PAF,"gzip -dc $alignment|sort -k 10nr,10nr -k 1,1 -k 6,6|" or die "$?";
+			if($sort){
+				open PAF,"gzip -dc $alignment|sort -k 10nr,10nr -k 1,1 -k 6,6|" or die "$?";
+			}else{
+				open PAF,"gzip -dc $alignment|" or die "$?";
+			}
 			print "$alignment is gz file\n";
 		}else{
 			die "\nerror:$alignment should end with paf or gz\n";
@@ -132,9 +140,9 @@ sub synteny_run(){
 			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
 			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
 			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
-			my $indentity=$arr[9]/$arr[10];
-			my $q_cov=abs($arr[2]-$arr[3])/$arr[1];
-			my $t_cov=abs($arr[7]-$arr[8])/$arr[6];
+			my $indentity=$arr[9]/$arr[10]*100;
+			my $q_cov=(1+abs($arr[2]-$arr[3]))/$arr[1] * 100;
+			my $t_cov=(1+abs($arr[7]-$arr[8]))/$arr[6] * 100;
 			$align{query}{$query_feature_id}{query_scf}=$query_scf;
 			$align{query}{$query_feature_id}{query_start}=$query_start;
 			$align{query}{$query_feature_id}{query_end}=$query_end;
@@ -148,9 +156,140 @@ sub synteny_run(){
 			push(@pairs,$query_target_feature_id);
 		}
 		close PAF;		
-	}elsif($alignment_type eq "blast"){
+	}elsif($alignment_type eq "blast_m8"){
+		if($alignment=~ /\.gz/){
+			if($sort){
+				open BLAST,"gzip -dc $alignment|sort -k 4nr,4nr -k 1,1 -k 2,2|" or die "$?";
+			}else{
+				open BLAST,"gzip -dc $alignment|" or die "$?";
+			}
+			print "$alignment is gz file\n";
+		}else{
+			if($sort){
+				open BLAST,"cat $alignment|sort -k 4nr,4nr -k 1,1 -k 2,2|" or die "$?";
+			}else{
+				open BLAST,"$alignment" or die "$?";
+			}
+			print "$alignment is plain file\n";
+		}
+		while(<BLAST>){
+			chomp;
+			next if($_=~ /^#/ ||$_=~ /^\s*$/);
+#print "line$. is $_\n";
+			my @arr=split(/\s+/,$_);
+			my $query_scf=$arr[0];
+			my $target_scf=$arr[1];
+			my $query_start=$arr[6];
+			my $query_end=$arr[7];
+			my $target_start=$arr[8];
+			my $target_end=$arr[9];
+			my $strand=($arr[9]>$arr[8])? "+":"-";
+			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
+			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
+			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
+			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
+			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
+			my $indentity=$arr[2];
+			my $q_cov=(abs($arr[7]-$arr[6])+1)/$arr[3] * 100;
+			my $t_cov=(abs($arr[9]-$arr[8])+1)/$arr[3] * 100;
+			$align{query}{$query_feature_id}{query_scf}=$query_scf;
+			$align{query}{$query_feature_id}{query_start}=$query_start;
+			$align{query}{$query_feature_id}{query_end}=$query_end;
+			$align{qt}{$query_target_feature_id}{strand}=$strand;
+			$align{qt}{$query_target_feature_id}{indentity}=$indentity;
+			$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
+			$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+			$align{target}{$target_feature_id}{target_scf}=$target_scf;
+			$align{target}{$target_feature_id}{target_start}=$target_start;
+			$align{target}{$target_feature_id}{target_end}=$target_end;
+			push(@pairs,$query_target_feature_id);
+		}
+		close BLAST;		
+	}elsif($alignment_type eq "blat_psl"){
+		my $big=1;
+		my $detail=1;
+		if($k=~ /blat_block_show/){
+			my $error="error: blat_block_show in $k format error, should like \\t/blat_block_show->1:1 or blat_block_show->1:0 or blat_block_show->0:1\n";
+			if($k=~ /blat_block_show->([01]):[01]/){
+				$big=$1;
+				$detail=$2;
+				die "$error\n" if($big + $detail ==0);
+			}else{
+				die "$error\n";
+			}
+		}
 		
-
+		if($alignment=~ /\.gz/){
+			if($sort){
+				open BLAT,"gzip -dc $alignment|awk '{if(\$1==\"psLayout\"){flag=1}if(flag==1){if(NR>=6)print \$0}else{print \$0}}'|sort -k 4nr,4nr -k 1,1 -k 2,2|" or die "$?";
+			}else{
+				open BLAT,"gzip -dc $alignment|awk '{if(\$1==\"psLayout\"){flag=1}if(flag==1){if(NR>=6)print \$0}else{print \$0}}'|" or die "$?";
+			}
+			print "$alignment is gz file\n";
+		}else{
+			if($sort){
+				open BLAT,"cat $alignment|awk '{if(\$1==\"psLayout\"){flag=1}if(flag==1){if(NR>=6)print \$0}else{print \$0}}'|sort -k 4nr,4nr -k 1,1 -k 2,2|" or die "$?";
+			}else{
+				open BLAT,"cat $alignment|awk '{if(\$1==\"psLayout\"){flag=1}if(flag==1){if(NR>=6)print \$0}else{print \$0}}'|" or die "$?";
+			}
+			print "$alignment is plain file\n";
+		}
+		while(<BLAT>){
+			chomp;
+			next if($_=~ /^#/ ||$_=~ /^\s*$/);
+#print "line$. is $_\n";
+			my @arr=split(/\s+/,$_);
+			my $query_scf=$arr[9];
+			my $target_scf=$arr[13];
+			my $query_start=($arr[11] ==0)? 1:$arr[11];
+			my $query_end=$arr[12];
+			my $target_start=($arr[15] ==0)? 1:$arr[15];
+			my $target_end=$arr[16];
+			my $strand=$arr[8];
+			if($strand eq "+" || $strand eq "-"){
+				die "error:here1 in line$.:$_ \n" if($query_start > $query_end);
+				die "error:here2 in line$.:$_ \n" if($target_start > $target_end);
+			}else{
+				die "error: blat not support strand $strand in line$.:$_ yet\n";
+			}
+			if($arr[19]=~ /\d,\d/){
+				my @blocksize=split(/,/, $arr[18]);
+				my @detail_q=split(/,/, $arr[19]);
+				my @detail_t=split(/,/, $arr[20]);
+				
+				for my $i(0..scalar(@detail_q)-1){
+					my $q_start=$detail_q[$i];
+					$q_start = 1 if($q_start ==0);
+					my $q_end=$q_start+$blocksize[$i];
+					my $t_start=$detail_t[$i];
+					$t_start = 1 if($t_start ==0);
+					my $t_end=$t_start+$blocksize[$i];
+					die "error:blat max($q_start, $q_end) > $arr[10] || max($t_start, $t_end)>$arr[14]\n" if(max($q_start, $q_end) > $arr[10] || max($t_start, $t_end)>$arr[14]);
+						
+				}
+				
+			}
+			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
+			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
+			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
+			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
+			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
+			my $indentity=$arr[2];
+			my $q_cov=(abs($arr[7]-$arr[6])+1)/$arr[3] * 100;
+			my $t_cov=(abs($arr[9]-$arr[8])+1)/$arr[3] * 100;
+			$align{query}{$query_feature_id}{query_scf}=$query_scf;
+			$align{query}{$query_feature_id}{query_start}=$query_start;
+			$align{query}{$query_feature_id}{query_end}=$query_end;
+			$align{qt}{$query_target_feature_id}{strand}=$strand;
+			$align{qt}{$query_target_feature_id}{indentity}=$indentity;
+			$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
+			$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+			$align{target}{$target_feature_id}{target_scf}=$target_scf;
+			$align{target}{$target_feature_id}{target_start}=$target_start;
+			$align{target}{$target_feature_id}{target_end}=$target_end;
+			push(@pairs,$query_target_feature_id);
+		}
+		close BLAT;		
 	}else{
 		die "error: not support alignment_type $alignment_type yet\n"
 	}
@@ -210,11 +349,11 @@ sub synteny_common_write(){
 		}else{
 			die "\nerror:srand $strand\n";
 		}
-		$cross_link_opacity*=$align{qt}{$pair}{indentity};
+		$cross_link_opacity*=($align{qt}{$pair}{indentity}/100);
 		my $q_cov=$align{qt}{$pair}{q_cov};
 		my $t_cov=$align{qt}{$pair}{t_cov};
 		if(not exists $qtid{"$query_feature_id.$target_feature_id"}){
-			my $feature_popup_title="query -> $query_scf:$query_start:$query_end;target -> $target_scf:$target_start:$target_end;strand -> $strand;indentity -> $align{qt}{$pair}{indentity};coverage -> query:$q_cov;target:$t_cov";
+			my $feature_popup_title="query -> $query_scf:$query_start:$query_end;target -> $target_scf:$target_start:$target_end;strand -> $strand;indentity -> $align{qt}{$pair}{indentity}%;coverage -> query:$q_cov%;target:$t_cov%";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shape\t$crosslink_shape\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_anchor_pos\tlow_up\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_color\t$cross_link_color\n";
