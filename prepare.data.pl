@@ -1,11 +1,13 @@
 #!/usr/bin/env perl -w
+#use strict;
+use warnings;
 use Getopt::Long;
 use List::Util qw(max min);
 use FindBin qw($Bin);
 use lib "$Bin";
 use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para);
 
-my ($list,$prefix,$outdir,$conf);
+my ($list,$prefix,$outdir,$conf, $confile, $track_reorder);
 GetOptions("list:s"=>\$list,
 		"prefix:s"=>\$prefix,
 		"outdir:s"=>\$outdir,
@@ -29,6 +31,7 @@ if(! -d "$outdir"){
 my @track_reorder;
 my @funcs=("hist_scatter_line", "reads_mapping", "synteny");
 my %conf = &read_conf($confile, @funcs);
+
 ($conf, $track_reorder) = &default_setting(%conf);
 %conf=%$conf;
 @track_reorder=@$track_reorder;
@@ -41,8 +44,8 @@ my %gff=%$gff;
 my %fts=%$fts;
 my @track_order=@$track_order;
 
-for my $f (@funcs){
-	&$f(\%gff, \%conf);
+for my $fun (@funcs){
+	&$fun(\%gff, \%conf);
 }
 
 
@@ -50,7 +53,7 @@ for my $f (@funcs){
 print "\ndata done\n";
 sub synteny(){
 	my ($gff, $conf)=@_;
-	my $ex="synteny=order->1,query->s1:target->s2,../data/s1.mapto.s2.paf.gz,paf,quadrilateral,forward->yellow->opacity1,reverse->blue->opacity1,cross_link_shift_y->+1:-1";
+	my $ex="synteny=order->1,query->s1:target->s2,../data/s1.mapto.s2.paf.gz,paf,quadrilateral,forward->yellow->opacity1,reverse->blue->opacity1,cross_link_shift_y->+1:-1,sort->1";
 	unless(exists $conf->{synteny} && $conf->{synteny}){
 		print "synteny not\n";
 		return 0;
@@ -61,12 +64,12 @@ sub synteny(){
 	my @show_types=("quadrilateral");
 #my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel");
 	my @highs=("blat_block_show");
-	my @align_types=("paf", "blast_m8", "blat_psl", "mummer4");
+	my @align_types=("paf", "blast_m8", "blat_psl", "mummer_coords");
 	for my $k (@{$conf->{synteny}}){
 		$k_index++;
 		&check_highs(\@highs,$k);
 		print "$k_index is $k\n\n";
-		@ks = split(/\t+/, $k);
+		my @ks = split(/\t+/, $k);
 		my @infos=split(/,/, $ks[0]);
 		my $infos_len=scalar(@infos);
 		if($infos_len != 9 ){
@@ -128,6 +131,7 @@ sub synteny_run(){
 			next if($_=~ /^#/ ||$_=~ /^\s*$/);
 #print "line$. is $_\n";
 			my @arr=split(/\s+/,$_);
+			die "error:alignment sholud be >12 columns in $alignment\n" if(@arr<12);
 			my $query_scf=$arr[0];
 			my $target_scf=$arr[5];
 			my $query_start=($arr[2] ==0)? 1:$arr[2];
@@ -177,6 +181,7 @@ sub synteny_run(){
 			next if($_=~ /^#/ ||$_=~ /^\s*$/);
 #print "line$. is $_\n";
 			my @arr=split(/\s+/,$_);
+			die "error:alignment sholud be 12 columns in $alignment\n" if(@arr!=12);
 			my $query_scf=$arr[0];
 			my $target_scf=$arr[1];
 			my $query_start=$arr[6];
@@ -218,7 +223,7 @@ sub synteny_run(){
 				die "$error\n";
 			}
 		}
-		
+
 		if($alignment=~ /\.gz/){
 			if($sort){
 				open BLAT,"gzip -dc $alignment|awk '{if(\$1==\"psLayout\"){flag=1}if(flag==1){if(NR>=6)print \$0}else{print \$0}}'|sort -k 4nr,4nr -k 1,1 -k 2,2|" or die "$?";
@@ -239,6 +244,7 @@ sub synteny_run(){
 			next if($_=~ /^#/ ||$_=~ /^\s*$/);
 #print "line$. is $_\n";
 			my @arr=split(/\s+/,$_);
+			die "error:alignment sholud be 21 columns in $alignment\n" if(@arr!=21);
 			my $query_scf=$arr[9];
 			my $target_scf=$arr[13];
 			my $query_start=($arr[11] ==0)? 1:$arr[11];
@@ -252,11 +258,11 @@ sub synteny_run(){
 			}else{
 				die "error: blat not support strand $strand in line$.:$_ yet\n";
 			}
-			if($arr[19]=~ /\d,\d/){
+			if($arr[19]=~ /\d,\d/ && $detail){
 				my @blocksize=split(/,/, $arr[18]);
 				my @detail_q=split(/,/, $arr[19]);
 				my @detail_t=split(/,/, $arr[20]);
-				
+
 				for my $i(0..scalar(@detail_q)-1){
 					my $q_start=$detail_q[$i];
 					$q_start = 1 if($q_start ==0);
@@ -265,18 +271,89 @@ sub synteny_run(){
 					$t_start = 1 if($t_start ==0);
 					my $t_end=$t_start+$blocksize[$i];
 					die "error:blat max($q_start, $q_end) > $arr[10] || max($t_start, $t_end)>$arr[14]\n" if(max($q_start, $q_end) > $arr[10] || max($t_start, $t_end)>$arr[14]);
-						
+					my $query_feature_id="$query_name.$query_scf.$q_start.$q_end.$k_index.$strand";
+					my $target_feature_id="$target_name.$target_scf.$t_start.$t_end.$k_index.$strand";
+					my $query_target_feature_id="$query_feature_id -> $target_feature_id";
+					my $indentity="null";
+					my $q_cov=(abs($q_end -$q_start)+1)/$arr[10] * 100;
+					my $t_cov=(abs($t_end-$t_start)+1)/$arr[14] * 100;
+					$align{query}{$query_feature_id}{query_scf}=$query_scf;
+					$align{query}{$query_feature_id}{query_start}=$q_start;
+					$align{query}{$query_feature_id}{query_end}=$q_end;
+					$align{qt}{$query_target_feature_id}{strand}=$strand;
+					$align{qt}{$query_target_feature_id}{indentity}=$indentity;
+					$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
+					$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+					$align{target}{$target_feature_id}{target_scf}=$target_scf;
+					$align{target}{$target_feature_id}{target_start}=$t_start;
+					$align{target}{$target_feature_id}{target_end}=$t_end;
+					push(@pairs,$query_target_feature_id);
 				}
-				
 			}
+			if($big){
+				die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
+				die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
+				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
+				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
+				my $query_target_feature_id="$query_feature_id -> $target_feature_id";
+				my $indentity=($arr[0]-$arr[1])/$arr[0];
+				my $q_cov=(abs($arr[12]-$arr[11])+1)/$arr[10] * 100;
+				my $t_cov=(abs($arr[16]-$arr[15])+1)/$arr[14] * 100;
+				$align{query}{$query_feature_id}{query_scf}=$query_scf;
+				$align{query}{$query_feature_id}{query_start}=$query_start;
+				$align{query}{$query_feature_id}{query_end}=$query_end;
+				$align{qt}{$query_target_feature_id}{strand}=$strand;
+				$align{qt}{$query_target_feature_id}{indentity}=$indentity;
+				$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
+				$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+				$align{target}{$target_feature_id}{target_scf}=$target_scf;
+				$align{target}{$target_feature_id}{target_start}=$target_start;
+				$align{target}{$target_feature_id}{target_end}=$target_end;
+				push(@pairs,$query_target_feature_id);
+			}
+		}
+		close BLAT;		
+	}elsif($alignment_type eq "mummer_coords"){ # https://mummer4.github.io/tutorial/tutorial.html /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/mummer/mummer-4.0.0beta2/
+		if($alignment=~ /\.coords$/){
+			if($sort){
+				open M,"cat $alignment|awk 'NR>=6'|sort -k 7nr,7nr -k 8nr,8nr -k 10nr,10nr -k 18,19|" or die "$?";
+			}else{
+				open M,"$alignment|awk 'NR>=6'|" or die "$?";
+			}
+			print "$alignment is plain file\n";
+		}elsif($alignment=~ /\.gz/){
+			if($sort){
+				open M,"gzip -dc $alignment|awk 'NR>=6'|sort -k 7nr,7nr -k 8nr,8nr -k 10nr,10nr -k 18,19|" or die "$?";
+			}else{
+				open M,"gzip -dc $alignment|awk 'NR>=6'|" or die "$?";
+			}
+			print "$alignment is gz file\n";
+		}else{
+			die "\nerror:$alignment should end with coords or gz\n";
+		}
+		while(<M>){
+			chomp;
+			next if($_=~ /^#/ ||$_=~ /^\s*$/);
+#print "line$. is $_\n";
+			my @arr=split(/\s+/,$_);
+			die "error:alignment sholud be 20 columns in $alignment\n" if(@arr!=20);
+			
+			my $query_scf=$arr[19];
+			my $target_scf=$arr[18];
+			my $query_start=($arr[4] >$arr[5])? $arr[5]:$arr[4];
+			my $query_end=($arr[4] >$arr[5])? $arr[4]:$arr[5];
+			my $target_start=$arr[1];
+			my $target_end=$arr[2];
+			die "die:error $arr[2]<$arr[1]\n" if($arr[2]<$arr[1]);
+			my $strand=($arr[4] >$arr[5])? "-":"+";
 			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
 			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
 			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
 			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
 			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
-			my $indentity=$arr[2];
-			my $q_cov=(abs($arr[7]-$arr[6])+1)/$arr[3] * 100;
-			my $t_cov=(abs($arr[9]-$arr[8])+1)/$arr[3] * 100;
+			my $indentity=$arr[10];
+			my $q_cov=$arr[16];
+			my $t_cov=$arr[15];
 			$align{query}{$query_feature_id}{query_scf}=$query_scf;
 			$align{query}{$query_feature_id}{query_start}=$query_start;
 			$align{query}{$query_feature_id}{query_end}=$query_end;
@@ -289,16 +366,12 @@ sub synteny_run(){
 			$align{target}{$target_feature_id}{target_end}=$target_end;
 			push(@pairs,$query_target_feature_id);
 		}
-		close BLAT;		
-	}elsif($alignment_type eq "mummer4"){ # https://mummer4.github.io/tutorial/tutorial.html /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/mummer/mummer-4.0.0beta2/
-		die  "wait mummer4\n";
+		close M;		
 	}else{
 		die "error: not support alignment_type $alignment_type yet\n"
 	}
 
-	($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf) = &synteny_common_write(\@pairs, \%align, $arr);	
-
-
+	($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf) = &synteny_common_write(\@pairs, \%align, $arr);
 	return ($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf);
 }
 
@@ -391,7 +464,7 @@ sub reads_mapping(){
 		$k_index++;
 		&check_highs(\@highs,$k);
 		print "$k_index is $k\n\n";
-		@ks = split(/\t+/, $k);
+		my @ks = split(/\t+/, $k);
 		my @infos=split(/,/, $ks[0]);
 		my $infos_len=scalar(@infos);
 		if($infos_len != 17){
@@ -406,7 +479,7 @@ sub reads_mapping(){
 		die "\nerror: not support $reads_type~ only support @mapping_types\n" if(! grep(/^$reads_type$/, @mapping_types));
 		&show_type_check($show_type,\@{$show_types{$reads_type}});
 		die "\nerror: mapqs $mapqs should be number which >=0 , and like 0:10:40 which mean will show mapping read which mapq>=0, if mapq>=40 will use the same opacity\n" if($mapqs!~ /^\d+:\d+:\d+$/);
-		for($i=0;$i<$infos_len;$i++){
+		for(my $i=0;$i<$infos_len;$i++){
 			next if($i==8);
 			$infos[$i]=~ s/\s//g;
 		}
@@ -630,7 +703,7 @@ sub hist_scatter_line(){
 		$k_index++;
 		&check_highs(\@highs,$k);
 		print "$k_index is $k\n\n";
-		@ks = split(/\t+/, $k);
+		my @ks = split(/\t+/, $k);
 		my @infos=split(/,/, $ks[0]);
 #highlight_hgrid->26:2:green,28:2:black    highlight_columns->0:20:green:0.7,20:100:black:0.5 start_end_xaxis->61:661,711:1311,1361:1961
 		my $infos_len=scalar(@infos);
@@ -648,7 +721,7 @@ sub hist_scatter_line(){
 		$depth_file=~ /^([^:]+):([^:]+)$/;
 		die "\nerror: $1 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $1);
 		die "\nerror: $2 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $2);
-		for($i=0;$i<$infos_len;$i++){
+		for(my $i=0;$i<$infos_len;$i++){
 			next if($i==8);
 			$infos[$i]=~ s/\s//g;
 		}
@@ -762,7 +835,7 @@ sub reads_mapping_run(){
 			my ($r1_start,$r1_end,$r2_start,$r2_end);
 # mate_read_id			
 			my ($cr_id, $map_pos_start_cr, $map_pos_end_cr, $cr_type,$cr_order);
-			$map_pos_strand_cr=$reads{$read_id}{strand};
+			my $map_pos_strand_cr=$reads{$read_id}{strand};
 			my $read_shift_y_depth = $reads_depth{depth}{$read_id};
 			$read_shift_y_depth=0 if($show_type =~ /^rainbow/);
 			my $opacity_ratio_mapq=$reads{$read_id}{cigar}{-1}{mapq_percent};
@@ -850,7 +923,7 @@ sub reads_mapping_run(){
 						$cross_link_width_ellipse=$3;	
 						my $out_r=abs($e1) - $one_read_height- abs($s1);
 						my $inner_r=abs($e1) - $one_read_height - abs($e1-$s1)*0.02-abs($s1);
-						$cross_link_height_ellipse="$out_r,$inner_r";
+						my $cross_link_height_ellipse="$out_r,$inner_r";
 						$cross_link_anchor_pos=($updown == -1)? "up_up":"low_low";	
 						$cross_link_shape="ellipse";
 						my $cross_link_orientation_ellipse=($updown == -1)? "up":"down";
@@ -986,8 +1059,8 @@ sub get_reads_depth(){
 	my @max_depths=(1);
 	my $new_depth=0;
 #my $one_read_height=(abs($s1-$e1))/$max_depth;
-	$max_depth=max(@max_depths)+0.5;
-	$one_read_height=(0.99 * abs($s1-$e1))/$max_depth;
+	my $max_depth=max(@max_depths)+0.5;
+	my $one_read_height=(0.99 * abs($s1-$e1))/$max_depth;
 #print "max_depth is $max_depth, max_depths is @max_depths, read_type is $read_type\n";
 	my $read_num;
 	my $read_shift_y;
@@ -1021,7 +1094,7 @@ sub get_reads_depth(){
 			next if($read_type eq "short_reads" && $reads{$read_id}{mate_read_id} ne "null" && $reads{$read_id}{mate_pos} < $reads{$read_id}{ref_end} && $reads{$read_id}{mate_pos} < $reads{$read_id}{ref_start});
 #print "read_idis2 $read_id,$reads{$read_id}{mate_pos},$reads{$read_id}{ref_end}\n";
 			my ($cr_id, $map_pos_start_cr, $map_pos_end_cr, $cr_type,$cr_order);
-			$map_pos_strand_cr=$reads{$read_id}{strand};
+			my $map_pos_strand_cr=$reads{$read_id}{strand};
 
 			my $cr=-1;
 			$cr_type=$reads{$read_id}{cigar}{$cr}{type};
@@ -1307,7 +1380,7 @@ sub convert_cigar(){
 	my @ref_consumes=("M","D","N","=","X");
 	my @reads_consumes=("M","I","S","=","X");
 	my @cigars=$cg=~ /(\d+[^\d]+)/g;
-	$cigars_len=scalar(@cigars);
+	my $cigars_len=scalar(@cigars);
 	for my $i(0..$cigars_len-1){
 		die "i is $i, isis $cigars[$i],$cigars[$i+1] cg is,$cg,\n" if($cigars[$i]!~ /(\d+)([^\d]+)/);
 #$cigars[$i]=~ /(\d+)([^\d]+)/);
@@ -1554,12 +1627,12 @@ sub get_regions(){
 				$info=~ /\s+$a->(\S+)/;
 				my $poss=$1;
 				my @rgs=split(/,/, $poss);
-				for $rg(@rgs){
+				for my $rg(@rgs){
 					if($rg=~ /^(\d+):(\d+)$/){
 #print "\nrgrg is $rg, info is $info\n";
 						my ($start, $end)=($1,$2);
 						$flag=0;
-						$skip_flag=&check_reads_ref_overlap($start,$end,$block_start,$block_end);
+						my $skip_flag=&check_reads_ref_overlap($start,$end,$block_start,$block_end);
 						next if($skip_flag);
 						$start=$block_start if($start<$block_start);
 						$end=$block_end if($end>$block_end);

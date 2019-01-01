@@ -304,7 +304,7 @@ sub go_line(){
 	$line=~ /[\s;]ID=(\S+)/;
 	my $feature_id=$1;
 	$feature_id=~ s/;.*//g;
-	die "error: feature_id format should like ID=gene1; in gff, instead of $line\n" if(!$feature_id);
+	die "error: feature_id format should like ID=gene1; or xxx;ID=gene1; in gff, instead of $line\n" if(!$feature_id);
 	die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);
 	if(exists $fts->{$feature_id}){
 		die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";

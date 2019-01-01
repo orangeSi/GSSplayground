@@ -1,11 +1,13 @@
 #!/usr/bin/env perl -w
+use strict;
+use warnings;
 use Getopt::Long;
 use FindBin qw($Bin);
 use List::Util qw(max min);
 use lib "$Bin";
 use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks);
 
-my ($list,$prefix,$outdir,$conf);
+my ($list,$prefix,$outdir,$conf,$track_reorder);
 GetOptions("list:s"=>\$list,
 		"prefix:s"=>\$prefix,
 		"outdir:s"=>\$outdir,
@@ -178,6 +180,7 @@ while(@track_order){
 		if($display_segment_name_flag=~ /yes/i){
 			my $segment_baseline;
 			my $segment_text_anchor;
+			my $segment_name_x;
 			if($display_segment_name_pos eq "left"){
 				$segment_text_anchor="start";
 				$segment_name_x=$id_line_x;
@@ -191,7 +194,7 @@ while(@track_order){
 				die "error:display_segment_name_pos not support $display_segment_name_pos, only support left right center\n";
 			}
 
-			$segment_name_y=$id_line_y+0.5*$id_line_height;
+			my $segment_name_y=$id_line_y+0.5*$id_line_height;
 			if($display_segment_name_shift_y=~ /^[\+-]0$/){
 				$segment_baseline="middle";
 			}elsif($display_segment_name_shift_y=~ /^[\d\+\.]+$/){
@@ -259,9 +262,9 @@ while(@track_order){
 
 			my $index_label_content = (exists $conf{feature_setting2}{$index_id}{feature_label})? (($display_feature_label=~ /^yes$/ or $display_feature_label=~ /^yes,/)? $conf{feature_setting2}{$index_id}{feature_label}:""):$feature_not_mark_label;
 			my $index_label_size = &get_para("feature_label_size", $index_id, \%conf);
-			$index_label_col = &get_para("feature_label_color", $index_id, \%conf);
-			$index_label_position = &get_para("pos_feature_label", $index_id, \%conf);
-			$index_label_angle = &get_para("label_rotate_angle", $index_id, \%conf);
+			my $index_label_col = &get_para("feature_label_color", $index_id, \%conf);
+			my $index_label_position = &get_para("pos_feature_label", $index_id, \%conf);
+			my $index_label_angle = &get_para("label_rotate_angle", $index_id, \%conf);
 
 			my $feature_height_ratio = &get_para("feature_height_ratio", $index_id, \%conf);
 			my $feature_height_unit = &get_para("feature_height_unit", $index_id, \%conf);
@@ -311,6 +314,7 @@ while(@track_order){
 #				}
 #			}
 #print "index_id is $index_id\n";
+			my $orders;
 			($svg_gene, $shift_angle_closed_feature, $orders)=&draw_genes(
 					$index_id,
 					$index_start, 
@@ -519,7 +523,7 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 #cross_link_orientation_line
 		my $cross_link_orientation_line=(exists $conf{crossing_link2}{index}{$pair}{cross_link_orientation_line})? $conf{crossing_link2}{index}{$pair}{cross_link_orientation_line}:$conf{cross_link_orientation_line};
 		my $cross_link_height_line=(exists $conf{crossing_link2}{index}{$pair}{cross_link_height_line})? $conf{crossing_link2}{index}{$pair}{cross_link_height_line}:$conf{cross_link_height_line};
-		@cross_link_orientation_line_list = split(/,/, $cross_link_orientation_line);
+		my @cross_link_orientation_line_list = split(/,/, $cross_link_orientation_line);
 		if(@cross_link_orientation_line_list!=2){
 			die "error: cross_link_orientation_line=$cross_link_orientation_line ,error format. example: start,end or end,start ~\n"
 		}
@@ -731,7 +735,7 @@ my $rm_title="set -vex;sed -e 's/^\\s*<g>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//
 die "\nerror:$rm_title\n\n" if($?);
 
 print "\noutfile is  $outdir/$prefix.svg and $outdir/$prefix.notitle.svg\n";
-print "\nif you want png or pdf format,you could do:\n\tconvert  -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.png\n\tconvert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf\n\n";
+print "\nif you want png or pdf format,you could use convert or cairosvg to convert svg to pdf or png:\n\tconvert  -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.png\n\tconvert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf\n\n";
 
 &jstohtml("$Bin/svg-pan-zoom.js","$outdir/$prefix");
 
