@@ -53,21 +53,21 @@ perl >=v5.10.1
 ```
 sh example/out11.sh # output out11.svg and convert out11.svg to out11.png
 ```
-![gene cluster image](example/out11.png)
+![gene cluster image](example/out11.notitle.png)
 <br><br><br>
-![gene cluster image](example/out7.svg)
+![gene cluster image](example/out7.notitle.svg)
 <br><br><br>
-![gene cluster image](example/out10.svg)
+![gene cluster image](example/out10.notitle.svg)
 <br><br><br>
-![gene cluster image](example/out.svg)
+![gene cluster image](example/out.notitle.svg)
 <br><br><br>
-![gene cluster image](example/out2.svg)
+![gene cluster image](example/out2.notitle.svg)
 <br><br><br>
-![gene cluster image](example/out3.svg)
+![gene cluster image](example/out3.notitle.svg)
 <br><br>
-![gene cluster image](example/out3.2.svg)
+![gene cluster image](example/out3.2.notitle.svg)
 <br><br>
-![gene cluster image](example/out8.svg)
+![gene cluster image](example/out8.notitle.svg)
 <br><br><br>
 
 contact:<br>
