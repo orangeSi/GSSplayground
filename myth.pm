@@ -301,11 +301,22 @@ sub go_line(){
 		return ($conf, $gff, $block_index, $gene_index, $fts);
 	}
 	#print "4parse_arrs line is $line\n";
-	$line=~ /[\s;]ID=(\S+)/;
-	my $feature_id=$1;
-	$feature_id=~ s/;.*//g;
+	my $feature_id;
+	if($line=~ /[\s;]ID=[^;]+/ && $line!~ /[\s;]Parent=[^;]+/){
+		$line=~ /[\s;]ID=(\S+)/;
+		$feature_id=$1;
+		$feature_id=~ s/;.*//g;
+	}elsif($line=~ /[\s;]Parent=[^;]+/){
+		$line=~ /[\s;]Parent=(\S+)/;
+		$feature_id=$1;
+		$feature_id=~ s/;.*//g;
+		$feature_id="$feature_id.s$start_f.e$end_f";
+	}else{
+		die "error: need at least one in  ID or Parent in $line for $sample of $gffs\n";
+	}
 	die "error: feature_id format should like ID=gene1; or xxx;ID=gene1; in gff, instead of $line\n" if(!$feature_id);
 	die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);
+
 	if(exists $fts->{$feature_id}){
 		die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
 	}else{
