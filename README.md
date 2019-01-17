@@ -1,22 +1,24 @@
 # ClustersPloter
-#### Usage:<br>
+### Usage:<br>
 ```
 %  git clone http://github.com/orangeSi/ClustersPloter.git
-%  cd  example 
+%  cd  ClustersPloter/example 
 %  sh test.sh
 # or go to https://clustersploter.readthedocs.io/en/latest/# 
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;plot gene clusters of many samples, one track means one sample, one track contain more than one fragments. one fragment contain gene cluster. you can defined every gene or feature(rotation,color,label,order depth,font size) in clusters. And add crossing link for any pair of genes.<br>
 
-#### Dependence<br>
+### Dependence<br>
 ```
 samtools >=1.7 # add this to linux PATH 
 perl >=v5.10.1
+sort
 ```
-<br>
-#### Main Function:<br>
+
+### Features:<br>
+- plot gene clusters of many samples, one track means one sample, one track contain more than one fragments. one fragment contain gene cluster. you can defined every gene or feature(rotation,color,label,order depth,font size) in clusters. And add crossing link for any pair of genes.<br>
 - every track mean one sample , one sample can has more than one fragments. you can defind the feature color/lable font size/label color/label rotaion in feature.color.label.conf <br>
-- you can draw crosslink or sysnteny among features of different tracks<br><br>
+- you can draw crosslink or sysnteny among features of different tracks<br>
+- illunimate pair-end or mate-pair reads or pacbio/nanopore long reads mapping with varation(indel, sv) in bam, support snpindel in vcf file<br>
 
 ### Update:<br>
 #### 2018-12-28:<br>
