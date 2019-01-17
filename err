@@ -1,9 +1,0 @@
-
-perl plot.genome.featureCluster.pl [options]:
-* --list <str>  two formats: [sample gff genome seq_id1 seq_draw_start1 seq_draw_end1 genome seq_id2 seq_draw_start2 seq_draw_end2 ...]
-	or [sample gff genome]no seq_id mean full length of whole gff
-* --prefix <str>
-* --outdir <str>
-* --conf <str> 
-
-writed by myth
