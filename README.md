@@ -3,7 +3,7 @@
 ```
 %  git clone http://github.com/orangeSi/ClustersPloter.git
 %  cd  ClustersPloter/example 
-%  sh test.sh
+%  sh test.sh # output svg and html
 # or go to https://clustersploter.readthedocs.io/en/latest/# 
 ```
 
