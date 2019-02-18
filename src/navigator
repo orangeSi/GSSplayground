@@ -1,0 +1,50 @@
+
+
+<input id="search_the_key" type="value" /> <input value="search by key" type="button" onclick="search_by_key()" />
+<script>
+function refill(chi, fill){
+		chi.style.fill = fill;
+}
+function search_by_key(){
+	var new_color = "red";
+	var gs = document.getElementsByClassName("myth");
+	var key = document.getElementById("search_the_key").value;
+	if(key.length == 0){return 1;}
+	var re = new RegExp(key,"g");
+	for (var i=0; i < gs.length; i++){
+		if(gs[i].innerHTML.match(re)){
+			//console.log(gs[i].innerHTML);
+			if (gs[i].hasChildNodes()) {
+				var children = gs[i].childNodes;
+				for (var ii = 0; ii < children.length; ii++) {
+				// do something with each child as children[i]
+				// NOTE: List is live, adding or removing children will change the list
+					
+					if(children[ii].tagName == "title" || children[ii].tagName === undefined){
+						continue;
+					}
+					console.log("tagname is "+children[ii].tagName);
+					console.log("style is "+children[ii].style);
+					var rawfill = children[ii].style.fill;
+					children[ii].style.fill = new_color;
+					var the_time=0;
+					var color="";
+					var loops=30;
+					if(loops%2){alert("loops must be even,like 20, not "+loops)}
+					for(var j=1; j<=loops; j++){ // 100 loops
+						the_time += j * 100;
+						if(j%2){
+							color=new_color;
+						}else{
+							color=rawfill;
+							}
+						setTimeout(refill, the_time,children[ii], color);
+					}
+							
+				}
+			}
+		}
+	}
+}
+</script>
+
