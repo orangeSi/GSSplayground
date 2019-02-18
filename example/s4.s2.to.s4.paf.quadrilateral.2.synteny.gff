@@ -1,6 +1,0 @@
-s4	add	synteny	1	9609	.	+	.	ID=s4.s4.1.9609.2.+;
-s4000	add	synteny	1	9609	.	+	.	ID=s4.s4000.1.9609.2.+;
-s40000	add	synteny	1	9609	.	+	.	ID=s4.s40000.1.9609.2.+;
-s4	add	synteny	180	540	.	+	.	ID=s4.s4.180.540.2.+;
-s4000	add	synteny	180	540	.	+	.	ID=s4.s4000.180.540.2.+;
-s40000	add	synteny	180	540	.	+	.	ID=s4.s40000.180.540.2.+;

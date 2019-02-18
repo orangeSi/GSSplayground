@@ -1,4 +1,0 @@
-s3	add	hist_scatter_line	111	210	.	+	.	ID=s3.s3.1.hist.0.1.111.511;
-s3	add	hist_scatter_line	211	310	.	+	.	ID=s3.s3.1.hist.1.1.111.511;
-s3	add	hist_scatter_line	311	410	.	+	.	ID=s3.s3.1.hist.2.1.111.511;
-s3	add	hist_scatter_line	411	510	.	+	.	ID=s3.s3.1.hist.3.1.111.511;
