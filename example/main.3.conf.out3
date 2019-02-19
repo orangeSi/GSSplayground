@@ -12,8 +12,8 @@ sample_name_font_size_default = 15
 cross_link_width_ellipse = 0.2
 feature_border_color = black
 
-hist_scatter_line = hist,2,chr14,14,0,20,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,0,1->25->4,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.3:0.3:0.1:0.1,5:5
-hist_scatter_line = hist,1,chr14,14,0,20,../data/illumina.chr14.sort.bam:../data/chr14.fa,color->green:opacity->1,31->41,ytick_flag,1->25->4,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->illuminate read depth,gap:60bp,fontsize:13,color:black	start_end_xaxis->66901400:66902400
+hist_scatter_line = hist,1,chr14,14,0,20,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,0,1->25->4,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.3:0.3:0.1:0.1,5:5
+hist_scatter_line = hist,2,chr14,14,0,20,../data/illumina.chr14.sort.bam:../data/chr14.fa,color->green:opacity->1,31->41,ytick_flag,1->25->4,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->illuminate read depth,gap:60bp,fontsize:13,color:black	start_end_xaxis->66901400:66902400
 
 width_ratio_ref_cluster_legend = 0.1-0.75-0.15
 display_feature = yes

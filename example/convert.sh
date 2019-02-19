@@ -1,5 +1,5 @@
 set -vex
-pdi=100
+pdi=150
 ls out*notitle.svg|while read line
 do
 	png=`echo $line|sed 's/svg$/png/'`
