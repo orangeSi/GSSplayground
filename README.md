@@ -59,11 +59,11 @@ samtools view  xx.bam chr4:96548917-96549017 # extract the specific region to go
 ```
 cat example/work.sh
 ```
-![gene cluster image](example/out3.notitle.svg)
+![gene cluster image](example/out3.notitle.png)
 <br><br><br>
-![gene cluster image](example/out2.notitle.svg)
+![gene cluster image](example/out2.notitle.png)
 <br><br><br>
-![gene cluster image](example/out1.notitle.svg)
+![gene cluster image](example/out1.notitle.png)
 <br><br><br>
 ![gene cluster image](example_old/out7.notitle.svg)
 <br><br><br>
