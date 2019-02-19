@@ -1,1 +1,0 @@
-../../../ClustersPloter.sh
