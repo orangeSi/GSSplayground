@@ -1,4 +1,0 @@
-s1	s1.gff,s1.synteny.gff	s1.seq
-s2	s2.gff,s2.synteny.gff	s2.seq
-s3	s3.gff,s3.synteny.gff	s3.seq
-s4	s4.gff,s4.synteny.gff,s4.read_mapping.gff,s4.hist_scatter_line.gff	s4.seq
