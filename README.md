@@ -42,7 +42,6 @@ sort
 
 #### Note:<br>
 ```
-samtools view  xx.bam chr4:96548917-96549017 # extract the specific region to go faster plot
 ```
 
 #### ToDo:<br>
