@@ -1,0 +1,27 @@
+
+set -vex;cat out2.pO83_CORR.NC_017659.1.1.1.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.1.2.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.2.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.1.3.long_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.3.1700.5900.mapping.gff >out2.pO83_CORR.out2.reads_mapping.gff;rm out2.pO83_CORR.NC_017659.1.1.1.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.1.2.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.2.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.1.3.long_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.3.1700.5900.mapping.gff;echo output out2.pO83_CORR.out2.reads_mapping.gff
+
+
+set -vex;cat out2.pO83_CORR.NC_017659.1.1.1.short_reads.ylabel.setting.conf out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.setting.conf out2.pO83_CORR.NC_017659.1.1.2.short_reads.ylabel.setting.conf out2.pO83_CORR.NC_017659.1.1.2.1700.5900.mapping.setting.conf out2.pO83_CORR.NC_017659.1.1.3.long_reads.ylabel.setting.conf out2.pO83_CORR.NC_017659.1.1.3.1700.5900.mapping.setting.conf > out2.pO83_CORR.out2.reads_mapping.setting.conf;rm out2.pO83_CORR.NC_017659.1.1.1.short_reads.ylabel.setting.conf out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.setting.conf out2.pO83_CORR.NC_017659.1.1.2.short_reads.ylabel.setting.conf out2.pO83_CORR.NC_017659.1.1.2.1700.5900.mapping.setting.conf out2.pO83_CORR.NC_017659.1.1.3.long_reads.ylabel.setting.conf out2.pO83_CORR.NC_017659.1.1.3.1700.5900.mapping.setting.conf;echo output out2.pO83_CORR.out2.reads_mapping.setting.conf
+
+
+set -vex;cat out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.crosslink.conf >out2.pO83_CORR.out2.reads_mapping.crosslink;rm out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.crosslink.conf;echo output out2.pO83_CORR.out2.reads_mapping.crosslink
+
+
+set -vex;cat out2.pO83_CORR.out2.reads_mapping.crosslink >out2.reads_mapping.crosslink
+
+
+set -vex;cat out2.pO83_CORR.out2.reads_mapping.setting.conf >out2.reads_mapping.setting.conf
+
+
+set -vex;cat out2.reads_mapping.setting.conf >feature.color.label.conf.out2
+
+
+set -vex;cat out2.reads_mapping.crosslink >feature.crossing.link.out2
+
+
+set -vex;cat out2.pO83_CORR.out2.reads_mapping.gff|awk -F   '{print }'|sort -u
+
+
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out2.pO83_CORR.out2.reads_mapping.gff\t/' tracks.2.list >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
+

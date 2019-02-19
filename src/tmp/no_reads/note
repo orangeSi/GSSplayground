@@ -1,0 +1,3 @@
+Q: list里面的片段如果有没有基因，则这个片段不会被显示
+A: ../../plot.genome.featureCluster.pl +144 
+

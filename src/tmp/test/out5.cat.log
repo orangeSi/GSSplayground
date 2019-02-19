@@ -1,0 +1,48 @@
+
+set -vex;cat out5.zz.s160.1.1.hist.ylabel.gff out5.zz.s160.1.1.ytick.gff out5.zz.s160.1.1.178608.179608.depth.gff >out5.zz.out5.hist_scatter_line.gff;rm out5.zz.s160.1.1.hist.ylabel.gff out5.zz.s160.1.1.ytick.gff out5.zz.s160.1.1.178608.179608.depth.gff;echo output out5.zz.out5.hist_scatter_line.gff
+
+
+set -vex;cat out5.zz.s160.1.1.hist.ylabel.setting.conf out5.zz.s160.1.1.ytick.setting.conf out5.zz.s160.1.1.178608.179608.depth.setting.conf > out5.zz.out5.hist_scatter_line.setting.conf;rm out5.zz.s160.1.1.hist.ylabel.setting.conf out5.zz.s160.1.1.ytick.setting.conf out5.zz.s160.1.1.178608.179608.depth.setting.conf;echo output out5.zz.out5.hist_scatter_line.setting.conf
+
+
+set -vex;cat out5.zz.out5.hist_scatter_line.setting.conf >out5.hist_scatter_line.setting.conf
+
+
+set -vex;cat out5.zz.s160.1.2.178608.179608.mapping.gff >out5.zz.out5.reads_mapping.gff;rm out5.zz.s160.1.2.178608.179608.mapping.gff;echo output out5.zz.out5.reads_mapping.gff
+
+
+set -vex;cat out5.zz.s160.1.2.178608.179608.mapping.setting.conf > out5.zz.out5.reads_mapping.setting.conf;rm out5.zz.s160.1.2.178608.179608.mapping.setting.conf;echo output out5.zz.out5.reads_mapping.setting.conf
+
+
+set -vex;cat out5.zz.s160.1.2.178608.179608.mapping.crosslink.conf >out5.zz.out5.reads_mapping.crosslink;rm out5.zz.s160.1.2.178608.179608.mapping.crosslink.conf;echo output out5.zz.out5.reads_mapping.crosslink
+
+
+set -vex;cat out5.aa.s160.1.1.155612.178608.mapping.gff >out5.aa.out5.reads_mapping.gff;rm out5.aa.s160.1.1.155612.178608.mapping.gff;echo output out5.aa.out5.reads_mapping.gff
+
+
+set -vex;cat out5.aa.s160.1.1.155612.178608.mapping.setting.conf > out5.aa.out5.reads_mapping.setting.conf;rm out5.aa.s160.1.1.155612.178608.mapping.setting.conf;echo output out5.aa.out5.reads_mapping.setting.conf
+
+
+set -vex;cat out5.aa.s160.1.1.155612.178608.mapping.crosslink.conf >out5.aa.out5.reads_mapping.crosslink;rm out5.aa.s160.1.1.155612.178608.mapping.crosslink.conf;echo output out5.aa.out5.reads_mapping.crosslink
+
+
+set -vex;cat out5.zz.out5.reads_mapping.crosslink out5.aa.out5.reads_mapping.crosslink >out5.reads_mapping.crosslink
+
+
+set -vex;cat out5.zz.out5.reads_mapping.setting.conf out5.aa.out5.reads_mapping.setting.conf >out5.reads_mapping.setting.conf
+
+
+set -vex;cat out5.hist_scatter_line.setting.conf out5.reads_mapping.setting.conf >feature.color.label.conf.out5
+
+
+set -vex;cat out5.reads_mapping.crosslink >feature.crossing.link.out5
+
+
+set -vex;cat out5.zz.out5.hist_scatter_line.gff out5.zz.out5.reads_mapping.gff out5.aa.out5.reads_mapping.gff|awk -F   '{print }'|sort -u
+
+
+set -vex;sed  -r 's/^(zz\s.*\.gff)\s/\1,out5.zz.out5.hist_scatter_line.gff,out5.zz.out5.reads_mapping.gff\t/' list5 >list5.out5;cp list5.out5 list5.out5.tmp
+
+
+set -vex;sed  -r 's/^(aa\s.*\.gff)\s/\1,out5.aa.out5.reads_mapping.gff\t/' list5.out5.tmp >list5.out5;cp list5.out5 list5.out5.tmp
+

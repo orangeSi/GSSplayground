@@ -1,0 +1,470 @@
+#!/usr/bin/env perl -w
+
+use Getopt::Long;
+my ($list,$prefix,$outdir,$conf);
+GetOptions("list:s"=>\$list,
+        "prefix:s"=>\$prefix,
+        "outdir:s"=>\$outdir,
+        "conf:s"=>\$confile
+        );
+
+die "
+perl $0 [options]:
+* --list <str>  two formats: [sample gff genome seq_id1 seq_draw_start1 seq_draw_end1 genome seq_id2 seq_draw_start2 seq_draw_end2 ...]
+or [sample gff genome]no seq_id mean full length of whole gff
+* --prefix <str>
+* --outdir <str>
+* --conf <str> 
+
+writed by myth
+" unless($list && $prefix && $outdir && $confile);
+if(! -d "$outdir"){
+    `mkdir -p $outdir`;
+}
+
+my @funcs=("depth_hist", "depth_scatter", "depth_scatter_line", "sr_mapping", "lr_mapping");
+my %conf = &read_conf($confile, @funcs);
+%conf = &default_setting(%conf);
+&check_para(%conf);
+
+###start:get scaffold length in genome file and scaffold length  in gff file of list 
+my ($genome, $gff, $track_order, $sample_num, $fts) = &read_list($list, \%conf);
+my %genome=%$genome;
+my %gff=%$gff;
+my %fts=%$fts;
+my @track_order=@$track_order;
+my @track_reorder;
+
+for my $f (@funcs){
+    &$f(%gff);
+}
+
+#`set -vex;sed 's/$conf{feature_setting}/$conf{feature_setting}.new/g' $confile > $confile.new`;
+print "\ndata done\n";
+
+
+
+
+#@my @funcs=("depth_hist", "depth_hist", "depth_scatter", "depth_scatter_line", "sr_mapping", "lr_mapping");
+sub depth_hist(){
+    my (%gff)=@_;
+    my $ex="s2,s2000,0,100,path_map.sort.bam,10->50,ytick_flag,20->30,ytick_label_text,hgrid_flag\n#sample,scf,block_flag,window_size,depth_file,yaxis,ytick_flag,yaxis_show,ytick_label,hgrid_flag";
+
+    unless(exists $conf{depth_hist} && $conf{depth_hist}){
+        print "depth_hist not\n";
+        return 0;
+    }
+    print "depth_hist start\n";
+    for my $k (keys %{$conf{depth_hist}}){
+        my @infos=split(/,/, $conf{depth_hist}{$k});
+        my $infos_len=scalar(@infos);
+        if($infos_len != 10){
+            die "error: depth_hist should have 10 colums for depth_hist=$conf{depth_hist}{$k}, but only have $infos_len\nvalid like depth_hist=$ex\n";
+        }
+        my ($sample,$scf,$block_flag,$window_size,$depth_file,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag) = @infos;
+        die "error: $depth_file not exists for depth_hist=$conf{depth_hist}{$k}\n" if(! -f $depth_file);
+
+        for($i=0;$i<=9;$i++){
+            next if($i==8);
+            $infos[$i]=~ s/\s//g;
+        }
+        die "error: block_flag should >=0, 0 mean all\n" if($block_flag<0 ||$block_flag!~ /^\d+$/);
+        die "error: window_size should >=1\n" if($window_size!~ /^\d+$/);
+        die "error: $sample or $scf not are friends in $conf{depth_hist}{$k}\n" if(not exists $gff{$sample}{scf}{$scf});
+        die "error: $sample don't have $block_flag fragments in $conf{depth_hist}{$k}\n" if($block_flag!=0 && not exists $gff{$sample}{chooselen_single}{$block_flag});
+        for my $block_index(keys %{$gff{$sample}{chooselen_single}}){
+            next if($block_flag != 0 && $block_flag != $block_index);
+		    my @scfs=keys %{$gff{$sample}{block}{$block_index}};
+            next if($scf ne $scfs[0]);
+            
+            if($ytick_flag){
+                my @yaxis_list=split(/->/,$yaxis);
+                die "error:yaxis_list neet two elements\n" if(@yaxis_list!=2);
+                my @yaxis_show_list=split(/->/,$yaxis_show);
+                die "error:yaxis_list neet two elements\n" if(@yaxis_show_list!=2);
+                
+                my $tick="$yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label";
+                my ($ytick_gff, $ytick_setting_conf)=&feature_ytick($tick, $sample, $scf, $block_index, $gff,$k);
+                open GFF,">$sample.$scf.$block_index.$k.ytick.gff" or die "$!";
+                print GFF "$ytick_gff";
+                close GFF;
+                open CONF,">$sample.$scf.$block_index.$k.setting.conf" or die "$!";
+                print CONF "$ytick_setting_conf";
+                close CONF;
+            }
+
+        }
+
+    }
+    
+}
+
+
+sub read_list(){
+###start:get scaffold length in genome file and scaffold length  in gff file
+    my %fts;
+    my ($list, $conf) = @_;
+    my (%genome,%gff,@track_order,$sample_num);
+    my $space_len = $conf{space_between_blocks};# 500bp是默认的blocks之间的间距
+    my @features=split(/,/, $conf{feature_keywords});
+    my %uniq_sample;
+    my %sample_scf;
+    open LI,"$list" or die "$!";
+    while(<LI>){
+        chomp;
+        next if($_=~ /^\s*$/||$_=~ /^#/);
+        $sample_num++;
+        my $block_index=1;
+        my %scf_block_id;
+        my ($sample,$gffs,$genome,@arrs)=split(/\t/,$_); # $seq_id,$seq_draw_start,$seq_draw_end
+            push @track_order, $sample;
+
+        if(exists $uniq_sample{$sample}){
+            die "error:more than one $sample, not allow same 1th column in $list~\n " 
+        }else{
+            $uniq_sample{$sample}="";
+        }
+        print "$sample\n";
+        if(@arrs%3){
+            die "$list line $. error format:$_, should be separated by \\t \n"; 
+        }
+        open GE,"$genome" or die "$!";
+        $/=">";<GE>;
+        while(<GE>){
+            chomp;
+            my ($id,$seq)=split(/\n/,$_,2);
+            $id=~ /^(\S+)/;
+            $id=$1;
+            $seq=~ s/\s+//g;
+            my $len=length $seq;
+            $genome{$sample}{$id}{len}=$len;
+        }
+        close GE;
+        $/="\n";
+
+        my %all_seq_id;
+        my @gffss = split(/,/, $gffs);
+        foreach my $gffs(@gffss){
+            open GFF,"$gffs" or die "$!";
+            while(<GFF>){
+                chomp;
+                next if($_=~ /^#/);
+                my @arr=split(/\t/,$_);
+                $all_seq_id{$arr[0]} = "";
+            }
+            close GFF;
+            open GFF,"$gffs" or die "$!";
+            my $gene_index;
+            while(<GFF>){
+                chomp;
+                next if($_=~ /^#/);
+                my @arr=split(/\t/,$_);
+                die "error: $gffs should have tab in file~\n" if(@arr==1);
+                my $block_index=-1;
+                my $start_f=$arr[3];
+                my $end_f=$arr[4];
+                if($arr[3] > $arr[4]){
+                    $arr[3] = $end_f;
+                    $arr[4] = $start_f;
+                }
+
+                if(@arrs){ # has seq_id mean not full length of whole gff
+                    for (my $arrs_index=0;$arrs_index < scalar(@arrs);$arrs_index+=3){
+                        my ($seq_id,$seq_draw_start,$seq_draw_end) = @arrs[$arrs_index..$arrs_index+2];
+                        die "error: $seq_id not in $gffs\n" if(not exists $all_seq_id{$seq_id});
+                        my $seq_draw_start_tmp=$seq_draw_start;
+                        my $seq_draw_end_tmp=$seq_draw_end;
+
+                        $seq_draw_start = eval($seq_draw_start);
+                        $seq_draw_end = eval($seq_draw_end);
+                        die "error:for $seq_id , start $seq_draw_start_tmp should less than end $seq_draw_end_tmp in --list " if($seq_draw_end <= $seq_draw_start);
+
+#print "$seq_id,$seq_draw_start,$seq_draw_end\n";
+                        next unless ($arr[0] eq $seq_id && $arr[3] >= $seq_draw_start && $arr[4] <= $seq_draw_end);
+                        $seq_draw_end = ($genome{$sample}{$seq_id}{len}>=$seq_draw_end)? $seq_draw_end:$genome{$sample}{$seq_id}{len}; #防止seq_draw_end越界
+                            $genome{$sample}{$arr[0]}{$arrs_index}{len}=$seq_draw_end -$seq_draw_start+1; # 一条scaffold有多个block
+                            $arr[3]=$arr[3]-$seq_draw_start +1;
+                        $arr[4]=$arr[4]-$seq_draw_start +1;
+                        $block_index = $arrs_index;
+#print "hereis $block_index\n";
+                        if(not exists  $gff{$sample}{chooselen_single}{$block_index}){
+                            $gff{$sample}{chooselen_single}{$block_index}{len} = $genome{$sample}{$arr[0]}{$arrs_index}{len};
+                            $gff{$sample}{chooselen_single}{$block_index}{start} = $seq_draw_start;
+                            $gff{$sample}{chooselen_single}{$block_index}{end} = $seq_draw_end;
+#gff{$sample}{chooselen_single}{$block_index}{scf_id} = $arr[0];
+                            $gff{$sample}{chooselen_all} +=$gff{$sample}{chooselen_single}{$block_index}{len}; ## 把每行所有block长度加起来
+                                $gff{$sample}{chooselen_all} += $space_len ; ## 加上 每个block之间的宽度，500bp相当于一个基因的长度,后面最好把这个500bp改成每个track实际的平均基因长度
+                        }
+                    }
+
+                }else{ # list里面没有定义seq_id/start/end,即要画full-length of scaffold
+#print "not seq_id\n";
+#$block_index = $conf{'scaffold_order'}{$sample}{$arr[0]};
+                    $scf_block_id{$arr[0]} = $. if(not exists $scf_block_id{$arr[0]});
+                    $block_index=$scf_block_id{$arr[0]};
+                    if(not exists  $gff{$sample}{chooselen_single}{$block_index}){
+                        $gff{$sample}{chooselen_single}{$block_index}{len} = $genome{$sample}{$arr[0]}{len};
+                        $gff{$sample}{chooselen_single}{$block_index}{start} = 1;
+                        $gff{$sample}{chooselen_single}{$block_index}{end} = $genome{$sample}{$arr[0]}{len};
+
+                        $gff{$sample}{chooselen_all} +=$gff{$sample}{chooselen_single}{$block_index}{len}; # ## 把每行所有block(即scaffold)长度加起来
+#print "$sample	$gff{$sample}{chooselen_all}\n";
+                            $gff{$sample}{chooselen_all} += $space_len ; ## 这个500最好改成每个track的blocks的平均长度的一定比例，比如一半
+                    }
+#$gff{$sample}{block}{$block_index}{$arr[0]}{len}=$genome{$sample}{$arr[0]}{len}; # 一条scaffold就是一个block
+                }
+#print "block $sample $block_index\n";
+
+                next if(@arrs && $block_index == -1);
+                my $flag=1;
+                foreach my $f(@features){
+                    next if ($f=~ /^\s*$/);
+                    $f=~ s/\s//g;
+                    $flag =0 if($arr[2]=~ /$f/);
+                }
+                next if($flag);
+
+				$_=~ /\sID=(\S+)/;
+				my $feature_id=$1;
+                $feature_id=~ s/\s//g;
+                $feature_id=~ s/;.*//g;
+                die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);
+                if(exists $fts{$feature_id}){
+                    die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+                }else{
+                    $fts{$feature_id}{sample} = $sample;
+                    $fts{$feature_id}{scf} = $arr[0];
+                }
+                $gene_index++;
+
+                if(!$arr[3]){die "error:$gffs line $.\n"}
+                $gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{start}=$arr[3]; # block_index 是指每行中每个cluster的左右顺序
+                    $gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{start_raw}=$start_f; # block_index 是指每行中每个cluster的左右顺序
+                    $gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{end}=$arr[4];
+                $gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{end_raw}=$end_f;
+                $gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{id}=$feature_id;
+                if(!$feature_id){die "die:line is $_\n"}
+                $gff{$sample}{block}{$block_index}{$arr[0]}{$gene_index}{strand}=($arr[6]=~ /\+/)? 1:0;
+                $gff{$sample}{scf}{$arr[0]}="";
+
+                $conf{feature_setting}{$feature_id}{start}=$start_f;
+                $conf{feature_setting}{$feature_id}{end}=$end_f;
+                $conf{feature_setting}{$feature_id}{sample}=$sample;
+                $conf{feature_setting}{$feature_id}{scf_id}=$arr[0];
+                die "error: sample $sample should not have : char\n" if($sample=~ /:/ && exists $conf{feature_ytick_region});
+                die "error: scaffold_id $arr[0] should not have : char\n" if($arr[0]=~ /:/ && exists $conf{feature_ytick_region});
+
+}
+close GFF;
+}
+}
+close LI;
+return (\%genome, \%gff, \@track_order, $sample_num, \%fts);
+####end:get scaffold length in genome file and scaffold length  in gff file
+}
+
+sub feature_ytick(){
+    my ($tick, $ytick_sample, $ytick_scf, $block, $gff, $kk) = @_;
+
+    my ($ytick_gff, $ytick_setting_conf);
+
+    my @tick_unit=split(/,/, $tick);
+    die "error: error format:$tick\n" if(@tick_unit%5);
+    my ($s1, $e1, $s2, $e2, $title) = @tick_unit;
+    my $s1_raw = $s1;
+    my $e1_raw = $e1;
+    print "s1 is $s1, e1 is $e1\n";
+    my $ytick_orientation="up";
+    $ytick_orientation="down" if($e1=~ /-/);
+
+    my $block_start_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{start};
+    my $block_end_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{end};
+    my $ytick_feature_backbone_width = 20; # bp 
+    my $feature_backbone_shift_x = $ytick_feature_backbone_width; 
+    my $ytick_feature_backbone_start = $block_end_bp - $ytick_feature_backbone_width;
+    my $ytick_feature_backbone_end = $block_end_bp;
+    my $ytick_feature_backbone_id = "$ytick_sample.$ytick_scf.$block.$block_start_bp.$block_end_bp.$kk";
+    my $ytick_feature_backbone_height = $e1-$s1;
+    my $feature_backbone_shift_y = 0.5 + $s1 + 0.5*$ytick_feature_backbone_height;
+    if($ytick_orientation=~ /up/i){
+        $feature_backbone_shift_y *=-1;
+    }elsif($ytick_orientation=~ /down/i){
+        $feature_backbone_shift_y=~ s/^(\d)/+$1/;
+    }else{
+        die "die:\n";
+    }
+
+    #print "\nfeature_ytick_region7\n\n";
+
+    $ytick_gff.="$ytick_scf\tadd\tytick\t$ytick_feature_backbone_start\t$ytick_feature_backbone_end\t.\t+\t.\tID=$ytick_feature_backbone_id;\n";
+
+    $ytick_setting_conf.="\n$ytick_feature_backbone_id\tfeature_height_ratio\t$ytick_feature_backbone_height\n";
+    $ytick_setting_conf.="\n$ytick_feature_backbone_id\tfeature_height_unit\tpercent\n";
+    $ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_shape\trect\n";
+    $ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_shift_x\t$feature_backbone_shift_x\n";
+    $ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_shift_y\t$feature_backbone_shift_y\n";
+    $ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_shift_y_unit\tpercent\n";
+    $ytick_setting_conf.="$ytick_feature_backbone_id\tdisplay_feature_label\tno\n";
+    $ytick_setting_conf.="$ytick_feature_backbone_id\tpos_feature_label\tright_medium\n";
+    $ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_label\tytick_label\n";
+    #print "\n2ytick_gff is $ytick_gff\n\n";
+    my $ytick_unit=10;
+    #my $ytick_unit_real = $ytick_height/($e1-$s1)*$ytick_unit;
+    my $ytick_nums = int(($e1_raw-$s1_raw)/$ytick_unit);
+    for my $k (0..$ytick_nums){
+        my $ytick_feature_tick_width = 80; # bp 
+        my $ytick_feature_tick_start=$block_end_bp - $ytick_feature_tick_width;
+        my $ytick_feature_tick_end=$block_end_bp;
+        my $ytick_feature_tick_height=0.4;
+        my $feature_label_size=6;
+        my $padding_feature_label=$feature_label_size*0.3;
+        my $ytick_feature_tick_id="$ytick_feature_backbone_id.tick$k";
+        my $feature_tick_shift_x=0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width - $ytick_feature_backbone_width*0.5; # bp 
+
+        #my $feature_tick_shift_y = 0.5 + $s1 + $k * $ytick_unit + 0.5*$ytick_feature_tick_height;
+        my $feature_tick_shift_y = $s1 + $k * $ytick_unit;
+        my $tick_label=$s1_raw+$k*$ytick_unit;
+        if($ytick_orientation=~ /up/i){
+            $feature_tick_shift_y ="-$feature_tick_shift_y";
+        }elsif($ytick_orientation=~ /down/i){
+            $feature_tick_shift_y ="+$feature_tick_shift_y";
+        }else{
+            die "die:\n";
+        }
+        $ytick_gff.="$ytick_scf\tadd\tytick\t$ytick_feature_tick_start\t$ytick_feature_tick_end\t.\t+\t.\tID=$ytick_feature_tick_id;\n";
+        $ytick_setting_conf.="\n$ytick_feature_tick_id\tfeature_height_ratio\t$ytick_feature_tick_height\n";
+        $ytick_setting_conf.="$ytick_feature_tick_id\tfeature_shape\trect\n";
+        $ytick_setting_conf.="$ytick_feature_tick_id\tfeature_shift_x\t$feature_tick_shift_x\n";
+        $ytick_setting_conf.="$ytick_feature_tick_id\tfeature_shift_y\t$feature_tick_shift_y\n";
+        $ytick_setting_conf.="$ytick_feature_tick_id\tfeature_shift_y_unit\tpercent\n";
+        $ytick_setting_conf.="$ytick_feature_tick_id\tdisplay_feature_label\tyes\n";
+        $ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label\t$tick_label\n";
+        $ytick_setting_conf.="$ytick_feature_tick_id\tpos_feature_label\tright_medium\n";	
+        $ytick_setting_conf.="$ytick_feature_tick_id\tlabel_rotate_angle\t0\n";
+        $ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label_size\t$feature_label_size\n";
+        $ytick_setting_conf.="$ytick_feature_tick_id\tpadding_feature_label\t$padding_feature_label\n";
+        $ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label_auto_angle_flag\t0\n\n";
+        #feature_ytick_hgrid_line=1
+
+    }
+    return ($ytick_gff, $ytick_setting_conf);
+}
+
+
+
+sub read_conf(){
+    my ($conf, @funcs) = @_;
+    my %confs;
+    open IN, "$conf" or die "$!";
+    while(<IN>){
+        chomp;
+        next if($_=~ /^#/ || $_=~ /^\s*$/);
+        die "error: need = in $_ of $conf~\n" if($_!~ /=/);
+        $_=~ s/([^=^\s])\s+#.*$/$1/g;
+        my ($key, $value) = split(/\s*=\s*/, $_);
+        $value=~ s/\s+$//;
+        $value=~ s/^\s+//;
+
+        if($key eq ""){
+            die "error format: $_\n";
+        }
+        if($value eq ""){
+            die "error format: $_\n";
+        }
+        if(grep(/^$key$/, @funcs)){
+            $confs{$key}{$.} = $value;
+            print "$key -> $. -> $value\n";
+        }else{
+            $confs{$key} = $value;
+            print "$key -> $value\n";
+        }
+    }
+    close IN;
+    return %confs;
+
+}
+
+sub default_setting(){
+    my (%conf) = @_;
+    $conf{svg_width_height} ||= '600,1500';
+#$conf{anchor_positon_ratio} ||= 1;
+    $conf{pdf_dpi} ||=100;
+    $conf{top_bottom_margin} ||=0.1;
+    $conf{genome_height_ratio} ||= 1;
+    $conf{feature_height_ratio} ||= 1.5;
+    $conf{space_between_blocks} ||= 1.1;
+    $conf{feature_label_size} ||=10;
+    $conf{feature_label_color} ||="black";
+    $conf{label_rotate_angle} ||=-60;
+    $conf{feature_color} ||= 'ForestGreen'; #ForestGreen,LimeGreen
+        $conf{color_sample_name_default} ||= 'green';
+    $conf{sample_name_color_default} ||='black';
+    $conf{sample_name_font_size_default} ||=15;
+    $conf{legend_font_size} ||= 15; #legend中文字字体大小
+        $conf{legend_height_percent} ||= 0.2; # legends的高度占整个图高度的比例
+        $conf{legend_width_margin} ||= 0.1; # legends左右两侧的margin
+        $conf{legend_width_textpercent} ||= 0.6; # l
+        $conf{feature_shape} ||= 'round_rect';
+    $conf{track_style} ||="fill:green";
+    $conf{padding_feature_label} ||= 3;
+    $conf{pos_feature_label} ||="medium_up";
+    $conf{distance_closed_feature} ||=50;
+    $conf{shift_angle_closed_feature} ||=10;
+    $conf{feature_arrow_sharp_extent} =(exists $conf{feature_arrow_sharp_extent})? $conf{feature_arrow_sharp_extent}:0.3;
+    $conf{scale_display} ||="no";
+    $conf{scale_position} ||="low";
+    $conf{display_feature} ||="yes";
+    $conf{legend_stroke_color} ||="black";
+    $conf{legend_stroke_width} ||=0;
+    $conf{track_order}=(exists $conf{track_order})? $conf{track_order}:0;
+    $conf{feature_order} =(exists $conf{feature_order})? $conf{feature_order}:1;
+    $conf{feature_label_order} =(exists $conf{feature_label_order})? $conf{feature_label_order}:1;
+    $conf{cross_link_order} =(exists $conf{cross_link_order})? $conf{cross_link_order}:2; # bigger mean upper 
+        $conf{cross_link_opacity} ||=1;
+    $conf{display_feature_label} ||="yes";
+    $conf{display_legend} ||="yes";
+    $conf{cross_link_anchor_pos} ||="medium_medium";
+    $conf{ignore_sharp_arrow} ||="no";
+    $conf{scale_color} ||="black";
+    $conf{scale_width} ||=1;
+    $conf{scale_ratio} ||=100;
+    $conf{scale_padding_y} ||=-0.1;
+    $conf{scale_tick_height} ||=0.01;
+    $conf{scale_tick_opacity} ||=0.5;
+    $conf{scale_order} ||=0;
+    $conf{scale_tick_padding_y} ||=10;
+    $conf{scale_tick_fontsize} ||=10;
+    $conf{feature_arrow_width_extent} ||=0.7;
+    $conf{connect_with_same_scaffold} ||="yes";
+    $conf{connect_stroke_dasharray} ||="2,2";
+    $conf{connect_stroke_width} ||=2;
+    $conf{connect_stroke_color} ||="black";
+    $conf{absolute_postion_in_title} ||="yes";
+    $conf{feature_shift_y} ||=0;
+    $conf{feature_shift_x} ||=0;
+    $conf{feature_border_size} ||=0;
+    $conf{feature_border_color} ||="black";
+    $conf{feature_opacity} =(exists $conf{feature_opacity})? $conf{feature_opacity}:1;
+    $conf{cross_link_orientation} ||="forward";
+    $conf{cross_link_color} ||="#FF8C00";
+    $conf{cross_link_color_reverse} ||="#3CB371";
+    $conf{feature_shift_y_unit} ||="backbone"; # radius or backbone
+        $conf{cross_link_orientation_ellipse} ||="up";
+    $conf{cross_link_shape} ||="quadrilateral";
+    $conf{cross_link_height_ellipse} ||="10,8";
+    $conf{svg_background_color} ||="white";
+#$conf{feature_ytick_region} ||="0-3:0-10;";
+    $conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
+
+    return %conf;
+}
+
+
+sub check_para(){
+    my (%conf)=@_;
+    my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend","depth_hist","depth_scatter","depth_scatter_line","display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit","feature_ytick_hgrid_line","feature_ytick_region","genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent","lr_mapping","padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","sr_mapping","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent", "feature_height_unit");
+    for my $k (keys %conf){
+        die "\nerror: not support $k in $confile. only support @paras\n" if(!grep(/^$k$/, @paras));
+    }
+    print "check done\n";
+}

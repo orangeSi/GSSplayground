@@ -1,0 +1,3 @@
+#track_name	genome.gff	genome.fa	chr_id	fragment_start	fragment_end	chr_id	fragment_start	fragment_end ...
+pO83_CORR.2	../data/NC_017659.1.gff	../data/NC_017659.1.fa	NC_017659.1	1	147060
+pO83_CORR.1	../data/NC_017659.1.gff	../data/NC_017659.1.fa	NC_017659.1	1	147060

@@ -1744,7 +1744,7 @@ sub detail_cigar(){
 	$reads{$r_id}{strand}=($strand)? "-":"+";
 
 # call snp # MD:Z:12C135 
-	if($line=~ /MD:\S*\d[ATCG]/ && 0 ){
+	if(0 && $line=~ /MD:\S*\d[ATCG]/){ # for mismatch
 		my $call="cp $header_bam $header_bam.tmp && echo -e \"$line\" >> $header_bam.tmp && samtools mpileup -u --skip-indels -t DP $header_bam.tmp -f $refasta 2>/dev/null|bcftools view -v snps |grep \"^$scf\"";
 		open SNP,"$call|" or die "\nerror:$call \nerror!\n";
 		while(<SNP>){

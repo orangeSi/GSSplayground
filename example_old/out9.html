@@ -1,0 +1,2407 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+// svg-pan-zoom v3.6.0
+// https://github.com/ariutta/svg-pan-zoom
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var svgPanZoom = require('./svg-pan-zoom.js');
+
+// UMD module definition
+(function(window, document){
+  // AMD
+  if (typeof define === 'function' && define.amd) {
+    define('svg-pan-zoom', function () {
+      return svgPanZoom;
+    });
+  // CMD
+  } else if (typeof module !== 'undefined' && module.exports) {
+    module.exports = svgPanZoom;
+
+    // Browser
+    // Keep exporting globally as module.exports is available because of browserify
+    window.svgPanZoom = svgPanZoom;
+  }
+})(window, document)
+
+},{"./svg-pan-zoom.js":4}],2:[function(require,module,exports){
+var SvgUtils = require('./svg-utilities');
+
+module.exports = {
+  enable: function(instance) {
+    // Select (and create if necessary) defs
+    var defs = instance.svg.querySelector('defs')
+    if (!defs) {
+      defs = document.createElementNS(SvgUtils.svgNS, 'defs')
+      instance.svg.appendChild(defs)
+    }
+
+    // Check for style element, and create it if it doesn't exist
+    var styleEl = defs.querySelector('style#svg-pan-zoom-controls-styles');
+    if (!styleEl) {
+      var style = document.createElementNS(SvgUtils.svgNS, 'style')
+      style.setAttribute('id', 'svg-pan-zoom-controls-styles')
+      style.setAttribute('type', 'text/css')
+      style.textContent = '.svg-pan-zoom-control { cursor: pointer; fill: black; fill-opacity: 0.333; } .svg-pan-zoom-control:hover { fill-opacity: 0.8; } .svg-pan-zoom-control-background { fill: white; fill-opacity: 0.5; } .svg-pan-zoom-control-background { fill-opacity: 0.8; }'
+      defs.appendChild(style)
+    }
+
+    // Zoom Group
+    var zoomGroup = document.createElementNS(SvgUtils.svgNS, 'g');
+    zoomGroup.setAttribute('id', 'svg-pan-zoom-controls');
+    zoomGroup.setAttribute('transform', 'translate(' + ( instance.width - 70 ) + ' ' + ( instance.height - 76 ) + ') scale(0.75)');
+    zoomGroup.setAttribute('class', 'svg-pan-zoom-control');
+
+    // Control elements
+    zoomGroup.appendChild(this._createZoomIn(instance))
+    zoomGroup.appendChild(this._createZoomReset(instance))
+    zoomGroup.appendChild(this._createZoomOut(instance))
+
+    // Finally append created element
+    instance.svg.appendChild(zoomGroup)
+
+    // Cache control instance
+    instance.controlIcons = zoomGroup
+  }
+
+, _createZoomIn: function(instance) {
+    var zoomIn = document.createElementNS(SvgUtils.svgNS, 'g');
+    zoomIn.setAttribute('id', 'svg-pan-zoom-zoom-in');
+    zoomIn.setAttribute('transform', 'translate(30.5 5) scale(0.015)');
+    zoomIn.setAttribute('class', 'svg-pan-zoom-control');
+    zoomIn.addEventListener('click', function() {instance.getPublicInstance().zoomIn()}, false)
+    zoomIn.addEventListener('touchstart', function() {instance.getPublicInstance().zoomIn()}, false)
+
+    var zoomInBackground = document.createElementNS(SvgUtils.svgNS, 'rect'); // TODO change these background space fillers to rounded rectangles so they look prettier
+    zoomInBackground.setAttribute('x', '0');
+    zoomInBackground.setAttribute('y', '0');
+    zoomInBackground.setAttribute('width', '1500'); // larger than expected because the whole group is transformed to scale down
+    zoomInBackground.setAttribute('height', '1400');
+    zoomInBackground.setAttribute('class', 'svg-pan-zoom-control-background');
+    zoomIn.appendChild(zoomInBackground);
+
+    var zoomInShape = document.createElementNS(SvgUtils.svgNS, 'path');
+    zoomInShape.setAttribute('d', 'M1280 576v128q0 26 -19 45t-45 19h-320v320q0 26 -19 45t-45 19h-128q-26 0 -45 -19t-19 -45v-320h-320q-26 0 -45 -19t-19 -45v-128q0 -26 19 -45t45 -19h320v-320q0 -26 19 -45t45 -19h128q26 0 45 19t19 45v320h320q26 0 45 19t19 45zM1536 1120v-960 q0 -119 -84.5 -203.5t-203.5 -84.5h-960q-119 0 -203.5 84.5t-84.5 203.5v960q0 119 84.5 203.5t203.5 84.5h960q119 0 203.5 -84.5t84.5 -203.5z');
+    zoomInShape.setAttribute('class', 'svg-pan-zoom-control-element');
+    zoomIn.appendChild(zoomInShape);
+
+    return zoomIn
+  }
+
+, _createZoomReset: function(instance){
+    // reset
+    var resetPanZoomControl = document.createElementNS(SvgUtils.svgNS, 'g');
+    resetPanZoomControl.setAttribute('id', 'svg-pan-zoom-reset-pan-zoom');
+    resetPanZoomControl.setAttribute('transform', 'translate(5 35) scale(0.4)');
+    resetPanZoomControl.setAttribute('class', 'svg-pan-zoom-control');
+    resetPanZoomControl.addEventListener('click', function() {instance.getPublicInstance().reset()}, false);
+    resetPanZoomControl.addEventListener('touchstart', function() {instance.getPublicInstance().reset()}, false);
+
+    var resetPanZoomControlBackground = document.createElementNS(SvgUtils.svgNS, 'rect'); // TODO change these background space fillers to rounded rectangles so they look prettier
+    resetPanZoomControlBackground.setAttribute('x', '2');
+    resetPanZoomControlBackground.setAttribute('y', '2');
+    resetPanZoomControlBackground.setAttribute('width', '182'); // larger than expected because the whole group is transformed to scale down
+    resetPanZoomControlBackground.setAttribute('height', '58');
+    resetPanZoomControlBackground.setAttribute('class', 'svg-pan-zoom-control-background');
+    resetPanZoomControl.appendChild(resetPanZoomControlBackground);
+
+    var resetPanZoomControlShape1 = document.createElementNS(SvgUtils.svgNS, 'path');
+    resetPanZoomControlShape1.setAttribute('d', 'M33.051,20.632c-0.742-0.406-1.854-0.609-3.338-0.609h-7.969v9.281h7.769c1.543,0,2.701-0.188,3.473-0.562c1.365-0.656,2.048-1.953,2.048-3.891C35.032,22.757,34.372,21.351,33.051,20.632z');
+    resetPanZoomControlShape1.setAttribute('class', 'svg-pan-zoom-control-element');
+    resetPanZoomControl.appendChild(resetPanZoomControlShape1);
+
+    var resetPanZoomControlShape2 = document.createElementNS(SvgUtils.svgNS, 'path');
+    resetPanZoomControlShape2.setAttribute('d', 'M170.231,0.5H15.847C7.102,0.5,0.5,5.708,0.5,11.84v38.861C0.5,56.833,7.102,61.5,15.847,61.5h154.384c8.745,0,15.269-4.667,15.269-10.798V11.84C185.5,5.708,178.976,0.5,170.231,0.5z M42.837,48.569h-7.969c-0.219-0.766-0.375-1.383-0.469-1.852c-0.188-0.969-0.289-1.961-0.305-2.977l-0.047-3.211c-0.03-2.203-0.41-3.672-1.142-4.406c-0.732-0.734-2.103-1.102-4.113-1.102h-7.05v13.547h-7.055V14.022h16.524c2.361,0.047,4.178,0.344,5.45,0.891c1.272,0.547,2.351,1.352,3.234,2.414c0.731,0.875,1.31,1.844,1.737,2.906s0.64,2.273,0.64,3.633c0,1.641-0.414,3.254-1.242,4.84s-2.195,2.707-4.102,3.363c1.594,0.641,2.723,1.551,3.387,2.73s0.996,2.98,0.996,5.402v2.32c0,1.578,0.063,2.648,0.19,3.211c0.19,0.891,0.635,1.547,1.333,1.969V48.569z M75.579,48.569h-26.18V14.022h25.336v6.117H56.454v7.336h16.781v6H56.454v8.883h19.125V48.569z M104.497,46.331c-2.44,2.086-5.887,3.129-10.34,3.129c-4.548,0-8.125-1.027-10.731-3.082s-3.909-4.879-3.909-8.473h6.891c0.224,1.578,0.662,2.758,1.316,3.539c1.196,1.422,3.246,2.133,6.15,2.133c1.739,0,3.151-0.188,4.236-0.562c2.058-0.719,3.087-2.055,3.087-4.008c0-1.141-0.504-2.023-1.512-2.648c-1.008-0.609-2.607-1.148-4.796-1.617l-3.74-0.82c-3.676-0.812-6.201-1.695-7.576-2.648c-2.328-1.594-3.492-4.086-3.492-7.477c0-3.094,1.139-5.664,3.417-7.711s5.623-3.07,10.036-3.07c3.685,0,6.829,0.965,9.431,2.895c2.602,1.93,3.966,4.73,4.093,8.402h-6.938c-0.128-2.078-1.057-3.555-2.787-4.43c-1.154-0.578-2.587-0.867-4.301-0.867c-1.907,0-3.428,0.375-4.565,1.125c-1.138,0.75-1.706,1.797-1.706,3.141c0,1.234,0.561,2.156,1.682,2.766c0.721,0.406,2.25,0.883,4.589,1.43l6.063,1.43c2.657,0.625,4.648,1.461,5.975,2.508c2.059,1.625,3.089,3.977,3.089,7.055C108.157,41.624,106.937,44.245,104.497,46.331z M139.61,48.569h-26.18V14.022h25.336v6.117h-18.281v7.336h16.781v6h-16.781v8.883h19.125V48.569z M170.337,20.14h-10.336v28.43h-7.266V20.14h-10.383v-6.117h27.984V20.14z');
+    resetPanZoomControlShape2.setAttribute('class', 'svg-pan-zoom-control-element');
+    resetPanZoomControl.appendChild(resetPanZoomControlShape2);
+
+    return resetPanZoomControl
+  }
+
+, _createZoomOut: function(instance){
+    // zoom out
+    var zoomOut = document.createElementNS(SvgUtils.svgNS, 'g');
+    zoomOut.setAttribute('id', 'svg-pan-zoom-zoom-out');
+    zoomOut.setAttribute('transform', 'translate(30.5 70) scale(0.015)');
+    zoomOut.setAttribute('class', 'svg-pan-zoom-control');
+    zoomOut.addEventListener('click', function() {instance.getPublicInstance().zoomOut()}, false);
+    zoomOut.addEventListener('touchstart', function() {instance.getPublicInstance().zoomOut()}, false);
+
+    var zoomOutBackground = document.createElementNS(SvgUtils.svgNS, 'rect'); // TODO change these background space fillers to rounded rectangles so they look prettier
+    zoomOutBackground.setAttribute('x', '0');
+    zoomOutBackground.setAttribute('y', '0');
+    zoomOutBackground.setAttribute('width', '1500'); // larger than expected because the whole group is transformed to scale down
+    zoomOutBackground.setAttribute('height', '1400');
+    zoomOutBackground.setAttribute('class', 'svg-pan-zoom-control-background');
+    zoomOut.appendChild(zoomOutBackground);
+
+    var zoomOutShape = document.createElementNS(SvgUtils.svgNS, 'path');
+    zoomOutShape.setAttribute('d', 'M1280 576v128q0 26 -19 45t-45 19h-896q-26 0 -45 -19t-19 -45v-128q0 -26 19 -45t45 -19h896q26 0 45 19t19 45zM1536 1120v-960q0 -119 -84.5 -203.5t-203.5 -84.5h-960q-119 0 -203.5 84.5t-84.5 203.5v960q0 119 84.5 203.5t203.5 84.5h960q119 0 203.5 -84.5 t84.5 -203.5z');
+    zoomOutShape.setAttribute('class', 'svg-pan-zoom-control-element');
+    zoomOut.appendChild(zoomOutShape);
+
+    return zoomOut
+  }
+
+, disable: function(instance) {
+    if (instance.controlIcons) {
+      instance.controlIcons.parentNode.removeChild(instance.controlIcons)
+      instance.controlIcons = null
+    }
+  }
+}
+
+},{"./svg-utilities":5}],3:[function(require,module,exports){
+var SvgUtils = require('./svg-utilities')
+  , Utils = require('./utilities')
+  ;
+
+var ShadowViewport = function(viewport, options){
+  this.init(viewport, options)
+}
+
+/**
+ * Initialization
+ *
+ * @param  {SVGElement} viewport
+ * @param  {Object} options
+ */
+ShadowViewport.prototype.init = function(viewport, options) {
+  // DOM Elements
+  this.viewport = viewport
+  this.options = options
+
+  // State cache
+  this.originalState = {zoom: 1, x: 0, y: 0}
+  this.activeState = {zoom: 1, x: 0, y: 0}
+
+  this.updateCTMCached = Utils.proxy(this.updateCTM, this)
+
+  // Create a custom requestAnimationFrame taking in account refreshRate
+  this.requestAnimationFrame = Utils.createRequestAnimationFrame(this.options.refreshRate)
+
+  // ViewBox
+  this.viewBox = {x: 0, y: 0, width: 0, height: 0}
+  this.cacheViewBox()
+
+  // Process CTM
+  var newCTM = this.processCTM()
+
+  // Update viewport CTM and cache zoom and pan
+  this.setCTM(newCTM)
+
+  // Update CTM in this frame
+  this.updateCTM()
+}
+
+/**
+ * Cache initial viewBox value
+ * If no viewBox is defined, then use viewport size/position instead for viewBox values
+ */
+ShadowViewport.prototype.cacheViewBox = function() {
+  var svgViewBox = this.options.svg.getAttribute('viewBox')
+
+  if (svgViewBox) {
+    var viewBoxValues = svgViewBox.split(/[\s\,]/).filter(function(v){return v}).map(parseFloat)
+
+    // Cache viewbox x and y offset
+    this.viewBox.x = viewBoxValues[0]
+    this.viewBox.y = viewBoxValues[1]
+    this.viewBox.width = viewBoxValues[2]
+    this.viewBox.height = viewBoxValues[3]
+
+    var zoom = Math.min(this.options.width / this.viewBox.width, this.options.height / this.viewBox.height)
+
+    // Update active state
+    this.activeState.zoom = zoom
+    this.activeState.x = (this.options.width - this.viewBox.width * zoom) / 2
+    this.activeState.y = (this.options.height - this.viewBox.height * zoom) / 2
+
+    // Force updating CTM
+    this.updateCTMOnNextFrame()
+
+    this.options.svg.removeAttribute('viewBox')
+  } else {
+    this.simpleViewBoxCache()
+  }
+}
+
+/**
+ * Recalculate viewport sizes and update viewBox cache
+ */
+ShadowViewport.prototype.simpleViewBoxCache = function() {
+  var bBox = this.viewport.getBBox()
+
+  this.viewBox.x = bBox.x
+  this.viewBox.y = bBox.y
+  this.viewBox.width = bBox.width
+  this.viewBox.height = bBox.height
+}
+
+/**
+ * Returns a viewbox object. Safe to alter
+ *
+ * @return {Object} viewbox object
+ */
+ShadowViewport.prototype.getViewBox = function() {
+  return Utils.extend({}, this.viewBox)
+}
+
+/**
+ * Get initial zoom and pan values. Save them into originalState
+ * Parses viewBox attribute to alter initial sizes
+ *
+ * @return {CTM} CTM object based on options
+ */
+ShadowViewport.prototype.processCTM = function() {
+  var newCTM = this.getCTM()
+
+  if (this.options.fit || this.options.contain) {
+    var newScale;
+    if (this.options.fit) {
+      newScale = Math.min(this.options.width/this.viewBox.width, this.options.height/this.viewBox.height);
+    } else {
+      newScale = Math.max(this.options.width/this.viewBox.width, this.options.height/this.viewBox.height);
+    }
+
+    newCTM.a = newScale; //x-scale
+    newCTM.d = newScale; //y-scale
+    newCTM.e = -this.viewBox.x * newScale; //x-transform
+    newCTM.f = -this.viewBox.y * newScale; //y-transform
+  }
+
+  if (this.options.center) {
+    var offsetX = (this.options.width - (this.viewBox.width + this.viewBox.x * 2) * newCTM.a) * 0.5
+      , offsetY = (this.options.height - (this.viewBox.height + this.viewBox.y * 2) * newCTM.a) * 0.5
+
+    newCTM.e = offsetX
+    newCTM.f = offsetY
+  }
+
+  // Cache initial values. Based on activeState and fix+center opitons
+  this.originalState.zoom = newCTM.a
+  this.originalState.x = newCTM.e
+  this.originalState.y = newCTM.f
+
+  return newCTM
+}
+
+/**
+ * Return originalState object. Safe to alter
+ *
+ * @return {Object}
+ */
+ShadowViewport.prototype.getOriginalState = function() {
+  return Utils.extend({}, this.originalState)
+}
+
+/**
+ * Return actualState object. Safe to alter
+ *
+ * @return {Object}
+ */
+ShadowViewport.prototype.getState = function() {
+  return Utils.extend({}, this.activeState)
+}
+
+/**
+ * Get zoom scale
+ *
+ * @return {Float} zoom scale
+ */
+ShadowViewport.prototype.getZoom = function() {
+  return this.activeState.zoom
+}
+
+/**
+ * Get zoom scale for pubilc usage
+ *
+ * @return {Float} zoom scale
+ */
+ShadowViewport.prototype.getRelativeZoom = function() {
+  return this.activeState.zoom / this.originalState.zoom
+}
+
+/**
+ * Compute zoom scale for pubilc usage
+ *
+ * @return {Float} zoom scale
+ */
+ShadowViewport.prototype.computeRelativeZoom = function(scale) {
+  return scale / this.originalState.zoom
+}
+
+/**
+ * Get pan
+ *
+ * @return {Object}
+ */
+ShadowViewport.prototype.getPan = function() {
+  return {x: this.activeState.x, y: this.activeState.y}
+}
+
+/**
+ * Return cached viewport CTM value that can be safely modified
+ *
+ * @return {SVGMatrix}
+ */
+ShadowViewport.prototype.getCTM = function() {
+  var safeCTM = this.options.svg.createSVGMatrix()
+
+  // Copy values manually as in FF they are not itterable
+  safeCTM.a = this.activeState.zoom
+  safeCTM.b = 0
+  safeCTM.c = 0
+  safeCTM.d = this.activeState.zoom
+  safeCTM.e = this.activeState.x
+  safeCTM.f = this.activeState.y
+
+  return safeCTM
+}
+
+/**
+ * Set a new CTM
+ *
+ * @param {SVGMatrix} newCTM
+ */
+ShadowViewport.prototype.setCTM = function(newCTM) {
+  var willZoom = this.isZoomDifferent(newCTM)
+    , willPan = this.isPanDifferent(newCTM)
+
+  if (willZoom || willPan) {
+    // Before zoom
+    if (willZoom) {
+      // If returns false then cancel zooming
+      if (this.options.beforeZoom(this.getRelativeZoom(), this.computeRelativeZoom(newCTM.a)) === false) {
+        newCTM.a = newCTM.d = this.activeState.zoom
+        willZoom = false
+      } else {
+        this.updateCache(newCTM);
+        this.options.onZoom(this.getRelativeZoom())
+      }
+    }
+
+    // Before pan
+    if (willPan) {
+      var preventPan = this.options.beforePan(this.getPan(), {x: newCTM.e, y: newCTM.f})
+          // If prevent pan is an object
+        , preventPanX = false
+        , preventPanY = false
+
+      // If prevent pan is Boolean false
+      if (preventPan === false) {
+        // Set x and y same as before
+        newCTM.e = this.getPan().x
+        newCTM.f = this.getPan().y
+
+        preventPanX = preventPanY = true
+      } else if (Utils.isObject(preventPan)) {
+        // Check for X axes attribute
+        if (preventPan.x === false) {
+          // Prevent panning on x axes
+          newCTM.e = this.getPan().x
+          preventPanX = true
+        } else if (Utils.isNumber(preventPan.x)) {
+          // Set a custom pan value
+          newCTM.e = preventPan.x
+        }
+
+        // Check for Y axes attribute
+        if (preventPan.y === false) {
+          // Prevent panning on x axes
+          newCTM.f = this.getPan().y
+          preventPanY = true
+        } else if (Utils.isNumber(preventPan.y)) {
+          // Set a custom pan value
+          newCTM.f = preventPan.y
+        }
+      }
+
+      // Update willPan flag
+      // Check if newCTM is still different
+      if ((preventPanX && preventPanY) || !this.isPanDifferent(newCTM)) {
+        willPan = false
+      } else {
+        this.updateCache(newCTM);
+        this.options.onPan(this.getPan());
+      }
+    }
+
+    // Check again if should zoom or pan
+    if (willZoom || willPan) {
+      this.updateCTMOnNextFrame()
+    }
+  }
+}
+
+ShadowViewport.prototype.isZoomDifferent = function(newCTM) {
+  return this.activeState.zoom !== newCTM.a
+}
+
+ShadowViewport.prototype.isPanDifferent = function(newCTM) {
+  return this.activeState.x !== newCTM.e || this.activeState.y !== newCTM.f
+}
+
+
+/**
+ * Update cached CTM and active state
+ *
+ * @param {SVGMatrix} newCTM
+ */
+ShadowViewport.prototype.updateCache = function(newCTM) {
+  this.activeState.zoom = newCTM.a
+  this.activeState.x = newCTM.e
+  this.activeState.y = newCTM.f
+}
+
+ShadowViewport.prototype.pendingUpdate = false
+
+/**
+ * Place a request to update CTM on next Frame
+ */
+ShadowViewport.prototype.updateCTMOnNextFrame = function() {
+  if (!this.pendingUpdate) {
+    // Lock
+    this.pendingUpdate = true
+
+    // Throttle next update
+    this.requestAnimationFrame.call(window, this.updateCTMCached)
+  }
+}
+
+/**
+ * Update viewport CTM with cached CTM
+ */
+ShadowViewport.prototype.updateCTM = function() {
+  var ctm = this.getCTM()
+
+  // Updates SVG element
+  SvgUtils.setCTM(this.viewport, ctm, this.defs)
+
+  // Free the lock
+  this.pendingUpdate = false
+
+  // Notify about the update
+  if(this.options.onUpdatedCTM) {
+    this.options.onUpdatedCTM(ctm)
+  }
+}
+
+module.exports = function(viewport, options){
+  return new ShadowViewport(viewport, options)
+}
+
+},{"./svg-utilities":5,"./utilities":7}],4:[function(require,module,exports){
+var Wheel = require('./uniwheel')
+, ControlIcons = require('./control-icons')
+, Utils = require('./utilities')
+, SvgUtils = require('./svg-utilities')
+, ShadowViewport = require('./shadow-viewport')
+
+var SvgPanZoom = function(svg, options) {
+  this.init(svg, options)
+}
+
+var optionsDefaults = {
+  viewportSelector: '.svg-pan-zoom_viewport' // Viewport selector. Can be querySelector string or SVGElement
+, panEnabled: true // enable or disable panning (default enabled)
+, controlIconsEnabled: false // insert icons to give user an option in addition to mouse events to control pan/zoom (default disabled)
+, zoomEnabled: true // enable or disable zooming (default enabled)
+, dblClickZoomEnabled: true // enable or disable zooming by double clicking (default enabled)
+, mouseWheelZoomEnabled: true // enable or disable zooming by mouse wheel (default enabled)
+, preventMouseEventsDefault: true // enable or disable preventDefault for mouse events
+, zoomScaleSensitivity: 0.1 // Zoom sensitivity
+, minZoom: 0.5 // Minimum Zoom level
+, maxZoom: 10 // Maximum Zoom level
+, fit: true // enable or disable viewport fit in SVG (default true)
+, contain: false // enable or disable viewport contain the svg (default false)
+, center: true // enable or disable viewport centering in SVG (default true)
+, refreshRate: 'auto' // Maximum number of frames per second (altering SVG's viewport)
+, beforeZoom: null
+, onZoom: null
+, beforePan: null
+, onPan: null
+, customEventsHandler: null
+, eventsListenerElement: null
+, onUpdatedCTM: null
+}
+
+var passiveListenerOption = {passive: true};
+
+SvgPanZoom.prototype.init = function(svg, options) {
+  var that = this
+
+  this.svg = svg
+  this.defs = svg.querySelector('defs')
+
+  // Add default attributes to SVG
+  SvgUtils.setupSvgAttributes(this.svg)
+
+  // Set options
+  this.options = Utils.extend(Utils.extend({}, optionsDefaults), options)
+
+  // Set default state
+  this.state = 'none'
+
+  // Get dimensions
+  var boundingClientRectNormalized = SvgUtils.getBoundingClientRectNormalized(svg)
+  this.width = boundingClientRectNormalized.width
+  this.height = boundingClientRectNormalized.height
+
+  // Init shadow viewport
+  this.viewport = ShadowViewport(SvgUtils.getOrCreateViewport(this.svg, this.options.viewportSelector), {
+    svg: this.svg
+  , width: this.width
+  , height: this.height
+  , fit: this.options.fit
+  , contain: this.options.contain
+  , center: this.options.center
+  , refreshRate: this.options.refreshRate
+  // Put callbacks into functions as they can change through time
+  , beforeZoom: function(oldScale, newScale) {
+      if (that.viewport && that.options.beforeZoom) {return that.options.beforeZoom(oldScale, newScale)}
+    }
+  , onZoom: function(scale) {
+      if (that.viewport && that.options.onZoom) {return that.options.onZoom(scale)}
+    }
+  , beforePan: function(oldPoint, newPoint) {
+      if (that.viewport && that.options.beforePan) {return that.options.beforePan(oldPoint, newPoint)}
+    }
+  , onPan: function(point) {
+      if (that.viewport && that.options.onPan) {return that.options.onPan(point)}
+    }
+  , onUpdatedCTM: function(ctm) {
+      if (that.viewport && that.options.onUpdatedCTM) {return that.options.onUpdatedCTM(ctm)}
+    }
+  })
+
+  // Wrap callbacks into public API context
+  var publicInstance = this.getPublicInstance()
+  publicInstance.setBeforeZoom(this.options.beforeZoom)
+  publicInstance.setOnZoom(this.options.onZoom)
+  publicInstance.setBeforePan(this.options.beforePan)
+  publicInstance.setOnPan(this.options.onPan)
+  publicInstance.setOnUpdatedCTM(this.options.onUpdatedCTM)
+
+  if (this.options.controlIconsEnabled) {
+    ControlIcons.enable(this)
+  }
+
+  // Init events handlers
+  this.lastMouseWheelEventTime = Date.now()
+  this.setupHandlers()
+}
+
+/**
+ * Register event handlers
+ */
+SvgPanZoom.prototype.setupHandlers = function() {
+  var that = this
+    , prevEvt = null // use for touchstart event to detect double tap
+    ;
+
+  this.eventListeners = {
+    // Mouse down group
+    mousedown: function(evt) {
+      var result = that.handleMouseDown(evt, prevEvt);
+      prevEvt = evt
+      return result;
+    }
+  , touchstart: function(evt) {
+      var result = that.handleMouseDown(evt, prevEvt);
+      prevEvt = evt
+      return result;
+    }
+
+    // Mouse up group
+  , mouseup: function(evt) {
+      return that.handleMouseUp(evt);
+    }
+  , touchend: function(evt) {
+      return that.handleMouseUp(evt);
+    }
+
+    // Mouse move group
+  , mousemove: function(evt) {
+      return that.handleMouseMove(evt);
+    }
+  , touchmove: function(evt) {
+      return that.handleMouseMove(evt);
+    }
+
+    // Mouse leave group
+  , mouseleave: function(evt) {
+      return that.handleMouseUp(evt);
+    }
+  , touchleave: function(evt) {
+      return that.handleMouseUp(evt);
+    }
+  , touchcancel: function(evt) {
+      return that.handleMouseUp(evt);
+    }
+  }
+
+  // Init custom events handler if available
+  if (this.options.customEventsHandler != null) { // jshint ignore:line
+    this.options.customEventsHandler.init({
+      svgElement: this.svg
+    , eventsListenerElement: this.options.eventsListenerElement
+    , instance: this.getPublicInstance()
+    })
+
+    // Custom event handler may halt builtin listeners
+    var haltEventListeners = this.options.customEventsHandler.haltEventListeners
+    if (haltEventListeners && haltEventListeners.length) {
+      for (var i = haltEventListeners.length - 1; i >= 0; i--) {
+        if (this.eventListeners.hasOwnProperty(haltEventListeners[i])) {
+          delete this.eventListeners[haltEventListeners[i]]
+        }
+      }
+    }
+  }
+
+  // Bind eventListeners
+  for (var event in this.eventListeners) {
+    // Attach event to eventsListenerElement or SVG if not available
+    (this.options.eventsListenerElement || this.svg)
+      .addEventListener(event, this.eventListeners[event], !this.options.preventMouseEventsDefault ? passiveListenerOption : false)
+  }
+
+  // Zoom using mouse wheel
+  if (this.options.mouseWheelZoomEnabled) {
+    this.options.mouseWheelZoomEnabled = false // set to false as enable will set it back to true
+    this.enableMouseWheelZoom()
+  }
+}
+
+/**
+ * Enable ability to zoom using mouse wheel
+ */
+SvgPanZoom.prototype.enableMouseWheelZoom = function() {
+  if (!this.options.mouseWheelZoomEnabled) {
+    var that = this
+
+    // Mouse wheel listener
+    this.wheelListener = function(evt) {
+      return that.handleMouseWheel(evt);
+    }
+
+    // Bind wheelListener
+    var isPassiveListener = !this.options.preventMouseEventsDefault
+    Wheel.on(this.options.eventsListenerElement || this.svg, this.wheelListener, isPassiveListener)
+
+    this.options.mouseWheelZoomEnabled = true
+  }
+}
+
+/**
+ * Disable ability to zoom using mouse wheel
+ */
+SvgPanZoom.prototype.disableMouseWheelZoom = function() {
+  if (this.options.mouseWheelZoomEnabled) {
+    var isPassiveListener = !this.options.preventMouseEventsDefault
+    Wheel.off(this.options.eventsListenerElement || this.svg, this.wheelListener, isPassiveListener)
+    this.options.mouseWheelZoomEnabled = false
+  }
+}
+
+/**
+ * Handle mouse wheel event
+ *
+ * @param  {Event} evt
+ */
+SvgPanZoom.prototype.handleMouseWheel = function(evt) {
+  if (!this.options.zoomEnabled || this.state !== 'none') {
+    return;
+  }
+
+  if (this.options.preventMouseEventsDefault){
+    if (evt.preventDefault) {
+      evt.preventDefault();
+    } else {
+      evt.returnValue = false;
+    }
+  }
+
+  // Default delta in case that deltaY is not available
+  var delta = evt.deltaY || 1
+    , timeDelta = Date.now() - this.lastMouseWheelEventTime
+    , divider = 3 + Math.max(0, 30 - timeDelta)
+
+  // Update cache
+  this.lastMouseWheelEventTime = Date.now()
+
+  // Make empirical adjustments for browsers that give deltaY in pixels (deltaMode=0)
+  if ('deltaMode' in evt && evt.deltaMode === 0 && evt.wheelDelta) {
+    delta = evt.deltaY === 0 ? 0 :  Math.abs(evt.wheelDelta) / evt.deltaY
+  }
+
+  delta = -0.3 < delta && delta < 0.3 ? delta : (delta > 0 ? 1 : -1) * Math.log(Math.abs(delta) + 10) / divider
+
+  var inversedScreenCTM = this.svg.getScreenCTM().inverse()
+    , relativeMousePoint = SvgUtils.getEventPoint(evt, this.svg).matrixTransform(inversedScreenCTM)
+    , zoom = Math.pow(1 + this.options.zoomScaleSensitivity, (-1) * delta); // multiplying by neg. 1 so as to make zoom in/out behavior match Google maps behavior
+
+  this.zoomAtPoint(zoom, relativeMousePoint)
+}
+
+/**
+ * Zoom in at a SVG point
+ *
+ * @param  {SVGPoint} point
+ * @param  {Float} zoomScale    Number representing how much to zoom
+ * @param  {Boolean} zoomAbsolute Default false. If true, zoomScale is treated as an absolute value.
+ *                                Otherwise, zoomScale is treated as a multiplied (e.g. 1.10 would zoom in 10%)
+ */
+SvgPanZoom.prototype.zoomAtPoint = function(zoomScale, point, zoomAbsolute) {
+  var originalState = this.viewport.getOriginalState()
+
+  if (!zoomAbsolute) {
+    // Fit zoomScale in set bounds
+    if (this.getZoom() * zoomScale < this.options.minZoom * originalState.zoom) {
+      zoomScale = (this.options.minZoom * originalState.zoom) / this.getZoom()
+    } else if (this.getZoom() * zoomScale > this.options.maxZoom * originalState.zoom) {
+      zoomScale = (this.options.maxZoom * originalState.zoom) / this.getZoom()
+    }
+  } else {
+    // Fit zoomScale in set bounds
+    zoomScale = Math.max(this.options.minZoom * originalState.zoom, Math.min(this.options.maxZoom * originalState.zoom, zoomScale))
+    // Find relative scale to achieve desired scale
+    zoomScale = zoomScale/this.getZoom()
+  }
+
+  var oldCTM = this.viewport.getCTM()
+    , relativePoint = point.matrixTransform(oldCTM.inverse())
+    , modifier = this.svg.createSVGMatrix().translate(relativePoint.x, relativePoint.y).scale(zoomScale).translate(-relativePoint.x, -relativePoint.y)
+    , newCTM = oldCTM.multiply(modifier)
+
+  if (newCTM.a !== oldCTM.a) {
+    this.viewport.setCTM(newCTM)
+  }
+}
+
+/**
+ * Zoom at center point
+ *
+ * @param  {Float} scale
+ * @param  {Boolean} absolute Marks zoom scale as relative or absolute
+ */
+SvgPanZoom.prototype.zoom = function(scale, absolute) {
+  this.zoomAtPoint(scale, SvgUtils.getSvgCenterPoint(this.svg, this.width, this.height), absolute)
+}
+
+/**
+ * Zoom used by public instance
+ *
+ * @param  {Float} scale
+ * @param  {Boolean} absolute Marks zoom scale as relative or absolute
+ */
+SvgPanZoom.prototype.publicZoom = function(scale, absolute) {
+  if (absolute) {
+    scale = this.computeFromRelativeZoom(scale)
+  }
+
+  this.zoom(scale, absolute)
+}
+
+/**
+ * Zoom at point used by public instance
+ *
+ * @param  {Float} scale
+ * @param  {SVGPoint|Object} point    An object that has x and y attributes
+ * @param  {Boolean} absolute Marks zoom scale as relative or absolute
+ */
+SvgPanZoom.prototype.publicZoomAtPoint = function(scale, point, absolute) {
+  if (absolute) {
+    // Transform zoom into a relative value
+    scale = this.computeFromRelativeZoom(scale)
+  }
+
+  // If not a SVGPoint but has x and y then create a SVGPoint
+  if (Utils.getType(point) !== 'SVGPoint') {
+    if('x' in point && 'y' in point) {
+      point = SvgUtils.createSVGPoint(this.svg, point.x, point.y)
+    } else {
+      throw new Error('Given point is invalid')
+    }
+  }
+
+  this.zoomAtPoint(scale, point, absolute)
+}
+
+/**
+ * Get zoom scale
+ *
+ * @return {Float} zoom scale
+ */
+SvgPanZoom.prototype.getZoom = function() {
+  return this.viewport.getZoom()
+}
+
+/**
+ * Get zoom scale for public usage
+ *
+ * @return {Float} zoom scale
+ */
+SvgPanZoom.prototype.getRelativeZoom = function() {
+  return this.viewport.getRelativeZoom()
+}
+
+/**
+ * Compute actual zoom from public zoom
+ *
+ * @param  {Float} zoom
+ * @return {Float} zoom scale
+ */
+SvgPanZoom.prototype.computeFromRelativeZoom = function(zoom) {
+  return zoom * this.viewport.getOriginalState().zoom
+}
+
+/**
+ * Set zoom to initial state
+ */
+SvgPanZoom.prototype.resetZoom = function() {
+  var originalState = this.viewport.getOriginalState()
+
+  this.zoom(originalState.zoom, true);
+}
+
+/**
+ * Set pan to initial state
+ */
+SvgPanZoom.prototype.resetPan = function() {
+  this.pan(this.viewport.getOriginalState());
+}
+
+/**
+ * Set pan and zoom to initial state
+ */
+SvgPanZoom.prototype.reset = function() {
+  this.resetZoom()
+  this.resetPan()
+}
+
+/**
+ * Handle double click event
+ * See handleMouseDown() for alternate detection method
+ *
+ * @param {Event} evt
+ */
+SvgPanZoom.prototype.handleDblClick = function(evt) {
+  if (this.options.preventMouseEventsDefault) {
+    if (evt.preventDefault) {
+      evt.preventDefault()
+    } else {
+      evt.returnValue = false
+    }
+  }
+
+  // Check if target was a control button
+  if (this.options.controlIconsEnabled) {
+    var targetClass = evt.target.getAttribute('class') || ''
+    if (targetClass.indexOf('svg-pan-zoom-control') > -1) {
+      return false
+    }
+  }
+
+  var zoomFactor
+
+  if (evt.shiftKey) {
+    zoomFactor = 1/((1 + this.options.zoomScaleSensitivity) * 2) // zoom out when shift key pressed
+  } else {
+    zoomFactor = (1 + this.options.zoomScaleSensitivity) * 2
+  }
+
+  var point = SvgUtils.getEventPoint(evt, this.svg).matrixTransform(this.svg.getScreenCTM().inverse())
+  this.zoomAtPoint(zoomFactor, point)
+}
+
+/**
+ * Handle click event
+ *
+ * @param {Event} evt
+ */
+SvgPanZoom.prototype.handleMouseDown = function(evt, prevEvt) {
+  if (this.options.preventMouseEventsDefault) {
+    if (evt.preventDefault) {
+      evt.preventDefault()
+    } else {
+      evt.returnValue = false
+    }
+  }
+
+  Utils.mouseAndTouchNormalize(evt, this.svg)
+
+  // Double click detection; more consistent than ondblclick
+  if (this.options.dblClickZoomEnabled && Utils.isDblClick(evt, prevEvt)){
+    this.handleDblClick(evt)
+  } else {
+    // Pan mode
+    this.state = 'pan'
+    this.firstEventCTM = this.viewport.getCTM()
+    this.stateOrigin = SvgUtils.getEventPoint(evt, this.svg).matrixTransform(this.firstEventCTM.inverse())
+  }
+}
+
+/**
+ * Handle mouse move event
+ *
+ * @param  {Event} evt
+ */
+SvgPanZoom.prototype.handleMouseMove = function(evt) {
+  if (this.options.preventMouseEventsDefault) {
+    if (evt.preventDefault) {
+      evt.preventDefault()
+    } else {
+      evt.returnValue = false
+    }
+  }
+
+  if (this.state === 'pan' && this.options.panEnabled) {
+    // Pan mode
+    var point = SvgUtils.getEventPoint(evt, this.svg).matrixTransform(this.firstEventCTM.inverse())
+      , viewportCTM = this.firstEventCTM.translate(point.x - this.stateOrigin.x, point.y - this.stateOrigin.y)
+
+    this.viewport.setCTM(viewportCTM)
+  }
+}
+
+/**
+ * Handle mouse button release event
+ *
+ * @param {Event} evt
+ */
+SvgPanZoom.prototype.handleMouseUp = function(evt) {
+  if (this.options.preventMouseEventsDefault) {
+    if (evt.preventDefault) {
+      evt.preventDefault()
+    } else {
+      evt.returnValue = false
+    }
+  }
+
+  if (this.state === 'pan') {
+    // Quit pan mode
+    this.state = 'none'
+  }
+}
+
+/**
+ * Adjust viewport size (only) so it will fit in SVG
+ * Does not center image
+ */
+SvgPanZoom.prototype.fit = function() {
+  var viewBox = this.viewport.getViewBox()
+    , newScale = Math.min(this.width/viewBox.width, this.height/viewBox.height)
+
+  this.zoom(newScale, true)
+}
+
+/**
+ * Adjust viewport size (only) so it will contain the SVG
+ * Does not center image
+ */
+SvgPanZoom.prototype.contain = function() {
+  var viewBox = this.viewport.getViewBox()
+    , newScale = Math.max(this.width/viewBox.width, this.height/viewBox.height)
+
+  this.zoom(newScale, true)
+}
+
+/**
+ * Adjust viewport pan (only) so it will be centered in SVG
+ * Does not zoom/fit/contain image
+ */
+SvgPanZoom.prototype.center = function() {
+  var viewBox = this.viewport.getViewBox()
+    , offsetX = (this.width - (viewBox.width + viewBox.x * 2) * this.getZoom()) * 0.5
+    , offsetY = (this.height - (viewBox.height + viewBox.y * 2) * this.getZoom()) * 0.5
+
+  this.getPublicInstance().pan({x: offsetX, y: offsetY})
+}
+
+/**
+ * Update content cached BorderBox
+ * Use when viewport contents change
+ */
+SvgPanZoom.prototype.updateBBox = function() {
+  this.viewport.simpleViewBoxCache()
+}
+
+/**
+ * Pan to a rendered position
+ *
+ * @param  {Object} point {x: 0, y: 0}
+ */
+SvgPanZoom.prototype.pan = function(point) {
+  var viewportCTM = this.viewport.getCTM()
+  viewportCTM.e = point.x
+  viewportCTM.f = point.y
+  this.viewport.setCTM(viewportCTM)
+}
+
+/**
+ * Relatively pan the graph by a specified rendered position vector
+ *
+ * @param  {Object} point {x: 0, y: 0}
+ */
+SvgPanZoom.prototype.panBy = function(point) {
+  var viewportCTM = this.viewport.getCTM()
+  viewportCTM.e += point.x
+  viewportCTM.f += point.y
+  this.viewport.setCTM(viewportCTM)
+}
+
+/**
+ * Get pan vector
+ *
+ * @return {Object} {x: 0, y: 0}
+ */
+SvgPanZoom.prototype.getPan = function() {
+  var state = this.viewport.getState()
+
+  return {x: state.x, y: state.y}
+}
+
+/**
+ * Recalculates cached svg dimensions and controls position
+ */
+SvgPanZoom.prototype.resize = function() {
+  // Get dimensions
+  var boundingClientRectNormalized = SvgUtils.getBoundingClientRectNormalized(this.svg)
+  this.width = boundingClientRectNormalized.width
+  this.height = boundingClientRectNormalized.height
+
+  // Recalculate original state
+  var viewport = this.viewport
+  viewport.options.width = this.width
+  viewport.options.height = this.height
+  viewport.processCTM()
+
+  // Reposition control icons by re-enabling them
+  if (this.options.controlIconsEnabled) {
+    this.getPublicInstance().disableControlIcons()
+    this.getPublicInstance().enableControlIcons()
+  }
+}
+
+/**
+ * Unbind mouse events, free callbacks and destroy public instance
+ */
+SvgPanZoom.prototype.destroy = function() {
+  var that = this
+
+  // Free callbacks
+  this.beforeZoom = null
+  this.onZoom = null
+  this.beforePan = null
+  this.onPan = null
+  this.onUpdatedCTM = null
+
+  // Destroy custom event handlers
+  if (this.options.customEventsHandler != null) { // jshint ignore:line
+    this.options.customEventsHandler.destroy({
+      svgElement: this.svg
+    , eventsListenerElement: this.options.eventsListenerElement
+    , instance: this.getPublicInstance()
+    })
+  }
+
+  // Unbind eventListeners
+  for (var event in this.eventListeners) {
+    (this.options.eventsListenerElement || this.svg)
+      .removeEventListener(event, this.eventListeners[event], !this.options.preventMouseEventsDefault ? passiveListenerOption : false)
+  }
+
+  // Unbind wheelListener
+  this.disableMouseWheelZoom()
+
+  // Remove control icons
+  this.getPublicInstance().disableControlIcons()
+
+  // Reset zoom and pan
+  this.reset()
+
+  // Remove instance from instancesStore
+  instancesStore = instancesStore.filter(function(instance){
+    return instance.svg !== that.svg
+  })
+
+  // Delete options and its contents
+  delete this.options
+
+  // Delete viewport to make public shadow viewport functions uncallable
+  delete this.viewport
+
+  // Destroy public instance and rewrite getPublicInstance
+  delete this.publicInstance
+  delete this.pi
+  this.getPublicInstance = function(){
+    return null
+  }
+}
+
+/**
+ * Returns a public instance object
+ *
+ * @return {Object} Public instance object
+ */
+SvgPanZoom.prototype.getPublicInstance = function() {
+  var that = this
+
+  // Create cache
+  if (!this.publicInstance) {
+    this.publicInstance = this.pi = {
+      // Pan
+      enablePan: function() {that.options.panEnabled = true; return that.pi}
+    , disablePan: function() {that.options.panEnabled = false; return that.pi}
+    , isPanEnabled: function() {return !!that.options.panEnabled}
+    , pan: function(point) {that.pan(point); return that.pi}
+    , panBy: function(point) {that.panBy(point); return that.pi}
+    , getPan: function() {return that.getPan()}
+      // Pan event
+    , setBeforePan: function(fn) {that.options.beforePan = fn === null ? null : Utils.proxy(fn, that.publicInstance); return that.pi}
+    , setOnPan: function(fn) {that.options.onPan = fn === null ? null : Utils.proxy(fn, that.publicInstance); return that.pi}
+      // Zoom and Control Icons
+    , enableZoom: function() {that.options.zoomEnabled = true; return that.pi}
+    , disableZoom: function() {that.options.zoomEnabled = false; return that.pi}
+    , isZoomEnabled: function() {return !!that.options.zoomEnabled}
+    , enableControlIcons: function() {
+        if (!that.options.controlIconsEnabled) {
+          that.options.controlIconsEnabled = true
+          ControlIcons.enable(that)
+        }
+        return that.pi
+      }
+    , disableControlIcons: function() {
+        if (that.options.controlIconsEnabled) {
+          that.options.controlIconsEnabled = false;
+          ControlIcons.disable(that)
+        }
+        return that.pi
+      }
+    , isControlIconsEnabled: function() {return !!that.options.controlIconsEnabled}
+      // Double click zoom
+    , enableDblClickZoom: function() {that.options.dblClickZoomEnabled = true; return that.pi}
+    , disableDblClickZoom: function() {that.options.dblClickZoomEnabled = false; return that.pi}
+    , isDblClickZoomEnabled: function() {return !!that.options.dblClickZoomEnabled}
+      // Mouse wheel zoom
+    , enableMouseWheelZoom: function() {that.enableMouseWheelZoom(); return that.pi}
+    , disableMouseWheelZoom: function() {that.disableMouseWheelZoom(); return that.pi}
+    , isMouseWheelZoomEnabled: function() {return !!that.options.mouseWheelZoomEnabled}
+      // Zoom scale and bounds
+    , setZoomScaleSensitivity: function(scale) {that.options.zoomScaleSensitivity = scale; return that.pi}
+    , setMinZoom: function(zoom) {that.options.minZoom = zoom; return that.pi}
+    , setMaxZoom: function(zoom) {that.options.maxZoom = zoom; return that.pi}
+      // Zoom event
+    , setBeforeZoom: function(fn) {that.options.beforeZoom = fn === null ? null : Utils.proxy(fn, that.publicInstance); return that.pi}
+    , setOnZoom: function(fn) {that.options.onZoom = fn === null ? null : Utils.proxy(fn, that.publicInstance); return that.pi}
+      // Zooming
+    , zoom: function(scale) {that.publicZoom(scale, true); return that.pi}
+    , zoomBy: function(scale) {that.publicZoom(scale, false); return that.pi}
+    , zoomAtPoint: function(scale, point) {that.publicZoomAtPoint(scale, point, true); return that.pi}
+    , zoomAtPointBy: function(scale, point) {that.publicZoomAtPoint(scale, point, false); return that.pi}
+    , zoomIn: function() {this.zoomBy(1 + that.options.zoomScaleSensitivity); return that.pi}
+    , zoomOut: function() {this.zoomBy(1 / (1 + that.options.zoomScaleSensitivity)); return that.pi}
+    , getZoom: function() {return that.getRelativeZoom()}
+      // CTM update
+    , setOnUpdatedCTM: function(fn) {that.options.onUpdatedCTM = fn === null ? null : Utils.proxy(fn, that.publicInstance); return that.pi}
+      // Reset
+    , resetZoom: function() {that.resetZoom(); return that.pi}
+    , resetPan: function() {that.resetPan(); return that.pi}
+    , reset: function() {that.reset(); return that.pi}
+      // Fit, Contain and Center
+    , fit: function() {that.fit(); return that.pi}
+    , contain: function() {that.contain(); return that.pi}
+    , center: function() {that.center(); return that.pi}
+      // Size and Resize
+    , updateBBox: function() {that.updateBBox(); return that.pi}
+    , resize: function() {that.resize(); return that.pi}
+    , getSizes: function() {
+        return {
+          width: that.width
+        , height: that.height
+        , realZoom: that.getZoom()
+        , viewBox: that.viewport.getViewBox()
+        }
+      }
+      // Destroy
+    , destroy: function() {that.destroy(); return that.pi}
+    }
+  }
+
+  return this.publicInstance
+}
+
+/**
+ * Stores pairs of instances of SvgPanZoom and SVG
+ * Each pair is represented by an object {svg: SVGSVGElement, instance: SvgPanZoom}
+ *
+ * @type {Array}
+ */
+var instancesStore = []
+
+var svgPanZoom = function(elementOrSelector, options){
+  var svg = Utils.getSvg(elementOrSelector)
+
+  if (svg === null) {
+    return null
+  } else {
+    // Look for existent instance
+    for(var i = instancesStore.length - 1; i >= 0; i--) {
+      if (instancesStore[i].svg === svg) {
+        return instancesStore[i].instance.getPublicInstance()
+      }
+    }
+
+    // If instance not found - create one
+    instancesStore.push({
+      svg: svg
+    , instance: new SvgPanZoom(svg, options)
+    })
+
+    // Return just pushed instance
+    return instancesStore[instancesStore.length - 1].instance.getPublicInstance()
+  }
+}
+
+module.exports = svgPanZoom;
+
+},{"./control-icons":2,"./shadow-viewport":3,"./svg-utilities":5,"./uniwheel":6,"./utilities":7}],5:[function(require,module,exports){
+var Utils = require('./utilities')
+  , _browser = 'unknown'
+  ;
+
+// http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+if (/*@cc_on!@*/false || !!document.documentMode) { // internet explorer
+  _browser = 'ie';
+}
+
+module.exports = {
+  svgNS:  'http://www.w3.org/2000/svg'
+, xmlNS:  'http://www.w3.org/XML/1998/namespace'
+, xmlnsNS:  'http://www.w3.org/2000/xmlns/'
+, xlinkNS:  'http://www.w3.org/1999/xlink'
+, evNS:  'http://www.w3.org/2001/xml-events'
+
+  /**
+   * Get svg dimensions: width and height
+   *
+   * @param  {SVGSVGElement} svg
+   * @return {Object}     {width: 0, height: 0}
+   */
+, getBoundingClientRectNormalized: function(svg) {
+    if (svg.clientWidth && svg.clientHeight) {
+      return {width: svg.clientWidth, height: svg.clientHeight}
+    } else if (!!svg.getBoundingClientRect()) {
+      return svg.getBoundingClientRect();
+    } else {
+      throw new Error('Cannot get BoundingClientRect for SVG.');
+    }
+  }
+
+  /**
+   * Gets g element with class of "viewport" or creates it if it doesn't exist
+   *
+   * @param  {SVGSVGElement} svg
+   * @return {SVGElement}     g (group) element
+   */
+, getOrCreateViewport: function(svg, selector) {
+    var viewport = null
+
+    if (Utils.isElement(selector)) {
+      viewport = selector
+    } else {
+      viewport = svg.querySelector(selector)
+    }
+
+    // Check if there is just one main group in SVG
+    if (!viewport) {
+      var childNodes = Array.prototype.slice.call(svg.childNodes || svg.children).filter(function(el){
+        return el.nodeName !== 'defs' && el.nodeName !== '#text'
+      })
+
+      // Node name should be SVGGElement and should have no transform attribute
+      // Groups with transform are not used as viewport because it involves parsing of all transform possibilities
+      if (childNodes.length === 1 && childNodes[0].nodeName === 'g' && childNodes[0].getAttribute('transform') === null) {
+        viewport = childNodes[0]
+      }
+    }
+
+    // If no favorable group element exists then create one
+    if (!viewport) {
+      var viewportId = 'viewport-' + new Date().toISOString().replace(/\D/g, '');
+      viewport = document.createElementNS(this.svgNS, 'g');
+      viewport.setAttribute('id', viewportId);
+
+      // Internet Explorer (all versions?) can't use childNodes, but other browsers prefer (require?) using childNodes
+      var svgChildren = svg.childNodes || svg.children;
+      if (!!svgChildren && svgChildren.length > 0) {
+        for (var i = svgChildren.length; i > 0; i--) {
+          // Move everything into viewport except defs
+          if (svgChildren[svgChildren.length - i].nodeName !== 'defs') {
+            viewport.appendChild(svgChildren[svgChildren.length - i]);
+          }
+        }
+      }
+      svg.appendChild(viewport);
+    }
+
+    // Parse class names
+    var classNames = [];
+    if (viewport.getAttribute('class')) {
+      classNames = viewport.getAttribute('class').split(' ')
+    }
+
+    // Set class (if not set already)
+    if (!~classNames.indexOf('svg-pan-zoom_viewport')) {
+      classNames.push('svg-pan-zoom_viewport')
+      viewport.setAttribute('class', classNames.join(' '))
+    }
+
+    return viewport
+  }
+
+  /**
+   * Set SVG attributes
+   *
+   * @param  {SVGSVGElement} svg
+   */
+  , setupSvgAttributes: function(svg) {
+    // Setting default attributes
+    svg.setAttribute('xmlns', this.svgNS);
+    svg.setAttributeNS(this.xmlnsNS, 'xmlns:xlink', this.xlinkNS);
+    svg.setAttributeNS(this.xmlnsNS, 'xmlns:ev', this.evNS);
+
+    // Needed for Internet Explorer, otherwise the viewport overflows
+    if (svg.parentNode !== null) {
+      var style = svg.getAttribute('style') || '';
+      if (style.toLowerCase().indexOf('overflow') === -1) {
+        svg.setAttribute('style', 'overflow: hidden; ' + style);
+      }
+    }
+  }
+
+/**
+ * How long Internet Explorer takes to finish updating its display (ms).
+ */
+, internetExplorerRedisplayInterval: 300
+
+/**
+ * Forces the browser to redisplay all SVG elements that rely on an
+ * element defined in a 'defs' section. It works globally, for every
+ * available defs element on the page.
+ * The throttling is intentionally global.
+ *
+ * This is only needed for IE. It is as a hack to make markers (and 'use' elements?)
+ * visible after pan/zoom when there are multiple SVGs on the page.
+ * See bug report: https://connect.microsoft.com/IE/feedback/details/781964/
+ * also see svg-pan-zoom issue: https://github.com/ariutta/svg-pan-zoom/issues/62
+ */
+, refreshDefsGlobal: Utils.throttle(function() {
+    var allDefs = document.querySelectorAll('defs');
+    var allDefsCount = allDefs.length;
+    for (var i = 0; i < allDefsCount; i++) {
+      var thisDefs = allDefs[i];
+      thisDefs.parentNode.insertBefore(thisDefs, thisDefs);
+    }
+  }, this ? this.internetExplorerRedisplayInterval : null)
+
+  /**
+   * Sets the current transform matrix of an element
+   *
+   * @param {SVGElement} element
+   * @param {SVGMatrix} matrix  CTM
+   * @param {SVGElement} defs
+   */
+, setCTM: function(element, matrix, defs) {
+    var that = this
+      , s = 'matrix(' + matrix.a + ',' + matrix.b + ',' + matrix.c + ',' + matrix.d + ',' + matrix.e + ',' + matrix.f + ')';
+
+    element.setAttributeNS(null, 'transform', s);
+    if ('transform' in element.style) {
+      element.style.transform = s;
+    } else if ('-ms-transform' in element.style) {
+      element.style['-ms-transform'] = s;
+    } else if ('-webkit-transform' in element.style) {
+      element.style['-webkit-transform'] = s;
+    }
+
+    // IE has a bug that makes markers disappear on zoom (when the matrix "a" and/or "d" elements change)
+    // see http://stackoverflow.com/questions/17654578/svg-marker-does-not-work-in-ie9-10
+    // and http://srndolha.wordpress.com/2013/11/25/svg-line-markers-may-disappear-in-internet-explorer-11/
+    if (_browser === 'ie' && !!defs) {
+      // this refresh is intended for redisplaying the SVG during zooming
+      defs.parentNode.insertBefore(defs, defs);
+      // this refresh is intended for redisplaying the other SVGs on a page when panning a given SVG
+      // it is also needed for the given SVG itself, on zoomEnd, if the SVG contains any markers that
+      // are located under any other element(s).
+      window.setTimeout(function() {
+        that.refreshDefsGlobal();
+      }, that.internetExplorerRedisplayInterval);
+    }
+  }
+
+  /**
+   * Instantiate an SVGPoint object with given event coordinates
+   *
+   * @param {Event} evt
+   * @param  {SVGSVGElement} svg
+   * @return {SVGPoint}     point
+   */
+, getEventPoint: function(evt, svg) {
+    var point = svg.createSVGPoint()
+
+    Utils.mouseAndTouchNormalize(evt, svg)
+
+    point.x = evt.clientX
+    point.y = evt.clientY
+
+    return point
+  }
+
+  /**
+   * Get SVG center point
+   *
+   * @param  {SVGSVGElement} svg
+   * @return {SVGPoint}
+   */
+, getSvgCenterPoint: function(svg, width, height) {
+    return this.createSVGPoint(svg, width / 2, height / 2)
+  }
+
+  /**
+   * Create a SVGPoint with given x and y
+   *
+   * @param  {SVGSVGElement} svg
+   * @param  {Number} x
+   * @param  {Number} y
+   * @return {SVGPoint}
+   */
+, createSVGPoint: function(svg, x, y) {
+    var point = svg.createSVGPoint()
+    point.x = x
+    point.y = y
+
+    return point
+  }
+}
+
+},{"./utilities":7}],6:[function(require,module,exports){
+// uniwheel 0.1.2 (customized)
+// A unified cross browser mouse wheel event handler
+// https://github.com/teemualap/uniwheel
+
+module.exports = (function(){
+
+  //Full details: https://developer.mozilla.org/en-US/docs/Web/Reference/Events/wheel
+
+  var prefix = "", _addEventListener, _removeEventListener, support, fns = [];
+  var passiveOption = {passive: true};
+
+  // detect event model
+  if ( window.addEventListener ) {
+    _addEventListener = "addEventListener";
+    _removeEventListener = "removeEventListener";
+  } else {
+    _addEventListener = "attachEvent";
+    _removeEventListener = "detachEvent";
+    prefix = "on";
+  }
+
+  // detect available wheel event
+  support = "onwheel" in document.createElement("div") ? "wheel" : // Modern browsers support "wheel"
+            document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
+            "DOMMouseScroll"; // let's assume that remaining browsers are older Firefox
+
+
+  function createCallback(element,callback) {
+
+    var fn = function(originalEvent) {
+
+      !originalEvent && ( originalEvent = window.event );
+
+      // create a normalized event object
+      var event = {
+        // keep a ref to the original event object
+        originalEvent: originalEvent,
+        target: originalEvent.target || originalEvent.srcElement,
+        type: "wheel",
+        deltaMode: originalEvent.type == "MozMousePixelScroll" ? 0 : 1,
+        deltaX: 0,
+        delatZ: 0,
+        preventDefault: function() {
+          originalEvent.preventDefault ?
+            originalEvent.preventDefault() :
+            originalEvent.returnValue = false;
+        }
+      };
+
+      // calculate deltaY (and deltaX) according to the event
+      if ( support == "mousewheel" ) {
+        event.deltaY = - 1/40 * originalEvent.wheelDelta;
+        // Webkit also support wheelDeltaX
+        originalEvent.wheelDeltaX && ( event.deltaX = - 1/40 * originalEvent.wheelDeltaX );
+      } else {
+        event.deltaY = originalEvent.detail;
+      }
+
+      // it's time to fire the callback
+      return callback( event );
+
+    };
+
+    fns.push({
+      element: element,
+      fn: fn,
+    });
+
+    return fn;
+  }
+
+  function getCallback(element) {
+    for (var i = 0; i < fns.length; i++) {
+      if (fns[i].element === element) {
+        return fns[i].fn;
+      }
+    }
+    return function(){};
+  }
+
+  function removeCallback(element) {
+    for (var i = 0; i < fns.length; i++) {
+      if (fns[i].element === element) {
+        return fns.splice(i,1);
+      }
+    }
+  }
+
+  function _addWheelListener(elem, eventName, callback, isPassiveListener ) {
+    var cb;
+
+    if (support === "wheel") {
+      cb = callback;
+    } else {
+      cb = createCallback(elem, callback);
+    }
+
+    elem[_addEventListener](prefix + eventName, cb, isPassiveListener ? passiveOption : false);
+  }
+
+  function _removeWheelListener(elem, eventName, callback, isPassiveListener ) {
+
+    var cb;
+
+    if (support === "wheel") {
+      cb = callback;
+    } else {
+      cb = getCallback(elem);
+    }
+
+    elem[_removeEventListener](prefix + eventName, cb, isPassiveListener ? passiveOption : false);
+
+    removeCallback(elem);
+  }
+
+  function addWheelListener( elem, callback, isPassiveListener ) {
+    _addWheelListener(elem, support, callback, isPassiveListener );
+
+    // handle MozMousePixelScroll in older Firefox
+    if( support == "DOMMouseScroll" ) {
+      _addWheelListener(elem, "MozMousePixelScroll", callback, isPassiveListener );
+    }
+  }
+
+  function removeWheelListener(elem, callback, isPassiveListener){
+    _removeWheelListener(elem, support, callback, isPassiveListener);
+
+    // handle MozMousePixelScroll in older Firefox
+    if( support == "DOMMouseScroll" ) {
+      _removeWheelListener(elem, "MozMousePixelScroll", callback, isPassiveListener);
+    }
+  }
+
+  return {
+    on: addWheelListener,
+    off: removeWheelListener
+  };
+
+})();
+
+},{}],7:[function(require,module,exports){
+module.exports = {
+  /**
+   * Extends an object
+   *
+   * @param  {Object} target object to extend
+   * @param  {Object} source object to take properties from
+   * @return {Object}        extended object
+   */
+  extend: function(target, source) {
+    target = target || {};
+    for (var prop in source) {
+      // Go recursively
+      if (this.isObject(source[prop])) {
+        target[prop] = this.extend(target[prop], source[prop])
+      } else {
+        target[prop] = source[prop]
+      }
+    }
+    return target;
+  }
+
+  /**
+   * Checks if an object is a DOM element
+   *
+   * @param  {Object}  o HTML element or String
+   * @return {Boolean}   returns true if object is a DOM element
+   */
+, isElement: function(o){
+    return (
+      o instanceof HTMLElement || o instanceof SVGElement || o instanceof SVGSVGElement || //DOM2
+      (o && typeof o === 'object' && o !== null && o.nodeType === 1 && typeof o.nodeName === 'string')
+    );
+  }
+
+  /**
+   * Checks if an object is an Object
+   *
+   * @param  {Object}  o Object
+   * @return {Boolean}   returns true if object is an Object
+   */
+, isObject: function(o){
+    return Object.prototype.toString.call(o) === '[object Object]';
+  }
+
+  /**
+   * Checks if variable is Number
+   *
+   * @param  {Integer|Float}  n
+   * @return {Boolean}   returns true if variable is Number
+   */
+, isNumber: function(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+
+  /**
+   * Search for an SVG element
+   *
+   * @param  {Object|String} elementOrSelector DOM Element or selector String
+   * @return {Object|Null}                   SVG or null
+   */
+, getSvg: function(elementOrSelector) {
+    var element
+      , svg;
+
+    if (!this.isElement(elementOrSelector)) {
+      // If selector provided
+      if (typeof elementOrSelector === 'string' || elementOrSelector instanceof String) {
+        // Try to find the element
+        element = document.querySelector(elementOrSelector)
+
+        if (!element) {
+          throw new Error('Provided selector did not find any elements. Selector: ' + elementOrSelector)
+          return null
+        }
+      } else {
+        throw new Error('Provided selector is not an HTML object nor String')
+        return null
+      }
+    } else {
+      element = elementOrSelector
+    }
+
+    if (element.tagName.toLowerCase() === 'svg') {
+      svg = element;
+    } else {
+      if (element.tagName.toLowerCase() === 'object') {
+        svg = element.contentDocument.documentElement;
+      } else {
+        if (element.tagName.toLowerCase() === 'embed') {
+          svg = element.getSVGDocument().documentElement;
+        } else {
+          if (element.tagName.toLowerCase() === 'img') {
+            throw new Error('Cannot script an SVG in an "img" element. Please use an "object" element or an in-line SVG.');
+          } else {
+            throw new Error('Cannot get SVG.');
+          }
+          return null
+        }
+      }
+    }
+
+    return svg
+  }
+
+  /**
+   * Attach a given context to a function
+   * @param  {Function} fn      Function
+   * @param  {Object}   context Context
+   * @return {Function}           Function with certain context
+   */
+, proxy: function(fn, context) {
+    return function() {
+      return fn.apply(context, arguments)
+    }
+  }
+
+  /**
+   * Returns object type
+   * Uses toString that returns [object SVGPoint]
+   * And than parses object type from string
+   *
+   * @param  {Object} o Any object
+   * @return {String}   Object type
+   */
+, getType: function(o) {
+    return Object.prototype.toString.apply(o).replace(/^\[object\s/, '').replace(/\]$/, '')
+  }
+
+  /**
+   * If it is a touch event than add clientX and clientY to event object
+   *
+   * @param  {Event} evt
+   * @param  {SVGSVGElement} svg
+   */
+, mouseAndTouchNormalize: function(evt, svg) {
+    // If no clientX then fallback
+    if (evt.clientX === void 0 || evt.clientX === null) {
+      // Fallback
+      evt.clientX = 0
+      evt.clientY = 0
+
+      // If it is a touch event
+      if (evt.touches !== void 0 && evt.touches.length) {
+        if (evt.touches[0].clientX !== void 0) {
+          evt.clientX = evt.touches[0].clientX
+          evt.clientY = evt.touches[0].clientY
+        } else if (evt.touches[0].pageX !== void 0) {
+          var rect = svg.getBoundingClientRect();
+
+          evt.clientX = evt.touches[0].pageX - rect.left
+          evt.clientY = evt.touches[0].pageY - rect.top
+        }
+      // If it is a custom event
+      } else if (evt.originalEvent !== void 0) {
+        if (evt.originalEvent.clientX !== void 0) {
+          evt.clientX = evt.originalEvent.clientX
+          evt.clientY = evt.originalEvent.clientY
+        }
+      }
+    }
+  }
+
+  /**
+   * Check if an event is a double click/tap
+   * TODO: For touch gestures use a library (hammer.js) that takes in account other events
+   * (touchmove and touchend). It should take in account tap duration and traveled distance
+   *
+   * @param  {Event}  evt
+   * @param  {Event}  prevEvt Previous Event
+   * @return {Boolean}
+   */
+, isDblClick: function(evt, prevEvt) {
+    // Double click detected by browser
+    if (evt.detail === 2) {
+      return true;
+    }
+    // Try to compare events
+    else if (prevEvt !== void 0 && prevEvt !== null) {
+      var timeStampDiff = evt.timeStamp - prevEvt.timeStamp // should be lower than 250 ms
+        , touchesDistance = Math.sqrt(Math.pow(evt.clientX - prevEvt.clientX, 2) + Math.pow(evt.clientY - prevEvt.clientY, 2))
+
+      return timeStampDiff < 250 && touchesDistance < 10
+    }
+
+    // Nothing found
+    return false;
+  }
+
+  /**
+   * Returns current timestamp as an integer
+   *
+   * @return {Number}
+   */
+, now: Date.now || function() {
+    return new Date().getTime();
+  }
+
+  // From underscore.
+  // Returns a function, that, when invoked, will only be triggered at most once
+  // during a given window of time. Normally, the throttled function will run
+  // as much as it can, without ever going more than once per `wait` duration;
+  // but if you'd like to disable the execution on the leading edge, pass
+  // `{leading: false}`. To disable execution on the trailing edge, ditto.
+// jscs:disable
+// jshint ignore:start
+, throttle: function(func, wait, options) {
+    var that = this;
+    var context, args, result;
+    var timeout = null;
+    var previous = 0;
+    if (!options) options = {};
+    var later = function() {
+      previous = options.leading === false ? 0 : that.now();
+      timeout = null;
+      result = func.apply(context, args);
+      if (!timeout) context = args = null;
+    };
+    return function() {
+      var now = that.now();
+      if (!previous && options.leading === false) previous = now;
+      var remaining = wait - (now - previous);
+      context = this;
+      args = arguments;
+      if (remaining <= 0 || remaining > wait) {
+        clearTimeout(timeout);
+        timeout = null;
+        previous = now;
+        result = func.apply(context, args);
+        if (!timeout) context = args = null;
+      } else if (!timeout && options.trailing !== false) {
+        timeout = setTimeout(later, remaining);
+      }
+      return result;
+    };
+  }
+// jshint ignore:end
+// jscs:enable
+
+  /**
+   * Create a requestAnimationFrame simulation
+   *
+   * @param  {Number|String} refreshRate
+   * @return {Function}
+   */
+, createRequestAnimationFrame: function(refreshRate) {
+    var timeout = null
+
+    // Convert refreshRate to timeout
+    if (refreshRate !== 'auto' && refreshRate < 60 && refreshRate > 1) {
+      timeout = Math.floor(1000 / refreshRate)
+    }
+
+    if (timeout === null) {
+      return window.requestAnimationFrame || requestTimeout(33)
+    } else {
+      return requestTimeout(timeout)
+    }
+  }
+}
+
+/**
+ * Create a callback that will execute after a given timeout
+ *
+ * @param  {Function} timeout
+ * @return {Function}
+ */
+function requestTimeout(timeout) {
+  return function(callback) {
+    window.setTimeout(callback, timeout)
+  }
+}
+
+},{}]},{},[1]);
+</script>
+</head>
+<body>
+<h1>./out9, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>
+<div id='container' style="width: 1500px; height: 800px; border:1px solid black;">
+<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox="0 0 1500 800" version="1.1">
+<text x="135" y="160" font-size="15px" fill="green"  text-anchor='end' alignment-baseline="middle" >s1</text>
+<text x="135" y="320" font-size="15px" fill="blue"  text-anchor='end' alignment-baseline="middle" >s2</text>
+<text x="135" y="480" font-size="15px" fill="black"  text-anchor='end' alignment-baseline="middle" >s3</text>
+<text x="135" y="640" font-size="15px" fill="red"  text-anchor='end' alignment-baseline="middle" >s4</text>
+
+<line x1="150" y1="704" x2="1275" y2="704" style="stroke:green;stroke-width:0.5"/>
+<line x1="150" y1="696" x2="150" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="150" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">0</text>
+<line x1="251.38331906457" y1="696" x2="251.38331906457" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="251.38331906457" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">2,000</text>
+<line x1="352.76663812914" y1="696" x2="352.76663812914" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="352.76663812914" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">4,000</text>
+<line x1="454.14995719371" y1="696" x2="454.14995719371" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="454.14995719371" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">6,000</text>
+<line x1="555.53327625828" y1="696" x2="555.53327625828" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="555.53327625828" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">8,000</text>
+<line x1="656.91659532285" y1="696" x2="656.91659532285" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="656.91659532285" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">10,000</text>
+<line x1="758.299914387419" y1="696" x2="758.299914387419" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="758.299914387419" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">12,000</text>
+<line x1="859.683233451989" y1="696" x2="859.683233451989" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="859.683233451989" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">14,000</text>
+<line x1="961.066552516559" y1="696" x2="961.066552516559" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="961.066552516559" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">16,000</text>
+<line x1="1062.44987158113" y1="696" x2="1062.44987158113" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1062.44987158113" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">18,000</text>
+<line x1="1163.8331906457" y1="696" x2="1163.8331906457" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1163.8331906457" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">20,000</text>
+<line x1="1275" y1="696" x2="1275" y2="704" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1275" y="719" font-size="13px" fill="green"  text-anchor='middle' font-family="Times New Roman">22,193bp</text>
+
+
+
+<g><title><tspan>gene_s203 -> gene_s303</tspan></title>
+<polygon points="298.273104131933,328.16 308.157977740729,328.16 312.264002162844,481.76 302.379128554049,481.76" style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1"/></g>
+
+<g><title><tspan>gene_s404000 -> gene_s4020000</tspan></title>
+<path d="M233.316811607264 641.76 L225.378497724508 641.76 A88.8117875005632 39.42  0 0 1   403.002072725634 641.76 L395.063758842878 641.76 A80.8734736178074 31.536 0 1 0 233.316811607264 641.76 Z"  style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:0.5" /></g>
+<g><title><tspan>gene_s307 -> gene_s308</tspan></title>
+<line x1="458.560131573018" y1="484.96" x2="491.965935204794" y2="484.96" style="fill:red;stroke:red;stroke-width:0.64;opacity:1" /></g>
+
+<g><title><tspan>gene_s2100000 -> gene_s4100000</tspan></title>
+<polygon points="1132.96196999054,318.24 1146.80079304285,318.24 710.979250214031,645.319411526157 710.979250214031,631.480588473843" style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1"/></g>
+
+<g><title><tspan>gene_s303 -> gene_s403000</tspan></title>
+<polygon points="302.379128554049,488.16 312.264002162844,488.16 206.825350335691,641.76 196.940476726896,641.76" style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1"/></g>
+
+<g><title><tspan>gene_s406000 -> gene_s4060000</tspan></title>
+<path d="M303.636281710449 631.84 L292.747713242914 631.84 A156.51049880593 39.42  0 0 1   605.768710854774 631.84 L594.880142387239 631.84 A145.621930338395 31.536 0 1 0 303.636281710449 631.84 Z"  style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1" /></g>
+<g><title><tspan>gene_s208 -> gene_s304</tspan></title>
+<line x1="511.608953273555" y1="324.96" x2="340.245798224665" y2="484.96" style="fill:#FF8C00;stroke:#FF8C00;stroke-width:0.64;opacity:1" /></g>
+
+<g><title><tspan>gene_s406000 -> gene_s403000</tspan></title>
+<path d="M303.636281710449 638.24 L292.747713242914 638.24 A-42.9611814536115 15.768  0 1 0   206.825350335691 648.16 L195.936781868157 648.16 A-53.8497499211463 14.1912 0 0 1 303.636281710449 638.24 Z"  style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1" /></g>
+<g><title><tspan>gene_s1060000 -> gene_s2100000</tspan></title>
+<polygon points="1007.04388771234,158.24 1061.48673005002,158.24 1146.80079304285,311.84 1132.96196999054,311.84" style="stroke:black;stroke-width:0.1;fill:#FF8C00;opacity:1"/></g>
+
+
+<g><title>s1:2-3050</title>
+<rect x="150" y="159.84" width="154.558869913937" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s1:3000-6010</title>
+<rect x="309.628035867165" y="159.84" width="152.63258685171" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s1:5980-9609</title>
+<rect x="467.329788672104" y="159.84" width="184.010724102194" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s1000:2000-6000</title>
+<rect x="656.409678727527" y="159.84" width="202.817329788672" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s10000:2000-6000</title>
+<rect x="864.296174469427" y="159.84" width="202.817329788672" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s10000:6000-10000</title>
+<rect x="1072.18267021133" y="159.84" width="202.817329788672" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s2:1-9000</title>
+<rect x="150" y="319.84" width="456.224935790565" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s2000:2000-6000</title>
+<rect x="611.294101743793" y="319.84" width="202.817329788672" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s20000:2000-6000</title>
+<rect x="819.180597485694" y="319.84" width="202.817329788672" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s20000:6000-10000</title>
+<rect x="1027.06709322759" y="319.84" width="202.817329788672" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s3:11-2010</title>
+<rect x="150" y="479.84" width="101.38331906457" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s3:2020-5000</title>
+<rect x="256.452485017798" y="479.84" width="151.111837065741" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s3:5100-9609</title>
+<rect x="412.633488036768" y="479.84" width="228.619384490605" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s3000:2000-6000</title>
+<rect x="646.322038480602" y="479.84" width="202.817329788672" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s30000:2000-6000</title>
+<rect x="854.208534222503" y="479.84" width="202.817329788672" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s4000:2000-6000</title>
+<rect x="150" y="639.84" width="202.817329788672" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s40000:1000-8000</title>
+<rect x="357.886495741901" y="639.84" width="354.892308385527" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s40000:8000-9609</title>
+<rect x="717.847970080656" y="639.84" width="81.6135718469788" height="0.32" style="fill:blue;opacity:0.2"   /></g>
+
+
+
+				<g><title><tspan>feature_id -> gene_s101</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1:87-1109</tspan></title>
+				<polygon points="154.359482719777,163.36 154.359482719777,166.56 190.659780110846,166.56 190.659780110846,168.16 206.217050421304,164.96 190.659780110846,161.76 190.659780110846,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s102</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1:1106-1888</tspan></title>
+				<polygon points="206.014283783175,163.36 206.014283783175,166.56 233.79838237282,166.56 233.79838237282,168.16 245.705853196954,164.96 233.79838237282,161.76 233.79838237282,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s104</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1:3486-3857</tspan></title>
+				<polygon points="334.314874059388,163.36 334.314874059388,166.56 347.514982201595,166.56 347.514982201595,168.16 353.172171405398,164.96 347.514982201595,161.76 347.514982201595,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s105</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1:4343-4780</tspan></title>
+				<polygon points="377.757626278556,163.36 377.757626278556,166.56 393.299689091155,166.56 393.299689091155,168.16 399.960573153697,164.96 393.299689091155,161.76 393.299689091155,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s106</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1:4815-5888</tspan></title>
+				<polygon points="401.684089577795,155.04 418.016942279097,158.24 418.016942279097,156.64 456.126931915469,156.64 456.126931915469,153.44 418.016942279097,153.44 418.016942279097,151.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s107</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1:6005-6421</tspan></title>
+				<polygon points="468.647771819943,163.36 468.647771819943,166.56 483.444667237417,166.56 483.444667237417,168.16 489.786193844906,164.96 483.444667237417,161.76 483.444667237417,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s108</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1:6664-7602</tspan></title>
+				<polygon points="502.053575451719,163.36 502.053575451719,166.56 535.37320326229,166.56 535.37320326229,168.16 549.653043752534,164.96 535.37320326229,161.76 535.37320326229,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s109</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1:7789-8088</tspan></title>
+				<polygon points="559.081692425539,155.04 563.643941783445,158.24 563.643941783445,156.64 574.289190285225,156.64 574.289190285225,153.44 563.643941783445,153.44 563.643941783445,151.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s110</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1:8088-8360</tspan></title>
+				<polygon points="574.238498625693,155.04 578.390145541387,158.24 578.390145541387,156.64 588.077321678007,156.64 588.077321678007,153.44 578.390145541387,153.44 578.390145541387,151.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s103000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1000:2925-3119</tspan></title>
+				<polygon points="703.350155454423,163.36 703.350155454423,166.56 710.269566980579,166.56 710.269566980579,168.16 713.235029063218,164.96 710.269566980579,161.76 710.269566980579,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s104000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1000:3486-3857</tspan></title>
+				<polygon points="731.788176452034,163.36 731.788176452034,166.56 744.988284594241,166.56 744.988284594241,168.16 750.645473798044,164.96 744.988284594241,161.76 744.988284594241,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s105000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1000:4343-4780</tspan></title>
+				<polygon points="775.230928671202,163.36 775.230928671202,166.56 790.772991483801,166.56 790.772991483801,168.16 797.433875546343,164.96 790.772991483801,161.76 790.772991483801,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s106000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s1000:4815-5888</tspan></title>
+				<polygon points="799.157391970441,155.04 815.490244671743,158.24 815.490244671743,156.64 853.600234308115,156.64 853.600234308115,153.44 815.490244671743,153.44 815.490244671743,151.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1030000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s10000:2925-3119</tspan></title>
+				<polygon points="911.236651196323,163.36 911.236651196323,166.56 918.15606272248,166.56 918.15606272248,168.16 921.121524805119,164.96 918.15606272248,161.76 918.15606272248,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1040000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s10000:3486-3857</tspan></title>
+				<polygon points="939.674672193935,163.36 939.674672193935,166.56 952.874780336142,166.56 952.874780336142,168.16 958.531969539945,164.96 952.874780336142,161.76 952.874780336142,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1050000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s10000:4343-4780</tspan></title>
+				<polygon points="983.117424413103,163.36 983.117424413103,166.56 998.659487225702,166.56 998.659487225702,168.16 1005.32037128824,164.96 998.659487225702,161.76 998.659487225702,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1060000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s10000:4815-5888</tspan></title>
+				<polygon points="1007.04388771234,155.04 1023.37674041364,158.24 1023.37674041364,156.64 1061.48673005002,156.64 1061.48673005002,153.44 1023.37674041364,153.44 1023.37674041364,151.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1070000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s10000:6005-6421</tspan></title>
+				<polygon points="1072.48682016852,163.36 1072.48682016852,166.56 1087.283715586,166.56 1087.283715586,168.16 1093.62524219348,164.96 1087.283715586,161.76 1087.283715586,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1080000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s10000:6664-7602</tspan></title>
+				<polygon points="1105.8926238003,163.36 1105.8926238003,166.56 1139.21225161087,166.56 1139.21225161087,168.16 1153.49209210111,164.96 1139.21225161087,161.76 1139.21225161087,163.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1090000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s10000:7789-8088</tspan></title>
+				<polygon points="1162.92074077412,155.04 1167.48299013202,158.24 1167.48299013202,156.64 1178.1282386338,156.64 1178.1282386338,153.44 1167.48299013202,153.44 1167.48299013202,151.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s1100000</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s10000:8088-8360</tspan></title>
+				<polygon points="1178.07754697427,155.04 1182.22919388997,158.24 1182.22919388997,156.64 1191.91637002658,156.64 1191.91637002658,153.44 1182.22919388997,153.44 1182.22919388997,151.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s11000001</tspan>
+<tspan>track name -> s1</tspan>
+<tspan>ref start-end -> s10000:8361-8560</tspan></title>
+				<polygon points="1191.91637002658,155.04 1194.95786959852,158.24 1194.95786959852,156.64 1202.05470193304,156.64 1202.05470193304,153.44 1194.95786959852,153.44 1194.95786959852,151.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s201</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2:87-1109</tspan></title>
+				<polygon points="154.410174379309,323.36 154.410174379309,326.56 190.710471770378,326.56 190.710471770378,328.16 206.267742080836,324.96 190.710471770378,321.76 190.710471770378,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s202</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2:1106-1888</tspan></title>
+				<polygon points="206.064975442707,323.36 206.064975442707,326.56 233.849074032353,326.56 233.849074032353,328.16 245.756544856486,324.96 233.849074032353,321.76 233.849074032353,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s203</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2:2925-3119</tspan></title>
+				<polygon points="298.273104131933,323.36 298.273104131933,326.56 305.19251565809,326.56 305.19251565809,328.16 308.157977740729,324.96 305.19251565809,321.76 305.19251565809,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s204</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2:3486-3857</tspan></title>
+				<polygon points="326.711125129545,323.36 326.711125129545,326.56 339.911233271752,326.56 339.911233271752,328.16 345.568422475555,324.96 339.911233271752,321.76 339.911233271752,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s205</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2:4343-4780</tspan></title>
+				<polygon points="370.153877348714,323.36 370.153877348714,326.56 385.695940161312,326.56 385.695940161312,328.16 392.356824223854,324.96 385.695940161312,321.76 385.695940161312,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s206</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2:4815-5888</tspan></title>
+				<polygon points="394.080340647952,315.04 410.413193349254,318.24 410.413193349254,316.64 448.523182985626,316.64 448.523182985626,313.44 410.413193349254,313.44 410.413193349254,311.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s207</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2:6005-6421</tspan></title>
+				<polygon points="454.403415491371,323.36 454.403415491371,326.56 469.200310908845,326.56 469.200310908845,328.16 475.541837516334,324.96 469.200310908845,321.76 469.200310908845,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s208</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2:6664-7602</tspan></title>
+				<polygon points="487.809219123147,323.36 487.809219123147,326.56 521.128846933718,326.56 521.128846933718,328.16 535.408687423963,324.96 521.128846933718,321.76 521.128846933718,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s209</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2:7789-8088</tspan></title>
+				<polygon points="544.837336096967,315.04 549.399585454873,318.24 549.399585454873,316.64 560.044833956653,316.64 560.044833956653,313.44 549.399585454873,313.44 549.399585454873,311.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s210</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2:8088-8360</tspan></title>
+				<polygon points="559.994142297121,315.04 564.145789212815,318.24 564.145789212815,316.64 573.832965349435,316.64 573.832965349435,313.44 564.145789212815,313.44 564.145789212815,311.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s203000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2000:2925-3119</tspan></title>
+				<polygon points="658.234578470689,323.36 658.234578470689,326.56 665.153989996846,326.56 665.153989996846,328.16 668.119452079485,324.96 665.153989996846,321.76 665.153989996846,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s204000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2000:3486-3857</tspan></title>
+				<polygon points="686.672599468301,323.36 686.672599468301,326.56 699.872707610508,326.56 699.872707610508,328.16 705.529896814311,324.96 699.872707610508,321.76 699.872707610508,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s205000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2000:4343-4780</tspan></title>
+				<polygon points="730.115351687469,323.36 730.115351687469,326.56 745.657414500068,326.56 745.657414500068,328.16 752.31829856261,324.96 745.657414500068,321.76 745.657414500068,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s206000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s2000:4815-5888</tspan></title>
+				<polygon points="754.041814986708,315.04 770.37466768801,318.24 770.37466768801,316.64 808.484657324381,316.64 808.484657324381,313.44 770.37466768801,313.44 770.37466768801,311.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2030000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s20000:2925-3119</tspan></title>
+				<polygon points="866.12107421259,323.36 866.12107421259,326.56 873.040485738746,326.56 873.040485738746,328.16 876.005947821385,324.96 873.040485738746,321.76 873.040485738746,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2040000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s20000:3486-3857</tspan></title>
+				<polygon points="894.559095210201,323.36 894.559095210201,326.56 907.759203352408,326.56 907.759203352408,328.16 913.416392556211,324.96 907.759203352408,321.76 907.759203352408,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2050000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s20000:4343-4780</tspan></title>
+				<polygon points="938.00184742937,323.36 938.00184742937,326.56 953.543910241968,326.56 953.543910241968,328.16 960.204794304511,324.96 953.543910241968,321.76 953.543910241968,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2060000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s20000:4815-5888</tspan></title>
+				<polygon points="961.928310728608,315.04 978.26116342991,318.24 978.26116342991,316.64 1016.37115306628,316.64 1016.37115306628,313.44 978.26116342991,313.44 978.26116342991,311.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2070000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s20000:6005-6421</tspan></title>
+				<polygon points="1027.37124318479,323.36 1027.37124318479,326.56 1042.16813860226,326.56 1042.16813860226,328.16 1048.50966520975,324.96 1042.16813860226,321.76 1042.16813860226,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2080000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s20000:6664-7602</tspan></title>
+				<polygon points="1060.77704681656,323.36 1060.77704681656,326.56 1094.09667462713,326.56 1094.09667462713,328.16 1108.37651511738,324.96 1094.09667462713,321.76 1094.09667462713,323.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2090000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s20000:7789-8088</tspan></title>
+				<polygon points="1117.80516379038,315.04 1122.36741314829,318.24 1122.36741314829,316.64 1133.01266165007,316.64 1133.01266165007,313.44 1122.36741314829,313.44 1122.36741314829,311.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s2100000</tspan>
+<tspan>track name -> s2</tspan>
+<tspan>ref start-end -> s20000:8088-8360</tspan></title>
+				<polygon points="1132.96196999054,315.04 1137.11361690623,318.24 1137.11361690623,316.64 1146.80079304285,316.64 1146.80079304285,313.44 1137.11361690623,313.44 1137.11361690623,311.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s301</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3:87-1109</tspan></title>
+				<polygon points="153.903257783986,483.36 153.903257783986,486.56 190.203555175055,486.56 190.203555175055,488.16 205.760825485513,484.96 190.203555175055,481.76 190.203555175055,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s302</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3:1106-1888</tspan></title>
+				<polygon points="205.558058847384,483.36 205.558058847384,486.56 233.34215743703,486.56 233.34215743703,488.16 245.249628261163,484.96 233.34215743703,481.76 233.34215743703,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s303</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3:2925-3119</tspan></title>
+				<polygon points="302.379128554049,483.36 302.379128554049,486.56 309.298540080205,486.56 309.298540080205,488.16 312.264002162844,484.96 309.298540080205,481.76 309.298540080205,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s304</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3:3486-3857</tspan></title>
+				<polygon points="330.81714955166,483.36 330.81714955166,486.56 344.017257693867,486.56 344.017257693867,488.16 349.67444689767,484.96 344.017257693867,481.76 344.017257693867,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s305</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3:4343-4780</tspan></title>
+				<polygon points="374.259901770829,483.36 374.259901770829,486.56 389.801964583427,486.56 389.801964583427,488.16 396.462848645969,484.96 389.801964583427,481.76 389.801964583427,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s307</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3:6005-6421</tspan></title>
+				<polygon points="458.560131573018,483.36 458.560131573018,486.56 473.357026990492,486.56 473.357026990492,488.16 479.698553597981,484.96 473.357026990492,481.76 473.357026990492,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s308</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3:6664-7602</tspan></title>
+				<polygon points="491.965935204794,483.36 491.965935204794,486.56 525.285563015365,486.56 525.285563015365,488.16 539.56540350561,484.96 525.285563015365,481.76 525.285563015365,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s309</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3:7789-8088</tspan></title>
+				<polygon points="548.994052178615,475.04 553.55630153652,478.24 553.55630153652,476.64 564.2015500383,476.64 564.2015500383,473.44 553.55630153652,473.44 553.55630153652,471.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s310</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3:8088-8360</tspan></title>
+				<polygon points="564.150858378768,475.04 568.302505294462,478.24 568.302505294462,476.64 577.989681431082,476.64 577.989681431082,473.44 568.302505294462,473.44 568.302505294462,471.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s303000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3000:2925-3119</tspan></title>
+				<polygon points="693.262515207498,483.36 693.262515207498,486.56 700.181926733655,486.56 700.181926733655,488.16 703.147388816293,484.96 700.181926733655,481.76 700.181926733655,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s304000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3000:3486-3857</tspan></title>
+				<polygon points="721.70053620511,483.36 721.70053620511,486.56 734.900644347317,486.56 734.900644347317,488.16 740.55783355112,484.96 734.900644347317,481.76 734.900644347317,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s305000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3000:4343-4780</tspan></title>
+				<polygon points="765.143288424278,483.36 765.143288424278,486.56 780.685351236876,486.56 780.685351236876,488.16 787.346235299419,484.96 780.685351236876,481.76 780.685351236876,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s306000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s3000:4815-5888</tspan></title>
+				<polygon points="789.069751723516,475.04 805.402604424818,478.24 805.402604424818,476.64 843.51259406119,476.64 843.51259406119,473.44 805.402604424818,473.44 805.402604424818,471.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3030000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s30000:2925-3119</tspan></title>
+				<polygon points="901.149010949398,483.36 901.149010949398,486.56 908.068422475555,486.56 908.068422475555,488.16 911.033884558194,484.96 908.068422475555,481.76 908.068422475555,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3040000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s30000:3486-3857</tspan></title>
+				<polygon points="929.58703194701,483.36 929.58703194701,486.56 942.787140089217,486.56 942.787140089217,488.16 948.44432929302,484.96 942.787140089217,481.76 942.787140089217,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3050000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s30000:4343-4780</tspan></title>
+				<polygon points="973.029784166178,483.36 973.029784166178,486.56 988.571846978777,486.56 988.571846978777,488.16 995.232731041319,484.96 988.571846978777,481.76 988.571846978777,483.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s3060000</tspan>
+<tspan>track name -> s3</tspan>
+<tspan>ref start-end -> s30000:4815-5888</tspan></title>
+				<polygon points="996.956247465417,475.04 1013.28910016672,478.24 1013.28910016672,476.64 1051.39908980309,476.64 1051.39908980309,473.44 1013.28910016672,473.44 1013.28910016672,471.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s403000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s4000:2925-3119</tspan></title>
+				<polygon points="196.940476726896,643.36 196.940476726896,646.56 203.859888253053,646.56 203.859888253053,648.16 206.825350335691,644.96 203.859888253053,641.76 203.859888253053,643.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s404000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s4000:3486-3857</tspan></title>
+				<polygon points="225.378497724508,643.36 225.378497724508,646.56 238.578605866715,646.56 238.578605866715,648.16 244.235795070518,644.96 238.578605866715,641.76 238.578605866715,643.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s405000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s4000:4343-4780</tspan></title>
+				<polygon points="268.821249943676,643.36 268.821249943676,646.56 284.363312756274,646.56 284.363312756274,648.16 291.024196818817,644.96 284.363312756274,641.76 284.363312756274,643.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s406000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s4000:4815-5888</tspan></title>
+				<polygon points="292.747713242914,635.04 309.080565944217,638.24 309.080565944217,636.64 347.190555580588,636.64 347.190555580588,633.44 309.080565944217,633.44 309.080565944217,631.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4020000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s40000:1106-1888</tspan></title>
+				<polygon points="363.310503311855,643.36 363.310503311855,646.56 391.0946019015,646.56 391.0946019015,648.16 403.002072725634,644.96 391.0946019015,641.76 391.0946019015,643.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4030000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s40000:2925-3119</tspan></title>
+				<polygon points="455.518632001081,643.36 455.518632001081,646.56 462.438043527238,646.56 462.438043527238,648.16 465.403505609877,644.96 462.438043527238,641.76 462.438043527238,643.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4040000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s40000:3486-3857</tspan></title>
+				<polygon points="483.956652998693,643.36 483.956652998693,646.56 497.1567611409,646.56 497.1567611409,648.16 502.813950344703,644.96 497.1567611409,641.76 497.1567611409,643.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4050000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s40000:4343-4780</tspan></title>
+				<polygon points="527.399405217861,643.36 527.399405217861,646.56 542.94146803046,646.56 542.94146803046,648.16 549.602352093002,644.96 542.94146803046,641.76 542.94146803046,643.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4060000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s40000:4815-5888</tspan></title>
+				<polygon points="551.3258685171,635.04 567.658721218402,638.24 567.658721218402,636.64 605.768710854774,636.64 605.768710854774,633.44 567.658721218402,633.44 567.658721218402,631.84" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4070000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s40000:6005-6421</tspan></title>
+				<polygon points="611.648943360519,643.36 611.648943360519,646.56 626.445838777993,646.56 626.445838777993,648.16 632.787365385482,644.96 626.445838777993,641.76 626.445838777993,643.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4080000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s40000:6664-7602</tspan></title>
+				<polygon points="645.054746992295,643.36 645.054746992295,646.56 678.374374802866,646.56 678.374374802866,648.16 692.65421529311,644.96 678.374374802866,641.76 678.374374802866,643.36" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s4100000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s40000:8088-8360</tspan></title>
+				<circle cx="710.979250214031" cy="640" r="6.9194115261569" stroke="black" stroke-width="0" fill="black" style="opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> gene_s410000000</tspan>
+<tspan>track name -> s4</tspan>
+<tspan>ref start-end -> s40000:8188-8260</tspan></title>
+				<polygon points="727.428693732258,640.96 727.428693732258,642.56 731.129184878115,642.56 731.129184878115,640.96 " style="fill:red;stroke:black;stroke-width:0;opacity:1"/></g>
+
+</svg>
+ </div>
+    <button id="enable" style='display:none'>enable</button>
+    <button id="disable" style='display:none'>disable</button>
+
+    <script>
+      // Don't use window.onLoad like this in production, because it can only listen to one function.
+      window.onload = function() {
+        // Expose to window namespase for testing purposes
+        window.zoomTiger = svgPanZoom('#demo-tiger', {
+          zoomEnabled: true,
+          controlIconsEnabled: true,
+          fit: true,
+          center: true,
+          // viewportSelector: document.getElementById('demo-tiger').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
+        });
+
+        document.getElementById('enable').addEventListener('click', function() {
+          window.zoomTiger.enableControlIcons();
+        })
+        document.getElementById('disable').addEventListener('click', function() {
+          window.zoomTiger.disableControlIcons();
+	alert('ddd')
+        })
+      };
+    </script>
+
+  </body>
+
+</html>

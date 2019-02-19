@@ -1,0 +1,2 @@
+# download chr14.fa from http://hgdownload.cse.ucsc.edu/goldenpath/hg19/chromosomes/chr14.fa.gz
+chr14	chr14.gff	../../genomeview/chr14.fa	14	66901400	66901400+1000

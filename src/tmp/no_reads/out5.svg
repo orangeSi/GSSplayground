@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1300" height="500" style="background-color:white;">
+<text x="117" y="130" font-size="15px" fill="black"  text-anchor='end' alignment-baseline="middle" >aa</text>
+<text x="117" y="290" font-size="15px" fill="black"  text-anchor='end' alignment-baseline="middle" >zz</text>
+<text x="117" y="370" font-size="15px" fill="black"  text-anchor='end' alignment-baseline="middle" >yy</text>
+
+<line x1="130" y1="480" x2="1105" y2="480" style="stroke:green;stroke-width:0.5"/>
+<line x1="130" y1="475" x2="130" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="130" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">0bp</text>
+<line x1="187.153201613737" y1="475" x2="187.153201613737" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="187.153201613737" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">1,700</text>
+<line x1="244.306403227475" y1="475" x2="244.306403227475" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="244.306403227475" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">3,400</text>
+<line x1="301.459604841212" y1="475" x2="301.459604841212" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="301.459604841212" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">5,100</text>
+<line x1="358.61280645495" y1="475" x2="358.61280645495" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="358.61280645495" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">6,800</text>
+<line x1="415.766008068687" y1="475" x2="415.766008068687" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="415.766008068687" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">8,500</text>
+<line x1="472.919209682425" y1="475" x2="472.919209682425" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="472.919209682425" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">10,200</text>
+<line x1="530.072411296162" y1="475" x2="530.072411296162" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="530.072411296162" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">11,900</text>
+<line x1="587.2256129099" y1="475" x2="587.2256129099" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="587.2256129099" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">13,600</text>
+<line x1="644.378814523637" y1="475" x2="644.378814523637" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="644.378814523637" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">15,300</text>
+<line x1="701.532016137375" y1="475" x2="701.532016137375" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="701.532016137375" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">17,000</text>
+<line x1="758.685217751112" y1="475" x2="758.685217751112" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="758.685217751112" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">18,700</text>
+<line x1="815.83841936485" y1="475" x2="815.83841936485" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="815.83841936485" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">20,400</text>
+<line x1="872.991620978587" y1="475" x2="872.991620978587" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="872.991620978587" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">22,100</text>
+<line x1="930.144822592324" y1="475" x2="930.144822592324" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="930.144822592324" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">23,800</text>
+<line x1="987.298024206062" y1="475" x2="987.298024206062" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="987.298024206062" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">25,500</text>
+<line x1="1044.4512258198" y1="475" x2="1044.4512258198" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1044.4512258198" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">27,200</text>
+<line x1="1105" y1="475" x2="1105" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
+<text x="1105" y="490" font-size="6px" fill="green"  text-anchor='middle' font-family="Times New Roman">29,001bp</text>
+
+
+<g><title>s160:155612-178608</title>
+<rect x="130" y="129.2" width="773.148339712424" height="1.6" style="fill:blue;opacity:0.2"   /></g>
+<g><title>s160:180608-209608</title>
+<rect x="130" y="369.2" width="975" height="1.6" style="fill:blue;opacity:0.2"   /></g>
+
+
+
+				<g><title><tspan>feature_id -> SM000160S02537</tspan>
+<tspan>track name -> aa</tspan>
+<tspan>ref start-end -> s160:157466-157907</tspan></title>
+				<polygon points="192.364228819696,126.8 192.364228819696,133.2 204.252094755353,133.2 204.252094755353,133.28 207.224061239268,130 204.252094755353,126.72 204.252094755353,126.8" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> SM000160S02541</tspan>
+<tspan>track name -> aa</tspan>
+<tspan>ref start-end -> s160:158501-160355</tspan></title>
+				<polygon points="227.160442743354,130 239.633288507293,133.28 239.633288507293,133.2 289.52467156305,133.2 289.52467156305,126.8 239.633288507293,126.8 239.633288507293,126.72" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> SM000160S02540</tspan>
+<tspan>track name -> aa</tspan>
+<tspan>ref start-end -> s160:163956-166016</tspan></title>
+				<polygon points="410.554980862729,126.8 410.554980862729,133.2 465.986862521982,133.2 465.986862521982,133.28 479.844832936795,130 465.986862521982,126.72 465.986862521982,126.8" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> SM000160S02546</tspan>
+<tspan>track name -> aa</tspan>
+<tspan>ref start-end -> s160:173641-174439</tspan></title>
+				<polygon points="736.160132409227,130 741.532533360919,133.28 741.532533360919,133.2 763.022137167684,133.2 763.022137167684,126.8 741.532533360919,126.8 741.532533360919,126.72" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> SM000160S02555</tspan>
+<tspan>track name -> yy</tspan>
+<tspan>ref start-end -> s160:195946-200982</tspan></title>
+				<polygon points="645.689976207717,366.8 645.689976207717,373.2 781.163235750491,373.2 781.163235750491,373.28 815.031550636185,370 781.163235750491,366.72 781.163235750491,366.8" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g><title><tspan>feature_id -> SM000160S02562</tspan>
+<tspan>track name -> yy</tspan>
+<tspan>ref start-end -> s160:201558-208795</tspan></title>
+				<polygon points="834.362780593773,370 883.030412744388,373.28 883.030412744388,373.2 1077.70094134685,373.2 1077.70094134685,366.8 883.030412744388,366.8 883.030412744388,366.72" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+
+</svg>

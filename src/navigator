@@ -1,6 +1,10 @@
 
-
-<input id="search_the_key" type="value" /> <input value="search by key" type="button" onclick="search_by_key()" />
+<ul>
+<li>
+<td><input id="search_the_key" type="value" /></td>
+<td><input value="search by keyword of feature id" type="button" onclick="search_by_key()" /></td>
+</li>
+</ul>
 <script>
 function refill(chi, fill){
 		chi.style.fill = fill;
@@ -29,7 +33,7 @@ function search_by_key(){
 					children[ii].style.fill = new_color;
 					var the_time=0;
 					var color="";
-					var loops=30;
+					var loops=16;
 					if(loops%2){alert("loops must be even,like 20, not "+loops)}
 					for(var j=1; j<=loops; j++){ // 100 loops
 						the_time += j * 100;

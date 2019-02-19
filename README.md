@@ -2,8 +2,8 @@
 ### Usage:<br>
 ```
 %  git clone http://github.com/orangeSi/ClustersPloter.git
-%  cd  ClustersPloter/example 
-%  sh test.sh # output svg and html
+%  cd  ClustersPloter/example/
+%  cat work.sh # output svg and html
 # or go to https://clustersploter.readthedocs.io/en/latest/# 
 ```
 
@@ -40,6 +40,10 @@ sort
 - remove the legend border line<br>
 <br>
 
+#### Note:<br>
+```
+samtools view  xx.bam chr4:96548917-96549017 # extract the specific region to go faster plot
+```
 
 #### ToDo:<br>
 &nbsp;&nbsp;**2018-12-28**:<br>
@@ -53,23 +57,27 @@ sort
 
 
 ```
-sh example/out11.sh # output out11.svg and convert out11.svg to out11.png
+cat example/work.sh
 ```
-![gene cluster image](example/out11.notitle.svg)
-<br><br><br>
-![gene cluster image](example/out7.notitle.svg)
-<br><br><br>
-![gene cluster image](example/out10.notitle.svg)
-<br><br><br>
-![gene cluster image](example/out.notitle.svg)
+![gene cluster image](example/out3.notitle.svg)
 <br><br><br>
 ![gene cluster image](example/out2.notitle.svg)
 <br><br><br>
-![gene cluster image](example/out3.notitle.svg)
+![gene cluster image](example/out1.notitle.svg)
+<br><br><br>
+![gene cluster image](example_old/out7.notitle.svg)
+<br><br><br>
+![gene cluster image](example_old/out10.notitle.svg)
+<br><br><br>
+![gene cluster image](example_old/out.notitle.svg)
+<br><br><br>
+![gene cluster image](example_old/out2.notitle.svg)
+<br><br><br>
+![gene cluster image](example_old/out3.notitle.svg)
 <br><br>
-![gene cluster image](example/out3.2.notitle.svg)
+![gene cluster image](example_old/out3.2.notitle.svg)
 <br><br>
-![gene cluster image](example/out8.notitle.svg)
+![gene cluster image](example_old/out8.notitle.svg)
 <br><br><br>
 
 contact:<br>

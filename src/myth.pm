@@ -81,15 +81,31 @@ sub read_list(){
 		print "$sample\n";
 
 		open GE,"$genome" or die "can not open $genome\n";
-		$/=">";<GE>;
+		my $flag_num=`head $genome|grep "^>"|wc -l`;chomp $flag_num;
+		if($flag_num){
+			$/=">";<GE>;
+		}
 		while(<GE>){
 			chomp;
-			my ($id,$seq)=split(/\n/,$_,2);
-			die "error:id $id is unvalid for $_\n" if($id!~ /^(\S+)/);
-			$id=$1;
-			die "error:id is null for $_\n" if(!$id);
-			$seq=~ s/\s+//g;
-			my $len=length $seq;
+			my ($id,$seq,$len);
+			if($flag_num){
+				($id,$seq)=split(/\n/,$_,2);
+				die "error:id $id is unvalid for $_\n" if($id!~ /^(\S+)/);
+				$id=$1;
+				die "error:id is null for $_\n" if(!$id);
+				$seq=~ s/\s+//g;
+				$len=length $seq;
+			}else{
+				next if($_=~ /^\s*#/);
+				$_=~ s/^\s+//;
+				$_=~ s/\s+$//;
+				my @arr=split(/\s+/,$_);
+				die "error: in $genome line $.:$_, first column is chr_id, second column is chr_length\n" if(scalar @arr != 2);
+				($id,$len)=@arr;
+				die "error:in $genome line $.:$_, chr_length should be number\n" if($len!~ /^\d+$/);
+				$seq="";
+			}
+
 			$genome{$sample}{$id}{len}=$len;
 			if(not exists $scf_block_id{$id}){
 				$scf_block_id_flag++;

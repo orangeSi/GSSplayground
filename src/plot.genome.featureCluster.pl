@@ -170,7 +170,7 @@ while(@track_order){
 		}
 		$start_once=$gff{$sample}{chooselen_single}{$block_index}{start};
 		$end_once=$gff{$sample}{chooselen_single}{$block_index}{end};
-		$orders{$track_order}.="<g><title>$scf[0]:$gff{$sample}{chooselen_single}{$block_index}{start}-$gff{$sample}{chooselen_single}{$block_index}{end}</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
+		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$gff{$sample}{chooselen_single}{$block_index}{start}-$gff{$sample}{chooselen_single}{$block_index}{end}</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
 		
 		#$conf{display_segment_name} ||="yes,center,shift_y:+1,fontsize:10,color:black"
 		#	
@@ -462,7 +462,7 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 		die "error: not support cross_link_orientation_ellipse=$cross_link_orientation_ellipse for $up_id and $down_id\n"
 	}
 
-	my $title_clink="\n<g><title><tspan>$up_id -> $down_id</tspan>$feature_popup_title</title>\n";
+	my $title_clink="\n<g class='myth'><title><tspan>$up_id -> $down_id</tspan>$feature_popup_title</title>\n";
 #if($fts{$up_id}{sample} eq $fts{$down_id}{sample} && $fts{$up_id}{scf} eq $fts{$down_id}{scf} && $cross_link_shape=~ /ellipse/i){
 	$cross_link_shape=~ s/\s+//g;
 	if($cross_link_shape=~ /ellipse/i){
@@ -737,7 +737,7 @@ my $rm_title="set -vex;sed -e 's/^\\s*<g>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//
 `$rm_title`;
 die "\nerror:$rm_title\n\n" if($?);
 
-print "\noutfile is  $outdir/$prefix.svg and $outdir/$prefix.notitle.svg\n";
+print "\noutfile is  $outdir/$prefix.svg and $outdir/$prefix.notitle.svg $outdir/$prefix.html\n";
 print "\nif you want png or pdf format,you could use convert or cairosvg to convert svg to pdf or png:\n\tconvert  -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.png\n\tconvert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf\n\n";
 
 &jstohtml("$Bin/svg-pan-zoom.js","$outdir/$prefix");
@@ -750,14 +750,26 @@ sub jstohtml(){
 	if(-f $zoom){
 		#my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_width\" height=\"$svg_height\" style=\"background-color:$conf{svg_background_color};\">\n";
 		open OUT,">$prefix.html";
-		print OUT "<!DOCTYPE html>\n<html>\n<head>\n<script>\n";
+		print OUT "<!DOCTYPE html>\n<html>\n<head>\n<style>\n
+ul {
+    font-size:0;
+    text-align:center
+}
+ul li {
+    display:inline;
+    zoom:1
+}
+td {
+}
+</style>
+<script>\n";
 		my $navigator="";
 		if(-f "$Bin/navigator"){
 			$navigator=`cat $Bin/navigator`;chomp $navigator;
 		}
 		my $zoom_js=`cat $zoom`; chomp $zoom_js;
 		print OUT "$zoom_js\n";
-		print OUT "</script>\n</head>\n<body>\n<h1>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>\n$navigator\n<div id='container' style=\"width: ${svg_width}px; height: ${svg_height}px; border:1px solid black;\">\n<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox=\"0 0 $svg_width $svg_height\" version=\"1.1\">\n";
+		print OUT "</script>\n</head>\n<body>\n<h1>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>\n$navigator\n<div id='container' style=\"width: ${svg_width}px; height: ${svg_height}px; border:1px solid black;display:none\">\n<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox=\"0 0 $svg_width $svg_height\" version=\"1.1\">\n";
 		my $svg=`sed '1d' $prefix.svg`;chomp $svg;
 		print OUT "$svg\n";
 		print OUT " </div>
@@ -766,6 +778,8 @@ sub jstohtml(){
 
     <script>
       // Don't use window.onLoad like this in production, because it can only listen to one function.
+	document.getElementById(\"container\").style.width=document.documentElement.clientWidth*0.99 + \"px\";
+	document.getElementById(\"container\").style.display=\"block\";
       window.onload = function() {
         // Expose to window namespase for testing purposes
         window.zoomTiger = svgPanZoom('#demo-tiger', {

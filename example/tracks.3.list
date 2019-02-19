@@ -1,0 +1,4 @@
+#track_name	genome.gff	genome.fa	chr_id	fragment_start	fragment_end	chr_id	fragment_start	fragment_end ...
+#chr14	../data/chr14.gff	../data/chr14.fa.length	14	66901400	66901400+1000
+#chr14	../data/chr14.gff	../data/chr14.fa.length	14	66900400	66917974	
+chr14	../data/chr14.gff	../data/chr14.fa.length	14	66901400	66901400+2000
