@@ -1,4 +1,4 @@
-#!/usr/bin/env perl -w
+#!/usr/binmin()/env perl -w
 #use strict;
 use warnings;
 use Getopt::Long;
@@ -165,8 +165,9 @@ sub synteny(){
 	my $k_index;
 	my (%outname);
 	my @show_types=("quadrilateral");
-#my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel");
-	my @highs=("blat_block_show");
+	#my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel");
+	#my @highs=("blat_block_show", "start_end_xaxis",);
+	my @highs=("blat_block_show", "start_end_xaxis");
 	my @align_types=("paf", "blast_m8", "blat_psl", "mummer_coords");
 	for my $k (@{$conf->{synteny}}){
 		$k_index++;
@@ -178,32 +179,90 @@ sub synteny(){
 		if($infos_len != 9 ){
 			die "\nerror: synteny should separate by \\t, and have 9 colums for synteny=$k, but only have $infos_len\nvalid like $ex\n";
 		}
-		my @arr=$ks[0]=~ /^order->(-?\d+->-?\d+),query->([^:]+):target->([^,]+),(\S+),(\S+),(\S+),forward->([^-]+)->opacity([\d\.]+),reverse->([^-]+)->opacity([\d\.]+),cross_link_shift_y->(\+[\d\.]+:-[\d\.]+),sort->([01])$/;
-		die "\nerror: $ks[0] format \nerror, should like $ex\n" if(@arr!=12);
-		my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y,$sort) = @arr;
+		my @arr=$ks[0]=~ /^order->(-?\d+->-?\d+),query->([^:]+)->([^:]+):target->([^,]+)->([^,]+),(\S+),(\S+),(\S+),forward->([^-]+)->opacity([\d\.]+),reverse->([^-]+)->opacity([\d\.]+),cross_link_shift_y->(\+[\d\.]+:-[\d\.]+),sort->([01])$/;
+		die "\nerror: $ks[0] format \nerror, should like $ex\n" if(@arr!=14);
+		my ($synteny_order,$query_name,$query_scf_id,$target_name,$target_scf_id,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y,$sort) = @arr;
 		die "\nerror: not support $alignment_type, only support @align_types\n" if(! grep(/^$alignment_type$/, @align_types));
 		die "\nerror: not support $crosslink_shape, only support @show_types\n" if(! grep(/^$crosslink_shape$/, @show_types));
 		die "\nerror: $query_name not exists in --list\n" if(not exists $conf->{sample_scf}{$query_name});
 		die "\nerror: $target_name not exists in --list\n" if(not exists $conf->{sample_scf}{$target_name});
-#$conf{sample_scf}{$sample}{$id}="";
-		my ($synteny_gff_q, $synteny_setting_conf_q, $synteny_gff_t, $synteny_setting_conf_t,$cross_link_conf)=&synteny_run(\@arr, $conf,$k_index, $k);
-
+		my (@blocks_query, @blocks_target);
+		for my $block_index(keys %{$gff->{$query_name}->{chooselen_single}}){
+			my @scfs=keys %{$gff->{$query_name}->{block2}->{$block_index}};
+			next if($query_scf_id ne $scfs[0]);
+			#print "scf1 is @scfs, block_index is $block_index, query_name is $query_name\n";
+			push @blocks_query, "$scfs[0],$gff->{$query_name}->{chooselen_single}->{$block_index}->{start},$gff->{$query_name}->{chooselen_single}->{$block_index}->{end}";
+		}
+		for my $block_index(keys %{$gff->{$target_name}->{chooselen_single}}){
+			my @scfs = keys %{$gff->{$target_name}->{block2}->{$block_index}};
+			next if($target_scf_id ne $scfs[0]);
+			#print "scf2 is @scfs\n";
+			push @blocks_target, "$scfs[0],$gff->{$target_name}->{chooselen_single}->{$block_index}->{start},$gff->{$target_name}->{chooselen_single}->{$block_index}->{end}";
+		}
+		my ($synteny_gff_q, $synteny_setting_conf_q, $synteny_gff_t, $synteny_setting_conf_t,$cross_link_conf)=&synteny_run(\@arr, $conf,$k_index, $k, \@blocks_query, \@blocks_target);
 		my $prefix="$prefix_name.$query_name.$query_name.to.$target_name.$alignment_type.$crosslink_shape.$k_index.synteny";	
 		%outname = &gather_gff_conf_link($prefix,$synteny_gff_q,$synteny_setting_conf_q,"", \%outname, $query_name);
-
 		$prefix="$target_name.$query_name.to.$target_name.$alignment_type.$crosslink_shape.$k_index.synteny";	
 		%outname = &gather_gff_conf_link($prefix,$synteny_gff_t,$synteny_setting_conf_t,"", \%outname, $target_name);
-
 		$prefix="$query_name.to.$target_name.$alignment_type.$crosslink_shape.$k_index.synteny";	
 		%outname = &gather_gff_conf_link($prefix,"","",$cross_link_conf, \%outname, "$query_name.to.$target_name");
+		
 
 	}
 	&write_gff_conf_link(\%outname, "$prefix_name.synteny");
 }
 
+
+sub check_overlap(){
+	my ($start, $end, $rg_start,$rg_end)=@_;
+	my $overlength=0;
+	my $edge=0;
+	my $distance=max($start, $end, $rg_start,$rg_end) - min($start, $end, $rg_start,$rg_end) + 1;
+	my $sum=abs($start - $end) + 1 + abs($rg_start - $rg_end) +1;
+	if( $distance < $sum ){
+		$overlength= $sum - $distance;
+		$edge = ($start > $rg_start)? $rg_end:$rg_start;
+	}
+	return $overlength, $edge;
+}
+
+sub check_allow_feature_out_of_list(){
+	my ($query_name, $target_name, $allow_feature_out_of_list, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, $feature_type)=@_;
+	my $skip=1;
+	my $edge_pos="0"; # is edge x and y
+	my @allow_feature_out_of_lists=split(/,/, $allow_feature_out_of_list);
+	my @blocks_query=@$blocks_query;
+	my @blocks_target=@$blocks_target;
+	my $query_length=abs($query_start - $query_end)+1;
+	my $target_length=abs($target_start - $target_end)+1;
+	my $exist_flag=0;
+	for my $q(@blocks_query){
+		for my $t(@blocks_target){
+			my ($rg_query_id, $rg_query_start, $rg_query_end)=split(/,/, $q);
+			my ($rg_target_id, $rg_target_start, $rg_target_end)=split(/,/, $t);
+			next if($rg_query_id ne $query_scf || $rg_target_id ne $target_scf || $exist_flag);
+			my ($query_overlap_length, $q_edge)=&check_overlap($query_start, $query_end, $rg_query_start,$rg_query_end);
+			my ($target_overlap_length, $t_edge)=&check_overlap($target_start, $target_end, $rg_target_start,$rg_target_end);
+			if($query_overlap_length || $target_overlap_length){
+				if($query_overlap_length == $query_length && $target_overlap_length == $target_length){
+					$skip=0;
+					$exist_flag=1;
+				}elsif(grep(/^$feature_type$/, @allow_feature_out_of_lists)){
+					$skip=0;
+					$exist_flag=1;
+					$edge_pos="$query_name,$rg_query_id,$rg_query_start:$rg_query_end ->$target_name,$rg_target_id,$rg_target_start:$rg_target_end -> $query_name,$rg_query_id,$q_edge -> $target_name,$rg_target_id,$t_edge";
+				}else{
+					$skip=1;
+				}
+			}
+		}
+	}
+	if($edge_pos){print "\nedge_pos is $edge_pos, for $query_scf:$query_start-$query_end -> $target_scf:$target_start-$target_end\n"}
+	return $skip, $edge_pos;
+}
 sub synteny_run(){
-	my ($arr,$conf,$k_index, $k)=@_;
-	my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y, $sort)=@$arr;
+	my ($arr,$conf,$k_index,$k,$blocks_query, $blocks_target)=@_;
+	my ($synteny_order,$query_name,$query_scf_id,$target_name,$target_scf_id,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y, $sort)=@$arr;
 	my ($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf);
 	my (%qid, %tid, $qtid);
 #my $feature_color="white";
@@ -245,6 +304,9 @@ sub synteny_run(){
 			my $strand=$arr[4];
 			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
 			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
+			my ($skip, $edge)=&check_allow_feature_out_of_list($query_name,$target_name,$conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny");
+			next if($skip);
+
 			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
 			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
 			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
@@ -258,6 +320,7 @@ sub synteny_run(){
 			$align{qt}{$query_target_feature_id}{indentity}=$indentity;
 			$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
 			$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+			$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
 			$align{target}{$target_feature_id}{target_scf}=$target_scf;
 			$align{target}{$target_feature_id}{target_start}=$target_start;
 			$align{target}{$target_feature_id}{target_end}=$target_end;
@@ -295,6 +358,9 @@ sub synteny_run(){
 			my $strand=($arr[9]>$arr[8])? "+":"-";
 			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
 			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
+			my ($skip, $edge)=&check_allow_feature_out_of_list($query_name,$target_name,$conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny");
+			next if($skip);
+
 			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
 			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
 			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
@@ -308,6 +374,7 @@ sub synteny_run(){
 			$align{qt}{$query_target_feature_id}{indentity}=$indentity;
 			$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
 			$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+			$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
 			$align{target}{$target_feature_id}{target_scf}=$target_scf;
 			$align{target}{$target_feature_id}{target_start}=$target_start;
 			$align{target}{$target_feature_id}{target_end}=$target_end;
@@ -356,6 +423,8 @@ sub synteny_run(){
 			my $target_start=($arr[15] ==0)? 1:$arr[15];
 			my $target_end=$arr[16];
 			my $strand=$arr[8];
+			my ($skip, $edge)=&check_allow_feature_out_of_list($query_name,$target_name,$conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny");
+			next if($skip);
 			if($strand eq "+" || $strand eq "-"){
 				die "error:here1 in line$.:$_ \n" if($query_start > $query_end);
 				die "error:here2 in line$.:$_ \n" if($target_start > $target_end);
@@ -374,6 +443,8 @@ sub synteny_run(){
 					my $t_start=$detail_t[$i];
 					$t_start = 1 if($t_start ==0);
 					my $t_end=$t_start+$blocksize[$i];
+					my ($skip2, $edge2)=&check_allow_feature_out_of_list($query_name,$target_name, $conf->{allow_feature_out_of_list}, $q_start, $q_end, $t_start, $t_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny");
+					next if($skip2);	
 					die "error:blat max($q_start, $q_end) > $arr[10] || max($t_start, $t_end)>$arr[14]\n" if(max($q_start, $q_end) > $arr[10] || max($t_start, $t_end)>$arr[14]);
 					my $query_feature_id="$query_name.$query_scf.$q_start.$q_end.$k_index.$strand";
 					my $target_feature_id="$target_name.$target_scf.$t_start.$t_end.$k_index.$strand";
@@ -388,6 +459,7 @@ sub synteny_run(){
 					$align{qt}{$query_target_feature_id}{indentity}=$indentity;
 					$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
 					$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+					$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge2; # 
 					$align{target}{$target_feature_id}{target_scf}=$target_scf;
 					$align{target}{$target_feature_id}{target_start}=$t_start;
 					$align{target}{$target_feature_id}{target_end}=$t_end;
@@ -410,6 +482,7 @@ sub synteny_run(){
 				$align{qt}{$query_target_feature_id}{indentity}=$indentity;
 				$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
 				$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+				$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
 				$align{target}{$target_feature_id}{target_scf}=$target_scf;
 				$align{target}{$target_feature_id}{target_start}=$target_start;
 				$align{target}{$target_feature_id}{target_end}=$target_end;
@@ -452,6 +525,9 @@ sub synteny_run(){
 			my $strand=($arr[4] >$arr[5])? "-":"+";
 			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
 			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
+			my ($skip, $edge)=&check_allow_feature_out_of_list($query_name,$target_name, $conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny");
+			next if($skip);
+
 			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
 			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
 			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
@@ -465,6 +541,7 @@ sub synteny_run(){
 			$align{qt}{$query_target_feature_id}{indentity}=$indentity;
 			$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
 			$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+			$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
 			$align{target}{$target_feature_id}{target_scf}=$target_scf;
 			$align{target}{$target_feature_id}{target_start}=$target_start;
 			$align{target}{$target_feature_id}{target_end}=$target_end;
@@ -483,7 +560,7 @@ sub synteny_common_write(){
 	my ($pairs, $align, $arr)=@_;
 	my @pairs=@$pairs;
 	my %align=%$align;
-	my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y,$sort)=@$arr;
+	my ($synteny_order,$query_name,$query_scf_id,$target_name,$target_scf_id,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y,$sort)=@$arr;
 	my ($synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf);
 	my $cross_link_opacity;
 	my $cross_link_color;
@@ -552,6 +629,7 @@ sub synteny_common_write(){
 		my $t_cov=$align{qt}{$pair}{t_cov};
 		if(not exists $qtid{"$query_feature_id.$target_feature_id"}){
 			my $feature_popup_title="query -> $query_scf:$query_start:$query_end;target -> $target_scf:$target_start:$target_end;strand -> $strand;indentity -> $align{qt}{$pair}{indentity}%;coverage -> query:$q_cov%;target:$t_cov%";
+			my $edge_coordinate_feature_out_of_list=$align{qt}{$pair}{edge_coordinate_feature_out_of_list};
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shape\t$crosslink_shape\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_anchor_pos\tlow_up\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_color\t$cross_link_color\n";
@@ -560,6 +638,7 @@ sub synteny_common_write(){
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcrosslink_stroke_style\tstroke:black;stroke-width:0.2;\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tfeature_popup_title\t$feature_popup_title\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_order\t$synteny_order_pair\n";
+			$cross_link_conf.="$query_feature_id\t$target_feature_id\tedge_coordinate_feature_out_of_list\t$edge_coordinate_feature_out_of_list\n";
 			$qtid{"$query_feature_id.$target_feature_id"}="";
 		}
 	}
@@ -614,7 +693,13 @@ sub reads_mapping(){
 			print "block_index is $block_index,$sample\n";
 			next if($block_flag != 0 && $block_flag != $block_index);
 			my @scfs=keys %{$gff->{$sample}->{block2}->{$block_index}};
-			next if($scf ne $scfs[0]);
+			if($scf ne $scfs[0]){
+				if($block_flag == 0){
+					next;
+				}else{
+					die "error: block_index is $block_index, the scaffold id should be $scfs[0] instead of $scf in $k \n";	
+				}
+			}
 			my @yaxis_list=split(/->/,$yaxis);
 			die "\nerror:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[-\d\.]+->[-\d\.]+/);
 			my @yaxis_show_list=split(/->/,$yaxis_show);
@@ -889,7 +974,13 @@ sub hist_scatter_line(){
 			print "block_index is $block_index,$sample\n";
 			next if($block_flag != 0 && $block_flag != $block_index);
 			my @scfs=keys %{$gff->{$sample}->{block2}->{$block_index}};
-			next if($scf ne $scfs[0]);
+			if($scf ne $scfs[0]){
+				if($block_flag == 0){
+					next;
+				}else{
+					die "error: block_index is $block_index, the scaffold id should be $scfs[0] instead of $scf in $k \n";	
+				}
+			}
 			my @yaxis_list=split(/->/,$yaxis);
 			die "\nerror:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[-\d\.]+->[-\d\.]+/);
 			my @yaxis_show_list=split(/->/,$yaxis_show);
@@ -1802,7 +1893,7 @@ sub get_regions(){
 					}
 				}
 			}elsif($a eq "highlight_columns"){
-				print ""
+				die "error: highlight_columns\n";
 
 			}elsif($a eq "color_height_cs"){
 				$info=~ /\s+$a->(\S+)/;

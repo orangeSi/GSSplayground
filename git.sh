@@ -1,6 +1,6 @@
 if [ "$2" == "" ];
 then
-	echo "sh $0 <git commit -m > <git add >example: sh $0 'update readme' 'README.md */*' "
+	echo -e "sh $0 <git commit -m > <git add >\nexample: sh $0 'update readme' 'README.md */*' "
 	exit
 fi
 commit=$1

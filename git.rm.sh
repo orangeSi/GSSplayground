@@ -1,11 +1,11 @@
 if [ "$#" -ne 2 ];
 then
-	echo "sh $0 <git rm  file > <git commit -m>"
+	echo "sh $0 <commit -m> <rm  file>"
 	exit
 fi
 set -vex
-files=$1
-commit=$2
+files=$2
+commit=$1
 git rm -r --cached $files
 git commit -m "$commit"
 git push -u origin master

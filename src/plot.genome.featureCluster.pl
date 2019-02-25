@@ -46,6 +46,7 @@ my ($svg_width,$svg_height) = split(',',$conf{'svg_width_height'});
 my %positon_links;
 my @fetures_links;
 my %features_height;
+my %blocks_two_ends_cord; # $blocks_two_ends_cord{sample_name}{scf_id}{start_pos} = "x,y"
 ##start:get max scaffolds lengths in gff file
 my ($ref_name_width_ratio, $cluster_width_ratio, $legend_width_ratio) = split(/-/, $conf{width_ratio_ref_cluster_legend});
 if($ref_name_width_ratio+$cluster_width_ratio+$legend_width_ratio !=1){
@@ -141,12 +142,13 @@ while(@track_order){
 
 	my $pre_block='';
 	foreach my $block_index(sort {$a<=>$b} keys %{$gff{$sample}{block}}){ # one block_index ---> one scaffold ---> one cluster of genes
-	print "xxxx is $sample, block_index is $block_index\n";
+	#print "xxxx is $sample, block_index is $block_index\n";
 #print "block_index is $block_index, sample is $sample\n";
 		$flag++;
 		my $shift_angle_closed_feature=0;
 #print "block_index is $block_index, sample is $sample\n";
 		my @scf = keys %{$gff{$sample}{block}{$block_index}};
+		die "error:scf element number is not one for $sample and $block_index\n" if(@scf != 1);
 #print "scff is @scf, $block_index\n";
 		die "error:block_index $block_index should not have two scf\n" if(@scf!=1);
 		my $id_line_x=$left_distance; # 每个block的genome的起点的x,y坐标
@@ -208,7 +210,7 @@ while(@track_order){
 			}else{
 				die "error:display_segment_name_shift_y not support $display_segment_name_shift_y in $display_segment_name, should like +1 or -1 or 0\n";
 			}
-			my $segment_name=($gff{$sample}{chooselen_single}{$block_index}{len} == $gff{$sample}{scf}{$scf[0]})? "$scf[0]":"$scf[0]:$start_once-$end_once";
+			my $segment_name=($gff{$sample}{chooselen_single}{$block_index}{len} == $gff{$sample}{scf}{$scf[0]})? "$scf[0]":"$scf[0]:${start_once}bp-${end_once}bp";
 			$orders{$display_segment_name_order}.="<text x=\"$segment_name_x\" y=\"$segment_name_y\" font-size=\"${display_segment_name_fontsize}px\" fill=\"$display_segment_name_color\"  text-anchor='$segment_text_anchor' alignment-baseline=\"$segment_baseline\" >$segment_name</text>\n"; # draw sample name
 		}elsif($display_segment_name_flag!~ /no/i){
 			die "error:$display_segment_name should be start with yes or no, not $display_segment_name_flag\n"
@@ -347,6 +349,12 @@ while(@track_order){
 			$index_id_previous=$index_id;
 
 		}
+		my $end_start_x=$shift_x;
+		my $end_start_y=$id_line_y;
+		my $end_end_x=$shift_x+$id_line_width;
+		my $end_end_y=$id_line_y;
+		$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{start}}="$end_start_x,$end_start_y";
+		$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{end}}="$end_end_x,$end_end_y";
 		$shift_x+=($id_line_width+$block_distance);
 	}
 	$top_distance+=$sample_single_height * (1+$tracks_shift_y{sample}{$sample}{shift_y_down});
@@ -363,6 +371,22 @@ print "\n\n";
 
 print "\n\n";
 
+sub convert_cord(){
+	my ($edge_coordinate_feature_out_of_list, $blocks_two_ends_cord, $pair)=@_;
+	#print "edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list for $pair\n";
+	%blocks_two_ends_cord=%$blocks_two_ends_cord;
+	return $edge_coordinate_feature_out_of_list if($edge_coordinate_feature_out_of_list eq "0");
+	die "error: edge_coordinate_feature_out_of_list=$edge_coordinate_feature_out_of_list format error\n" unless ($edge_coordinate_feature_out_of_list=~ /^([^,]+),([^,]+),(\d+):(\d+)\s*->\s*([^,]+),([^,]+),(\d+):(\d+)/);
+	my ($query,$q_scf,$q_start_pos,$q_end_pos, $target,$t_scf,$t_start_pos,$t_end_pos)=($1,$2,$3,$4,$5,$6,$7,$8);
+	die "error: not exists blocks_two_ends_cord{$query}{$q_scf}{$q_start_pos}\n" if(not exists $blocks_two_ends_cord{$query}{$q_scf}{$q_start_pos});
+	die "error: not exists blocks_two_ends_cord{$query}{$q_scf}{$q_end_pos}\n" if(not exists $blocks_two_ends_cord{$query}{$q_scf}{$q_end_pos});
+	die "error: not exists blocks_two_ends_cord{$target}{$t_scf}{$t_start_pos}\n" if(not exists $blocks_two_ends_cord{$target}{$t_scf}{$t_start_pos});
+	die "error: not exists blocks_two_ends_cord{$target}{$t_scf}{$t_end_pos}\n" if(not exists $blocks_two_ends_cord{$target}{$t_scf}{$t_end_pos});
+	$edge_coordinate_feature_out_of_list="$blocks_two_ends_cord{$query}{$q_scf}{$q_start_pos}:$blocks_two_ends_cord{$query}{$q_scf}{$q_end_pos} -> $blocks_two_ends_cord{$target}{$t_scf}{$t_start_pos}:$blocks_two_ends_cord{$target}{$t_scf}{$t_end_pos}";
+	#print "edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list for $pair\n\n";
+	return $edge_coordinate_feature_out_of_list;
+}
+
 
 # draw crossing_links for feature crosslink
 foreach my $pair(keys %{$conf{crossing_link2}{index}}){
@@ -376,10 +400,12 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 	my $cross_link_anchor_pos=(exists $conf{crossing_link2}{index}{$pair}{cross_link_anchor_pos})? $conf{crossing_link2}{index}{$pair}{cross_link_anchor_pos}:$conf{cross_link_anchor_pos};
 	my $cross_link_width_ellipse=(exists $conf{crossing_link2}{index}{$pair}{cross_link_width_ellipse})? $conf{crossing_link2}{index}{$pair}{cross_link_width_ellipse}:$conf{cross_link_width_ellipse};
 	my $crosslink_stroke_style=(exists $conf{crossing_link2}{index}{$pair}{crosslink_stroke_style})? $conf{crossing_link2}{index}{$pair}{crosslink_stroke_style}:$conf{crosslink_stroke_style};
+	my $edge_coordinate_feature_out_of_list=(exists $conf{crossing_link2}{index}{$pair}{edge_coordinate_feature_out_of_list})? $conf{crossing_link2}{index}{$pair}{edge_coordinate_feature_out_of_list}:"0";
 	die "error: cross_link_width_ellipse $cross_link_width_ellipse should be number\n" if($cross_link_width_ellipse!~ /^[\d\.]+$/);
 	die "error1: $up_id of crosslink is not in --list regions, please try to check it, conf{crossing_link2}{position}{$up_id}{start}{x}\n" if(not exists $conf{crossing_link2}{position}{$up_id}{start}{x});
 	die "error:crosslink_stroke_style=$crosslink_stroke_style format error, should be like crosslink_stroke_style=stroke:green;stroke-width:1\n" if($crosslink_stroke_style!~ /^stroke:[^;]+;stroke-width:[\d\.]+;$/);
 	my $feature_popup_title=(exists $conf{crossing_link2}{index}{$pair}{feature_popup_title})? $conf{crossing_link2}{index}{$pair}{feature_popup_title}:$conf{feature_popup_title};
+	$edge_coordinate_feature_out_of_list = &convert_cord($edge_coordinate_feature_out_of_list, \%blocks_two_ends_cord, $pair);
 	if($feature_popup_title){
 		my @kvs=split(/;/, $feature_popup_title);
 		$feature_popup_title="\n";
@@ -509,15 +535,25 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 #$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"fill:white;stroke:black;stroke-width:0.5;fill-opacity:0;stroke-opacity:1\" /></g>";
 #print "downid is $down_id, up is is $up_id\n";
 		next;
-	}elsif($cross_link_shape=~ /quadrilateral/i){
+	}elsif($cross_link_shape=~ /quadrilateral/i){ # <polygon> not support clip-path, <path> support clip-path
+		my $quadrilateral="";
 		if($cross_link_orientation=~ /reverse/i){
 			$color=(exists $conf{crossing_link2}{index}{$pair}{cross_link_color_reverse})? $conf{crossing_link2}{index}{$pair}{cross_link_color_reverse}:$conf{cross_link_color_reverse};
-			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
+			if($edge_coordinate_feature_out_of_list eq "0"){
+				$quadrilateral="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/>"; #crossing link of features
+			}else{
+				$quadrilateral=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$left_down_x,$left_down_y,$right_down_x,$right_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity");
+			}
 		}elsif($cross_link_orientation=~ /forward/i){
-			$orders{$cross_link_order}.="$title_clink<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/></g>\n"; #crossing link of features
+			if($edge_coordinate_feature_out_of_list eq "0"){
+				$quadrilateral="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
+			}else{
+				$quadrilateral=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity");
+			}
 		}else{
 			die "error: not support cross_link_orientation=$cross_link_orientation\n";
 		}
+		$orders{$cross_link_order}.="$title_clink $quadrilateral</g>\n"
 	}elsif($cross_link_shape eq "w"){
 		print "wait w\n";
 		die "not support w yet\n";
@@ -733,7 +769,7 @@ for my $order(sort {$a<=>$b}keys %orders){
 }
 print SVG "</svg>";
 close SVG;
-my $rm_title="set -vex;sed -e 's/^\\s*<g>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//'  $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
+my $rm_title="set -vex;sed -r -e 's/^\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//'  $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
 `$rm_title`;
 die "\nerror:$rm_title\n\n" if($?);
 
@@ -810,3 +846,32 @@ td {
 	}
 }
 
+sub check_blocks_two_ends_cord(){
+	for my $s(keys %blocks_two_ends_cord){
+		foreach my $scf(keys %{$blocks_two_ends_cord{$s}}){
+			foreach my $pos(keys %{$blocks_two_ends_cord{$s}{$scf}}){
+				print "$s,$scf,$pos -> $blocks_two_ends_cord{$s}{$scf}{$pos}\n";		
+			}
+		}
+	}
+}
+
+
+
+sub cut_quadrilateral(){
+	my ($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, $style)=@_;
+	# $edge_coordinate_feature_out_of_list="130,382:1105,382 -> 130,249:1082,249";
+	my $clip_path="";
+	my $clip_path_id="cut-off-bottom-$left_up_x-$left_up_y-$right_up_x-$right_up_y-$right_down_x-$right_down_y-$left_down_x-$left_down_y";
+	if($edge_coordinate_feature_out_of_list=~ /^([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)\s*->\s*([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)/){
+		$clip_path="<defs>    <clipPath id=\"$clip_path_id\"><path d=\"M$1 $2 L$3 $4 L$7 $8 L$5 $6 Z\" /></clipPath>  </defs>\n";
+	}else{
+		die "error: in cut_quadrilateral, edge_coordinate_feature_out_of_list=$edge_coordinate_feature_out_of_list format eror\n"
+	}
+	#print "edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list\n";
+	$clip_path.="<path d=\"M$left_up_x $left_up_y L$right_up_x $right_up_y L$right_down_x $right_down_y L$left_down_x $left_down_y Z\"  clip-path=\"url(#$clip_path_id)\" style=\"$style\" />\n";
+	#"""  <defs>    <clipPath id="cut-off-bottom"><path d="M0 0 L170 0 L170 300 L0 300 Z" />	    </clipPath>  </defs> 
+	# <path d="M150 0 L75 200 L225 200 Z"  clip-path="url(#cut-off-bottom)" />"""
+	
+	return $clip_path;
+}
