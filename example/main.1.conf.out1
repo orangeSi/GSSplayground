@@ -69,6 +69,7 @@ track_order = 1
 distance_closed_feature = 200
 scale_width = 0.5
 color_sample_name_default = green
+allow_feature_out_of_list = synteny
 scale_tick_padding_y = 10
 absolute_postion_in_title = yes
 pos_feature_label = right_low

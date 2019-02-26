@@ -5755,8 +5755,8 @@ pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+	pO83_CORR.NC_017659.1.5460.1470
 pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+	pO83_CORR.NC_017659.1.5460.147060.1.+	cross_link_color	orange
 pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+	pO83_CORR.NC_017659.1.5460.147060.1.+	cross_link_opacity	0.5
 pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+	pO83_CORR.NC_017659.1.5460.147060.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+	pO83_CORR.NC_017659.1.5460.147060.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+	pO83_CORR.NC_017659.1.5460.147060.1.+	feature_popup_title	query -> NC_017659.1.fake:5460:147060;target -> NC_017659.1:5460:147060;strand -> +;indentity -> 100.00%;coverage -> query:100%;target:100%
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+	pO83_CORR.NC_017659.1.5460.147060.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+	pO83_CORR.NC_017659.1.5460.147060.1.+	feature_popup_title	query -> NC_017659.1.fake:5460:147060;target -> NC_017659.1: 5460-147060;strand -> +;indentity -> 100.00%;coverage -> query:100%;target:100%
 pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+	pO83_CORR.NC_017659.1.5460.147060.1.+	cross_link_order	0.25
 pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+	pO83_CORR.NC_017659.1.5460.147060.1.+	edge_coordinate_feature_out_of_list	pO83_CORR.indel,NC_017659.1.fake,1700:6000 ->pO83_CORR,NC_017659.1,1700:5900 -> pO83_CORR.indel,NC_017659.1.fake,6000 -> pO83_CORR,NC_017659.1,5900
 pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+	pO83_CORR.NC_017659.1.2101.5468.1.+	cross_link_shape	quadrilateral
@@ -5764,8 +5764,8 @@ pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+	pO83_CORR.NC_017659.1.2101.5468.1
 pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+	pO83_CORR.NC_017659.1.2101.5468.1.+	cross_link_color	orange
 pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+	pO83_CORR.NC_017659.1.2101.5468.1.+	cross_link_opacity	0.4997
 pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+	pO83_CORR.NC_017659.1.2101.5468.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+	pO83_CORR.NC_017659.1.2101.5468.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+	pO83_CORR.NC_017659.1.2101.5468.1.+	feature_popup_title	query -> NC_017659.1.fake:1891:5257;target -> NC_017659.1:2101:5468;strand -> +;indentity -> 99.94%;coverage -> query:99.9703087885986%;target:100%
+pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+	pO83_CORR.NC_017659.1.2101.5468.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+	pO83_CORR.NC_017659.1.2101.5468.1.+	feature_popup_title	query -> NC_017659.1.fake:1891:5257;target -> NC_017659.1: 2101-5468;strand -> +;indentity -> 99.94%;coverage -> query:99.9703087885986%;target:100%
 pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+	pO83_CORR.NC_017659.1.2101.5468.1.+	cross_link_order	0.5
 pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+	pO83_CORR.NC_017659.1.2101.5468.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+	pO83_CORR.NC_017659.1.1.1898.1.+	cross_link_shape	quadrilateral
@@ -5773,8 +5773,8 @@ pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+	pO83_CORR.NC_017659.1.1.1898.1.+	cro
 pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+	pO83_CORR.NC_017659.1.1.1898.1.+	cross_link_color	orange
 pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+	pO83_CORR.NC_017659.1.1.1898.1.+	cross_link_opacity	0.49945
 pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+	pO83_CORR.NC_017659.1.1.1898.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+	pO83_CORR.NC_017659.1.1.1898.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+	pO83_CORR.NC_017659.1.1.1898.1.+	feature_popup_title	query -> NC_017659.1.fake:1:1898;target -> NC_017659.1:1:1898;strand -> +;indentity -> 99.89%;coverage -> query:100%;target:100%
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+	pO83_CORR.NC_017659.1.1.1898.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+	pO83_CORR.NC_017659.1.1.1898.1.+	feature_popup_title	query -> NC_017659.1.fake:1:1898;target -> NC_017659.1: 1-1898;strand -> +;indentity -> 99.89%;coverage -> query:100%;target:100%
 pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+	pO83_CORR.NC_017659.1.1.1898.1.+	cross_link_order	0.75
 pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+	pO83_CORR.NC_017659.1.1.1898.1.+	edge_coordinate_feature_out_of_list	pO83_CORR.indel,NC_017659.1.fake,1700:6000 ->pO83_CORR,NC_017659.1,1700:5900 -> pO83_CORR.indel,NC_017659.1.fake,1700 -> pO83_CORR,NC_017659.1,1700
 pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+	pO83_CORR.NC_017659.1.1891.2100.1.+	cross_link_shape	quadrilateral
@@ -5782,7 +5782,7 @@ pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+	pO83_CORR.NC_017659.1.1891.2100.1
 pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+	pO83_CORR.NC_017659.1.1891.2100.1.+	cross_link_color	orange
 pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+	pO83_CORR.NC_017659.1.1891.2100.1.+	cross_link_opacity	0.5
 pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+	pO83_CORR.NC_017659.1.1891.2100.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+	pO83_CORR.NC_017659.1.1891.2100.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+	pO83_CORR.NC_017659.1.1891.2100.1.+	feature_popup_title	query -> NC_017659.1.fake:5251:5460;target -> NC_017659.1:1891:2100;strand -> +;indentity -> 100.00%;coverage -> query:100%;target:100%
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+	pO83_CORR.NC_017659.1.1891.2100.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+	pO83_CORR.NC_017659.1.1891.2100.1.+	feature_popup_title	query -> NC_017659.1.fake:5251:5460;target -> NC_017659.1: 1891-2100;strand -> +;indentity -> 100.00%;coverage -> query:100%;target:100%
 pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+	pO83_CORR.NC_017659.1.1891.2100.1.+	cross_link_order	1
 pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+	pO83_CORR.NC_017659.1.1891.2100.1.+	edge_coordinate_feature_out_of_list	0

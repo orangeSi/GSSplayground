@@ -1,7 +1,7 @@
 #!/bin/sh
 if [ $# -ne 4 ];
 then
-	echo -e "\nsh $0 track.list prefix outdir main.conf\n"
+	echo -e "usage:\n sh $0 track.list prefix outdir main.conf\n\nany question, go to https://github.com/orangeSi/ClustersPloter/issues"
 	exit
 fi
 set -vex
@@ -35,6 +35,7 @@ else
 	cp $list $list.$prefix
 	cp $conf $conf.$prefix
 fi
+
 
 perl $base/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix
 

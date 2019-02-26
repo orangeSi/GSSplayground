@@ -1922,16 +1922,21 @@ function requestTimeout(timeout) {
 
 <ul>
 <li>
-<td><input id="search_the_key" type="value" /></td>
+<td><input id="search_the_key" type="value" value="use js regrex,example keyA|keyB" /></td>
 <td><input value="search by keyword of feature id" type="button" onclick="search_by_key()" /></td>
 </li>
 </ul>
 <script>
-function refill(chi, fill){
+function refill(chi, fill,opacity,stroke_width){
 		chi.style.fill = fill;
+		chi.style.opacity = opacity;
+		chi.style['stroke-width']=stroke_width;
+		chi.style['stroke']=fill;
 }
 function search_by_key(){
 	var new_color = "red";
+	var new_opacity = 1;
+	var new_stroke_width = 1;
 	var gs = document.getElementsByClassName("myth");
 	var key = document.getElementById("search_the_key").value;
 	if(key.length == 0){return 1;}
@@ -1951,19 +1956,37 @@ function search_by_key(){
 					console.log("tagname is "+children[ii].tagName);
 					console.log("style is "+children[ii].style);
 					var rawfill = children[ii].style.fill;
+					var rawopacity = children[ii].style.opacity;
+					var raw_stroke_width =  children[ii].style['stroke-width'];
+					console.log("raw_stroke_width is "+raw_stroke_width);
+					if(rawopacity>0.8){
+						new_opacity=0.5;
+					}else{
+						new_opacity=1;
+					}
+					if(raw_stroke_width == 0 ||raw_stroke_width == "0px"){
+						new_stroke_width = 1;
+					}
 					children[ii].style.fill = new_color;
 					var the_time=0;
 					var color="";
-					var loops=16;
-					if(loops%2){alert("loops must be even,like 20, not "+loops)}
+					var opacity=1;
+					var loops=3;
+					var stroke_width=0;
+					if(loops%2 == 0){alert("loops must be even,like 20, not "+loops)}
+					refill(children[ii], new_color,new_opacity, new_stroke_width);
 					for(var j=1; j<=loops; j++){ // 100 loops
-						the_time += j * 100;
-						if(j%2){
+						the_time += j * 1000;
+						if(j%2 == 0){
 							color=new_color;
+							opacity=new_opacity;
+							stroke_width=new_stroke_width;
 						}else{
 							color=rawfill;
+							opacity=rawopacity;
+							stroke_width=raw_stroke_width;
 							}
-						setTimeout(refill, the_time,children[ii], color);
+						setTimeout(refill, the_time,children[ii], color,opacity, stroke_width);
 					}
 							
 				}
@@ -31840,13 +31863,13 @@ function search_by_key(){
 
 <g class='myth'><title><tspan>pO83_CORR.NC_017659.1.5460.147060.1.+ -> pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+</tspan>
 <tspan>query -> NC_017659.1.fake:5460:147060</tspan>
-<tspan>target -> NC_017659.1:5460:147060</tspan>
+<tspan>target -> NC_017659.1: 5460-147060</tspan>
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 100.00%</tspan>
 <tspan>coverage -> query:100%</tspan>
 <tspan>target:100%</tspan></title>
  <defs>    <clipPath id="cut-off-bottom-982.586607765636-254.666666666667-33082.3250406882-254.666666666667-33082.3250406882-378.666666666667-982.586607765636-378.666666666667"><path d="M130 382.666666666667 L1105 382.666666666667 L1082.33085328993 249.333333333333 L130 249.333333333333 Z" /></clipPath>  </defs>
-<path d="M982.586607765636 254.666666666667 L33082.3250406882 254.666666666667 L33082.3250406882 378.666666666667 L982.586607765636 378.666666666667 Z"  clip-path="url(#cut-off-bottom-982.586607765636-254.666666666667-33082.3250406882-254.666666666667-33082.3250406882-378.666666666667-982.586607765636-378.666666666667)" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5" />
+<path d="M982.586607765636 254.666666666667 L33082.3250406882 254.666666666667 L33082.3250406882 378.666666666667 L982.586607765636 378.666666666667 Z"  clip-path="url(#cut-off-bottom-982.586607765636-254.666666666667-33082.3250406882-254.666666666667-33082.3250406882-378.666666666667-982.586607765636-378.666666666667)" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5" />
 </g>
 
 
@@ -31863,12 +31886,12 @@ function search_by_key(){
 
 <g class='myth'><title><tspan>pO83_CORR.NC_017659.1.2101.5468.1.+ -> pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+</tspan>
 <tspan>query -> NC_017659.1.fake:1891:5257</tspan>
-<tspan>target -> NC_017659.1:2101:5468</tspan>
+<tspan>target -> NC_017659.1: 2101-5468</tspan>
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 99.94%</tspan>
 <tspan>coverage -> query:99.9703087885986%</tspan>
 <tspan>target:100%</tspan></title>
- <polygon points="221.129969774471,254.666666666667 984.626830969542,254.666666666667 936.7949314113,378.666666666667 173.524761683329,378.666666666667" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.4997"/>
+ <polygon points="221.129969774471,254.666666666667 984.626830969542,254.666666666667 936.7949314113,378.666666666667 173.524761683329,378.666666666667" style="stroke:black;stroke-width:0;fill:orange;opacity:0.4997"/>
 </g>
 
 
@@ -31885,13 +31908,13 @@ function search_by_key(){
 
 <g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1.1898.1.+ -> pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+</tspan>
 <tspan>query -> NC_017659.1.fake:1:1898</tspan>
-<tspan>target -> NC_017659.1:1:1898</tspan>
+<tspan>target -> NC_017659.1: 1-1898</tspan>
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 99.89%</tspan>
 <tspan>coverage -> query:100%</tspan>
 <tspan>target:100%</tspan></title>
  <defs>    <clipPath id="cut-off-bottom--254.922111136945-254.666666666667-175.338293420135-254.666666666667-175.338293420135-378.666666666667--254.922111136945-378.666666666667"><path d="M130 382.666666666667 L1105 382.666666666667 L1082.33085328993 249.333333333333 L130 249.333333333333 Z" /></clipPath>  </defs>
-<path d="M-254.922111136945 254.666666666667 L175.338293420135 254.666666666667 L175.338293420135 378.666666666667 L-254.922111136945 378.666666666667 Z"  clip-path="url(#cut-off-bottom--254.922111136945-254.666666666667-175.338293420135-254.666666666667-175.338293420135-378.666666666667--254.922111136945-378.666666666667)" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.49945" />
+<path d="M-254.922111136945 254.666666666667 L175.338293420135 254.666666666667 L175.338293420135 378.666666666667 L-254.922111136945 378.666666666667 Z"  clip-path="url(#cut-off-bottom--254.922111136945-254.666666666667-175.338293420135-254.666666666667-175.338293420135-378.666666666667--254.922111136945-378.666666666667)" style="stroke:black;stroke-width:0;fill:orange;opacity:0.49945" />
 </g>
 
 
@@ -35076,12 +35099,12 @@ function search_by_key(){
 
 <g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1891.2100.1.+ -> pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+</tspan>
 <tspan>query -> NC_017659.1.fake:5251:5460</tspan>
-<tspan>target -> NC_017659.1:1891:2100</tspan>
+<tspan>target -> NC_017659.1: 1891-2100</tspan>
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 100.00%</tspan>
 <tspan>coverage -> query:100%</tspan>
 <tspan>target:100%</tspan></title>
- <polygon points="173.524761683329,254.666666666667 221.129969774471,254.666666666667 982.813299232737,378.666666666667 935.208091141595,378.666666666667" style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"/>
+ <polygon points="173.524761683329,254.666666666667 221.129969774471,254.666666666667 982.813299232737,378.666666666667 935.208091141595,378.666666666667" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5"/>
 </g>
 
 
@@ -35124,10 +35147,13 @@ function search_by_key(){
     <script>
       // Don't use window.onLoad like this in production, because it can only listen to one function.
 	document.getElementById("container").style.width=document.documentElement.clientWidth*0.99 + "px";
+	document.getElementById("container").style.height=document.documentElement.clientHeight*0.91 + "px";
 	document.getElementById("container").style.display="block";
       window.onload = function() {
         // Expose to window namespase for testing purposes
         window.zoomTiger = svgPanZoom('#demo-tiger', {
+	  maxZoom: 500,
+     	  minZoom:0.01,
           zoomEnabled: true,
           controlIconsEnabled: true,
           fit: true,

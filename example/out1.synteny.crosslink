@@ -3,334 +3,376 @@ pO83_CORR.1.NC_017659.1.1.147060.1.+	pO83_CORR.2.NC_017659.1.1.147060.1.+	cross_
 pO83_CORR.1.NC_017659.1.1.147060.1.+	pO83_CORR.2.NC_017659.1.1.147060.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.1.147060.1.+	pO83_CORR.2.NC_017659.1.1.147060.1.+	cross_link_opacity	0.5
 pO83_CORR.1.NC_017659.1.1.147060.1.+	pO83_CORR.2.NC_017659.1.1.147060.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.1.147060.1.+	pO83_CORR.2.NC_017659.1.1.147060.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.1.147060.1.+	pO83_CORR.2.NC_017659.1.1.147060.1.+	feature_popup_title	query -> NC_017659.1:1:147060;target -> NC_017659.1:1:147060;strand -> +;indentity -> 100.00%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.1.147060.1.+	pO83_CORR.2.NC_017659.1.1.147060.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.1.147060.1.+	pO83_CORR.2.NC_017659.1.1.147060.1.+	feature_popup_title	query -> NC_017659.1:1:147060;target -> NC_017659.1: 1-147060;strand -> +;indentity -> 100.00%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.1.147060.1.+	pO83_CORR.2.NC_017659.1.1.147060.1.+	cross_link_order	0.0238095238095238
+pO83_CORR.1.NC_017659.1.1.147060.1.+	pO83_CORR.2.NC_017659.1.1.147060.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.34724.36500.1.-	pO83_CORR.2.NC_017659.1.42262.40487.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.34724.36500.1.-	pO83_CORR.2.NC_017659.1.42262.40487.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.34724.36500.1.-	pO83_CORR.2.NC_017659.1.42262.40487.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.34724.36500.1.-	pO83_CORR.2.NC_017659.1.42262.40487.1.-	cross_link_opacity	0.55944
 pO83_CORR.1.NC_017659.1.34724.36500.1.-	pO83_CORR.2.NC_017659.1.42262.40487.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.34724.36500.1.-	pO83_CORR.2.NC_017659.1.42262.40487.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.34724.36500.1.-	pO83_CORR.2.NC_017659.1.42262.40487.1.-	feature_popup_title	query -> NC_017659.1:34724:36500;target -> NC_017659.1:42262:40487;strand -> -;indentity -> 79.92%;coverage -> query:99.1076408254322%;target:99.0518683770218%
+pO83_CORR.1.NC_017659.1.34724.36500.1.-	pO83_CORR.2.NC_017659.1.42262.40487.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.34724.36500.1.-	pO83_CORR.2.NC_017659.1.42262.40487.1.-	feature_popup_title	query -> NC_017659.1:34724:36500;target -> NC_017659.1: 42262-40487;strand -> -;indentity -> 79.92%;coverage -> query:99.1076408254322%;target:99.0518683770218%
 pO83_CORR.1.NC_017659.1.34724.36500.1.-	pO83_CORR.2.NC_017659.1.42262.40487.1.-	cross_link_order	0.0476190476190476
+pO83_CORR.1.NC_017659.1.34724.36500.1.-	pO83_CORR.2.NC_017659.1.42262.40487.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.40487.42262.1.-	pO83_CORR.2.NC_017659.1.36500.34724.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.40487.42262.1.-	pO83_CORR.2.NC_017659.1.36500.34724.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.40487.42262.1.-	pO83_CORR.2.NC_017659.1.36500.34724.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.40487.42262.1.-	pO83_CORR.2.NC_017659.1.36500.34724.1.-	cross_link_opacity	0.55944
 pO83_CORR.1.NC_017659.1.40487.42262.1.-	pO83_CORR.2.NC_017659.1.36500.34724.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.40487.42262.1.-	pO83_CORR.2.NC_017659.1.36500.34724.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.40487.42262.1.-	pO83_CORR.2.NC_017659.1.36500.34724.1.-	feature_popup_title	query -> NC_017659.1:40487:42262;target -> NC_017659.1:36500:34724;strand -> -;indentity -> 79.92%;coverage -> query:99.0518683770218%;target:99.1076408254322%
+pO83_CORR.1.NC_017659.1.40487.42262.1.-	pO83_CORR.2.NC_017659.1.36500.34724.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.40487.42262.1.-	pO83_CORR.2.NC_017659.1.36500.34724.1.-	feature_popup_title	query -> NC_017659.1:40487:42262;target -> NC_017659.1: 36500-34724;strand -> -;indentity -> 79.92%;coverage -> query:99.0518683770218%;target:99.1076408254322%
 pO83_CORR.1.NC_017659.1.40487.42262.1.-	pO83_CORR.2.NC_017659.1.36500.34724.1.-	cross_link_order	0.0714285714285714
+pO83_CORR.1.NC_017659.1.40487.42262.1.-	pO83_CORR.2.NC_017659.1.36500.34724.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.45180.45999.1.-	pO83_CORR.2.NC_017659.1.48349.47530.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.45180.45999.1.-	pO83_CORR.2.NC_017659.1.48349.47530.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.45180.45999.1.-	pO83_CORR.2.NC_017659.1.48349.47530.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.45180.45999.1.-	pO83_CORR.2.NC_017659.1.48349.47530.1.-	cross_link_opacity	0.7
 pO83_CORR.1.NC_017659.1.45180.45999.1.-	pO83_CORR.2.NC_017659.1.48349.47530.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.45180.45999.1.-	pO83_CORR.2.NC_017659.1.48349.47530.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.45180.45999.1.-	pO83_CORR.2.NC_017659.1.48349.47530.1.-	feature_popup_title	query -> NC_017659.1:45180:45999;target -> NC_017659.1:48349:47530;strand -> -;indentity -> 100.00%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.45180.45999.1.-	pO83_CORR.2.NC_017659.1.48349.47530.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.45180.45999.1.-	pO83_CORR.2.NC_017659.1.48349.47530.1.-	feature_popup_title	query -> NC_017659.1:45180:45999;target -> NC_017659.1: 48349-47530;strand -> -;indentity -> 100.00%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.45180.45999.1.-	pO83_CORR.2.NC_017659.1.48349.47530.1.-	cross_link_order	0.0952380952380952
+pO83_CORR.1.NC_017659.1.45180.45999.1.-	pO83_CORR.2.NC_017659.1.48349.47530.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.47530.48349.1.-	pO83_CORR.2.NC_017659.1.45999.45180.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.47530.48349.1.-	pO83_CORR.2.NC_017659.1.45999.45180.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.47530.48349.1.-	pO83_CORR.2.NC_017659.1.45999.45180.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.47530.48349.1.-	pO83_CORR.2.NC_017659.1.45999.45180.1.-	cross_link_opacity	0.7
 pO83_CORR.1.NC_017659.1.47530.48349.1.-	pO83_CORR.2.NC_017659.1.45999.45180.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.47530.48349.1.-	pO83_CORR.2.NC_017659.1.45999.45180.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.47530.48349.1.-	pO83_CORR.2.NC_017659.1.45999.45180.1.-	feature_popup_title	query -> NC_017659.1:47530:48349;target -> NC_017659.1:45999:45180;strand -> -;indentity -> 100.00%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.47530.48349.1.-	pO83_CORR.2.NC_017659.1.45999.45180.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.47530.48349.1.-	pO83_CORR.2.NC_017659.1.45999.45180.1.-	feature_popup_title	query -> NC_017659.1:47530:48349;target -> NC_017659.1: 45999-45180;strand -> -;indentity -> 100.00%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.47530.48349.1.-	pO83_CORR.2.NC_017659.1.45999.45180.1.-	cross_link_order	0.119047619047619
+pO83_CORR.1.NC_017659.1.47530.48349.1.-	pO83_CORR.2.NC_017659.1.45999.45180.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.138801.139574.1.+	pO83_CORR.2.NC_017659.1.43767.44540.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.138801.139574.1.+	pO83_CORR.2.NC_017659.1.43767.44540.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.138801.139574.1.+	pO83_CORR.2.NC_017659.1.43767.44540.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.138801.139574.1.+	pO83_CORR.2.NC_017659.1.43767.44540.1.+	cross_link_opacity	0.49355
 pO83_CORR.1.NC_017659.1.138801.139574.1.+	pO83_CORR.2.NC_017659.1.43767.44540.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.138801.139574.1.+	pO83_CORR.2.NC_017659.1.43767.44540.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.138801.139574.1.+	pO83_CORR.2.NC_017659.1.43767.44540.1.+	feature_popup_title	query -> NC_017659.1:138801:139574;target -> NC_017659.1:43767:44540;strand -> +;indentity -> 98.71%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.138801.139574.1.+	pO83_CORR.2.NC_017659.1.43767.44540.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.138801.139574.1.+	pO83_CORR.2.NC_017659.1.43767.44540.1.+	feature_popup_title	query -> NC_017659.1:138801:139574;target -> NC_017659.1: 43767-44540;strand -> +;indentity -> 98.71%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.138801.139574.1.+	pO83_CORR.2.NC_017659.1.43767.44540.1.+	cross_link_order	0.142857142857143
+pO83_CORR.1.NC_017659.1.138801.139574.1.+	pO83_CORR.2.NC_017659.1.43767.44540.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.43767.44540.1.+	pO83_CORR.2.NC_017659.1.138801.139574.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.43767.44540.1.+	pO83_CORR.2.NC_017659.1.138801.139574.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.43767.44540.1.+	pO83_CORR.2.NC_017659.1.138801.139574.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.43767.44540.1.+	pO83_CORR.2.NC_017659.1.138801.139574.1.+	cross_link_opacity	0.49355
 pO83_CORR.1.NC_017659.1.43767.44540.1.+	pO83_CORR.2.NC_017659.1.138801.139574.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.43767.44540.1.+	pO83_CORR.2.NC_017659.1.138801.139574.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.43767.44540.1.+	pO83_CORR.2.NC_017659.1.138801.139574.1.+	feature_popup_title	query -> NC_017659.1:43767:44540;target -> NC_017659.1:138801:139574;strand -> +;indentity -> 98.71%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.43767.44540.1.+	pO83_CORR.2.NC_017659.1.138801.139574.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.43767.44540.1.+	pO83_CORR.2.NC_017659.1.138801.139574.1.+	feature_popup_title	query -> NC_017659.1:43767:44540;target -> NC_017659.1: 138801-139574;strand -> +;indentity -> 98.71%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.43767.44540.1.+	pO83_CORR.2.NC_017659.1.138801.139574.1.+	cross_link_order	0.166666666666667
+pO83_CORR.1.NC_017659.1.43767.44540.1.+	pO83_CORR.2.NC_017659.1.138801.139574.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.110471.111241.1.+	pO83_CORR.2.NC_017659.1.74013.74783.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.110471.111241.1.+	pO83_CORR.2.NC_017659.1.74013.74783.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.110471.111241.1.+	pO83_CORR.2.NC_017659.1.74013.74783.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.110471.111241.1.+	pO83_CORR.2.NC_017659.1.74013.74783.1.+	cross_link_opacity	0.4935
 pO83_CORR.1.NC_017659.1.110471.111241.1.+	pO83_CORR.2.NC_017659.1.74013.74783.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.110471.111241.1.+	pO83_CORR.2.NC_017659.1.74013.74783.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.110471.111241.1.+	pO83_CORR.2.NC_017659.1.74013.74783.1.+	feature_popup_title	query -> NC_017659.1:110471:111241;target -> NC_017659.1:74013:74783;strand -> +;indentity -> 98.70%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.110471.111241.1.+	pO83_CORR.2.NC_017659.1.74013.74783.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.110471.111241.1.+	pO83_CORR.2.NC_017659.1.74013.74783.1.+	feature_popup_title	query -> NC_017659.1:110471:111241;target -> NC_017659.1: 74013-74783;strand -> +;indentity -> 98.70%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.110471.111241.1.+	pO83_CORR.2.NC_017659.1.74013.74783.1.+	cross_link_order	0.19047619047619
+pO83_CORR.1.NC_017659.1.110471.111241.1.+	pO83_CORR.2.NC_017659.1.74013.74783.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.74013.74783.1.+	pO83_CORR.2.NC_017659.1.110471.111241.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.74013.74783.1.+	pO83_CORR.2.NC_017659.1.110471.111241.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.74013.74783.1.+	pO83_CORR.2.NC_017659.1.110471.111241.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.74013.74783.1.+	pO83_CORR.2.NC_017659.1.110471.111241.1.+	cross_link_opacity	0.4935
 pO83_CORR.1.NC_017659.1.74013.74783.1.+	pO83_CORR.2.NC_017659.1.110471.111241.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.74013.74783.1.+	pO83_CORR.2.NC_017659.1.110471.111241.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.74013.74783.1.+	pO83_CORR.2.NC_017659.1.110471.111241.1.+	feature_popup_title	query -> NC_017659.1:74013:74783;target -> NC_017659.1:110471:111241;strand -> +;indentity -> 98.70%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.74013.74783.1.+	pO83_CORR.2.NC_017659.1.110471.111241.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.74013.74783.1.+	pO83_CORR.2.NC_017659.1.110471.111241.1.+	feature_popup_title	query -> NC_017659.1:74013:74783;target -> NC_017659.1: 110471-111241;strand -> +;indentity -> 98.70%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.74013.74783.1.+	pO83_CORR.2.NC_017659.1.110471.111241.1.+	cross_link_order	0.214285714285714
+pO83_CORR.1.NC_017659.1.74013.74783.1.+	pO83_CORR.2.NC_017659.1.110471.111241.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.110474.111244.1.-	pO83_CORR.2.NC_017659.1.139568.138798.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.110474.111244.1.-	pO83_CORR.2.NC_017659.1.139568.138798.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.110474.111244.1.-	pO83_CORR.2.NC_017659.1.139568.138798.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.110474.111244.1.-	pO83_CORR.2.NC_017659.1.139568.138798.1.-	cross_link_opacity	0.69818
 pO83_CORR.1.NC_017659.1.110474.111244.1.-	pO83_CORR.2.NC_017659.1.139568.138798.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.110474.111244.1.-	pO83_CORR.2.NC_017659.1.139568.138798.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.110474.111244.1.-	pO83_CORR.2.NC_017659.1.139568.138798.1.-	feature_popup_title	query -> NC_017659.1:110474:111244;target -> NC_017659.1:139568:138798;strand -> -;indentity -> 99.74%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.110474.111244.1.-	pO83_CORR.2.NC_017659.1.139568.138798.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.110474.111244.1.-	pO83_CORR.2.NC_017659.1.139568.138798.1.-	feature_popup_title	query -> NC_017659.1:110474:111244;target -> NC_017659.1: 139568-138798;strand -> -;indentity -> 99.74%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.110474.111244.1.-	pO83_CORR.2.NC_017659.1.139568.138798.1.-	cross_link_order	0.238095238095238
+pO83_CORR.1.NC_017659.1.110474.111244.1.-	pO83_CORR.2.NC_017659.1.139568.138798.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.138798.139568.1.-	pO83_CORR.2.NC_017659.1.111244.110474.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.138798.139568.1.-	pO83_CORR.2.NC_017659.1.111244.110474.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.138798.139568.1.-	pO83_CORR.2.NC_017659.1.111244.110474.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.138798.139568.1.-	pO83_CORR.2.NC_017659.1.111244.110474.1.-	cross_link_opacity	0.69818
 pO83_CORR.1.NC_017659.1.138798.139568.1.-	pO83_CORR.2.NC_017659.1.111244.110474.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.138798.139568.1.-	pO83_CORR.2.NC_017659.1.111244.110474.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.138798.139568.1.-	pO83_CORR.2.NC_017659.1.111244.110474.1.-	feature_popup_title	query -> NC_017659.1:138798:139568;target -> NC_017659.1:111244:110474;strand -> -;indentity -> 99.74%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.138798.139568.1.-	pO83_CORR.2.NC_017659.1.111244.110474.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.138798.139568.1.-	pO83_CORR.2.NC_017659.1.111244.110474.1.-	feature_popup_title	query -> NC_017659.1:138798:139568;target -> NC_017659.1: 111244-110474;strand -> -;indentity -> 99.74%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.138798.139568.1.-	pO83_CORR.2.NC_017659.1.111244.110474.1.-	cross_link_order	0.261904761904762
+pO83_CORR.1.NC_017659.1.138798.139568.1.-	pO83_CORR.2.NC_017659.1.111244.110474.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.43766.44534.1.-	pO83_CORR.2.NC_017659.1.74784.74016.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.43766.44534.1.-	pO83_CORR.2.NC_017659.1.74784.74016.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.43766.44534.1.-	pO83_CORR.2.NC_017659.1.74784.74016.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.43766.44534.1.-	pO83_CORR.2.NC_017659.1.74784.74016.1.-	cross_link_opacity	0.7
 pO83_CORR.1.NC_017659.1.43766.44534.1.-	pO83_CORR.2.NC_017659.1.74784.74016.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.43766.44534.1.-	pO83_CORR.2.NC_017659.1.74784.74016.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.43766.44534.1.-	pO83_CORR.2.NC_017659.1.74784.74016.1.-	feature_popup_title	query -> NC_017659.1:43766:44534;target -> NC_017659.1:74784:74016;strand -> -;indentity -> 100.00%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.43766.44534.1.-	pO83_CORR.2.NC_017659.1.74784.74016.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.43766.44534.1.-	pO83_CORR.2.NC_017659.1.74784.74016.1.-	feature_popup_title	query -> NC_017659.1:43766:44534;target -> NC_017659.1: 74784-74016;strand -> -;indentity -> 100.00%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.43766.44534.1.-	pO83_CORR.2.NC_017659.1.74784.74016.1.-	cross_link_order	0.285714285714286
+pO83_CORR.1.NC_017659.1.43766.44534.1.-	pO83_CORR.2.NC_017659.1.74784.74016.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.74016.74784.1.-	pO83_CORR.2.NC_017659.1.44534.43766.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.74016.74784.1.-	pO83_CORR.2.NC_017659.1.44534.43766.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.74016.74784.1.-	pO83_CORR.2.NC_017659.1.44534.43766.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.74016.74784.1.-	pO83_CORR.2.NC_017659.1.44534.43766.1.-	cross_link_opacity	0.7
 pO83_CORR.1.NC_017659.1.74016.74784.1.-	pO83_CORR.2.NC_017659.1.44534.43766.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.74016.74784.1.-	pO83_CORR.2.NC_017659.1.44534.43766.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.74016.74784.1.-	pO83_CORR.2.NC_017659.1.44534.43766.1.-	feature_popup_title	query -> NC_017659.1:74016:74784;target -> NC_017659.1:44534:43766;strand -> -;indentity -> 100.00%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.74016.74784.1.-	pO83_CORR.2.NC_017659.1.44534.43766.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.74016.74784.1.-	pO83_CORR.2.NC_017659.1.44534.43766.1.-	feature_popup_title	query -> NC_017659.1:74016:74784;target -> NC_017659.1: 44534-43766;strand -> -;indentity -> 100.00%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.74016.74784.1.-	pO83_CORR.2.NC_017659.1.44534.43766.1.-	cross_link_order	0.30952380952381
+pO83_CORR.1.NC_017659.1.74016.74784.1.-	pO83_CORR.2.NC_017659.1.44534.43766.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.138801.139569.1.-	pO83_CORR.2.NC_017659.1.74783.74015.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.138801.139569.1.-	pO83_CORR.2.NC_017659.1.74783.74015.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.138801.139569.1.-	pO83_CORR.2.NC_017659.1.74783.74015.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.138801.139569.1.-	pO83_CORR.2.NC_017659.1.74783.74015.1.-	cross_link_opacity	0.69272
 pO83_CORR.1.NC_017659.1.138801.139569.1.-	pO83_CORR.2.NC_017659.1.74783.74015.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.138801.139569.1.-	pO83_CORR.2.NC_017659.1.74783.74015.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.138801.139569.1.-	pO83_CORR.2.NC_017659.1.74783.74015.1.-	feature_popup_title	query -> NC_017659.1:138801:139569;target -> NC_017659.1:74783:74015;strand -> -;indentity -> 98.96%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.138801.139569.1.-	pO83_CORR.2.NC_017659.1.74783.74015.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.138801.139569.1.-	pO83_CORR.2.NC_017659.1.74783.74015.1.-	feature_popup_title	query -> NC_017659.1:138801:139569;target -> NC_017659.1: 74783-74015;strand -> -;indentity -> 98.96%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.138801.139569.1.-	pO83_CORR.2.NC_017659.1.74783.74015.1.-	cross_link_order	0.333333333333333
+pO83_CORR.1.NC_017659.1.138801.139569.1.-	pO83_CORR.2.NC_017659.1.74783.74015.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.74015.74783.1.-	pO83_CORR.2.NC_017659.1.139569.138801.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.74015.74783.1.-	pO83_CORR.2.NC_017659.1.139569.138801.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.74015.74783.1.-	pO83_CORR.2.NC_017659.1.139569.138801.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.74015.74783.1.-	pO83_CORR.2.NC_017659.1.139569.138801.1.-	cross_link_opacity	0.69272
 pO83_CORR.1.NC_017659.1.74015.74783.1.-	pO83_CORR.2.NC_017659.1.139569.138801.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.74015.74783.1.-	pO83_CORR.2.NC_017659.1.139569.138801.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.74015.74783.1.-	pO83_CORR.2.NC_017659.1.139569.138801.1.-	feature_popup_title	query -> NC_017659.1:74015:74783;target -> NC_017659.1:139569:138801;strand -> -;indentity -> 98.96%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.74015.74783.1.-	pO83_CORR.2.NC_017659.1.139569.138801.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.74015.74783.1.-	pO83_CORR.2.NC_017659.1.139569.138801.1.-	feature_popup_title	query -> NC_017659.1:74015:74783;target -> NC_017659.1: 139569-138801;strand -> -;indentity -> 98.96%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.74015.74783.1.-	pO83_CORR.2.NC_017659.1.139569.138801.1.-	cross_link_order	0.357142857142857
+pO83_CORR.1.NC_017659.1.74015.74783.1.-	pO83_CORR.2.NC_017659.1.139569.138801.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.44534.43767.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.44534.43767.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.44534.43767.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.44534.43767.1.-	cross_link_opacity	0.69181
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.44534.43767.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.44534.43767.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.44534.43767.1.-	feature_popup_title	query -> NC_017659.1:110474:111241;target -> NC_017659.1:44534:43767;strand -> -;indentity -> 98.83%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.44534.43767.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.44534.43767.1.-	feature_popup_title	query -> NC_017659.1:110474:111241;target -> NC_017659.1: 44534-43767;strand -> -;indentity -> 98.83%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.44534.43767.1.-	cross_link_order	0.380952380952381
+pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.44534.43767.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.43767.44534.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.43767.44534.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.43767.44534.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.43767.44534.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_opacity	0.69181
 pO83_CORR.1.NC_017659.1.43767.44534.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.43767.44534.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.43767.44534.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	feature_popup_title	query -> NC_017659.1:43767:44534;target -> NC_017659.1:111241:110474;strand -> -;indentity -> 98.83%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.43767.44534.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.43767.44534.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	feature_popup_title	query -> NC_017659.1:43767:44534;target -> NC_017659.1: 111241-110474;strand -> -;indentity -> 98.83%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.43767.44534.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_order	0.404761904761905
+pO83_CORR.1.NC_017659.1.43767.44534.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.43767.44534.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.43767.44534.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.43767.44534.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.43767.44534.1.+	cross_link_opacity	0.4948
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.43767.44534.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.43767.44534.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.43767.44534.1.+	feature_popup_title	query -> NC_017659.1:126723:127490;target -> NC_017659.1:43767:44534;strand -> +;indentity -> 98.96%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.43767.44534.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.43767.44534.1.+	feature_popup_title	query -> NC_017659.1:126723:127490;target -> NC_017659.1: 43767-44534;strand -> +;indentity -> 98.96%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.43767.44534.1.+	cross_link_order	0.428571428571429
+pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.43767.44534.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.74783.74016.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.74783.74016.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.74783.74016.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.74783.74016.1.-	cross_link_opacity	0.69272
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.74783.74016.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.74783.74016.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.74783.74016.1.-	feature_popup_title	query -> NC_017659.1:126723:127490;target -> NC_017659.1:74783:74016;strand -> -;indentity -> 98.96%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.74783.74016.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.74783.74016.1.-	feature_popup_title	query -> NC_017659.1:126723:127490;target -> NC_017659.1: 74783-74016;strand -> -;indentity -> 98.96%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.74783.74016.1.-	cross_link_order	0.452380952380952
+pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.74783.74016.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.43767.44534.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.43767.44534.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.43767.44534.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.43767.44534.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_opacity	0.4948
 pO83_CORR.1.NC_017659.1.43767.44534.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.43767.44534.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.43767.44534.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	feature_popup_title	query -> NC_017659.1:43767:44534;target -> NC_017659.1:126723:127490;strand -> +;indentity -> 98.96%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.43767.44534.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.43767.44534.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	feature_popup_title	query -> NC_017659.1:43767:44534;target -> NC_017659.1: 126723-127490;strand -> +;indentity -> 98.96%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.43767.44534.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_order	0.476190476190476
+pO83_CORR.1.NC_017659.1.43767.44534.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.74016.74783.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.74016.74783.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.74016.74783.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.74016.74783.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_opacity	0.69272
 pO83_CORR.1.NC_017659.1.74016.74783.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.74016.74783.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.74016.74783.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	feature_popup_title	query -> NC_017659.1:74016:74783;target -> NC_017659.1:127490:126723;strand -> -;indentity -> 98.96%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.74016.74783.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.74016.74783.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	feature_popup_title	query -> NC_017659.1:74016:74783;target -> NC_017659.1: 127490-126723;strand -> -;indentity -> 98.96%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.74016.74783.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_order	0.5
+pO83_CORR.1.NC_017659.1.74016.74783.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.138801.139568.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.138801.139568.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.138801.139568.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.138801.139568.1.+	cross_link_opacity	0.4987
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.138801.139568.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.138801.139568.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.138801.139568.1.+	feature_popup_title	query -> NC_017659.1:126723:127490;target -> NC_017659.1:138801:139568;strand -> +;indentity -> 99.74%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.138801.139568.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.138801.139568.1.+	feature_popup_title	query -> NC_017659.1:126723:127490;target -> NC_017659.1: 138801-139568;strand -> +;indentity -> 99.74%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.138801.139568.1.+	cross_link_order	0.523809523809524
+pO83_CORR.1.NC_017659.1.126723.127490.1.+	pO83_CORR.2.NC_017659.1.138801.139568.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.138801.139568.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.138801.139568.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.138801.139568.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.138801.139568.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_opacity	0.4987
 pO83_CORR.1.NC_017659.1.138801.139568.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.138801.139568.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.138801.139568.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	feature_popup_title	query -> NC_017659.1:138801:139568;target -> NC_017659.1:126723:127490;strand -> +;indentity -> 99.74%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.138801.139568.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.138801.139568.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	feature_popup_title	query -> NC_017659.1:138801:139568;target -> NC_017659.1: 126723-127490;strand -> +;indentity -> 99.74%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.138801.139568.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	cross_link_order	0.547619047619048
+pO83_CORR.1.NC_017659.1.138801.139568.1.+	pO83_CORR.2.NC_017659.1.126723.127490.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_opacity	0.69909
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	feature_popup_title	query -> NC_017659.1:110474:111241;target -> NC_017659.1:127490:126723;strand -> -;indentity -> 99.87%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	feature_popup_title	query -> NC_017659.1:110474:111241;target -> NC_017659.1: 127490-126723;strand -> -;indentity -> 99.87%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	cross_link_order	0.571428571428571
+pO83_CORR.1.NC_017659.1.110474.111241.1.-	pO83_CORR.2.NC_017659.1.127490.126723.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_opacity	0.69909
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	feature_popup_title	query -> NC_017659.1:126723:127490;target -> NC_017659.1:111241:110474;strand -> -;indentity -> 99.87%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	feature_popup_title	query -> NC_017659.1:126723:127490;target -> NC_017659.1: 111241-110474;strand -> -;indentity -> 99.87%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	cross_link_order	0.595238095238095
+pO83_CORR.1.NC_017659.1.126723.127490.1.-	pO83_CORR.2.NC_017659.1.111241.110474.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.107471.107875.1.+	pO83_CORR.2.NC_017659.1.107557.107961.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.107471.107875.1.+	pO83_CORR.2.NC_017659.1.107557.107961.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.107471.107875.1.+	pO83_CORR.2.NC_017659.1.107557.107961.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.107471.107875.1.+	pO83_CORR.2.NC_017659.1.107557.107961.1.+	cross_link_opacity	0.45185
 pO83_CORR.1.NC_017659.1.107471.107875.1.+	pO83_CORR.2.NC_017659.1.107557.107961.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.107471.107875.1.+	pO83_CORR.2.NC_017659.1.107557.107961.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.107471.107875.1.+	pO83_CORR.2.NC_017659.1.107557.107961.1.+	feature_popup_title	query -> NC_017659.1:107471:107875;target -> NC_017659.1:107557:107961;strand -> +;indentity -> 90.37%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.107471.107875.1.+	pO83_CORR.2.NC_017659.1.107557.107961.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.107471.107875.1.+	pO83_CORR.2.NC_017659.1.107557.107961.1.+	feature_popup_title	query -> NC_017659.1:107471:107875;target -> NC_017659.1: 107557-107961;strand -> +;indentity -> 90.37%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.107471.107875.1.+	pO83_CORR.2.NC_017659.1.107557.107961.1.+	cross_link_order	0.619047619047619
+pO83_CORR.1.NC_017659.1.107471.107875.1.+	pO83_CORR.2.NC_017659.1.107557.107961.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.107557.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107875.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.107557.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107875.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.107557.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107875.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.107557.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107875.1.+	cross_link_opacity	0.45185
 pO83_CORR.1.NC_017659.1.107557.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107875.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.107557.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107875.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.107557.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107875.1.+	feature_popup_title	query -> NC_017659.1:107557:107961;target -> NC_017659.1:107471:107875;strand -> +;indentity -> 90.37%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.107557.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107875.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.107557.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107875.1.+	feature_popup_title	query -> NC_017659.1:107557:107961;target -> NC_017659.1: 107471-107875;strand -> +;indentity -> 90.37%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.107557.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107875.1.+	cross_link_order	0.642857142857143
+pO83_CORR.1.NC_017659.1.107557.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107875.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.103111.103472.1.+	pO83_CORR.2.NC_017659.1.106746.107107.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.103111.103472.1.+	pO83_CORR.2.NC_017659.1.106746.107107.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.103111.103472.1.+	pO83_CORR.2.NC_017659.1.106746.107107.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.103111.103472.1.+	pO83_CORR.2.NC_017659.1.106746.107107.1.+	cross_link_opacity	0.4848
 pO83_CORR.1.NC_017659.1.103111.103472.1.+	pO83_CORR.2.NC_017659.1.106746.107107.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.103111.103472.1.+	pO83_CORR.2.NC_017659.1.106746.107107.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.103111.103472.1.+	pO83_CORR.2.NC_017659.1.106746.107107.1.+	feature_popup_title	query -> NC_017659.1:103111:103472;target -> NC_017659.1:106746:107107;strand -> +;indentity -> 96.96%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.103111.103472.1.+	pO83_CORR.2.NC_017659.1.106746.107107.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.103111.103472.1.+	pO83_CORR.2.NC_017659.1.106746.107107.1.+	feature_popup_title	query -> NC_017659.1:103111:103472;target -> NC_017659.1: 106746-107107;strand -> +;indentity -> 96.96%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.103111.103472.1.+	pO83_CORR.2.NC_017659.1.106746.107107.1.+	cross_link_order	0.666666666666667
+pO83_CORR.1.NC_017659.1.103111.103472.1.+	pO83_CORR.2.NC_017659.1.106746.107107.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.106746.107107.1.+	pO83_CORR.2.NC_017659.1.103111.103472.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.106746.107107.1.+	pO83_CORR.2.NC_017659.1.103111.103472.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.106746.107107.1.+	pO83_CORR.2.NC_017659.1.103111.103472.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.106746.107107.1.+	pO83_CORR.2.NC_017659.1.103111.103472.1.+	cross_link_opacity	0.4848
 pO83_CORR.1.NC_017659.1.106746.107107.1.+	pO83_CORR.2.NC_017659.1.103111.103472.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.106746.107107.1.+	pO83_CORR.2.NC_017659.1.103111.103472.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.106746.107107.1.+	pO83_CORR.2.NC_017659.1.103111.103472.1.+	feature_popup_title	query -> NC_017659.1:106746:107107;target -> NC_017659.1:103111:103472;strand -> +;indentity -> 96.96%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.106746.107107.1.+	pO83_CORR.2.NC_017659.1.103111.103472.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.106746.107107.1.+	pO83_CORR.2.NC_017659.1.103111.103472.1.+	feature_popup_title	query -> NC_017659.1:106746:107107;target -> NC_017659.1: 103111-103472;strand -> +;indentity -> 96.96%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.106746.107107.1.+	pO83_CORR.2.NC_017659.1.103111.103472.1.+	cross_link_order	0.69047619047619
+pO83_CORR.1.NC_017659.1.106746.107107.1.+	pO83_CORR.2.NC_017659.1.103111.103472.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.107600.107959.1.-	pO83_CORR.2.NC_017659.1.107959.107600.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.107600.107959.1.-	pO83_CORR.2.NC_017659.1.107959.107600.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.107600.107959.1.-	pO83_CORR.2.NC_017659.1.107959.107600.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.107600.107959.1.-	pO83_CORR.2.NC_017659.1.107959.107600.1.-	cross_link_opacity	0.43554
 pO83_CORR.1.NC_017659.1.107600.107959.1.-	pO83_CORR.2.NC_017659.1.107959.107600.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.107600.107959.1.-	pO83_CORR.2.NC_017659.1.107959.107600.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.107600.107959.1.-	pO83_CORR.2.NC_017659.1.107959.107600.1.-	feature_popup_title	query -> NC_017659.1:107600:107959;target -> NC_017659.1:107959:107600;strand -> -;indentity -> 62.22%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.107600.107959.1.-	pO83_CORR.2.NC_017659.1.107959.107600.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.107600.107959.1.-	pO83_CORR.2.NC_017659.1.107959.107600.1.-	feature_popup_title	query -> NC_017659.1:107600:107959;target -> NC_017659.1: 107959-107600;strand -> -;indentity -> 62.22%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.107600.107959.1.-	pO83_CORR.2.NC_017659.1.107959.107600.1.-	cross_link_order	0.714285714285714
+pO83_CORR.1.NC_017659.1.107600.107959.1.-	pO83_CORR.2.NC_017659.1.107959.107600.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.107471.107789.1.+	pO83_CORR.2.NC_017659.1.107643.107961.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.107471.107789.1.+	pO83_CORR.2.NC_017659.1.107643.107961.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.107471.107789.1.+	pO83_CORR.2.NC_017659.1.107643.107961.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.107471.107789.1.+	pO83_CORR.2.NC_017659.1.107643.107961.1.+	cross_link_opacity	0.4514
 pO83_CORR.1.NC_017659.1.107471.107789.1.+	pO83_CORR.2.NC_017659.1.107643.107961.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.107471.107789.1.+	pO83_CORR.2.NC_017659.1.107643.107961.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.107471.107789.1.+	pO83_CORR.2.NC_017659.1.107643.107961.1.+	feature_popup_title	query -> NC_017659.1:107471:107789;target -> NC_017659.1:107643:107961;strand -> +;indentity -> 90.28%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.107471.107789.1.+	pO83_CORR.2.NC_017659.1.107643.107961.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.107471.107789.1.+	pO83_CORR.2.NC_017659.1.107643.107961.1.+	feature_popup_title	query -> NC_017659.1:107471:107789;target -> NC_017659.1: 107643-107961;strand -> +;indentity -> 90.28%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.107471.107789.1.+	pO83_CORR.2.NC_017659.1.107643.107961.1.+	cross_link_order	0.738095238095238
+pO83_CORR.1.NC_017659.1.107471.107789.1.+	pO83_CORR.2.NC_017659.1.107643.107961.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.107643.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107789.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.107643.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107789.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.107643.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107789.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.107643.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107789.1.+	cross_link_opacity	0.4514
 pO83_CORR.1.NC_017659.1.107643.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107789.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.107643.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107789.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.107643.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107789.1.+	feature_popup_title	query -> NC_017659.1:107643:107961;target -> NC_017659.1:107471:107789;strand -> +;indentity -> 90.28%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.107643.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107789.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.107643.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107789.1.+	feature_popup_title	query -> NC_017659.1:107643:107961;target -> NC_017659.1: 107471-107789;strand -> +;indentity -> 90.28%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.107643.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107789.1.+	cross_link_order	0.761904761904762
+pO83_CORR.1.NC_017659.1.107643.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107789.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.107471.107703.1.+	pO83_CORR.2.NC_017659.1.107729.107961.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.107471.107703.1.+	pO83_CORR.2.NC_017659.1.107729.107961.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.107471.107703.1.+	pO83_CORR.2.NC_017659.1.107729.107961.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.107471.107703.1.+	pO83_CORR.2.NC_017659.1.107729.107961.1.+	cross_link_opacity	0.4528
 pO83_CORR.1.NC_017659.1.107471.107703.1.+	pO83_CORR.2.NC_017659.1.107729.107961.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.107471.107703.1.+	pO83_CORR.2.NC_017659.1.107729.107961.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.107471.107703.1.+	pO83_CORR.2.NC_017659.1.107729.107961.1.+	feature_popup_title	query -> NC_017659.1:107471:107703;target -> NC_017659.1:107729:107961;strand -> +;indentity -> 90.56%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.107471.107703.1.+	pO83_CORR.2.NC_017659.1.107729.107961.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.107471.107703.1.+	pO83_CORR.2.NC_017659.1.107729.107961.1.+	feature_popup_title	query -> NC_017659.1:107471:107703;target -> NC_017659.1: 107729-107961;strand -> +;indentity -> 90.56%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.107471.107703.1.+	pO83_CORR.2.NC_017659.1.107729.107961.1.+	cross_link_order	0.785714285714286
+pO83_CORR.1.NC_017659.1.107471.107703.1.+	pO83_CORR.2.NC_017659.1.107729.107961.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.107729.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107703.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.107729.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107703.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.107729.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107703.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.107729.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107703.1.+	cross_link_opacity	0.4528
 pO83_CORR.1.NC_017659.1.107729.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107703.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.107729.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107703.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.107729.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107703.1.+	feature_popup_title	query -> NC_017659.1:107729:107961;target -> NC_017659.1:107471:107703;strand -> +;indentity -> 90.56%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.107729.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107703.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.107729.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107703.1.+	feature_popup_title	query -> NC_017659.1:107729:107961;target -> NC_017659.1: 107471-107703;strand -> +;indentity -> 90.56%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.107729.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107703.1.+	cross_link_order	0.80952380952381
+pO83_CORR.1.NC_017659.1.107729.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107703.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.141329.141474.1.+	pO83_CORR.2.NC_017659.1.144228.144373.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.141329.141474.1.+	pO83_CORR.2.NC_017659.1.144228.144373.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.141329.141474.1.+	pO83_CORR.2.NC_017659.1.144228.144373.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.141329.141474.1.+	pO83_CORR.2.NC_017659.1.144228.144373.1.+	cross_link_opacity	0.45205
 pO83_CORR.1.NC_017659.1.141329.141474.1.+	pO83_CORR.2.NC_017659.1.144228.144373.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.141329.141474.1.+	pO83_CORR.2.NC_017659.1.144228.144373.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.141329.141474.1.+	pO83_CORR.2.NC_017659.1.144228.144373.1.+	feature_popup_title	query -> NC_017659.1:141329:141474;target -> NC_017659.1:144228:144373;strand -> +;indentity -> 90.41%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.141329.141474.1.+	pO83_CORR.2.NC_017659.1.144228.144373.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.141329.141474.1.+	pO83_CORR.2.NC_017659.1.144228.144373.1.+	feature_popup_title	query -> NC_017659.1:141329:141474;target -> NC_017659.1: 144228-144373;strand -> +;indentity -> 90.41%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.141329.141474.1.+	pO83_CORR.2.NC_017659.1.144228.144373.1.+	cross_link_order	0.833333333333333
+pO83_CORR.1.NC_017659.1.141329.141474.1.+	pO83_CORR.2.NC_017659.1.144228.144373.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.144228.144373.1.+	pO83_CORR.2.NC_017659.1.141329.141474.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.144228.144373.1.+	pO83_CORR.2.NC_017659.1.141329.141474.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.144228.144373.1.+	pO83_CORR.2.NC_017659.1.141329.141474.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.144228.144373.1.+	pO83_CORR.2.NC_017659.1.141329.141474.1.+	cross_link_opacity	0.45205
 pO83_CORR.1.NC_017659.1.144228.144373.1.+	pO83_CORR.2.NC_017659.1.141329.141474.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.144228.144373.1.+	pO83_CORR.2.NC_017659.1.141329.141474.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.144228.144373.1.+	pO83_CORR.2.NC_017659.1.141329.141474.1.+	feature_popup_title	query -> NC_017659.1:144228:144373;target -> NC_017659.1:141329:141474;strand -> +;indentity -> 90.41%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.144228.144373.1.+	pO83_CORR.2.NC_017659.1.141329.141474.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.144228.144373.1.+	pO83_CORR.2.NC_017659.1.141329.141474.1.+	feature_popup_title	query -> NC_017659.1:144228:144373;target -> NC_017659.1: 141329-141474;strand -> +;indentity -> 90.41%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.144228.144373.1.+	pO83_CORR.2.NC_017659.1.141329.141474.1.+	cross_link_order	0.857142857142857
+pO83_CORR.1.NC_017659.1.144228.144373.1.+	pO83_CORR.2.NC_017659.1.141329.141474.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.107477.107617.1.+	pO83_CORR.2.NC_017659.1.107821.107961.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.107477.107617.1.+	pO83_CORR.2.NC_017659.1.107821.107961.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.107477.107617.1.+	pO83_CORR.2.NC_017659.1.107821.107961.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.107477.107617.1.+	pO83_CORR.2.NC_017659.1.107821.107961.1.+	cross_link_opacity	0.43615
 pO83_CORR.1.NC_017659.1.107477.107617.1.+	pO83_CORR.2.NC_017659.1.107821.107961.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.107477.107617.1.+	pO83_CORR.2.NC_017659.1.107821.107961.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.107477.107617.1.+	pO83_CORR.2.NC_017659.1.107821.107961.1.+	feature_popup_title	query -> NC_017659.1:107477:107617;target -> NC_017659.1:107821:107961;strand -> +;indentity -> 87.23%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.107477.107617.1.+	pO83_CORR.2.NC_017659.1.107821.107961.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.107477.107617.1.+	pO83_CORR.2.NC_017659.1.107821.107961.1.+	feature_popup_title	query -> NC_017659.1:107477:107617;target -> NC_017659.1: 107821-107961;strand -> +;indentity -> 87.23%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.107477.107617.1.+	pO83_CORR.2.NC_017659.1.107821.107961.1.+	cross_link_order	0.880952380952381
+pO83_CORR.1.NC_017659.1.107477.107617.1.+	pO83_CORR.2.NC_017659.1.107821.107961.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.107821.107961.1.+	pO83_CORR.2.NC_017659.1.107477.107617.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.107821.107961.1.+	pO83_CORR.2.NC_017659.1.107477.107617.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.107821.107961.1.+	pO83_CORR.2.NC_017659.1.107477.107617.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.107821.107961.1.+	pO83_CORR.2.NC_017659.1.107477.107617.1.+	cross_link_opacity	0.43615
 pO83_CORR.1.NC_017659.1.107821.107961.1.+	pO83_CORR.2.NC_017659.1.107477.107617.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.107821.107961.1.+	pO83_CORR.2.NC_017659.1.107477.107617.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.107821.107961.1.+	pO83_CORR.2.NC_017659.1.107477.107617.1.+	feature_popup_title	query -> NC_017659.1:107821:107961;target -> NC_017659.1:107477:107617;strand -> +;indentity -> 87.23%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.107821.107961.1.+	pO83_CORR.2.NC_017659.1.107477.107617.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.107821.107961.1.+	pO83_CORR.2.NC_017659.1.107477.107617.1.+	feature_popup_title	query -> NC_017659.1:107821:107961;target -> NC_017659.1: 107477-107617;strand -> +;indentity -> 87.23%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.107821.107961.1.+	pO83_CORR.2.NC_017659.1.107477.107617.1.+	cross_link_order	0.904761904761905
+pO83_CORR.1.NC_017659.1.107821.107961.1.+	pO83_CORR.2.NC_017659.1.107477.107617.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.15820.15942.1.-	pO83_CORR.2.NC_017659.1.75060.74940.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.15820.15942.1.-	pO83_CORR.2.NC_017659.1.75060.74940.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.15820.15942.1.-	pO83_CORR.2.NC_017659.1.75060.74940.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.15820.15942.1.-	pO83_CORR.2.NC_017659.1.75060.74940.1.-	cross_link_opacity	0.59759
 pO83_CORR.1.NC_017659.1.15820.15942.1.-	pO83_CORR.2.NC_017659.1.75060.74940.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.15820.15942.1.-	pO83_CORR.2.NC_017659.1.75060.74940.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.15820.15942.1.-	pO83_CORR.2.NC_017659.1.75060.74940.1.-	feature_popup_title	query -> NC_017659.1:15820:15942;target -> NC_017659.1:75060:74940;strand -> -;indentity -> 85.37%;coverage -> query:100%;target:98.3739837398374%
+pO83_CORR.1.NC_017659.1.15820.15942.1.-	pO83_CORR.2.NC_017659.1.75060.74940.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.15820.15942.1.-	pO83_CORR.2.NC_017659.1.75060.74940.1.-	feature_popup_title	query -> NC_017659.1:15820:15942;target -> NC_017659.1: 75060-74940;strand -> -;indentity -> 85.37%;coverage -> query:100%;target:98.3739837398374%
 pO83_CORR.1.NC_017659.1.15820.15942.1.-	pO83_CORR.2.NC_017659.1.75060.74940.1.-	cross_link_order	0.928571428571428
+pO83_CORR.1.NC_017659.1.15820.15942.1.-	pO83_CORR.2.NC_017659.1.75060.74940.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.74940.75060.1.-	pO83_CORR.2.NC_017659.1.15942.15820.1.-	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.74940.75060.1.-	pO83_CORR.2.NC_017659.1.15942.15820.1.-	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.74940.75060.1.-	pO83_CORR.2.NC_017659.1.15942.15820.1.-	cross_link_color	blue
 pO83_CORR.1.NC_017659.1.74940.75060.1.-	pO83_CORR.2.NC_017659.1.15942.15820.1.-	cross_link_opacity	0.59759
 pO83_CORR.1.NC_017659.1.74940.75060.1.-	pO83_CORR.2.NC_017659.1.15942.15820.1.-	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.74940.75060.1.-	pO83_CORR.2.NC_017659.1.15942.15820.1.-	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.74940.75060.1.-	pO83_CORR.2.NC_017659.1.15942.15820.1.-	feature_popup_title	query -> NC_017659.1:74940:75060;target -> NC_017659.1:15942:15820;strand -> -;indentity -> 85.37%;coverage -> query:98.3739837398374%;target:100%
+pO83_CORR.1.NC_017659.1.74940.75060.1.-	pO83_CORR.2.NC_017659.1.15942.15820.1.-	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.74940.75060.1.-	pO83_CORR.2.NC_017659.1.15942.15820.1.-	feature_popup_title	query -> NC_017659.1:74940:75060;target -> NC_017659.1: 15942-15820;strand -> -;indentity -> 85.37%;coverage -> query:98.3739837398374%;target:100%
 pO83_CORR.1.NC_017659.1.74940.75060.1.-	pO83_CORR.2.NC_017659.1.15942.15820.1.-	cross_link_order	0.952380952380952
+pO83_CORR.1.NC_017659.1.74940.75060.1.-	pO83_CORR.2.NC_017659.1.15942.15820.1.-	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.107471.107574.1.+	pO83_CORR.2.NC_017659.1.107858.107961.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.107471.107574.1.+	pO83_CORR.2.NC_017659.1.107858.107961.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.107471.107574.1.+	pO83_CORR.2.NC_017659.1.107858.107961.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.107471.107574.1.+	pO83_CORR.2.NC_017659.1.107858.107961.1.+	cross_link_opacity	0.4279
 pO83_CORR.1.NC_017659.1.107471.107574.1.+	pO83_CORR.2.NC_017659.1.107858.107961.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.107471.107574.1.+	pO83_CORR.2.NC_017659.1.107858.107961.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.107471.107574.1.+	pO83_CORR.2.NC_017659.1.107858.107961.1.+	feature_popup_title	query -> NC_017659.1:107471:107574;target -> NC_017659.1:107858:107961;strand -> +;indentity -> 85.58%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.107471.107574.1.+	pO83_CORR.2.NC_017659.1.107858.107961.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.107471.107574.1.+	pO83_CORR.2.NC_017659.1.107858.107961.1.+	feature_popup_title	query -> NC_017659.1:107471:107574;target -> NC_017659.1: 107858-107961;strand -> +;indentity -> 85.58%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.107471.107574.1.+	pO83_CORR.2.NC_017659.1.107858.107961.1.+	cross_link_order	0.976190476190476
+pO83_CORR.1.NC_017659.1.107471.107574.1.+	pO83_CORR.2.NC_017659.1.107858.107961.1.+	edge_coordinate_feature_out_of_list	0
 pO83_CORR.1.NC_017659.1.107858.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107574.1.+	cross_link_shape	quadrilateral
 pO83_CORR.1.NC_017659.1.107858.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107574.1.+	cross_link_anchor_pos	low_up
 pO83_CORR.1.NC_017659.1.107858.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107574.1.+	cross_link_color	orange
 pO83_CORR.1.NC_017659.1.107858.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107574.1.+	cross_link_opacity	0.4279
 pO83_CORR.1.NC_017659.1.107858.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107574.1.+	cross_link_shift_y	+3:-3
-pO83_CORR.1.NC_017659.1.107858.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107574.1.+	crosslink_stroke_style	stroke:black;stroke-width:0.2;
-pO83_CORR.1.NC_017659.1.107858.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107574.1.+	feature_popup_title	query -> NC_017659.1:107858:107961;target -> NC_017659.1:107471:107574;strand -> +;indentity -> 85.58%;coverage -> query:100%;target:100%
+pO83_CORR.1.NC_017659.1.107858.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107574.1.+	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.1.NC_017659.1.107858.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107574.1.+	feature_popup_title	query -> NC_017659.1:107858:107961;target -> NC_017659.1: 107471-107574;strand -> +;indentity -> 85.58%;coverage -> query:100%;target:100%
 pO83_CORR.1.NC_017659.1.107858.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107574.1.+	cross_link_order	1
+pO83_CORR.1.NC_017659.1.107858.107961.1.+	pO83_CORR.2.NC_017659.1.107471.107574.1.+	edge_coordinate_feature_out_of_list	0

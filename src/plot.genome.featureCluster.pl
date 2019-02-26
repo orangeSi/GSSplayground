@@ -141,14 +141,15 @@ while(@track_order){
 
 
 	my $pre_block='';
-	foreach my $block_index(sort {$a<=>$b} keys %{$gff{$sample}{block}}){ # one block_index ---> one scaffold ---> one cluster of genes
+	#foreach my $block_index(sort {$a<=>$b} keys %{$gff{$sample}{block}}){ # one block_index ---> one scaffold ---> one cluster of genes
+	foreach my $block_index(sort {$a<=>$b} keys %{$gff{$sample}{chooselen_single}}){
 	#print "xxxx is $sample, block_index is $block_index\n";
 #print "block_index is $block_index, sample is $sample\n";
 		$flag++;
 		my $shift_angle_closed_feature=0;
 #print "block_index is $block_index, sample is $sample\n";
-		my @scf = keys %{$gff{$sample}{block}{$block_index}};
-		die "error:scf element number is not one for $sample and $block_index\n" if(@scf != 1);
+		my @scf = keys %{$gff{$sample}{block2}{$block_index}};
+		die "error:scf element number is not one for $sample and $block_index, @scf\n" if(@scf != 1);
 #print "scff is @scf, $block_index\n";
 		die "error:block_index $block_index should not have two scf\n" if(@scf!=1);
 		my $id_line_x=$left_distance; # 每个block的genome的起点的x,y坐标
@@ -706,6 +707,7 @@ if($conf{display_legend}=~ /yes/i){
 
 #刻度尺
 if($conf{scale_display}=~ /yes/i){
+	print "scale_display is $conf{scale_display}\n";
 	my @scales=split(/_/, $conf{scale_position});
 	foreach my $scale(@scales){
 		print "disply scale\n";
@@ -815,10 +817,13 @@ td {
     <script>
       // Don't use window.onLoad like this in production, because it can only listen to one function.
 	document.getElementById(\"container\").style.width=document.documentElement.clientWidth*0.99 + \"px\";
+	document.getElementById(\"container\").style.height=document.documentElement.clientHeight*0.91 + \"px\";
 	document.getElementById(\"container\").style.display=\"block\";
       window.onload = function() {
         // Expose to window namespase for testing purposes
         window.zoomTiger = svgPanZoom('#demo-tiger', {
+	  maxZoom: 500,
+     	  minZoom:0.01,
           zoomEnabled: true,
           controlIconsEnabled: true,
           fit: true,

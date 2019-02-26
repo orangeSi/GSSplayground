@@ -1,16 +1,21 @@
 
 <ul>
 <li>
-<td><input id="search_the_key" type="value" /></td>
+<td><input id="search_the_key" type="value" value="use js regrex,example keyA|keyB" /></td>
 <td><input value="search by keyword of feature id" type="button" onclick="search_by_key()" /></td>
 </li>
 </ul>
 <script>
-function refill(chi, fill){
+function refill(chi, fill,opacity,stroke_width){
 		chi.style.fill = fill;
+		chi.style.opacity = opacity;
+		chi.style['stroke-width']=stroke_width;
+		chi.style['stroke']=fill;
 }
 function search_by_key(){
 	var new_color = "red";
+	var new_opacity = 1;
+	var new_stroke_width = 1;
 	var gs = document.getElementsByClassName("myth");
 	var key = document.getElementById("search_the_key").value;
 	if(key.length == 0){return 1;}
@@ -30,19 +35,37 @@ function search_by_key(){
 					console.log("tagname is "+children[ii].tagName);
 					console.log("style is "+children[ii].style);
 					var rawfill = children[ii].style.fill;
+					var rawopacity = children[ii].style.opacity;
+					var raw_stroke_width =  children[ii].style['stroke-width'];
+					console.log("raw_stroke_width is "+raw_stroke_width);
+					if(rawopacity>0.8){
+						new_opacity=0.5;
+					}else{
+						new_opacity=1;
+					}
+					if(raw_stroke_width == 0 ||raw_stroke_width == "0px"){
+						new_stroke_width = 1;
+					}
 					children[ii].style.fill = new_color;
 					var the_time=0;
 					var color="";
-					var loops=16;
-					if(loops%2){alert("loops must be even,like 20, not "+loops)}
+					var opacity=1;
+					var loops=3;
+					var stroke_width=0;
+					if(loops%2 == 0){alert("loops must be even,like 20, not "+loops)}
+					refill(children[ii], new_color,new_opacity, new_stroke_width);
 					for(var j=1; j<=loops; j++){ // 100 loops
-						the_time += j * 100;
-						if(j%2){
+						the_time += j * 1000;
+						if(j%2 == 0){
 							color=new_color;
+							opacity=new_opacity;
+							stroke_width=new_stroke_width;
 						}else{
 							color=rawfill;
+							opacity=rawopacity;
+							stroke_width=raw_stroke_width;
 							}
-						setTimeout(refill, the_time,children[ii], color);
+						setTimeout(refill, the_time,children[ii], color,opacity, stroke_width);
 					}
 							
 				}

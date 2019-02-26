@@ -66,6 +66,8 @@ sub read_list(){
 	while(<LI>){
 		chomp;
 		next if($_=~ /^\s*$/||$_=~ /^#/);
+		my $list_line=$_;
+		$_=~ s/\s*$//g;
 		$sample_num++;
 		my $block_index=1;
 		my %scf_block_id;
@@ -117,26 +119,25 @@ sub read_list(){
 		close GE;
 
 		if(@arrs%3){
-			die "error:$list line $. is $_, the format is error, should be separated by \\t \n"; 
+			die "error:$list line $list_line, arrs is @arrs, numberl=".scalar@arrs." the format is error, should be separated by tab \n"; 
 		}elsif(@arrs!=0){
 			my ($gff, $fts, $gene_index_tmp, @arr_tmp);
-			($gff, $fts, $block_index, $conf, $gene_index_tmp, $genome) = &parse_arrs(\@arrs, 0, \@arr_tmp, \%genome, $block_index, \%gff, $gffs, \%fts, $conf, 0, 0, 0, 0, "", $sample, $space_len, $allow_feature_out_of_list);
+			($gff, $fts, $block_index, $conf, $gene_index_tmp, $genome) = &parse_arrs(\@arrs, 0, \@arr_tmp, \%genome, $block_index, \%gff, $gffs, \%fts, $conf, 0, 0, 0, 0, "", $sample, $space_len, $allow_feature_out_of_list); 
 			#print "2dd $list_line\n";
 			%genome=%$genome;
 			%gff=%$gff;
 			%fts=%$fts;
 			# return $gff->{$sample}->{chooselen_single}{$block_index} and %{$gff->{$sample}->{block2}->{$block_index}}
 		}else{
-			print "";
-			#die "die: wait\n";
-			#for my $scf(keys %{$genome{$sample}}){
-			#	print "scf is $scf\n";
-				#my ($gff, $fts, @arr_tmp,$gene_index);
-				#@arr_tmp=("$scf");
-				#($gff, $fts, $block_index, $conf, $gene_index) = &parse_all_seq(\%scf_block_id, $block_index, \%gff, $sample, \@arr_tmp, \%genome, $space_len, $conf, 0, \%fts, $gffs, 0,0,0,"");
-				#%gff=%$gff;
-				#%fts=%$fts;
-			#}
+			die "die: wait, arrs is @arrs\n";
+			for my $scf(keys %{$genome{$sample}}){
+				#print "scf is $scf\n";
+				my ($gff, $fts, @arr_tmp,$gene_index);
+				@arr_tmp=("$scf");
+				($gff, $fts, $block_index, $conf, $gene_index) = &parse_all_seq(\%scf_block_id, $block_index, \%gff, $sample, \@arr_tmp, \%genome, $space_len, $conf, 0, \%fts, $gffs, 0,0,0,"");
+				%gff=%$gff;
+				%fts=%$fts;
+			}
 		}
 
 
@@ -152,7 +153,7 @@ sub read_list(){
 				next if($_=~ /^#/||$_=~ /^\s*$/);
 				my @arr=split(/\t/,$_);
 				die "error: need 9 columns for gff format, $gffs, line$.\n" if(@arr!=9);
-				$all_seq_id{$arr[0]} = "";
+				$all_seq_id{$sample}{$arr[0]} = "";
 			}
 			close GFF;
 			open GFF,"$gffs" or die "$!";
@@ -161,7 +162,7 @@ sub read_list(){
 				next if($_=~ /^#/||$_=~ /^\s*$/);
 				my @arr=split(/\t/,$_);
 				die "error: $gffs should have tab in file~\n" if(@arr==1);
-				my $block_index=-1;
+				$block_index=-1;
 				my $start_f=$arr[3];
 				my $end_f=$arr[4];
 #die "die1\n" if($start_f == 5998);
@@ -206,8 +207,9 @@ sub read_list(){
 					$gff{$sample}{scf}{$scf}=$genome{$sample}{$scf}{len};
 					next;
 				}
-				print "sample is $sample ,scf is $scf\n";
+				#print "sample is $sample ,scf is $scf\n";
 				my @block_indexs= sort {$b<=>$a} keys %{$gff{$sample}{block}};
+				die "error:block_indexs is null\n" if(@block_indexs==0);
 				my $block_index=$block_indexs[0]+1;
 				my $gene_index=1;
 				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{start}=1.00; # block_index 是指每行中每个cluster的左右顺序
@@ -243,7 +245,7 @@ sub parse_arrs(){
 	#print "1parse_arrs line is $line\n";
 	for (my $arrs_index=0;$arrs_index < scalar(@arrs);$arrs_index+=3){
 		my ($seq_id,$seq_draw_start,$seq_draw_end) = @arrs[$arrs_index..$arrs_index+2];
-		die "error: $seq_id not in $gffs\n" if($line ne "" && not exists $all_seq_id->{$seq_id});
+		#die "error: $seq_id not in $gffs in sample $sample\n" if($line ne "" && not exists $all_seq_id->{$sample}->{$seq_id});
 		$gff->{$sample}->{scf}->{$seq_id}="";
 		my $seq_draw_start_tmp=$seq_draw_start;
 		my $seq_draw_end_tmp=$seq_draw_end;
@@ -256,19 +258,18 @@ sub parse_arrs(){
 		if($line ne ""){
 			next unless ($arr[0] eq $seq_id);
 			my @allow_feature_out_of_list=split(/,/,$allow_feature_out_of_list);
-			if(grep(/^$arr[2]$/, @allow_feature_out_of_list)){
-				print "allow_feature_out_of_list=$allow_feature_out_of_list, for @arr\n";
-			}else{
+			if(!grep(/^$arr[2]$/, @allow_feature_out_of_list)){
+				#print "allow_feature_out_of_list=$allow_feature_out_of_list, for @arr\n";
 				next unless ($arr[0] eq $seq_id && $arr[3] >= $seq_draw_start && $arr[4] <= $seq_draw_end ); # filter features which are not totally in the regions of --list
 			}
 		}
 		#print "line is $line,\n";
 #die "die1\n" if($start_f == 5998);
-		#print "2parse_arrs line is $line\n";
+		#print "2rse_arrs line is $line\n";
 		$seq_draw_end = ($genome->{$sample}->{$seq_id}->{len} >= $seq_draw_end)? $seq_draw_end:$genome->{$sample}->{$seq_id}->{len}; #防止seq_draw_end越界
 		if($line ne ""){
-				$genome->{$sample}->{$arr[0]}->{$arrs_index}->{len}=$seq_draw_end -$seq_draw_start+1; # 一条scaffold有多个block
-					$arr[3]=$arr[3]-$seq_draw_start +1;
+				$genome->{$sample}->{$arr[0]}->{$arrs_index}->{len}=$seq_draw_end -$seq_draw_start+1; # gff为空的情况
+				$arr[3]=$arr[3]-$seq_draw_start +1;
 				$arr[4]=$arr[4]-$seq_draw_start +1;
 		}
 		$block_index = ($arrs_index/3+1);
@@ -281,7 +282,7 @@ sub parse_arrs(){
 			$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $seq_draw_end -$seq_draw_start+1;
 			$gff->{$sample}->{chooselen_single}->{$block_index}->{start} = $seq_draw_start;
 			$gff->{$sample}->{chooselen_single}->{$block_index}->{end} = $seq_draw_end;
-#gff{$sample}{chooselen_single}{$block_index}{scf_id} = $arr[0];
+			$gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id} = $seq_id;
 			$gff->{$sample}->{chooselen_all} +=$gff->{$sample}->{chooselen_single}->{$block_index}->{len}; ## 把每行所有block长度加起来
 				$gff->{$sample}->{chooselen_all} += $space_len ; ## 加上 每个block之间的宽度，500bp相当于一个基因的长度,后面最好把这个500bp改成每个track实际的平均基因长度
 		}
@@ -303,6 +304,8 @@ sub parse_all_seq(){
 		$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $genome->{$sample}->{$arr[0]}->{len};
 		$gff->{$sample}->{chooselen_single}->{$block_index}->{start} = 1;
 		$gff->{$sample}->{chooselen_single}->{$block_index}->{end} = $genome->{$sample}->{$arr[0]}->{len};
+		$gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id} = $arr[0];
+		print "isis  $gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id}\n";
 
 		$gff->{$sample}->{chooselen_all} +=$gff->{$sample}->{chooselen_single}->{$block_index}->{len}; # ## 把每行所有block(即scaffold)长度加起来
 #print "$sample	$gff{$sample}{chooselen_all}\n";

@@ -4,7 +4,7 @@ feature_label_order = 4
 feature_label_size = 10
 scale_ratio = 1700
 
-synteny = order->0->1,query->pO83_CORR.indel->NC_017659.1.fake:target->pO83_CORR->NC_017659.1,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
+synteny = order->0->1,query->pO83_CORR.indel:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
 
 legend_stroke_width = 0.5
 scale_display = yes
