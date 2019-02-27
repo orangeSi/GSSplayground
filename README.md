@@ -59,11 +59,11 @@ sort
 ```
 cat example/work.sh
 ```
-![gene cluster image](example/out3.notitle.png)
+![gene cluster image](example/out3.notitle.svg)
 <br><br><br>
 ![gene cluster image](example/out2.notitle.svg)
 <br><br><br>
-![gene cluster image](example/out1.notitle.png)
+![gene cluster image](example/out1.notitle.svg)
 <br><br><br>
 ![gene cluster image](example_old/out7.notitle.svg)
 <br><br><br>
