@@ -280,9 +280,13 @@ sub parse_arrs(){
 				my $seq_draw_start=$gff->{$sample}->{chooselen_single}->{$block_index}->{start};
 				my $seq_draw_end=$gff->{$sample}->{chooselen_single}->{$block_index}->{end};
 				my @allow_feature_out_of_list=split(/,/,$allow_feature_out_of_list);
-				if(!grep(/^$arr[2]$/, @allow_feature_out_of_list)){
-					#print "allow_feature_out_of_list=$allow_feature_out_of_list, for @arr\n";
-					next unless ($arr[3] >= $seq_draw_start && $arr[4] <= $seq_draw_end ); # filter features which are not totally in the regions of --list
+				my $allow_feature_out_of_list_flag=0;
+				unless($arr[3] >= $seq_draw_start && $arr[4] <= $seq_draw_end ){ # filter features which are not totally in the regions of --list
+					if(grep(/^$arr[2]$/, @allow_feature_out_of_list)){
+						$allow_feature_out_of_list_flag=1;
+					}else{
+						next;
+					}
 				}
 				$seq_draw_end = ($genome->{$sample}->{$arr[0]}->{len} >= $seq_draw_end)? $seq_draw_end:$genome->{$sample}->{$arr[0]}->{len}; #防止seq_draw_end越界
 				#$genome->{$sample}->{$arr[0]}->{$arrs_index}->{len}=$seq_draw_end -$seq_draw_start+1; # gff为空的情况
@@ -297,7 +301,7 @@ sub parse_arrs(){
 					$gff->{$sample}->{chooselen_all} +=$gff->{$sample}->{chooselen_single}->{$block_index}->{len}; ## 把每行所有block长度加起来
 					$gff->{$sample}->{chooselen_all} += $space_len ; ## 加上 每个block之间的宽度，500bp相当于一个基因的长度,后面最好把这个500bp改成每个track实际的平均基因长度
 				}
-				($conf, $gff, $block_index, $gene_index, $fts) = &go_line($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, \@arr, \@arrs, $line, $gene_index, $fts);	
+				($conf, $gff, $block_index, $gene_index, $fts) = &go_line($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, \@arr, \@arrs, $line, $gene_index, $fts, $allow_feature_out_of_list_flag);	
 				print "read gff, $sample:$arr[0]:$seq_draw_start-$seq_draw_end block_index $block_index for $line\n";
 		}
 	}
@@ -333,7 +337,7 @@ sub parse_all_seq(){
 }
 
 sub go_line(){
-	my ($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, $arr, $arrs, $line, $gene_index, $fts)=@_;
+	my ($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, $arr, $arrs, $line, $gene_index, $fts, $allow_feature_out_of_list_flag)=@_;
 	my @arr=@$arr;
 	#my @arrs=@$arrs;
 	#print "conf1 is $conf\n";
@@ -343,11 +347,16 @@ sub go_line(){
 	}
 	#print "4parse_arrs line is $line\n";
 	my $feature_id;
-	if($line=~ /[\s;]ID=[^;]+/ && $line!~ /[\s;]Parent=[^;]+/){
+	if($line=~ /[\s;]ID=[^;]+/ && $line!~ /[\s;]Parent=[^;]+/){ # only has ID=
 		$line=~ /[\s;]ID=(\S+)/;
 		$feature_id=$1;
 		$feature_id=~ s/;.*//g;
-	}elsif($line=~ /[\s;]Parent=[^;]+/){
+	}elsif($line=~ /[\s;]ID=[^;]+/ && $line=~ /[\s;]Parent=[^;]+/){ # both has ID= and Parent=
+		$line=~ /[\s;]ID=(\S+)/;
+		$feature_id=$1;
+		$feature_id=~ s/;.*//g;
+		$feature_id="$feature_id.s$start_f.e$end_f";
+	}elsif($line!~ /[\s;]ID=[^;]+/ && $line=~ /[\s;]Parent=[^;]+/){ # only has Parent=
 		$line=~ /[\s;]Parent=(\S+)/;
 		$feature_id=$1;
 		$feature_id=~ s/;.*//g;
@@ -389,6 +398,7 @@ sub go_line(){
 	$conf->{feature_setting2}->{$feature_id}->{sample}=$sample;
 	$conf->{feature_setting2}->{$feature_id}->{scf_id}=$arr[0];
 	$conf->{feature_setting2}->{$feature_id}->{type}=$arr[2];
+	$conf->{feature_setting2}->{$feature_id}->{allow_feature_out_of_list_flag}=1 if($allow_feature_out_of_list_flag);
 	die "error: sample $sample should not have : char\n" if($sample=~ /:/);
 	die "error: scaffold_id $arr[0] should not have : char\n" if($arr[0]=~ /:/);
 	#print "conf2 is $conf\n";
@@ -442,7 +452,7 @@ sub get_real_coordinate(){
 
 sub draw_genes(){
 #draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag, $conf, $ratio, $id_line_height, $shift_angle_closed_feature, $orders, $up_percent_unit, $down_percent_unit)=@_;
+	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag, $conf, $ratio, $id_line_height, $shift_angle_closed_feature, $orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id)=@_;
 	print "draw feature_id = $feature_id\n";
 	#print "feature_id is $feature_id, $start, $end\n";
 	#my $strand2=($strand)? "+":"-";
@@ -723,8 +733,12 @@ sub draw_genes(){
 			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
 		}elsif($display_feature=~ /yes/i){
 			$orders->{$order_f}.="
-			<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
-			<polygon id=\"$feature_id\" points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
+			<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>";
+			if(exists $conf->{feature_setting2}->{$feature_id}->{allow_feature_out_of_list_flag} && $conf->{feature_setting2}->{$feature_id}->{allow_feature_out_of_list_flag}){
+				$orders->{$order_f}.="<path id=\"$feature_id\" path d=\"M$x1 $y1 L$x2 $y2 L$x3 $y3 L$x4 $y4 Z\" clip-path=\"url(#$block_clip_path_id)\" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
+			}else{
+				$orders->{$order_f}.="<polygon id=\"$feature_id\" points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
+			}
 
 		}
 
@@ -1128,7 +1142,7 @@ sub check_track_order(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

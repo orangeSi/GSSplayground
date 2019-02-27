@@ -30,25 +30,32 @@ cd $outdir
 num=`cat $conf|grep -E "^\s*hist_scatter_line\s*=|^\s*reads_mapping\s*=|^\s*synteny\s*="|wc -l`
 if [ "$num" -ge 1 ];
 then
+	date
+	cmd="perl $base/prepare.data.pl --list $list --prefix $prefix --outdir . --conf $conf"
+	echo $cmd
 	perl $base/prepare.data.pl --list $list --prefix $prefix --outdir . --conf $conf >$prefix.prepare.data.log 2>$prefix.prepare.data.error.tmp
 	cat $prefix.prepare.data.error.tmp|grep -v '^+ ' > $prefix.prepare.data.error && rm $prefix.prepare.data.error.tmp
+	date
 else
 	cp $list $list.$prefix
 	cp $conf $conf.$prefix
 fi
 
-cmd="perl $base/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.prepare.data.log"
-echo $cmd
 if [ -s $prefix.prepare.data.error ];
 then
 	echo -e "\n\nerror: $prefix.prepare.data.error\n\n"
 	exit
 else
-	perl $base/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.plot.log 2>$prefix.plot.error.tmp
-	cat $prefix.plot.error.tmp|grep -v '^+ ' >$prefix.plot.error && rm $prefix.plot.error.tmp
-fi
-cmd="perl $base/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.plot.log"
+
+date
+cmd="perl $base/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix "
 echo $cmd
+perl $base/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.plot.log 2>$prefix.plot.error.tmp
+cat $prefix.plot.error.tmp|grep -v '^+ ' >$prefix.plot.error && rm $prefix.plot.error.tmp
+date
+
+fi
+
 ls -l $prefix.prepare.data.log $prefix.plot.log $prefix.prepare.data.error $prefix.plot.error
 
 if [ -s $prefix.plot.error ];

@@ -152,6 +152,9 @@ while(@track_order){
 		die "error:scf element number is not one for $sample and $block_index, @scf\n" if(@scf != 1);
 #print "scff is @scf, $block_index\n";
 		die "error:block_index $block_index should not have two scf\n" if(@scf!=1);
+		
+		my $block_clip_path_id="cut-$sample-$scf[0]-$block_index";
+
 		my $id_line_x=$left_distance; # 每个block的genome的起点的x,y坐标
 			my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
 			my $id_line_width=$gff{$sample}{chooselen_single}{$block_index}{len} * $ratio; # 每个block的genome的宽度
@@ -174,7 +177,10 @@ while(@track_order){
 		$start_once=$gff{$sample}{chooselen_single}{$block_index}{start};
 		$end_once=$gff{$sample}{chooselen_single}{$block_index}{end};
 		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$gff{$sample}{chooselen_single}{$block_index}{start}-$gff{$sample}{chooselen_single}{$block_index}{end}</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
-		
+		#if(exists $conf{feature_setting2}{$f}{allow_feature_out_of_list_flag} && $conf{feature_setting2}{$f}{allow_feature_out_of_list_flag}){
+		#	my ($clip_x1_x,$clip_x1_y,$clip_x2_x,$clip_x2_y,$clip_x3_x,$clip_x3_y,$clip_x4_x,$clip_x4_y)=($shift_x,$top_distance,$shift_x+$id_line_width,$top_distance,$shift_x+$id_line_width,$top_distance + $sample_single_height,$shift_x,$top_distance + $sample_single_height);
+		#	$svg.="<defs>    <clipPath id=\"$block_clip_path_id\"><path d=\"M$clip_x1_x $clip_x1_y L$clip_x2_x $clip_x2_y L$clip_x3_x $clip_x3_y L$clip_x4_x $clip_x4_y Z\" />     </clipPath>  </defs>\n"
+		#}
 		#$conf{display_segment_name} ||="yes,center,shift_y:+1,fontsize:10,color:black"
 		#	
 		#my $display_segment_name_flag=$1;
@@ -251,6 +257,10 @@ while(@track_order){
 			shift @index_id_arr;
 			my $gene_height_medium;
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
+			if(exists $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag} && $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag}){
+				my ($clip_x1_x,$clip_x1_y,$clip_x2_x,$clip_x2_y,$clip_x3_x,$clip_x3_y,$clip_x4_x,$clip_x4_y)=($shift_x,$top_distance,$shift_x+$id_line_width,$top_distance,$shift_x+$id_line_width,$top_distance + $sample_single_height,$shift_x,$top_distance + $sample_single_height);
+				$svg.="<defs>    <clipPath id=\"$block_clip_path_id\"><path d=\"M$clip_x1_x $clip_x1_y L$clip_x2_x $clip_x2_y L$clip_x3_x $clip_x3_y L$clip_x4_x $clip_x4_y Z\" />     </clipPath>  </defs>\n"
+		}
 #print "index_id is $index_id, sample is $sample\n";
 #$gff{$sample}{block}{$block}{$scf}{$gene}{id}
 #print "\nindex id is $index_id\n";
@@ -342,7 +352,7 @@ while(@track_order){
 					$index_label_col,
 					$index_label_position,
 					$index_label_angle,
-					$angle_flag, \%conf, $ratio, $id_line_height, $shift_angle_closed_feature, \%orders, $up_percent_unit, $down_percent_unit); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
+					$angle_flag, \%conf, $ratio, $id_line_height, $shift_angle_closed_feature, \%orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 						$svg.=$svg_gene;
 			%orders=%$orders;
 			$pre_index_end = $index_end;
@@ -389,6 +399,7 @@ sub convert_cord(){
 }
 
 
+my %clip_for_crosslink;
 # draw crossing_links for feature crosslink
 foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 #$conf{crossing_link2}{index}{"$arr[0],$arr[1]"}{$arr[2]} = $arr[3];
@@ -543,13 +554,13 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 			if($edge_coordinate_feature_out_of_list eq "0"){
 				$quadrilateral="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/>"; #crossing link of features
 			}else{
-				$quadrilateral=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$left_down_x,$left_down_y,$right_down_x,$right_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity");
+				$quadrilateral=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$left_down_x,$left_down_y,$right_down_x,$right_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity", %clip_for_crosslink);
 			}
 		}elsif($cross_link_orientation=~ /forward/i){
 			if($edge_coordinate_feature_out_of_list eq "0"){
 				$quadrilateral="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
 			}else{
-				$quadrilateral=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity");
+				$quadrilateral=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity", %clip_for_crosslink);
 			}
 		}else{
 			die "error: not support cross_link_orientation=$cross_link_orientation\n";
@@ -816,8 +827,9 @@ td {
 
     <script>
       // Don't use window.onLoad like this in production, because it can only listen to one function.
-	document.getElementById(\"container\").style.width=document.documentElement.clientWidth*0.99 + \"px\";
-	document.getElementById(\"container\").style.height=document.documentElement.clientHeight*0.91 + \"px\";
+	document.getElementById(\"container\").style.width=document.documentElement.clientWidth*0.97 + \"px\";
+	document.getElementById(\"container\").style.height=document.documentElement.clientHeight*0.93 + \"px\";
+	document.getElementById(\"container\").style['margin']='auto';
 	document.getElementById(\"container\").style.display=\"block\";
       window.onload = function() {
         // Expose to window namespase for testing purposes
@@ -864,12 +876,20 @@ sub check_blocks_two_ends_cord(){
 
 
 sub cut_quadrilateral(){
-	my ($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, $style)=@_;
+	my ($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, $style, $clip_for_crosslink)=@_;
 	# $edge_coordinate_feature_out_of_list="130,382:1105,382 -> 130,249:1082,249";
 	my $clip_path="";
-	my $clip_path_id="cut-off-bottom-$left_up_x-$left_up_y-$right_up_x-$right_up_y-$right_down_x-$right_down_y-$left_down_x-$left_down_y";
+	my $clip_path_id;
+	#my $clip_path_id="cut-off-bottom-$left_up_x-$left_up_y-$right_up_x-$right_up_y-$right_down_x-$right_down_y-$left_down_x-$left_down_y";
+	#my $clip_path_id="cut-$sample-$scf-$start-$end";
 	if($edge_coordinate_feature_out_of_list=~ /^([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)\s*->\s*([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)/){
-		$clip_path="<defs>    <clipPath id=\"$clip_path_id\"><path d=\"M$1 $2 L$3 $4 L$7 $8 L$5 $6 Z\" /></clipPath>  </defs>\n";
+		$clip_path_id="$1-$2-$3-$4-$7-$8-$5-$6";
+		#print "clip_path_id is $clip_path_id\n";
+		my $clip="<defs>    <clipPath id=\"$clip_path_id\"><path d=\"M$1 $2 L$3 $4 L$7 $8 L$5 $6 Z\" /></clipPath>  </defs>\n";
+		if(not exists $clip_for_crosslink->{"$clip"}){
+			$clip_path.="$clip";
+			$clip_for_crosslink->{"$clip"}="";
+		}
 	}else{
 		die "error: in cut_quadrilateral, edge_coordinate_feature_out_of_list=$edge_coordinate_feature_out_of_list format eror\n"
 	}

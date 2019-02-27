@@ -1,7 +1,7 @@
 
 <ul>
 <li>
-<td><input id="search_the_key" type="value" value="use js regrex,example keyA|keyB" /></td>
+<td><input id="search_the_key" type="value" value="use js regrex,example keywordA|keywordB"  size=50 title="use js regrex,example keywordA|keywordB" /></td>
 <td><input value="search by keyword of feature id" type="button" onclick="search_by_key()" /></td>
 </li>
 </ul>
