@@ -38,10 +38,10 @@ sub shift_tracks(){
 			$tracks_shift_y{num}+=$tracks_shift_y{sample}{$track}{shift_y_up}+$tracks_shift_y{sample}{$track}{shift_y_down}+1;
 		}
 	}
-	
+
 
 	return %tracks_shift_y;
-	
+
 }
 sub format_scale(){
 	my ($last_tick_label)=@_;
@@ -72,9 +72,8 @@ sub read_list(){
 		my $block_index=1;
 		my %scf_block_id;
 		my $scf_block_id_flag=0;
-		my $list_line=$_;
 		my ($sample,$gffs,$genome,@arrs)=split(/\s+/,$_); # $seq_id,$seq_draw_start,$seq_draw_end
-			push @track_order, $sample;
+		push @track_order, $sample;
 
 		if(exists $uniq_sample{$sample}){
 			die "error:more than one $sample, not allow same 1th column in $list~\n " 
@@ -129,7 +128,7 @@ sub read_list(){
 			%fts=%$fts;
 			# return $gff->{$sample}->{chooselen_single}{$block_index} and %{$gff->{$sample}->{block2}->{$block_index}}
 		}else{
-			die "die: wait, arrs is @arrs\n";
+			die "die: wait, arrs is @arrs, not support this yet\n";
 			for my $scf(keys %{$genome{$sample}}){
 				#print "scf is $scf\n";
 				my ($gff, $fts, @arr_tmp,$gene_index);
@@ -243,52 +242,66 @@ sub parse_arrs(){
 	my @arrs=@$arrs;
 	my @arr=@$arr;
 	#print "1parse_arrs line is $line\n";
-	for (my $arrs_index=0;$arrs_index < scalar(@arrs);$arrs_index+=3){
-		my ($seq_id,$seq_draw_start,$seq_draw_end) = @arrs[$arrs_index..$arrs_index+2];
-		#die "error: $seq_id not in $gffs in sample $sample\n" if($line ne "" && not exists $all_seq_id->{$sample}->{$seq_id});
-		$gff->{$sample}->{scf}->{$seq_id}="";
-		my $seq_draw_start_tmp=$seq_draw_start;
-		my $seq_draw_end_tmp=$seq_draw_end;
+	if($line eq ""){
+		for (my $arrs_index=0;$arrs_index < scalar(@arrs);$arrs_index+=3){
+			my ($seq_id,$seq_draw_start,$seq_draw_end) = @arrs[$arrs_index..$arrs_index+2];
+			next if($line ne "" && $arr[0] ne $seq_id);
+			#die "error: $seq_id not in $gffs in sample $sample\n" if($line ne "" && not exists $all_seq_id->{$sample}->{$seq_id});
+			$gff->{$sample}->{scf}->{$seq_id}="";
+			my $seq_draw_start_tmp=$seq_draw_start;
+			my $seq_draw_end_tmp=$seq_draw_end;
 
-		$seq_draw_start = eval($seq_draw_start);
-		$seq_draw_end = eval($seq_draw_end);
-		die "error:for $seq_id , start $seq_draw_start_tmp should less than end $seq_draw_end_tmp in --list " if($seq_draw_end <= $seq_draw_start);
+			$seq_draw_start = eval($seq_draw_start);
+			$seq_draw_end = eval($seq_draw_end);
+			die "error:for $seq_id , start $seq_draw_start_tmp should less than end $seq_draw_end_tmp in --list " if($seq_draw_end <= $seq_draw_start);
 
-#print "$seq_id,$seq_draw_start,$seq_draw_end\n";
-		if($line ne ""){
-			next unless ($arr[0] eq $seq_id);
-			my @allow_feature_out_of_list=split(/,/,$allow_feature_out_of_list);
-			if(!grep(/^$arr[2]$/, @allow_feature_out_of_list)){
-				#print "allow_feature_out_of_list=$allow_feature_out_of_list, for @arr\n";
-				next unless ($arr[0] eq $seq_id && $arr[3] >= $seq_draw_start && $arr[4] <= $seq_draw_end ); # filter features which are not totally in the regions of --list
+			#print "line is $line,\n";
+			#print "2rse_arrs line is $line\n";
+			$seq_draw_end = ($genome->{$sample}->{$seq_id}->{len} >= $seq_draw_end)? $seq_draw_end:$genome->{$sample}->{$seq_id}->{len}; #防止seq_draw_end越界
+			$block_index = ($arrs_index/3+1);
+			$gff->{$sample}->{block2}->{$block_index}->{$seq_id}="";
+			$gff->{$sample}->{block3}->{$seq_id}->{$block_index}="";
+
+			#print "3parse_arrs line is $line\n";
+#print "hereis $block_index\n";
+			if(not exists  $gff->{$sample}->{chooselen_single}->{$block_index}){
+#$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $genome->{$sample}->{$arr[0]}->{$arrs_index}->{len};
+				$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $seq_draw_end -$seq_draw_start+1;
+				$gff->{$sample}->{chooselen_single}->{$block_index}->{start} = $seq_draw_start;
+				$gff->{$sample}->{chooselen_single}->{$block_index}->{end} = $seq_draw_end;
+				$gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id} = $seq_id;
+				$gff->{$sample}->{chooselen_all} +=$gff->{$sample}->{chooselen_single}->{$block_index}->{len}; ## 把每行所有block长度加起来
+				$gff->{$sample}->{chooselen_all} += $space_len ; ## 加上 每个block之间的宽度，500bp相当于一个基因的长度,后面最好把这个500bp改成每个track实际的平均基因长度
 			}
+			print "parse $sample $sample:$seq_id:$seq_draw_start-$seq_draw_end -> block_index $block_index\n";
 		}
-		#print "line is $line,\n";
-#die "die1\n" if($start_f == 5998);
-		#print "2rse_arrs line is $line\n";
-		$seq_draw_end = ($genome->{$sample}->{$seq_id}->{len} >= $seq_draw_end)? $seq_draw_end:$genome->{$sample}->{$seq_id}->{len}; #防止seq_draw_end越界
-		if($line ne ""){
-				$genome->{$sample}->{$arr[0]}->{$arrs_index}->{len}=$seq_draw_end -$seq_draw_start+1; # gff为空的情况
+	}else{
+		for my $block_index (keys %{$gff->{$sample}->{block3}->{$arr[0]}}){
+				my $seq_draw_start=$gff->{$sample}->{chooselen_single}->{$block_index}->{start};
+				my $seq_draw_end=$gff->{$sample}->{chooselen_single}->{$block_index}->{end};
+				my @allow_feature_out_of_list=split(/,/,$allow_feature_out_of_list);
+				if(!grep(/^$arr[2]$/, @allow_feature_out_of_list)){
+					#print "allow_feature_out_of_list=$allow_feature_out_of_list, for @arr\n";
+					next unless ($arr[3] >= $seq_draw_start && $arr[4] <= $seq_draw_end ); # filter features which are not totally in the regions of --list
+				}
+				$seq_draw_end = ($genome->{$sample}->{$arr[0]}->{len} >= $seq_draw_end)? $seq_draw_end:$genome->{$sample}->{$arr[0]}->{len}; #防止seq_draw_end越界
+				#$genome->{$sample}->{$arr[0]}->{$arrs_index}->{len}=$seq_draw_end -$seq_draw_start+1; # gff为空的情况
 				$arr[3]=$arr[3]-$seq_draw_start +1;
 				$arr[4]=$arr[4]-$seq_draw_start +1;
+				if(not exists  $gff->{$sample}->{chooselen_single}->{$block_index}){
+					#$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $genome->{$sample}->{$arr[0]}->{$arrs_index}->{len};
+					$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $seq_draw_end -$seq_draw_start+1;
+					$gff->{$sample}->{chooselen_single}->{$block_index}->{start} = $seq_draw_start;
+					$gff->{$sample}->{chooselen_single}->{$block_index}->{end} = $seq_draw_end;
+					$gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id} = $arr[0];
+					$gff->{$sample}->{chooselen_all} +=$gff->{$sample}->{chooselen_single}->{$block_index}->{len}; ## 把每行所有block长度加起来
+					$gff->{$sample}->{chooselen_all} += $space_len ; ## 加上 每个block之间的宽度，500bp相当于一个基因的长度,后面最好把这个500bp改成每个track实际的平均基因长度
+				}
+				($conf, $gff, $block_index, $gene_index, $fts) = &go_line($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, \@arr, \@arrs, $line, $gene_index, $fts);	
+				print "read gff, $sample:$arr[0]:$seq_draw_start-$seq_draw_end block_index $block_index for $line\n";
 		}
-		$block_index = ($arrs_index/3+1);
-		
-		$gff->{$sample}->{block2}->{$block_index}{$seq_id}="";	
-		#print "3parse_arrs line is $line\n";
-#print "hereis $block_index\n";
-		if(not exists  $gff->{$sample}->{chooselen_single}->{$block_index}){
-#$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $genome->{$sample}->{$arr[0]}->{$arrs_index}->{len};
-			$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $seq_draw_end -$seq_draw_start+1;
-			$gff->{$sample}->{chooselen_single}->{$block_index}->{start} = $seq_draw_start;
-			$gff->{$sample}->{chooselen_single}->{$block_index}->{end} = $seq_draw_end;
-			$gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id} = $seq_id;
-			$gff->{$sample}->{chooselen_all} +=$gff->{$sample}->{chooselen_single}->{$block_index}->{len}; ## 把每行所有block长度加起来
-				$gff->{$sample}->{chooselen_all} += $space_len ; ## 加上 每个block之间的宽度，500bp相当于一个基因的长度,后面最好把这个500bp改成每个track实际的平均基因长度
-		}
-		($conf, $gff, $block_index, $gene_index, $fts) = &go_line($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, \@arr, \@arrs, $line, $gene_index, $fts) if($line ne "");
-
 	}
+
 	return ($gff, $fts, $block_index, $conf, $gene_index, $genome)
 
 }
@@ -309,7 +322,7 @@ sub parse_all_seq(){
 
 		$gff->{$sample}->{chooselen_all} +=$gff->{$sample}->{chooselen_single}->{$block_index}->{len}; # ## 把每行所有block(即scaffold)长度加起来
 #print "$sample	$gff{$sample}{chooselen_all}\n";
-			$gff->{$sample}->{chooselen_all} += $space_len ; ## 这个500最好改成每个track的blocks的平均长度的一定比例，比如一半
+		$gff->{$sample}->{chooselen_all} += $space_len ; ## 这个500最好改成每个track的blocks的平均长度的一定比例，比如一半
 	}
 
 #my ($gff,$fts);
@@ -430,7 +443,7 @@ sub get_real_coordinate(){
 sub draw_genes(){
 #draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag, $conf, $ratio, $id_line_height, $shift_angle_closed_feature, $orders, $up_percent_unit, $down_percent_unit)=@_;
-	#print "draw $feature_id\n";
+	print "draw feature_id = $feature_id\n";
 	#print "feature_id is $feature_id, $start, $end\n";
 	#my $strand2=($strand)? "+":"-";
 	if($index_color=~ /rgb\(\d+,\d+,\d+\),[^,]/ or $index_color=~ /[^,],rgb\(\d+,\d+,\d+\)/){
@@ -524,7 +537,7 @@ sub draw_genes(){
 	die "error: label_text_anchor $label_text_anchor should be start or end or middle\n" if($label_text_anchor ne "start" && $label_text_anchor ne "end"  && $label_text_anchor ne "middle");
 	#print "$padding_feature_label*=$gene_height_medium for $feature_id\n" if($index_label_content eq "27");
 	$padding_feature_label*=$gene_height_medium;
-	
+
 	my ($back,$x1,$y1,$x2,$y2,$x3,$y3,$x4,$y4,$x5,$y5,$x6,$y6,$x7,$y7,$label_x,$label_y,$index_col_start,$index_col_end,$crossing_link_start_x,$crossing_link_start_y,$crossing_link_end_x,$crossing_link_end_y);
 	my ($label_y_shift, $label_roat_angle);
 	$back="";
@@ -571,10 +584,10 @@ sub draw_genes(){
 		if($strand){
 #以左上角为起始点，逆时针转一圈
 			$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
-				$x2=$x1;$y2=$y1+$gene_height_medium;
+			$x2=$x1;$y2=$y1+$gene_height_medium;
 			$x3=$x2+(1-$gene_width_arrow)*($end -$start)*$ratio;$y3=$y2;#gene_width_arrow指横向的arrow箭头的宽度
-				$x4=$x3;$y4=$y3+$gene_height_top; ##gene_height_top是指arrow中间之外的一边尖尖的高度
-				$x5=$x2+($end -$start+$fake)*$ratio;$y5=0.5*$sample_single_height+$shift_y;
+			$x4=$x3;$y4=$y3+$gene_height_top; ##gene_height_top是指arrow中间之外的一边尖尖的高度
+			$x5=$x2+($end -$start+$fake)*$ratio;$y5=0.5*$sample_single_height+$shift_y;
 			$x6=$x4;$y6=$y4 - 2*$gene_height_top - $gene_height_medium;
 			$x7=$x3;$y7=$y1;
 			$label_y=$y6+$label_y_shift;
@@ -619,19 +632,19 @@ sub draw_genes(){
 			$index_color_id=~ s/\)/-/g;
 			$index_color_id=~ s/\(/-/g;
 			$orders->{$order_f}.="
-				<defs>
-				<linearGradient id=\"$index_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
-				<stop offset=\"0%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
-				<stop offset=\"50%\" style=\"stop-color:$index_col_end;stop-opacity:1\"/>
-				<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
-				</linearGradient>
-				</defs>
-				<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
-				<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture arrow
+			<defs>
+			<linearGradient id=\"$index_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
+			<stop offset=\"0%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
+			<stop offset=\"50%\" style=\"stop-color:$index_col_end;stop-opacity:1\"/>
+			<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
+			</linearGradient>
+			</defs>
+			<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture arrow
 		}elsif($display_feature=~ /yes/i){
 			$orders->{$order_f}.="
-				<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
-				<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture arrow
+			<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 $x5,$y5 $x6,$y6 $x7,$y7\" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture arrow
 
 		}
 
@@ -640,22 +653,22 @@ sub draw_genes(){
 ## draw label of feature
 		$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
 # check this feature if is in crossing_link
- 			#print "ssfeature_id is $feature_id\n";
-			if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
+		#print "ssfeature_id is $feature_id\n";
+		if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
 #print "crossing_link $feature_id\n";
-				$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{x}=$crossing_link_start_x;
-				$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{y}=$crossing_link_start_y;
+			$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{x}=$crossing_link_start_x;
+			$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{y}=$crossing_link_start_y;
 
-				$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{x}=$crossing_link_end_x;
-				$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{y}=$crossing_link_end_y;
+			$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{x}=$crossing_link_end_x;
+			$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{y}=$crossing_link_end_y;
 #print "crossing_linkis $feature_id $crossing_link_start_x $crossing_link_start_y $crossing_link_end_x $crossing_link_end_y\n";
-			}
+		}
 
 	}elsif($shape=~ /^rect/){
 		if($strand){
 #以左上角为起始点，逆时针转一圈
 			$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
-				$x2=$x1;$y2=$y1+$gene_height_medium;
+			$x2=$x1;$y2=$y1+$gene_height_medium;
 			$x3=$x2+($end -$start+$fake)*$ratio;$y3=$y2;
 			$x4=$x3;$y4=$y1;
 
@@ -667,7 +680,7 @@ sub draw_genes(){
 		}else{
 #以左上角为起始点，逆时针转一圈
 			$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
-				$x2=$x1;$y2=$y1+$gene_height_medium;
+			$x2=$x1;$y2=$y1+$gene_height_medium;
 			$x3=$x2+($end -$start+$fake)*$ratio;$y3=$y2;
 			$x4=$x3;$y4=$y1;
 
@@ -699,19 +712,19 @@ sub draw_genes(){
 			$index_color_id=~ s/\)/-/g;
 			$index_color_id=~ s/\(/-/g;
 			$orders->{$order_f}.="
-				<defs>
-				<linearGradient id=\"$index_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
-				<stop offset=\"0%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
-				<stop offset=\"50%\" style=\"stop-color:$index_col_end;stop-opacity:1\"/>
-				<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
-				</linearGradient>
-				</defs>
-				<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
-				<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
+			<defs>
+			<linearGradient id=\"$index_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
+			<stop offset=\"0%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
+			<stop offset=\"50%\" style=\"stop-color:$index_col_end;stop-opacity:1\"/>
+			<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
+			</linearGradient>
+			</defs>
+			<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
+			<polygon points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:url(#$index_color_id);stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
 		}elsif($display_feature=~ /yes/i){
 			$orders->{$order_f}.="
-				<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
-				<polygon id=\"$feature_id\" points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
+			<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
+			<polygon id=\"$feature_id\" points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
 
 		}
 
@@ -721,16 +734,16 @@ sub draw_genes(){
 		die "die:label_y is $label_y, id is $feature_id\n" if(!$label_y);
 		$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 # check this feature if is in crossing_link
- 			#print "feature_id is $feature_id\n";
-			if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
+		#print "feature_id is $feature_id\n";
+		if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
 #print "crossing_link $feature_id\n";
-				$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{x}=$crossing_link_start_x;
-				$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{y}=$crossing_link_start_y;
+			$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{x}=$crossing_link_start_x;
+			$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{y}=$crossing_link_start_y;
 
-				$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{x}=$crossing_link_end_x;
-				$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{y}=$crossing_link_end_y;
+			$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{x}=$crossing_link_end_x;
+			$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{y}=$crossing_link_end_y;
 #print "crossing_linkis $feature_id $crossing_link_start_x $crossing_link_start_y $crossing_link_end_x $crossing_link_end_y\n";
-			}
+		}
 
 	}elsif($shape=~ /^round_rect/){
 		die "error: not support $shape yet~\n";
@@ -762,19 +775,19 @@ sub draw_genes(){
 			$index_color_id=~ s/\)/-/g;
 			$index_color_id=~ s/\(/-/g;
 			$orders->{$order_f}.="
-				<defs>
-				<linearGradient id=\"$index_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
-				<stop offset=\"0%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
-				<stop offset=\"50%\" style=\"stop-color:$index_col_end;stop-opacity:1\"/>
-				<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
-				</linearGradient>
-				</defs>
-				<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
-				<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\" style=\"opacity:$feature_opacity\" /></g>\n"; ## feture rect
+			<defs>
+			<linearGradient id=\"$index_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
+			<stop offset=\"0%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
+			<stop offset=\"50%\" style=\"stop-color:$index_col_end;stop-opacity:1\"/>
+			<stop offset=\"100%\" style=\"stop-color:$index_col_start;stop-opacity:1\"/>
+			</linearGradient>
+			</defs>
+			<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
+			<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\" style=\"opacity:$feature_opacity\" /></g>\n"; ## feture rect
 		}elsif($display_feature=~ /yes/i){
 			$orders->{$order_f}.="
-				<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
-				<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\" style=\"opacity:$feature_opacity\"/></g>\n"; ## feture rect
+			<g class='myth'><title><tspan>feature_id -> $feature_id</tspan>\n<tspan>track name -> $sample</tspan>\n<tspan>ref start-end -> $id:$start_title-$end_title</tspan>$feature_popup_title</title>
+			<circle cx=\"$center_point_x\" cy=\"$center_point_y\" r=\"$radius\" stroke=\"$feature_stroke_color\" stroke-width=\"$feature_stroke_size\" fill=\"$index_color\" style=\"opacity:$feature_opacity\"/></g>\n"; ## feture rect
 
 		}
 
@@ -783,14 +796,14 @@ sub draw_genes(){
 ## draw label of feature
 		$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 # check this feature if is in crossing_link
-			if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
+		if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
 #print "crossing_link $feature_id\n";
-				$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{x}=$crossing_link_start_x;
-				$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{y}=$crossing_link_start_y;
+			$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{x}=$crossing_link_start_x;
+			$conf->{crossing_link2}->{position}->{$feature_id}->{start}->{y}=$crossing_link_start_y;
 
-				$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{x}=$crossing_link_end_x;
-				$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{y}=$crossing_link_end_y;
-			}
+			$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{x}=$crossing_link_end_x;
+			$conf->{crossing_link2}->{position}->{$feature_id}->{end}->{y}=$crossing_link_end_y;
+		}
 
 	}else{
 		die "error: not support $shape yet~\n";
@@ -872,20 +885,20 @@ sub default_setting(){
 	$conf{genome_height_ratio} ||= 1;
 	$conf{feature_height_ratio} ||= 2;
 	$conf{feature_height_unit} ||= "backbone"; # or percent
-		$conf{space_between_blocks} ||= 500; # bp
-		$conf{feature_label_size} ||=10;
+	$conf{space_between_blocks} ||= 500; # bp
+	$conf{feature_label_size} ||=10;
 	$conf{feature_label_color} ||="black";
 	$conf{label_rotate_angle} =(exists $conf{label_rotate_angle})? $conf{label_rotate_angle}:-60;
 	$conf{feature_color} ||= 'ForestGreen'; #ForestGreen,LimeGreen
-		$conf{color_sample_name_default} ||= 'green';
+	$conf{color_sample_name_default} ||= 'green';
 	$conf{sample_name_color_default} ||='black';
 	$conf{sample_name_font_size_default} ||=15;
 	$conf{legend_font_size} ||= 15; #legend中文字字体大小
-		$conf{legend_height_percent} ||= 0.2; # legends的高度占整个图高度的比例
-		$conf{legend_width_margin} ||= 0.1; # legends左右两侧的margin
-		$conf{legend_width_textpercent} ||= 0.6; # l
-		$conf{feature_shape} ||= 'arrow'; # arrow or rect or circle_point, not support round_rect yet
-		$conf{track_style} ||="fill:green";
+	$conf{legend_height_percent} ||= 0.2; # legends的高度占整个图高度的比例
+	$conf{legend_width_margin} ||= 0.1; # legends左右两侧的margin
+	$conf{legend_width_textpercent} ||= 0.6; # l
+	$conf{feature_shape} ||= 'arrow'; # arrow or rect or circle_point, not support round_rect yet
+	$conf{track_style} ||="fill:green";
 	$conf{padding_feature_label} ||= 0.1;
 	$conf{pos_feature_label} ||="medium_up_skip_arrow_sharp";
 	$conf{distance_closed_feature} ||=50;
@@ -900,7 +913,7 @@ sub default_setting(){
 	$conf{feature_order} =(defined $conf{feature_order})? $conf{feature_order}:1;
 	$conf{feature_label_order} =(defined $conf{feature_label_order})? $conf{feature_label_order}:1;
 	$conf{cross_link_order} =(defined $conf{cross_link_order})? $conf{cross_link_order}:2; # bigger mean upper 
-		$conf{cross_link_opacity} ||=1;
+	$conf{cross_link_opacity} ||=1;
 	$conf{display_feature_label} ||="yes";
 	$conf{display_legend} ||="yes";
 	$conf{cross_link_anchor_pos} ||="medium_medium";
@@ -977,10 +990,10 @@ sub default_setting(){
 				my @arr = split(/\t+/, $_);
 				if(@arr == 2){
 					$conf{sample_name_old2new2}{$arr[0]}{new_name} = $arr[1]; ## old sample name to new sample name
-						$conf{sample_name_old2new2}{$arr[0]}{new_color} = $conf{sample_name_color_default};
+					$conf{sample_name_old2new2}{$arr[0]}{new_color} = $conf{sample_name_color_default};
 					$conf{sample_name_old2new2}{$arr[0]}{new_font_size} = $conf{sample_name_font_size_default};
 #die "error line$.:$_, use tab to seprate new and old name, $arr[0] has not new name in $conf{'sample_name_old2new'} for sample_name_old2new\n";
-#
+					#
 				}elsif(@arr >= 3){
 					$conf{sample_name_old2new2}{$arr[0]}{new_name} = $arr[1]; ## old sample name to new sample name
 					$conf{sample_name_old2new2}{$arr[0]}{new_color} = $arr[2];

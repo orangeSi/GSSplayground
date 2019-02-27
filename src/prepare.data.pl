@@ -612,13 +612,22 @@ sub synteny_common_write(){
 		my $target_end=$align{target}{$target_feature_id}{target_end};
 		my $target_scf=$align{target}{$target_feature_id}{target_scf};
 		my $strand=$align{qt}{$pair}{strand};
+		if($strand eq "+"){
+			$cross_link_color=$forward_color;
+			$cross_link_opacity=$forward_opacity;
+		}elsif($strand eq "-"){
+			$cross_link_color=$reverse_color;
+			$cross_link_opacity=$reverse_opacity;
+		}else{
+			die "\nerror:srand $strand\n";
+		}
 		if(not exists $qid{$query_feature_id}){
 			$synteny_gff_q.="$query_scf\tadd\tsynteny\t$query_start\t$query_end\t.\t$strand\t.\tID=$query_feature_id;\n";
 			$synteny_setting_conf_q.="$query_feature_id\tfeature_shape\trect\n";
 			$synteny_setting_conf_q.="$query_feature_id\tfeature_height_ratio\t1\n";
 			$synteny_setting_conf_q.="$query_feature_id\tfeature_height_unit\tbackbone\n";
-#$synteny_setting_conf_q.="$query_feature_id\tfeature_color\t$feature_color\n";
-			$synteny_setting_conf_q.="$query_feature_id\tfeature_opacity\t0\n";
+			$synteny_setting_conf_q.="$query_feature_id\tfeature_opacity\t$cross_link_opacity\n";
+			$synteny_setting_conf_q.="$query_feature_id\tfeature_color\t$cross_link_color\n";
 			$synteny_setting_conf_q.="$query_feature_id\tdisplay_feature_label\tno\n";
 			$synteny_setting_conf_q.="$query_feature_id\tfeature_order\t$synteny_order_pair\n";
 			$qid{$query_feature_id}="";
@@ -628,20 +637,11 @@ sub synteny_common_write(){
 			$synteny_setting_conf_t.="$target_feature_id\tfeature_shape\trect\n";
 			$synteny_setting_conf_t.="$target_feature_id\tfeature_height_ratio\t1\n";
 			$synteny_setting_conf_t.="$target_feature_id\tfeature_height_unit\tbackbone\n";
-#$synteny_setting_conf_t.="$target_feature_id\tfeature_color\t$feature_color\n";
-			$synteny_setting_conf_t.="$target_feature_id\tfeature_opacity\t0\n";
+			$synteny_setting_conf_t.="$target_feature_id\tfeature_color\t$cross_link_color\n";
+			$synteny_setting_conf_t.="$target_feature_id\tfeature_opacity\t$cross_link_opacity\n";
 			$synteny_setting_conf_t.="$target_feature_id\tdisplay_feature_label\tno\n";
 			$synteny_setting_conf_t.="$target_feature_id\tfeature_order\t$synteny_order_pair\n";
 			$tid{$target_feature_id}="";
-		}
-		if($strand eq "+"){
-			$cross_link_color=$forward_color;
-			$cross_link_opacity=$forward_opacity;
-		}elsif($strand eq "-"){
-			$cross_link_color=$reverse_color;
-			$cross_link_opacity=$reverse_opacity;
-		}else{
-			die "\nerror:srand $strand\n";
 		}
 		$cross_link_opacity*=($align{qt}{$pair}{indentity}/100);
 		my $q_cov=$align{qt}{$pair}{q_cov};

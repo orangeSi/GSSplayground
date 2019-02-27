@@ -1,0 +1,4 @@
+NC_017659.1.fake	add	synteny	5460	147060	.	+	.	ID=pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+;
+NC_017659.1.fake	add	synteny	1891	5257	.	+	.	ID=pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+;
+NC_017659.1.fake	add	synteny	1	1898	.	+	.	ID=pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+;
+NC_017659.1.fake	add	synteny	5251	5460	.	+	.	ID=pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+;
