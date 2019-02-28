@@ -1,18 +1,18 @@
 + samtools depth -r NC_017659.1:1700-5900 ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.sr.sam.sorted.bam
-+ awk '{print $NF}'
-+ sort -k 1nr
 + head -1
-+ sort -k 1nr
 + awk '{print $NF}'
++ sort -k 1nr
 + samtools depth -r NC_017659.1:1700-5900 ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.sr.sam.sorted.bam
++ awk '{print $NF}'
++ sort -k 1nr
 + head -1
 + samtools depth -r NC_017659.1:1700-5900 ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.longreads.sort.bam
 + awk '{print $NF}'
-+ sort -k 1nr
 + head -1
-+ samtools depth -r NC_017659.1.fake:1700-6000 ../data/NC_017659.1.indel.fa.longreads.map2ref.sort.bam
 + sort -k 1nr
++ samtools depth -r NC_017659.1.fake:1700-6000 ../data/NC_017659.1.indel.fa.longreads.map2ref.sort.bam
 + awk '{print $NF}'
++ sort -k 1nr
 + head -1
 + cat out2.pO83_CORR.NC_017659.1.1.1.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.1.2.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.2.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.1.3.long_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.3.1700.5900.mapping.gff
 + rm out2.pO83_CORR.NC_017659.1.1.1.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.1.2.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.2.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.1.3.long_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.3.1700.5900.mapping.gff

@@ -250,11 +250,11 @@ while(@track_order){
 		my $pre_scf_id="";
 
 
-		my @index_id_arr=(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}});
+		#my @index_id_arr=(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}});
 		foreach my $index(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){
 #next if($index eq "len");
 #print "here $sample $block_index $scf[0] $index\n";
-			shift @index_id_arr;
+			#shift @index_id_arr;
 			my $gene_height_medium;
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
 			if(exists $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag} && $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag}){
@@ -401,8 +401,11 @@ sub convert_cord(){
 
 my %clip_for_crosslink;
 # draw crossing_links for feature crosslink
-foreach my $pair(keys %{$conf{crossing_link2}{index}}){
+my @pairs=keys %{$conf{crossing_link2}{index}};
+my $pairs_index=0;
+foreach my $pair(@pairs){
 #$conf{crossing_link2}{index}{"$arr[0],$arr[1]"}{$arr[2]} = $arr[3];
+	$pairs_index++;
 	my ($up_id, $down_id) = split(",", $pair);
 #print "2id is $up_id\n";
 	my $color=(exists $conf{crossing_link2}{index}{$pair}{cross_link_color})? $conf{crossing_link2}{index}{$pair}{cross_link_color}:$conf{cross_link_color};
@@ -501,7 +504,7 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 	}
 
 	my $title_clink="\n<g class='myth'><title><tspan>$up_id -> $down_id</tspan>$feature_popup_title</title>\n";
-#if($fts{$up_id}{sample} eq $fts{$down_id}{sample} && $fts{$up_id}{scf} eq $fts{$down_id}{scf} && $cross_link_shape=~ /ellipse/i){
+	#if($fts{$up_id}{sample} eq $fts{$down_id}{sample} && $fts{$up_id}{scf} eq $fts{$down_id}{scf} && $cross_link_shape=~ /ellipse/i)
 	$cross_link_shape=~ s/\s+//g;
 	if($cross_link_shape=~ /ellipse/i){
 		die "error:cross_link_width_ellipse $cross_link_width_ellipse should <=1\n" if($cross_link_width_ellipse>1 || $cross_link_width_ellipse <0);
@@ -610,10 +613,7 @@ foreach my $pair(keys %{$conf{crossing_link2}{index}}){
 	}else{
 		die "error:not support cross_link_shape=$cross_link_shape: for $up_id and $down_id, only support quadrilateral or w or ellipse or line\n";
 	}
-
-
-
-
+	print "plot crosslink pair $pair, ${pairs_index}th -> ".scalar(@pairs)."\n";
 }
 
 
