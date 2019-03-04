@@ -36,14 +36,14 @@
 <path id="pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+"  d="M649.401558073654 349 L649.401558073654 351 L20204.7804532578 351 L20204.7804532578 349 Z" clip-path="url(#cut-pO83_CORR.indel-NC_017659.1.fake-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
 <g class='myth'><title><tspan>pO83_CORR.NC_017659.1.5460.147060.1.+ -> pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+</tspan>
-<tspan>query -> NC_017659.1.fake:5460:147060</tspan>
+<tspan>query -> NC_017659.1.fake: 5460-147060</tspan>
 <tspan>target -> NC_017659.1: 5460-147060</tspan>
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 100.00%</tspan>
-<tspan>coverage -> query:100%</tspan>
-<tspan>target:100%</tspan></title>
- <defs>    <clipPath id="130-349-723.976628895184-349-1105-149-130-149"><path d="M130 349 L723.976628895184 349 L1105 149 L130 149 Z" /></clipPath>  </defs>
-<path d="M884.036827195467 157 L20439.4157223796 157 L20204.7804532578 343 L649.401558073654 343 Z"  clip-path="url(#130-349-723.976628895184-349-1105-149-130-149)" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5" />
+<tspan>coverage -> query: 141601/141601=100%</tspan>
+<tspan>target: 141601/141601=100%</tspan></title>
+ <defs>    <clipPath id="clip_130-349-723.976628895184-349-1105-149-130-149"><path d="M130 349 L723.976628895184 349 L1105 149 L130 149 Z" /></clipPath>  </defs>
+<path d="M884.036827195467 157 L20439.4157223796 157 L20204.7804532578 343 L649.401558073654 343 Z"  clip-path="url(#clip_130-349-723.976628895184-349-1105-149-130-149)" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5" />
 </g>
 
 
@@ -59,12 +59,12 @@
 <polygon id="pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+" points="156.515580736544,349 156.515580736544,351 621.504957507082,351 621.504957507082,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
 <g class='myth'><title><tspan>pO83_CORR.NC_017659.1.2101.5468.1.+ -> pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+</tspan>
-<tspan>query -> NC_017659.1.fake:1891:5257</tspan>
+<tspan>query -> NC_017659.1.fake: 1891-5257</tspan>
 <tspan>target -> NC_017659.1: 2101-5468</tspan>
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 99.94%</tspan>
-<tspan>coverage -> query:99.9703087885986%</tspan>
-<tspan>target:100%</tspan></title>
+<tspan>coverage -> query: 3367/3368=99.9703087885986%</tspan>
+<tspan>target: 3368/3368=100%</tspan></title>
  <polygon points="420.152266288952,157 885.279745042493,157 621.504957507082,343 156.515580736544,343" style="stroke:black;stroke-width:0;fill:orange;opacity:0.4997"/>
 </g>
 
@@ -81,14 +81,13 @@
 <path id="pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+"  d="M-104.49716713881 349 L-104.49716713881 351 L157.620396600567 351 L157.620396600567 349 Z" clip-path="url(#cut-pO83_CORR.indel-NC_017659.1.fake-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
 <g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1.1898.1.+ -> pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+</tspan>
-<tspan>query -> NC_017659.1.fake:1:1898</tspan>
+<tspan>query -> NC_017659.1.fake: 1-1898</tspan>
 <tspan>target -> NC_017659.1: 1-1898</tspan>
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 99.89%</tspan>
-<tspan>coverage -> query:100%</tspan>
-<tspan>target:100%</tspan></title>
- <defs>    <clipPath id="130-349-723.976628895184-349-1105-149-130-149"><path d="M130 349 L723.976628895184 349 L1105 149 L130 149 Z" /></clipPath>  </defs>
-<path d="M130.138101983003 157 L392.25566572238 157 L157.620396600567 343 L-104.49716713881 343 Z"  clip-path="url(#130-349-723.976628895184-349-1105-149-130-149)" style="stroke:black;stroke-width:0;fill:orange;opacity:0.49945" />
+<tspan>coverage -> query: 1898/1898=100%</tspan>
+<tspan>target: 1898/1898=100%</tspan></title>
+ <path d="M130.138101983003 157 L392.25566572238 157 L157.620396600567 343 L-104.49716713881 343 Z"  clip-path="url(#clip_130-349-723.976628895184-349-1105-149-130-149)" style="stroke:black;stroke-width:0;fill:orange;opacity:0.49945" />
 </g>
 
 
@@ -104,13 +103,17 @@
 <polygon id="pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+" points="620.538243626062,349 620.538243626062,351 649.539660056657,351 649.539660056657,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
 <g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1891.2100.1.+ -> pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+</tspan>
-<tspan>query -> NC_017659.1.fake:5251:5460</tspan>
+<tspan>query -> NC_017659.1.fake: 5251-5460</tspan>
 <tspan>target -> NC_017659.1: 1891-2100</tspan>
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 100.00%</tspan>
-<tspan>coverage -> query:100%</tspan>
-<tspan>target:100%</tspan></title>
+<tspan>coverage -> query: 210/210=100%</tspan>
+<tspan>target: 210/210=100%</tspan></title>
  <polygon points="391.150849858357,157 420.152266288952,157 649.539660056657,343 620.538243626062,343" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5"/>
 </g>
+
+
+<text x="616.5" y="154" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" transform="rotate(0 616.5 154)" >NC_017659.1:1bp-7060bp</text>
+<text x="425.988314447592" y="354" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" transform="rotate(0 425.988314447592 354)" >NC_017659.1.fake:1700bp-6000bp</text>
 
 </svg>

@@ -177,7 +177,7 @@ sub synteny(){
 		my @infos=split(/,/, $ks[0]);
 		my $infos_len=scalar(@infos);
 		if($infos_len != 9 ){
-			die "\nerror: synteny should separate by \\t, and have 9 colums for synteny=$k, but only have $infos_len\nvalid like $ex\n";
+			die "\nerror: synteny=$k, error format~\n valid like $ex\n";
 		}
 		my @arr=$ks[0]=~ /^order->(-?\d+->-?\d+),query->([^:]+):target->([^,]+),(\S+),(\S+),(\S+),forward->([^-]+)->opacity([\d\.]+),reverse->([^-]+)->opacity([\d\.]+),cross_link_shift_y->(\+[\d\.]+:-[\d\.]+),sort->([01])$/;
 		die "\nerror: $ks[0] format \nerror, should like $ex\n" if(@arr!=12);
@@ -327,8 +327,9 @@ sub synteny_run(){
 			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
 			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
 			my $indentity=$arr[9]/$arr[10]*100;
-			my $q_cov=(1+abs($arr[2]-$arr[3]))/$arr[1] * 100;
-			my $t_cov=(1+abs($arr[7]-$arr[8]))/$arr[6] * 100;
+			my $tmp;
+			$tmp=1+abs($arr[2]-$arr[3]);my $q_cov=$tmp/$arr[1] * 100;$q_cov=" $tmp/$arr[1]=$q_cov";
+			$tmp=1+abs($arr[7]-$arr[8]);my $t_cov=$tmp/$arr[6] * 100;$t_cov=" $tmp/$arr[6]=$t_cov";
 			$align{query}{$query_feature_id}{query_scf}=$query_scf;
 			$align{query}{$query_feature_id}{query_start}=$query_start;
 			$align{query}{$query_feature_id}{query_end}=$query_end;
@@ -381,8 +382,9 @@ sub synteny_run(){
 			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
 			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
 			my $indentity=$arr[2];
-			my $q_cov=(abs($arr[7]-$arr[6])+1)/$arr[3] * 100;
-			my $t_cov=(abs($arr[9]-$arr[8])+1)/$arr[3] * 100;
+			my $tmp;
+			$tmp=abs($arr[7]-$arr[6])+1;my $q_cov=$tmp/$arr[3] * 100;$q_cov=" $tmp/$arr[3]=$q_cov";
+			$tmp=abs($arr[9]-$arr[8])+1;my $t_cov=$tmp/$arr[3] * 100;$t_cov=" $tmp/$arr[3]=$t_cov";
 			$align{query}{$query_feature_id}{query_scf}=$query_scf;
 			$align{query}{$query_feature_id}{query_start}=$query_start;
 			$align{query}{$query_feature_id}{query_end}=$query_end;
@@ -509,16 +511,16 @@ sub synteny_run(){
 	}elsif($alignment_type eq "mummer_coords"){ # https://mummer4.github.io/tutorial/tutorial.html /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/mummer/mummer-4.0.0beta2/
 		if($alignment=~ /\.coords.*$/){
 			if($sort){
-				open M,"cat $alignment|awk 'NR>=6'|sort -k 7nr,7nr -k 8nr,8nr -k 10nr,10nr -k 18,19|" or die "$?";
+				open M,"cat $alignment|awk 'NR>=5'|sort -k 5nr,5nr -k 6nr,6nr -k 7nr,7nr -k 10,11|" or die "$?";
 			}else{
-				open M,"cat $alignment|awk 'NR>=6'|" or die "$?";
+				open M,"cat $alignment|awk 'NR>=5'|" or die "$?";
 			}
 			print "$alignment is plain file\n";
 		}elsif($alignment=~ /\.gz$/){
 			if($sort){
-				open M,"gzip -dc $alignment|awk 'NR>=6'|sort -k 7nr,7nr -k 8nr,8nr -k 10nr,10nr -k 18,19|" or die "$?";
+				open M,"gzip -dc $alignment|awk 'NR>=5'|sort -k 5nr,5nr -k 6nr,6nr -k 7nr,7nr -k 10,11|" or die "$?";
 			}else{
-				open M,"gzip -dc $alignment|awk 'NR>=6'|" or die "$?";
+				open M,"gzip -dc $alignment|awk 'NR>=5'|" or die "$?";
 			}
 			print "$alignment is gz file\n";
 		}else{
@@ -531,16 +533,16 @@ sub synteny_run(){
 			$_=~ s/^\s*//;
 			my @arr=split(/\s+/,$_);
 			#die "arr leng is ".scalar(@arr)."\narr is @arr\n";
-			die "error:alignment sholud be 19 columns in $alignment, but only get ".scalar(@arr)." columns, for line $.:$_\n. example:show-coords -r -c -l  out.delta >out.delta.coords\n" if(@arr!=19);
+			die "error:alignment sholud be 11 columns in $alignment, but only get ".scalar(@arr)." columns, for line $.:$_\n. example: show-coords -rTl out.delta >out.delta.coords\n" if(@arr!=11);
 			
-			my $query_scf=$arr[18];
-			my $target_scf=$arr[17];
-			my $query_start=($arr[3] >$arr[4])? $arr[4]:$arr[3];
-			my $query_end=($arr[3] >$arr[4])? $arr[3]:$arr[4];
+			my $query_scf=$arr[10];
+			my $target_scf=$arr[9];
+			my $query_start=($arr[2] >$arr[3])? $arr[3]:$arr[2];
+			my $query_end=($arr[2] > $arr[3])? $arr[2]:$arr[3];
 			my $target_start=$arr[0];
 			my $target_end=$arr[1];
-			die "die:error $arr[1]<$arr[0]\n" if($arr[1]<$arr[0]);
-			my $strand=($arr[3] >$arr[4])? "-":"+";
+			die "die:error $arr[1]<$arr[0] in $alignment, $_\n" if($arr[1]<$arr[0]);
+			my $strand=($arr[2] >$arr[3])? "-":"+";
 			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
 			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
 			my ($skip, $edge)=&check_allow_feature_out_of_list($query_name,$target_name, $conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny", $check_all_vs_all_if);
@@ -549,9 +551,11 @@ sub synteny_run(){
 			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
 			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
 			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
-			my $indentity=$arr[9];
-			my $q_cov=$arr[15];
-			my $t_cov=$arr[14];
+			my $indentity=$arr[6];
+			my $tmp;
+			my $q_cov=(abs($arr[2]-$arr[3])+1)/$arr[8];$tmp=abs($arr[2]-$arr[3])+1;$q_cov="$tmp/$arr[8]=$q_cov";
+			my $t_cov=(abs($arr[0]-$arr[1])+1)/$arr[7];$tmp=abs($arr[0]-$arr[1])+1;$t_cov="$tmp/$arr[7]=$t_cov";
+
 			$align{query}{$query_feature_id}{query_scf}=$query_scf;
 			$align{query}{$query_feature_id}{query_start}=$query_start;
 			$align{query}{$query_feature_id}{query_end}=$query_end;
@@ -647,7 +651,7 @@ sub synteny_common_write(){
 		my $q_cov=$align{qt}{$pair}{q_cov};
 		my $t_cov=$align{qt}{$pair}{t_cov};
 		if(not exists $qtid{"$query_feature_id.$target_feature_id"}){
-			my $feature_popup_title="query -> $query_scf:$query_start:$query_end;target -> $target_scf: $target_start-$target_end;strand -> $strand;indentity -> $align{qt}{$pair}{indentity}%;coverage -> query:$q_cov%;target:$t_cov%";
+			my $feature_popup_title="query -> $query_scf: $query_start-$query_end;target -> $target_scf: $target_start-$target_end;strand -> $strand;indentity -> $align{qt}{$pair}{indentity}%;coverage -> query:$q_cov%;target:$t_cov%";
 			my $edge_coordinate_feature_out_of_list=$align{qt}{$pair}{edge_coordinate_feature_out_of_list};
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shape\t$crosslink_shape\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_anchor_pos\tlow_up\n";
@@ -1193,6 +1197,8 @@ sub reads_mapping_run(){
 						$cross_link_anchor_pos=($updown == -1)? "up_up":"low_low";	
 						$cross_link_shape="ellipse";
 						my $cross_link_orientation_ellipse=($updown == -1)? "up":"down";
+						my $cross_link_track_name=$sample;
+						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_track_name\t$cross_link_track_name\n";
 						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_orientation_ellipse\t$cross_link_orientation_ellipse\n";
 						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_height_ellipse\t$cross_link_height_ellipse\n";
 						$cross_link_conf.="$cr_id\t$mate_cr_id\tcross_link_width_ellipse\t$cross_link_width_ellipse\n";

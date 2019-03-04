@@ -43,7 +43,7 @@ scale_tick_height -> 0.01
 legend_height_space -> 0.1
 legend_width_margin -> 0.15
 feature_shift_x -> 0
-feature_keywords -> xx,hist_scatter_line,long_reads,short_reads,vcf,ylabel,ytick
+feature_keywords -> xx,hist_scatter_line,long_reads,short_reads,ylabel,ytick
 track_style -> fill:blue;opacity:0.2
 feature_x_extent -> 0bp,0bp
 label_rotate_angle -> 0
@@ -60,7 +60,7 @@ space_between_blocks -> 500
 feature_color -> rgb(50,205,50)
 scale_position -> low
 feature_border_size -> 0
-display_segment_name -> no,center,shift_y:+1,fontsize:10,color:black,order:5
+display_segment_name -> no,center,shift_y:+1,fontsize:10,color:black,order:5,rotate:90
 feature_shape -> arrow
 legend_font_size -> 20
 legend_height_percent -> 0.2
@@ -82,7 +82,6 @@ reads_mapping -> long_reads,1,chr14,14,0,../data/pacbio.chr14.sort.bam:../data/c
 reads_mapping -> short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,paired:color->Orange:opacity->1:cross_link_height_line->0.3,72->110,0,20->30->2,ytick_label_text,hgrid_flag,green:black,1:1,2:6:0.2:0,15:15,0:10:40	ylabel->illuminate read mapping paired,gap:60bp,fontsize:13,color:black
 reads_mapping -> short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,stack,45->70,0,32->51->2,ytick_label_text,hgrid_flag,green:black,1:1,2:6:0.2:0,15:15,0:10:40	ylabel->illumnate read mapping stack,gap:60bp,fontsize:13,color:black
 reads_mapping -> short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,rainbow:color->blue:opacity->0.5:cross_link_width_ellipse->0.05,10->30,0,10->40->3,ytick_label_text,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40
-reads_mapping -> vcf,1,chr14,14,0,../data/hg002.chr14.vcf.gz:../data/chr14.fa,stack,2->9,0,10->40->3,ytick_label_text,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:1bp:rect,D:black:opacity1:height0.8:1bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:1bp:rect,H:blue:opacity0.6:height0.2:1bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:1bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect	display_feature_label->yes	feature_x_extent->-2bp,+2bp	ylabel->vcf,gap:60bp,fontsize:15,color:green
 label_text_alignment_baseline -> baseline
 scale_order -> -1
 legend_height_ratio -> 0.7
@@ -1235,9 +1234,6 @@ read gff, chr14:14:66901400-66903400 block_index 1 for 14	add	short_reads	669033
 read gff, chr14:14:66901400-66903400 block_index 1 for 14	add	short_reads	66903349	66903400	.	-	.	ID=HISEQ1:23:H9UD5ADXX:1:2106:10355:81311.14.66901400.66903400.read2.cr.-1.148reverse.-1.4;
 read gff, chr14:14:66901400-66903400 block_index 1 for 14	add	short_reads	66903367	66903400	.	-	.	ID=HISEQ1:29:HA2WPADXX:2:2209:6644:19639.14.66901400.66903400.read2.cr.-1.148reverse.-1.4;
 read gff, chr14:14:66901400-66903400 block_index 1 for 14	add	short_reads	66903370	66903400	.	-	.	ID=HISEQ1:23:H9UD5ADXX:2:2206:1956:89188.14.66901400.66903400.read1.cr.-1.148reverse.-1.4;
-read gff, chr14:14:66901400-66903400 block_index 1 for 14	add	ylabel	66903400	66903400	.	+	.	ID=chr14.14.1.66901400.66903400.5.vcf.ylabel+;
-read gff, chr14:14:66901400-66903400 block_index 1 for 14	add	vcf	66901580	66901580	.	+	.	ID=chr14.14.vcf.66901580.C.to.T.rs1350330.5
-read gff, chr14:14:66901400-66903400 block_index 1 for 14	add	vcf	66903247	66903247	.	+	.	ID=chr14.14.vcf.66903247.A.to.G.rs933039.5
 end read tracks.3.list.out3
 draw sample name chr14
 draw feature_id = HISEQ1:22:H9UJNADXX:1:1202:18612:53114.14.66901400.66903400.read1.mate.cr.-1.0fake.-1.2
@@ -1434,7 +1430,6 @@ draw feature_id = HISEQ1:22:H9UJNADXX:1:2103:8066:93304.14.66901400.66903400.rea
 draw feature_id = HISEQ1:29:HA2WPADXX:2:2215:4750:44714.14.66901400.66903400.read2.cr.-1.148reverse.-1.2
 draw feature_id = HISEQ1:29:HA2WPADXX:2:2215:4750:44714.14.66901400.66903400.read2.cr.-1.148reverse.-1.3
 draw feature_id = chr14.14.1.hist.9.1.66901400.66903400
-draw feature_id = chr14.14.vcf.66901580.C.to.T.rs1350330.5
 draw feature_id = chr14.14.1.hist.9.2.66901400.66902400
 draw feature_id = HISEQ1:28:HA2RLADXX:2:1212:17790:51647.14.66901400.66903400.read2.cr.-1.146forward.-1.2
 draw feature_id = HISEQ1:28:HA2RLADXX:2:1212:17790:51647.14.66901400.66903400.read2.cr.-1.146forward.-1.3
@@ -2285,7 +2280,6 @@ draw feature_id = HISEQ1:29:HA2WPADXX:2:2201:6872:26711.14.66901400.66903400.rea
 draw feature_id = HISEQ1:29:HA2WPADXX:2:2201:6872:26711.14.66901400.66903400.read1.cr.-1.148reverse.-1.2
 draw feature_id = m141229_130433_42156_c100766522550000001823162307221572_s1_p0/119619/70622_71657.14.66901400.66903400.unpair.se.cr.20.70S.1.1
 draw feature_id = chr14.14.1.hist.92.1.66901400.66903400
-draw feature_id = chr14.14.vcf.66903247.A.to.G.rs933039.5
 draw feature_id = HISEQ1:25:H9UD6ADXX:1:2111:14266:12597.14.66901400.66903400.read1.cr.-1.148forward.-1.2
 draw feature_id = HISEQ1:25:H9UD6ADXX:1:2111:14266:12597.14.66901400.66903400.read1.cr.-1.148forward.-1.3
 draw feature_id = HISEQ1:20:H9V1RADXX:1:1210:9955:26219.14.66901400.66903400.read1.cr.-1.148reverse.-1.3
@@ -2361,7 +2355,6 @@ draw feature_id = chr14.14.1.66901400.66903400.hist.ytickbackbone2.tick0
 draw feature_id = chr14.14.1.66901400.66903400.hist.ytickbackbone2.tick1
 draw feature_id = chr14.14.1.66901400.66903400.2.hist.ylabel+
 draw feature_id = HISEQ1:26:HA2RRADXX:2:1109:13672:96620.14.66901400.66903400.read2.mate.cr.-1.0fake.-1.2
-draw feature_id = chr14.14.1.66901400.66903400.5.vcf.ylabel+
 draw feature_id = HISEQ1:22:H9UJNADXX:2:2206:15770:55797.14.66901400.66903400.read1.mate.cr.-1.0fake.-1.2
 draw feature_id = HISEQ1:25:H9UD6ADXX:1:2111:14266:12597.14.66901400.66903400.read1.mate.cr.-1.0fake.-1.2
 draw feature_id = HISEQ1:20:H9V1RADXX:1:2103:18195:46512.14.66901400.66903400.read1.mate.cr.-1.0fake.-1.2

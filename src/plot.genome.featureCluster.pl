@@ -101,13 +101,15 @@ my $left_distance_init = $ref_name_width_ratio * $svg_width ;#block左侧起点�
 my ($down_percent_unit,$up_percent_unit,$ytick_region_ratio,$start_once,$end_once);
 my $index_id_previous="";
 my $display_segment_name=$conf{display_segment_name};
-die "error:display_segment_name $display_segment_name format error, should like display_segment_name=yes,center,shift_y:+1,fontsize:10,color:black,order:5\n" if($display_segment_name!~ /^([^,]+),([^,]+),shift_y:([-\+\d\.]+),fontsize:([\d\.]+),color:(\S+),order:(\d+)/);
+die "error:display_segment_name $display_segment_name format error, should like display_segment_name=yes,center,shift_y:+1,fontsize:10,color:black,order:5,rotate:90\n" if($display_segment_name!~ /^([^,]+),([^,]+),shift_y:([-\+\d\.]+),fontsize:([\d\.]+),color:(\S+),order:(\d+),rotate:(-?\d+)/);
 my $display_segment_name_flag=$1;
 my $display_segment_name_pos=$2;
 my $display_segment_name_shift_y=$3*$sample_single_height/100;
 my $display_segment_name_fontsize=$4;
 my $display_segment_name_color=$5;
 my $display_segment_name_order=$6;
+my $segment_name_angle=$7;
+my %up_down_percent_unit;
 
 while(@track_order){
 	$index++;
@@ -117,6 +119,8 @@ while(@track_order){
 	$top_distance+=$tracks_shift_y{sample}{$sample}{shift_y_up} * $sample_single_height;
 	$up_percent_unit=(($sample_single_height-$id_line_height)/2 -1 + $tracks_shift_y{sample}{$sample}{shift_y_up} * $sample_single_height)/100;
 	$down_percent_unit=(($sample_single_height-$id_line_height)/2 -1 + $tracks_shift_y{sample}{$sample}{shift_y_down} * $sample_single_height)/100;
+	$up_down_percent_unit{$sample}{up_percent_unit}=$up_percent_unit;
+	$up_down_percent_unit{$sample}{down_percent_unit}=$down_percent_unit;
 
 	die "error: sample :$sample: is not in gff file of --list \n" if (not exists $gff{$sample});
 	my $block_distance = $space_len*$ratio; # block_distance 是每个block的间距
@@ -218,7 +222,7 @@ while(@track_order){
 				die "error:display_segment_name_shift_y not support $display_segment_name_shift_y in $display_segment_name, should like +1 or -1 or 0\n";
 			}
 			my $segment_name=($gff{$sample}{chooselen_single}{$block_index}{len} == $gff{$sample}{scf}{$scf[0]})? "$scf[0]":"$scf[0]:${start_once}bp-${end_once}bp";
-			$orders{$display_segment_name_order}.="<text x=\"$segment_name_x\" y=\"$segment_name_y\" font-size=\"${display_segment_name_fontsize}px\" fill=\"$display_segment_name_color\"  text-anchor='$segment_text_anchor' alignment-baseline=\"$segment_baseline\" >$segment_name</text>\n"; # draw sample name
+			$orders{$display_segment_name_order}.="<text x=\"$segment_name_x\" y=\"$segment_name_y\" font-size=\"${display_segment_name_fontsize}px\" fill=\"$display_segment_name_color\"  text-anchor='$segment_text_anchor' alignment-baseline=\"$segment_baseline\" transform=\"rotate($segment_name_angle $segment_name_x $segment_name_y)\" >$segment_name</text>\n"; # draw sample name
 		}elsif($display_segment_name_flag!~ /no/i){
 			die "error:$display_segment_name should be start with yes or no, not $display_segment_name_flag\n"
 		}
@@ -430,16 +434,16 @@ foreach my $pair(@pairs){
 	}
 	chomp $feature_popup_title;
 	if($conf{crossing_link2}{position}{$up_id}{start}{y} > $conf{crossing_link2}{position}{$down_id}{start}{y}){
-		if($up_id=~ /09:3303:59796/){
-			print "1 $up_id,$down_id, $conf{crossing_link2}{position}{$up_id}{start}{y} > $conf{crossing_link2}{position}{$down_id}{start}{y}\n";
-			my $tmp=$conf{crossing_link2}{position}{$up_id}{start}{y} - $conf{crossing_link2}{position}{$down_id}{start}{y};
-			print "diff is $tmp\n"
-		}
+		#if($up_id=~ /09:3303:59796/){
+		#	print "1 $up_id,$down_id, $conf{crossing_link2}{position}{$up_id}{start}{y} > $conf{crossing_link2}{position}{$down_id}{start}{y}\n";
+		#	my $tmp=$conf{crossing_link2}{position}{$up_id}{start}{y} - $conf{crossing_link2}{position}{$down_id}{start}{y};
+		#	print "diff is $tmp\n"
+		#}
 		my $up_id_tmp=$up_id;
 		my $down_id_tmp=$down_id;
 		$up_id=$down_id_tmp;
 		$down_id=$up_id_tmp;
-		if($up_id=~ /09:3303:59796/){print "2 $up_id,$down_id\n"}
+		#if($up_id=~ /09:3303:59796/){print "2 $up_id,$down_id\n"}
 	}
 	my $cross_link_shift_y_pair_up=0;
 	my $cross_link_shift_y_pair_low=0;
@@ -489,16 +493,17 @@ foreach my $pair(@pairs){
 	my $cross_link_shape=(exists $conf{crossing_link2}{index}{$pair}{cross_link_shape})? $conf{crossing_link2}{index}{$pair}{cross_link_shape}:$conf{cross_link_shape};
 	my $cross_link_orientation_ellipse=(exists $conf{crossing_link2}{index}{$pair}{cross_link_orientation_ellipse})? $conf{crossing_link2}{index}{$pair}{cross_link_orientation_ellipse}:$conf{cross_link_orientation_ellipse};
 	my $cross_link_height_ellipse=(exists $conf{crossing_link2}{index}{$pair}{cross_link_height_ellipse})? $conf{crossing_link2}{index}{$pair}{cross_link_height_ellipse}:$conf{cross_link_height_ellipse};
+	my $cross_link_track_name=(exists $conf{crossing_link2}{index}{$pair}{cross_link_track_name})? $conf{crossing_link2}{index}{$pair}{cross_link_track_name}:$conf{cross_link_track_name};
 	if($cross_link_height_ellipse!~ /^[\d\.]+,[\d\.]+$/){
 		die "error: not support cross_link_height_ellipse=$cross_link_height_ellipse for $pair, right format should like 10,8\n";
 	}
 
 	if($cross_link_orientation_ellipse=~ /up/i){
 		$cross_link_orientation_ellipse="0,1,1,0";
-		$ytick_region_ratio=$up_percent_unit;
+		$ytick_region_ratio=$up_down_percent_unit{$cross_link_track_name}{up_percent_unit};
 	}elsif($cross_link_orientation_ellipse=~ /down/i){
 		$cross_link_orientation_ellipse="1,0,0,1";
-		$ytick_region_ratio=$down_percent_unit;
+		$ytick_region_ratio=$up_down_percent_unit{$cross_link_track_name}{down_percent_unit};
 	}else{
 		die "error: not support cross_link_orientation_ellipse=$cross_link_orientation_ellipse for $up_id and $down_id\n"
 	}
@@ -552,18 +557,21 @@ foreach my $pair(@pairs){
 		next;
 	}elsif($cross_link_shape=~ /quadrilateral/i){ # <polygon> not support clip-path, <path> support clip-path
 		my $quadrilateral="";
+		my $clip_for_crosslink;
 		if($cross_link_orientation=~ /reverse/i){
 			$color=(exists $conf{crossing_link2}{index}{$pair}{cross_link_color_reverse})? $conf{crossing_link2}{index}{$pair}{cross_link_color_reverse}:$conf{cross_link_color_reverse};
 			if($edge_coordinate_feature_out_of_list eq "0"){
 				$quadrilateral="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/>"; #crossing link of features
 			}else{
-				$quadrilateral=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$left_down_x,$left_down_y,$right_down_x,$right_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity", %clip_for_crosslink);
+				($quadrilateral,$clip_for_crosslink)=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$left_down_x,$left_down_y,$right_down_x,$right_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity", \%clip_for_crosslink);
+				%clip_for_crosslink=%$clip_for_crosslink;
 			}
 		}elsif($cross_link_orientation=~ /forward/i){
 			if($edge_coordinate_feature_out_of_list eq "0"){
 				$quadrilateral="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
 			}else{
-				$quadrilateral=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity", %clip_for_crosslink);
+				($quadrilateral,$clip_for_crosslink)=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity", \%clip_for_crosslink);
+				%clip_for_crosslink=%$clip_for_crosslink;
 			}
 		}else{
 			die "error: not support cross_link_orientation=$cross_link_orientation\n";
@@ -877,18 +885,19 @@ sub check_blocks_two_ends_cord(){
 
 sub cut_quadrilateral(){
 	my ($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, $style, $clip_for_crosslink)=@_;
+	my %clip_for_crosslink=%$clip_for_crosslink;
 	# $edge_coordinate_feature_out_of_list="130,382:1105,382 -> 130,249:1082,249";
 	my $clip_path="";
 	my $clip_path_id;
 	#my $clip_path_id="cut-off-bottom-$left_up_x-$left_up_y-$right_up_x-$right_up_y-$right_down_x-$right_down_y-$left_down_x-$left_down_y";
 	#my $clip_path_id="cut-$sample-$scf-$start-$end";
 	if($edge_coordinate_feature_out_of_list=~ /^([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)\s*->\s*([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)/){
-		$clip_path_id="$1-$2-$3-$4-$7-$8-$5-$6";
+		$clip_path_id="clip_$1-$2-$3-$4-$7-$8-$5-$6";
 		#print "clip_path_id is $clip_path_id\n";
 		my $clip="<defs>    <clipPath id=\"$clip_path_id\"><path d=\"M$1 $2 L$3 $4 L$7 $8 L$5 $6 Z\" /></clipPath>  </defs>\n";
-		if(not exists $clip_for_crosslink->{"$clip"}){
+		if(not exists $clip_for_crosslink{$clip_path_id}){
 			$clip_path.="$clip";
-			$clip_for_crosslink->{"$clip"}="";
+			$clip_for_crosslink{$clip_path_id}="";
 		}
 	}else{
 		die "error: in cut_quadrilateral, edge_coordinate_feature_out_of_list=$edge_coordinate_feature_out_of_list format eror\n"
@@ -898,5 +907,5 @@ sub cut_quadrilateral(){
 	#"""  <defs>    <clipPath id="cut-off-bottom"><path d="M0 0 L170 0 L170 300 L0 300 Z" />	    </clipPath>  </defs> 
 	# <path d="M150 0 L75 200 L225 200 Z"  clip-path="url(#cut-off-bottom)" />"""
 	
-	return $clip_path;
+	return $clip_path,\%clip_for_crosslink;
 }

@@ -160,6 +160,7 @@ sub read_list(){
 				chomp;
 				next if($_=~ /^#/||$_=~ /^\s*$/);
 				my @arr=split(/\t/,$_);
+				next if(not exists $gff{$sample}{block3}{$arr[0]});
 				die "error: $gffs should have tab in file~\n" if(@arr==1);
 				$block_index=-1;
 				my $start_f=$arr[3];
@@ -978,10 +979,11 @@ sub default_setting(){
 	$conf{label_text_anchor} ||="start";
 	$conf{label_text_alignment_baseline} ||="baseline";
 	$conf{crosslink_stroke_style} ||="stroke:black;stroke-width:0.1;";
-	$conf{display_segment_name} ||="no,center,shift_y:+1,fontsize:10,color:black,order:5";
+	$conf{display_segment_name} ||="no,center,shift_y:+1,fontsize:10,color:black,order:5,rotate:90";
 	$conf{feature_popup_title} ||="";
 	$conf{allow_feature_out_of_list} ||="synteny";
 	$conf{skip_feature_type_keep_crosslink} ||="";
+	$conf{cross_link_track_name} ||="";
 ##$conf{feature_ytick_region} ||="0-3:0-10;";
 ##$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
 
@@ -1152,7 +1154,7 @@ sub check_track_order(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

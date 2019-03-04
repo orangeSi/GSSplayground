@@ -10210,20 +10210,6 @@
 
 
 
-
-
-
-
-
-
-
-
-<polygon id="chr14.14.vcf.66901580.C.to.T.rs1350330.5" points="218.193403298351,418.497733333333 218.193403298351,434.057333333333 218.680659670165,434.057333333333 218.680659670165,418.497733333333 " style="fill:Purple;stroke:black;stroke-width:0;opacity:1"/>
-
-
-
-
-
 <polygon id="chr14.14.1.hist.9.2.66901400.66902400" points="218.193403298351,303.236291666667 218.193403298351,326.622 227.938530734633,326.622 227.938530734633,303.236291666667 " style="fill:green;stroke:black;stroke-width:0;opacity:1"/>
 
 
@@ -10469,20 +10455,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-<polygon id="chr14.14.vcf.66903247.A.to.G.rs933039.5" points="1030.44977511244,418.497733333333 1030.44977511244,434.057333333333 1030.93703148426,434.057333333333 1030.93703148426,418.497733333333 " style="fill:Purple;stroke:black;stroke-width:0;opacity:1"/>
-
-
-
-
 <polygon id="chr14.14.1.66901400.66903400.hist.ytickbackbone2.tick6" points="1106.60794602626,289.204866666667 1106.60794602626,289.9458 1106.90029985008,289.9458 1106.90029985008,289.204866666667 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/>
 
 
@@ -10528,11 +10500,6 @@
 
 
 
-<polygon id="chr14.14.1.66901400.66903400.5.vcf.ylabel+" points="1136.67166416792,421.091 1136.67166416792,421.091 1137.15892053973,421.091 1137.15892053973,421.091 " style="fill:white;stroke:black;stroke-width:0;opacity:1"/>
-
-
-
-
 <polygon id="chr14.14.1.66901400.66903400.1.long_reads.ylabel-" points="1180.52473763118,555.48 1180.52473763118,555.48 1181.011994003,555.48 1181.011994003,555.48 " style="fill:white;stroke:black;stroke-width:0;opacity:1"/>
 
 
@@ -10546,10 +10513,8 @@
 <polygon id="chr14.14.1.66901400.66903400.3.short_reads.ylabel+" points="1136.67166416792,228.448333333333 1136.67166416792,228.448333333333 1137.15892053973,228.448333333333 1137.15892053973,228.448333333333 " style="fill:white;stroke:black;stroke-width:0;opacity:1"/>
 
 
-<text x="218.437031484258" y="416.941773333333" font-size="2px" fill="Purple"  text-anchor='start'   transform="rotate(-15 218.437031484258 416.941773333333)" font-family="Times New Roman"  >66901580:C.to.T</text>
 <text x="398.478260869565" y="289.204866666667" font-size="5px" fill="black"  text-anchor='middle'   transform="rotate(0 398.478260869565 289.204866666667)" font-family="Times New Roman"  >25.65</text>
 <text x="398.478260869565" y="289.204866666667" font-size="5px" fill="black"  text-anchor='middle'   transform="rotate(0 398.478260869565 289.204866666667)" font-family="Times New Roman"  >25.65</text>
-<text x="1030.69340329835" y="416.941773333333" font-size="2px" fill="Purple"  text-anchor='start'   transform="rotate(-15 1030.69340329835 416.941773333333)" font-family="Times New Roman"  >66903247:A.to.G</text>
 <text x="1106.90029985008" y="290.686733333333" font-size="5px" fill="black"  text-anchor='start'   transform="rotate(0 1106.90029985008 290.686733333333)" font-family="Times New Roman"  >25</text>
 <text x="1106.90029985008" y="309.210066666667" font-size="5px" fill="black"  text-anchor='start'   transform="rotate(0 1106.90029985008 309.210066666667)" font-family="Times New Roman"  >13</text>
 <text x="1106.90029985008" y="303.035622222222" font-size="5px" fill="black"  text-anchor='start'   transform="rotate(0 1106.90029985008 303.035622222222)" font-family="Times New Roman"  >17</text>
@@ -10558,7 +10523,6 @@
 <text x="1106.90029985008" y="327.7334" font-size="5px" fill="black"  text-anchor='start'   transform="rotate(0 1106.90029985008 327.7334)" font-family="Times New Roman"  >1</text>
 <text x="1106.90029985008" y="321.558955555555" font-size="5px" fill="black"  text-anchor='start'   transform="rotate(0 1106.90029985008 321.558955555555)" font-family="Times New Roman"  >5</text>
 <text x="1137.15892053973" y="308.098666666667" font-size="13px" fill="black"  text-anchor='start'   transform="rotate(0 1137.15892053973 308.098666666667)" font-family="Times New Roman"  alignment-baseline="middle"  >illuminate read depth</text>
-<text x="1137.15892053973" y="421.091" font-size="15px" fill="green"  text-anchor='start'   transform="rotate(0 1137.15892053973 421.091)" font-family="Times New Roman"  alignment-baseline="middle"  >vcf</text>
 <text x="1181.011994003" y="555.48" font-size="13px" fill="black"  text-anchor='start'   transform="rotate(0 1181.011994003 555.48)" font-family="Times New Roman"  alignment-baseline="middle"  >pacbio read mapping stack</text>
 <text x="1137.15892053973" y="104.342" font-size="13px" fill="black"  text-anchor='start'   transform="rotate(0 1137.15892053973 104.342)" font-family="Times New Roman"  alignment-baseline="middle"  >illuminate read mapping paired</text>
 <text x="1137.15892053973" y="228.448333333333" font-size="13px" fill="black"  text-anchor='start'   transform="rotate(0 1137.15892053973 228.448333333333)" font-family="Times New Roman"  alignment-baseline="middle"  >illumnate read mapping stack</text>
