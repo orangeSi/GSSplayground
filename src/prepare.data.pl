@@ -186,16 +186,18 @@ sub synteny(){
 		die "\nerror: not support $crosslink_shape, only support @show_types\n" if(! grep(/^$crosslink_shape$/, @show_types));
 		die "\nerror: $query_name not exists in --list\n" if(not exists $conf->{sample_scf}{$query_name});
 		die "\nerror: $target_name not exists in --list\n" if(not exists $conf->{sample_scf}{$target_name});
-		my (@blocks_query, @blocks_target);
+		my (@blocks_query, @blocks_target,@block_indexs);
 		for my $block_index(keys %{$gff->{$query_name}->{chooselen_single}}){
 			my @scfs=keys %{$gff->{$query_name}->{block2}->{$block_index}};
 			#print "scf1 is @scfs, block_index is $block_index, query_name is $query_name\n";
 			push @blocks_query, "$scfs[0],$gff->{$query_name}->{chooselen_single}->{$block_index}->{start},$gff->{$query_name}->{chooselen_single}->{$block_index}->{end}";
 		}
+
 		for my $block_index(keys %{$gff->{$target_name}->{chooselen_single}}){
 			my @scfs = keys %{$gff->{$target_name}->{block2}->{$block_index}};
 			#print "scf2 is @scfs\n";
 			push @blocks_target, "$scfs[0],$gff->{$target_name}->{chooselen_single}->{$block_index}->{start},$gff->{$target_name}->{chooselen_single}->{$block_index}->{end}";
+			push @block_indexs, $block_index;
 		}
 		my $check_all_vs_all_if=&check_all_vs_all($gff,$genome);
 		#die "check_all_vs_all is $check_all_vs_all_if\n";
@@ -242,38 +244,58 @@ sub check_overlap(){
 
 sub check_allow_feature_out_of_list(){
 	my ($query_name, $target_name, $allow_feature_out_of_list, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, $feature_type, $check_all_vs_all_if)=@_;
-	return 0,"0" if($check_all_vs_all_if);
+	my (@edge_pos, @qt);
+
+	if($check_all_vs_all_if){
+		push @edge_pos, "0";
+		push @qt, "1";
+		return 0, \@edge_pos, \@qt;
+	}
 	my $skip=1;
-	my $edge_pos="0"; # is edge x and y
+	#my $edge_pos="0"; # is edge x and y
 	my @allow_feature_out_of_lists=split(/,/, $allow_feature_out_of_list);
 	my @blocks_query=@$blocks_query;
 	my @blocks_target=@$blocks_target;
 	my $query_length=abs($query_start - $query_end)+1;
 	my $target_length=abs($target_start - $target_end)+1;
 	my $exist_flag=0;
+	my ($q_index,$t_index);
 	for my $q(@blocks_query){
+		$q_index++;
 		for my $t(@blocks_target){
+			$t_index++;
 			my ($rg_query_id, $rg_query_start, $rg_query_end)=split(/,/, $q);
 			my ($rg_target_id, $rg_target_start, $rg_target_end)=split(/,/, $t);
-			next if($rg_query_id ne $query_scf || $rg_target_id ne $target_scf || $exist_flag);
+			#next if($rg_query_id ne $query_scf || $rg_target_id ne $target_scf || $exist_flag);
+			next if($rg_query_id ne $query_scf || $rg_target_id ne $target_scf);
 			my ($query_overlap_length, $q_edge)=&check_overlap($query_start, $query_end, $rg_query_start,$rg_query_end);
 			my ($target_overlap_length, $t_edge)=&check_overlap($target_start, $target_end, $rg_target_start,$rg_target_end);
+			print "query_overlap_length=$query_overlap_length, target_overlap_length=$target_overlap_length, blast:$query_start:$query_end -> $target_start:$target_end rg:$q -> $t\n\n";
 			if($query_overlap_length || $target_overlap_length){
+				#print "query_overlap_length=$query_overlap_length, target_overlap_length=$target_overlap_length, blast:$query_start:$query_end -> $target_start:$target_end rg:$q -> $t\n\n";
 				if($query_overlap_length == $query_length && $target_overlap_length == $target_length){
 					$skip=0;
 					$exist_flag=1;
+					if(!grep(/^$q_index$/, @qt)){
+						push(@edge_pos,"0");
+						push(@qt,"$q_index");
+					}
 				}elsif(grep(/^$feature_type$/, @allow_feature_out_of_lists)){
 					$skip=0;
 					$exist_flag=1;
-					$edge_pos="$query_name,$rg_query_id,$rg_query_start:$rg_query_end ->$target_name,$rg_target_id,$rg_target_start:$rg_target_end -> $query_name,$rg_query_id,$q_edge -> $target_name,$rg_target_id,$t_edge";
+					if(!grep(/^$q_index$/, @qt)){
+						push(@qt,"$q_index");
+						push(@edge_pos,"$query_name,$rg_query_id,$rg_query_start:$rg_query_end ->$target_name,$rg_target_id,$rg_target_start:$rg_target_end -> $query_name,$rg_query_id,$q_edge -> $target_name,$rg_target_id,$t_edge");
+					}	
 				}else{
 					$skip=1;
+					#print "skip\n\n";
 				}
 			}
 		}
 	}
 	if($edge_pos){print "\nedge_pos is $edge_pos, for $query_scf:$query_start-$query_end -> $target_scf:$target_start-$target_end\n"}
-	return $skip, $edge_pos;
+	return $skip, \@edge_pos, \@qt;
 }
 sub synteny_run(){
 	my ($arr,$conf,$k_index,$k,$blocks_query, $blocks_target,$check_all_vs_all_if)=@_;
@@ -375,28 +397,33 @@ sub synteny_run(){
 			my $strand=($arr[9]>$arr[8])? "+":"-";
 			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
 			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
-			my ($skip, $edge)=&check_allow_feature_out_of_list($query_name,$target_name,$conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny", $check_all_vs_all_if);
+			my ($skip, $edge, $qt)=&check_allow_feature_out_of_list($query_name,$target_name,$conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny", $check_all_vs_all_if);
 			next if($skip);
-
-			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
-			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
-			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
-			my $indentity=$arr[2];
-			my $tmp;
-			$tmp=abs($arr[7]-$arr[6])+1;my $q_cov=$tmp/$arr[3] * 100;$q_cov=" $tmp/$arr[3]=$q_cov";
-			$tmp=abs($arr[9]-$arr[8])+1;my $t_cov=$tmp/$arr[3] * 100;$t_cov=" $tmp/$arr[3]=$t_cov";
-			$align{query}{$query_feature_id}{query_scf}=$query_scf;
-			$align{query}{$query_feature_id}{query_start}=$query_start;
-			$align{query}{$query_feature_id}{query_end}=$query_end;
-			$align{qt}{$query_target_feature_id}{strand}=$strand;
-			$align{qt}{$query_target_feature_id}{indentity}=$indentity;
-			$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
-			$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
-			$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
-			$align{target}{$target_feature_id}{target_scf}=$target_scf;
-			$align{target}{$target_feature_id}{target_start}=$target_start;
-			$align{target}{$target_feature_id}{target_end}=$target_end;
-			push(@pairs,$query_target_feature_id);
+			my @edge=@$edge;
+			my @qt=@$qt;
+			while(@qt){
+				my $qt_index=shift @qt;
+				$edge=shift @edge;
+				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.$qt_index";
+				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.$qt_index";
+				my $query_target_feature_id="$query_feature_id -> $target_feature_id";
+				my $indentity=$arr[2];
+				my $tmp;
+				$tmp=abs($arr[7]-$arr[6])+1;my $q_cov=$tmp/$arr[3] * 100;$q_cov=" $tmp/$arr[3]=$q_cov";
+				$tmp=abs($arr[9]-$arr[8])+1;my $t_cov=$tmp/$arr[3] * 100;$t_cov=" $tmp/$arr[3]=$t_cov";
+				$align{query}{$query_feature_id}{query_scf}=$query_scf;
+				$align{query}{$query_feature_id}{query_start}=$query_start;
+				$align{query}{$query_feature_id}{query_end}=$query_end;
+				$align{qt}{$query_target_feature_id}{strand}=$strand;
+				$align{qt}{$query_target_feature_id}{indentity}=$indentity;
+				$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
+				$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+				$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
+				$align{target}{$target_feature_id}{target_scf}=$target_scf;
+				$align{target}{$target_feature_id}{target_start}=$target_start;
+				$align{target}{$target_feature_id}{target_end}=$target_end;
+				push(@pairs,$query_target_feature_id);
+			}
 		}
 		close BLAST;		
 	}elsif($alignment_type eq "blat_psl"){ # https://genome.ucsc.edu/FAQ/FAQformat.html#format2
@@ -653,6 +680,7 @@ sub synteny_common_write(){
 		if(not exists $qtid{"$query_feature_id.$target_feature_id"}){
 			my $feature_popup_title="query -> $query_scf: $query_start-$query_end;target -> $target_scf: $target_start-$target_end;strand -> $strand;indentity -> $align{qt}{$pair}{indentity}%;coverage -> query:$q_cov%;target:$t_cov%";
 			my $edge_coordinate_feature_out_of_list=$align{qt}{$pair}{edge_coordinate_feature_out_of_list};
+			#$block_clip_path_id="cut-$sample-$scf[0]-$block_index
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shape\t$crosslink_shape\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_anchor_pos\tlow_up\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_color\t$cross_link_color\n";

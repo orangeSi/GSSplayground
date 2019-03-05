@@ -158,6 +158,7 @@ while(@track_order){
 		die "error:block_index $block_index should not have two scf\n" if(@scf!=1);
 		
 		my $block_clip_path_id="cut-$sample-$scf[0]-$block_index";
+		my %block_clip_path_ids;
 
 		my $id_line_x=$left_distance; # 每个block的genome的起点的x,y坐标
 			my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
@@ -181,10 +182,6 @@ while(@track_order){
 		$start_once=$gff{$sample}{chooselen_single}{$block_index}{start};
 		$end_once=$gff{$sample}{chooselen_single}{$block_index}{end};
 		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$gff{$sample}{chooselen_single}{$block_index}{start}-$gff{$sample}{chooselen_single}{$block_index}{end}</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
-		#if(exists $conf{feature_setting2}{$f}{allow_feature_out_of_list_flag} && $conf{feature_setting2}{$f}{allow_feature_out_of_list_flag}){
-		#	my ($clip_x1_x,$clip_x1_y,$clip_x2_x,$clip_x2_y,$clip_x3_x,$clip_x3_y,$clip_x4_x,$clip_x4_y)=($shift_x,$top_distance,$shift_x+$id_line_width,$top_distance,$shift_x+$id_line_width,$top_distance + $sample_single_height,$shift_x,$top_distance + $sample_single_height);
-		#	$svg.="<defs>    <clipPath id=\"$block_clip_path_id\"><path d=\"M$clip_x1_x $clip_x1_y L$clip_x2_x $clip_x2_y L$clip_x3_x $clip_x3_y L$clip_x4_x $clip_x4_y Z\" />     </clipPath>  </defs>\n"
-		#}
 		#$conf{display_segment_name} ||="yes,center,shift_y:+1,fontsize:10,color:black"
 		#	
 		#my $display_segment_name_flag=$1;
@@ -262,9 +259,11 @@ while(@track_order){
 			my $gene_height_medium;
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
 			if(exists $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag} && $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag}){
-				my ($clip_x1_x,$clip_x1_y,$clip_x2_x,$clip_x2_y,$clip_x3_x,$clip_x3_y,$clip_x4_x,$clip_x4_y)=($shift_x,$top_distance,$shift_x+$id_line_width,$top_distance,$shift_x+$id_line_width,$top_distance + $sample_single_height,$shift_x,$top_distance + $sample_single_height);
-				$svg.="<defs>    <clipPath id=\"$block_clip_path_id\"><path d=\"M$clip_x1_x $clip_x1_y L$clip_x2_x $clip_x2_y L$clip_x3_x $clip_x3_y L$clip_x4_x $clip_x4_y Z\" />     </clipPath>  </defs>\n"
+			my ($clip_x1_x,$clip_x1_y,$clip_x2_x,$clip_x2_y,$clip_x3_x,$clip_x3_y,$clip_x4_x,$clip_x4_y)=($shift_x,$top_distance,$shift_x+$id_line_width,$top_distance,$shift_x+$id_line_width,$top_distance + $sample_single_height,$shift_x,$top_distance + $sample_single_height);
+			$svg.="<defs>    <clipPath id=\"$block_clip_path_id\"><path d=\"M$clip_x1_x $clip_x1_y L$clip_x2_x $clip_x2_y L$clip_x3_x $clip_x3_y L$clip_x4_x $clip_x4_y Z\" />     </clipPath>  </defs>\n" if(not exists $block_clip_path_ids{$block_clip_path_id});
+			$block_clip_path_ids{$block_clip_path_id}="";
 		}
+
 #print "index_id is $index_id, sample is $sample\n";
 #$gff{$sample}{block}{$block}{$scf}{$gene}{id}
 #print "\nindex id is $index_id\n";
@@ -563,14 +562,14 @@ foreach my $pair(@pairs){
 			if($edge_coordinate_feature_out_of_list eq "0"){
 				$quadrilateral="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $left_down_x,$left_down_y $right_down_x,$right_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/>"; #crossing link of features
 			}else{
-				($quadrilateral,$clip_for_crosslink)=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$left_down_x,$left_down_y,$right_down_x,$right_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity", \%clip_for_crosslink);
+				($quadrilateral,$clip_for_crosslink)=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$left_down_x,$left_down_y,$right_down_x,$right_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity", \%clip_for_crosslink, $up_id, $down_id, \%conf);
 				%clip_for_crosslink=%$clip_for_crosslink;
 			}
 		}elsif($cross_link_orientation=~ /forward/i){
 			if($edge_coordinate_feature_out_of_list eq "0"){
 				$quadrilateral="<polygon points=\"$left_up_x,$left_up_y $right_up_x,$right_up_y $right_down_x,$right_down_y $left_down_x,$left_down_y\" style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\"/>\n"; #crossing link of features
 			}else{
-				($quadrilateral,$clip_for_crosslink)=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity", \%clip_for_crosslink);
+				($quadrilateral,$clip_for_crosslink)=&cut_quadrilateral($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, "${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity", \%clip_for_crosslink, $up_id, $down_id, \%conf);
 				%clip_for_crosslink=%$clip_for_crosslink;
 			}
 		}else{
@@ -822,6 +821,7 @@ td {
 <script>\n";
 		my $navigator="";
 		if(-f "$Bin/navigator"){
+			print "$Bin/navigator\n";
 			$navigator=`cat $Bin/navigator`;chomp $navigator;
 		}
 		my $zoom_js=`cat $zoom`; chomp $zoom_js;
@@ -884,17 +884,33 @@ sub check_blocks_two_ends_cord(){
 
 
 sub cut_quadrilateral(){
-	my ($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, $style, $clip_for_crosslink)=@_;
+	my ($edge_coordinate_feature_out_of_list,$left_up_x,$left_up_y,$right_up_x,$right_up_y,$right_down_x,$right_down_y,$left_down_x,$left_down_y, $style, $clip_for_crosslink, $up_id, $down_id, $conf)=@_;
 	my %clip_for_crosslink=%$clip_for_crosslink;
 	# $edge_coordinate_feature_out_of_list="130,382:1105,382 -> 130,249:1082,249";
 	my $clip_path="";
 	my $clip_path_id;
+	#print "\ncut_quadrilateral $conf->{feature_setting2}->{$up_id}->{block_start_end}\ncut_quadrilateral $conf->{feature_setting2}->{$down_id}->{block_start_end}\n";
+	
 	#my $clip_path_id="cut-off-bottom-$left_up_x-$left_up_y-$right_up_x-$right_up_y-$right_down_x-$right_down_y-$left_down_x-$left_down_y";
 	#my $clip_path_id="cut-$sample-$scf-$start-$end";
 	if($edge_coordinate_feature_out_of_list=~ /^([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)\s*->\s*([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)/){
-		$clip_path_id="clip_$1-$2-$3-$4-$7-$8-$5-$6";
+		my ($up_block_start, $up_block_end)=split(/,/, $conf->{feature_setting2}->{$up_id}->{block_start_end});
+		my $up_sample=$conf->{feature_setting2}->{$up_id}->{sample};
+		my $up_scf_id=$conf->{feature_setting2}->{$up_id}->{scf_id};
+
+		my ($down_block_start, $down_block_end)=split(/,/, $conf->{feature_setting2}->{$down_id}->{block_start_end});
+		my $down_sample=$conf->{feature_setting2}->{$down_id}->{sample};
+		my $down_scf_id=$conf->{feature_setting2}->{$down_id}->{scf_id};
+		
+		my ($up_start_x, $up_start_y)=split(/,/, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_start});
+		my ($up_end_x, $up_end_y)=split(/,/, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_end});
+		my ($down_start_x, $down_start_y)=split(/,/, $blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_start});
+		my ($down_end_x, $down_end_y)=split(/,/, $blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_end});
+		
+		$clip_path_id="clip_$up_start_x-$up_start_y-$up_end_x-$up_end_y-$down_start_x-$down_start_y-$down_end_x-$down_end_y";
 		#print "clip_path_id is $clip_path_id\n";
-		my $clip="<defs>    <clipPath id=\"$clip_path_id\"><path d=\"M$1 $2 L$3 $4 L$7 $8 L$5 $6 Z\" /></clipPath>  </defs>\n";
+		print "edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list\n";
+		my $clip="<defs>    <clipPath id=\"$clip_path_id\"><path d=\"M$up_start_x $up_start_y L$up_end_x $up_end_y L$down_end_x $down_end_y L$down_start_x $down_start_y Z\" /></clipPath>  </defs>\n";
 		if(not exists $clip_for_crosslink{$clip_path_id}){
 			$clip_path.="$clip";
 			$clip_for_crosslink{$clip_path_id}="";

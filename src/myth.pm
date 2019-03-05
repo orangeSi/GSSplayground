@@ -121,7 +121,10 @@ sub read_list(){
 			die "error:$list line $list_line, arrs is @arrs, numberl=".scalar@arrs." the format is error, should be separated by tab \n"; 
 		}elsif(@arrs!=0){
 			my ($gff, $fts, $gene_index_tmp, @arr_tmp);
+			print "11\n";
 			($gff, $fts, $block_index, $conf, $gene_index_tmp, $genome) = &parse_arrs(\@arrs, 0, \@arr_tmp, \%genome, $block_index, \%gff, $gffs, \%fts, $conf, 0, 0, 0, 0, "", $sample, $space_len, $allow_feature_out_of_list); 
+			print "33\n";
+			#$block_index=1;
 			#print "2dd $list_line\n";
 			%genome=%$genome;
 			%gff=%$gff;
@@ -151,6 +154,7 @@ sub read_list(){
 				chomp;
 				next if($_=~ /^#/||$_=~ /^\s*$/);
 				my @arr=split(/\t/,$_);
+				die "error: in $gffs, scaffold_id should not contain , in $_ line$.\n" if($arr[0]=~ /,/);
 				die "error: need 9 columns for gff format, $gffs, line$.\n" if(@arr!=9);
 				$all_seq_id{$sample}{$arr[0]} = "";
 			}
@@ -182,13 +186,16 @@ sub read_list(){
 				if(@arrs){ # has seq_id mean not full length of whole gff
 					my ($gff, $fts);
 					#print "line1 is $_\n";
+					print "44\n";
 					($gff, $fts, $block_index, $conf, $gene_index, $genome) = &parse_arrs(\@arrs, \%all_seq_id, \@arr, \%genome, $block_index, \%gff, $gffs, \%fts, $conf, $gene_index, $., $start_f, $end_f, $_, $sample, $space_len, $allow_feature_out_of_list);
+					print "55\n";
 					%genome=%$genome;
 					%gff=%$gff;
 					%fts=%$fts;
 					#print "line2 is $_\n";
 
 				}else{ # list里面没有定义seq_id/start/end,即要画full-length of scaffold
+					die "error: not support this yet now\n";
 					my ($gff, $fts);
 					#print "conf3 is $conf\n";
 					($gff, $fts, $conf, $gene_index) = &parse_all_seq(\%scf_block_id, \%gff, $sample, \@arr, \%genome, $space_len, $conf, $gene_index, $fts, $gffs, $start_f, $end_f, $., $_);
@@ -242,7 +249,7 @@ sub parse_arrs(){
 	my ($arrs, $all_seq_id, $arr, $genome, $block_index, $gff, $gffs, $fts, $conf, $gene_index, $line_num, $start_f, $end_f, $line, $sample, $space_len, $allow_feature_out_of_list)=@_;	
 	my @arrs=@$arrs;
 	my @arr=@$arr;
-	#print "1parse_arrs line is $line\n";
+	#print "1parse_arrs line is $line\n\n";
 	if($line eq ""){
 		for (my $arrs_index=0;$arrs_index < scalar(@arrs);$arrs_index+=3){
 			my ($seq_id,$seq_draw_start,$seq_draw_end) = @arrs[$arrs_index..$arrs_index+2];
@@ -264,7 +271,7 @@ sub parse_arrs(){
 			$gff->{$sample}->{block3}->{$seq_id}->{$block_index}="";
 
 			#print "3parse_arrs line is $line\n";
-#print "hereis $block_index\n";
+			print "hereis $block_index\n";
 			if(not exists  $gff->{$sample}->{chooselen_single}->{$block_index}){
 #$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $genome->{$sample}->{$arr[0]}->{$arrs_index}->{len};
 				$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $seq_draw_end -$seq_draw_start+1;
@@ -274,10 +281,11 @@ sub parse_arrs(){
 				$gff->{$sample}->{chooselen_all} +=$gff->{$sample}->{chooselen_single}->{$block_index}->{len}; ## 把每行所有block长度加起来
 				$gff->{$sample}->{chooselen_all} += $space_len ; ## 加上 每个block之间的宽度，500bp相当于一个基因的长度,后面最好把这个500bp改成每个track实际的平均基因长度
 			}
-			print "parse $sample $sample:$seq_id:$seq_draw_start-$seq_draw_end -> block_index $block_index\n";
+			print "parse $sample $sample:$seq_id:$seq_draw_start-$seq_draw_end -> block_index $block_index\n\n";
 		}
 	}else{
 		for my $block_index (keys %{$gff->{$sample}->{block3}->{$arr[0]}}){
+			print "block_index is $block_index\n";
 			my $seq_draw_start=$gff->{$sample}->{chooselen_single}->{$block_index}->{start};
 			my $seq_draw_end=$gff->{$sample}->{chooselen_single}->{$block_index}->{end};
 			my @allow_feature_out_of_list=split(/,/,$allow_feature_out_of_list);
@@ -302,8 +310,8 @@ sub parse_arrs(){
 				$gff->{$sample}->{chooselen_all} +=$gff->{$sample}->{chooselen_single}->{$block_index}->{len}; ## 把每行所有block长度加起来
 				$gff->{$sample}->{chooselen_all} += $space_len ; ## 加上 每个block之间的宽度，500bp相当于一个基因的长度,后面最好把这个500bp改成每个track实际的平均基因长度
 			}
-			($conf, $gff, $block_index, $gene_index, $fts) = &go_line($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, \@arr, \@arrs, $line, $gene_index, $fts, $allow_feature_out_of_list_flag);	
-			print "read gff, $sample:$arr[0]:$seq_draw_start-$seq_draw_end block_index $block_index for $line\n";
+			($conf, $gff, $block_index, $gene_index, $fts) = &go_line($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, \@arr, \@arrs, $line, $gene_index, $fts, $allow_feature_out_of_list_flag, $seq_draw_start, $seq_draw_end);	
+			#print "read gff, $sample:$arr[0]:$seq_draw_start-$seq_draw_end block_index $block_index for $line\n";
 		}
 	}
 
@@ -338,7 +346,7 @@ sub parse_all_seq(){
 }
 
 sub go_line(){
-	my ($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, $arr, $arrs, $line, $gene_index, $fts, $allow_feature_out_of_list_flag)=@_;
+	my ($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, $arr, $arrs, $line, $gene_index, $fts, $allow_feature_out_of_list_flag, $seq_draw_start, $seq_draw_end)=@_;
 	my @arr=@$arr;
 	#my @arrs=@$arrs;
 	#print "conf1 is $conf\n";
@@ -371,12 +379,24 @@ sub go_line(){
 	#if($feature_id!~ /$marker$/){
 	#	$feature_id="$feature_id.$marker.$sample.$marker";
 	#}
-	if(exists $fts->{$feature_id}){
-		die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+	if($feature_id=~ /\.[+-]\.(\d+)$/ && $arr[2] eq "synteny"){
+		my $feature_id_block_index=$1;
+		return ($conf, $gff, $block_index, $gene_index, $fts) if($feature_id_block_index != $block_index);
+		if(exists $fts->{$feature_id}){ # check feature_id if had exists in one block of --list, in fact one feature_id may occurs in more than one block of --list
+			print "\n1 is $1,block_index is $block_index, line is $line\n";
+			die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+		}else{
+			$fts->{$feature_id}{sample} = $sample;
+			$fts->{$feature_id}{scf} = $arr[0];
+			#print "block_index is $block_index, line is $line\n";
+		}
 	}else{
-		$fts->{$feature_id}{sample} = $sample;
-		$fts->{$feature_id}{scf} = $arr[0];
-#print "fts has $feature_id\n";
+		if(exists $fts->{$feature_id}){ # check feature_id if had exists in one block of --list, in fact one feature_id may occurs in more than one block of --list
+			die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+		}else{
+			$fts->{$feature_id}{sample} = $sample;
+			$fts->{$feature_id}{scf} = $arr[0];
+		}
 	}
 	$gene_index++;
 	if(!$arr[3]){die "error:$gffs line $line_num\n"}
@@ -398,6 +418,7 @@ sub go_line(){
 	$conf->{feature_setting2}->{$feature_id}->{end}=$end_f;
 	$conf->{feature_setting2}->{$feature_id}->{sample}=$sample;
 	$conf->{feature_setting2}->{$feature_id}->{scf_id}=$arr[0];
+	$conf->{feature_setting2}->{$feature_id}->{block_start_end}="$seq_draw_start,$seq_draw_end";
 	$conf->{feature_setting2}->{$feature_id}->{type}=$arr[2];
 	$conf->{feature_setting2}->{$feature_id}->{allow_feature_out_of_list_flag}=1 if($allow_feature_out_of_list_flag);
 	die "error: sample $sample should not have : char\n" if($sample=~ /:/);
@@ -745,7 +766,7 @@ sub draw_genes(){
 				if(exists $conf->{feature_setting2}->{$feature_id}->{allow_feature_out_of_list_flag} && $conf->{feature_setting2}->{$feature_id}->{allow_feature_out_of_list_flag}){
 					$orders->{$order_f}.="<path id=\"$feature_id\"  d=\"M$x1 $y1 L$x2 $y2 L$x3 $y3 L$x4 $y4 Z\" clip-path=\"url(#$block_clip_path_id)\" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
 				}else{
-					$orders->{$order_f}.="<polygon id=\"$feature_id\" points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
+				$orders->{$order_f}.="<polygon id=\"$feature_id\" points=\"$x1,$y1 $x2,$y2 $x3,$y3 $x4,$y4 \" style=\"fill:$index_color;stroke:$feature_stroke_color;stroke-width:$feature_stroke_size;opacity:$feature_opacity\"/></g>\n"; ## feture rect
 				}
 
 			}
@@ -1154,7 +1175,7 @@ sub check_track_order(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

@@ -84,36 +84,62 @@ feature_height_ratio -> 2
 scale_padding_y -> 0.6
 start read tracks.1.list.out1
 pO83_CORR
+11
+hereis 1
 parse pO83_CORR pO83_CORR:NC_017659.1:1-7060 -> block_index 1
-read gff, pO83_CORR:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	synteny	5460	147060	.	+	.	ID=pO83_CORR.NC_017659.1.5460.147060.1.+;
-read gff, pO83_CORR:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	synteny	2101	5468	.	+	.	ID=pO83_CORR.NC_017659.1.2101.5468.1.+;
-read gff, pO83_CORR:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	synteny	1	1898	.	+	.	ID=pO83_CORR.NC_017659.1.1.1898.1.+;
-read gff, pO83_CORR:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	synteny	1891	2100	.	+	.	ID=pO83_CORR.NC_017659.1.1891.2100.1.+;
+
+33
+44
+block_index is 1
+55
+44
+block_index is 1
+55
+44
+block_index is 1
+55
+44
+block_index is 1
+55
 pO83_CORR.indel
+11
+hereis 1
 parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:1700-6000 -> block_index 1
-read gff, pO83_CORR.indel:NC_017659.1.fake:1700-6000 block_index 1 for NC_017659.1.fake	add	synteny	5460	147060	.	+	.	ID=pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+;
-read gff, pO83_CORR.indel:NC_017659.1.fake:1700-6000 block_index 1 for NC_017659.1.fake	add	synteny	1891	5257	.	+	.	ID=pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+;
-read gff, pO83_CORR.indel:NC_017659.1.fake:1700-6000 block_index 1 for NC_017659.1.fake	add	synteny	1	1898	.	+	.	ID=pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+;
-read gff, pO83_CORR.indel:NC_017659.1.fake:1700-6000 block_index 1 for NC_017659.1.fake	add	synteny	5251	5460	.	+	.	ID=pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+;
+
+33
+44
+block_index is 1
+55
+44
+block_index is 1
+55
+44
+block_index is 1
+55
+44
+block_index is 1
+55
 end read tracks.1.list.out1
 draw sample name pO83_CORR
-draw feature_id = pO83_CORR.NC_017659.1.1.1898.1.+
-draw feature_id = pO83_CORR.NC_017659.1.1891.2100.1.+
-draw feature_id = pO83_CORR.NC_017659.1.2101.5468.1.+
-draw feature_id = pO83_CORR.NC_017659.1.5460.147060.1.+
+draw feature_id = pO83_CORR.NC_017659.1.1.1898.1.+.1
+draw feature_id = pO83_CORR.NC_017659.1.1891.2100.1.+.1
+draw feature_id = pO83_CORR.NC_017659.1.2101.5468.1.+.1
+draw feature_id = pO83_CORR.NC_017659.1.5460.147060.1.+.1
 draw sample name pO83_CORR.indel
-draw feature_id = pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+
-draw feature_id = pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+
-draw feature_id = pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+
-draw feature_id = pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+
+draw feature_id = pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1
+draw feature_id = pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.1
+draw feature_id = pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1
+draw feature_id = pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1
 
 
 
 
-plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+,pO83_CORR.NC_017659.1.1891.2100.1.+, 1th -> 4
-plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+,pO83_CORR.NC_017659.1.2101.5468.1.+, 2th -> 4
-plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+,pO83_CORR.NC_017659.1.5460.147060.1.+, 3th -> 4
-plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+,pO83_CORR.NC_017659.1.1.1898.1.+, 4th -> 4
+edge_coordinate_feature_out_of_list is 130,349:723.976628895184,349 -> 130,149:1105,149
+plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1,pO83_CORR.NC_017659.1.1.1898.1.+.1, 1th -> 4
+plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1,pO83_CORR.NC_017659.1.1891.2100.1.+.1, 2th -> 4
+plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.1,pO83_CORR.NC_017659.1.2101.5468.1.+.1, 3th -> 4
+edge_coordinate_feature_out_of_list is 130,349:723.976628895184,349 -> 130,149:1105,149
+plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1,pO83_CORR.NC_017659.1.5460.147060.1.+.1, 4th -> 4
 lengend start
 scale_display is yes
 disply scale
@@ -132,6 +158,7 @@ if you want png or pdf format,you could use convert or cairosvg to convert svg t
 	convert  -density 100 ./out1.svg ./out1.png
 	convert -density 100 ./out1.svg ./out1.dpi100.pdf
 
+/hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/navigator
 /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/svg-pan-zoom.js exists,
 	so output ./out1.html, which you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom
 
