@@ -121,9 +121,9 @@ sub read_list(){
 			die "error:$list line $list_line, arrs is @arrs, numberl=".scalar@arrs." the format is error, should be separated by tab \n"; 
 		}elsif(@arrs!=0){
 			my ($gff, $fts, $gene_index_tmp, @arr_tmp);
-			print "11\n";
+			#print "11\n";
 			($gff, $fts, $block_index, $conf, $gene_index_tmp, $genome) = &parse_arrs(\@arrs, 0, \@arr_tmp, \%genome, $block_index, \%gff, $gffs, \%fts, $conf, 0, 0, 0, 0, "", $sample, $space_len, $allow_feature_out_of_list); 
-			print "33\n";
+			#print "33\n";
 			#$block_index=1;
 			#print "2dd $list_line\n";
 			%genome=%$genome;
@@ -186,9 +186,9 @@ sub read_list(){
 				if(@arrs){ # has seq_id mean not full length of whole gff
 					my ($gff, $fts);
 					#print "line1 is $_\n";
-					print "44\n";
+					#print "44\n";
 					($gff, $fts, $block_index, $conf, $gene_index, $genome) = &parse_arrs(\@arrs, \%all_seq_id, \@arr, \%genome, $block_index, \%gff, $gffs, \%fts, $conf, $gene_index, $., $start_f, $end_f, $_, $sample, $space_len, $allow_feature_out_of_list);
-					print "55\n";
+					#print "55\n";
 					%genome=%$genome;
 					%gff=%$gff;
 					%fts=%$fts;
@@ -271,7 +271,7 @@ sub parse_arrs(){
 			$gff->{$sample}->{block3}->{$seq_id}->{$block_index}="";
 
 			#print "3parse_arrs line is $line\n";
-			print "hereis $block_index\n";
+			#print "hereis $block_index\n";
 			if(not exists  $gff->{$sample}->{chooselen_single}->{$block_index}){
 #$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $genome->{$sample}->{$arr[0]}->{$arrs_index}->{len};
 				$gff->{$sample}->{chooselen_single}->{$block_index}->{len} = $seq_draw_end -$seq_draw_start+1;
@@ -285,7 +285,7 @@ sub parse_arrs(){
 		}
 	}else{
 		for my $block_index (keys %{$gff->{$sample}->{block3}->{$arr[0]}}){
-			print "block_index is $block_index\n";
+			#print "block_index is $block_index\n";
 			my $seq_draw_start=$gff->{$sample}->{chooselen_single}->{$block_index}->{start};
 			my $seq_draw_end=$gff->{$sample}->{chooselen_single}->{$block_index}->{end};
 			my @allow_feature_out_of_list=split(/,/,$allow_feature_out_of_list);
@@ -311,7 +311,7 @@ sub parse_arrs(){
 				$gff->{$sample}->{chooselen_all} += $space_len ; ## 加上 每个block之间的宽度，500bp相当于一个基因的长度,后面最好把这个500bp改成每个track实际的平均基因长度
 			}
 			($conf, $gff, $block_index, $gene_index, $fts) = &go_line($conf, $gff, $sample, $block_index, $gffs, $line_num, $start_f, $end_f, \@arr, \@arrs, $line, $gene_index, $fts, $allow_feature_out_of_list_flag, $seq_draw_start, $seq_draw_end);	
-			#print "read gff, $sample:$arr[0]:$seq_draw_start-$seq_draw_end block_index $block_index for $line\n";
+			print "read gff, $sample:$arr[0]:$seq_draw_start-$seq_draw_end block_index $block_index for $line\n";
 		}
 	}
 

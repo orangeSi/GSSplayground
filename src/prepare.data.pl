@@ -168,7 +168,8 @@ sub synteny(){
 	#my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel");
 	#my @highs=("blat_block_show", "start_end_xaxis",);
 	my @highs=("blat_block_show", "start_end_xaxis");
-	my @align_types=("paf", "blast_m8", "blat_psl", "mummer_coords");
+	#my @align_types=("paf", "blast_m8", "blat_psl", "mummer_coords");
+	my @align_types=("blast_m8", "mummer_coords");
 	for my $k (@{$conf->{synteny}}){
 		$k_index++;
 		&check_highs(\@highs,$k);
@@ -572,29 +573,34 @@ sub synteny_run(){
 			my $strand=($arr[2] >$arr[3])? "-":"+";
 			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
 			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
-			my ($skip, $edge)=&check_allow_feature_out_of_list($query_name,$target_name, $conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny", $check_all_vs_all_if);
+			my ($skip, $edge, $qt)=&check_allow_feature_out_of_list($query_name,$target_name, $conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny", $check_all_vs_all_if);
 			next if($skip);
+			my @edge=@$edge;
+			my @qt=@$qt;
+			while(@qt){
+				my $qt_index=shift @qt;
+				$edge=shift @edge;
+				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.$qt_index";
+				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.$qt_index";
+				my $query_target_feature_id="$query_feature_id -> $target_feature_id";
+				my $indentity=$arr[6];
+				my $tmp;
+				my $q_cov=(abs($arr[2]-$arr[3])+1)/$arr[8];$tmp=abs($arr[2]-$arr[3])+1;$q_cov="$tmp/$arr[8]=$q_cov";
+				my $t_cov=(abs($arr[0]-$arr[1])+1)/$arr[7];$tmp=abs($arr[0]-$arr[1])+1;$t_cov="$tmp/$arr[7]=$t_cov";
 
-			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
-			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
-			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
-			my $indentity=$arr[6];
-			my $tmp;
-			my $q_cov=(abs($arr[2]-$arr[3])+1)/$arr[8];$tmp=abs($arr[2]-$arr[3])+1;$q_cov="$tmp/$arr[8]=$q_cov";
-			my $t_cov=(abs($arr[0]-$arr[1])+1)/$arr[7];$tmp=abs($arr[0]-$arr[1])+1;$t_cov="$tmp/$arr[7]=$t_cov";
-
-			$align{query}{$query_feature_id}{query_scf}=$query_scf;
-			$align{query}{$query_feature_id}{query_start}=$query_start;
-			$align{query}{$query_feature_id}{query_end}=$query_end;
-			$align{qt}{$query_target_feature_id}{strand}=$strand;
-			$align{qt}{$query_target_feature_id}{indentity}=$indentity;
-			$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
-			$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
-			$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
-			$align{target}{$target_feature_id}{target_scf}=$target_scf;
-			$align{target}{$target_feature_id}{target_start}=$target_start;
-			$align{target}{$target_feature_id}{target_end}=$target_end;
-			push(@pairs,$query_target_feature_id);
+				$align{query}{$query_feature_id}{query_scf}=$query_scf;
+				$align{query}{$query_feature_id}{query_start}=$query_start;
+				$align{query}{$query_feature_id}{query_end}=$query_end;
+				$align{qt}{$query_target_feature_id}{strand}=$strand;
+				$align{qt}{$query_target_feature_id}{indentity}=$indentity;
+				$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
+				$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+				$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
+				$align{target}{$target_feature_id}{target_scf}=$target_scf;
+				$align{target}{$target_feature_id}{target_start}=$target_start;
+				$align{target}{$target_feature_id}{target_end}=$target_end;
+				push(@pairs,$query_target_feature_id);
+			}
 		}
 		close M;		
 	}else{
