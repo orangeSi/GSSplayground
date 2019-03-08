@@ -169,7 +169,7 @@ sub synteny(){
 	#my @highs=("blat_block_show", "start_end_xaxis",);
 	my @highs=("blat_block_show", "start_end_xaxis");
 	#my @align_types=("paf", "blast_m8", "blat_psl", "mummer_coords");
-	my @align_types=("blast_m8", "mummer_coords");
+	my @align_types=("blast_m8", "mummer_coords", "common");
 	for my $k (@{$conf->{synteny}}){
 		$k_index++;
 		&check_highs(\@highs,$k);
@@ -426,7 +426,72 @@ sub synteny_run(){
 				push(@pairs,$query_target_feature_id);
 			}
 		}
-		close BLAST;		
+		close BLAST;	
+	}elsif($alignment_type eq "common"){
+		if($alignment=~ /\.gz$/){
+			if($sort){
+				open COM,"gzip -dc $alignment|sort -k 9nr,9nr -k 1,1 -k 2,2|" or die "$?";
+			}else{
+				open COM,"gzip -dc $alignment|" or die "$?";
+			}
+			print "$alignment is gz file\n";
+		}else{
+			if($sort){
+				open COM,"cat $alignment|sort -k 9nr,9nr -k 1,1 -k 2,2|" or die "$?";
+			}else{
+				open COM,"$alignment" or die "$?";
+			}
+			print "$alignment is plain file\n";
+		}
+		while(<COM>){
+			chomp;
+			next if($_=~ /^#/ ||$_=~ /^\s*$/);
+#print "line$. is $_\n";
+			my @arr=split(/\t/,$_);
+			die "error:alignment sholud be 9 or 10 columns by tab in $alignment\n" if(@arr!=9 && @arr!=10);
+			my $query_scf=$arr[0];
+			my $target_scf=$arr[1];
+			my $query_start=$arr[2];
+			my $query_end=$arr[3];
+			my $target_start=$arr[4];
+			my $target_end=$arr[5];
+			my $strand=$arr[6];
+			my $indentity=$arr[7];
+			my $align_length=$arr[8];
+			my $pop=(@arr==10)? $arr[9]:"";
+			die "\nerror:3/4/5/6/9th column should be numer,like #query       target       query_start  query_end  target_start  target_end  strand  indentity(just_for_display)  alignment_length(just_for_display)  popup, in $alignment line$. $_\n" if($query_start=~ /[^\d]/ || $query_end=~ /[^\d]/ ||$target_start=~ /[^\d]/ ||$target_end=~ /[^\d]/ || $align_length=~ /[^\d]/);
+			die "\nerror:7th column must be + or - instead of $strand  in $alignment line$. $_\n" if($strand ne "+" && $strand ne "-");
+			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
+			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
+			my ($skip, $edge, $qt)=&check_allow_feature_out_of_list($query_name,$target_name,$conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny", $check_all_vs_all_if);
+			next if($skip);
+			my @edge=@$edge;
+			my @qt=@$qt;
+			while(@qt){
+				my $qt_index=shift @qt;
+				$edge=shift @edge;
+				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.$qt_index";
+				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.$qt_index";
+				my $query_target_feature_id="$query_feature_id -> $target_feature_id";
+				my $tmp;
+				$tmp=abs($query_start-$query_end)+1;my $q_cov=$tmp/$align_length * 100;$q_cov=" $tmp/$align_length=$q_cov";
+				$tmp=abs($target_start-$target_end)+1;my $t_cov=$tmp/$align_length * 100;$t_cov=" $tmp/$align_length=$t_cov";
+				$align{query}{$query_feature_id}{query_scf}=$query_scf;
+				$align{query}{$query_feature_id}{query_start}=$query_start;
+				$align{query}{$query_feature_id}{query_end}=$query_end;
+				$align{qt}{$query_target_feature_id}{strand}=$strand;
+				$align{qt}{$query_target_feature_id}{indentity}=$indentity;
+				$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
+				$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+				$align{qt}{$query_target_feature_id}{popup}=$pop;
+				$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
+				$align{target}{$target_feature_id}{target_scf}=$target_scf;
+				$align{target}{$target_feature_id}{target_start}=$target_start;
+				$align{target}{$target_feature_id}{target_end}=$target_end;
+				push(@pairs,$query_target_feature_id);
+			}
+		}
+		close COM;	
 	}elsif($alignment_type eq "blat_psl"){ # https://genome.ucsc.edu/FAQ/FAQformat.html#format2
 		my $big=1;
 		my $detail=1;
