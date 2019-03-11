@@ -1,6 +1,7 @@
 #!/usr/bin/env perl -w
 use strict;
 use warnings;
+use JSON qw(encode_json);
 use Getopt::Long;
 use FindBin qw($Bin);
 use List::Util qw(max min);
@@ -47,6 +48,8 @@ my %positon_links;
 my @fetures_links;
 my %features_height;
 my %blocks_two_ends_cord; # $blocks_two_ends_cord{sample_name}{scf_id}{start_pos} = "x,y"
+my %blocks_start_ends_cord; # $blocks_two_ends_cord{sample_name}{scf_id}{start_pos} = "x,y"
+my %tracks_height;
 ##start:get max scaffolds lengths in gff file
 my ($ref_name_width_ratio, $cluster_width_ratio, $legend_width_ratio) = split(/-/, $conf{width_ratio_ref_cluster_legend});
 if($ref_name_width_ratio+$cluster_width_ratio+$legend_width_ratio !=1){
@@ -369,9 +372,11 @@ while(@track_order){
 		my $end_end_y=$id_line_y;
 		$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{start}}="$end_start_x,$end_start_y";
 		$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{end}}="$end_end_x,$end_end_y";
+		$blocks_start_ends_cord{$sample}{$scf[0]}{"$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}"}="$end_start_x,$end_start_y,$end_end_x,$end_end_y";
 		$shift_x+=($id_line_width+$block_distance);
 	}
 	$top_distance+=$sample_single_height * (1+$tracks_shift_y{sample}{$sample}{shift_y_down});
+	$tracks_height{$sample}=$sample_single_height * (1+$tracks_shift_y{sample}{$sample}{shift_y_down});
 #$gff{$sample}{id}{$arr[0]}{$gene_index}{end}=$arr[4]
 
 
@@ -746,6 +751,7 @@ if($conf{scale_display}=~ /yes/i){
 		}
 		$orders{$conf{scale_order}}.="<line x1=\"$x_start_scale\" y1=\"$y_scale\" x2=\"$x_end_scale\" y2=\"$y_scale\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width}\"/>\n"; #main line
 		my $unit_scale=$conf{scale_ratio}*$ratio; # bp
+		print "unit_scale is $unit_scale=$conf{scale_ratio}*$ratio\n";
 		my $ticks=int($cluster_width_ratio*$svg_width/$unit_scale);
 		#die "tick is $ticks =int($cluster_width_ratio*$svg_width/$unit_scale)\n";
 		print "ticks number is $ticks\n";
@@ -768,7 +774,8 @@ if($conf{scale_display}=~ /yes/i){
 			$orders{$conf{scale_order}}.= "<text x=\"$tick_x\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$tick_label</text>\n"; # label of feature
 
 		}
-		if($cluster_width_ratio*$svg_width % $unit_scale){
+		print "cluster_width_ratio $cluster_width_ratio*$svg_width % $unit_scale\n";
+		if($unit_scale >=1 && $cluster_width_ratio*$svg_width % $unit_scale){
 			$orders{$conf{scale_order}}.="<line x1=\"$x_end_scale\" y1=\"$tick_y1\" x2=\"$x_end_scale\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # last tick
 			
 				my $last_tick_label=&format_scale($max_length+$scale_start-1);
@@ -825,8 +832,9 @@ td {
 			$navigator=`cat $Bin/navigator`;chomp $navigator;
 		}
 		my $zoom_js=`cat $zoom`; chomp $zoom_js;
-		print OUT "$zoom_js\n";
-		print OUT "</script>\n</head>\n<body>\n<h1>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>\n$navigator\n<div id='container' style=\"width: ${svg_width}px; height: ${svg_height}px; border:1px solid black;display:none\">\n<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox=\"0 0 $svg_width $svg_height\" version=\"1.1\">\n";
+		print OUT "$zoom_js</script>\n";
+		print OUT "<script>var blocks_start_ends_cord=".encode_json(\%blocks_start_ends_cord).";\nvar tracks_heigh=".encode_json(\%tracks_height).";</script>\n";
+		print OUT "</head>\n<body>\n<h1>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>\n$navigator\n<div id='container' style=\"width: ${svg_width}px; height: ${svg_height}px; border:1px solid black;display:none\">\n<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox=\"0 0 $svg_width $svg_height\" version=\"1.1\">\n";
 		my $svg=`sed '1d' $prefix.svg`;chomp $svg;
 		print OUT "$svg\n";
 		print OUT " </div>
@@ -834,20 +842,29 @@ td {
     <button id=\"disable\" style='display:none'>disable</button>
 
     <script>
-      // Don't use window.onLoad like this in production, because it can only listen to one function.
+	window.refresh_flag = 0 ;
+    // Don't use window.onLoad like this in production, because it can only listen to one function.
 	document.getElementById(\"container\").style.width=document.documentElement.clientWidth*0.97 + \"px\";
 	document.getElementById(\"container\").style.height=document.documentElement.clientHeight*0.93 + \"px\";
 	document.getElementById(\"container\").style['margin']='auto';
 	document.getElementById(\"container\").style.display=\"block\";
-      window.onload = function() {
-        // Expose to window namespase for testing purposes
-        window.zoomTiger = svgPanZoom('#demo-tiger', {
+    function svgpanzoom(the_alert) {
+	  if(window.hasOwnProperty(\"zoomTiger\")){
+	  	if(the_alert){alert('there is not need to hit me anymore~');}
+	  	return 0
+	  }
+	  console.log(\"start svgpanzoom\")
+	  window.refresh_flag +=1 ;
+      // Expose to window namespase for testing purposes
+
+      window.zoomTiger = svgPanZoom('#demo-tiger', {
 	  maxZoom: 500,
      	  minZoom:0.01,
           zoomEnabled: true,
           controlIconsEnabled: true,
-          fit: true,
-          center: true,
+		  fit: false, 
+		  center: false,
+		  destroy: function() {this.destroy(); return this.pi}
           // viewportSelector: document.getElementById('demo-tiger').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
         });
 
@@ -856,7 +873,6 @@ td {
         })
         document.getElementById('disable').addEventListener('click', function() {
           window.zoomTiger.disableControlIcons();
-	alert('ddd')
         })
       };
     </script>

@@ -1,0 +1,26 @@
++ cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.common.quadrilateral.1.synteny.gff
++ rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.common.quadrilateral.1.synteny.gff
++ echo output out4.pO83_CORR.out4.synteny.gff
++ cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.common.quadrilateral.1.synteny.setting.conf
++ rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.common.quadrilateral.1.synteny.setting.conf
++ echo output out4.pO83_CORR.out4.synteny.setting.conf
++ cat out4.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.common.quadrilateral.1.synteny.gff
++ rm out4.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.common.quadrilateral.1.synteny.gff
++ echo output out4.pO83_CORR.indel.out4.synteny.gff
++ cat out4.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.common.quadrilateral.1.synteny.setting.conf
++ rm out4.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.common.quadrilateral.1.synteny.setting.conf
++ echo output out4.pO83_CORR.indel.out4.synteny.setting.conf
++ cat pO83_CORR.indel.to.pO83_CORR.common.quadrilateral.1.synteny.crosslink.conf
++ rm pO83_CORR.indel.to.pO83_CORR.common.quadrilateral.1.synteny.crosslink.conf
++ echo output out4.pO83_CORR.indel.to.pO83_CORR.out4.synteny.crosslink
++ cat out4.pO83_CORR.indel.to.pO83_CORR.out4.synteny.crosslink
++ cat out4.pO83_CORR.out4.synteny.setting.conf out4.pO83_CORR.indel.out4.synteny.setting.conf
++ cat out4.synteny.setting.conf
++ cat out4.synteny.crosslink
++ awk -F '	' '{print $3}'
++ sort -u
++ cat out4.pO83_CORR.out4.synteny.gff out4.pO83_CORR.indel.out4.synteny.gff
++ sed -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out4.pO83_CORR.out4.synteny.gff\t/' tracks.4.list
++ cp tracks.4.list.out4 tracks.4.list.out4.tmp
++ sed -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out4.pO83_CORR.indel.out4.synteny.gff\t/' tracks.4.list.out4.tmp
++ cp tracks.4.list.out4 tracks.4.list.out4.tmp

@@ -24,7 +24,7 @@ sub shift_tracks(){
 			my @arr=split(/,/, $p);
 			die "error: $p format error for tracks_shift_y=$para, should liketracks_shift_y=s2,0,+5:+0;s3,0,+5:+0;\n" if(@arr!=3);
 			die "error: you have already specify  $arr[0] for more than one time in $para\n" if(exists $tracks_shift_y{$arr[0]});
-			die "error: $arr[0] not in sample list: @track_order\n" if(!grep(/^$arr[0]$/, @track_order));
+			die "error: $arr[0] not in sample list: @track_order in tracks_shift_y=$para\n" if(!grep(/^$arr[0]$/, @track_order));
 			die "error: $arr[2] in $p of $para error format, should like: +0.5:+0.5\n"if($arr[2]!~ /^([\d\.\+-]+):([\d\.\+-]+)$/);
 			die "error: $1 or $2 in $arr[-2] should not < -0.5\n" if($1 < -0.5 || $2 < -0.5);
 			$tracks_shift_y{sample}{$arr[0]}{shift_y_up}=$1;
@@ -80,9 +80,9 @@ sub read_list(){
 		}else{
 			$uniq_sample{$sample}="";
 		}
-		print "$sample\n";
+		print "read_list $sample start\n";
 
-		open GE,"$genome" or die "can not open $genome\n";
+		open GE,"$genome" or die "genome is $genome? can not open $genome\n";
 		my $flag_num=`head $genome|grep "^>"|wc -l`;chomp $flag_num;
 		if($flag_num){
 			$/=">";<GE>;
@@ -237,6 +237,7 @@ sub read_list(){
 				$gff{$sample}{scf}{$scf}=$genome{$sample}{$scf}{len};
 			}		
 		}
+		print "read_list $sample end\n";
 	}
 	close LI;
 	#$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}
@@ -892,7 +893,7 @@ sub display_conf(){
 sub read_conf(){
 	my ($conf,@funcs) = @_;
 	my %confs;
-	open IN, "$conf" or die "can not open $conf\n";
+	open IN, "$conf" or die "conf is $conf ? can not open $conf\n";
 	while(<IN>){
 		chomp;
 		next if($_=~ /^#/ || $_=~ /^\s*$/);

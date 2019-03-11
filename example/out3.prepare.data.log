@@ -73,12 +73,10 @@ scale_tick_height -> 0.01
 scale_order -> -1
 scale_tick_padding_y -> 10
 scale_tick_fontsize -> 6
-chr14
-11
-hereis 1
+read_list chr14 start
 parse chr14 chr14:14:66901400-66903400 -> block_index 1
 
-33
+read_list chr14 end
 hist_scatter_line start
 1 is hist,1,chr14,14,0,20,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,0,1->25->4,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.3:0.3:0.1:0.1,5:5
 
@@ -89,9 +87,10 @@ no out3.chr14.14.1.1.hist.ylabel.gff for chr14
 no out3.chr14.14.1.1.hist.ylabel.setting.conf for chr14
 
 no out3.chr14.14.1.1.hist.ylabel.crosslink.conf for chr14
-rg is 66901400,66903400  :66901400,66903400
+hist_scatter_line_run rg is 66901400,66903400  :66901400,66903400
 info is hist,1,chr14,14,0,20,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,0,1->25->4,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.3:0.3:0.1:0.1,5:5
 is:../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa, chr14, 14,66901400, 66903400,20, hist,1,chr14,14,0,20,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,0,1->25->4,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.3:0.3:0.1:0.1,5:5
+100
 
 output out3.chr14.14.1.1.66901400.66903400.depth.gff
 
@@ -114,11 +113,12 @@ output out3.chr14.14.1.2.ytick.gff
 output out3.chr14.14.1.2.ytick.setting.conf
 
 no out3.chr14.14.1.2.ytick.crosslink.conf for chr14
-rg is 66901400,66902400  :66901400,66902400
+hist_scatter_line_run rg is 66901400,66902400  :66901400,66902400
 info is hist,2,chr14,14,0,20,../data/illumina.chr14.sort.bam:../data/chr14.fa,color->green:opacity->1,31->41,ytick_flag,1->25->4,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->illuminate read depth,gap:60bp,fontsize:13,color:black	start_end_xaxis->66901400:66902400
 is:../data/illumina.chr14.sort.bam:../data/chr14.fa, chr14, 14,66901400, 66902400,20, hist,2,chr14,14,0,20,../data/illumina.chr14.sort.bam:../data/chr14.fa,color->green:opacity->1,31->41,ytick_flag,1->25->4,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->illuminate read depth,gap:60bp,fontsize:13,color:black	start_end_xaxis->66901400:66902400
 bam
 cmd is samtools depth  -r 14:66901400-66902400 ../data/illumina.chr14.sort.bam|awk '{print "chr14\t"$0}'|sed -r 's/\s/\t/g' >../data/illumina.chr14.sort.bam.14.66901400.66902400.depth
+50
 
 output out3.chr14.14.1.2.66901400.66902400.depth.gff
 

@@ -9,8 +9,16 @@ fi
 dep="samtools sort perl"
 for i in $dep
 do
-	which $i 
+	j=`which $i 2>/dev/null`
+	if [ "$j" == "" ];
+	then
+		which $i
+		exit
+	else
+		echo $j
+	fi
 done
+
 
 #samtools view -h S20K.sort.bam s160:155612-178608 |samtools view - -b >S20K.s160.155612.178608.sort.bam #samtools index S20K.s160.155612.178608.sort.bam
 
@@ -19,6 +27,15 @@ list=$1
 prefix=$2
 outdir=$3
 conf=$4
+
+for i in $list $conf
+do
+	if [ ! -f "$i" ];
+	then
+		echo "error: $i not exists"
+		exit
+	fi
+done
 
 if [ -d "$outdir" ];
 then

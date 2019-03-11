@@ -4,6 +4,7 @@ use warnings;
 use Getopt::Long;
 use List::Util qw(max min);
 use FindBin qw($Bin);
+use JSON qw(encode_json);
 use lib "$Bin";
 use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para);
 
@@ -172,6 +173,7 @@ sub synteny(){
 	my @align_types=("blast_m8", "mummer_coords", "common");
 	for my $k (@{$conf->{synteny}}){
 		$k_index++;
+		$k=~ s/\s+$//;
 		&check_highs(\@highs,$k);
 		print "$k_index is $k\n\n";
 		my @ks = split(/\t+/, $k);
@@ -787,6 +789,7 @@ sub reads_mapping(){
 	my @mapping_types=("short_reads", "long_reads", "vcf");
 	for my $k (@{$conf->{reads_mapping}}){
 		$k_index++;
+		$k=~ s/\s+$//;
 		&check_highs(\@highs,$k);
 		print "$k_index is $k\n\n";
 		my @ks = split(/\t+/, $k);
@@ -809,7 +812,7 @@ sub reads_mapping(){
 			$infos[$i]=~ s/\s//g;
 		}
 		die "\nerror: block_flag should >=0, 0 mean all\n" if($block_flag<0 ||$block_flag!~ /^\d+$/);
-		die "\nerror: $sample or $scf not are friends in $k\n" if(not exists $gff->{$sample}->{scf}->{$scf});
+		die "\nerror: $sample or $scf not are friends in $k and $list \n" if(not exists $gff->{$sample}->{scf}->{$scf});
 		die "\nerror: $sample don't have $block_flag fragments in $k\n" if($block_flag!=0 && not exists $gff->{$sample}->{chooselen_single}->{$block_flag});
 		for my $block_index(keys %{$gff->{$sample}->{chooselen_single}}){
 			print "block_index is $block_index,$sample\n";
@@ -1064,6 +1067,7 @@ sub hist_scatter_line(){
 	my @highs=("highlight_columns", "highlight_hgrid", "start_end_xaxis", "ylabel");
 	for my $k (@{$conf->{hist_scatter_line}}){
 		$k_index++;
+		$k=~ s/\s+$//;
 		&check_highs(\@highs,$k);
 		print "$k_index is $k\n\n";
 		my @ks = split(/\t+/, $k);
@@ -1131,9 +1135,10 @@ sub hist_scatter_line(){
 #my @highlight_columns = @{$highss{highlight_columns}};
 			for my $rg(@start_end_xaxis){
 				my ($rg_start, $rg_end)=split(/,/, $rg);
-				print "rg is $rg  :$rg_start,$rg_end\n";
+				print "hist_scatter_line_run rg is $rg  :$rg_start,$rg_end\n";
 				my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&hist_scatter_line_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type, $rg_start, $rg_end, $depth_order, $the_color, $the_opacity);
-				my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.depth";	
+				my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.depth";
+				#print "depth_gff gff is $depth_gff\n";
 				%outname = &gather_gff_conf_link($prefix,$depth_gff,$depth_setting_conf,$cross_link_conf, \%outname, $sample);
 			}
 		}
@@ -2044,6 +2049,8 @@ sub hist_scatter_line_run(){
 	my $max_depth=$depths{max_depth};
 	my $depth_depth_ratio=(abs($s1-$e1)) / (abs($e2-$s2));
 	my $depth_overflow_flag=0;    
+	print scalar(keys %{$depths{window}});
+	print "\n";
 
 	my $previous_id;
 	my $cross_link_conf="";
@@ -2167,9 +2174,9 @@ sub read_depth_file(){
 	$depth_file=$1;
 #s3      s3      3       10 #sample scf_id  pos depth
 	if($depth_file=~ /\.gz$/){
-		open IN,"gzip -dc $depth_file|" or die "\ncan not open $depth_file\n";
+		open IN,"gzip -dc $depth_file|" or die "\ngzip -dc $depth_file, can not open $depth_file\n";
 	}else{
-		open IN,"$depth_file" or die "\ncan not open $depth_file\n";
+		open IN,"$depth_file" or die "\ndepth_file can not open $depth_file\n";
 	}
 	while(<IN>){
 		chomp;
@@ -2178,11 +2185,13 @@ sub read_depth_file(){
 		my @arr=split(/\s+/,$_);
 		if(@arr==4){
 			if(!$arr[2] || !$block_end_bp){die "is,$arr[2],$block_end_bp\n"};
-			next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] > $block_end_bp || $arr[2]<$block_start_bp);
+			#next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] > $block_end_bp || $arr[2]<$block_start_bp);
+			next if($arr[1] ne $scf || $arr[2] > $block_end_bp || $arr[2]<$block_start_bp);
 			die "\nerror:$arr[2] or $arr[3]\n" if($arr[2]!~ /^\d+$/ || $arr[3]!~ /^\d+$/);
 			$tmp{$arr[2]}=$arr[3];
 		}elsif(@arr==5){
-			next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] < $block_start_bp || $arr[3] > $block_end_bp);
+			#next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] < $block_start_bp || $arr[3] > $block_end_bp);
+			next if($arr[1] ne $scf || $arr[2] < $block_start_bp || $arr[3] > $block_end_bp);
 			$depths{window}{$.}{depth}=$arr[4];
 			$depths{window}{$.}{start}=$arr[2];
 			$depths{window}{$.}{end}=$arr[3];								
@@ -2215,16 +2224,19 @@ sub read_depth_file(){
 			$pos_all+=$tmp{$pos};
 #die "\nerror:pos is $pos,$start,$end,$block_start_bp,$block_end_bp\n" if (!$tmp{$pos});
 		}
+		#print "avg_depth=$avg_depth=$pos_all/($end-$start+1)\n";
 		my $avg_depth=$pos_all/($end-$start+1);
 		$max=($avg_depth>$max)? $avg_depth:$max;
 		$depths{window}{$i}{depth}=$avg_depth;
 		$depths{window}{$i}{start}=$start;
 		$depths{window}{$i}{end}=$end;
+		#print "aaaaaaaaaaaa\n";
 #print "info is $info,iis $i,$avg_depth\n";
 
 	}
 	$depths{max_depth}=$max;
-
+	#print scalar(keys %{$depths{window}});
+	#print "\n";
 	return %depths;
 }
 

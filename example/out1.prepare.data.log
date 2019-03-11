@@ -68,18 +68,14 @@ scale_tick_height -> 0.01
 scale_order -> -1
 scale_tick_padding_y -> 10
 scale_tick_fontsize -> 6
-pO83_CORR
-11
-hereis 1
+read_list pO83_CORR start
 parse pO83_CORR pO83_CORR:NC_017659.1:1-7060 -> block_index 1
 
-33
-pO83_CORR.indel
-11
-hereis 1
+read_list pO83_CORR end
+read_list pO83_CORR.indel start
 parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:1700-6000 -> block_index 1
 
-33
+read_list pO83_CORR.indel end
 hist_scatter_line not
 reads_mapping not
 synteny start

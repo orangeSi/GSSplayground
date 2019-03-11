@@ -1,9 +1,12 @@
 reads_mapping -> short_reads,1,pO83_CORR,NC_017659.1,0,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.sr.sam.sorted.bam:../data/NC_017659.1.fa,rainbow:color->blue:opacity->0.8:cross_link_width_ellipse->0.05,5->33,0,10->30->3,ytick_label_text,0,green:black,1:1,2:6:0.2:0.1,15:15,10:10:40	ylabel->illuminate pair-end read mapping,gap:50bp,fontsize:13,color:black
 reads_mapping -> short_reads,1,pO83_CORR,NC_017659.1,0,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.sr.sam.sorted.bam:../data/NC_017659.1.fa,stack,35->65,0,10->40->3,ytick_label_text,0,green:black,1:1,2:6:0.2:0.1,15:15,10:10:40	ylabel->illuminate pair-end read mapping stack,gap:50bp,fontsize:13,color:black
 reads_mapping -> long_reads,1,pO83_CORR,NC_017659.1,0,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.longreads.sort.bam:../data/NC_017659.1.fa,stack,70->100,0,20->30->2,ytick_label_text,hgrid_flag,green:black,1:1,2:6:0.2:0,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect	ylabel->pacbio read mapping stack,gap:50bp,fontsize:13,color:black
+reads_mapping -> short_reads,1,pO83_CORR.twin,NC_017659.1,0,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.sr.sam.sorted.bam:../data/NC_017659.1.fa,rainbow:color->blue:opacity->0.8:cross_link_width_ellipse->0.05,5->33,0,10->30->3,ytick_label_text,0,green:black,1:1,2:6:0.2:0.1,15:15,10:10:40	ylabel->illuminate pair-end read mapping,gap:50bp,fontsize:13,color:black
+reads_mapping -> short_reads,1,pO83_CORR.twin,NC_017659.1,0,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.sr.sam.sorted.bam:../data/NC_017659.1.fa,stack,35->65,0,10->40->3,ytick_label_text,0,green:black,1:1,2:6:0.2:0.1,15:15,10:10:40	ylabel->illuminate pair-end read mapping stack,gap:50bp,fontsize:13,color:black
+reads_mapping -> long_reads,1,pO83_CORR.twin,NC_017659.1,0,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.longreads.sort.bam:../data/NC_017659.1.fa,stack,70->100,0,20->30->2,ytick_label_text,hgrid_flag,green:black,1:1,2:6:0.2:0,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect	ylabel->pacbio read mapping stack,gap:50bp,fontsize:13,color:black
 reads_mapping -> long_reads,1,pO83_CORR.indel,NC_017659.1.fake,0,../data/NC_017659.1.indel.fa.longreads.map2ref.sort.bam:../data/NC_017659.1.indel.fa,stack,-20->-100,0,20->30->2,ytick_label_text,hgrid_flag,green:black,1:1,2:6:0.2:0,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect	ylabel->pacbio read mapping stack,gap:50bp,fontsize:13,color:black
-tracks_shift_y -> pO83_CORR,0,+1:+0
-synteny -> order->0->1,query->pO83_CORR.indel:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
+tracks_shift_y -> pO83_CORR,0,+1:+0;pO83_CORR.twin,0,+1:-0.5
+synteny -> order->0->1,query->pO83_CORR.indel:target->pO83_CORR,../data/mummer.delta.filter.coords,mummer_coords,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
 allow_feature_out_of_list -> synteny
 display_segment_name -> yes,center,shift_y:+2,fontsize:6,color:black,order:5,rotate:0
 svg_width_height -> 1300,500
@@ -74,24 +77,22 @@ scale_tick_height -> 0.01
 scale_order -> -1
 scale_tick_padding_y -> 10
 scale_tick_fontsize -> 6
-pO83_CORR
-11
-hereis 1
+read_list pO83_CORR start
 parse pO83_CORR pO83_CORR:NC_017659.1:1700-5900 -> block_index 1
 
-hereis 2
 parse pO83_CORR pO83_CORR:NC_017659.1:5901-7000 -> block_index 2
 
-33
-pO83_CORR.indel
-11
-hereis 1
+read_list pO83_CORR end
+read_list pO83_CORR.indel start
 parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:1700-6000 -> block_index 1
 
-hereis 2
 parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:6001-7000 -> block_index 2
 
-33
+read_list pO83_CORR.indel end
+read_list pO83_CORR.twin start
+parse pO83_CORR.twin pO83_CORR.twin:NC_017659.1:1700-7000 -> block_index 1
+
+read_list pO83_CORR.twin end
 hist_scatter_line not
 reads_mapping start
 1 is short_reads,1,pO83_CORR,NC_017659.1,0,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.sr.sam.sorted.bam:../data/NC_017659.1.fa,rainbow:color->blue:opacity->0.8:cross_link_width_ellipse->0.05,5->33,0,10->30->3,ytick_label_text,0,green:black,1:1,2:6:0.2:0.1,15:15,10:10:40	ylabel->illuminate pair-end read mapping,gap:50bp,fontsize:13,color:black
@@ -226,15 +227,84 @@ output out2.pO83_CORR.NC_017659.1.2.3.5901.7000.mapping.gff
 output out2.pO83_CORR.NC_017659.1.2.3.5901.7000.mapping.setting.conf
 
 no out2.pO83_CORR.NC_017659.1.2.3.5901.7000.mapping.crosslink.conf for pO83_CORR
-4 is long_reads,1,pO83_CORR.indel,NC_017659.1.fake,0,../data/NC_017659.1.indel.fa.longreads.map2ref.sort.bam:../data/NC_017659.1.indel.fa,stack,-20->-100,0,20->30->2,ytick_label_text,hgrid_flag,green:black,1:1,2:6:0.2:0,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect	ylabel->pacbio read mapping stack,gap:50bp,fontsize:13,color:black
+4 is short_reads,1,pO83_CORR.twin,NC_017659.1,0,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.sr.sam.sorted.bam:../data/NC_017659.1.fa,rainbow:color->blue:opacity->0.8:cross_link_width_ellipse->0.05,5->33,0,10->30->3,ytick_label_text,0,green:black,1:1,2:6:0.2:0.1,15:15,10:10:40	ylabel->illuminate pair-end read mapping,gap:50bp,fontsize:13,color:black
+
+block_index is 1,pO83_CORR.twin
+
+output out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.gff
+
+output out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.setting.conf
+
+no out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.crosslink.conf for pO83_CORR.twin
+start_end_xaxis is 1700,7000
+cmd is set -vex;samtools depth  -r NC_017659.1:1700-7000 ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.sr.sam.sorted.bam|awk '{print $NF}'|sort -k 1nr|head -1
+max_depth max_depth is 71
+
+rg is 1700,7000,  :1700,7000
+shift_y start
+max_depth is 199.5, read_type is short_reads
+read number is 1708
+
+output out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.gff
+
+output out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.setting.conf
+
+output out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.crosslink.conf
+5 is short_reads,1,pO83_CORR.twin,NC_017659.1,0,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.sr.sam.sorted.bam:../data/NC_017659.1.fa,stack,35->65,0,10->40->3,ytick_label_text,0,green:black,1:1,2:6:0.2:0.1,15:15,10:10:40	ylabel->illuminate pair-end read mapping stack,gap:50bp,fontsize:13,color:black
+
+block_index is 1,pO83_CORR.twin
+
+output out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.gff
+
+output out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.setting.conf
+
+no out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.crosslink.conf for pO83_CORR.twin
+start_end_xaxis is 1700,7000
+cmd is set -vex;samtools depth  -r NC_017659.1:1700-7000 ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.sr.sam.sorted.bam|awk '{print $NF}'|sort -k 1nr|head -1
+max_depth max_depth is 71
+
+rg is 1700,7000,  :1700,7000
+shift_y start
+max_depth is 77.5, read_type is short_reads
+read number is 1551
+
+output out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.gff
+
+output out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.setting.conf
+
+no out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.crosslink.conf for pO83_CORR.twin
+6 is long_reads,1,pO83_CORR.twin,NC_017659.1,0,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.longreads.sort.bam:../data/NC_017659.1.fa,stack,70->100,0,20->30->2,ytick_label_text,hgrid_flag,green:black,1:1,2:6:0.2:0,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect	ylabel->pacbio read mapping stack,gap:50bp,fontsize:13,color:black
+
+block_index is 1,pO83_CORR.twin
+
+output out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.gff
+
+output out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.setting.conf
+
+no out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.crosslink.conf for pO83_CORR.twin
+start_end_xaxis is 1700,7000
+cmd is set -vex;samtools depth  -r NC_017659.1:1700-7000 ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.longreads.sort.bam|awk '{print $NF}'|sort -k 1nr|head -1
+max_depth max_depth is 23
+
+rg is 1700,7000,  :1700,7000
+shift_y start
+max_depth is 22.5, read_type is long_reads
+read number is 33
+
+output out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.gff
+
+output out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.setting.conf
+
+no out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.crosslink.conf for pO83_CORR.twin
+7 is long_reads,1,pO83_CORR.indel,NC_017659.1.fake,0,../data/NC_017659.1.indel.fa.longreads.map2ref.sort.bam:../data/NC_017659.1.indel.fa,stack,-20->-100,0,20->30->2,ytick_label_text,hgrid_flag,green:black,1:1,2:6:0.2:0,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect	ylabel->pacbio read mapping stack,gap:50bp,fontsize:13,color:black
 
 block_index is 1,pO83_CORR.indel
 
-output out2.pO83_CORR.indel.NC_017659.1.fake.1.4.long_reads.ylabel.gff
+output out2.pO83_CORR.indel.NC_017659.1.fake.1.7.long_reads.ylabel.gff
 
-output out2.pO83_CORR.indel.NC_017659.1.fake.1.4.long_reads.ylabel.setting.conf
+output out2.pO83_CORR.indel.NC_017659.1.fake.1.7.long_reads.ylabel.setting.conf
 
-no out2.pO83_CORR.indel.NC_017659.1.fake.1.4.long_reads.ylabel.crosslink.conf for pO83_CORR.indel
+no out2.pO83_CORR.indel.NC_017659.1.fake.1.7.long_reads.ylabel.crosslink.conf for pO83_CORR.indel
 start_end_xaxis is 1700,6000
 cmd is set -vex;samtools depth  -r NC_017659.1.fake:1700-6000 ../data/NC_017659.1.indel.fa.longreads.map2ref.sort.bam|awk '{print $NF}'|sort -k 1nr|head -1
 max_depth max_depth is 21
@@ -244,18 +314,18 @@ shift_y start
 max_depth is 20.5, read_type is long_reads
 read number is 26
 
-output out2.pO83_CORR.indel.NC_017659.1.fake.1.4.1700.6000.mapping.gff
+output out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.gff
 
-output out2.pO83_CORR.indel.NC_017659.1.fake.1.4.1700.6000.mapping.setting.conf
+output out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.setting.conf
 
-no out2.pO83_CORR.indel.NC_017659.1.fake.1.4.1700.6000.mapping.crosslink.conf for pO83_CORR.indel
+no out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.crosslink.conf for pO83_CORR.indel
 block_index is 2,pO83_CORR.indel
 
-output out2.pO83_CORR.indel.NC_017659.1.fake.2.4.long_reads.ylabel.gff
+output out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.gff
 
-output out2.pO83_CORR.indel.NC_017659.1.fake.2.4.long_reads.ylabel.setting.conf
+output out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.setting.conf
 
-no out2.pO83_CORR.indel.NC_017659.1.fake.2.4.long_reads.ylabel.crosslink.conf for pO83_CORR.indel
+no out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.crosslink.conf for pO83_CORR.indel
 start_end_xaxis is 6001,7000
 cmd is set -vex;samtools depth  -r NC_017659.1.fake:6001-7000 ../data/NC_017659.1.indel.fa.longreads.map2ref.sort.bam|awk '{print $NF}'|sort -k 1nr|head -1
 max_depth max_depth is 23
@@ -265,11 +335,11 @@ shift_y start
 max_depth is 22.5, read_type is long_reads
 read number is 26
 
-output out2.pO83_CORR.indel.NC_017659.1.fake.2.4.6001.7000.mapping.gff
+output out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.gff
 
-output out2.pO83_CORR.indel.NC_017659.1.fake.2.4.6001.7000.mapping.setting.conf
+output out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.setting.conf
 
-no out2.pO83_CORR.indel.NC_017659.1.fake.2.4.6001.7000.mapping.crosslink.conf for pO83_CORR.indel
+no out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.crosslink.conf for pO83_CORR.indel
 func_name is reads_mapping
 echo "
 set -vex;cat out2.pO83_CORR.NC_017659.1.1.1.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.2.1.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.1.5901.7000.mapping.gff out2.pO83_CORR.NC_017659.1.1.2.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.2.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.2.2.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.2.5901.7000.mapping.gff out2.pO83_CORR.NC_017659.1.1.3.long_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.3.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.2.3.long_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.3.5901.7000.mapping.gff >out2.pO83_CORR.out2.reads_mapping.gff;rm out2.pO83_CORR.NC_017659.1.1.1.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.2.1.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.1.5901.7000.mapping.gff out2.pO83_CORR.NC_017659.1.1.2.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.2.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.2.2.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.2.5901.7000.mapping.gff out2.pO83_CORR.NC_017659.1.1.3.long_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.1.3.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.2.3.long_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.3.5901.7000.mapping.gff;echo output out2.pO83_CORR.out2.reads_mapping.gff
@@ -281,23 +351,32 @@ echo "
 set -vex;cat out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.crosslink.conf out2.pO83_CORR.NC_017659.1.2.1.5901.7000.mapping.crosslink.conf >out2.pO83_CORR.out2.reads_mapping.crosslink;rm out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.crosslink.conf out2.pO83_CORR.NC_017659.1.2.1.5901.7000.mapping.crosslink.conf;echo output out2.pO83_CORR.out2.reads_mapping.crosslink
 " >> out2.cat.log;set -vex;cat out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.crosslink.conf out2.pO83_CORR.NC_017659.1.2.1.5901.7000.mapping.crosslink.conf >out2.pO83_CORR.out2.reads_mapping.crosslink;rm out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.crosslink.conf out2.pO83_CORR.NC_017659.1.2.1.5901.7000.mapping.crosslink.conf;echo output out2.pO83_CORR.out2.reads_mapping.crosslink done
 echo "
-set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.1.4.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.4.1700.6000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.4.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.4.6001.7000.mapping.gff >out2.pO83_CORR.indel.out2.reads_mapping.gff;rm out2.pO83_CORR.indel.NC_017659.1.fake.1.4.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.4.1700.6000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.4.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.4.6001.7000.mapping.gff;echo output out2.pO83_CORR.indel.out2.reads_mapping.gff
-" >> out2.cat.log;set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.1.4.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.4.1700.6000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.4.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.4.6001.7000.mapping.gff >out2.pO83_CORR.indel.out2.reads_mapping.gff;rm out2.pO83_CORR.indel.NC_017659.1.fake.1.4.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.4.1700.6000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.4.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.4.6001.7000.mapping.gff;echo output out2.pO83_CORR.indel.out2.reads_mapping.gff done
+set -vex;cat out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.gff >out2.pO83_CORR.twin.out2.reads_mapping.gff;rm out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.gff;echo output out2.pO83_CORR.twin.out2.reads_mapping.gff
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.gff >out2.pO83_CORR.twin.out2.reads_mapping.gff;rm out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.gff;echo output out2.pO83_CORR.twin.out2.reads_mapping.gff done
 echo "
-set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.1.4.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.4.1700.6000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.4.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.4.6001.7000.mapping.setting.conf > out2.pO83_CORR.indel.out2.reads_mapping.setting.conf;rm out2.pO83_CORR.indel.NC_017659.1.fake.1.4.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.4.1700.6000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.4.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.4.6001.7000.mapping.setting.conf;echo output out2.pO83_CORR.indel.out2.reads_mapping.setting.conf
-" >> out2.cat.log;set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.1.4.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.4.1700.6000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.4.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.4.6001.7000.mapping.setting.conf > out2.pO83_CORR.indel.out2.reads_mapping.setting.conf;rm out2.pO83_CORR.indel.NC_017659.1.fake.1.4.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.4.1700.6000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.4.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.4.6001.7000.mapping.setting.conf;echo output out2.pO83_CORR.indel.out2.reads_mapping.setting.conf done
+set -vex;cat out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.setting.conf > out2.pO83_CORR.twin.out2.reads_mapping.setting.conf;rm out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.setting.conf;echo output out2.pO83_CORR.twin.out2.reads_mapping.setting.conf
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.setting.conf > out2.pO83_CORR.twin.out2.reads_mapping.setting.conf;rm out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.setting.conf out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.setting.conf;echo output out2.pO83_CORR.twin.out2.reads_mapping.setting.conf done
+echo "
+set -vex;cat out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.crosslink.conf >out2.pO83_CORR.twin.out2.reads_mapping.crosslink;rm out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.crosslink.conf;echo output out2.pO83_CORR.twin.out2.reads_mapping.crosslink
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.crosslink.conf >out2.pO83_CORR.twin.out2.reads_mapping.crosslink;rm out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.crosslink.conf;echo output out2.pO83_CORR.twin.out2.reads_mapping.crosslink done
+echo "
+set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.1.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.gff >out2.pO83_CORR.indel.out2.reads_mapping.gff;rm out2.pO83_CORR.indel.NC_017659.1.fake.1.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.gff;echo output out2.pO83_CORR.indel.out2.reads_mapping.gff
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.1.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.gff >out2.pO83_CORR.indel.out2.reads_mapping.gff;rm out2.pO83_CORR.indel.NC_017659.1.fake.1.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.gff;echo output out2.pO83_CORR.indel.out2.reads_mapping.gff done
+echo "
+set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.1.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.setting.conf > out2.pO83_CORR.indel.out2.reads_mapping.setting.conf;rm out2.pO83_CORR.indel.NC_017659.1.fake.1.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.setting.conf;echo output out2.pO83_CORR.indel.out2.reads_mapping.setting.conf
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.1.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.setting.conf > out2.pO83_CORR.indel.out2.reads_mapping.setting.conf;rm out2.pO83_CORR.indel.NC_017659.1.fake.1.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.setting.conf;echo output out2.pO83_CORR.indel.out2.reads_mapping.setting.conf done
 out2.reads_mapping end
 echo "
-set -vex;cat out2.pO83_CORR.out2.reads_mapping.crosslink >out2.reads_mapping.crosslink
-" >> out2.cat.log;set -vex;cat out2.pO83_CORR.out2.reads_mapping.crosslink >out2.reads_mapping.crosslink done
+set -vex;cat out2.pO83_CORR.out2.reads_mapping.crosslink out2.pO83_CORR.twin.out2.reads_mapping.crosslink >out2.reads_mapping.crosslink
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.out2.reads_mapping.crosslink out2.pO83_CORR.twin.out2.reads_mapping.crosslink >out2.reads_mapping.crosslink done
 echo "
-set -vex;cat out2.pO83_CORR.out2.reads_mapping.setting.conf out2.pO83_CORR.indel.out2.reads_mapping.setting.conf >out2.reads_mapping.setting.conf
-" >> out2.cat.log;set -vex;cat out2.pO83_CORR.out2.reads_mapping.setting.conf out2.pO83_CORR.indel.out2.reads_mapping.setting.conf >out2.reads_mapping.setting.conf done
+set -vex;cat out2.pO83_CORR.out2.reads_mapping.setting.conf out2.pO83_CORR.twin.out2.reads_mapping.setting.conf out2.pO83_CORR.indel.out2.reads_mapping.setting.conf >out2.reads_mapping.setting.conf
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.out2.reads_mapping.setting.conf out2.pO83_CORR.twin.out2.reads_mapping.setting.conf out2.pO83_CORR.indel.out2.reads_mapping.setting.conf >out2.reads_mapping.setting.conf done
 synteny start
-1 is order->0->1,query->pO83_CORR.indel:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
+1 is order->0->1,query->pO83_CORR.indel:target->pO83_CORR,../data/mummer.delta.filter.coords,mummer_coords,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
 
-start read ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6
-../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6 is plain file
+start read ../data/mummer.delta.filter.coords
+../data/mummer.delta.filter.coords is plain file
 query_overlap_length=541, target_overlap_length=441, blast:5460:147060 -> 5460:147060 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
 query_overlap_length=541, target_overlap_length=1100, blast:5460:147060 -> 5460:147060 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
@@ -306,13 +385,13 @@ query_overlap_length=1000, target_overlap_length=441, blast:5460:147060 -> 5460:
 
 query_overlap_length=1000, target_overlap_length=1100, blast:5460:147060 -> 5460:147060 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=3367, target_overlap_length=3368, blast:1891:5257 -> 2101:5468 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+query_overlap_length=3360, target_overlap_length=3360, blast:1891:5250 -> 2101:5460 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
-query_overlap_length=3367, target_overlap_length=0, blast:1891:5257 -> 2101:5468 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+query_overlap_length=3360, target_overlap_length=0, blast:1891:5250 -> 2101:5460 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=3368, blast:1891:5257 -> 2101:5468 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=3360, blast:1891:5250 -> 2101:5460 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:1891:5257 -> 2101:5468 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:1891:5250 -> 2101:5460 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
 query_overlap_length=199, target_overlap_length=199, blast:1:1898 -> 1:1898 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
@@ -322,269 +401,85 @@ query_overlap_length=0, target_overlap_length=199, blast:1:1898 -> 1:1898 rg:NC_
 
 query_overlap_length=0, target_overlap_length=0, blast:1:1898 -> 1:1898 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:34724:36500 -> 42262:40487 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:40854:42178 -> 34808:36132 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:34724:36500 -> 42262:40487 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:40854:42178 -> 34808:36132 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:34724:36500 -> 42262:40487 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:40854:42178 -> 34808:36132 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:34724:36500 -> 42262:40487 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:40854:42178 -> 34808:36132 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:40487:42262 -> 36500:34724 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:34808:36132 -> 40854:42178 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:40487:42262 -> 36500:34724 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:34808:36132 -> 40854:42178 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:40487:42262 -> 36500:34724 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:34808:36132 -> 40854:42178 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:40487:42262 -> 36500:34724 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:34808:36132 -> 40854:42178 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 48349:47530 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45180:45999 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 48349:47530 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45180:45999 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 48349:47530 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45180:45999 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 48349:47530 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45180:45999 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45999:45180 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 47530:48349 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45999:45180 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 47530:48349 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45999:45180 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 47530:48349 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45999:45180 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 47530:48349 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:138801:139574 -> 43767:44540 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 43766:44534 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:138801:139574 -> 43767:44540 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 43766:44534 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:138801:139574 -> 43767:44540 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 43766:44534 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:138801:139574 -> 43767:44540 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 43766:44534 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:43767:44540 -> 138801:139574 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74016:74784 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:43767:44540 -> 138801:139574 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74016:74784 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:43767:44540 -> 138801:139574 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74016:74784 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:43767:44540 -> 138801:139574 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74016:74784 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:110471:111241 -> 74013:74783 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 110474:111241 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:110471:111241 -> 74013:74783 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 110474:111241 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:110471:111241 -> 74013:74783 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 110474:111241 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:110471:111241 -> 74013:74783 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 110474:111241 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:74013:74783 -> 110471:111241 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 110474:111241 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:74013:74783 -> 110471:111241 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 110474:111241 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:74013:74783 -> 110471:111241 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 110474:111241 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:74013:74783 -> 110471:111241 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 110474:111241 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:110474:111244 -> 139568:138798 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 126723:127490 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:110474:111244 -> 139568:138798 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 126723:127490 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:110474:111244 -> 139568:138798 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 126723:127490 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:110474:111244 -> 139568:138798 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 126723:127490 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:138798:139568 -> 111244:110474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 138801:139568 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:138798:139568 -> 111244:110474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 138801:139568 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:138798:139568 -> 111244:110474 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 138801:139568 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
 
-query_overlap_length=0, target_overlap_length=0, blast:138798:139568 -> 111244:110474 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74784:74016 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74784:74016 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74784:74016 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74784:74016 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 44534:43766 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 44534:43766 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 44534:43766 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 44534:43766 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:138801:139569 -> 74783:74015 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:138801:139569 -> 74783:74015 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:138801:139569 -> 74783:74015 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:138801:139569 -> 74783:74015 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:74015:74783 -> 139569:138801 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:74015:74783 -> 139569:138801 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:74015:74783 -> 139569:138801 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:74015:74783 -> 139569:138801 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 44534:43767 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 44534:43767 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 44534:43767 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 44534:43767 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 111241:110474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 111241:110474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 111241:110474 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 111241:110474 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 43767:44534 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 43767:44534 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 43767:44534 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 43767:44534 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 74783:74016 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 74783:74016 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 74783:74016 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 74783:74016 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 126723:127490 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 126723:127490 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 126723:127490 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 126723:127490 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:74016:74783 -> 127490:126723 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:74016:74783 -> 127490:126723 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:74016:74783 -> 127490:126723 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:74016:74783 -> 127490:126723 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 138801:139568 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 138801:139568 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 138801:139568 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 138801:139568 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 126723:127490 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 126723:127490 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 126723:127490 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 126723:127490 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 127490:126723 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 127490:126723 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 127490:126723 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 127490:126723 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 111241:110474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 111241:110474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 111241:110474 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 111241:110474 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107875 -> 107557:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107875 -> 107557:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107875 -> 107557:107961 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107875 -> 107557:107961 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107557:107961 -> 107471:107875 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107557:107961 -> 107471:107875 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107557:107961 -> 107471:107875 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107557:107961 -> 107471:107875 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:103111:103472 -> 106746:107107 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:103111:103472 -> 106746:107107 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:103111:103472 -> 106746:107107 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:103111:103472 -> 106746:107107 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:106746:107107 -> 103111:103472 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:106746:107107 -> 103111:103472 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:106746:107107 -> 103111:103472 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:106746:107107 -> 103111:103472 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107600:107959 -> 107959:107600 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107600:107959 -> 107959:107600 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107600:107959 -> 107959:107600 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107600:107959 -> 107959:107600 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107789 -> 107643:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107789 -> 107643:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107789 -> 107643:107961 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107789 -> 107643:107961 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107643:107961 -> 107471:107789 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107643:107961 -> 107471:107789 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107643:107961 -> 107471:107789 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107643:107961 -> 107471:107789 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107703 -> 107729:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107703 -> 107729:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107703 -> 107729:107961 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107703 -> 107729:107961 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107729:107961 -> 107471:107703 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107729:107961 -> 107471:107703 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107729:107961 -> 107471:107703 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107729:107961 -> 107471:107703 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 138801:139568 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
 query_overlap_length=210, target_overlap_length=210, blast:5251:5460 -> 1891:2100 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
 
@@ -594,105 +489,41 @@ query_overlap_length=0, target_overlap_length=210, blast:5251:5460 -> 1891:2100 
 
 query_overlap_length=0, target_overlap_length=0, blast:5251:5460 -> 1891:2100 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
 
-query_overlap_length=0, target_overlap_length=0, blast:141329:141474 -> 144228:144373 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+end read ../data/mummer.delta.filter.coords, paris num is8
 
-query_overlap_length=0, target_overlap_length=0, blast:141329:141474 -> 144228:144373 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+output out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff
 
-query_overlap_length=0, target_overlap_length=0, blast:141329:141474 -> 144228:144373 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+output out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf
 
-query_overlap_length=0, target_overlap_length=0, blast:141329:141474 -> 144228:144373 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+no out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf for pO83_CORR.indel
 
-query_overlap_length=0, target_overlap_length=0, blast:144228:144373 -> 141329:141474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+output pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff
 
-query_overlap_length=0, target_overlap_length=0, blast:144228:144373 -> 141329:141474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
+output pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf
 
-query_overlap_length=0, target_overlap_length=0, blast:144228:144373 -> 141329:141474 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
+no pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf for pO83_CORR
 
-query_overlap_length=0, target_overlap_length=0, blast:144228:144373 -> 141329:141474 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
+no pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff for pO83_CORR.indel.to.pO83_CORR
 
-query_overlap_length=0, target_overlap_length=0, blast:107477:107617 -> 107821:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
+no pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf for pO83_CORR.indel.to.pO83_CORR
 
-query_overlap_length=0, target_overlap_length=0, blast:107477:107617 -> 107821:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107477:107617 -> 107821:107961 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107477:107617 -> 107821:107961 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107821:107961 -> 107477:107617 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107821:107961 -> 107477:107617 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107821:107961 -> 107477:107617 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107821:107961 -> 107477:107617 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:15820:15942 -> 75060:74940 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:15820:15942 -> 75060:74940 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:15820:15942 -> 75060:74940 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:15820:15942 -> 75060:74940 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:74940:75060 -> 15942:15820 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:74940:75060 -> 15942:15820 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:74940:75060 -> 15942:15820 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:74940:75060 -> 15942:15820 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107574 -> 107858:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107574 -> 107858:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107574 -> 107858:107961 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107471:107574 -> 107858:107961 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107858:107961 -> 107471:107574 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107858:107961 -> 107471:107574 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,5901,7000
-
-query_overlap_length=0, target_overlap_length=0, blast:107858:107961 -> 107471:107574 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,1700,5900
-
-query_overlap_length=0, target_overlap_length=0, blast:107858:107961 -> 107471:107574 rg:NC_017659.1.fake,6001,7000 -> NC_017659.1,5901,7000
-
-end read ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6, paris num is8
-
-output out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff
-
-output out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf
-
-no out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf for pO83_CORR.indel
-
-output pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff
-
-output pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf
-
-no pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf for pO83_CORR
-
-no pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff for pO83_CORR.indel.to.pO83_CORR
-
-no pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf for pO83_CORR.indel.to.pO83_CORR
-
-output pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf
+output pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf
 func_name is synteny
 echo "
-set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out2.pO83_CORR.out2.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.out2.synteny.gff
-" >> out2.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out2.pO83_CORR.out2.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.out2.synteny.gff done
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.out2.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.out2.synteny.gff
+" >> out2.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.out2.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.out2.synteny.gff done
 echo "
-set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.out2.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.out2.synteny.setting.conf
-" >> out2.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.out2.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.out2.synteny.setting.conf done
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.out2.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.out2.synteny.setting.conf
+" >> out2.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.out2.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.out2.synteny.setting.conf done
 echo "
-set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out2.pO83_CORR.indel.out2.synteny.gff;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.indel.out2.synteny.gff
-" >> out2.cat.log;set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out2.pO83_CORR.indel.out2.synteny.gff;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.indel.out2.synteny.gff done
+set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.indel.out2.synteny.gff;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.indel.out2.synteny.gff
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.indel.out2.synteny.gff;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.indel.out2.synteny.gff done
 echo "
-set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.indel.out2.synteny.setting.conf;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.indel.out2.synteny.setting.conf
-" >> out2.cat.log;set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.indel.out2.synteny.setting.conf;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.indel.out2.synteny.setting.conf done
+set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.indel.out2.synteny.setting.conf;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.indel.out2.synteny.setting.conf
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.indel.out2.synteny.setting.conf;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.indel.out2.synteny.setting.conf done
 echo "
-set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink
-" >> out2.cat.log;set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink done
+set -vex;cat pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf >out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf;echo output out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink
+" >> out2.cat.log;set -vex;cat pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf >out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf;echo output out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink done
 out2.synteny end
 echo "
 set -vex;cat out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink >out2.synteny.crosslink
@@ -709,11 +540,14 @@ echo "
 set -vex;cat out2.reads_mapping.crosslink out2.synteny.crosslink >feature.crossing.link.out2
 " >> out2.cat.log;set -vex;cat out2.reads_mapping.crosslink out2.synteny.crosslink >feature.crossing.link.out2 done
 echo "
-set -vex;cat out2.pO83_CORR.out2.reads_mapping.gff out2.pO83_CORR.indel.out2.reads_mapping.gff out2.pO83_CORR.out2.synteny.gff out2.pO83_CORR.indel.out2.synteny.gff|awk -F "	" '{print $3}'|sort -u
-" >> out2.cat.log;set -vex;cat out2.pO83_CORR.out2.reads_mapping.gff out2.pO83_CORR.indel.out2.reads_mapping.gff out2.pO83_CORR.out2.synteny.gff out2.pO83_CORR.indel.out2.synteny.gff|awk -F "	" '{print $3}'|sort -u done
+set -vex;cat out2.pO83_CORR.out2.reads_mapping.gff out2.pO83_CORR.twin.out2.reads_mapping.gff out2.pO83_CORR.indel.out2.reads_mapping.gff out2.pO83_CORR.out2.synteny.gff out2.pO83_CORR.indel.out2.synteny.gff|awk -F "	" '{print $3}'|sort -u
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.out2.reads_mapping.gff out2.pO83_CORR.twin.out2.reads_mapping.gff out2.pO83_CORR.indel.out2.reads_mapping.gff out2.pO83_CORR.out2.synteny.gff out2.pO83_CORR.indel.out2.synteny.gff|awk -F "	" '{print $3}'|sort -u done
 echo "
 set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out2.pO83_CORR.out2.reads_mapping.gff,out2.pO83_CORR.out2.synteny.gff\t/' tracks.2.list >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
 " >> out2.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out2.pO83_CORR.out2.reads_mapping.gff,out2.pO83_CORR.out2.synteny.gff\t/' tracks.2.list >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp done
+echo "
+set -vex;sed  -r 's/^(pO83_CORR.twin\s.*\.gff)\s/\1,out2.pO83_CORR.twin.out2.reads_mapping.gff\t/' tracks.2.list.out2.tmp >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
+" >> out2.cat.log;set -vex;sed  -r 's/^(pO83_CORR.twin\s.*\.gff)\s/\1,out2.pO83_CORR.twin.out2.reads_mapping.gff\t/' tracks.2.list.out2.tmp >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp done
 echo "
 set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out2.pO83_CORR.indel.out2.reads_mapping.gff,out2.pO83_CORR.indel.out2.synteny.gff\t/' tracks.2.list.out2.tmp >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
 " >> out2.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out2.pO83_CORR.indel.out2.reads_mapping.gff,out2.pO83_CORR.indel.out2.synteny.gff\t/' tracks.2.list.out2.tmp >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp done

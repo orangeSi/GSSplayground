@@ -3,7 +3,12 @@
 <li>
 <td><input id="search_the_key" type="value" value="use js regrex,example keywordA|keywordB"  size=50 title="use js regrex,example keywordA|keywordB" /></td>
 <td><input value="search by keyword of feature id" type="button" onclick="search_by_key()" /></td>
-</li>
+</li><br>
+<li>
+<td><input id="search_the_rg" type="value" value="track_name:chr_id:start:end" size=50 title="track_name:chr_id:start:end" /></td>
+<td><input id="search_by_rg" value="search by track_name1:chr_id1:start1:end1;track_name2:chr_id2:start2:end2;" type="button" onclick="search_by_rg()" /></td>
+</li><br>
+<li><td><input type="button" value="if you want pan and zoom the imgine, hit me" style="color:green;font-weight:bold" onclick="svgpanzoom(1)" /></td></li>
 </ul>
 <script>
 function refill(chi, fill,opacity,stroke_width){
@@ -12,22 +17,116 @@ function refill(chi, fill,opacity,stroke_width){
 		chi.style['stroke-width']=stroke_width;
 		chi.style['stroke']=fill;
 }
+//blocks_start_ends_cord
+function search_by_rg(){
+	if(window.refresh_flag >0){
+		alert('sorry, you neet to refresh the page, then you can search the region yet~');
+		return 0
+	}
+	var search_result_num = 0;	
+	var search_the_rg = document.getElementById("search_the_rg").value;
+	search_the_rg = search_the_rg.replace(/\s*$/, "");
+	search_the_rg = search_the_rg.replace(/^\s*/, "");
+	search_the_rg = search_the_rg.replace(/;\s*$/, "");
+	
+	var rgs = search_the_rg.split(/;/);
+	for (var rg_index in rgs){
+		rgs[rg_index] = rgs[rg_index].replace(/\s*$/, "");
+		rgs[rg_index] = rgs[rg_index].replace(/^\s*/, "");
+		rgs[rg_index] = rgs[rg_index].replace(/;\s*$/, "");
+		rg = rgs[rg_index].split(/:/);
+		if(rg.length !=4){alert(rgs[rg_index]+" should like track_name:chr_id:start:end");return 1}
+		var [rg_track_name, rg_chr_id, rg_start, rg_end] = rg;
+		rg = [rg_start, rg_end];
+		var svg = document.getElementById("demo-tiger");
+		var svgNS = 'http://www.w3.org/2000/svg';
+		var re = new RegExp(rg_track_name,"g");
+		for (var track_name in blocks_start_ends_cord){
+			if(track_name.match(re)){
+				for (var chr_id in blocks_start_ends_cord[track_name]){
+					if( chr_id == rg_chr_id){
+						for (var start_end in blocks_start_ends_cord[track_name][chr_id]){
+							var [start, end] = start_end.split(/,/);
+							start = parseFloat(start);
+							end = parseFloat(end);
+						
+							var [start_x, start_y, end_x, end_y] = blocks_start_ends_cord[track_name][chr_id][start_end].split(/,/);
+							console.log(blocks_start_ends_cord[track_name][chr_id][start_end].split(/,/));
+							start_x = parseFloat(start_x);
+							start_y = parseFloat(start_y);
+							end_x = parseFloat(end_x);
+							end_y = parseFloat(end_y);
+						
+						for(var rg_index in rg){
+							var rg_pos = rg[rg_index];
+							console.log(rg_pos);
+							if( rg_pos >= start && rg_pos <= end){
+								var scale_ratio = (end_x-start_x)/(end-start+1); 
+								var x = start_x + (rg_pos-start) * scale_ratio;
+								console.log('ratio is '+scale_ratio)
+								var height= tracks_heigh[track_name];
+								var y=(start_y+end_y)/2 - height;
+								var width=scale_ratio*(end-start)/1000;
+								if(y<0){y=0};
+								/// cread a child ,demo-tiger
+								if(rg_index == 1){
+									x = x - width;
+								}
+								width *=3;
+								 var g = document.createElementNS(svgNS,'g');
+								 var title = document.createElementNS(svgNS,'title');
+								 var title_text = document.createTextNode(track_name+":"+chr_id+":"+rg_pos);
+								 var rect = document.createElementNS(svgNS,'rect');
+								 rect.setAttribute('x',x);
+								 rect.setAttribute('y',y);
+								 rect.setAttribute('width',width);
+								 rect.setAttribute('height',2*height);
+								 rect.setAttribute('fill','red');
+								 title.append(title_text);
+								 g.append(title);
+								 g.append(rect);
+								 svg.appendChild(g);
+
+								 console.log('rect is '+rect.innerHTML);
+								 console.log("x="+x+",y="+y+",width="+width+",height="+height);
+								 search_result_num +=1;
+								}
+							}
+
+						}
+					}
+				}
+			}
+		}
+	}
+	if(search_result_num == 0){
+		alert("find nothing~");
+		return 0;
+	}
+	svgpanzoom(0);
+	console.log('reload');
+}
+
+
 function search_by_key(){
+	var search_result_num = 0;
 	var new_color = "red";
 	var new_opacity = 1;
 	var new_stroke_width = 1;
 	var gs = document.getElementsByClassName("myth");
 	var key = document.getElementById("search_the_key").value;
+	
 	if(key.length == 0){return 1;}
 	var re = new RegExp(key,"g");
 	for (var i=0; i < gs.length; i++){
 		if(gs[i].innerHTML.match(re)){
 			//console.log(gs[i].innerHTML);
+			search_result_num +=1;
 			if (gs[i].hasChildNodes()) {
 				var children = gs[i].childNodes;
 				for (var ii = 0; ii < children.length; ii++) {
-				// do something with each child as children[i]
-				// NOTE: List is live, adding or removing children will change the list
+					// do something with each child as children[i]
+					// NOTE: List is live, adding or removing children will change the list
 					
 					if(children[ii].tagName == "title" || children[ii].tagName === undefined){
 						continue;
@@ -50,7 +149,7 @@ function search_by_key(){
 					var the_time=0;
 					var color="";
 					var opacity=1;
-					var loops=3;
+					var loops=1;
 					var stroke_width=0;
 					if(loops%2 == 0){alert("loops must be even,like 20, not "+loops)}
 					refill(children[ii], new_color,new_opacity, new_stroke_width);
@@ -72,6 +171,12 @@ function search_by_key(){
 			}
 		}
 	}
+	
+	if(search_result_num == 0){
+		alert("find nothing~");
+		return 0;
+	}
+	svgpanzoom(0);
+	
 }
 </script>
-
