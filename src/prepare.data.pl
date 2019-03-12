@@ -814,7 +814,8 @@ sub reads_mapping(){
 		die "\nerror: block_flag should >=0, 0 mean all\n" if($block_flag<0 ||$block_flag!~ /^\d+$/);
 		die "\nerror: $sample or $scf not are friends in $k and $list \n" if(not exists $gff->{$sample}->{scf}->{$scf});
 		die "\nerror: $sample don't have $block_flag fragments in $k\n" if($block_flag!=0 && not exists $gff->{$sample}->{chooselen_single}->{$block_flag});
-		for my $block_index(keys %{$gff->{$sample}->{chooselen_single}}){
+		my $ytick_flag_exists=0;
+		for my $block_index(sort {$b<=>$a} keys %{$gff->{$sample}->{chooselen_single}}){
 			print "block_index is $block_index,$sample\n";
 			next if($block_flag != 0 && $block_flag != $block_index);
 			my @scfs=keys %{$gff->{$sample}->{block2}->{$block_index}};
@@ -836,17 +837,18 @@ sub reads_mapping(){
 			my ($mapping_label_size, $tick_label_size)=@label_sizes;
 			my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{start};
 			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
+			if($ytick_flag_exists == 0){
+				my ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf)=&plot_ylabel($k, $block_start_bp, $block_end_bp, $sample, $block_index, $scf, $k_index, $yaxis, $reads_type, \@yaxis_list);
+				my $prefix_ylabel="$prefix_name.$sample.$scf.$block_index.$k_index.$reads_type.ylabel";
+				%outname = &gather_gff_conf_link($prefix_ylabel,$ylabel_gff,$ylabel_setting_conf,$ylabel_cross_link_conf, \%outname, $sample);
 
-			my ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf)=&plot_ylabel($k, $block_start_bp, $block_end_bp, $sample, $block_index, $scf, $k_index, $yaxis, $reads_type, \@yaxis_list);
-			my $prefix_ylabel="$prefix_name.$sample.$scf.$block_index.$k_index.$reads_type.ylabel";
-			%outname = &gather_gff_conf_link($prefix_ylabel,$ylabel_gff,$ylabel_setting_conf,$ylabel_cross_link_conf, \%outname, $sample);
-
-			if($ytick_flag){
-				my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size, $reads_type);
-				my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.ytick";
-				%outname = &gather_gff_conf_link($prefix,$ytick_gff,$ytick_setting_conf,$cross_link_conf, \%outname, $sample);
+				if($ytick_flag){
+					my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size, $reads_type);
+					my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.ytick";
+					%outname = &gather_gff_conf_link($prefix,$ytick_gff,$ytick_setting_conf,$cross_link_conf, \%outname, $sample);
+				}
 			}
-
+			$ytick_flag_exists++;
 			my %highss = &get_regions(\@highs, $k, $block_start_bp, $block_end_bp);
 			next if(not exists $highss{start_end_xaxis});
 			my @start_end_xaxis = @{$highss{start_end_xaxis}};
@@ -1096,7 +1098,8 @@ sub hist_scatter_line(){
 		die "\nerror: window_size should >=1\n" if($window_size!~ /^\d+$/);
 		die "\nerror: $sample or $scf not are friends in $k\n" if(not exists $gff->{$sample}->{scf}->{$scf});
 		die "\nerror: $sample don't have $block_flag fragments in $k\n" if($block_flag!=0 && not exists $gff->{$sample}->{chooselen_single}->{$block_flag});
-		for my $block_index(keys %{$gff->{$sample}->{chooselen_single}}){
+		my $ytick_flag_exists=0;
+		for my $block_index(sort {$b<=>$a} keys %{$gff->{$sample}->{chooselen_single}}){
 			print "block_index is $block_index,$sample\n";
 			next if($block_flag != 0 && $block_flag != $block_index);
 			my @scfs=keys %{$gff->{$sample}->{block2}->{$block_index}};
@@ -1118,16 +1121,19 @@ sub hist_scatter_line(){
 			my ($depth_label_size, $tick_label_size)=@label_sizes;
 			my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{start};
 			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
+			if($ytick_flag_exists == 0){
+				my ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf)=&plot_ylabel($k, $block_start_bp, $block_end_bp, $sample, $block_index, $scf, $k_index, $yaxis, $depth_type, \@yaxis_list);
+				my $prefix_ylabel="$prefix_name.$sample.$scf.$block_index.$k_index.$depth_type.ylabel";
+				%outname = &gather_gff_conf_link($prefix_ylabel,$ylabel_gff,$ylabel_setting_conf,$ylabel_cross_link_conf, \%outname, $sample);
 
-			my ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf)=&plot_ylabel($k, $block_start_bp, $block_end_bp, $sample, $block_index, $scf, $k_index, $yaxis, $depth_type, \@yaxis_list);
-			my $prefix_ylabel="$prefix_name.$sample.$scf.$block_index.$k_index.$depth_type.ylabel";
-			%outname = &gather_gff_conf_link($prefix_ylabel,$ylabel_gff,$ylabel_setting_conf,$ylabel_cross_link_conf, \%outname, $sample);
-
-			if($ytick_flag){
-				my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size, $depth_type);
-				my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.ytick";
-				%outname = &gather_gff_conf_link($prefix,$ytick_gff,$ytick_setting_conf,$cross_link_conf, \%outname, $sample);
+				if($ytick_flag){
+					my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_border, $k, $tick_label_size, $depth_type);
+					my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.ytick";
+					%outname = &gather_gff_conf_link($prefix,$ytick_gff,$ytick_setting_conf,$cross_link_conf, \%outname, $sample);
+				}
 			}
+			$ytick_flag_exists++;
+
 
 			my %highss = &get_regions(\@highs,$k, $block_start_bp, $block_end_bp);
 			next if(not exists $highss{start_end_xaxis});

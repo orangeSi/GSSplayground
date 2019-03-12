@@ -1,6 +1,9 @@
 
 <ul>
 <li>
+<td><input id="hightligh_ratio" type="value" value="1"  size=5 title="highlight ratio" /></td>
+</li><br>
+<li>
 <td><input id="search_the_key" type="value" value="use js regrex,example keywordA|keywordB"  size=50 title="use js regrex,example keywordA|keywordB" /></td>
 <td><input value="search by keyword of feature id" type="button" onclick="search_by_key()" /></td>
 </li><br>
@@ -18,6 +21,17 @@ function refill(chi, fill,opacity,stroke_width){
 		chi.style['stroke']=fill;
 }
 //blocks_start_ends_cord
+
+function get_hightligh_ratio(){
+	var hightligh_ratio=document.getElementById("hightligh_ratio").value;
+	hightligh_ratio = hightligh_ratio.replace(/^\s*|\s*$/g, "");
+	if(hightligh_ratio.match(/[^\d^\.]/)){
+		alert(hightligh_ratio+" should be number, like 1.1 or 1 or 2");
+		return 0;
+	}
+	hightligh_ratio = parseFloat(hightligh_ratio);
+	return hightligh_ratio;
+}
 function search_by_rg(){
 	if(window.refresh_flag >0){
 		alert('sorry, you neet to refresh the page, then you can search the region yet~');
@@ -29,6 +43,10 @@ function search_by_rg(){
 	search_the_rg = search_the_rg.replace(/^\s*/, "");
 	search_the_rg = search_the_rg.replace(/;\s*$/, "");
 	
+	var hightligh_ratio = get_hightligh_ratio();
+	console.log("hightligh_ratio is "+hightligh_ratio);
+	if(hightligh_ratio == 0){return 0}
+
 	var rgs = search_the_rg.split(/;/);
 	for (var rg_index in rgs){
 		rgs[rg_index] = rgs[rg_index].replace(/\s*$/, "");
@@ -72,7 +90,7 @@ function search_by_rg(){
 								if(rg_index == 1){
 									x = x - width;
 								}
-								width *=3;
+								width *=hightligh_ratio;
 								 var g = document.createElementNS(svgNS,'g');
 								 var title = document.createElementNS(svgNS,'title');
 								 var title_text = document.createTextNode(track_name+":"+chr_id+":"+rg_pos);
@@ -109,6 +127,7 @@ function search_by_rg(){
 
 
 function search_by_key(){
+	var hightlight_time = 6;
 	var search_result_num = 0;
 	var new_color = "red";
 	var new_opacity = 1;
@@ -116,7 +135,12 @@ function search_by_key(){
 	var gs = document.getElementsByClassName("myth");
 	var key = document.getElementById("search_the_key").value;
 	
-	if(key.length == 0){return 1;}
+	if(key.length == 0){alert("keyword is empty");return 1;}
+
+	var hightligh_ratio = get_hightligh_ratio();
+	console.log("hightligh_ratio is "+hightligh_ratio);
+	if(hightligh_ratio == 0){return 0}
+
 	var re = new RegExp(key,"g");
 	for (var i=0; i < gs.length; i++){
 		if(gs[i].innerHTML.match(re)){
@@ -145,6 +169,9 @@ function search_by_key(){
 					if(raw_stroke_width == 0 ||raw_stroke_width == "0px"){
 						new_stroke_width = 1;
 					}
+					
+					new_stroke_width *=hightligh_ratio;
+
 					children[ii].style.fill = new_color;
 					var the_time=0;
 					var color="";
@@ -154,7 +181,7 @@ function search_by_key(){
 					if(loops%2 == 0){alert("loops must be even,like 20, not "+loops)}
 					refill(children[ii], new_color,new_opacity, new_stroke_width);
 					for(var j=1; j<=loops; j++){ // 100 loops
-						the_time += j * 1000;
+						the_time += j * 1000 * hightlight_time;
 						if(j%2 == 0){
 							color=new_color;
 							opacity=new_opacity;
