@@ -14,12 +14,15 @@ cross_link_anchor_pos = low_up
 sample_name_font_size_default = 15
 cross_link_width_ellipse = 0.2
 feature_border_color = black
+
+hist_scatter_line = brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black	start_end_xaxis->1:7060
+
 width_ratio_ref_cluster_legend = 0.1-0.75-0.15
 display_feature = yes
 feature_opacity = 1
+cross_link_orientation_ellipse = up
 cross_link_opacity = 1
 feature_label_auto_angle_flag = 1
-cross_link_orientation_ellipse = up
 feature_label_color = black
 padding_feature_label = 0.01
 scale_tick_fontsize = 6
@@ -44,7 +47,7 @@ scale_tick_height = 0.01
 legend_height_space = 0.1
 legend_width_margin = 0.15
 feature_shift_x = 0
-feature_keywords = xx,synteny
+feature_keywords = xx,hist_scatter_line,synteny,ylabel
 track_style = fill:blue;opacity:0.2
 feature_x_extent = 0bp,0bp
 label_rotate_angle = 0

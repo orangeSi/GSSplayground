@@ -1,3 +1,4 @@
+hist_scatter_line -> brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black	start_end_xaxis->1:7060
 synteny -> order->2->3,query->pO83_CORR.indel:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
 display_segment_name -> yes,center,shift_y:+2,fontsize:10,color:black,order:5,rotate:0
 svg_width_height -> 1300,500
@@ -76,7 +77,37 @@ read_list pO83_CORR.indel start
 parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:1700-6000 -> block_index 1
 
 read_list pO83_CORR.indel end
-hist_scatter_line not
+hist_scatter_line start
+1 is brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black	start_end_xaxis->1:7060
+
+block_index is 1,pO83_CORR
+
+output out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff
+
+output out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf
+
+no out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.crosslink.conf for pO83_CORR
+hist_scatter_line_run rg is 1,7060  :1,7060
+info is brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black	start_end_xaxis->1:7060
+is:../data/base_brand.txt:../data/NC_017659.1.fa, pO83_CORR, NC_017659.1,1, 7060,20, brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black	start_end_xaxis->1:7060
+7060
+
+output out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.gff
+
+output out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.setting.conf
+
+no out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.crosslink.conf for pO83_CORR
+func_name is hist_scatter_line
+echo "
+set -vex;cat out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.gff >out1.pO83_CORR.out1.hist_scatter_line.gff;rm out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.gff;echo output out1.pO83_CORR.out1.hist_scatter_line.gff
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.gff >out1.pO83_CORR.out1.hist_scatter_line.gff;rm out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.gff;echo output out1.pO83_CORR.out1.hist_scatter_line.gff done
+echo "
+set -vex;cat out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.setting.conf > out1.pO83_CORR.out1.hist_scatter_line.setting.conf;rm out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.setting.conf;echo output out1.pO83_CORR.out1.hist_scatter_line.setting.conf
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.setting.conf > out1.pO83_CORR.out1.hist_scatter_line.setting.conf;rm out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.setting.conf;echo output out1.pO83_CORR.out1.hist_scatter_line.setting.conf done
+out1.hist_scatter_line end
+echo "
+set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.setting.conf >out1.hist_scatter_line.setting.conf
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.setting.conf >out1.hist_scatter_line.setting.conf done
 reads_mapping not
 synteny start
 1 is order->2->3,query->pO83_CORR.indel:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
@@ -215,20 +246,20 @@ set -vex;cat out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink >out1.synt
 echo "
 set -vex;cat out1.pO83_CORR.out1.synteny.setting.conf out1.pO83_CORR.indel.out1.synteny.setting.conf >out1.synteny.setting.conf
 " >> out1.cat.log;set -vex;cat out1.pO83_CORR.out1.synteny.setting.conf out1.pO83_CORR.indel.out1.synteny.setting.conf >out1.synteny.setting.conf done
-add out1.synteny.setting.conf to feature_setting 
+add out1.hist_scatter_line.setting.conf out1.synteny.setting.conf to feature_setting 
 echo "
-set -vex;cat out1.synteny.setting.conf >feature.color.label.conf.out1
-" >> out1.cat.log;set -vex;cat out1.synteny.setting.conf >feature.color.label.conf.out1 done
+set -vex;cat out1.hist_scatter_line.setting.conf out1.synteny.setting.conf >feature.color.label.conf.out1
+" >> out1.cat.log;set -vex;cat out1.hist_scatter_line.setting.conf out1.synteny.setting.conf >feature.color.label.conf.out1 done
 add out1.synteny.crosslink to crossing_link 
 echo "
 set -vex;cat out1.synteny.crosslink >feature.crossing.link.out1
 " >> out1.cat.log;set -vex;cat out1.synteny.crosslink >feature.crossing.link.out1 done
 echo "
-set -vex;cat out1.pO83_CORR.out1.synteny.gff out1.pO83_CORR.indel.out1.synteny.gff|awk -F "	" '{print $3}'|sort -u
-" >> out1.cat.log;set -vex;cat out1.pO83_CORR.out1.synteny.gff out1.pO83_CORR.indel.out1.synteny.gff|awk -F "	" '{print $3}'|sort -u done
+set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.gff out1.pO83_CORR.out1.synteny.gff out1.pO83_CORR.indel.out1.synteny.gff|awk -F "	" '{print $3}'|sort -u
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.gff out1.pO83_CORR.out1.synteny.gff out1.pO83_CORR.indel.out1.synteny.gff|awk -F "	" '{print $3}'|sort -u done
 echo "
-set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp
-" >> out1.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp done
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.hist_scatter_line.gff,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp
+" >> out1.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.hist_scatter_line.gff,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp done
 echo "
 set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out1.pO83_CORR.indel.out1.synteny.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp
 " >> out1.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out1.pO83_CORR.indel.out1.synteny.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp done

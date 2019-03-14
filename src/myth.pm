@@ -467,6 +467,8 @@ sub get_real_coordinate(){
 	}else{
 		die "error:$s should <= $e, but not in fact\n"
 	}
+	$s--;
+	$e--;
 	return ($s,$e);
 }
 
@@ -520,7 +522,7 @@ sub draw_genes(){
 	my @feature_shift_y_units = ("radius", "backbone", "percent");
 	if($shape=~ /^circle_point/){
 		if($feature_shift_y_unit=~ /radius/){
-			$shift_unit=($end-$start)*$ratio;
+			$shift_unit=($end-$start+1)*$ratio;
 		}elsif($feature_shift_y_unit!~ /backbone/ && $feature_shift_y_unit!~ /percent/){
 			die "error: only support @feature_shift_y_units for feature_shift_y_unit, but not $feature_shift_y_unit\n";
 		}

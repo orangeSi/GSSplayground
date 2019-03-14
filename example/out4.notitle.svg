@@ -27,13 +27,12 @@
 
 
 
-<path id="pO83_CORR.NC_017659.1.5460.147060.1.+.1"  d="M890.5 149 L890.5 151 L20613.4964285714 151 L20613.4964285714 149 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+<path id="pO83_CORR.NC_017659.1.5460.147060.1.+.1"  d="M890.360714285714 149 L890.360714285714 151 L20613.3571428571 151 L20613.3571428571 149 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
 
-<path id="pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1"  d="M890.5 349 L890.5 351 L20613.4964285714 351 L20613.4964285714 349 Z" clip-path="url(#cut-pO83_CORR.indel-NC_017659.1.fake-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
-
+<path id="pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1"  d="M890.360714285714 349 L890.360714285714 351 L20613.3571428571 351 L20613.3571428571 349 Z" clip-path="url(#cut-pO83_CORR.indel-NC_017659.1.fake-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
@@ -42,7 +41,7 @@
 
 
  <defs>    <clipPath id="clip_130-149-1105-149-130-349-1105-349"><path d="M130 149 L1105 149 L1105 349 L130 349 Z" /></clipPath>  </defs>
-<path d="M890.5 157 L20613.4964285714 157 L20613.4964285714 343 L890.5 343 Z"  clip-path="url(#clip_130-149-1105-149-130-349-1105-349)" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5" />
+<path d="M890.360714285714 157 L20613.3571428571 157 L20613.3571428571 343 L890.360714285714 343 Z"  clip-path="url(#clip_130-149-1105-149-130-349-1105-349)" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5" />
 
 
 
@@ -50,21 +49,12 @@
 
 
 
-<polygon id="pO83_CORR.NC_017659.1.2101.5468.1.+.1" points="422.639285714286,149 422.639285714286,151 891.753571428571,151 891.753571428571,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+<polygon id="pO83_CORR.NC_017659.1.2101.5468.1.+.1" points="422.5,149 422.5,151 891.614285714286,151 891.614285714286,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
 
-<polygon id="pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.1" points="393.389285714286,349 393.389285714286,351 862.364285714286,351 862.364285714286,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
-
-
-
-
-
-
-
-
- <polygon points="422.639285714286,157 891.753571428571,157 862.364285714286,343 393.389285714286,343" style="stroke:black;stroke-width:0;fill:orange;opacity:0.4997"/>
+<polygon id="pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.1" points="393.25,349 393.25,351 862.225,351 862.225,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
@@ -72,12 +62,7 @@
 
 
 
-<polygon id="pO83_CORR.NC_017659.1.1.1898.1.+.1" points="130.139285714286,149 130.139285714286,151 394.503571428571,151 394.503571428571,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
-
-
-
-
-<polygon id="pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1" points="130.139285714286,349 130.139285714286,351 394.503571428571,351 394.503571428571,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+ <polygon points="422.5,157 891.614285714286,157 862.225,343 393.25,343" style="stroke:black;stroke-width:0;fill:orange;opacity:0.4997"/>
 
 
 
@@ -85,21 +70,12 @@
 
 
 
-
- <polygon points="130.139285714286,157 394.503571428571,157 394.503571428571,343 130.139285714286,343" style="stroke:black;stroke-width:0;fill:orange;opacity:0.49945"/>
-
+<polygon id="pO83_CORR.NC_017659.1.1.1898.1.+.1" points="130,149 130,151 394.364285714286,151 394.364285714286,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
 
-
-
-<polygon id="pO83_CORR.NC_017659.1.1891.2100.1.+.1" points="393.389285714286,149 393.389285714286,151 422.639285714286,151 422.639285714286,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
-
-
-
-
-<polygon id="pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1" points="861.389285714286,349 861.389285714286,351 890.639285714286,351 890.639285714286,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+<polygon id="pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1" points="130,349 130,351 394.364285714286,351 394.364285714286,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
@@ -107,8 +83,28 @@
 
 
 
+ <polygon points="130,157 394.364285714286,157 394.364285714286,343 130,343" style="stroke:black;stroke-width:0;fill:orange;opacity:0.49945"/>
 
- <polygon points="393.389285714286,157 422.639285714286,157 890.639285714286,343 861.389285714286,343" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5"/>
+
+
+
+
+
+
+<polygon id="pO83_CORR.NC_017659.1.1891.2100.1.+.1" points="393.25,149 393.25,151 422.5,151 422.5,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+
+
+
+
+<polygon id="pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1" points="861.25,349 861.25,351 890.5,351 890.5,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+
+
+
+
+
+
+
+ <polygon points="393.25,157 422.5,157 890.5,343 861.25,343" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5"/>
 
 
 </svg>

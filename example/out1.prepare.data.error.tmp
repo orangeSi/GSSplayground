@@ -1,3 +1,10 @@
++ cat out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.gff
++ rm out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.gff
++ echo output out1.pO83_CORR.out1.hist_scatter_line.gff
++ cat out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.setting.conf
++ rm out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.setting.conf
++ echo output out1.pO83_CORR.out1.hist_scatter_line.setting.conf
++ cat out1.pO83_CORR.out1.hist_scatter_line.setting.conf
 + cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff
 + rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff
 + echo output out1.pO83_CORR.out1.synteny.gff
@@ -15,12 +22,12 @@
 + echo output out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink
 + cat out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink
 + cat out1.pO83_CORR.out1.synteny.setting.conf out1.pO83_CORR.indel.out1.synteny.setting.conf
-+ cat out1.synteny.setting.conf
++ cat out1.hist_scatter_line.setting.conf out1.synteny.setting.conf
 + cat out1.synteny.crosslink
++ cat out1.pO83_CORR.out1.hist_scatter_line.gff out1.pO83_CORR.out1.synteny.gff out1.pO83_CORR.indel.out1.synteny.gff
 + sort -u
-+ cat out1.pO83_CORR.out1.synteny.gff out1.pO83_CORR.indel.out1.synteny.gff
 + awk -F '	' '{print $3}'
-+ sed -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list
++ sed -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.hist_scatter_line.gff,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list
 + cp tracks.1.list.out1 tracks.1.list.out1.tmp
 + sed -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out1.pO83_CORR.indel.out1.synteny.gff\t/' tracks.1.list.out1.tmp
 + cp tracks.1.list.out1 tracks.1.list.out1.tmp

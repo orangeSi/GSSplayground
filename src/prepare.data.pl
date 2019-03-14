@@ -411,16 +411,17 @@ sub synteny_run(){
 				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.$qt_index";
 				my $query_target_feature_id="$query_feature_id -> $target_feature_id";
 				my $indentity=$arr[2];
-				my $tmp;
-				$tmp=abs($arr[7]-$arr[6])+1;my $q_cov=$tmp/$arr[3] * 100;$q_cov=" $tmp/$arr[3]=$q_cov";
-				$tmp=abs($arr[9]-$arr[8])+1;my $t_cov=$tmp/$arr[3] * 100;$t_cov=" $tmp/$arr[3]=$t_cov";
+				#my $tmp;
+				#$tmp=abs($arr[7]-$arr[6])+1;my $q_cov=$tmp/$arr[3] * 100;$q_cov=" $tmp/$arr[3]=$q_cov";
+				#$tmp=abs($arr[9]-$arr[8])+1;my $t_cov=$tmp/$arr[3] * 100;$t_cov=" $tmp/$arr[3]=$t_cov";
 				$align{query}{$query_feature_id}{query_scf}=$query_scf;
 				$align{query}{$query_feature_id}{query_start}=$query_start;
 				$align{query}{$query_feature_id}{query_end}=$query_end;
 				$align{qt}{$query_target_feature_id}{strand}=$strand;
 				$align{qt}{$query_target_feature_id}{indentity}=$indentity;
-				$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
-				$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+				#$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
+				#$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+				$align{qt}{$query_target_feature_id}{align_length}=$arr[3];
 				$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
 				$align{target}{$target_feature_id}{target_scf}=$target_scf;
 				$align{target}{$target_feature_id}{target_start}=$target_start;
@@ -475,16 +476,22 @@ sub synteny_run(){
 				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.$qt_index";
 				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.$qt_index";
 				my $query_target_feature_id="$query_feature_id -> $target_feature_id";
-				my $tmp;
-				$tmp=abs($query_start-$query_end)+1;my $q_cov=$tmp/$align_length * 100;$q_cov=" $tmp/$align_length=$q_cov";
-				$tmp=abs($target_start-$target_end)+1;my $t_cov=$tmp/$align_length * 100;$t_cov=" $tmp/$align_length=$t_cov";
+				#my $tmp;
+				#$tmp=abs($query_start-$query_end)+1;
+				#my $q_cov=$tmp/$align_length * 100;
+				#$q_cov=" $tmp/$align_length=$q_cov";
+				#$tmp=abs($target_start-$target_end)+1;
+				#my $t_cov=$tmp/$align_length * 100;
+				#$t_cov=" $tmp/$align_length=$t_cov";
+				
 				$align{query}{$query_feature_id}{query_scf}=$query_scf;
 				$align{query}{$query_feature_id}{query_start}=$query_start;
 				$align{query}{$query_feature_id}{query_end}=$query_end;
 				$align{qt}{$query_target_feature_id}{strand}=$strand;
 				$align{qt}{$query_target_feature_id}{indentity}=$indentity;
-				$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
-				$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+				#$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
+				#$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+				$align{qt}{$query_target_feature_id}{align_length}=$align_length;
 				$align{qt}{$query_target_feature_id}{popup}=$pop;
 				$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
 				$align{target}{$target_feature_id}{target_scf}=$target_scf;
@@ -748,10 +755,17 @@ sub synteny_common_write(){
 			$tid{$target_feature_id}="";
 		}
 		$cross_link_opacity*=($align{qt}{$pair}{indentity}/100);
-		my $q_cov=$align{qt}{$pair}{q_cov};
-		my $t_cov=$align{qt}{$pair}{t_cov};
+		#my $q_cov=$align{qt}{$pair}{q_cov};
+		#my $t_cov=$align{qt}{$pair}{t_cov};
+		my $coverage="";
+		if(exists $align{qt}{$pair}{align_length}){
+			$coverage.="alignment_length -> $align{qt}{$pair}{align_length};";
+		}
+		if(exists $align{qt}{$pair}{q_cov}){
+			$coverage.="query_coverage -> $align{qt}{$pair}{q_cov};ref_coverage -> $align{qt}{$pair}{t_cov};";
+		}
 		if(not exists $qtid{"$query_feature_id.$target_feature_id"}){
-			my $feature_popup_title="query -> $query_scf: $query_start-$query_end;target -> $target_scf: $target_start-$target_end;strand -> $strand;indentity -> $align{qt}{$pair}{indentity}%;coverage -> query:$q_cov%;target:$t_cov%";
+			my $feature_popup_title="query -> $query_scf: $query_start-$query_end;target -> $target_scf: $target_start-$target_end;strand -> $strand;indentity -> $align{qt}{$pair}{indentity}%;$coverage";
 			my $edge_coordinate_feature_out_of_list=$align{qt}{$pair}{edge_coordinate_feature_out_of_list};
 			#$block_clip_path_id="cut-$sample-$scf[0]-$block_index
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shape\t$crosslink_shape\n";
@@ -1085,7 +1099,7 @@ sub hist_scatter_line(){
 		my $the_opacity=$2;
 
 		die "\nerror: depth_order should be number, not $depth_order\n" if($depth_order!~ /^-?\d+$/);
-		my @depth_types=("hist", "scatter", "scatter_line");
+		my @depth_types=("hist", "scatter", "scatter_line", "brand");
 		die "\nerror: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
 		$depth_file=~ /^([^:]+):([^:]+)$/;
 		die "\nerror: $1 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $1);
@@ -1607,6 +1621,7 @@ sub get_mapping_reads(){
 			chomp;
 			my @arr=split(/\t/,$_);
 			my ($r_id, $flag, $ref_id, $ref_start_pos, $mapq, $cigar, $rnext, $pnext)=@arr[0..7];
+			$r_id=~ s/,/\./g;
 			next if($flag & 4);
 			next if($mapq < $min_mapq);
 			next if($cigar eq "*");
@@ -2074,9 +2089,16 @@ sub hist_scatter_line_run(){
 		}else{
 			$depth_overflow_flag=0;    
 		}
+		
+		if($depth_type eq "brand"){
+			die "error:brand, $s1>$e1, $s1 should not be $e1\n" if($s1 == $e1);
+			$display_feature_label="no";
+			$depth_height=abs($s1-$e1);
+		}
+
 		my $depth_shift_y;
-		my $depth_color=$the_color;
-		my $depth_opacity=$the_opacity;
+		my $depth_color=(exists $depths{window}{$window}{color})? $depths{window}{$window}{color}:$the_color;
+		my $depth_opacity=(exists $depths{window}{$window}{opacity})? $depths{window}{$window}{opacity}:$the_opacity;
 		my $depth_start=$depths{window}{$window}{start};
 		my $depth_end=$depths{window}{$window}{end};
 		next if($depth_end >$block_end_bp && $depth_start < $block_start_bp);
@@ -2100,7 +2122,25 @@ sub hist_scatter_line_run(){
 #$depth_setting_conf.="$depth_id\tpadding_feature_label\t0.01\n";
 		}
 
-		if($depth_type eq "hist"){
+		if($depth_type eq "brand"){
+			if($e1=~ /-/){
+				$depth_shift_y=abs($e1)-$depth_height;
+				$depth_shift_y="+$depth_shift_y";
+				$padding_depth_label="-0.01";
+			}else{
+				$depth_shift_y=abs($s1);
+				$depth_shift_y="-$depth_shift_y";
+				$padding_depth_label="+0.01";
+			}
+			$depth_setting_conf.="\n$depth_id\tfeature_popup_title\t$depths{window}{$window}{label}\n" if(exists $depths{window}{$window}{label});
+			$depth_setting_conf.="\n$depth_id\tfeature_height_ratio\t$depth_height\n";
+			$depth_setting_conf.="\n$depth_id\tfeature_height_unit\tpercent\n";
+			$depth_setting_conf.="$depth_id\tfeature_shape\trect\n";
+			$depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
+			$depth_setting_conf.="$depth_id\tfeature_shift_y_unit\tpercent\n";
+			$depth_setting_conf.="$depth_id\tpadding_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
+
+		}elsif($depth_type eq "hist"){
 			if($e1=~ /-/){
 				$depth_shift_y=abs($e1)-$depth_height;
 				$depth_shift_y="+$depth_shift_y";
@@ -2189,19 +2229,30 @@ sub read_depth_file(){
 		$_=~ s/\s+$//g;
 		next if($_=~ /^\s*#.*$/||$_=~ /^\s*$/);
 		my @arr=split(/\s+/,$_);
-		if(@arr==4){
-			if(!$arr[2] || !$block_end_bp){die "is,$arr[2],$block_end_bp\n"};
+		if(@arr==3){
+			# chr_id point depth
+			if(!$arr[1] || !$block_end_bp){die "error:is,$arr[1],$block_end_bp\n"};
 			#next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] > $block_end_bp || $arr[2]<$block_start_bp);
-			next if($arr[1] ne $scf || $arr[2] > $block_end_bp || $arr[2]<$block_start_bp);
-			die "\nerror:$arr[2] or $arr[3]\n" if($arr[2]!~ /^\d+$/ || $arr[3]!~ /^\d+$/);
-			$tmp{$arr[2]}=$arr[3];
-		}elsif(@arr==5){
-			#next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] < $block_start_bp || $arr[3] > $block_end_bp);
-			next if($arr[1] ne $scf || $arr[2] < $block_start_bp || $arr[3] > $block_end_bp);
-			$depths{window}{$.}{depth}=$arr[4];
-			$depths{window}{$.}{start}=$arr[2];
-			$depths{window}{$.}{end}=$arr[3];								
-			$max=$arr[4] if($arr[4]>$max);
+			next if($arr[0] ne $scf || $arr[1] > $block_end_bp || $arr[1]<$block_start_bp);
+			die "\nerror: line $_ in $depth_file should be number instead of $arr[1] or $arr[2]\n" if($arr[1]!~ /^\d+$/ || $arr[2]!~ /^\d+$/);
+			$tmp{$arr[1]}=$arr[2];
+		}elsif(@arr==4 || @arr==5 ){
+			# chr_id start end depth color:opacity:label
+			next if($arr[0] ne $scf || $arr[1] < $block_start_bp || $arr[2] > $block_end_bp);
+			die "\nerror: line $_ in $depth_file should be number instead of $arr[1] or $arr[2] or $arr[3]\n" if($arr[1]!~ /^\d+$/ || $arr[2]!~ /^\d+$/ || $arr[3]!~ /^\d+$/);
+			if(@arr == 5){
+				my @style=split(/:/, $arr[4]);
+				die "error:$arr[4] sholud be like red:1 in $line line$.\n" if(@style !=2 && @style !=3);
+				die "error:$arr[4] should be like red:1 in $line line$.\n" if($arr[1]=~ /[^\.^\d]/);
+				$depths{window}{$.}{color}=$style[0];
+				$depths{window}{$.}{opacity}=$style[1];
+				$depths{window}{$.}{label}= $style[2] if(@style >=3);
+			}
+			$tmp{$arr[1]}=$arr[2];
+			$depths{window}{$.}{depth}=$arr[3];
+			$depths{window}{$.}{start}=$arr[1];
+			$depths{window}{$.}{end}=$arr[2];								
+			$max=$arr[3] if($arr[3]>$max);
 		}else{
 			die "\nerror:depth need 4 or 5 columns for $_\nsample	scaffold_id	pos	depth\nor\nsample     scaffold_id     start	end     depth\n";
 		}
