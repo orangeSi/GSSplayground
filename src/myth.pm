@@ -447,28 +447,18 @@ sub get_para(){
 }
 
 sub get_real_coordinate(){
-	my ($s,$e)=@_;
+	my ($s,$e,$feature_id)=@_;
+	die "error:for feature_id: $feature_id ,$s should <= $e, but not in fact\n" if($s>$e);
 	my $s_precision=($s=~ /\./)? length(($s =~ /\.(.*)/)[0]):0;
 	my $e_precision=($e=~ /\./)? length(($e =~ /\.(.*)/)[0]):0;
+	my $s_unit=1/(10**$s_precision);
+	my $e_unit=1/(10**$e_precision);
+	$s-=$s_unit;
+	$e-=$e_unit;
 	#print "s_precision $s_precision , e_precision $e_precision\n";
 	#die "error: precision of $s and $e are not equal\n" if($s_precision != $e_precision);
 	return $s,$e if($s_precision != $e_precision);
-	my $unit;
-	if($s == $e){
-		$unit=1/(10**$s_precision);
-		$s=$s;
-		$e=$s+$unit;
-		#print "1unit is $unit\n";
-	}elsif($s<=$e){
-		$unit=1/(10**$s_precision);
-		$s=$s;
-		$e=$e+$unit;
-		#print "2unit is $unit\n";
-	}else{
-		die "error:$s should <= $e, but not in fact\n"
-	}
-	$s--;
-	$e--;
+	$e=$e+$s_unit;
 	return ($s,$e);
 }
 
@@ -613,7 +603,7 @@ sub draw_genes(){
 		die "error: feature_x_extent=$feature_x_extent format error, shoule like 0bp,0bp or -1bp,+1bp or +1bp,+2bp \n";	
 	}
 
-	($start, $end)=&get_real_coordinate($start,$end);
+	($start, $end)=&get_real_coordinate($start,$end,$feature_id);
 
 	my $fake=0;
 	#$fake=0 if($end==$start);

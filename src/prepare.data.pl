@@ -2132,7 +2132,7 @@ sub hist_scatter_line_run(){
 				$depth_shift_y="-$depth_shift_y";
 				$padding_depth_label="+0.01";
 			}
-			$depth_setting_conf.="\n$depth_id\tfeature_popup_title\t$depths{window}{$window}{label}\n" if(exists $depths{window}{$window}{label});
+			$depth_setting_conf.="\n$depth_id\tfeature_popup_title\tbase -> $depths{window}{$window}{label}\n" if(exists $depths{window}{$window}{label});
 			$depth_setting_conf.="\n$depth_id\tfeature_height_ratio\t$depth_height\n";
 			$depth_setting_conf.="\n$depth_id\tfeature_height_unit\tpercent\n";
 			$depth_setting_conf.="$depth_id\tfeature_shape\trect\n";

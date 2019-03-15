@@ -76,7 +76,7 @@ function search_by_rg(){
 							end_y = parseFloat(end_y);
 						
 						for(var rg_index in rg){
-							var rg_pos = rg[rg_index];
+							var rg_pos = parseFloat(rg[rg_index]);
 							console.log(rg_pos);
 							if( rg_pos >= start && rg_pos <= end){
 								var scale_ratio = (end_x-start_x)/(end-start+1); 
