@@ -6,7 +6,7 @@ use Getopt::Long;
 use FindBin qw($Bin);
 use List::Util qw(max min);
 use lib "$Bin";
-use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks);
+use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_y shift_tracks_x);
 
 my ($list,$prefix,$outdir,$conf,$track_reorder);
 GetOptions("list:s"=>\$list,
@@ -89,7 +89,8 @@ my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_
 my $top_distance=$top_bottom_margin/2*$svg_height;
 #tracks_shift_y=chr14,0,+1 #sampl
 #die "track_order is @track_order\n";
-my %tracks_shift_y = &shift_tracks($conf{tracks_shift_y}, \@track_order);
+my %tracks_shift_y = &shift_tracks_y($conf{tracks_shift_y}, \@track_order);
+my %tracks_shift_x = &shift_tracks_x($conf{tracks_shift_x});
 
 
 my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$tracks_shift_y{num}; # 每个track的高度
@@ -159,11 +160,12 @@ while(@track_order){
 		die "error:scf element number is not one for $sample and $block_index, @scf\n" if(@scf != 1);
 #print "scff is @scf, $block_index\n";
 		die "error:block_index $block_index should not have two scf\n" if(@scf!=1);
+		$shift_x += ($tracks_shift_x{$sample}{$block_index}{shift_x_left}*$ratio) if(exists $tracks_shift_x{$sample}{$block_index}{shift_x_left});
 		
 		my $block_clip_path_id="cut-$sample-$scf[0]-$block_index";
 		my %block_clip_path_ids;
 
-		my $id_line_x=$left_distance; # 每个block的genome的起点的x,y坐标
+		my $id_line_x=$shift_x; # 每个block的genome的起点的x,y坐标
 			my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
 			my $id_line_width=$gff{$sample}{chooselen_single}{$block_index}{len} * $ratio; # 每个block的genome的宽度
 #print "chooselen_single is $sample $gff{$sample}{chooselen_single}{$block_index} * $ratio\n";
@@ -373,7 +375,8 @@ while(@track_order){
 		$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{start}}="$end_start_x,$end_start_y";
 		$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{end}}="$end_end_x,$end_end_y";
 		$blocks_start_ends_cord{$sample}{$scf[0]}{"$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}"}="$end_start_x,$end_start_y,$end_end_x,$end_end_y";
-		$shift_x+=($id_line_width+$block_distance);
+		$shift_x += ($id_line_width+$block_distance);
+		$shift_x += ($tracks_shift_x{$sample}{$block_index}{shift_x_right}*$ratio) if(exists $tracks_shift_x{$sample}{$block_index}{shift_x_right});
 	}
 	$top_distance+=$sample_single_height * (1+$tracks_shift_y{sample}{$sample}{shift_y_down});
 	$tracks_height{$sample}=$sample_single_height * (1+$tracks_shift_y{sample}{$sample}{shift_y_down});

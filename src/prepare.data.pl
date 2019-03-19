@@ -2092,6 +2092,7 @@ sub hist_scatter_line_run(){
 		
 		if($depth_type eq "brand"){
 			die "error:brand, $s1>$e1, $s1 should not be $e1\n" if($s1 == $e1);
+			#$display_feature_label="yes";
 			$display_feature_label="no";
 			$depth_height=abs($s1-$e1);
 		}
@@ -2104,6 +2105,7 @@ sub hist_scatter_line_run(){
 		next if($depth_end >$block_end_bp && $depth_start < $block_start_bp);
 		my $padding_depth_label=1;
 		my $feature_popup_title="value -> $depth";
+		$feature_popup_title.=";$depths{window}{$window}{popup}" if(exists $depths{window}{$window}{popup});
 		my$depth_id="$sample.$scf.$block.$depth_type.$window.$k_index.$block_start_bp.$block_end_bp";
 		$depth_gff.="$scf\tadd\thist_scatter_line\t$depth_start\t$depth_end\t.\t+\t.\tID=$depth_id;\n";
 		$depth_setting_conf.="$depth_id\tdisplay_feature_label\t$display_feature_label\n";
@@ -2132,13 +2134,20 @@ sub hist_scatter_line_run(){
 				$depth_shift_y="-$depth_shift_y";
 				$padding_depth_label="+0.01";
 			}
+			$feature_popup_title="base -> $depths{window}{$window}{label}";
+			$feature_popup_title.=";$depths{window}{$window}{popup}" if(exists $depths{window}{$window}{popup});
 			$depth_setting_conf.="\n$depth_id\tfeature_popup_title\tbase -> $depths{window}{$window}{label}\n" if(exists $depths{window}{$window}{label});
 			$depth_setting_conf.="\n$depth_id\tfeature_height_ratio\t$depth_height\n";
 			$depth_setting_conf.="\n$depth_id\tfeature_height_unit\tpercent\n";
 			$depth_setting_conf.="$depth_id\tfeature_shape\trect\n";
 			$depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
 			$depth_setting_conf.="$depth_id\tfeature_shift_y_unit\tpercent\n";
+			$depth_setting_conf.="$depth_id\tfeature_label\t$depths{window}{$window}{label}\n";
 			$depth_setting_conf.="$depth_id\tpadding_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
+			$depth_setting_conf.="$depth_id\tpos_feature_label\tleft_medium\n";
+			$depth_setting_conf.="$depth_id\tfeature_label_dominant_baseline\tcentral\n";
+			$depth_setting_conf.="$depth_id\tfeature_label_textLength\t1*feature_width\n";
+			$depth_setting_conf.="$depth_id\tfeature_label_lengthAdjust\tspacingAndGlyphs\n"; #
 
 		}elsif($depth_type eq "hist"){
 			if($e1=~ /-/){
@@ -2228,19 +2237,19 @@ sub read_depth_file(){
 		chomp;
 		$_=~ s/\s+$//g;
 		next if($_=~ /^\s*#.*$/||$_=~ /^\s*$/);
-		my @arr=split(/\s+/,$_);
+		my @arr=split(/\t+/,$_);
 		if(@arr==3){
 			# chr_id point depth
 			if(!$arr[1] || !$block_end_bp){die "error:is,$arr[1],$block_end_bp\n"};
 			#next if($arr[0] ne $sample || $arr[1] ne $scf || $arr[2] > $block_end_bp || $arr[2]<$block_start_bp);
 			next if($arr[0] ne $scf || $arr[1] > $block_end_bp || $arr[1]<$block_start_bp);
-			die "\nerror: line $_ in $depth_file should be number instead of $arr[1] or $arr[2]\n" if($arr[1]!~ /^\d+$/ || $arr[2]!~ /^\d+$/);
+			die "\nerror: line $_ in $depth_file should be number instead of $arr[1] or $arr[2]\n" if($arr[1]!~ /^[\d\.]+$/ || $arr[2]!~ /^[\d\.]+$/);
 			$tmp{$arr[1]}=$arr[2];
-		}elsif(@arr==4 || @arr==5 ){
+		}elsif(@arr==4 || @arr==5 || @arr ==6){
 			# chr_id start end depth color:opacity:label
 			next if($arr[0] ne $scf || $arr[1] < $block_start_bp || $arr[2] > $block_end_bp);
 			die "\nerror: line $_ in $depth_file should be number instead of $arr[1] or $arr[2] or $arr[3]\n" if($arr[1]!~ /^\d+$/ || $arr[2]!~ /^\d+$/ || $arr[3]!~ /^\d+$/);
-			if(@arr == 5){
+			if(@arr >= 5){
 				my @style=split(/:/, $arr[4]);
 				die "error:$arr[4] sholud be like red:1 in $line line$.\n" if(@style !=2 && @style !=3);
 				die "error:$arr[4] should be like red:1 in $line line$.\n" if($arr[1]=~ /[^\.^\d]/);
@@ -2248,13 +2257,18 @@ sub read_depth_file(){
 				$depths{window}{$.}{opacity}=$style[1];
 				$depths{window}{$.}{label}= $style[2] if(@style >=3);
 			}
+			if(@arr == 6){
+				die "error:line $. in $depth_file, should be like $_\tpopup:xxxxx\n" if($arr[5]!~ /^popup:(.*)$/);
+				$depths{window}{$.}{popup}= $1;
+			}
+
 			$tmp{$arr[1]}=$arr[2];
 			$depths{window}{$.}{depth}=$arr[3];
 			$depths{window}{$.}{start}=$arr[1];
 			$depths{window}{$.}{end}=$arr[2];								
 			$max=$arr[3] if($arr[3]>$max);
 		}else{
-			die "\nerror:depth need 4 or 5 columns for $_\nsample	scaffold_id	pos	depth\nor\nsample     scaffold_id     start	end     depth\n";
+			die "\nerror:seprate by tab, depth need 3/4/5/6 columns for $_\nscaffold_id\tpos\tdepth\nor\nscaffold_id\tstart\tend\tdepth\nor\nchr_id start end depth color:opacity:label\norchr_id start end depth color:opacity:label popup:xxx\n\n";
 		}
 #print "AAAis $arr[2], 3 is $arr[3]\n";
 

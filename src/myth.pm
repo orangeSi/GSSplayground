@@ -4,9 +4,9 @@ use warnings;
 use List::MoreUtils qw(uniq);
 use Exporter qw(import);
 
-our @EXPORT_OK = qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks);
+our @EXPORT_OK = qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_x shift_tracks_y);
 
-sub shift_tracks(){
+sub shift_tracks_y(){
 	my ($para, $track_order)=@_; # para="s1,block_index,+0.3;s2,block_index,-0.3;"
 	my @track_order=@$track_order;
 	$para=~ s/;\s*$//g;
@@ -21,6 +21,7 @@ sub shift_tracks(){
 		}
 	}else{
 		for my $p(@paras){
+			next if(!$p);
 			my @arr=split(/,/, $p);
 			die "error: $p format error for tracks_shift_y=$para, should liketracks_shift_y=s2,0,+5:+0;s3,0,+5:+0;\n" if(@arr!=3);
 			die "error: you have already specify  $arr[0] for more than one time in $para\n" if(exists $tracks_shift_y{$arr[0]});
@@ -43,6 +44,24 @@ sub shift_tracks(){
 	return %tracks_shift_y;
 
 }
+sub shift_tracks_x(){
+	my ($para)=@_; # para="pO83_CORR,1,+100bp:+;pO83_CORR,2,+100bp:+0;"
+	$para=~ s/;\s*$//g;
+	my @paras=split(/;/, $para);
+	my %tracks_shift_x;
+	for my $p(@paras){
+			next if(!$p);
+			my @arr=split(/,/, $p);
+			die "error: $p format error for tracks_shift_x=$para, should liketracks_shift_x=pO83_CORR,2,+100bp:+0bp;;\n" if(@arr!=3);
+			my ($sample,$block_index,$left_right)=@arr;
+			die "error: in $p, block_index=$block_index should >=1\n" if($block_index<1);
+			die "error: in $p, $left_right should be like +100bp:-100bp\n" if($left_right!~ /^([+-]\d+)bp:([+-]\d+)bp$/);
+			$tracks_shift_x{$arr[0]}{$block_index}{shift_x_left}=$1;
+			$tracks_shift_x{$arr[0]}{$block_index}{shift_x_right}=$2;
+	}
+	return %tracks_shift_x;
+}
+
 sub format_scale(){
 	my ($last_tick_label)=@_;
 	$last_tick_label=reverse($last_tick_label);
@@ -552,6 +571,15 @@ sub draw_genes(){
 	}else{
 		die "error: for $feature_id, feature_shift_y is $feature_shift_y, but should be like +1 or -1, +2, so on\n"
 	}
+	my $feature_label_dominant_baseline=&get_para("feature_label_dominant_baseline", $feature_id, $conf);
+	$feature_label_dominant_baseline=($feature_label_dominant_baseline)? "dominant-baseline='$feature_label_dominant_baseline'":"";
+	my $feature_label_textLength = &get_para("feature_label_textLength", $feature_id, $conf);
+	die "error: feature_label_textLength=$feature_label_textLength shuold be like 1*feature_width" if($feature_label_textLength !~ /^([\.\d]+)\*feature_width\s*$/ && $feature_label_textLength);
+	my $textLength=$1;
+	$feature_label_textLength=($feature_label_textLength)? $textLength:"";
+	my $feature_label_lengthAdjust = &get_para("feature_label_lengthAdjust", $feature_id, $conf);
+	$feature_label_lengthAdjust=($feature_label_lengthAdjust)? "lengthAdjust='$feature_label_lengthAdjust'":"";
+	#
 	my $order_f=&get_para("feature_order", $feature_id, $conf);
 	my $order_f_label=&get_para("feature_label_order", $feature_id, $conf);
 	my $padding_feature_label=&get_para("padding_feature_label", $feature_id, $conf);
@@ -604,7 +632,12 @@ sub draw_genes(){
 	}
 
 	($start, $end)=&get_real_coordinate($start,$end,$feature_id);
-
+	if($feature_label_textLength){
+		$feature_label_textLength = $feature_label_textLength * ($end -$start)*$ratio;
+		$feature_label_textLength = "textLength='$feature_label_textLength'";
+		$index_label_angle=0;
+	}
+	my $feature_label_autowidth="$feature_label_dominant_baseline $feature_label_textLength $feature_label_lengthAdjust";
 	my $fake=0;
 	#$fake=0 if($end==$start);
 	if($shape=~ /arrow/){
@@ -677,11 +710,8 @@ sub draw_genes(){
 
 			}
 
-
-
-
 ## draw label of feature
-			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
+			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
 		}
 # check this feature if is in crossing_link
 		#print "ssfeature_id is $feature_id\n";
@@ -768,7 +798,7 @@ sub draw_genes(){
 
 ## draw label of feature
 			die "die:label_y is $label_y, id is $feature_id\n" if(!$label_y);
-			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
+			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		}
 # check this feature if is in crossing_link
 		#print "feature_id is $feature_id\n";
@@ -831,7 +861,7 @@ sub draw_genes(){
 
 
 ## draw label of feature
-			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
+			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		}
 # check this feature if is in crossing_link
 		if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
@@ -998,6 +1028,10 @@ sub default_setting(){
 	$conf{allow_feature_out_of_list} ||="synteny";
 	$conf{skip_feature_type_keep_crosslink} ||="";
 	$conf{cross_link_track_name} ||="";
+	$conf{feature_label_dominant_baseline} ||="";
+	$conf{feature_label_textLength} ||="";
+	$conf{feature_label_lengthAdjust} ||="";
+
 ##$conf{feature_ytick_region} ||="0-3:0-10;";
 ##$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
 
@@ -1168,7 +1202,7 @@ sub check_track_order(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_dominant_baseline", "feature_label_textLength", "feature_label_lengthAdjust");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}
