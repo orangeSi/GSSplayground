@@ -141,7 +141,7 @@ sub read_list(){
 		}elsif(@arrs!=0){
 			my ($gff, $fts, $gene_index_tmp, @arr_tmp);
 			#print "11\n";
-			($gff, $fts, $block_index, $conf, $gene_index_tmp, $genome) = &parse_arrs(\@arrs, 0, \@arr_tmp, \%genome, $block_index, \%gff, $gffs, \%fts, $conf, 0, 0, 0, 0, "", $sample, $space_len, $allow_feature_out_of_list); 
+			($gff, $fts, $block_index, $conf, $gene_index_tmp, $genome) = &parse_arrs(\@arrs, 0, \@arr_tmp, \%genome, $block_index, \%gff, $gffs, \%fts, $conf, 0, 0, 0, 0, "", $sample, $space_len, $allow_feature_out_of_list);  # sometime gff of --list is empty
 			#print "33\n";
 			#$block_index=1;
 			#print "2dd $list_line\n";
@@ -269,8 +269,7 @@ sub parse_arrs(){
 	my ($arrs, $all_seq_id, $arr, $genome, $block_index, $gff, $gffs, $fts, $conf, $gene_index, $line_num, $start_f, $end_f, $line, $sample, $space_len, $allow_feature_out_of_list)=@_;	
 	my @arrs=@$arrs;
 	my @arr=@$arr;
-	#print "1parse_arrs line is $line\n\n";
-	if($line eq ""){
+	if($line eq ""){ # sometime gff of --list is empty
 		for (my $arrs_index=0;$arrs_index < scalar(@arrs);$arrs_index+=3){
 			my ($seq_id,$seq_draw_start,$seq_draw_end) = @arrs[$arrs_index..$arrs_index+2];
 			next if($line ne "" && $arr[0] ne $seq_id);
@@ -646,7 +645,15 @@ sub draw_genes(){
 #以左上角为起始点，逆时针转一圈
 			$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
 			$x2=$x1;$y2=$y1+$gene_height_medium;
-			$x3=$x2+(1-$gene_width_arrow)*($end -$start)*$ratio;$y3=$y2;#gene_width_arrow指横向的arrow箭头的宽度
+
+			if($gene_width_arrow=~ /^(\d+)bp/){
+				die "error: gene_width_arrow $gene_width_arrow should not > $end -$start in feature_id $feature_id\n" if($1 > ($end -$start));
+				$x3=$x2+($end -$start -$1)*$ratio;$y3=$y2;#gene_width_arrow指横向的arrow箭头的宽度
+			}elsif($gene_width_arrow <= 1){
+				$x3=$x2+(1-$gene_width_arrow)*($end -$start)*$ratio;$y3=$y2;#gene_width_arrow指横向的arrow箭头的宽度
+			}else{
+				die "error: gene_width_arrow $gene_width_arrow should be number which 0< <=1 or something like 10bp in feature_id $feature_id\n"
+			}
 			$x4=$x3;$y4=$y3+$gene_height_top; ##gene_height_top是指arrow中间之外的一边尖尖的高度
 			$x5=$x2+($end -$start+$fake)*$ratio;$y5=0.5*$sample_single_height+$shift_y;
 			$x6=$x4;$y6=$y4 - 2*$gene_height_top - $gene_height_medium;
@@ -659,9 +666,19 @@ sub draw_genes(){
 		}else{
 #负链以arrow左边尖尖为起始点，逆时针旋转一周
 			$x1=($start*$ratio+$shift_x);$y1=0.5*$sample_single_height+$shift_y;
-			$x2=$x1+$gene_width_arrow*($end -$start+$fake)*$ratio;$y2=$y1+0.5*$gene_height_medium+$gene_height_top;
-			$x3=$x2;$y3=$y2 -$gene_height_top;
-			$x4=$x3+(1-$gene_width_arrow)*($end -$start+$fake)*$ratio;$y4=$y3;
+
+			if($gene_width_arrow=~ /^(\d+)bp/){
+				die "error: gene_width_arrow $gene_width_arrow should not > $end -$start in feature_id $feature_id\n" if($1 > ($end -$start));
+				$x2=$x1 +($1 +$fake)*$ratio;$y2=$y1+0.5*$gene_height_medium+$gene_height_top;
+				$x3=$x2;$y3=$y2 -$gene_height_top;
+				$x4=$x3+($end -$start+$fake - $1)*$ratio;$y4=$y3;
+			}elsif($gene_width_arrow <= 1){
+				$x2=$x1+$gene_width_arrow*($end -$start+$fake)*$ratio;$y2=$y1+0.5*$gene_height_medium+$gene_height_top;
+				$x3=$x2;$y3=$y2 -$gene_height_top;
+				$x4=$x3+(1-$gene_width_arrow)*($end -$start+$fake)*$ratio;$y4=$y3;
+			}else{
+				die "error: gene_width_arrow $gene_width_arrow should be number which 0< <=1 or something like 10bp in feature_id $feature_id\n"
+			}
 			$x5=$x4;$y5=$y4-$gene_height_medium;
 			$x6=$x3;$y6=$y5;
 			$x7=$x2;$y7=$y2 -2*$gene_height_top - $gene_height_medium;
@@ -995,7 +1012,7 @@ sub default_setting(){
 	$conf{scale_order} ||=0;
 	$conf{scale_tick_padding_y} ||=10;
 	$conf{scale_tick_fontsize} ||=10;
-	$conf{feature_arrow_width_extent} ||=0.7;
+	$conf{feature_arrow_width_extent} ||=0.2;
 	$conf{connect_with_same_scaffold} ||="yes";
 	$conf{connect_stroke_dasharray} ||="2,2";
 	$conf{connect_stroke_width} ||=2;
@@ -1031,6 +1048,7 @@ sub default_setting(){
 	$conf{feature_label_dominant_baseline} ||="";
 	$conf{feature_label_textLength} ||="";
 	$conf{feature_label_lengthAdjust} ||="";
+	$conf{tracks_block_reverse} ||="";
 
 ##$conf{feature_ytick_region} ||="0-3:0-10;";
 ##$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
@@ -1202,7 +1220,7 @@ sub check_track_order(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_dominant_baseline", "feature_label_textLength", "feature_label_lengthAdjust");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_dominant_baseline", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

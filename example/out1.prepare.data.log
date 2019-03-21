@@ -1,4 +1,4 @@
-hist_scatter_line -> brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black	start_end_xaxis->1:7060
+hist_scatter_line -> brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0.01->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black
 synteny -> order->2->3,query->pO83_CORR.indel:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
 display_segment_name -> yes,center,shift_y:+2,fontsize:10,color:black,order:5,rotate:0
 svg_width_height -> 1300,500
@@ -78,7 +78,7 @@ parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:1700-6000 -> block_index 
 
 read_list pO83_CORR.indel end
 hist_scatter_line start
-1 is brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black	start_end_xaxis->1:7060
+1 is brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0.01->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black
 
 block_index is 1,pO83_CORR
 
@@ -88,9 +88,9 @@ output out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf
 
 no out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.crosslink.conf for pO83_CORR
 hist_scatter_line_run rg is 1,7060  :1,7060
-info is brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black	start_end_xaxis->1:7060
-is:../data/base_brand.txt:../data/NC_017659.1.fa, pO83_CORR, NC_017659.1,1, 7060,20, brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black	start_end_xaxis->1:7060
-7060
+info is brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0.01->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black
+is:../data/base_brand.txt:../data/NC_017659.1.fa, pO83_CORR, NC_017659.1,1, 7060,20, brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0.01->10,0,1->25->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black
+7057
 
 output out1.pO83_CORR.NC_017659.1.1.1.1.7060.depth.gff
 

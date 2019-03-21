@@ -119,8 +119,9 @@ sub add2conf(){
 	my $new;
 	if(exists $conf{$key}){
 		$new="$conf{$key}.$prefix_name";
-		my $command="set -vex;cat @arr $conf{$key} >$new";
+		my $command="set -vex;cat $conf{$key} @arr  >$new";
 		&run_system($command, "$prefix_name.cat.log");
+		$conf{$key} = $new;
 	}else{
 		if($key eq "feature_setting"){
 			$new="feature.color.label.conf.$prefix_name";
