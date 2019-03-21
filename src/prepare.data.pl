@@ -2216,7 +2216,7 @@ sub read_depth_file(){
 		my $bam_depth_file="$depth_file.$scf.$block_start_bp.$block_end_bp.depth";
 		if(! -f "$bam_depth_file" || 1){
 			print "bam\n";
-			my $cmd="samtools depth  -r $scf:$block_start_bp-$block_end_bp $depth_file|awk '{print \"$sample\\t\"\$0}'|sed -r 's/\\s/\\t/g' >$bam_depth_file";
+			my $cmd="samtools depth  -r $scf:$block_start_bp-$block_end_bp $depth_file|sed -r 's/\\s/\\t/g' >$bam_depth_file";
 			print "cmd is $cmd\n";
 			my $rg_depth=`$cmd`;
 			die "\nerror:$cmd\n" if($?);
@@ -2225,6 +2225,8 @@ sub read_depth_file(){
 
 		}
 		$depth_file=$bam_depth_file;
+	}elsif($depth_file=~ /\.sam:.*/){
+		die "error: need a bam file , not sam file in $depth_file\n";
 	}
 	$depth_file=~ /^([^:]+)/;
 	$depth_file=$1;

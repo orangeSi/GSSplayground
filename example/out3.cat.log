@@ -1,8 +1,8 @@
 
-set -vex;cat out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff >out3.chr14.out3.hist_scatter_line.gff;rm out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff;echo output out3.chr14.out3.hist_scatter_line.gff
+set -vex;cat out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff out3.chr14.14.1.2.66901400.66902400.depth.gff >out3.chr14.out3.hist_scatter_line.gff;rm out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff out3.chr14.14.1.2.66901400.66902400.depth.gff;echo output out3.chr14.out3.hist_scatter_line.gff
 
 
-set -vex;cat out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf > out3.chr14.out3.hist_scatter_line.setting.conf;rm out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf;echo output out3.chr14.out3.hist_scatter_line.setting.conf
+set -vex;cat out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf out3.chr14.14.1.2.66901400.66902400.depth.setting.conf > out3.chr14.out3.hist_scatter_line.setting.conf;rm out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf out3.chr14.14.1.2.66901400.66902400.depth.setting.conf;echo output out3.chr14.out3.hist_scatter_line.setting.conf
 
 
 set -vex;cat out3.chr14.out3.hist_scatter_line.setting.conf >out3.hist_scatter_line.setting.conf
