@@ -93,9 +93,9 @@ info is hist,1,chr14,14,0,20,../data/illumina.chr14.sort.bam.depth.txt:../data/c
 is:../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa, chr14, 14,66901400, 66903400,20, hist,1,chr14,14,0,20,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,0,1->25->4,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.3:0.3:0.1:0.1,5:5
 100
 
-no out3.chr14.14.1.1.66901400.66903400.depth.gff for chr14
+output out3.chr14.14.1.1.66901400.66903400.depth.gff
 
-no out3.chr14.14.1.1.66901400.66903400.depth.setting.conf for chr14
+output out3.chr14.14.1.1.66901400.66903400.depth.setting.conf
 
 no out3.chr14.14.1.1.66901400.66903400.depth.crosslink.conf for chr14
 2 is hist,2,chr14,14,0,20,../data/illumina.chr14.sort.bam:../data/chr14.fa,color->green:opacity->1,31->41,ytick_flag,1->25->4,ytick_label_text,hgrid_flag,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->illuminate read depth,gap:60bp,fontsize:13,color:black	start_end_xaxis->66901400:66902400
@@ -128,11 +128,11 @@ no out3.chr14.14.1.2.66901400.66902400.depth.setting.conf for chr14
 no out3.chr14.14.1.2.66901400.66902400.depth.crosslink.conf for chr14
 func_name is hist_scatter_line
 echo "
-set -vex;cat out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff >out3.chr14.out3.hist_scatter_line.gff;rm out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff;echo output out3.chr14.out3.hist_scatter_line.gff
-" >> out3.cat.log;set -vex;cat out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff >out3.chr14.out3.hist_scatter_line.gff;rm out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff;echo output out3.chr14.out3.hist_scatter_line.gff done
+set -vex;cat out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff >out3.chr14.out3.hist_scatter_line.gff;rm out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff;echo output out3.chr14.out3.hist_scatter_line.gff
+" >> out3.cat.log;set -vex;cat out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff >out3.chr14.out3.hist_scatter_line.gff;rm out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff;echo output out3.chr14.out3.hist_scatter_line.gff done
 echo "
-set -vex;cat out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf > out3.chr14.out3.hist_scatter_line.setting.conf;rm out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf;echo output out3.chr14.out3.hist_scatter_line.setting.conf
-" >> out3.cat.log;set -vex;cat out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf > out3.chr14.out3.hist_scatter_line.setting.conf;rm out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf;echo output out3.chr14.out3.hist_scatter_line.setting.conf done
+set -vex;cat out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf > out3.chr14.out3.hist_scatter_line.setting.conf;rm out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf;echo output out3.chr14.out3.hist_scatter_line.setting.conf
+" >> out3.cat.log;set -vex;cat out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf > out3.chr14.out3.hist_scatter_line.setting.conf;rm out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf;echo output out3.chr14.out3.hist_scatter_line.setting.conf done
 out3.hist_scatter_line end
 echo "
 set -vex;cat out3.chr14.out3.hist_scatter_line.setting.conf >out3.hist_scatter_line.setting.conf
