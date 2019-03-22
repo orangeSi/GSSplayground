@@ -372,9 +372,21 @@ while(@track_order){
 		my $end_start_y=$id_line_y;
 		my $end_end_x=$shift_x+$id_line_width;
 		my $end_end_y=$id_line_y;
-		$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{start}}="$end_start_x,$end_start_y";
-		$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{end}}="$end_end_x,$end_end_y";
-		$blocks_start_ends_cord{$sample}{$scf[0]}{"$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}"}="$end_start_x,$end_start_y,$end_end_x,$end_end_y";
+		if(exists $blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{start}}){
+			$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{start}}.=";$end_start_x,$end_start_y";
+		}else{
+			$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{start}}="$end_start_x,$end_start_y";
+		}
+		if(exists $blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{end}}){
+			$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{end}}.=";$end_end_x,$end_end_y";
+		}else{
+			$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{end}}="$end_end_x,$end_end_y";
+		}
+		if(exists $blocks_start_ends_cord{$sample}{$scf[0]}{"$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}"}){
+			$blocks_start_ends_cord{$sample}{$scf[0]}{"$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}"}.=";$end_start_x,$end_start_y,$end_end_x,$end_end_y";
+		}else{
+			$blocks_start_ends_cord{$sample}{$scf[0]}{"$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}"}="$end_start_x,$end_start_y,$end_end_x,$end_end_y";
+		}
 		$shift_x += ($id_line_width+$block_distance);
 		$shift_x += ($tracks_shift_x{$sample}{$block_index}{shift_x_right}*$ratio) if(exists $tracks_shift_x{$sample}{$block_index}{shift_x_right});
 	}

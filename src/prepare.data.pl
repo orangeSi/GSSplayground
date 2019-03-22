@@ -275,7 +275,7 @@ sub check_allow_feature_out_of_list(){
 			my ($query_overlap_length, $q_edge)=&check_overlap($query_start, $query_end, $rg_query_start,$rg_query_end);
 			my ($target_overlap_length, $t_edge)=&check_overlap($target_start, $target_end, $rg_target_start,$rg_target_end);
 			print "query_overlap_length=$query_overlap_length, target_overlap_length=$target_overlap_length, blast:$query_start:$query_end -> $target_start:$target_end rg:$q -> $t\n\n";
-			if($query_overlap_length || $target_overlap_length){
+			if($query_overlap_length && $target_overlap_length){
 				#print "query_overlap_length=$query_overlap_length, target_overlap_length=$target_overlap_length, blast:$query_start:$query_end -> $target_start:$target_end rg:$q -> $t\n\n";
 				if($query_overlap_length == $query_length && $target_overlap_length == $target_length){
 					$skip=0;
@@ -800,7 +800,8 @@ sub reads_mapping(){
 	@{$show_types{short_reads}}=(qr/^rainbow:color->[^:]+:opacity->[\d\.]+:cross_link_width_ellipse->[\d\.]+/,"stack",qr/^paired:color->[^:]+:opacity->[\d\.]+:cross_link_height_line->[\d\.]+/);
 	@{$show_types{long_reads}}=("stack");
 	@{$show_types{vcf}}=("stack");
-	my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel");
+	#my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel", "chop_soft_clip");
+	my @highs=("start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel", "chop_soft_clip");
 	my @mapping_types=("short_reads", "long_reads", "vcf");
 	for my $k (@{$conf->{reads_mapping}}){
 		$k_index++;
@@ -873,7 +874,7 @@ sub reads_mapping(){
 			for my $rg(@start_end_xaxis){
 				my ($rg_start, $rg_end)=split(/,/, $rg);
 				print "rg is $rg,  :$rg_start,$rg_end\n";
-				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth,$reads_order, $highss{color_height_cs}, $show_type, $mapqs,$refasta);
+				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth,$reads_order, \%highss, $show_type, $mapqs,$refasta);
 
 				my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.mapping";	
 				%outname = &gather_gff_conf_link($prefix,$mapping_gff,$mapping_setting_conf,$cross_link_conf, \%outname, $sample);
@@ -946,7 +947,7 @@ sub check_highs(){
 	my ($highs,$k)=@_;
 	my @highs=@$highs;
 	for my $h(@highs){
-		die "\nerror: $h in $k should like $h->\n" if($k=~ /\s$h/ && $k!~ /\s$h->/);
+		die "\nerror: $h in $k should use tab, like $h->\\xxxx\n" if($k=~ /\s$h->/ && $k!~ /\t$h->\S/);
 		die "\nerror: should use \\t,not just space key, for $h in $k \n" if($k=~ / $h->/);
 	}
 	return 0;
@@ -1169,16 +1170,22 @@ sub hist_scatter_line(){
 
 sub reads_mapping_run(){
 #&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth);
-	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$reads_order, $color_height_cs, $show_type,$mapqs, $refasta)=@_;
+	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$reads_order, $highss, $show_type,$mapqs, $refasta)=@_;
 	my $one_read_height=1;
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
-	$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect" if(!$color_height_cs); #yellow
-		my %colors_height = &cigar_setting($color_height_cs);
+	my $color_height_cs;
+	if(not exists $highss->{color_height_cs}){
+		$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect" 
+	}else{
+		$color_height_cs=$highss->{color_height_cs};
+	}
+	my %colors_height = &cigar_setting($color_height_cs);
+
 	if($read_type eq "vcf"){
 		($reads_gff, $reads_setting_conf, $cross_link_conf) = &check_vcf(\%colors_height, $bam_file, $sample, $scf, $rg_start, $rg_end, $k_index, $read_type, $s1, $e1, $info);
 		return ($reads_gff, $reads_setting_conf, $cross_link_conf);
 	}
-	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, \%colors_height, $show_type, $mapqs, $refasta);
+	my %reads=&get_mapping_reads($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, \%colors_height, $show_type, $mapqs, $refasta, $highss);
 #my $read_num=scalar(keys %reads);
 #die "read_num is $read_num\n";
 
@@ -1238,6 +1245,7 @@ sub reads_mapping_run(){
 
 				$cr_type=$reads{$read_id}{cigar}{$cr}{type};
 				my $cg=$reads{$read_id}{cigar}{$cr}{cr};
+				print "cr is $cg\n";
 				($feature_color, $feature_height,$feature_opacity, $feature_shape)=&cs_color_height($cg, \%colors_height, $map_pos_strand_cr,$cr, $reads{$read_id}{r1_r2});
 				$feature_opacity*=$opacity_ratio_mapq;
 				$feature_opacity=0 if($cr_type eq "fake");
@@ -1262,11 +1270,17 @@ sub reads_mapping_run(){
 					my $insert_height_tail_portion=0.1;
 					my $insert_feature_height=$insert_height_tail_portion * $feature_height;
 					my $insert_shift_y;
-
+					my $insert_len=$1;
 					for my $tail(0..1){
 						my $insert_cr_id="$cr_id.$tail";
-						my $insert_map_pos_start_cr=$map_pos_start_cr- ($1-($map_pos_end_cr-$map_pos_start_cr))/10/2;
-						my $insert_map_pos_end_cr=$map_pos_end_cr + ($1-($map_pos_end_cr-$map_pos_start_cr))/10/2;
+						my $border_insert;
+						if($insert_len > 10000){
+							$border_insert = (10000 -($map_pos_end_cr-$map_pos_start_cr))/10/2;
+						}else{
+							$border_insert = ($insert_len -($map_pos_end_cr-$map_pos_start_cr))/10/2;
+						}
+						my $insert_map_pos_start_cr=$map_pos_start_cr- $border_insert;
+						my $insert_map_pos_end_cr=$map_pos_end_cr + $border_insert;
 						$insert_shift_y=($tail)? $read_shift_y+ $updown * (1-$insert_height_tail_portion)*$feature_height:$read_shift_y;
 						$reads_gff.="$scf\tadd\t$read_type_raw\t$insert_map_pos_start_cr\t$insert_map_pos_end_cr\t.\t$map_pos_strand_cr\t.\tID=$insert_cr_id;\n";
 						$reads_setting_conf.="$insert_cr_id\tfeature_shape\t$feature_shape\n";
@@ -1595,7 +1609,7 @@ sub get_reads_depth(){
 
 
 sub get_mapping_reads(){
-	my ($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, $colors_height, $show_type, $mapqs, $refasta)=@_;
+	my ($scf, $bam_file, $rg_start, $rg_end, $read_type,$reads_order, $colors_height, $show_type, $mapqs, $refasta, $highss)=@_;
 	my %reads;
 	my $tmpf="$bam_file.$scf.$rg_start.$rg_end.reads.$read_type.hash";
 	$read_type="long_reads" if($show_type eq "stack");
@@ -1662,7 +1676,7 @@ sub get_mapping_reads(){
 			}
 			my $strand=($flag & $reverse_flag); # if ture, mean read reverse
 				$cigar=&convert_cigar($cigar, $colors_height);
-			%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $reads_order, $r_id, $rg_start, $rg_end, \%reads, $_, $header_bam, $scf, $refasta, $mapq_percent, $mapq, $flag);
+			%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $reads_order, $r_id, $rg_start, $rg_end, \%reads, $_, $header_bam, $scf, $refasta, $mapq_percent, $mapq, $flag, $highss);
 			$reads{$r_id}{ref_start}=$ref_start_pos;
 			$reads{$r_id}{ref_end}=$ref_start_pos + $ref_consumes_length -1;
 			$reads{$r_id}{ref_id}="$ref_id"; # "*0"
@@ -1671,7 +1685,7 @@ sub get_mapping_reads(){
 				$reads{$r_id}{read_id}="$read_id_raw";
 			$reads{$r_id}{flag}=$flag;
 			$reads{$r_id}{r1_r2}=$r1_r2;
-			print "\nisis $r_id, flag $flag\n" if($r_id=~ /2113:2681:5522/);
+			#print "\nisis $r_id, flag $flag\n" if($r_id=~ /2113:2681:5522/);
 
 			$reads{$r_id}{mate_read_id}="null" if($flag & 8 || $reads{$r_id}{mate_ref} ne $reads{$r_id}{ref_id} || $reads{$r_id}{mate_ref} eq "*" || $show_type eq "stack");
 #if($read_type eq "long_reads"){
@@ -1742,7 +1756,7 @@ sub get_mapping_reads(){
 
 sub cigar_setting(){
 	my ($color_height_cs)=@_;
-	my $color_height_cs_usage="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.4:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:#1E90FF:opacity0.6:height0.8:6bp:arrow,read2:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect" if(!$color_height_cs); #yellow
+	my $color_height_cs_usage="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:#1E90FF:opacity0.6:height0.8:6bp:arrow,read2:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect";
 		my %tmp;
 	my @cgs=("M","I","D","N","S","H","P","X","reverse","forward","fake","read1","read2");
 	my (%colors_height);
@@ -1867,7 +1881,7 @@ sub cs_color_height(){
 
 
 sub detail_cigar(){
-	my ($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, $reads, $line, $header_bam, $scf, $refasta, $mapq_percent, $mapq, $flag)=@_;
+	my ($strand, $cigar, $ref_start_pos, $read_order, $r_id, $rg_start, $rg_end, $reads, $line, $header_bam, $scf, $refasta, $mapq_percent, $mapq, $flag,$highss)=@_;
 	my %reads=%$reads;
 	my @cigars=$cigar=~ /(\d+[^\d])/g;
 	my $M_index=0;
@@ -1893,18 +1907,26 @@ sub detail_cigar(){
 	my $previous_end=$ref_start_pos;
 	my $cs_end;
 	my $shift_cs;
+	my $soft_clip_chop_len;
 	my $cs_start=$ref_start_pos;
 	for my $cs(0..$cigars_len-1){
+		print "detail cr is $cigars[$cs]\n\n";
 		if($cs < $M_index){
 			$cigars[0]=~ /^(\d+)([^\d]+)$/;
+			my $step=$1;
 			$reads{$r_id}{cigar}{0}{type}=$2;
 			$reads{$r_id}{cigar}{0}{cr}=$cigars[0];
-			$reads{$r_id}{cigar}{0}{start}=$ref_start_pos-$1;
+			$reads{$r_id}{cigar}{0}{start}=$ref_start_pos-$step;
+			if($highss->{chop_soft_clip}!~ /no/ && $reads{$r_id}{cigar}{0}{type}=~ /^[SH]$/){
+				$soft_clip_chop_len=($step > $highss->{chop_soft_clip})? $highss->{chop_soft_clip}:$step;
+				$reads{$r_id}{cigar}{0}{start}=$ref_start_pos-$soft_clip_chop_len;  # cut soft_clip to 10bp
+				#print "chop first S for $r_id\n";
+			}
 			$reads{$r_id}{cigar}{0}{end}=$ref_start_pos-1;
 			$reads{$r_id}{cigar}{0}{order}=$read_order;
 			$cs_start=$reads{$r_id}{cigar}{0}{start};
 			$previous_end=$reads{$r_id}{cigar}{0}{end}+1;
-#print "r_id is $r_id M_index is $M_index cs1 is $cs\n" if($tmp_flag == 1);
+			#print "r_id is $r_id M_index is $M_index cs1 is $cs\n" if($tmp_flag == 1);
 		}else{
 			$cigars[$cs]=~ /^(\d+)([^\d])$/;
 			my $step=$1;
@@ -1913,10 +1935,18 @@ sub detail_cigar(){
 #print "r_id is $r_id M_index is $M_index cs2 is $cs $cigars[$cs]\n" if($tmp_flag == 1);
 			$reads{$r_id}{cigar}{$cs}{type}=$2;
 			$reads{$r_id}{cigar}{$cs}{cr}=$cigars[$cs];
-			if(grep(/^$reads{$r_id}{cigar}{$cs}{type}$/, @ref_consumes)){
+			#print "$cigars[$cs],type is $reads{$r_id}{cigar}{$cs}{type}, chop_soft_clip is $highss->{chop_soft_clip}, $r_id\n";
+			if(grep(/^$reads{$r_id}{cigar}{$cs}{type}$/, @ref_consumes) || $reads{$r_id}{cigar}{$cs}{type}=~ /^[SH]$/){
 				$reads{$r_id}{cigar}{$cs}{start}=$previous_end;
-				$cs_end = $reads{$r_id}{cigar}{$cs}{start};
-				$cs_end = $cs_end + $step -1;
+				#print "$highss->{chop_soft_clip}!~ /no/ && $reads{$r_id}{cigar}{$cs}{type}\n";
+				#print "$highss->{chop_soft_clip}!~ /no/ && \n";
+				if($highss->{chop_soft_clip}!~ /no/ && $reads{$r_id}{cigar}{$cs}{type}=~ /^[SH]$/){
+					$soft_clip_chop_len=($step > $highss->{chop_soft_clip})? $highss->{chop_soft_clip}:$step;
+					$cs_end=$reads{$r_id}{cigar}{$cs}{start}+$soft_clip_chop_len;  # cut soft_clip to 10bp
+					#print "$cigars[$cs], soft_clip_chop_len is $soft_clip_chop_len,cs is $cs,highss->{chop_soft_clip} is for $r_id\n\n";
+				}else{
+					$cs_end = $reads{$r_id}{cigar}{$cs}{start} + $step -1;
+				}
 				$shift_cs=1;
 			}else{
 				$reads{$r_id}{cigar}{$cs}{start}=$previous_end-1;	
@@ -1961,6 +1991,7 @@ sub detail_cigar(){
 			}else{
 #print "r_id is $r_id  cs3.8.2 is $cs $reads{$r_id}{cigar}{$cs}{cr}, start=$reads{$r_id}{cigar}{$cs}{start}\n" if($tmp_flag == 1);
 				delete $reads{$r_id}{cigar}{$cs};
+				#print "delete $cs\n";
 			}
 		}
 		next if(not exists $reads{$r_id}{cigar}{$cs});
@@ -1970,6 +2001,7 @@ sub detail_cigar(){
 				$reads{$r_id}{cigar}{$cs}{end} = $rg_end;
 			}else{
 				delete $reads{$r_id}{cigar}{$cs};
+				#print "delete3 $cs\n";
 			}
 		}
 		next if(not exists $reads{$r_id}{cigar}{$cs});
@@ -2044,11 +2076,18 @@ sub get_regions(){
 					}
 				}
 			}elsif($a eq "highlight_columns"){
-				die "error: highlight_columns\n";
+				die "error: not support highlight_columns yet\n";
 
 			}elsif($a eq "color_height_cs"){
 				$info=~ /\s+$a->(\S+)/;
 				$hash{$a}=$1;
+			}elsif($a eq "chop_soft_clip"){
+				die "error: chop_soft_clip in $info should like chop_soft_clip->10bp or chop_soft_clip->no\n" if($info!~ /\s+$a->(\d+)bp/ && $info!~ /\s+$a->\s*no/);
+				if($info=~ /\s+$a->(\d+)bp/){
+					$hash{$a}=$1;
+				}else{
+					$hash{$a}="no";
+				}
 			}
 		}
 	}
@@ -2058,6 +2097,9 @@ sub get_regions(){
 		}else{
 			die "\n\nerror:here,$flag,$info\n";
 		}
+	}
+	if(not exists $hash{chop_soft_clip}){
+		$hash{chop_soft_clip}=10; #default 10bp
 	}
 	return %hash;
 }
