@@ -185,6 +185,7 @@ sub read_list(){
 				my @arr=split(/\t/,$_);
 				next if(not exists $gff{$sample}{block3}{$arr[0]});
 				die "error: $gffs should have tab in file~\n" if(@arr==1);
+				die "error: $arr[3] or $arr[4] should >=1 line$. in $gffs\n" if($arr[3] < 1 || $arr[4] < 1);
 				$block_index=-1;
 				my $start_f=$arr[3];
 				my $end_f=$arr[4];
@@ -398,12 +399,21 @@ sub go_line(){
 	#if($feature_id!~ /$marker$/){
 	#	$feature_id="$feature_id.$marker.$sample.$marker";
 	#}
-	if($feature_id=~ /\.[+-]\.(\d+)$/ && $arr[2] eq "synteny"){
-		my $feature_id_block_index=$1;
-		return ($conf, $gff, $block_index, $gene_index, $fts) if($feature_id_block_index != $block_index);
+	if($feature_id=~ /\.[+-]\.[qt]\.q_block_index=(\d+).t_block_index=(\d+)$/ && $arr[2] eq "synteny"){
+		#my $feature_id_block_index=$1;
+		#return ($conf, $gff, $block_index, $gene_index, $fts) if($feature_id_block_index != $block_index);
+		my $the_block_index=&get_block_index_from_id("crosslink", $feature_id);
+		return ($conf, $gff, $block_index, $gene_index, $fts) if($block_index != $the_block_index);
+		#if($feature_id eq "pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=1"){
+			#die "id is $feature_id, block_index is $block_index, the_block_index is $the_block_index\n";
+		#}
 		if(exists $fts->{$feature_id}){ # check feature_id if had exists in one block of --list, in fact one feature_id may occurs in more than one block of --list
-			print "\n1 is $1,block_index is $block_index, line is $line\n";
-			die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+			if($conf->{feature_id_is_unique}=~ /yes/){
+				print "\n1 is ,block_index is $block_index, line is $line\n";
+				die "error: 1feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+			}else{
+				print "warn: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+			}
 		}else{
 			$fts->{$feature_id}{sample} = $sample;
 			$fts->{$feature_id}{scf} = $arr[0];
@@ -411,7 +421,11 @@ sub go_line(){
 		}
 	}else{
 		if(exists $fts->{$feature_id}){ # check feature_id if had exists in one block of --list, in fact one feature_id may occurs in more than one block of --list
-			die "error: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+			if($conf->{feature_id_is_unique}=~ /yes/){
+				die "error: 2feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+			}else{
+				print "warn: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+			}
 		}else{
 			$fts->{$feature_id}{sample} = $sample;
 			$fts->{$feature_id}{scf} = $arr[0];
@@ -1049,6 +1063,7 @@ sub default_setting(){
 	$conf{feature_label_textLength} ||="";
 	$conf{feature_label_lengthAdjust} ||="";
 	$conf{tracks_block_reverse} ||="";
+	$conf{feature_id_is_unique} ||="yes";
 
 ##$conf{feature_ytick_region} ||="0-3:0-10;";
 ##$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
@@ -1202,6 +1217,20 @@ sub default_setting(){
 }
 
 
+sub get_block_index_from_id(){
+		my ($type, $id)=@_;
+		if($type eq "crosslink"){
+			die "error: id is $id format error should like *q.q_block_index=1.t_block_index=1 in get_block_index_from_id\n" if($id!~ /\.([qt])\.q_block_index=(\d+).t_block_index=(\d+)$/);
+			my ($qt, $q, $t)=($1, $2, $3);
+			if($qt eq "q"){
+				return $q;
+			}else{
+				return $t;
+			}
+		}else{
+			die "error: not support $type for $id in get_block_index_from_id\n"
+		}
+}
 sub check_track_order(){
 	my @track_order=@{$_[0]};
 	my @track_reorder=@{$_[1]};
@@ -1220,7 +1249,7 @@ sub check_track_order(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_dominant_baseline", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_dominant_baseline", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

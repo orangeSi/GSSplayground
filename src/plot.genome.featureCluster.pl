@@ -263,6 +263,12 @@ while(@track_order){
 			#shift @index_id_arr;
 			my $gene_height_medium;
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
+
+			if($index_id=~ /[qt].q_block_index=(\d+).t_block_index=(\d+)$/){ # for crosslink
+				my $the_block_index=&get_block_index_from_id("crosslink", $index_id);
+				next if($block_index != $the_block_index);
+			}
+
 			if(exists $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag} && $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag}){
 			my ($clip_x1_x,$clip_x1_y,$clip_x2_x,$clip_x2_y,$clip_x3_x,$clip_x3_y,$clip_x4_x,$clip_x4_y)=($shift_x,$top_distance,$shift_x+$id_line_width,$top_distance,$shift_x+$id_line_width,$top_distance + $sample_single_height,$shift_x,$top_distance + $sample_single_height);
 			$svg.="<defs>    <clipPath id=\"$block_clip_path_id\"><path d=\"M$clip_x1_x $clip_x1_y L$clip_x2_x $clip_x2_y L$clip_x3_x $clip_x3_y L$clip_x4_x $clip_x4_y Z\" />     </clipPath>  </defs>\n" if(not exists $block_clip_path_ids{$block_clip_path_id});
@@ -372,21 +378,9 @@ while(@track_order){
 		my $end_start_y=$id_line_y;
 		my $end_end_x=$shift_x+$id_line_width;
 		my $end_end_y=$id_line_y;
-		if(exists $blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{start}}){
-			$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{start}}.=";$end_start_x,$end_start_y";
-		}else{
-			$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{start}}="$end_start_x,$end_start_y";
-		}
-		if(exists $blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{end}}){
-			$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{end}}.=";$end_end_x,$end_end_y";
-		}else{
-			$blocks_two_ends_cord{$sample}{$scf[0]}{$gff{$sample}{chooselen_single}{$block_index}{end}}="$end_end_x,$end_end_y";
-		}
-		if(exists $blocks_start_ends_cord{$sample}{$scf[0]}{"$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}"}){
-			$blocks_start_ends_cord{$sample}{$scf[0]}{"$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}"}.=";$end_start_x,$end_start_y,$end_end_x,$end_end_y";
-		}else{
-			$blocks_start_ends_cord{$sample}{$scf[0]}{"$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}"}="$end_start_x,$end_start_y,$end_end_x,$end_end_y";
-		}
+		$blocks_two_ends_cord{$sample}{$scf[0]}{$block_index}{$gff{$sample}{chooselen_single}{$block_index}{start}}="$end_start_x,$end_start_y";
+		$blocks_two_ends_cord{$sample}{$scf[0]}{$block_index}{$gff{$sample}{chooselen_single}{$block_index}{end}}="$end_end_x,$end_end_y";
+		$blocks_start_ends_cord{$sample}{$scf[0]}{$block_index}{"$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}"}="$end_start_x,$end_start_y,$end_end_x,$end_end_y";
 		$shift_x += ($id_line_width+$block_distance);
 		$shift_x += ($tracks_shift_x{$sample}{$block_index}{shift_x_right}*$ratio) if(exists $tracks_shift_x{$sample}{$block_index}{shift_x_right});
 	}
@@ -397,6 +391,8 @@ while(@track_order){
 
 
 }
+
+&check_blocks_two_ends_cord();
 
 print "\n\n";
 #for my $id(keys %{$conf{crossing_link2}{position}}){
@@ -410,13 +406,14 @@ sub convert_cord(){
 	#print "edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list for $pair\n";
 	%blocks_two_ends_cord=%$blocks_two_ends_cord;
 	return $edge_coordinate_feature_out_of_list if($edge_coordinate_feature_out_of_list eq "0");
-	die "error: edge_coordinate_feature_out_of_list=$edge_coordinate_feature_out_of_list format error\n" unless ($edge_coordinate_feature_out_of_list=~ /^([^,]+),([^,]+),(\d+):(\d+)\s*->\s*([^,]+),([^,]+),(\d+):(\d+)/);
-	my ($query,$q_scf,$q_start_pos,$q_end_pos, $target,$t_scf,$t_start_pos,$t_end_pos)=($1,$2,$3,$4,$5,$6,$7,$8);
-	die "error: not exists blocks_two_ends_cord{$query}{$q_scf}{$q_start_pos}\n" if(not exists $blocks_two_ends_cord{$query}{$q_scf}{$q_start_pos});
-	die "error: not exists blocks_two_ends_cord{$query}{$q_scf}{$q_end_pos}\n" if(not exists $blocks_two_ends_cord{$query}{$q_scf}{$q_end_pos});
-	die "error: not exists blocks_two_ends_cord{$target}{$t_scf}{$t_start_pos}\n" if(not exists $blocks_two_ends_cord{$target}{$t_scf}{$t_start_pos});
-	die "error: not exists blocks_two_ends_cord{$target}{$t_scf}{$t_end_pos}\n" if(not exists $blocks_two_ends_cord{$target}{$t_scf}{$t_end_pos});
-	$edge_coordinate_feature_out_of_list="$blocks_two_ends_cord{$query}{$q_scf}{$q_start_pos}:$blocks_two_ends_cord{$query}{$q_scf}{$q_end_pos} -> $blocks_two_ends_cord{$target}{$t_scf}{$t_start_pos}:$blocks_two_ends_cord{$target}{$t_scf}{$t_end_pos}";
+	die "error: edge_coordinate_feature_out_of_list=$edge_coordinate_feature_out_of_list format error\n" unless ($edge_coordinate_feature_out_of_list=~ /^([^,]+),([^,]+),(\d+):(\d+)\s*->\s*([^,]+),([^,]+),(\d+):(\d+)\s*.*->\s*(\d+),(\d+)$/);
+	#"$query_name,$rg_query_id,$rg_query_start:$rg_query_end ->$target_name,$rg_target_id,$rg_target_start:$rg_target_end -> $query_name,$rg_query_id,$q_edge -> $target_name,$rg_target_id,$t_edge ->$q_block_index,$t_block_index";
+	my ($query,$q_scf,$q_start_pos,$q_end_pos, $target,$t_scf,$t_start_pos,$t_end_pos,$q_block_index,$t_block_index)=($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);
+	die "error: not exists blocks_two_ends_cord{$query}{$q_scf}{$q_start_pos}\n" if(not exists $blocks_two_ends_cord{$query}{$q_scf}{$q_block_index}{$q_start_pos});
+	die "error: not exists blocks_two_ends_cord{$query}{$q_scf}{$q_end_pos}\n" if(not exists $blocks_two_ends_cord{$query}{$q_scf}{$q_block_index}{$q_end_pos});
+	die "error: not exists blocks_two_ends_cord{$target}{$t_scf}{$t_start_pos}\n" if(not exists $blocks_two_ends_cord{$target}{$t_scf}{$t_block_index}{$t_start_pos});
+	die "error: not exists blocks_two_ends_cord{$target}{$t_scf}{$t_end_pos}\n" if(not exists $blocks_two_ends_cord{$target}{$t_scf}{$t_block_index}{$t_end_pos});
+	$edge_coordinate_feature_out_of_list="$blocks_two_ends_cord{$query}{$q_scf}{$q_block_index}{$q_start_pos}:$blocks_two_ends_cord{$query}{$q_scf}{$q_block_index}{$q_end_pos} -> $blocks_two_ends_cord{$target}{$t_scf}{$t_block_index}{$t_start_pos}:$blocks_two_ends_cord{$target}{$t_scf}{$t_block_index}{$t_end_pos} ->$q_block_index,$t_block_index";
 	#print "edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list for $pair\n\n";
 	return $edge_coordinate_feature_out_of_list;
 }
@@ -905,9 +902,11 @@ td {
 sub check_blocks_two_ends_cord(){
 	for my $s(keys %blocks_two_ends_cord){
 		foreach my $scf(keys %{$blocks_two_ends_cord{$s}}){
-			foreach my $pos(keys %{$blocks_two_ends_cord{$s}{$scf}}){
-				print "$s,$scf,$pos -> $blocks_two_ends_cord{$s}{$scf}{$pos}\n";		
-			}
+			foreach my $block_index(keys %{$blocks_two_ends_cord{$s}{$scf}}){
+				foreach my $pos(keys %{$blocks_two_ends_cord{$s}{$scf}{$block_index}}){
+					print "check_blocks_two_ends_cord $s,$scf,$block_index,$pos -> $blocks_two_ends_cord{$s}{$scf}{$block_index}{$pos}\n";		
+				}
+			}	
 		}
 	}
 }
@@ -924,20 +923,35 @@ sub cut_quadrilateral(){
 	
 	#my $clip_path_id="cut-off-bottom-$left_up_x-$left_up_y-$right_up_x-$right_up_y-$right_down_x-$right_down_y-$left_down_x-$left_down_y";
 	#my $clip_path_id="cut-$sample-$scf-$start-$end";
-	if($edge_coordinate_feature_out_of_list=~ /^([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)\s*->\s*([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)/){
-		my ($up_block_start, $up_block_end)=split(/,/, $conf->{feature_setting2}->{$up_id}->{block_start_end});
+	if($edge_coordinate_feature_out_of_list=~ /^([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)\s*->\s*([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)\s.*->(\d+),(\d+)$/){
+		#my ($q_block_index,$t_block_index) = ($9,$10);
+		my $up_block_index=&get_block_index_from_id("crosslink",$up_id);
+		my $down_block_index=&get_block_index_from_id("crosslink",$down_id);
+
+		#if(not exists $conf->{feature_setting2}->{$up_id}{block_start_end}){
+		#	die "error:up_id is $up_id\n"	;
+		#	return $clip_path,\%clip_for_crosslink;
+		#}
+		#my ($up_block_start, $up_block_end)=split(/,/, $conf->{feature_setting2}->{$up_id}->{block_start_end}); # 这个up_id 和 block_start_end的对应关系不对导致下面报错的。最好是up_id里面有block_id的信息，然后根据block_id和下面的sample的得到block_start_end！
 		my $up_sample=$conf->{feature_setting2}->{$up_id}->{sample};
 		my $up_scf_id=$conf->{feature_setting2}->{$up_id}->{scf_id};
+		my $up_block_start= min(keys %{$blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}});
+		my $up_block_end= max(keys %{$blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}});
 
-		my ($down_block_start, $down_block_end)=split(/,/, $conf->{feature_setting2}->{$down_id}->{block_start_end});
 		my $down_sample=$conf->{feature_setting2}->{$down_id}->{sample};
 		my $down_scf_id=$conf->{feature_setting2}->{$down_id}->{scf_id};
+		my $down_block_start= min(keys %{$blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}});
+		my $down_block_end= max(keys %{$blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}});
 		
-		my ($up_start_x, $up_start_y)=split(/,/, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_start});
-		my ($up_end_x, $up_end_y)=split(/,/, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_end});
-		my ($down_start_x, $down_start_y)=split(/,/, $blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_start});
-		my ($down_end_x, $down_end_y)=split(/,/, $blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_end});
-		
+		if(!$blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start} || !$blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_end} || not exists $blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}{$down_block_start} || not exists $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start} || !$blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start}){
+			die "error: up_id is $up_id, down_id is $down_id,up_block_start is blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start}, edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start}, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_end}, blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}{$down_block_start}, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start}, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start}\n";
+			return $clip_path,\%clip_for_crosslink;
+		}
+		my ($up_start_x, $up_start_y) = split(/,/, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start});
+		my ($up_end_x, $up_end_y)     = split(/,/, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_end});
+		my ($down_start_x, $down_start_y)=split(/,/, $blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}{$down_block_start});
+		my ($down_end_x, $down_end_y)=split(/,/, $blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}{$down_block_end});
+			
 		$clip_path_id="clip_$up_start_x-$up_start_y-$up_end_x-$up_end_y-$down_start_x-$down_start_y-$down_end_x-$down_end_y";
 		#print "clip_path_id is $clip_path_id\n";
 		print "edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list\n";
@@ -955,4 +969,19 @@ sub cut_quadrilateral(){
 	# <path d="M150 0 L75 200 L225 200 Z"  clip-path="url(#cut-off-bottom)" />"""
 	
 	return $clip_path,\%clip_for_crosslink;
+}
+
+sub get_block_index_from_id(){
+		my ($type, $id)=@_;
+		if($type eq "crosslink"){
+			die "error: id is $id format error should like *q.q_block_index=1.t_block_index=1 in get_block_index_from_id\n" if($id!~ /\.([qt])\.q_block_index=(\d+).t_block_index=(\d+)$/);
+			my ($qt, $q, $t)=($1, $2, $3);
+			if($qt eq "q"){
+				return $q;
+			}else{
+				return $t;
+			}
+		}else{
+			die "error: not support $type for $id in get_block_index_from_id\n"
+		}
 }

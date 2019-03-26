@@ -74,12 +74,12 @@
 
 
 
-<path id="pO83_CORR.NC_017659.1.5460.147060.1.+.1"  d="M890.360714285714 149 L890.360714285714 151 L20613.3571428571 151 L20613.3571428571 149 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+<path id="pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1"  d="M890.360714285714 149 L890.360714285714 151 L20613.3571428571 151 L20613.3571428571 149 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
 
-<path id="pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1"  d="M890.360714285714 349 L890.360714285714 351 L20613.3571428571 351 L20613.3571428571 349 Z" clip-path="url(#cut-pO83_CORR.indel-NC_017659.1.fake-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+<path id="pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1"  d="M890.360714285714 349 L890.360714285714 351 L20613.3571428571 351 L20613.3571428571 349 Z" clip-path="url(#cut-pO83_CORR.indel-NC_017659.1.fake-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
@@ -96,12 +96,12 @@
 
 
 
-<polygon id="pO83_CORR.NC_017659.1.2101.5468.1.+.1" points="422.5,149 422.5,151 891.614285714286,151 891.614285714286,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+<polygon id="pO83_CORR.NC_017659.1.2101.5468.1.+.t.q_block_index=1.t_block_index=1" points="422.5,149 422.5,151 891.614285714286,151 891.614285714286,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
 
-<polygon id="pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.1" points="393.25,349 393.25,351 862.225,351 862.225,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+<polygon id="pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.q.q_block_index=1.t_block_index=1" points="393.25,349 393.25,351 862.225,351 862.225,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
@@ -117,12 +117,12 @@
 
 
 
-<polygon id="pO83_CORR.NC_017659.1.1.1898.1.+.1" points="130,149 130,151 394.364285714286,151 394.364285714286,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+<polygon id="pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1" points="130,149 130,151 394.364285714286,151 394.364285714286,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
 
-<polygon id="pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1" points="130,349 130,351 394.364285714286,351 394.364285714286,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+<polygon id="pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1" points="130,349 130,351 394.364285714286,351 394.364285714286,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
@@ -138,12 +138,12 @@
 
 
 
-<polygon id="pO83_CORR.NC_017659.1.1891.2100.1.+.1" points="393.25,149 393.25,151 422.5,151 422.5,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+<polygon id="pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1" points="393.25,149 393.25,151 422.5,151 422.5,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 
 
-<polygon id="pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1" points="861.25,349 861.25,351 890.5,351 890.5,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+<polygon id="pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1" points="861.25,349 861.25,351 890.5,351 890.5,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 
 

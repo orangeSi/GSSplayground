@@ -62,65 +62,68 @@ function search_by_rg(){
 		for (var track_name in blocks_start_ends_cord){
 			if(track_name.match(re)){
 				for (var chr_id in blocks_start_ends_cord[track_name]){
-					if( chr_id == rg_chr_id){
-						for (var start_end in blocks_start_ends_cord[track_name][chr_id]){
-							var [start, end] = start_end.split(/,/);
-							start = parseFloat(start);
-							end = parseFloat(end);
+					for (var block_index in blocks_start_ends_cord[track_name][chr_id]){
+						if( chr_id == rg_chr_id){
+							for (var start_end in blocks_start_ends_cord[track_name][chr_id][block_index]){
+								var [start, end] = start_end.split(/,/);
+								start = parseFloat(start);
+								end = parseFloat(end);
 						
-							var [start_x, start_y, end_x, end_y] = blocks_start_ends_cord[track_name][chr_id][start_end].split(/,/);
-							console.log(blocks_start_ends_cord[track_name][chr_id][start_end].split(/,/));
-							start_x = parseFloat(start_x);
-							start_y = parseFloat(start_y);
-							end_x = parseFloat(end_x);
-							end_y = parseFloat(end_y);
+								var [start_x, start_y, end_x, end_y] = blocks_start_ends_cord[track_name][chr_id][block_index][start_end].split(/,/);
+								console.log(blocks_start_ends_cord[track_name][chr_id][block_index][start_end].split(/,/));
+								start_x = parseFloat(start_x);
+								start_y = parseFloat(start_y);
+								end_x = parseFloat(end_x);
+								end_y = parseFloat(end_y);
 						
-						for(var rg_index in rg){
-							var rg_pos = parseFloat(rg[rg_index]);
-							console.log(rg_pos);
-							if( rg_pos >= start && rg_pos <= end){
-								var scale_ratio = (end_x-start_x)/(end-start+1); 
-								var x = start_x + (rg_pos-start) * scale_ratio;
-								console.log('ratio is '+scale_ratio)
-								var height= tracks_heigh[track_name];
-								var y=(start_y+end_y)/2 - height;
-								var width=scale_ratio*(end-start)/1000;
-								var pos;
-								if(y<0){y=0};
+							for(var rg_index in rg){
+								var rg_pos = parseFloat(rg[rg_index]);
+								console.log(rg_pos);
+								if( rg_pos >= start && rg_pos <= end){
+									var scale_ratio = (end_x-start_x)/(end-start+1); 
+									var x = start_x + (rg_pos-start) * scale_ratio;
+									console.log('ratio is '+scale_ratio)
+									var height= tracks_heigh[track_name];
+									var y=(start_y+end_y)/2 - height;
+									var width=scale_ratio*(end-start)/1000;
+									var pos;
+									if(y<0){y=0};
 								
-								width *=hightligh_ratio;
+									width *=hightligh_ratio;
 
-								/// cread a child ,demo-tiger
-								if(rg_index == 1){
-									x = x + scale_ratio;
-									pos = rg_pos + 1;
-								}else{
-									x = x - width;
-									pos = rg_pos - 1;
-								}
-								 var g = document.createElementNS(svgNS,'g');
-								 var title = document.createElementNS(svgNS,'title');
-								 var title_text = document.createTextNode(track_name+":"+chr_id+": "+pos+"th bp");
-								 var rect = document.createElementNS(svgNS,'rect');
-								 rect.setAttribute('x',x);
-								 rect.setAttribute('y',y);
-								 rect.setAttribute('width',width);
-								 rect.setAttribute('height',2*height);
-								 rect.setAttribute('fill','red');
-								 title.append(title_text);
-								 g.append(title);
-								 g.append(rect);
-								 svg.appendChild(g);
+									/// cread a child ,demo-tiger
+									if(rg_index == 1){
+										x = x + scale_ratio;
+										pos = rg_pos + 1;
+									}else{
+										x = x - width;
+										pos = rg_pos - 1;
+									}
+									 var g = document.createElementNS(svgNS,'g');
+									 var title = document.createElementNS(svgNS,'title');
+									 var title_text = document.createTextNode(track_name+":"+chr_id+": "+pos+"th bp");
+									 var rect = document.createElementNS(svgNS,'rect');
+									 rect.setAttribute('x',x);
+									 rect.setAttribute('y',y);
+									 rect.setAttribute('width',width);
+									 rect.setAttribute('height',2*height);
+									 rect.setAttribute('fill','red');
+									 title.append(title_text);
+									 g.append(title);
+									 g.append(rect);
+									 svg.appendChild(g);
 
-								 console.log('rect is '+rect.innerHTML);
-								 console.log("x="+x+",y="+y+",width="+width+",height="+height);
-								 search_result_num +=1;
+									 console.log('rect is '+rect.innerHTML);
+									 console.log("x="+x+",y="+y+",width="+width+",height="+height);
+									 search_result_num +=1;
+									}
 								}
+	
 							}
-
 						}
 					}
 				}
+
 			}
 		}
 	}

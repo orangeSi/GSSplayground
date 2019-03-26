@@ -190,18 +190,18 @@ sub synteny(){
 		die "\nerror: not support $crosslink_shape, only support @show_types\n" if(! grep(/^$crosslink_shape$/, @show_types));
 		die "\nerror: $query_name not exists in --list\n" if(not exists $conf->{sample_scf}{$query_name});
 		die "\nerror: $target_name not exists in --list\n" if(not exists $conf->{sample_scf}{$target_name});
-		my (@blocks_query, @blocks_target,@block_indexs);
-		for my $block_index(keys %{$gff->{$query_name}->{chooselen_single}}){
+		my (@blocks_query, @blocks_target);
+		for my $block_index(sort{$a<=>$b} keys %{$gff->{$query_name}->{chooselen_single}}){
 			my @scfs=keys %{$gff->{$query_name}->{block2}->{$block_index}};
 			#print "scf1 is @scfs, block_index is $block_index, query_name is $query_name\n";
-			push @blocks_query, "$scfs[0],$gff->{$query_name}->{chooselen_single}->{$block_index}->{start},$gff->{$query_name}->{chooselen_single}->{$block_index}->{end}";
+			push @blocks_query, "$scfs[0],$gff->{$query_name}->{chooselen_single}->{$block_index}->{start},$gff->{$query_name}->{chooselen_single}->{$block_index}->{end},$block_index";
 		}
 
-		for my $block_index(keys %{$gff->{$target_name}->{chooselen_single}}){
+		for my $block_index(sort{$a<=>$b} keys %{$gff->{$target_name}->{chooselen_single}}){
 			my @scfs = keys %{$gff->{$target_name}->{block2}->{$block_index}};
 			#print "scf2 is @scfs\n";
-			push @blocks_target, "$scfs[0],$gff->{$target_name}->{chooselen_single}->{$block_index}->{start},$gff->{$target_name}->{chooselen_single}->{$block_index}->{end}";
-			push @block_indexs, $block_index;
+			push @blocks_target, "$scfs[0],$gff->{$target_name}->{chooselen_single}->{$block_index}->{start},$gff->{$target_name}->{chooselen_single}->{$block_index}->{end},$block_index";
+			#push @block_indexs, $block_index;
 		}
 		my $check_all_vs_all_if=&check_all_vs_all($gff,$genome);
 		#die "check_all_vs_all is $check_all_vs_all_if\n";
@@ -212,7 +212,6 @@ sub synteny(){
 		%outname = &gather_gff_conf_link($prefix,$synteny_gff_t,$synteny_setting_conf_t,"", \%outname, $target_name);
 		$prefix="$query_name.to.$target_name.$alignment_type.$crosslink_shape.$k_index.synteny";	
 		%outname = &gather_gff_conf_link($prefix,"","",$cross_link_conf, \%outname, "$query_name.to.$target_name");
-		
 
 	}
 	&write_gff_conf_link(\%outname, "$prefix_name.synteny");
@@ -263,33 +262,39 @@ sub check_allow_feature_out_of_list(){
 	my $query_length=abs($query_start - $query_end)+1;
 	my $target_length=abs($target_start - $target_end)+1;
 	my $exist_flag=0;
-	my ($q_index,$t_index);
+	my %hold_multil_hit;
 	for my $q(@blocks_query){
-		$q_index++;
 		for my $t(@blocks_target){
-			$t_index++;
-			my ($rg_query_id, $rg_query_start, $rg_query_end)=split(/,/, $q);
-			my ($rg_target_id, $rg_target_start, $rg_target_end)=split(/,/, $t);
+			my ($rg_query_id, $rg_query_start, $rg_query_end, $q_block_index)=split(/,/, $q);
+			my ($rg_target_id, $rg_target_start, $rg_target_end, $t_block_index)=split(/,/, $t);
 			#next if($rg_query_id ne $query_scf || $rg_target_id ne $target_scf || $exist_flag);
 			next if($rg_query_id ne $query_scf || $rg_target_id ne $target_scf);
 			my ($query_overlap_length, $q_edge)=&check_overlap($query_start, $query_end, $rg_query_start,$rg_query_end);
 			my ($target_overlap_length, $t_edge)=&check_overlap($target_start, $target_end, $rg_target_start,$rg_target_end);
 			print "query_overlap_length=$query_overlap_length, target_overlap_length=$target_overlap_length, blast:$query_start:$query_end -> $target_start:$target_end rg:$q -> $t\n\n";
+			my $qt_index="q_block_index=$q_block_index.t_block_index=$t_block_index";
 			if($query_overlap_length && $target_overlap_length){
 				#print "query_overlap_length=$query_overlap_length, target_overlap_length=$target_overlap_length, blast:$query_start:$query_end -> $target_start:$target_end rg:$q -> $t\n\n";
 				if($query_overlap_length == $query_length && $target_overlap_length == $target_length){
 					$skip=0;
 					$exist_flag=1;
-					if(!grep(/^$q_index$/, @qt)){
+					if((not exists $hold_multil_hit{q}{$q_block_index}) && (not exists $hold_multil_hit{t}{$t_block_index})){
 						push(@edge_pos,"0");
-						push(@qt,"$q_index");
+						push(@qt,"$qt_index");
+						#print "qt is1 $query_name:$q_block_index, $target_name:$t_block_index\n";
+						$hold_multil_hit{q}{$q_block_index}="";
+						$hold_multil_hit{t}{$t_block_index}="";
 					}
 				}elsif(grep(/^$feature_type$/, @allow_feature_out_of_lists)){
 					$skip=0;
 					$exist_flag=1;
-					if(!grep(/^$q_index$/, @qt)){
-						push(@qt,"$q_index");
-						push(@edge_pos,"$query_name,$rg_query_id,$rg_query_start:$rg_query_end ->$target_name,$rg_target_id,$rg_target_start:$rg_target_end -> $query_name,$rg_query_id,$q_edge -> $target_name,$rg_target_id,$t_edge");
+					if((not exists $hold_multil_hit{q}{$q_block_index}) && (not exists $hold_multil_hit{t}{$t_block_index})){
+						#print "qt is2 $query_name:$q_block_index, $target_name:$t_block_index , $hold_multil_hit{t}{$t_block_index}\n";
+						push(@qt,"$qt_index");
+						push(@edge_pos,"$query_name,$rg_query_id,$rg_query_start:$rg_query_end ->$target_name,$rg_target_id,$rg_target_start:$rg_target_end -> $query_name,$rg_query_id,$q_edge -> $target_name,$rg_target_id,$t_edge ->$q_block_index,$t_block_index");
+						$hold_multil_hit{q}{$q_block_index}="";
+						$hold_multil_hit{t}{$t_block_index}="";
+						#print "qt is2 $query_name:$q_block_index, $target_name:$t_block_index , $hold_multil_hit{t}{$t_block_index}\n";
 					}	
 				}else{
 					$skip=1;
@@ -298,6 +303,7 @@ sub check_allow_feature_out_of_list(){
 			}
 		}
 	}
+	print "qt is \n";
 	if($edge_pos){print "\nedge_pos is $edge_pos, for $query_scf:$query_start-$query_end -> $target_scf:$target_start-$target_end\n"}
 	return $skip, \@edge_pos, \@qt;
 }
@@ -408,8 +414,8 @@ sub synteny_run(){
 			while(@qt){
 				my $qt_index=shift @qt;
 				$edge=shift @edge;
-				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.$qt_index";
-				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.$qt_index";
+				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.q.$qt_index";
+				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.t.$qt_index";
 				my $query_target_feature_id="$query_feature_id -> $target_feature_id";
 				my $indentity=$arr[2];
 				#my $tmp;
@@ -474,8 +480,8 @@ sub synteny_run(){
 			while(@qt){
 				my $qt_index=shift @qt;
 				$edge=shift @edge;
-				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.$qt_index";
-				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.$qt_index";
+				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.q.$qt_index";
+				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.t.$qt_index";
 				my $query_target_feature_id="$query_feature_id -> $target_feature_id";
 				#my $tmp;
 				#$tmp=abs($query_start-$query_end)+1;
@@ -655,8 +661,8 @@ sub synteny_run(){
 			while(@qt){
 				my $qt_index=shift @qt;
 				$edge=shift @edge;
-				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.$qt_index";
-				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.$qt_index";
+				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.q.$qt_index";
+				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.t.$qt_index";
 				my $query_target_feature_id="$query_feature_id -> $target_feature_id";
 				my $indentity=$arr[6];
 				my $tmp;
@@ -1402,7 +1408,11 @@ sub check_vcf(){
 #print "line is $_\n";
 		my $vcf_id="$sample.$scf.vcf.$pos.$ref_base.to.$query_base.$snpid.$k_index";
 		my $feature_label="$pos:$ref_base.to.$query_base";
-		my ($mutation_type, $mutation_length, $start, $end)=&check_vcf_mutation_type($ref_base, $query_base, $pos);
+		my ($mutation_type, $mutation_length, $start, $end, $skip)=&check_vcf_mutation_type($ref_base, $query_base, $pos);
+		if($skip){
+			print "warn: not support $query_base in line$. in $vcf_file, skip this line\n";
+			next
+		}
 		my $feature_color=$colors_height{$mutation_type}{color};
 		my $feature_height=$colors_height{$mutation_type}{height}*abs($s1-$e1);
 		my $feature_opacity=$colors_height{$mutation_type}{opacity};
@@ -1442,7 +1452,11 @@ sub check_vcf(){
 
 sub check_vcf_mutation_type(){
 	my ($ref_base, $query_base, $pos)=@_;
-	my ($mutation_type, $mutation_length, $start, $end);
+	my ($mutation_type, $mutation_length, $start, $end, $skip);
+	$skip="";
+	if($query_base=~ /[^A^T^C^G^N]/){
+		return ("", "", "", "", 1);
+	}
 	if(length($ref_base) == length($query_base)){ # snp
 		die "\nerror:$ref_base  == $query_base \n" if($ref_base eq $query_base);
 		$mutation_type="X";
