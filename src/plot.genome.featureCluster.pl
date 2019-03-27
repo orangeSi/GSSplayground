@@ -454,6 +454,7 @@ foreach my $pair(@pairs){
 		}
 	}
 	chomp $feature_popup_title;
+	die "error is up_id is $up_id, down_id is $down_id, $conf{crossing_link2}{position}{$up_id}{start}{y} > $conf{crossing_link2}{position}{$down_id}{start}{y}\n" if(!$conf{crossing_link2}{position}{$up_id}{start}{y} || !$conf{crossing_link2}{position}{$down_id}{start}{y});
 	if($conf{crossing_link2}{position}{$up_id}{start}{y} > $conf{crossing_link2}{position}{$down_id}{start}{y}){
 		#if($up_id=~ /09:3303:59796/){
 		#	print "1 $up_id,$down_id, $conf{crossing_link2}{position}{$up_id}{start}{y} > $conf{crossing_link2}{position}{$down_id}{start}{y}\n";
@@ -854,7 +855,7 @@ td {
 		}
 		my $zoom_js=`cat $zoom`; chomp $zoom_js;
 		print OUT "$zoom_js</script>\n";
-		print OUT "<script>var blocks_start_ends_cord=".encode_json(\%blocks_start_ends_cord).";\nvar tracks_heigh=".encode_json(\%tracks_height).";</script>\n";
+		print OUT "<script>var blocks_start_ends_cord=".encode_json(\%blocks_start_ends_cord).";\nvar tracks_heigh=".encode_json(\%tracks_height).";var reversed_block=".encode_json(\%reversed_block).";</script>\n";
 		print OUT "</head>\n<body>\n<h1>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>\n$navigator\n<div id='container' style=\"width: ${svg_width}px; height: ${svg_height}px; border:1px solid black;display:none\">\n<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox=\"0 0 $svg_width $svg_height\" version=\"1.1\">\n";
 		my $svg=`sed '1d' $prefix.svg`;chomp $svg;
 		print OUT "$svg\n";

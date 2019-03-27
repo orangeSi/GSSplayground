@@ -1323,7 +1323,7 @@ sub reads_mapping_run(){
 					my $mate_id=$reads{$read_id}{mate_read_id};
 #die "ssread_id is $read_id, flag is $reads{$read_id}{flag}\n" if(!$mate_id);
 					my $mate_cg=$reads{$mate_id}{cigar}{$cr}{cr};
-					my $mate_cr_id="$mate_id.cr.$cr.$mate_cg.$updown.$k_index";
+					my $mate_cr_id="$mate_id.cr.$cr.$mate_cg.$updown.$k_index.$infos[4]";
 					my $cross_link_order=$reads{$read_id}{cigar}{-1}{order};
 					next if(exists $cross_link_pairs{"$mate_id,$read_id"} || $reads{$read_id}{cigar}{$cr}{end} > $reads{$mate_id}{cigar}{$cr}{end});
 					my $cross_link_height_line=0.3;

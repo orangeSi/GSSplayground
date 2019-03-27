@@ -80,6 +80,12 @@ function search_by_rg(){
 								var rg_pos = parseFloat(rg[rg_index]);
 								console.log(rg_pos);
 								if( rg_pos >= start && rg_pos <= end){
+									//reversed_block[track_name][block_index]="";
+									if(track_name in reversed_block && block_index in reversed_block[track_name]){
+										// start end is real , rg_pos is also real, but this is reverse strand block	
+										console.log("")
+									
+									}
 									var scale_ratio = (end_x-start_x)/(end-start+1); 
 									var x = start_x + (rg_pos-start) * scale_ratio;
 									console.log('ratio is '+scale_ratio)

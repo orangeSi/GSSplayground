@@ -532,7 +532,6 @@ sub draw_genes(){
 	print "draw feature_id = $feature_id\n";
 	($feature_pos, $start, $end, $strand)=&get_real_feature_region($reverse_block_flag, $start, $end, $start_block, $end_block, "+", 0, "feature"); # "$start-$end", $start, $end, $strand);
 	$feature_reverse_for_crosslink->{$feature_id}="" if($reverse_block_flag);
-	print "draw feature_id = $feature_id\n";
 	my $feature_type=$conf->{feature_setting2}->{$feature_id}->{type};
 	my $skip_feature_type_keep_crosslink=0;
 	$skip_feature_type_keep_crosslink=1 if(grep(/^$feature_type$/, split(/,/, $conf->{skip_feature_type_keep_crosslink})));
