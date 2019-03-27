@@ -1181,7 +1181,7 @@ sub reads_mapping_run(){
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
 	my $color_height_cs;
 	if(not exists $highss->{color_height_cs}){
-		$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect" 
+		$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect" 
 	}else{
 		$color_height_cs=$highss->{color_height_cs};
 	}
@@ -1263,7 +1263,7 @@ sub reads_mapping_run(){
 				$read_shift_y = abs($s1) + $one_read_height * $read_shift_y_depth + ($one_read_height - $feature_height)/2;
 				$read_shift_y = ($updown == 1)? "+$read_shift_y":"-$read_shift_y";
 
-				$cr_id="$read_id.cr.$cr.$cg.$updown.$k_index";
+				$cr_id="$read_id.cr.$cr.$cg.$updown.$k_index.$info[4]";
 #my $feature_shape="rect";
 				if($cr_type=~ /reverse/ || $cr_type=~ /forward/){
 #$feature_shape="arrow";
@@ -2163,7 +2163,7 @@ sub hist_scatter_line_run(){
 		my $padding_depth_label=1;
 		my $feature_popup_title="value -> $depth";
 		$feature_popup_title.=";$depths{window}{$window}{popup}" if(exists $depths{window}{$window}{popup});
-		my$depth_id="$sample.$scf.$block.$depth_type.$window.$k_index.$block_start_bp.$block_end_bp";
+		my$depth_id="$sample.$scf.$block.$depth_type.$window.$k_index.$block_start_bp.$block_end_bp.$info[4]";
 		$depth_gff.="$scf\tadd\thist_scatter_line\t$depth_start\t$depth_end\t.\t+\t.\tID=$depth_id;\n";
 		$depth_setting_conf.="$depth_id\tdisplay_feature_label\t$display_feature_label\n";
 		$depth_setting_conf.="$depth_id\tfeature_color\t$depth_color\n";

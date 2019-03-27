@@ -4,7 +4,7 @@ use warnings;
 use List::MoreUtils qw(uniq);
 use Exporter qw(import);
 
-our @EXPORT_OK = qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_x shift_tracks_y);
+our @EXPORT_OK = qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_x shift_tracks_y get_real_feature_region check_block_reverse);
 
 sub shift_tracks_y(){
 	my ($para, $track_order)=@_; # para="s1,block_index,+0.3;s2,block_index,-0.3;"
@@ -243,7 +243,7 @@ sub read_list(){
 				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{start_raw}=1; # block_index 是指每行中每个cluster的左右顺序
 				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{end}=1.00;
 				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{end_raw}=1;
-				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{strand}="+";
+				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{strand}=1;
 				$gff{$sample}{block}{$block_index}{$scf}{$gene_index}{id}="$sample.$block_index.$scf.null";
 				$gff{$sample}{block2}{$block_index}{$scf}="";	
 				$gff{$sample}{scf}{$scf}=$genome{$sample}{$scf}{len};
@@ -496,16 +496,46 @@ sub get_real_coordinate(){
 
 
 
+#($reverse_block_flag) ? "":"$start_once-$end_once"; $gff{$sample}{scf}{$scf}
+sub get_real_feature_region(){
+	my ($reverse_block_flag, $start, $end, $block_start, $block_end, $strand, $scf_len, $type)=@_;
+	if($reverse_block_flag){ # 3-7 of 1-10 -> 8-4
+		if($type eq "feature"){ #feature is 1, -10, 147049, 1, 6992, +, 0, feature
+			$block_end=$block_end-($block_start-1);
+			$block_start=1; # relative start end
+			print "\nfeature is $reverse_block_flag, $start, $end, $block_start, $block_end, $strand, $scf_len, $type\n";
+		}elsif($type eq "block"){
+			$block_end=$scf_len;
+			$block_start=1; # real start end
+		}else{
+			die "error: not support $type in get_real_feature_region\n";
+		}
+		$start=$block_end-($start-$block_start);
+		$end=$block_end-($end-$block_start);
+		my $start_tmp=$start; 
+		my $end_tmp=$end; 
+		$end=$start_tmp;
+		$start=$end_tmp;
+		$strand=~ tr/01/10/; # relative start and end
+		return ("reverse:$start-$end", $start, $end, $strand);
+	}else{
+		return ("$start-$end", $start, $end, $strand);
+	}
+
+} 
 
 sub draw_genes(){
 #draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag, $conf, $ratio, $id_line_height, $shift_angle_closed_feature, $orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id)=@_;
+	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag, $conf, $ratio, $id_line_height, $shift_angle_closed_feature, $orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id, $reverse_block_flag, $start_block, $end_block, $feature_reverse_for_crosslink)=@_;
+	#$gff{$sample}{scf}{$scf}
+	my $feature_pos;
+	print "draw feature_id = $feature_id\n";
+	($feature_pos, $start, $end, $strand)=&get_real_feature_region($reverse_block_flag, $start, $end, $start_block, $end_block, "+", 0, "feature"); # "$start-$end", $start, $end, $strand);
+	$feature_reverse_for_crosslink->{$feature_id}="" if($reverse_block_flag);
 	print "draw feature_id = $feature_id\n";
 	my $feature_type=$conf->{feature_setting2}->{$feature_id}->{type};
 	my $skip_feature_type_keep_crosslink=0;
 	$skip_feature_type_keep_crosslink=1 if(grep(/^$feature_type$/, split(/,/, $conf->{skip_feature_type_keep_crosslink})));
-	#print "feature_id is $feature_id, $start, $end\n";
-	#my $strand2=($strand)? "+":"-";
 	if($index_color=~ /rgb\(\d+,\d+,\d+\),[^,]/ or $index_color=~ /[^,],rgb\(\d+,\d+,\d+\)/){
 		die "\nerror: should use ,, instead of , to separate the $index_color\n";
 	}
@@ -909,7 +939,7 @@ sub draw_genes(){
 	}
 
 
-	return ($back, $shift_angle_closed_feature, $orders);	
+	return ($back, $shift_angle_closed_feature, $orders, $feature_reverse_for_crosslink);
 
 }
 sub display_conf(){
@@ -1246,6 +1276,30 @@ sub check_track_order(){
 	return @track_order;
 }
 
+#my %reversed_blocks=&check_block_reverse(\%gff, $conf{tracks_block_reverse});
+sub check_block_reverse(){
+	my ($tracks_block_reverse, $gff)=@_;
+	my %reversed_block;
+	##$gff{$sample}{block}{$block_index}
+	#tracks_block_reverse=pO83_CORR.indel.reverse,0;
+	for my $block(split(/;/, $tracks_block_reverse)){
+		next if($block=~ /^\s*$/);
+		my @infos=split(/,/, $block);
+		die "error: tracks_block_reverse=$tracks_block_reverse format error in $block,should like tracks_block_reverse=pO83_CORR.indel.reverse,0;\n" if (@infos != 2);
+		my ($sample, $block_index)=@infos;
+		die "error: error: track $sample not have block_index $block_index in tracks_block_reverse=$tracks_block_reverse\n" if($block_index=~ /^[^\d]*$/ || ($block_index != 0 && not exists $gff->{$sample}->{block}->{$block_index}));
+		if($block_index == 0){
+			foreach my $block_index(keys %{$gff->{$sample}->{block}}){
+				$reversed_block{$sample}{$block_index}="";
+				print "reverse $sample -> $block_index\n";
+			}
+		}else{
+			$reversed_block{$sample}{$block_index}="";
+			print "reverse $sample -> $block_index\n";
+		}
+	}
+	return %reversed_block;
+}
 
 sub check_para(){
 	my (%conf)=@_;

@@ -6,7 +6,7 @@ use Getopt::Long;
 use FindBin qw($Bin);
 use List::Util qw(max min);
 use lib "$Bin";
-use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_y shift_tracks_x);
+use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_y shift_tracks_x  get_real_feature_region check_block_reverse);
 
 my ($list,$prefix,$outdir,$conf,$track_reorder);
 GetOptions("list:s"=>\$list,
@@ -44,6 +44,7 @@ my ($svg_width,$svg_height) = split(',',$conf{'svg_width_height'});
 
 
 ## position of features for  crosslink
+my %feature_reverse_for_crosslink;
 my %positon_links;
 my @fetures_links;
 my %features_height;
@@ -69,6 +70,10 @@ print "end read $list\n";
 #die "track_order is @track_order, track_reorder is @track_reorder\n";
 @track_order=&check_track_order(\@track_order, \@track_reorder);
 
+
+## check track block reverse
+#die "tracks_block_reverse is $conf{tracks_block_reverse}\n";
+my %reversed_block=&check_block_reverse($conf{tracks_block_reverse}, \%gff); # outputs reversed_block{$sample}{$block_index}="";
 
 
 my $ends_extend_ratio = 0.1;
@@ -164,6 +169,7 @@ while(@track_order){
 		
 		my $block_clip_path_id="cut-$sample-$scf[0]-$block_index";
 		my %block_clip_path_ids;
+		my $reverse_block_flag=(exists $reversed_block{$sample}{$block_index})? 1:0;
 
 		my $id_line_x=$shift_x; # 每个block的genome的起点的x,y坐标
 			my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
@@ -186,14 +192,9 @@ while(@track_order){
 		}
 		$start_once=$gff{$sample}{chooselen_single}{$block_index}{start};
 		$end_once=$gff{$sample}{chooselen_single}{$block_index}{end};
-		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$gff{$sample}{chooselen_single}{$block_index}{start}-$gff{$sample}{chooselen_single}{$block_index}{end}</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
-		#$conf{display_segment_name} ||="yes,center,shift_y:+1,fontsize:10,color:black"
-		#	
-		#my $display_segment_name_flag=$1;
-		#my $display_segment_name_pos=$2;
-		#my $display_segment_name_shift_y=$3*$sample_single_height/100;
-		#my $display_segment_name_fontsize=$4;
-		#my $display_segment_name_color=$5;
+		#reversed_block{$sample}{$block_index}
+		my @block_region=&get_real_feature_region($reverse_block_flag, $start_once, $end_once, $start_once, $end_once, "+", $gff{$sample}{scf}{$scf[0]}, "block"); # "$start-$end", $start, $end, $strand);
+		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$block_region[0]</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
 		if($display_segment_name_flag=~ /yes/i){
 			my $segment_baseline;
 			my $segment_text_anchor;
@@ -223,7 +224,7 @@ while(@track_order){
 			}else{
 				die "error:display_segment_name_shift_y not support $display_segment_name_shift_y in $display_segment_name, should like +1 or -1 or 0\n";
 			}
-			my $segment_name=($gff{$sample}{chooselen_single}{$block_index}{len} == $gff{$sample}{scf}{$scf[0]})? "$scf[0]":"$scf[0]:${start_once}bp-${end_once}bp";
+			my $segment_name=($gff{$sample}{chooselen_single}{$block_index}{len} == $gff{$sample}{scf}{$scf[0]})? "$scf[0]":"$scf[0]:$block_region[0]bp";
 			$orders{$display_segment_name_order}.="<text x=\"$segment_name_x\" y=\"$segment_name_y\" font-size=\"${display_segment_name_fontsize}px\" fill=\"$display_segment_name_color\"  text-anchor='$segment_text_anchor' alignment-baseline=\"$segment_baseline\" transform=\"rotate($segment_name_angle $segment_name_x $segment_name_y)\" >$segment_name</text>\n"; # draw sample name
 		}elsif($display_segment_name_flag!~ /no/i){
 			die "error:$display_segment_name should be start with yes or no, not $display_segment_name_flag\n"
@@ -263,6 +264,7 @@ while(@track_order){
 			#shift @index_id_arr;
 			my $gene_height_medium;
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
+			#reversed_block{$sample}{$block_index}
 
 			if($index_id=~ /[qt].q_block_index=(\d+).t_block_index=(\d+)$/){ # for crosslink
 				my $the_block_index=&get_block_index_from_id("crosslink", $index_id);
@@ -343,8 +345,10 @@ while(@track_order){
 #				}
 #			}
 #print "index_id is $index_id\n";
+
 			my $orders;
-			($svg_gene, $shift_angle_closed_feature, $orders)=&draw_genes(
+			my $feature_reverse_for_crosslink;
+			($svg_gene, $shift_angle_closed_feature, $orders, $feature_reverse_for_crosslink)=&draw_genes(
 					$index_id,
 					$index_start, 
 					$index_end, 
@@ -366,9 +370,10 @@ while(@track_order){
 					$index_label_col,
 					$index_label_position,
 					$index_label_angle,
-					$angle_flag, \%conf, $ratio, $id_line_height, $shift_angle_closed_feature, \%orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
+					$angle_flag, \%conf, $ratio, $id_line_height, $shift_angle_closed_feature, \%orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id, $reverse_block_flag, $start_once, $end_once, \%feature_reverse_for_crosslink); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可  #reversed_block{$sample}{$block_index}
 						$svg.=$svg_gene;
 			%orders=%$orders;
+			%feature_reverse_for_crosslink=%$feature_reverse_for_crosslink;
 			$pre_index_end = $index_end;
 			$pre_scf_id = $scf[0];
 			$index_id_previous=$index_id;
@@ -512,6 +517,10 @@ foreach my $pair(@pairs){
 	my $cross_link_track_name=(exists $conf{crossing_link2}{index}{$pair}{cross_link_track_name})? $conf{crossing_link2}{index}{$pair}{cross_link_track_name}:$conf{cross_link_track_name};
 	if($cross_link_height_ellipse!~ /^[\d\.]+,[\d\.]+$/){
 		die "error: not support cross_link_height_ellipse=$cross_link_height_ellipse for $pair, right format should like 10,8\n";
+	}
+
+	if((exists $feature_reverse_for_crosslink{$up_id}) || (exists $feature_reverse_for_crosslink{$down_id})){
+		$cross_link_orientation=($cross_link_orientation=~ /reverse/)? "forward":"reverse";
 	}
 
 	if($cross_link_orientation_ellipse=~ /up/i){
