@@ -880,7 +880,7 @@ sub reads_mapping(){
 			for my $rg(@start_end_xaxis){
 				my ($rg_start, $rg_end)=split(/,/, $rg);
 				print "rg is $rg,  :$rg_start,$rg_end\n";
-				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth,$reads_order, \%highss, $show_type, $mapqs,$refasta);
+				my ($mapping_gff, $mapping_setting_conf, $cross_link_conf)=&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth,$reads_order, \%highss, $show_type, $mapqs,$refasta, \@infos);
 
 				my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.mapping";	
 				%outname = &gather_gff_conf_link($prefix,$mapping_gff,$mapping_setting_conf,$cross_link_conf, \%outname, $sample);
@@ -1164,7 +1164,7 @@ sub hist_scatter_line(){
 			for my $rg(@start_end_xaxis){
 				my ($rg_start, $rg_end)=split(/,/, $rg);
 				print "hist_scatter_line_run rg is $rg  :$rg_start,$rg_end\n";
-				my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&hist_scatter_line_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type, $rg_start, $rg_end, $depth_order, $the_color, $the_opacity);
+				my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&hist_scatter_line_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type, $rg_start, $rg_end, $depth_order, $the_color, $the_opacity, \@infos);
 				my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.depth";
 				#print "depth_gff gff is $depth_gff\n";
 				%outname = &gather_gff_conf_link($prefix,$depth_gff,$depth_setting_conf,$cross_link_conf, \%outname, $sample);
@@ -1176,7 +1176,8 @@ sub hist_scatter_line(){
 
 sub reads_mapping_run(){
 #&reads_mapping_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$mapping_file, $sample,$scf,$block_index, $gff, $k, $mapping_label_size, $k_index, $reads_type, $rg_start, $rg_end, $max_depth);
-	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$reads_order, $highss, $show_type,$mapqs, $refasta)=@_;
+	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $bam_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $read_type, $rg_start, $rg_end, $max_depth,$reads_order, $highss, $show_type,$mapqs, $refasta, $infos)=@_;
+	my @infos=@$infos;
 	my $one_read_height=1;
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
 	my $color_height_cs;
@@ -1263,7 +1264,7 @@ sub reads_mapping_run(){
 				$read_shift_y = abs($s1) + $one_read_height * $read_shift_y_depth + ($one_read_height - $feature_height)/2;
 				$read_shift_y = ($updown == 1)? "+$read_shift_y":"-$read_shift_y";
 
-				$cr_id="$read_id.cr.$cr.$cg.$updown.$k_index.$info[4]";
+				$cr_id="$read_id.cr.$cr.$cg.$updown.$k_index.$infos[4]";
 #my $feature_shape="rect";
 				if($cr_type=~ /reverse/ || $cr_type=~ /forward/){
 #$feature_shape="arrow";
@@ -2120,9 +2121,10 @@ sub get_regions(){
 
 
 sub hist_scatter_line_run(){
-	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type, $block_start_bp, $block_end_bp,$depth_order, $the_color, $the_opacity)=@_;
+	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type, $block_start_bp, $block_end_bp,$depth_order, $the_color, $the_opacity, $infos)=@_;
 	print "info is $info\n";
 	my %depths=&read_depth_file($depth_file, $sample, $scf,$block_start_bp, $block_end_bp, $window_size, $info);
+	my @infos=@$infos;
 	my ($depth_gff,$depth_setting_conf);
 	my $max_depth=$depths{max_depth};
 	my $depth_depth_ratio=(abs($s1-$e1)) / (abs($e2-$s2));
@@ -2163,7 +2165,7 @@ sub hist_scatter_line_run(){
 		my $padding_depth_label=1;
 		my $feature_popup_title="value -> $depth";
 		$feature_popup_title.=";$depths{window}{$window}{popup}" if(exists $depths{window}{$window}{popup});
-		my$depth_id="$sample.$scf.$block.$depth_type.$window.$k_index.$block_start_bp.$block_end_bp.$info[4]";
+		my $depth_id="$sample.$scf.$block.$depth_type.$window.$k_index.$block_start_bp.$block_end_bp.$infos[4]";
 		$depth_gff.="$scf\tadd\thist_scatter_line\t$depth_start\t$depth_end\t.\t+\t.\tID=$depth_id;\n";
 		$depth_setting_conf.="$depth_id\tdisplay_feature_label\t$display_feature_label\n";
 		$depth_setting_conf.="$depth_id\tfeature_color\t$depth_color\n";
