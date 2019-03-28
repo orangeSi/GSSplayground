@@ -1,0 +1,37 @@
++ cat pO83_CORR.indel.reverse.pO83_CORR.indel.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff
++ rm pO83_CORR.indel.reverse.pO83_CORR.indel.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff
++ echo output out6.pO83_CORR.indel.reverse.out6.synteny.gff
++ cat pO83_CORR.indel.reverse.pO83_CORR.indel.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf
++ rm pO83_CORR.indel.reverse.pO83_CORR.indel.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf
++ echo output out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf
++ cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff
++ rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff
++ echo output out6.pO83_CORR.out6.synteny.gff
++ cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf
++ rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf
++ echo output out6.pO83_CORR.out6.synteny.setting.conf
++ cat pO83_CORR.indel.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf
++ rm pO83_CORR.indel.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf
++ echo output out6.pO83_CORR.indel.to.pO83_CORR.indel.reverse.out6.synteny.crosslink
++ cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff
++ rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff
++ echo output out6.pO83_CORR.indel.out6.synteny.gff
++ cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf
++ rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf
++ echo output out6.pO83_CORR.indel.out6.synteny.setting.conf
++ cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf
++ rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf
++ echo output out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink
++ cat out6.pO83_CORR.indel.to.pO83_CORR.indel.reverse.out6.synteny.crosslink out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink
++ cat out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf out6.pO83_CORR.out6.synteny.setting.conf out6.pO83_CORR.indel.out6.synteny.setting.conf
++ cat feature.color.label.6.conf out6.synteny.setting.conf
++ cat out6.synteny.crosslink
++ cat out6.pO83_CORR.indel.reverse.out6.synteny.gff out6.pO83_CORR.out6.synteny.gff out6.pO83_CORR.indel.out6.synteny.gff
++ sort -u
++ awk -F '	' '{print $3}'
++ sed -r 's/^(pO83_CORR.indel.reverse\s.*\.gff)\s/\1,out6.pO83_CORR.indel.reverse.out6.synteny.gff\t/' tracks.6.list
++ cp tracks.6.list.out6 tracks.6.list.out6.tmp
++ sed -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out6.pO83_CORR.out6.synteny.gff\t/' tracks.6.list.out6.tmp
++ cp tracks.6.list.out6 tracks.6.list.out6.tmp
++ sed -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out6.pO83_CORR.indel.out6.synteny.gff\t/' tracks.6.list.out6.tmp
++ cp tracks.6.list.out6 tracks.6.list.out6.tmp

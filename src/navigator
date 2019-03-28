@@ -59,6 +59,7 @@ function search_by_rg(){
 		var svg = document.getElementById("demo-tiger");
 		var svgNS = 'http://www.w3.org/2000/svg';
 		var re = new RegExp(rg_track_name,"g");
+		var highlight_width = 0;
 		for (var track_name in blocks_start_ends_cord){
 			if(track_name.match(re)){
 				for (var chr_id in blocks_start_ends_cord[track_name]){
@@ -75,20 +76,22 @@ function search_by_rg(){
 								start_y = parseFloat(start_y);
 								end_x = parseFloat(end_x);
 								end_y = parseFloat(end_y);
-						
+							var highligh_color = "red";
 							for(var rg_index in rg){
 								var rg_pos = parseFloat(rg[rg_index]);
 								console.log(rg_pos);
 								if( rg_pos >= start && rg_pos <= end){
 									//reversed_block[track_name][block_index]="";
-									if(track_name in reversed_block && block_index in reversed_block[track_name]){
-										// start end is real , rg_pos is also real, but this is reverse strand block	
-										console.log("")
-									
-									}
 									var scale_ratio = (end_x-start_x)/(end-start+1); 
 									var x = start_x + (rg_pos-start) * scale_ratio;
-									console.log('ratio is '+scale_ratio)
+									var reverse_flag = 0;
+									if(track_name in reversed_block && block_index in reversed_block[track_name]){
+										//start end is real , rg_pos is also real, but this is reverse strand block	
+										console.log("reverse_flag in track:"+track_name+", block_index "+block_index)
+										reverse_flag = 1;
+									}
+									console.log("track_name "+track_name+", block_index "+block_index+", reverse_flag "+reverse_flag+", start "+start+", end "+end+", rg_pos "+rg_pos);
+									console.log('ratio is '+scale_ratio);
 									var height= tracks_heigh[track_name];
 									var y=(start_y+end_y)/2 - height;
 									var width=scale_ratio*(end-start)/1000;
@@ -96,14 +99,37 @@ function search_by_rg(){
 									if(y<0){y=0};
 								
 									width *=hightligh_ratio;
+									if(highlight_width > width){
+										width = highlight_width;
+									}else{
+										highlight_width = width;
+									}
 
 									/// cread a child ,demo-tiger
 									if(rg_index == 1){
-										x = x + scale_ratio;
-										pos = rg_pos + 1;
+										highligh_color = "red";
+										pos = rg_pos +1;
+										if(reverse_flag == 1){
+											x = start_x + (end - rg_pos) * scale_ratio;
+											x = x - width;
+											pos = "forward strand:"+pos;
+											console.log("reverse_flag==1, rg_index "+rg_index);
+										}else{
+											x = x + scale_ratio;
+											console.log("reverse_flag==0, rg_index "+rg_index);
+										}
 									}else{
-										x = x - width;
-										pos = rg_pos - 1;
+										highligh_color = "black";
+										pos = rg_pos -1;
+										if(reverse_flag == 1){
+											x = start_x + (end - rg_pos) * scale_ratio;
+											x = x + scale_ratio;
+											pos = "forward strand:"+pos;
+											console.log("reverse_flag==1, rg_index "+rg_index);
+										}else{
+											x = x - width;
+											console.log("reverse_flag==0, rg_index "+rg_index);
+										}
 									}
 									 var g = document.createElementNS(svgNS,'g');
 									 var title = document.createElementNS(svgNS,'title');
@@ -113,7 +139,7 @@ function search_by_rg(){
 									 rect.setAttribute('y',y);
 									 rect.setAttribute('width',width);
 									 rect.setAttribute('height',2*height);
-									 rect.setAttribute('fill','red');
+									 rect.setAttribute('fill',highligh_color);
 									 title.append(title_text);
 									 g.append(title);
 									 g.append(rect);
