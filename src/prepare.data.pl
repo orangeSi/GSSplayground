@@ -739,13 +739,27 @@ sub synteny_common_write(){
 		}else{
 			die "\nerror:srand $strand\n";
 		}
+		my $cross_link_color_reverse;
+		if($cross_link_color eq $forward_color){
+			$cross_link_color_reverse=$reverse_color;
+		}else{
+			$cross_link_color_reverse=$forward_color;
+		}
+		my $cross_link_opacity_reverse=0;
+		if($cross_link_opacity_reverse == $forward_opacity ){
+			$cross_link_opacity_reverse = $reverse_opacity;
+		}else{
+			$cross_link_opacity_reverse = $forward_opacity;
+		}
 		if(not exists $qid{$query_feature_id}){
 			$synteny_gff_q.="$query_scf\tadd\tsynteny\t$query_start\t$query_end\t.\t$strand\t.\tID=$query_feature_id;\n";
 			$synteny_setting_conf_q.="$query_feature_id\tfeature_shape\trect\n";
 			$synteny_setting_conf_q.="$query_feature_id\tfeature_height_ratio\t1\n";
 			$synteny_setting_conf_q.="$query_feature_id\tfeature_height_unit\tbackbone\n";
 			$synteny_setting_conf_q.="$query_feature_id\tfeature_opacity\t$cross_link_opacity\n";
+			$synteny_setting_conf_q.="$query_feature_id\tfeature_opacity_reverse\t$cross_link_opacity_reverse\n";
 			$synteny_setting_conf_q.="$query_feature_id\tfeature_color\t$cross_link_color\n";
+			$synteny_setting_conf_q.="$query_feature_id\tfeature_color_reverse\t$cross_link_color_reverse\n";
 			$synteny_setting_conf_q.="$query_feature_id\tdisplay_feature_label\tno\n";
 			$synteny_setting_conf_q.="$query_feature_id\tfeature_order\t$synteny_order_pair\n";
 			$qid{$query_feature_id}="";
@@ -756,7 +770,9 @@ sub synteny_common_write(){
 			$synteny_setting_conf_t.="$target_feature_id\tfeature_height_ratio\t1\n";
 			$synteny_setting_conf_t.="$target_feature_id\tfeature_height_unit\tbackbone\n";
 			$synteny_setting_conf_t.="$target_feature_id\tfeature_color\t$cross_link_color\n";
+			$synteny_setting_conf_t.="$target_feature_id\tfeature_color_reverse\t$cross_link_color_reverse\n";
 			$synteny_setting_conf_t.="$target_feature_id\tfeature_opacity\t$cross_link_opacity\n";
+			$synteny_setting_conf_t.="$target_feature_id\tfeature_opacity_reverse\t$cross_link_opacity_reverse\n";
 			$synteny_setting_conf_t.="$target_feature_id\tdisplay_feature_label\tno\n";
 			$synteny_setting_conf_t.="$target_feature_id\tfeature_order\t$synteny_order_pair\n";
 			$tid{$target_feature_id}="";
@@ -778,7 +794,9 @@ sub synteny_common_write(){
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shape\t$crosslink_shape\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_anchor_pos\tlow_up\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_color\t$cross_link_color\n";
+			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_color_reverse\t$cross_link_color_reverse\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_opacity\t$cross_link_opacity\n";
+			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_opacity_reverse\t$cross_link_opacity_reverse\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcross_link_shift_y\t$cross_link_shift_y\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tcrosslink_stroke_style\tstroke:black;stroke-width:0;\n";
 			$cross_link_conf.="$query_feature_id\t$target_feature_id\tfeature_popup_title\t$feature_popup_title\n";

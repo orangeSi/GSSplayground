@@ -522,6 +522,11 @@ foreach my $pair(@pairs){
 
 	if((exists $feature_reverse_for_crosslink{$up_id}) || (exists $feature_reverse_for_crosslink{$down_id})){
 		$cross_link_orientation=($cross_link_orientation=~ /reverse/)? "forward":"reverse";
+		if($feature_popup_title=~ /strand\s*->\s*+/){
+			$feature_popup_title=~ s/strand\s*->\s*+/strand -> -/;
+		}else{
+			$feature_popup_title=~ s/strand\s*->\s*-/strand -> +/;
+		}
 	}
 
 	if($cross_link_orientation_ellipse=~ /up/i){
@@ -653,6 +658,10 @@ foreach my $pair(@pairs){
 
 
 ## draw legend
+
+# TODO:
+# 把gff读取之后，把有legend_label的features挑出来,去掉冗余的（运行同一个label对应不同的颜色和透明度和feature_shape），创建新的id然后写入一个legened.gff和legend.setting.conf，重新用read_list读入legened.gff和legend.setting.conf，然后在开始draw_gene
+
 my $legend_num=0;
 my %legend_color_num;
 for my $f(keys %{$conf{feature_setting2}}){

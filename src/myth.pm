@@ -530,8 +530,18 @@ sub draw_genes(){
 	#$gff{$sample}{scf}{$scf}
 	my $feature_pos;
 	print "draw feature_id = $feature_id\n";
-	($feature_pos, $start, $end, $strand)=&get_real_feature_region($reverse_block_flag, $start, $end, $start_block, $end_block, "+", 0, "feature"); # "$start-$end", $start, $end, $strand);
-	$feature_reverse_for_crosslink->{$feature_id}="" if($reverse_block_flag);
+	($feature_pos, $start, $end, $strand)=&get_real_feature_region($reverse_block_flag, $start, $end, $start_block, $end_block, $strand, 0, "feature"); # "$start-$end", $start, $end, $strand);
+	&check_para(%{$conf->{feature_setting2}->{$feature_id}});
+	my $feature_opacity=&get_para("feature_opacity", $feature_id, $conf);
+	if($reverse_block_flag){
+		$feature_reverse_for_crosslink->{$feature_id}="";
+		if(exists $conf->{feature_setting2}->{$feature_id}{feature_opacity_reverse}){
+			$feature_opacity = $conf->{feature_setting2}->{$feature_id}{feature_opacity_reverse}
+		}
+		if(exists $conf->{feature_setting2}->{$feature_id}{feature_color_reverse}){
+			$index_color = $conf->{feature_setting2}->{$feature_id}{feature_color_reverse}
+		}
+	}
 	my $feature_type=$conf->{feature_setting2}->{$feature_id}->{type};
 	my $skip_feature_type_keep_crosslink=0;
 	$skip_feature_type_keep_crosslink=1 if(grep(/^$feature_type$/, split(/,/, $conf->{skip_feature_type_keep_crosslink})));
@@ -544,8 +554,6 @@ sub draw_genes(){
 			die "error: $c for @arr_cols of $feature_id is wrong color format\n";
 		}
 	}
-	&check_para(%{$conf->{feature_setting2}->{$feature_id}});
-	my $feature_opacity=&get_para("feature_opacity", $feature_id, $conf);
 #my $feature_opacity=1;
 	my $shape=&get_para("feature_shape", $feature_id, $conf);
 	my $feature_shift_y_unit=&get_para("feature_shift_y_unit", $feature_id, $conf);
@@ -1302,7 +1310,7 @@ sub check_block_reverse(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_dominant_baseline", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_dominant_baseline", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique", "cross_link_opacity_reverse", "feature_color_reverse", "feature_opacity_reverse");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}
