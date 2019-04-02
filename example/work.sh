@@ -6,5 +6,6 @@ sh ../ClustersPloter.sh tracks.3.list out3 . main.3.conf
 sh ../ClustersPloter.sh  tracks.4.list  out4 . main.4.conf
 sh ../ClustersPloter.sh tracks.5.list out5 . main.5.conf
 sh ../ClustersPloter.sh  tracks.6.list  out6 . main.6.conf
+sh ../ClustersPloter.sh  tracks.7.list  out7 . main.7.conf
 ls -lhtr *error 
 ls -lhtr *html

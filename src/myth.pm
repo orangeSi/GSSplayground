@@ -4,7 +4,7 @@ use warnings;
 use List::MoreUtils qw(uniq);
 use Exporter qw(import);
 
-our @EXPORT_OK = qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_x shift_tracks_y get_real_feature_region check_block_reverse);
+our @EXPORT_OK = qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_x shift_tracks_y get_real_feature_region check_block_reverse show_segment_strand draw_feature);
 
 sub shift_tracks_y(){
 	my ($para, $track_order)=@_; # para="s1,block_index,+0.3;s2,block_index,-0.3;"
@@ -61,6 +61,28 @@ sub shift_tracks_x(){
 	}
 	return %tracks_shift_x;
 }
+
+sub show_segment_strand(){
+	my ($info, $id_line_x, $id_line_y, $id_line_height, $id_line_width, $reverse)=@_;
+	die "error: display_segment_strand=$info format error, should like display_segment_strand=5:5,3:3,color:black,fontsize:5\n" if($info!~ /^5:(.*),3:(.*),color:(.*),fontsize:([\d\.]+)$/);
+	my ($five,$three,$color,$fsize)=($1, $2, $3, $4);
+	return "" if(!$five || !$three);
+	#$orders{$track_order}.=&show_segment_strand($five, $three, $id_line_x, $id_line_y, $id_line_height, $id_line_width);
+	my $five_x=$id_line_x-1;
+	my $five_y=$id_line_y+0.5*$id_line_height;
+	my $three_x=$id_line_x+$id_line_width+1;
+	my $three_y=$five_y;
+	if($reverse){
+		my $five_tmp=$five;
+		my $three_tmp=$three;
+		$five=$three_tmp;
+		$three=$five_tmp;
+	}
+	my $left="<text x=\"$five_x\" y=\"$five_y\" font-family=\"Times New Roman\" font-size=\"${fsize}px\" fill=\"$color\"  text-anchor='end' alignment-baseline=\"middle\" >$five</text>\n"; 
+	my $right="<text x=\"$three_x\" y=\"$three_y\" font-family=\"Times New Roman\" font-size=\"${fsize}px\" fill=\"$color\"  text-anchor='start' alignment-baseline=\"middle\" >$three</text>\n";
+	return "$left $right";
+}
+
 
 sub format_scale(){
 	my ($last_tick_label)=@_;
@@ -500,6 +522,8 @@ sub get_real_coordinate(){
 sub get_real_feature_region(){
 	my ($reverse_block_flag, $start, $end, $block_start, $block_end, $strand, $scf_len, $type)=@_;
 	if($reverse_block_flag){ # 3-7 of 1-10 -> 8-4
+		my $raw_start=$start;
+		my $raw_end=$end;
 		if($type eq "feature"){ #feature is 1, -10, 147049, 1, 6992, +, 0, feature
 			$block_end=$block_end-($block_start-1);
 			$block_start=1; # relative start end
@@ -517,12 +541,29 @@ sub get_real_feature_region(){
 		$end=$start_tmp;
 		$start=$end_tmp;
 		$strand=~ tr/01/10/; # relative start and end
-		return ("reverse:$start-$end", $start, $end, $strand);
+		return ("reverse:$start-$end($raw_start-$raw_end)", $start, $end, $strand);
 	}else{
 		return ("$start-$end", $start, $end, $strand);
 	}
 
 } 
+
+#draw_feature($color, $opacity, $shape, $arrow_x, $arrow_y)
+sub draw_feature(){
+	my ($color, $opacity, $shape, $x, $y, $width, $height)=@_;
+	my $svg;
+	my @shapes=("rect", "arrow", "circle_point");
+	die "error: not support $shape, only @shapes\n" if(!grep(/^$shape$/, @shapes));
+	if($shape eq "rect"){
+			
+	}elsif($shape eq "arrow"){
+		
+	}elsif($shape eq "circle_point"){
+
+	}
+	return $svg;
+}
+
 
 sub draw_genes(){
 #draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
@@ -578,11 +619,11 @@ sub draw_genes(){
 	}
 	$shift_x+=$feature_shift_x*$ratio;
 	my $shift_unit=$id_line_height;
-	my @feature_shift_y_units = ("radius", "backbone", "percent");
+	my @feature_shift_y_units = ("radius", "backbone", "percent", "px");
 	if($shape=~ /^circle_point/){
 		if($feature_shift_y_unit=~ /radius/){
 			$shift_unit=($end-$start+1)*$ratio;
-		}elsif($feature_shift_y_unit!~ /backbone/ && $feature_shift_y_unit!~ /percent/){
+		}elsif($feature_shift_y_unit!~ /backbone/ && $feature_shift_y_unit!~ /percent/ && $feature_shift_y_unit!~ /px/){
 			die "error: only support @feature_shift_y_units for feature_shift_y_unit, but not $feature_shift_y_unit\n";
 		}
 #print "circle shift_unit is $shift_unit\n";
@@ -596,6 +637,9 @@ sub draw_genes(){
 		}
 	}
 
+	if($feature_shift_y_unit=~ /^px$/){
+		$shift_unit=1;	
+	}
 	$feature_shift_y=~ s/^([1-9].*)/\+$1/;
 	my $circle_point=0;
 	$circle_point=1 if($shape=~ /^circle_point/);
@@ -779,7 +823,7 @@ sub draw_genes(){
 			}
 
 ## draw label of feature
-			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
+			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-family=\"Times New Roman\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
 		}
 # check this feature if is in crossing_link
 		#print "ssfeature_id is $feature_id\n";
@@ -866,7 +910,7 @@ sub draw_genes(){
 
 ## draw label of feature
 			die "die:label_y is $label_y, id is $feature_id\n" if(!$label_y);
-			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
+			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-family=\"Times New Roman\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		}
 # check this feature if is in crossing_link
 		#print "feature_id is $feature_id\n";
@@ -929,7 +973,7 @@ sub draw_genes(){
 
 
 ## draw label of feature
-			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
+			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-family=\"Times New Roman\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		}
 # check this feature if is in crossing_link
 		if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
@@ -1037,7 +1081,7 @@ sub default_setting(){
 	$conf{track_style} ||="fill:green";
 	$conf{padding_feature_label} ||= 0.1;
 	$conf{pos_feature_label} ||="medium_up_skip_arrow_sharp";
-	$conf{distance_closed_feature} ||=50;
+	$conf{distance_closed_feature} ||=10;
 	$conf{shift_angle_closed_feature} ||=10;
 	$conf{feature_arrow_sharp_extent} =(exists $conf{feature_arrow_sharp_extent})? $conf{feature_arrow_sharp_extent}:0.3;
 	$conf{scale_display} ||="no";
@@ -1088,7 +1132,7 @@ sub default_setting(){
 	$conf{feature_label_auto_angle_flag} =(exists $conf{feature_label_auto_angle_flag})? $conf{feature_label_auto_angle_flag}:1;
 	$conf{tracks_shift_y} ||=""; # sample2,block_index2,+0.3;sample2,block_index2,-0.1
 	$conf{tracks_shift_x} ||="";
-	$conf{label_text_anchor} ||="start";
+	$conf{label_text_anchor} ||="middle";
 	$conf{label_text_alignment_baseline} ||="baseline";
 	$conf{crosslink_stroke_style} ||="stroke:black;stroke-width:0.1;";
 	$conf{display_segment_name} ||="no,center,shift_y:+1,fontsize:10,color:black,order:5,rotate:90";
@@ -1101,6 +1145,8 @@ sub default_setting(){
 	$conf{feature_label_lengthAdjust} ||="";
 	$conf{tracks_block_reverse} ||="";
 	$conf{feature_id_is_unique} ||="yes";
+	$conf{display_segment_strand} ||="5:5',3:3',color:black,fontsize:7";
+	$conf{legend_height_ratio} ||=0.9;
 
 ##$conf{feature_ytick_region} ||="0-3:0-10;";
 ##$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
@@ -1108,7 +1154,7 @@ sub default_setting(){
 	if($conf{track_style}!~ /:/){
 		die "error: track_style format like  fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9\n";
 	}
-	if($conf{feature_shift_x}!~ /^\d+$/){
+	if($conf{feature_shift_x}!~ /^\d+$/ && $conf{feature_shift_x}!~ /^[\+\-]\d+$/){
 		die "error:feature_shift_x format like 0 or +10 or -10, unit is bp\n"
 	}
 
@@ -1310,7 +1356,7 @@ sub check_block_reverse(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_dominant_baseline", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique", "cross_link_opacity_reverse", "feature_color_reverse", "feature_opacity_reverse");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_dominant_baseline", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique", "cross_link_opacity_reverse", "feature_color_reverse", "feature_opacity_reverse", "display_segment_strand");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

@@ -1,0 +1,44 @@
+=head2 Tue Apr  2 01:27:09 2019: C<Module> L<Imager|Imager>
+
+=over 4
+
+=item *
+
+C<installed into: /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter_updateing/src/Imager-1.011/share/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.011>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue Apr  2 02:04:55 2019: C<Module> L<Imager|Imager>
+
+=over 4
+
+=item *
+
+C<installed into: /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter_updateing/src/Imager-1.011//share/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.011>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+

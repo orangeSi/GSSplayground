@@ -6,7 +6,7 @@ use Getopt::Long;
 use FindBin qw($Bin);
 use List::Util qw(max min);
 use lib "$Bin";
-use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_y shift_tracks_x  get_real_feature_region check_block_reverse);
+use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_y shift_tracks_x  get_real_feature_region check_block_reverse show_segment_strand);
 
 my ($list,$prefix,$outdir,$conf,$track_reorder);
 GetOptions("list:s"=>\$list,
@@ -120,6 +120,8 @@ my $display_segment_name_order=$6;
 my $segment_name_angle=$7;
 my %up_down_percent_unit;
 
+
+
 while(@track_order){
 	$index++;
 	my $sample = shift @track_order;
@@ -149,7 +151,7 @@ while(@track_order){
 	$conf{sample_name_old2new2}{$sample}{new_name} = $sample if(not exists $conf{sample_name_old2new2}{$sample}{new_name});
 	$conf{sample_name_old2new2}{$sample}{new_color} = $conf{sample_name_color_default} if(not exists $conf{sample_name_old2new2}{$sample}{new_color});
 	$conf{sample_name_old2new2}{$sample}{new_font_size} = $conf{sample_name_font_size_default} if(not exists $conf{sample_name_old2new2}{$sample}{new_font_size});
-	$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"$conf{sample_name_old2new2}{$sample}{new_font_size}px\" fill=\"$conf{sample_name_old2new2}{$sample}{new_color}\"  text-anchor='end' alignment-baseline=\"middle\" >$conf{sample_name_old2new2}{$sample}{new_name}</text>\n"; # draw sample name
+	$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-family=\"Times New Roman\" font-size=\"$conf{sample_name_old2new2}{$sample}{new_font_size}px\" fill=\"$conf{sample_name_old2new2}{$sample}{new_color}\"  text-anchor='end' alignment-baseline=\"middle\" >$conf{sample_name_old2new2}{$sample}{new_name}</text>\n"; # draw sample name
 	print "draw sample name $conf{sample_name_old2new2}{$sample}{new_name}\n";
 
 
@@ -195,6 +197,8 @@ while(@track_order){
 		#reversed_block{$sample}{$block_index}
 		my @block_region=&get_real_feature_region($reverse_block_flag, $start_once, $end_once, $start_once, $end_once, "+", $gff{$sample}{scf}{$scf[0]}, "block"); # "$start-$end", $start, $end, $strand);
 		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$block_region[0]</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
+		$orders{$track_order}.=&show_segment_strand($conf{display_segment_strand}, $id_line_x, $id_line_y, $id_line_height, $id_line_width, $reverse_block_flag);
+		 
 		if($display_segment_name_flag=~ /yes/i){
 			my $segment_baseline;
 			my $segment_text_anchor;
@@ -225,7 +229,7 @@ while(@track_order){
 				die "error:display_segment_name_shift_y not support $display_segment_name_shift_y in $display_segment_name, should like +1 or -1 or 0\n";
 			}
 			my $segment_name=($gff{$sample}{chooselen_single}{$block_index}{len} == $gff{$sample}{scf}{$scf[0]})? "$scf[0]":"$scf[0]:$block_region[0]bp";
-			$orders{$display_segment_name_order}.="<text x=\"$segment_name_x\" y=\"$segment_name_y\" font-size=\"${display_segment_name_fontsize}px\" fill=\"$display_segment_name_color\"  text-anchor='$segment_text_anchor' alignment-baseline=\"$segment_baseline\" transform=\"rotate($segment_name_angle $segment_name_x $segment_name_y)\" >$segment_name</text>\n"; # draw sample name
+			$orders{$display_segment_name_order}.="<text x=\"$segment_name_x\" y=\"$segment_name_y\" font-family=\"Times New Roman\" font-size=\"${display_segment_name_fontsize}px\" fill=\"$display_segment_name_color\"  text-anchor='$segment_text_anchor' alignment-baseline=\"$segment_baseline\" transform=\"rotate($segment_name_angle $segment_name_x $segment_name_y)\" >$segment_name</text>\n"; # draw sample name
 		}elsif($display_segment_name_flag!~ /no/i){
 			die "error:$display_segment_name should be start with yes or no, not $display_segment_name_flag\n"
 		}
@@ -663,20 +667,20 @@ foreach my $pair(@pairs){
 # 把gff读取之后，把有legend_label的features挑出来,去掉冗余的（运行同一个label对应不同的颜色和透明度和feature_shape），创建新的id然后写入一个legened.gff和legend.setting.conf，重新用read_list读入legened.gff和legend.setting.conf，然后在开始draw_gene
 
 my $legend_num=0;
-my %legend_color_num;
+my %legends;
 for my $f(keys %{$conf{feature_setting2}}){
-	if(exists $conf{feature_setting2}{$f}{legend_label}){
-		if(exists $legend_color_num{$conf{feature_setting2}{$f}{feature_color}}){
-			if($legend_color_num{$conf{feature_setting2}{$f}{feature_color}} ne $conf{feature_setting2}{$f}{legend_label}){
-				die "error: one $conf{feature_setting2}{$f}{feature_color} -> more than one different legend_label\n";
-			}
-		}else{
-			$legend_color_num{$conf{feature_setting2}{$f}{feature_color}}=$conf{feature_setting2}{$f}{legend_label};
-		}
-
+	if(exists $conf{feature_setting2}{$f}{legend_label} && $conf{feature_setting2}{$f}{legend_label}){
+			my $label=&get_para("legend_label", $f, \%conf);
+			my $color=&get_para("feature_color", $f, \%conf);
+			my $shape=&get_para("feature_shape", $f, \%conf);
+			my $opacity=&get_para("feature_opacity", $f, \%conf);
+			$legends{"$label.$color.$shape.$opacity"}{label}=$label;
+			$legends{"$label.$color.$shape.$opacity"}{color}=$color;
+			$legends{"$label.$color.$shape.$opacity"}{shape}=$shape;
+			$legends{"$label.$color.$shape.$opacity"}{opacity}=$opacity;
 	}
 }
-$legend_num=keys %legend_color_num;
+$legend_num=keys %legends;
 
 #print "legend_num is $legend_num\n";
 #my $top_margin_legend;
@@ -698,7 +702,7 @@ $legend_num=keys %legend_color_num;
 #}
 
 if($conf{display_legend}=~ /yes/i){
-	print "lengend start\n";
+	print "lengend start, legend_num is $legend_num\n";
 	my $legend_arrow_height = $id_line_height*$conf{feature_height_ratio}*$conf{legend_height_ratio};
 	my $legend_font_size = $conf{legend_font_size}; #legend中文字字体大小
 		my $top_margin_legend = ($svg_height - ($legend_arrow_height * $legend_num + ($legend_num-1)*$legend_arrow_height*$conf{legend_height_space}))/2;
@@ -712,11 +716,14 @@ if($conf{display_legend}=~ /yes/i){
 	my $arrow_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width*1.1;
 	my $arrow_y = $top_margin_legend;
 #my $legend_arrow_height = $legend_single_arrow_height * 0.8;
-	foreach my $legend_color(sort keys %legend_color_num){
-		my $legend = $legend_color_num{$legend_color};
+	foreach my $l(sort keys %legends){
+		my $legend=$legends{$l}{label}; 
+		my $color=$legends{$l}{color};
+		my $opacity=$legends{$l}{opacity};
+		my $shape=$legends{$l}{shape};
 ## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
 # 先用方块代替arrow
-		my @arr_cols=split(/,,/, $legend_color);
+		my @arr_cols=split(/,,/, $color);
 		my $arrow_col_start;
 		my $arrow_col_end;
 #print "legend arr_cols is @arr_cols\n";
@@ -725,7 +732,7 @@ if($conf{display_legend}=~ /yes/i){
 			$arrow_col_start = $arr_cols[0];
 			$arrow_col_end = $arr_cols[1];
 #my $arrow_color_id = $conf{feature_setting}{legend_col}{$legend};
-			my $arrow_color_id = $legend_color;
+			my $arrow_color_id = $color;
 			$arrow_color_id=~ s/,/-/g;
 			$arrow_color_id=~ s/\)/-/g;
 			$arrow_color_id=~ s/\(/-/g;
@@ -741,10 +748,10 @@ if($conf{display_legend}=~ /yes/i){
 				<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:url(#$arrow_color_id);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1\" />
 				</g>";
 		}else{
-			$svg.="<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:$legend_color;stroke:$conf{legend_stroke_color};stroke-width:$conf{legend_stroke_width};fill-opacity:1;stroke-opacity:1\" />";
+			$svg.="<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:$color;stroke:$conf{legend_stroke_color};stroke-width:$conf{legend_stroke_width};fill-opacity:$opacity;stroke-opacity:$opacity\" />";
 		}
 ## draw legend
-		$svg.="<text x=\"$text_x\" y=\"$text_y\" font-size=\"${legend_font_size}px\" fill=\"black\" text-anchor='start'>$legend</text>";
+		$svg.="<text x=\"$text_x\" y=\"$text_y\" font-family=\"Times New Roman\" font-size=\"${legend_font_size}px\" fill=\"black\" text-anchor='start'>$legend</text>";
 		$arrow_y += $legend_single_arrow_height +$legend_arrow_height*$conf{legend_height_space};
 		$text_y += $legend_single_arrow_height +$legend_arrow_height*$conf{legend_height_space};
 ## draw legend
@@ -802,7 +809,7 @@ if($conf{scale_display}=~ /yes/i){
 			$tick_label=&format_scale($tick_label);
 			$tick_label.="bp" if($tick == 0);
 			$orders{$conf{scale_order}}.="<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # ticks
-			$orders{$conf{scale_order}}.= "<text x=\"$tick_x\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$tick_label</text>\n"; # label of feature
+			$orders{$conf{scale_order}}.= "<text x=\"$tick_x\" y=\"$tick_label_y\" font-family=\"Times New Roman\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$tick_label</text>\n"; # label of feature
 
 		}
 		print "cluster_width_ratio $cluster_width_ratio*$svg_width % $unit_scale\n";
@@ -812,7 +819,7 @@ if($conf{scale_display}=~ /yes/i){
 				my $last_tick_label=&format_scale($max_length+$scale_start-1);
 			$last_tick_label.="bp";
 
-			$orders{$conf{scale_order}}.= "<text x=\"$x_end_scale\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$last_tick_label</text>\n"; # label of feature
+			$orders{$conf{scale_order}}.= "<text x=\"$x_end_scale\" y=\"$tick_label_y\" font-family=\"Times New Roman\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$last_tick_label</text>\n"; # label of feature
 
 		}
 

@@ -75,9 +75,9 @@ date
 echo
 fi
 echo 
-ls -ltrh $prefix.prepare.data.log $prefix.plot.log
+ls -ltrh $prefix.prepare.data.log $prefix.plot.log 2>/dev/null
 echo 
-ls -ltrh $prefix.prepare.data.error $prefix.plot.error
+ls -ltrh $prefix.prepare.data.error $prefix.plot.error 2>/dev/null
 echo 
 if [ -s $prefix.plot.error ];
 then
