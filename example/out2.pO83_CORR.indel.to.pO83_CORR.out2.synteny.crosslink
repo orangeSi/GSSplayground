@@ -1,72 +1,55 @@
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1	pO83_CORR.NC_017659.1.5460.147060.1.+.1	cross_link_shape	quadrilateral
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1	pO83_CORR.NC_017659.1.5460.147060.1.+.1	cross_link_anchor_pos	low_up
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1	pO83_CORR.NC_017659.1.5460.147060.1.+.1	cross_link_color	orange
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1	pO83_CORR.NC_017659.1.5460.147060.1.+.1	cross_link_opacity	0.5
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1	pO83_CORR.NC_017659.1.5460.147060.1.+.1	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1	pO83_CORR.NC_017659.1.5460.147060.1.+.1	crosslink_stroke_style	stroke:black;stroke-width:0;
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1	pO83_CORR.NC_017659.1.5460.147060.1.+.1	feature_popup_title	query -> NC_017659.1.fake: 5460-147060;target -> NC_017659.1: 5460-147060;strand -> +;indentity -> 100.00%;query_coverage -> 141601/147060=0.962879096967224;ref_coverage -> 141601/147060=0.962879096967224;
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1	pO83_CORR.NC_017659.1.5460.147060.1.+.1	cross_link_order	0.125
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1	pO83_CORR.NC_017659.1.5460.147060.1.+.1	edge_coordinate_feature_out_of_list	pO83_CORR.indel,NC_017659.1.fake,1700:6000 ->pO83_CORR,NC_017659.1,1700:5900 -> pO83_CORR.indel,NC_017659.1.fake,6000 -> pO83_CORR,NC_017659.1,5900
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.2	pO83_CORR.NC_017659.1.5460.147060.1.+.2	cross_link_shape	quadrilateral
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.2	pO83_CORR.NC_017659.1.5460.147060.1.+.2	cross_link_anchor_pos	low_up
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.2	pO83_CORR.NC_017659.1.5460.147060.1.+.2	cross_link_color	orange
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.2	pO83_CORR.NC_017659.1.5460.147060.1.+.2	cross_link_opacity	0.5
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.2	pO83_CORR.NC_017659.1.5460.147060.1.+.2	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.2	pO83_CORR.NC_017659.1.5460.147060.1.+.2	crosslink_stroke_style	stroke:black;stroke-width:0;
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.2	pO83_CORR.NC_017659.1.5460.147060.1.+.2	feature_popup_title	query -> NC_017659.1.fake: 5460-147060;target -> NC_017659.1: 5460-147060;strand -> +;indentity -> 100.00%;query_coverage -> 141601/147060=0.962879096967224;ref_coverage -> 141601/147060=0.962879096967224;
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.2	pO83_CORR.NC_017659.1.5460.147060.1.+.2	cross_link_order	0.25
-pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.2	pO83_CORR.NC_017659.1.5460.147060.1.+.2	edge_coordinate_feature_out_of_list	pO83_CORR.indel,NC_017659.1.fake,6001:7000 ->pO83_CORR,NC_017659.1,1700:5900 -> pO83_CORR.indel,NC_017659.1.fake,6001 -> pO83_CORR,NC_017659.1,5900
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.1	pO83_CORR.NC_017659.1.2101.5460.1.+.1	cross_link_shape	quadrilateral
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.1	pO83_CORR.NC_017659.1.2101.5460.1.+.1	cross_link_anchor_pos	low_up
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.1	pO83_CORR.NC_017659.1.2101.5460.1.+.1	cross_link_color	orange
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.1	pO83_CORR.NC_017659.1.2101.5460.1.+.1	cross_link_opacity	0.5
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.1	pO83_CORR.NC_017659.1.2101.5460.1.+.1	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.1	pO83_CORR.NC_017659.1.2101.5460.1.+.1	crosslink_stroke_style	stroke:black;stroke-width:0;
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.1	pO83_CORR.NC_017659.1.2101.5460.1.+.1	feature_popup_title	query -> NC_017659.1.fake: 1891-5250;target -> NC_017659.1: 2101-5460;strand -> +;indentity -> 100.00%;query_coverage -> 3360/147060=0.0228478172174623;ref_coverage -> 3360/147060=0.0228478172174623;
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.1	pO83_CORR.NC_017659.1.2101.5460.1.+.1	cross_link_order	0.375
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.1	pO83_CORR.NC_017659.1.2101.5460.1.+.1	edge_coordinate_feature_out_of_list	0
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.2	pO83_CORR.NC_017659.1.2101.5460.1.+.2	cross_link_shape	quadrilateral
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.2	pO83_CORR.NC_017659.1.2101.5460.1.+.2	cross_link_anchor_pos	low_up
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.2	pO83_CORR.NC_017659.1.2101.5460.1.+.2	cross_link_color	orange
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.2	pO83_CORR.NC_017659.1.2101.5460.1.+.2	cross_link_opacity	0.5
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.2	pO83_CORR.NC_017659.1.2101.5460.1.+.2	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.2	pO83_CORR.NC_017659.1.2101.5460.1.+.2	crosslink_stroke_style	stroke:black;stroke-width:0;
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.2	pO83_CORR.NC_017659.1.2101.5460.1.+.2	feature_popup_title	query -> NC_017659.1.fake: 1891-5250;target -> NC_017659.1: 2101-5460;strand -> +;indentity -> 100.00%;query_coverage -> 3360/147060=0.0228478172174623;ref_coverage -> 3360/147060=0.0228478172174623;
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.2	pO83_CORR.NC_017659.1.2101.5460.1.+.2	cross_link_order	0.5
-pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.2	pO83_CORR.NC_017659.1.2101.5460.1.+.2	edge_coordinate_feature_out_of_list	pO83_CORR.indel,NC_017659.1.fake,6001:7000 ->pO83_CORR,NC_017659.1,1700:5900 -> pO83_CORR.indel,NC_017659.1.fake,0 -> pO83_CORR,NC_017659.1,5900
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1	pO83_CORR.NC_017659.1.1.1898.1.+.1	cross_link_shape	quadrilateral
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1	pO83_CORR.NC_017659.1.1.1898.1.+.1	cross_link_anchor_pos	low_up
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1	pO83_CORR.NC_017659.1.1.1898.1.+.1	cross_link_color	orange
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1	pO83_CORR.NC_017659.1.1.1898.1.+.1	cross_link_opacity	0.49945
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1	pO83_CORR.NC_017659.1.1.1898.1.+.1	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1	pO83_CORR.NC_017659.1.1.1898.1.+.1	crosslink_stroke_style	stroke:black;stroke-width:0;
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1	pO83_CORR.NC_017659.1.1.1898.1.+.1	feature_popup_title	query -> NC_017659.1.fake: 1-1898;target -> NC_017659.1: 1-1898;strand -> +;indentity -> 99.89%;query_coverage -> 1898/147060=0.012906296749626;ref_coverage -> 1898/147060=0.012906296749626;
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1	pO83_CORR.NC_017659.1.1.1898.1.+.1	cross_link_order	0.625
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1	pO83_CORR.NC_017659.1.1.1898.1.+.1	edge_coordinate_feature_out_of_list	pO83_CORR.indel,NC_017659.1.fake,1700:6000 ->pO83_CORR,NC_017659.1,1700:5900 -> pO83_CORR.indel,NC_017659.1.fake,1700 -> pO83_CORR,NC_017659.1,1700
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.2	pO83_CORR.NC_017659.1.1.1898.1.+.2	cross_link_shape	quadrilateral
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.2	pO83_CORR.NC_017659.1.1.1898.1.+.2	cross_link_anchor_pos	low_up
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.2	pO83_CORR.NC_017659.1.1.1898.1.+.2	cross_link_color	orange
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.2	pO83_CORR.NC_017659.1.1.1898.1.+.2	cross_link_opacity	0.49945
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.2	pO83_CORR.NC_017659.1.1.1898.1.+.2	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.2	pO83_CORR.NC_017659.1.1.1898.1.+.2	crosslink_stroke_style	stroke:black;stroke-width:0;
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.2	pO83_CORR.NC_017659.1.1.1898.1.+.2	feature_popup_title	query -> NC_017659.1.fake: 1-1898;target -> NC_017659.1: 1-1898;strand -> +;indentity -> 99.89%;query_coverage -> 1898/147060=0.012906296749626;ref_coverage -> 1898/147060=0.012906296749626;
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.2	pO83_CORR.NC_017659.1.1.1898.1.+.2	cross_link_order	0.75
-pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.2	pO83_CORR.NC_017659.1.1.1898.1.+.2	edge_coordinate_feature_out_of_list	pO83_CORR.indel,NC_017659.1.fake,6001:7000 ->pO83_CORR,NC_017659.1,1700:5900 -> pO83_CORR.indel,NC_017659.1.fake,0 -> pO83_CORR,NC_017659.1,1700
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1	pO83_CORR.NC_017659.1.1891.2100.1.+.1	cross_link_shape	quadrilateral
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1	pO83_CORR.NC_017659.1.1891.2100.1.+.1	cross_link_anchor_pos	low_up
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1	pO83_CORR.NC_017659.1.1891.2100.1.+.1	cross_link_color	orange
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1	pO83_CORR.NC_017659.1.1891.2100.1.+.1	cross_link_opacity	0.5
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1	pO83_CORR.NC_017659.1.1891.2100.1.+.1	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1	pO83_CORR.NC_017659.1.1891.2100.1.+.1	crosslink_stroke_style	stroke:black;stroke-width:0;
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1	pO83_CORR.NC_017659.1.1891.2100.1.+.1	feature_popup_title	query -> NC_017659.1.fake: 5251-5460;target -> NC_017659.1: 1891-2100;strand -> +;indentity -> 100.00%;query_coverage -> 210/147060=0.00142798857609139;ref_coverage -> 210/147060=0.00142798857609139;
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1	pO83_CORR.NC_017659.1.1891.2100.1.+.1	cross_link_order	0.875
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1	pO83_CORR.NC_017659.1.1891.2100.1.+.1	edge_coordinate_feature_out_of_list	0
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.2	pO83_CORR.NC_017659.1.1891.2100.1.+.2	cross_link_shape	quadrilateral
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.2	pO83_CORR.NC_017659.1.1891.2100.1.+.2	cross_link_anchor_pos	low_up
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.2	pO83_CORR.NC_017659.1.1891.2100.1.+.2	cross_link_color	orange
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.2	pO83_CORR.NC_017659.1.1891.2100.1.+.2	cross_link_opacity	0.5
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.2	pO83_CORR.NC_017659.1.1891.2100.1.+.2	cross_link_shift_y	+3:-3
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.2	pO83_CORR.NC_017659.1.1891.2100.1.+.2	crosslink_stroke_style	stroke:black;stroke-width:0;
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.2	pO83_CORR.NC_017659.1.1891.2100.1.+.2	feature_popup_title	query -> NC_017659.1.fake: 5251-5460;target -> NC_017659.1: 1891-2100;strand -> +;indentity -> 100.00%;query_coverage -> 210/147060=0.00142798857609139;ref_coverage -> 210/147060=0.00142798857609139;
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.2	pO83_CORR.NC_017659.1.1891.2100.1.+.2	cross_link_order	1
-pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.2	pO83_CORR.NC_017659.1.1891.2100.1.+.2	edge_coordinate_feature_out_of_list	pO83_CORR.indel,NC_017659.1.fake,6001:7000 ->pO83_CORR,NC_017659.1,1700:5900 -> pO83_CORR.indel,NC_017659.1.fake,0 -> pO83_CORR,NC_017659.1,5900
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1	cross_link_shape	quadrilateral
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1	cross_link_anchor_pos	low_up
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1	cross_link_color	orange
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1	cross_link_color_reverse	blue
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1	cross_link_opacity	0.5
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1	cross_link_opacity_reverse	0.5
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1	cross_link_shift_y	+3:-3
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1	feature_popup_title	query -> NC_017659.1.fake: 5460-147060;target -> NC_017659.1: 5460-147060;strand -> +;indentity -> 100.00%;query_coverage -> 141601/147060=0.962879096967224;ref_coverage -> 141601/147060=0.962879096967224;
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1	cross_link_order	0.2
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1	edge_coordinate_feature_out_of_list	pO83_CORR.indel,NC_017659.1.fake,1700:6000 ->pO83_CORR,NC_017659.1,1700:5900 -> pO83_CORR.indel,NC_017659.1.fake,6000 -> pO83_CORR,NC_017659.1,5900 ->1,1
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2	cross_link_shape	quadrilateral
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2	cross_link_anchor_pos	low_up
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2	cross_link_color	orange
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2	cross_link_color_reverse	blue
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2	cross_link_opacity	0.5
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2	cross_link_opacity_reverse	0.5
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2	cross_link_shift_y	+3:-3
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2	feature_popup_title	query -> NC_017659.1.fake: 5460-147060;target -> NC_017659.1: 5460-147060;strand -> +;indentity -> 100.00%;query_coverage -> 141601/147060=0.962879096967224;ref_coverage -> 141601/147060=0.962879096967224;
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2	cross_link_order	0.4
+pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2	edge_coordinate_feature_out_of_list	pO83_CORR.indel,NC_017659.1.fake,6001:7000 ->pO83_CORR,NC_017659.1,5901:7000 -> pO83_CORR.indel,NC_017659.1.fake,6001 -> pO83_CORR,NC_017659.1,5901 ->2,2
+pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1	cross_link_shape	quadrilateral
+pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1	cross_link_anchor_pos	low_up
+pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1	cross_link_color	orange
+pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1	cross_link_color_reverse	blue
+pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1	cross_link_opacity	0.5
+pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1	cross_link_opacity_reverse	0.5
+pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1	cross_link_shift_y	+3:-3
+pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1	feature_popup_title	query -> NC_017659.1.fake: 1891-5250;target -> NC_017659.1: 2101-5460;strand -> +;indentity -> 100.00%;query_coverage -> 3360/147060=0.0228478172174623;ref_coverage -> 3360/147060=0.0228478172174623;
+pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1	cross_link_order	0.6
+pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1	edge_coordinate_feature_out_of_list	0
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1	cross_link_shape	quadrilateral
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1	cross_link_anchor_pos	low_up
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1	cross_link_color	orange
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1	cross_link_color_reverse	blue
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1	cross_link_opacity	0.49945
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1	cross_link_opacity_reverse	0.5
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1	cross_link_shift_y	+3:-3
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1	feature_popup_title	query -> NC_017659.1.fake: 1-1898;target -> NC_017659.1: 1-1898;strand -> +;indentity -> 99.89%;query_coverage -> 1898/147060=0.012906296749626;ref_coverage -> 1898/147060=0.012906296749626;
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1	cross_link_order	0.8
+pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1	edge_coordinate_feature_out_of_list	pO83_CORR.indel,NC_017659.1.fake,1700:6000 ->pO83_CORR,NC_017659.1,1700:5900 -> pO83_CORR.indel,NC_017659.1.fake,1700 -> pO83_CORR,NC_017659.1,1700 ->1,1
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1	cross_link_shape	quadrilateral
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1	cross_link_anchor_pos	low_up
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1	cross_link_color	orange
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1	cross_link_color_reverse	blue
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1	cross_link_opacity	0.5
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1	cross_link_opacity_reverse	0.5
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1	cross_link_shift_y	+3:-3
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1	feature_popup_title	query -> NC_017659.1.fake: 5251-5460;target -> NC_017659.1: 1891-2100;strand -> +;indentity -> 100.00%;query_coverage -> 210/147060=0.00142798857609139;ref_coverage -> 210/147060=0.00142798857609139;
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1	cross_link_order	1
+pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1	edge_coordinate_feature_out_of_list	0

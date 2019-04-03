@@ -19,8 +19,12 @@
 
 
 <rect x="130" y="149" width="975" height="2" style="fill:blue;opacity:0.2"   />
+<text x="129" y="150" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='end' alignment-baseline="middle" >5'</text>
+ <text x="1106" y="150" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='start' alignment-baseline="middle" >3'</text>
 
 <rect x="130" y="349" width="975" height="2" style="fill:blue;opacity:0.2"   />
+<text x="129" y="350" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='end' alignment-baseline="middle" >5'</text>
+ <text x="1106" y="350" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='start' alignment-baseline="middle" >3'</text>
 
 
 

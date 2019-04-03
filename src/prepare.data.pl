@@ -1455,7 +1455,7 @@ sub check_vcf(){
 		$reads_setting_conf.="$vcf_id\tfeature_opacity\t$feature_opacity\n";
 		$reads_setting_conf.="$vcf_id\tfeature_label\t$feature_label\n";
 		$reads_setting_conf.="$vcf_id\tdisplay_feature_label\t$display_feature_label\n";
-		$reads_setting_conf.="$vcf_id\tpadding_feature_label\t0.1\n";
+		$reads_setting_conf.="$vcf_id\ty_margin_feature_label\t0.1\n";
 		$reads_setting_conf.="$vcf_id\tpos_feature_label\t$pos_feature_label\n";
 		$reads_setting_conf.="$vcf_id\tfeature_label_auto_angle_flag\t0\n";
 		$reads_setting_conf.="$vcf_id\tlabel_rotate_angle\t-15\n";
@@ -2198,7 +2198,7 @@ sub hist_scatter_line_run(){
 			$depth_setting_conf.="$depth_id\tlabel_rotate_angle\t0\n";
 			$depth_setting_conf.="$depth_id\tfeature_label_auto_angle_flag\t0\n\n";
 			$depth_setting_conf.="$depth_id\tfeature_label_size\t$depth_label_size\n";
-#$depth_setting_conf.="$depth_id\tpadding_feature_label\t0.01\n";
+#$depth_setting_conf.="$depth_id\ty_margin_feature_label\t0.01\n";
 		}
 
 		if($depth_type eq "brand"){
@@ -2220,7 +2220,7 @@ sub hist_scatter_line_run(){
 			$depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
 			$depth_setting_conf.="$depth_id\tfeature_shift_y_unit\tpercent\n";
 			$depth_setting_conf.="$depth_id\tfeature_label\t$depths{window}{$window}{label}\n";
-			$depth_setting_conf.="$depth_id\tpadding_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
+			$depth_setting_conf.="$depth_id\ty_margin_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
 			$depth_setting_conf.="$depth_id\tpos_feature_label\tleft_medium\n";
 			$depth_setting_conf.="$depth_id\tfeature_label_dominant_baseline\tcentral\n";
 			$depth_setting_conf.="$depth_id\tfeature_label_textLength\t1*feature_width\n";
@@ -2241,7 +2241,7 @@ sub hist_scatter_line_run(){
 			$depth_setting_conf.="$depth_id\tfeature_shape\trect\n";
 			$depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
 			$depth_setting_conf.="$depth_id\tfeature_shift_y_unit\tpercent\n";
-			$depth_setting_conf.="$depth_id\tpadding_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
+			$depth_setting_conf.="$depth_id\ty_margin_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
 
 		}elsif($depth_type=~ /^scatter/){
 			if($e1=~ /-/){
@@ -2258,7 +2258,7 @@ sub hist_scatter_line_run(){
 			$depth_setting_conf.="$depth_id\tfeature_shape\tcircle_point\n";
 			$depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
 			$depth_setting_conf.="$depth_id\tfeature_shift_y_unit\tpercent\n";
-			$depth_setting_conf.="$depth_id\tpadding_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
+			$depth_setting_conf.="$depth_id\ty_margin_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
 			if($depth_type eq "scatter_line"){
 				unless($previous_id){$previous_id=$depth_id; next}
 				my $cross_link_height_line=0.5;
@@ -2448,7 +2448,7 @@ sub feature_ytick(){
 		my $ytick_feature_tick_end=$block_end_bp;
 		my $ytick_feature_tick_height=$tick_borders[2];
 		my $feature_label_size=$tick_label_size;
-		my $padding_feature_label=$feature_label_size*0.3;
+		my $y_margin_feature_label=$feature_label_size*0.3;
 		my $ytick_feature_tick_id="$ytick_feature_backbone_id.tick$k";
 #my $feature_tick_shift_x=0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width - $ytick_feature_backbone_width*0.5+$tick_gap_with_backbone; # bp 
 		my $feature_tick_shift_x=$tick_gap_with_backbone+0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width; # bp 
@@ -2501,7 +2501,7 @@ sub feature_ytick(){
 		$ytick_setting_conf.="$ytick_feature_tick_id\tpos_feature_label\tright_medium\n";	
 		$ytick_setting_conf.="$ytick_feature_tick_id\tlabel_rotate_angle\t0\n";
 		$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label_size\t$feature_label_size\n";
-		$ytick_setting_conf.="$ytick_feature_tick_id\tpadding_feature_label\t$padding_feature_label\n";
+		$ytick_setting_conf.="$ytick_feature_tick_id\ty_margin_feature_label\t$y_margin_feature_label\n";
 		$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label_auto_angle_flag\t0\n\n";
 		$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_color\t$tick_colors[0]\n\n";
 		$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_opacity\t$tick_opacitys[0]\n\n";

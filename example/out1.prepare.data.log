@@ -28,7 +28,7 @@ cross_link_order -> 0
 display_feature -> yes
 display_feature_label -> no
 pos_feature_label -> right_low
-padding_feature_label -> 0.01
+y_margin_feature_label -> 0.01
 label_rotate_angle -> 0
 feature_label_auto_angle_flag -> 1
 connect_with_same_scaffold -> no
@@ -36,7 +36,7 @@ connect_stroke_dasharray -> 2,5
 connect_stroke_width -> 2
 connect_stroke_color -> black
 absolute_postion_in_title -> yes
-distance_closed_feature -> 200
+distance_closed_feature -> 1
 shift_angle_closed_feature -> 10
 top_bottom_margin -> 0.2
 space_between_blocks -> 500
@@ -69,11 +69,9 @@ scale_tick_height -> 0.01
 scale_order -> -1
 scale_tick_padding_y -> 10
 scale_tick_fontsize -> 6
-read_list pO83_CORR start
 parse pO83_CORR pO83_CORR:NC_017659.1:1-7060 -> block_index 1
 
 read_list pO83_CORR end
-read_list pO83_CORR.indel start
 parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:1700-6000 -> block_index 1
 
 read_list pO83_CORR.indel end
@@ -114,96 +112,141 @@ synteny start
 
 start read ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6
 ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6 is plain file
-query_overlap_length=541, target_overlap_length=1601, blast:5460:147060 -> 5460:147060 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+query_overlap_length=541, target_overlap_length=1601, blast:5460:147060 -> 5460:147060 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=3367, target_overlap_length=3368, blast:1891:5257 -> 2101:5468 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=3367, target_overlap_length=3368, blast:1891:5257 -> 2101:5468 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=199, target_overlap_length=1898, blast:1:1898 -> 1:1898 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=199, target_overlap_length=1898, blast:1:1898 -> 1:1898 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:34724:36500 -> 42262:40487 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:34724:36500 -> 42262:40487 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:40487:42262 -> 36500:34724 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:40487:42262 -> 36500:34724 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 48349:47530 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 48349:47530 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45999:45180 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45999:45180 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:138801:139574 -> 43767:44540 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:138801:139574 -> 43767:44540 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:43767:44540 -> 138801:139574 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:43767:44540 -> 138801:139574 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:110471:111241 -> 74013:74783 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:110471:111241 -> 74013:74783 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:74013:74783 -> 110471:111241 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:74013:74783 -> 110471:111241 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:110474:111244 -> 139568:138798 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:110474:111244 -> 139568:138798 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:138798:139568 -> 111244:110474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:138798:139568 -> 111244:110474 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74784:74016 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74784:74016 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 44534:43766 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 44534:43766 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:138801:139569 -> 74783:74015 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:138801:139569 -> 74783:74015 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:74015:74783 -> 139569:138801 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:74015:74783 -> 139569:138801 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 44534:43767 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 44534:43767 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 111241:110474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 111241:110474 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 43767:44534 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 43767:44534 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 74783:74016 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 74783:74016 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 126723:127490 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 126723:127490 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:74016:74783 -> 127490:126723 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:74016:74783 -> 127490:126723 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 138801:139568 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 138801:139568 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 126723:127490 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 126723:127490 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 127490:126723 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 127490:126723 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 111241:110474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 111241:110474 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:107471:107875 -> 107557:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107471:107875 -> 107557:107961 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:107557:107961 -> 107471:107875 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107557:107961 -> 107471:107875 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:103111:103472 -> 106746:107107 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:103111:103472 -> 106746:107107 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:106746:107107 -> 103111:103472 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:106746:107107 -> 103111:103472 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:107600:107959 -> 107959:107600 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107600:107959 -> 107959:107600 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:107471:107789 -> 107643:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107471:107789 -> 107643:107961 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:107643:107961 -> 107471:107789 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107643:107961 -> 107471:107789 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:107471:107703 -> 107729:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107471:107703 -> 107729:107961 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:107729:107961 -> 107471:107703 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107729:107961 -> 107471:107703 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=210, target_overlap_length=210, blast:5251:5460 -> 1891:2100 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=210, target_overlap_length=210, blast:5251:5460 -> 1891:2100 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:141329:141474 -> 144228:144373 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:141329:141474 -> 144228:144373 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:144228:144373 -> 141329:141474 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:144228:144373 -> 141329:141474 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:107477:107617 -> 107821:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107477:107617 -> 107821:107961 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:107821:107961 -> 107477:107617 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107821:107961 -> 107477:107617 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:15820:15942 -> 75060:74940 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:15820:15942 -> 75060:74940 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:74940:75060 -> 15942:15820 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:74940:75060 -> 15942:15820 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:107471:107574 -> 107858:107961 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107471:107574 -> 107858:107961 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
-query_overlap_length=0, target_overlap_length=0, blast:107858:107961 -> 107471:107574 rg:NC_017659.1.fake,1700,6000 -> NC_017659.1,1,7060
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107858:107961 -> 107471:107574 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1,7060,1
 
+qt is 
 end read ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6, paris num is4
 
 output out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff

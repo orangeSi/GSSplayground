@@ -69,6 +69,8 @@ cat example/work.sh
 <br><br><br>
 ![gene cluster image](example/out6.notitle.svg)
 <br><br><br>
+![gene cluster image](example/out7.notitle.svg)
+<br><br><br>
 ![gene cluster image](example_old/out7.notitle.svg)
 <br><br><br>
 ![gene cluster image](example_old/out10.notitle.svg)

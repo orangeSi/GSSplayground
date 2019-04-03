@@ -19,8 +19,12 @@
 
 
 <rect x="130" y="149" width="975" height="2" style="fill:blue;opacity:0.2"   />
+<text x="129" y="150" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='end' alignment-baseline="middle" >5'</text>
+ <text x="1106" y="150" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='start' alignment-baseline="middle" >3'</text>
 
 <rect x="130" y="349" width="593.976628895184" height="2" style="fill:blue;opacity:0.2"   />
+<text x="129" y="350" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='end' alignment-baseline="middle" >5'</text>
+ <text x="724.976628895184" y="350" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='start' alignment-baseline="middle" >3'</text>
 
 
 
@@ -42457,7 +42461,7 @@
 
 
 
-<text x="1113.97662889518" y="144.0951" font-size="13px" fill="black"  text-anchor='start'   transform="rotate(0 1113.97662889518 144.0951)" font-family="Times New Roman"  alignment-baseline="middle"     >ref base</text>
+<text x="1113.97662889518" y="144.0951" font-family="Times New Roman" font-size="13px" fill="black"  text-anchor='middle'   transform="rotate(0 1113.97662889518 144.0951)"  alignment-baseline="middle"     >ref base</text>
 
 
 <text x="616.5" y="154" font-size="10px" fill="black"  text-anchor='middle' alignment-baseline="hanging" transform="rotate(0 616.5 154)" >NC_017659.1:1-7060bp</text>

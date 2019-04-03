@@ -2,6 +2,7 @@ package myth;
 use strict;
 use warnings;
 use List::MoreUtils qw(uniq);
+use List::Util qw(max min);
 use Exporter qw(import);
 
 our @EXPORT_OK = qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_x shift_tracks_y get_real_feature_region check_block_reverse show_segment_strand draw_feature);
@@ -121,7 +122,7 @@ sub read_list(){
 		}else{
 			$uniq_sample{$sample}="";
 		}
-		print "read_list $sample start\n";
+		#print "read_list $sample start\n";
 
 		open GE,"$genome" or die "genome is $genome? can not open $genome\n";
 		my $flag_num=`head $genome|grep "^>"|wc -l`;chomp $flag_num;
@@ -224,7 +225,7 @@ sub read_list(){
 					$flag =0 if($arr[2]=~ /^$f$/);
 				}
 				next if($flag);
-
+				#print "line is $_\n";
 				if(@arrs){ # has seq_id mean not full length of whole gff
 					my ($gff, $fts);
 					#print "line1 is $_\n";
@@ -417,6 +418,7 @@ sub go_line(){
 	}
 	die "error: feature_id format should like ID=gene1; or xxx;ID=gene1; in gff, instead of $line\n" if(!$feature_id);
 	die "error: $feature_id in $gffs should not contain , \n" if($feature_id=~ /,/);
+	#print "feature_id is $feature_id\n";
 	#my $marker="THISISABUG";
 	#if($feature_id!~ /$marker$/){
 	#	$feature_id="$feature_id.$marker.$sample.$marker";
@@ -583,7 +585,7 @@ sub draw_genes(){
 			$index_color = $conf->{feature_setting2}->{$feature_id}{feature_color_reverse}
 		}
 	}
-	my $feature_type=$conf->{feature_setting2}->{$feature_id}->{type};
+	my $feature_type=$conf->{feature_setting2}->{$feature_id}->{type}; # if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to})
 	my $skip_feature_type_keep_crosslink=0;
 	$skip_feature_type_keep_crosslink=1 if(grep(/^$feature_type$/, split(/,/, $conf->{skip_feature_type_keep_crosslink})));
 	if($index_color=~ /rgb\(\d+,\d+,\d+\),[^,]/ or $index_color=~ /[^,],rgb\(\d+,\d+,\d+\)/){
@@ -676,7 +678,8 @@ sub draw_genes(){
 	#
 	my $order_f=&get_para("feature_order", $feature_id, $conf);
 	my $order_f_label=&get_para("feature_label_order", $feature_id, $conf);
-	my $padding_feature_label=&get_para("padding_feature_label", $feature_id, $conf);
+	my $y_margin_feature_label=&get_para("y_margin_feature_label", $feature_id, $conf);
+	my $x_margin_feature_label=&get_para("x_margin_feature_label", $feature_id, $conf);
 	my $display_feature=&get_para("display_feature", $feature_id, $conf);
 	my $display_feature_label=&get_para("display_feature_label", $feature_id, $conf);
 	my $feature_stroke_color=&get_para("feature_border_color", $feature_id, $conf);
@@ -685,11 +688,11 @@ sub draw_genes(){
 	my $label_text_anchor=&get_para("label_text_anchor", $feature_id, $conf);
 
 	die "error: label_text_anchor $label_text_anchor should be start or end or middle\n" if($label_text_anchor ne "start" && $label_text_anchor ne "end"  && $label_text_anchor ne "middle");
-	#print "$padding_feature_label*=$gene_height_medium for $feature_id\n" if($index_label_content eq "27");
-	$padding_feature_label*=$gene_height_medium;
+	#print "$y_margin_feature_label*=$gene_height_medium for $feature_id\n" if($index_label_content eq "27");
+	$y_margin_feature_label*=$gene_height_medium;
 
 	my ($back,$x1,$y1,$x2,$y2,$x3,$y3,$x4,$y4,$x5,$y5,$x6,$y6,$x7,$y7,$label_x,$label_y,$index_col_start,$index_col_end,$crossing_link_start_x,$crossing_link_start_y,$crossing_link_end_x,$crossing_link_end_y);
-	my ($label_y_shift, $label_roat_angle);
+	my ($label_y_shift, $label_roat_angle, $label_x_shift);
 	$back="";
 	if($angle_flag){
 		$shift_angle_closed_feature += $conf->{shift_angle_closed_feature};
@@ -698,20 +701,20 @@ sub draw_genes(){
 	}
 	$gene_height_top=0 if($shape!~ /arrow/i);
 	if($index_label_position=~ /_up_?/){
-		$label_y_shift= - $padding_feature_label;
+		$label_y_shift= - abs($y_margin_feature_label);
 		$label_y_shift += $gene_height_top if($index_label_position=~ /skip_arrow_sharp/);
 		$index_label_angle = ($angle_flag)? $index_label_angle +$shift_angle_closed_feature:$index_label_angle; # 相邻feature的label的angle开
 	}elsif($index_label_position=~ /_low_?/){
-		$label_y_shift= 2*$gene_height_top + $gene_height_medium + $padding_feature_label;
+		$label_y_shift= 2*$gene_height_top + $gene_height_medium + $y_margin_feature_label;
 		$label_y_shift -= $gene_height_top if($index_label_position=~ /skip_arrow_sharp/);
 		$index_label_angle = ($angle_flag)? $index_label_angle -$shift_angle_closed_feature:$index_label_angle; # 相邻feature的label的angle开
 	}elsif($index_label_position=~ /_medium_?/){
-		$label_y_shift= $gene_height_top+0.5*$gene_height_medium + $padding_feature_label;
+		$label_y_shift= $gene_height_top+0.5*$gene_height_medium + $y_margin_feature_label;
 		$index_label_angle = ($angle_flag)? $index_label_angle -$shift_angle_closed_feature:$index_label_angle; # 相邻feature的label的angle开
 	}else{
 		die "error:  not support pos_feature_label $index_label_position  yet, only support right/left/medium_up/low/medium ~\n"
 	}
-	#print "label_y_shift is $label_y_shift, padding_feature_label is $padding_feature_label for $feature_id\n" if($index_label_content eq "27");
+	#print "label_y_shift is $label_y_shift, y_margin_feature_label is $y_margin_feature_label for $feature_id\n" if($index_label_content eq "27");
 	my $start_title=$start;
 	my $end_title=$end;
 	if($conf->{absolute_postion_in_title}=~ /yes/i){
@@ -738,7 +741,19 @@ sub draw_genes(){
 
 		if($strand){
 #以左上角为起始点，逆时针转一圈
-			$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
+			if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}){
+				die "error: feature_shift_x_to=$conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to} for $feature_id is error format, should be number\n" if($conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}!~ /^[\d\.]+$/);
+				$x1=$conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to};
+			}else{
+				$x1=$start*$ratio+$shift_x;
+			}
+			if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to}){
+				die "error: feature_shift_y_to=$conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to} for $feature_id is error format, should be number\n" if($conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to}!~ /^[\d\.]+$/);
+				$y1=$conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to};
+			}else{
+				$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度;
+			}
+
 			$x2=$x1;$y2=$y1+$gene_height_medium;
 
 			if($gene_width_arrow=~ /^(\d+)bp/){
@@ -750,7 +765,7 @@ sub draw_genes(){
 				die "error: gene_width_arrow $gene_width_arrow should be number which 0< <=1 or something like 10bp in feature_id $feature_id\n"
 			}
 			$x4=$x3;$y4=$y3+$gene_height_top; ##gene_height_top是指arrow中间之外的一边尖尖的高度
-			$x5=$x2+($end -$start+$fake)*$ratio;$y5=0.5*$sample_single_height+$shift_y;
+			$x5=$x2+($end -$start+$fake)*$ratio;$y5=0.5*$gene_height_medium+$y1;
 			$x6=$x4;$y6=$y4 - 2*$gene_height_top - $gene_height_medium;
 			$x7=$x3;$y7=$y1;
 			$label_y=$y6+$label_y_shift;
@@ -760,7 +775,18 @@ sub draw_genes(){
 			$crossing_link_end_y=$y5;
 		}else{
 #负链以arrow左边尖尖为起始点，逆时针旋转一周
-			$x1=($start*$ratio+$shift_x);$y1=0.5*$sample_single_height+$shift_y;
+			if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}){
+				die "error: feature_shift_x_to=$conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to} for $feature_id is error format, should be number\n" if($conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}!~ /^[\d\.]+$/);
+				$x1=$conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to};
+			}else{
+				$x1=$start*$ratio+$shift_x;
+			}
+			if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to}){
+				die "error: feature_shift_y_to=$conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to} for $feature_id is error format, should be number\n" if($conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to}!~ /^[\d\.]+$/);
+				$y1=$conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to}+0.5*$sample_single_height;
+			}else{
+				$y1=0.5*$sample_single_height+$shift_y;
+			}
 
 			if($gene_width_arrow=~ /^(\d+)bp/){
 				die "error: gene_width_arrow $gene_width_arrow should not > $end -$start in feature_id $feature_id\n" if($1 > ($end -$start));
@@ -785,13 +811,13 @@ sub draw_genes(){
 			$crossing_link_end_y=$y4-0.5*$gene_height_medium;
 
 		}
-
+		$label_x_shift = $x_margin_feature_label * min($gene_height_medium, ($end -$start)*$ratio);
 		if($index_label_position=~ /^medium_/){
-			$label_x = $x1 + ($end - $start)/2 * $ratio;
+			$label_x = $x1 + ($end - $start)/2 * $ratio + $label_x_shift;
 		}elsif($index_label_position=~ /^left_/){
-			$label_x = $x1;
+			$label_x = $x1 + $label_x_shift;
 		}elsif($index_label_position=~ /^right_/){
-			$label_x = $x4;
+			$label_x = $x5 + $label_x_shift;
 		}else{
 			die "error:  not support $index_label_position yet~\n"
 		}
@@ -823,7 +849,7 @@ sub draw_genes(){
 			}
 
 ## draw label of feature
-			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-family=\"Times New Roman\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
+			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-family=\"Times New Roman\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
 		}
 # check this feature if is in crossing_link
 		#print "ssfeature_id is $feature_id\n";
@@ -840,7 +866,19 @@ sub draw_genes(){
 	}elsif($shape=~ /^rect/){
 		if($strand){
 #以左上角为起始点，逆时针转一圈
-			$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
+			if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}){
+				die "error: feature_shift_x_to=$conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to} for $feature_id is error format, should be number\n" if($conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}!~ /^[\d\.]+$/);
+				$x1=$conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to};
+			}else{
+				$x1=($start*$ratio+$shift_x);
+			}
+			if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to}){
+				die "error: feature_shift_y_to=$conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to} for $feature_id is error format, should be number\n" if($conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to}!~ /^[\d\.]+$/);
+				$y1=$conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to};
+			}else{
+				$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
+			}
+			#$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
 			$x2=$x1;$y2=$y1+$gene_height_medium;
 			$x3=$x2+($end -$start+$fake)*$ratio;$y3=$y2;
 			$x4=$x3;$y4=$y1;
@@ -852,7 +890,19 @@ sub draw_genes(){
 			$crossing_link_end_y=$crossing_link_start_y;
 		}else{
 #以左上角为起始点，逆时针转一圈
-			$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
+			if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}){
+				die "error: feature_shift_x_to=$conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to} for $feature_id is error format, should be number\n" if($conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}!~ /^[\d\.]+$/);
+				$x1=$conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to};
+			}else{
+				$x1=($start*$ratio+$shift_x);
+			}
+			if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to}){
+				die "error: feature_shift_y_to=$conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to} for $feature_id is error format, should be number\n" if($conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to}!~ /^[\d\.]+$/);
+				$y1=$conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to};
+			}else{
+				$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
+			}
+			#$x1=($start*$ratio+$shift_x);$y1=($sample_single_height - $gene_height_medium)/2+$shift_y;#gene_height_medium指arrow中间的高度
 			$x2=$x1;$y2=$y1+$gene_height_medium;
 			$x3=$x2+($end -$start+$fake)*$ratio;$y3=$y2;
 			$x4=$x3;$y4=$y1;
@@ -864,12 +914,13 @@ sub draw_genes(){
 			$crossing_link_end_y=$crossing_link_start_y;
 		}
 
+		$label_x_shift = $x_margin_feature_label * min($gene_height_medium, ($end -$start)*$ratio);
 		if($index_label_position=~ /^medium_/){
-			$label_x = $x1 + ($end - $start)/2 * $ratio;
+			$label_x = $x1 + ($end - $start)/2 * $ratio + $label_x_shift;
 		}elsif($index_label_position=~ /^left_/){
-			$label_x = $x1;
+			$label_x = $x1 + $label_x_shift;
 		}elsif($index_label_position=~ /^right_/){
-			$label_x = $x4;
+			$label_x = $x4 + $label_x_shift;
 		}else{
 			die "error:  not support $index_label_position yet~\n"
 		}
@@ -910,7 +961,7 @@ sub draw_genes(){
 
 ## draw label of feature
 			die "die:label_y is $label_y, id is $feature_id\n" if(!$label_y);
-			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-family=\"Times New Roman\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
+			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-family=\"Times New Roman\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		}
 # check this feature if is in crossing_link
 		#print "feature_id is $feature_id\n";
@@ -927,24 +978,45 @@ sub draw_genes(){
 	}elsif($shape=~ /^round_rect/){
 		die "error: not support $shape yet~\n";
 	}elsif($shape=~ /^circle_point/){
-		my $center_point_x=$start*$ratio + $shift_x + ($end - $start)*$ratio*0.5;
-		my $center_point_y=($sample_single_height - $gene_height_medium)/2 + $shift_y + 0.5*$gene_height_medium ;
+		my ($center_point_x, $center_point_y);
 		my $radius= ($end - $start+$fake)*$ratio*0.5 ; # 0.5*$gene_height_medium;
-		my $x1=$start*$ratio+$shift_x;
-		my $x4=$x1+($end-$start+$fake)*$ratio;
+		if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}){
+				die "error: feature_shift_x_to=$conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to} for $feature_id is error format, should be number\n" if($conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}!~ /^[\d\.]+$/);
+				$center_point_x=$conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}+ $radius;
+		}else{
+				$center_point_x=$start*$ratio + $shift_x + $radius;
+		}
+		if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to}){
+				die "error: feature_shift_y_to=$conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to} for $feature_id is error format, should be number\n" if($conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to}!~ /^[\d\.]+$/);
+				$center_point_y=$conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to} + $radius;
+		}else{
+				$center_point_y=($sample_single_height - $gene_height_medium)/2 + $shift_y + 0.5*$gene_height_medium;
+		}
+		$y_margin_feature_label=&get_para("y_margin_feature_label", $feature_id, $conf);
+		if($index_label_position=~ /_up_?/){
+			$label_y_shift = $y_margin_feature_label * $radius - $radius;
+		}elsif($index_label_position=~ /_low_?/){
+			$label_y_shift = $y_margin_feature_label * $radius + $radius;
+		}elsif($index_label_position=~ /_medium_?/){
+			$label_y_shift = $y_margin_feature_label * $radius ;
+		}
+		$label_y=$center_point_y+$label_y_shift;
+
 		my $crossing_link_start_x=$center_point_x;
 		my $crossing_link_start_y=$center_point_y-$radius;
 		my $crossing_link_end_x=$center_point_x;
 		my $crossing_link_end_y=$center_point_y+$radius;
+		$label_x_shift = $x_margin_feature_label * 2*$radius;
 		if($index_label_position=~ /^medium_/){
-			$label_x = $x1 + ($end - $start)/2 * $ratio;
+			$label_x = $center_point_x + $label_x_shift;
 		}elsif($index_label_position=~ /^left_/){
-			$label_x = $x1;
+			$label_x = $center_point_x - ($end - $start)/2 * $ratio + $label_x_shift;
 		}elsif($index_label_position=~ /^right_/){
-			$label_x = $x4;
+			$label_x = $center_point_x + ($end - $start)/2 * $ratio + $label_x_shift;
 		}else{
 			die "error:  not support $index_label_position yet~\n"
 		}
+		#print "skip_feature_type_keep_crosslink is $skip_feature_type_keep_crosslink, feature_label_order is $order_f_label\n";
 		if(!$skip_feature_type_keep_crosslink){
 			if(@arr_cols==2 && $display_feature=~ /yes/i){
 				$index_col_start = $arr_cols[0];
@@ -973,7 +1045,7 @@ sub draw_genes(){
 
 
 ## draw label of feature
-			$orders->{$order_f_label}.= "<text x=\"$label_x\" y=\"$label_y\" font-family=\"Times New Roman\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" font-family=\"Times New Roman\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
+			$orders->{$order_f_label}.= "<text   x=\"$label_x\" y=\"$label_y\" font-family=\"Times New Roman\" font-size=\"${index_label_size}px\" fill=\"$index_label_col\"  text-anchor='$label_text_anchor'   transform=\"rotate($index_label_angle $label_x $label_y)\" $label_text_alignment_baseline $feature_label_autowidth >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		}
 # check this feature if is in crossing_link
 		if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
@@ -1073,13 +1145,14 @@ sub default_setting(){
 	$conf{color_sample_name_default} ||= 'green';
 	$conf{sample_name_color_default} ||='black';
 	$conf{sample_name_font_size_default} ||=15;
-	$conf{legend_font_size} ||= 15; #legend中文字字体大小
+	$conf{legend_font_size} ||= $conf{feature_label_size}; #legend中文字字体大小
 	$conf{legend_height_percent} ||= 0.2; # legends的高度占整个图高度的比例
 	$conf{legend_width_margin} ||= 0.1; # legends左右两侧的margin
 	$conf{legend_width_textpercent} ||= 0.6; # l
 	$conf{feature_shape} ||= 'arrow'; # arrow or rect or circle_point, not support round_rect yet
 	$conf{track_style} ||="fill:green";
-	$conf{padding_feature_label} ||= 0.1;
+	$conf{y_margin_feature_label} ||= 0.1;
+	$conf{x_margin_feature_label} ||= 0.01;
 	$conf{pos_feature_label} ||="medium_up_skip_arrow_sharp";
 	$conf{distance_closed_feature} ||=10;
 	$conf{shift_angle_closed_feature} ||=10;
@@ -1356,7 +1429,7 @@ sub check_block_reverse(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "padding_feature_label","pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_dominant_baseline", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique", "cross_link_opacity_reverse", "feature_color_reverse", "feature_opacity_reverse", "display_segment_strand");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "y_margin_feature_label", "x_margin_feature_label", "pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_dominant_baseline", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique", "cross_link_opacity_reverse", "feature_color_reverse", "feature_opacity_reverse", "display_segment_strand", "feature_shift_x_to", "feature_shift_y_to");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

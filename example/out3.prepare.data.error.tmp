@@ -6,21 +6,21 @@
 + echo output out3.chr14.out3.hist_scatter_line.setting.conf
 + cat out3.chr14.out3.hist_scatter_line.setting.conf
 + samtools depth -r 14:66901400-66903400 ../data/pacbio.chr14.sort.bam
-+ sort -k 1nr
 + head -1
-+ awk '{print $NF}'
-+ awk '{print $NF}'
-+ head -1
-+ samtools depth -r 14:66901400-66903400 ../data/illumina.chr14.sort.bam
 + sort -k 1nr
 + awk '{print $NF}'
-+ head -1
 + samtools depth -r 14:66901400-66903400 ../data/illumina.chr14.sort.bam
++ head -1
++ awk '{print $NF}'
 + sort -k 1nr
 + samtools depth -r 14:66901400-66903400 ../data/illumina.chr14.sort.bam
 + awk '{print $NF}'
-+ sort -k 1nr
 + head -1
++ sort -k 1nr
++ samtools depth -r 14:66901400-66903400 ../data/illumina.chr14.sort.bam
++ head -1
++ awk '{print $NF}'
++ sort -k 1nr
 + cat out3.chr14.14.1.1.long_reads.ylabel.gff out3.chr14.14.1.1.66901400.66903400.mapping.gff out3.chr14.14.1.2.short_reads.ylabel.gff out3.chr14.14.1.2.66901400.66903400.mapping.gff out3.chr14.14.1.3.short_reads.ylabel.gff out3.chr14.14.1.3.66901400.66903400.mapping.gff out3.chr14.14.1.4.66901400.66903400.mapping.gff out3.chr14.14.1.5.vcf.ylabel.gff out3.chr14.14.1.5.66901400.66903400.mapping.gff
 + rm out3.chr14.14.1.1.long_reads.ylabel.gff out3.chr14.14.1.1.66901400.66903400.mapping.gff out3.chr14.14.1.2.short_reads.ylabel.gff out3.chr14.14.1.2.66901400.66903400.mapping.gff out3.chr14.14.1.3.short_reads.ylabel.gff out3.chr14.14.1.3.66901400.66903400.mapping.gff out3.chr14.14.1.4.66901400.66903400.mapping.gff out3.chr14.14.1.5.vcf.ylabel.gff out3.chr14.14.1.5.66901400.66903400.mapping.gff
 + echo output out3.chr14.out3.reads_mapping.gff

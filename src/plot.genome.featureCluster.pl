@@ -28,14 +28,14 @@ writed by myth
 if(! -d "$outdir"){
 	`mkdir -p $outdir`;
 }
-
+my $rg_test;
 my @track_reorder;
 my @funcs=();
 my %conf = &read_conf($conf,@funcs);
+
 ($conf, $track_reorder) = &default_setting(0, %conf);
 %conf=%$conf;
 @track_reorder=@$track_reorder;
-
 &check_para(%conf);
 
 
@@ -48,6 +48,7 @@ my %feature_reverse_for_crosslink;
 my %positon_links;
 my @fetures_links;
 my %features_height;
+my %feature_strand;
 my %blocks_two_ends_cord; # $blocks_two_ends_cord{sample_name}{scf_id}{start_pos} = "x,y"
 my %blocks_start_ends_cord; # $blocks_two_ends_cord{sample_name}{scf_id}{start_pos} = "x,y"
 my %tracks_height;
@@ -56,6 +57,7 @@ my ($ref_name_width_ratio, $cluster_width_ratio, $legend_width_ratio) = split(/-
 if($ref_name_width_ratio+$cluster_width_ratio+$legend_width_ratio !=1){
 	die "error:width_ratio_ref_cluster_legend in $list ,the sum is not equal to 1\n";
 }
+
 
 
 ###start:get scaffold length in genome file and scaffold length  in gff file of list 
@@ -69,13 +71,9 @@ my @track_order=@$track_order;
 print "end read $list\n";
 #die "track_order is @track_order, track_reorder is @track_reorder\n";
 @track_order=&check_track_order(\@track_order, \@track_reorder);
-
-
 ## check track block reverse
 #die "tracks_block_reverse is $conf{tracks_block_reverse}\n";
 my %reversed_block=&check_block_reverse($conf{tracks_block_reverse}, \%gff); # outputs reversed_block{$sample}{$block_index}="";
-
-
 my $ends_extend_ratio = 0.1;
 my $max_length;
 my $space_len = $conf{space_between_blocks};# 500bp是默认的blocks之间的间距
@@ -84,6 +82,29 @@ foreach my $s(sort {$gff{$b}{chooselen_all}<=>$gff{$a}{chooselen_all}} keys %gff
 	last;
 }
 my $ratio=$cluster_width_ratio*$svg_width/$max_length;
+
+#($conf, $list)=&legend2gff($list, $conf, $svg_width, $legend_width_ratio, $ratio, $fontsize);
+# create gff and setting for legend
+my $legend_number;
+($conf, $list, $legend_number)=&legend2gff($list, $conf, $svg_width, $legend_width_ratio, $ratio, $conf{legend_font_size});
+%conf=%$conf;
+($conf, $track_reorder) = &default_setting(0, %conf);
+%conf=%$conf;
+@track_reorder=@$track_reorder;
+&check_para(%conf);
+
+
+if($legend_number){
+	###start:get scaffold length in genome file and scaffold length  in gff file of list 
+	print "start read $list again, legend_number=$legend_number\n";
+	($genome, $gff, $track_order, $sample_num, $fts, $conf2) = &read_list($list, \%conf);
+	%genome=%$genome;
+	%gff=%$gff;
+	%fts=%$fts;
+	%conf=%$conf2;
+}
+
+
 
 
 my $index;
@@ -151,7 +172,7 @@ while(@track_order){
 	$conf{sample_name_old2new2}{$sample}{new_name} = $sample if(not exists $conf{sample_name_old2new2}{$sample}{new_name});
 	$conf{sample_name_old2new2}{$sample}{new_color} = $conf{sample_name_color_default} if(not exists $conf{sample_name_old2new2}{$sample}{new_color});
 	$conf{sample_name_old2new2}{$sample}{new_font_size} = $conf{sample_name_font_size_default} if(not exists $conf{sample_name_old2new2}{$sample}{new_font_size});
-	$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-family=\"Times New Roman\" font-size=\"$conf{sample_name_old2new2}{$sample}{new_font_size}px\" fill=\"$conf{sample_name_old2new2}{$sample}{new_color}\"  text-anchor='end' alignment-baseline=\"middle\" >$conf{sample_name_old2new2}{$sample}{new_name}</text>\n"; # draw sample name
+	$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"$conf{sample_name_old2new2}{$sample}{new_font_size}px\" fill=\"$conf{sample_name_old2new2}{$sample}{new_color}\"  text-anchor='end' alignment-baseline=\"middle\" >$conf{sample_name_old2new2}{$sample}{new_name}</text>\n"; # draw sample name
 	print "draw sample name $conf{sample_name_old2new2}{$sample}{new_name}\n";
 
 
@@ -172,6 +193,7 @@ while(@track_order){
 		my $block_clip_path_id="cut-$sample-$scf[0]-$block_index";
 		my %block_clip_path_ids;
 		my $reverse_block_flag=(exists $reversed_block{$sample}{$block_index})? 1:0;
+		#$rg_test = "$sample:$scf[0]:" if(!$reverse_block_flag);
 
 		my $id_line_x=$shift_x; # 每个block的genome的起点的x,y坐标
 			my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
@@ -194,6 +216,7 @@ while(@track_order){
 		}
 		$start_once=$gff{$sample}{chooselen_single}{$block_index}{start};
 		$end_once=$gff{$sample}{chooselen_single}{$block_index}{end};
+		$rg_test = "$sample:$scf[0]:$start_once:$end_once;" if(!$reverse_block_flag);
 		#reversed_block{$sample}{$block_index}
 		my @block_region=&get_real_feature_region($reverse_block_flag, $start_once, $end_once, $start_once, $end_once, "+", $gff{$sample}{scf}{$scf[0]}, "block"); # "$start-$end", $start, $end, $strand);
 		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$block_region[0]</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
@@ -229,7 +252,7 @@ while(@track_order){
 				die "error:display_segment_name_shift_y not support $display_segment_name_shift_y in $display_segment_name, should like +1 or -1 or 0\n";
 			}
 			my $segment_name=($gff{$sample}{chooselen_single}{$block_index}{len} == $gff{$sample}{scf}{$scf[0]})? "$scf[0]":"$scf[0]:$block_region[0]bp";
-			$orders{$display_segment_name_order}.="<text x=\"$segment_name_x\" y=\"$segment_name_y\" font-family=\"Times New Roman\" font-size=\"${display_segment_name_fontsize}px\" fill=\"$display_segment_name_color\"  text-anchor='$segment_text_anchor' alignment-baseline=\"$segment_baseline\" transform=\"rotate($segment_name_angle $segment_name_x $segment_name_y)\" >$segment_name</text>\n"; # draw sample name
+			$orders{$display_segment_name_order}.="<text x=\"$segment_name_x\" y=\"$segment_name_y\" font-size=\"${display_segment_name_fontsize}px\" fill=\"$display_segment_name_color\"  text-anchor='$segment_text_anchor' alignment-baseline=\"$segment_baseline\" transform=\"rotate($segment_name_angle $segment_name_x $segment_name_y)\" >$segment_name</text>\n"; # draw sample name
 		}elsif($display_segment_name_flag!~ /no/i){
 			die "error:$display_segment_name should be start with yes or no, not $display_segment_name_flag\n"
 		}
@@ -281,13 +304,14 @@ while(@track_order){
 			$block_clip_path_ids{$block_clip_path_id}="";
 		}
 
-#print "index_id is $index_id, sample is $sample\n";
+		#print "index_id is $index_id, sample is $sample\n";
 #$gff{$sample}{block}{$block}{$scf}{$gene}{id}
 #print "\nindex id is $index_id\n";
 			die "die:index_id is $index_id,$sample $block_index $scf[0] $index\n" if(not $index_id);
 			my $index_start = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{start};
 			my $index_end = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{end};
 			my $index_strand = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{strand};
+			$feature_strand{$index_id}=$index_strand;
 			my $index_start_raw = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{start_raw};
 			my $index_end_raw = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{end_raw};
 
@@ -313,6 +337,8 @@ while(@track_order){
 				}
 			}elsif($feature_height_unit=~ /backbone/){
 				$gene_height_medium = $id_line_height * $feature_height_ratio;
+			}elsif($feature_height_unit=~ /^px$/){
+				$gene_height_medium = $feature_height_ratio;
 			}else{
 				die "error:feature_height_unit only support percent or backbone, but $feature_height_unit for $index_id\n"
 			}
@@ -666,104 +692,169 @@ foreach my $pair(@pairs){
 # TODO:
 # 把gff读取之后，把有legend_label的features挑出来,去掉冗余的（运行同一个label对应不同的颜色和透明度和feature_shape），创建新的id然后写入一个legened.gff和legend.setting.conf，重新用read_list读入legened.gff和legend.setting.conf，然后在开始draw_gene
 
-my $legend_num=0;
-my %legends;
-for my $f(keys %{$conf{feature_setting2}}){
-	if(exists $conf{feature_setting2}{$f}{legend_label} && $conf{feature_setting2}{$f}{legend_label}){
-			my $label=&get_para("legend_label", $f, \%conf);
-			my $color=&get_para("feature_color", $f, \%conf);
-			my $shape=&get_para("feature_shape", $f, \%conf);
-			my $opacity=&get_para("feature_opacity", $f, \%conf);
-			$legends{"$label.$color.$shape.$opacity"}{label}=$label;
-			$legends{"$label.$color.$shape.$opacity"}{color}=$color;
-			$legends{"$label.$color.$shape.$opacity"}{shape}=$shape;
-			$legends{"$label.$color.$shape.$opacity"}{opacity}=$opacity;
+sub legend2gff(){
+	my ($list, $conf, $svg_width, $legend_width_ratio, $ratio, $fontsize)=@_;
+	#my ($list, $conf, $svg_width, $legend_width_ratio, $fontsize)=@_;
+	my %legends;
+	#my $legend_levels="label,color,shape,opacity,strand";
+	my $legend_levels="label,color,shape,opacity";
+	my @legend_levels=split(/,/, $legend_levels);
+	die "error:legend_levels $legend_levels must have label, such as legend_levels=label,color,shape,opacity\n" if(! grep(/^label$/, @legend_levels));
+	for my $level(@legend_levels){
+		die "error: not support $level in legend_levels=$legend_levels\n" if(!grep(/^$level$/, @legend_levels));
 	}
-}
-$legend_num=keys %legends;
-
-#print "legend_num is $legend_num\n";
-#my $top_margin_legend;
-#my $legend_single_arrow_height = $common_size; # 和sample name一样的字体大小，字体大小几乎等同同等像素的宽高
-#my $limit = 0.8;
-#if($legend_single_arrow_height*$legend_num < $svg_height*$limit){
-#	$top_margin_legend = $svg_height - $legend_single_arrow_height*$legend_num *1.1; #第一个legend顶部的y轴
-#}else{
-#	$legend_single_arrow_height = $svg_height*$limit/$legend_num;# 每行legend的高度
-#	$top_margin_legend = (1-$limit)/2*$svg_height;
-#}
-#my $legend_font_size = $legend_single_arrow_height * 0.9;
-
-#my $legend_max_length=0;
-#foreach my $legend(keys %{$conf{feature_setting}{legend_col}}){
-#	if(length($legend) >$legend_max_length){
-#		$legend_max_length = $length($legend);
-#	}
-#}
-
-if($conf{display_legend}=~ /yes/i){
-	print "lengend start, legend_num is $legend_num\n";
-	my $legend_arrow_height = $id_line_height*$conf{feature_height_ratio}*$conf{legend_height_ratio};
-	my $legend_font_size = $conf{legend_font_size}; #legend中文字字体大小
-		my $top_margin_legend = ($svg_height - ($legend_arrow_height * $legend_num + ($legend_num-1)*$legend_arrow_height*$conf{legend_height_space}))/2;
-	my $legend_single_arrow_height = $legend_arrow_height;
-
-	my $legend_width_margin = $conf{legend_width_margin};
-	my $legend_width_textpercent = $conf{legend_width_textpercent};
-	my $legend_arrow_width = (1-$legend_width_margin*2)*(1-$legend_width_textpercent)*$svg_width*$legend_width_ratio;
-	my $text_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width+$legend_arrow_width*1.2;
-	my $text_y = $top_margin_legend + 0.95*$legend_arrow_height ;
-	my $arrow_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width*1.1;
-	my $arrow_y = $top_margin_legend;
-#my $legend_arrow_height = $legend_single_arrow_height * 0.8;
-	foreach my $l(sort keys %legends){
-		my $legend=$legends{$l}{label}; 
-		my $color=$legends{$l}{color};
-		my $opacity=$legends{$l}{opacity};
-		my $shape=$legends{$l}{shape};
-## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-# 先用方块代替arrow
-		my @arr_cols=split(/,,/, $color);
-		my $arrow_col_start;
-		my $arrow_col_end;
-#print "legend arr_cols is @arr_cols\n";
-		if(@arr_cols==2){
-#print "aisis $conf{feature_setting}{legend_col}{$legend},@arr_cols\n";
-			$arrow_col_start = $arr_cols[0];
-			$arrow_col_end = $arr_cols[1];
-#my $arrow_color_id = $conf{feature_setting}{legend_col}{$legend};
-			my $arrow_color_id = $color;
-			$arrow_color_id=~ s/,/-/g;
-			$arrow_color_id=~ s/\)/-/g;
-			$arrow_color_id=~ s/\(/-/g;
-			$svg.="
-				<defs>
-				<linearGradient id=\"$arrow_color_id\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
-				<stop offset=\"0%\" style=\"stop-color:$arrow_col_start;stop-opacity:1\"/>
-				<stop offset=\"50%\" style=\"stop-color:$arrow_col_end;stop-opacity:1\"/>
-				<stop offset=\"100%\" style=\"stop-color:$arrow_col_start;stop-opacity:1\"/>
-				</linearGradient>
-				</defs>
-				<g style=\"fill:none\">
-				<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:url(#$arrow_color_id);stroke:black;stroke-width:1;fill-opacity:1;stroke-opacity:1\" />
-				</g>";
-		}else{
-			$svg.="<rect x=\"$arrow_x\" y=\"$arrow_y\" width=\"$legend_arrow_width\" height=\"$legend_arrow_height\" style=\"fill:$color;stroke:$conf{legend_stroke_color};stroke-width:$conf{legend_stroke_width};fill-opacity:$opacity;stroke-opacity:$opacity\" />";
+	for my $f(keys %{$conf{feature_setting2}}){
+		if(exists $conf{feature_setting2}{$f}{legend_label} && $conf{feature_setting2}{$f}{legend_label}){
+			my %hash;
+			$hash{label}=&get_para("legend_label", $f, \%conf);
+			$hash{color}=&get_para("feature_color", $f, \%conf);
+			$hash{shape}=&get_para("feature_shape", $f, \%conf);
+			$hash{opacity}=&get_para("feature_opacity", $f, \%conf);
+			my $id;
+			for my $level(@legend_levels){
+				$id.="$hash{$level}.";
+			}
+			$id=~ s/\.$//;
+			$legends{$id}{label}=$hash{label};
+			$legends{$id}{color}=$hash{color};
+			$legends{$id}{shape}=$hash{shape};
+			$legends{$id}{opacity}=$hash{opacity};
 		}
-## draw legend
-		$svg.="<text x=\"$text_x\" y=\"$text_y\" font-family=\"Times New Roman\" font-size=\"${legend_font_size}px\" fill=\"black\" text-anchor='start'>$legend</text>";
-		$arrow_y += $legend_single_arrow_height +$legend_arrow_height*$conf{legend_height_space};
-		$text_y += $legend_single_arrow_height +$legend_arrow_height*$conf{legend_height_space};
-## draw legend
-
 	}
-#legend外围的线框
-#my $legend_rect_width = (1-$legend_width_margin*2)*$svg_width*$legend_width_ratio * 1.1;
-#my $legend_rect_height = $svg_height*$legend_height_percent * 1.04;
-#my $legend_rect_x = (1-$legend_width_ratio)*$svg_width+$legend_width_margin*$legend_width_ratio*$svg_width *0.9;
-#my $legend_rect_y = $top_margin_legend;
-#$svg.="<rect x=\"$legend_rect_x\" y=\"$legend_rect_y\" width=\"$legend_rect_width\" height=\"$legend_rect_height\" style=\"fill:none;stroke:black;stroke-width:1;fill-opacity:0;stroke-opacity:1\" />"; #不画这条线框了
+	print "lenged number is ",scalar(keys %legends),"\n";	
+	return $conf, $list, 0 if(scalar(keys %legends) == 0);
+	my $legend_width_margin = $conf->{legend_width_margin};
+	my $legend_width_textpercent = $conf->{legend_width_textpercent};
+	my $feature_width = (1-$legend_width_margin*2)*(1-$legend_width_textpercent)*$svg_width*$legend_width_ratio;
+	my $feature_setting;
+	my $gff="";
+	my ($sample, $block_id, $block_start, $block_end)=&get_one_block($list);
+	my $feature_start=$block_start;
+	my $total_height=0;
+	my $legend_height_extend=1.2;
+	my $feature_height = &check_font_size_by_estimate(0, $feature_width, \%legends, $fontsize);
+	my $feature_end;
+	my $feature_length_ratio=2;
+	foreach my $l(keys %legends){
+		$legends{$l}{height}=$feature_height;
+		$total_height+=$legends{$l}{height}*$legend_height_extend;
+	}
+	my $feature_shift_y_to=($svg_height-$total_height)/2;
+	my $keyword="legend";
+	foreach my $l(keys %legends){
+		my $id=$l;
+		my $strand="+";
+		my $y_margin_feature_label=-0.2;
+		my $x_margin_feature_label=0.2;
+		my $feature_shift_x_to = $svg_width*(1-$legend_width_ratio) + $legend_width_margin*$svg_width*$legend_width_ratio-1;	
+		if($legends{$l}{shape}=~ /^circle_point/){
+			$feature_end=$feature_start + 1 * $feature_height/$ratio-1;
+			#$feature_shift_x_to = $feature_shift_x_to + ($feature_length_ratio -1)* $feature_height /2;
+			#$x_margin_feature_label += (($feature_length_ratio -1)* $feature_height /2)/(2*$feature_height);
+			$feature_shift_x_to = $feature_shift_x_to + ($feature_length_ratio -1)* $feature_height ;
+			$y_margin_feature_label -=0.1;
+		}else{
+			$feature_end=$feature_start + $feature_length_ratio * $feature_height/$ratio-1;
+		}
+		$gff.="$block_id\tadd\t$keyword\t$feature_start\t$feature_end\t.\t$strand\t.\tID=$id;\n";
+		$feature_setting.="$id\tfeature_label\t$legends{$l}{label}\n";
+		$feature_setting.="$id\tfeature_label_size\t$fontsize\n";
+		$feature_setting.="$id\tdisplay_feature_label\tyes\n";
+		$feature_setting.="$id\tfeature_shape\t$legends{$l}{shape}\n";
+		$feature_setting.="$id\tfeature_color\t$legends{$l}{color}\n";
+		$feature_setting.="$id\tfeature_opacity\t$legends{$l}{opacity}\n";
+		$feature_setting.="$id\tpos_feature_label\tright_low_skip_arrow_sharp\n";
+		$feature_setting.="$id\ty_margin_feature_label\t$y_margin_feature_label\n";
+		$feature_setting.="$id\tx_margin_feature_label\t$x_margin_feature_label\n";
+		$feature_setting.="$id\tlabel_text_anchor\tstart\n";
+		$feature_setting.="$id\tlabel_text_alignment_baseline\tbaseline\n";
+		$feature_setting.="$id\tfeature_shift_x_to\t$feature_shift_x_to\n";
+		$feature_setting.="$id\tfeature_shift_y_to\t$feature_shift_y_to\n";
+		$feature_setting.="$id\tfeature_arrow_width_extent\t0.2\n";
+		$feature_setting.="$id\tfeature_height_ratio\t$legends{$l}{height}\n";
+		$feature_setting.="$id\tfeature_height_unit\tpx\n";
+		$feature_shift_y_to+=$feature_height*$legend_height_extend;
+	}
+	$list=&write_to_list($sample, $gff, $list);
+	$conf->{feature_setting}=&write_to_setting($feature_setting, $conf->{feature_setting});
+	$conf->{feature_keywords}.=",$keyword";
+	print "add legend list is $list\nadd legend feature_setting is $conf->{feature_setting}\nlenged end\n";
+	return $conf, $list, scalar(keys %legends);
 }
+
+sub write_to_list(){
+	my ($sample, $gff, $list)=@_;
+	my $legend_gff="$list.$prefix.legend.gff";
+	my $legend_list="$list.$prefix.legend.list";
+	open GFF,">$legend_gff" or die "error: cannot open $legend_gff\n";
+	print GFF "$gff";
+	close GFF;
+	my $command="set -vex;sed  -r 's/^($sample\\s.*\\.gff)\\s/\\1,$legend_gff\\t/' $list > $legend_list";
+	`$command`;
+	if($?){
+		die "\nerror: $command in write_to_list\n";	
+	}
+	return $legend_list;
+}
+sub write_to_setting(){
+	my ($feature_setting, $file)=@_;
+	my $lengend_seting="$file.legend.setting.conf";
+	my $command="cat $file > $lengend_seting && echo -e \"$feature_setting\" >> $lengend_seting";
+	`$command`;
+	if($?){
+		die "\nerror: $command in write_to_setting\n";	
+	}
+	return $lengend_seting;
+}
+
+#my ($sample, $block_id, $block_start, $block_end)=&get_one_block($list)
+sub get_one_block(){
+	my ($list)=@_;
+	my $tmp=`cat $list|awk '\$1!~ /^#/'|awk '{print \$1,\$4,\$5,\$6}'`;chomp $tmp;
+	return split(/\s+/,$tmp);
+}
+
+
+#check_font_size_by_estimate($feature_height_ratio, $fontsize)
+sub check_font_size_by_estimate(){
+	my ($height, $width, $legends, $fontsize) = @_;
+	print "fontsize is $fontsize before, height is $height\n";
+	my $text;
+	my %legends=%$legends;
+	foreach my $l(keys %legends){
+		$text.=$legends{$l}{label};
+	}
+	use Imager::Font;
+	my $ttf="$Bin/Times_New_Roman.ttf";
+	die "error: ttf $ttf not exists" if(!-f $ttf);
+	print "using $ttf\n";
+	my $font = Imager::Font->new(file => $ttf);
+	my $bbox = $font->bounding_box(string=>"$text", size=>$fontsize);
+	my $fheight = ($bbox->font_height + $bbox->text_height)/2;
+	#my $total_width = $bbox->total_width;
+	my $end_flag=1;
+	my $status=($fheight > $height)? 1:0;
+	while($end_flag){
+		if($fheight > $height){
+			#$fontsize -=0.5;
+			$height +=0.5;
+			$end_flag = 0 if(!$status);
+			$status=1;
+		}else{
+			#$fontsize +=0.5;
+			$height -=0.5;
+			$end_flag = 0 if($status);
+			$status=0;
+		}
+		#$bbox = $font->bounding_box(string=>"$text", size=>$fontsize);
+		#$fheight = ($bbox->font_height + $bbox->text_height)/2;
+		#$total_width = $bbox->total_width;
+		
+	}
+	print "fontsize is $fontsize after, height is $height\n";
+	return $height;
+}
+
 
 
 #刻度尺
@@ -809,7 +900,7 @@ if($conf{scale_display}=~ /yes/i){
 			$tick_label=&format_scale($tick_label);
 			$tick_label.="bp" if($tick == 0);
 			$orders{$conf{scale_order}}.="<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # ticks
-			$orders{$conf{scale_order}}.= "<text x=\"$tick_x\" y=\"$tick_label_y\" font-family=\"Times New Roman\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$tick_label</text>\n"; # label of feature
+			$orders{$conf{scale_order}}.= "<text x=\"$tick_x\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$tick_label</text>\n"; # label of feature
 
 		}
 		print "cluster_width_ratio $cluster_width_ratio*$svg_width % $unit_scale\n";
@@ -819,7 +910,7 @@ if($conf{scale_display}=~ /yes/i){
 				my $last_tick_label=&format_scale($max_length+$scale_start-1);
 			$last_tick_label.="bp";
 
-			$orders{$conf{scale_order}}.= "<text x=\"$x_end_scale\" y=\"$tick_label_y\" font-family=\"Times New Roman\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$last_tick_label</text>\n"; # label of feature
+			$orders{$conf{scale_order}}.= "<text x=\"$x_end_scale\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$last_tick_label</text>\n"; # label of feature
 
 		}
 
@@ -871,7 +962,8 @@ td {
 		}
 		my $zoom_js=`cat $zoom`; chomp $zoom_js;
 		print OUT "$zoom_js</script>\n";
-		print OUT "<script>var blocks_start_ends_cord=".encode_json(\%blocks_start_ends_cord).";\nvar tracks_heigh=".encode_json(\%tracks_height).";var reversed_block=".encode_json(\%reversed_block).";</script>\n";
+		my $feature_id=(keys %features_height)[-1];
+		print OUT "<script>var blocks_start_ends_cord=".encode_json(\%blocks_start_ends_cord).";\nvar tracks_heigh=".encode_json(\%tracks_height).";var reversed_block=".encode_json(\%reversed_block).";var feature_id_test='$feature_id';var rg_test='$rg_test';</script>\n";
 		print OUT "</head>\n<body>\n<h1>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>\n$navigator\n<div id='container' style=\"width: ${svg_width}px; height: ${svg_height}px; border:1px solid black;display:none\">\n<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox=\"0 0 $svg_width $svg_height\" version=\"1.1\">\n";
 		my $svg=`sed '1d' $prefix.svg`;chomp $svg;
 		print OUT "$svg\n";

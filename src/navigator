@@ -14,6 +14,8 @@
 <li><td><input type="button" value="if you want pan and zoom the imgine, hit me" style="color:green;font-weight:bold" onclick="svgpanzoom(1);this.value='ok, you can pan and zoom now'" /></td></li>
 </ul>
 <script>
+document.getElementById("search_the_key").value = feature_id_test;
+document.getElementById("search_the_rg").value = rg_test;
 function refill(chi, fill,opacity,stroke_width){
 		chi.style.fill = fill;
 		chi.style.opacity = opacity;

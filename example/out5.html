@@ -1915,8 +1915,8 @@ function requestTimeout(timeout) {
 }
 
 },{}]},{},[1]);</script>
-<script>var blocks_start_ends_cord={"pO83_CORR":{"NC_017659.1":{"1,7000":"130,149,1105,149"}},"pO83_CORR.indel":{"NC_017659.1.fake":{"1,7000":"130,349,1105,349"}}};
-var tracks_heigh={"pO83_CORR":200,"pO83_CORR.indel":200};</script>
+<script>var blocks_start_ends_cord={"pO83_CORR":{"NC_017659.1":{"1":{"1,7000":"130,149,1105,149"}}},"pO83_CORR.indel":{"NC_017659.1.fake":{"1":{"1,7000":"130,349,1105,349"}}}};
+var tracks_heigh={"pO83_CORR":200,"pO83_CORR.indel":200};var reversed_block={"pO83_CORR":{},"pO83_CORR.indel":{}};var feature_id_test='pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1';var rg_test='pO83_CORR.indel:NC_017659.1.fake:1:7000;';</script>
 </head>
 <body>
 <h1>./out5, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>
@@ -1933,9 +1933,11 @@ var tracks_heigh={"pO83_CORR":200,"pO83_CORR.indel":200};</script>
 <td><input id="search_the_rg" type="value" value="track_name:chr_id:start:end" size=50 title="track_name:chr_id:start:end" /></td>
 <td><input id="search_by_rg" value="search by track_name1:chr_id1:start1:end1;track_name2:chr_id2:start2:end2;" type="button" onclick="search_by_rg()" /></td>
 </li><br>
-<li><td><input type="button" value="if you want pan and zoom the imgine, hit me" style="color:green;font-weight:bold" onclick="svgpanzoom(1)" /></td></li>
+<li><td><input type="button" value="if you want pan and zoom the imgine, hit me" style="color:green;font-weight:bold" onclick="svgpanzoom(1);this.value='ok, you can pan and zoom now'" /></td></li>
 </ul>
 <script>
+document.getElementById("search_the_key").value = feature_id_test;
+document.getElementById("search_the_rg").value = rg_test;
 function refill(chi, fill,opacity,stroke_width){
 		chi.style.fill = fill;
 		chi.style.opacity = opacity;
@@ -1981,68 +1983,103 @@ function search_by_rg(){
 		var svg = document.getElementById("demo-tiger");
 		var svgNS = 'http://www.w3.org/2000/svg';
 		var re = new RegExp(rg_track_name,"g");
+		var highlight_width = 0;
 		for (var track_name in blocks_start_ends_cord){
 			if(track_name.match(re)){
 				for (var chr_id in blocks_start_ends_cord[track_name]){
-					if( chr_id == rg_chr_id){
-						for (var start_end in blocks_start_ends_cord[track_name][chr_id]){
-							var [start, end] = start_end.split(/,/);
-							start = parseFloat(start);
-							end = parseFloat(end);
+					for (var block_index in blocks_start_ends_cord[track_name][chr_id]){
+						if( chr_id == rg_chr_id){
+							for (var start_end in blocks_start_ends_cord[track_name][chr_id][block_index]){
+								var [start, end] = start_end.split(/,/);
+								start = parseFloat(start);
+								end = parseFloat(end);
 						
-							var [start_x, start_y, end_x, end_y] = blocks_start_ends_cord[track_name][chr_id][start_end].split(/,/);
-							console.log(blocks_start_ends_cord[track_name][chr_id][start_end].split(/,/));
-							start_x = parseFloat(start_x);
-							start_y = parseFloat(start_y);
-							end_x = parseFloat(end_x);
-							end_y = parseFloat(end_y);
-						
-						for(var rg_index in rg){
-							var rg_pos = parseFloat(rg[rg_index]);
-							console.log(rg_pos);
-							if( rg_pos >= start && rg_pos <= end){
-								var scale_ratio = (end_x-start_x)/(end-start+1); 
-								var x = start_x + (rg_pos-start) * scale_ratio;
-								console.log('ratio is '+scale_ratio)
-								var height= tracks_heigh[track_name];
-								var y=(start_y+end_y)/2 - height;
-								var width=scale_ratio*(end-start)/1000;
-								var pos;
-								if(y<0){y=0};
+								var [start_x, start_y, end_x, end_y] = blocks_start_ends_cord[track_name][chr_id][block_index][start_end].split(/,/);
+								console.log(blocks_start_ends_cord[track_name][chr_id][block_index][start_end].split(/,/));
+								start_x = parseFloat(start_x);
+								start_y = parseFloat(start_y);
+								end_x = parseFloat(end_x);
+								end_y = parseFloat(end_y);
+							var highligh_color = "red";
+							for(var rg_index in rg){
+								var rg_pos = parseFloat(rg[rg_index]);
+								console.log(rg_pos);
+								if( rg_pos >= start && rg_pos <= end){
+									//reversed_block[track_name][block_index]="";
+									var scale_ratio = (end_x-start_x)/(end-start+1); 
+									var x = start_x + (rg_pos-start) * scale_ratio;
+									var reverse_flag = 0;
+									if(track_name in reversed_block && block_index in reversed_block[track_name]){
+										//start end is real , rg_pos is also real, but this is reverse strand block	
+										console.log("reverse_flag in track:"+track_name+", block_index "+block_index)
+										reverse_flag = 1;
+									}
+									console.log("track_name "+track_name+", block_index "+block_index+", reverse_flag "+reverse_flag+", start "+start+", end "+end+", rg_pos "+rg_pos);
+									console.log('ratio is '+scale_ratio);
+									var height= tracks_heigh[track_name];
+									var y=(start_y+end_y)/2 - height;
+									var width=scale_ratio*(end-start)/1000;
+									var pos;
+									if(y<0){y=0};
 								
-								width *=hightligh_ratio;
+									width *=hightligh_ratio;
+									if(highlight_width > width){
+										width = highlight_width;
+									}else{
+										highlight_width = width;
+									}
 
-								/// cread a child ,demo-tiger
-								if(rg_index == 1){
-									x = x + scale_ratio;
-									pos = rg_pos + 1;
-								}else{
-									x = x - width;
-									pos = rg_pos - 1;
-								}
-								 var g = document.createElementNS(svgNS,'g');
-								 var title = document.createElementNS(svgNS,'title');
-								 var title_text = document.createTextNode(track_name+":"+chr_id+": "+pos+"th bp");
-								 var rect = document.createElementNS(svgNS,'rect');
-								 rect.setAttribute('x',x);
-								 rect.setAttribute('y',y);
-								 rect.setAttribute('width',width);
-								 rect.setAttribute('height',2*height);
-								 rect.setAttribute('fill','red');
-								 title.append(title_text);
-								 g.append(title);
-								 g.append(rect);
-								 svg.appendChild(g);
+									/// cread a child ,demo-tiger
+									if(rg_index == 1){
+										highligh_color = "red";
+										pos = rg_pos +1;
+										if(reverse_flag == 1){
+											x = start_x + (end - rg_pos) * scale_ratio;
+											x = x - width;
+											pos = "forward strand:"+pos;
+											console.log("reverse_flag==1, rg_index "+rg_index);
+										}else{
+											x = x + scale_ratio;
+											console.log("reverse_flag==0, rg_index "+rg_index);
+										}
+									}else{
+										highligh_color = "black";
+										pos = rg_pos -1;
+										if(reverse_flag == 1){
+											x = start_x + (end - rg_pos) * scale_ratio;
+											x = x + scale_ratio;
+											pos = "forward strand:"+pos;
+											console.log("reverse_flag==1, rg_index "+rg_index);
+										}else{
+											x = x - width;
+											console.log("reverse_flag==0, rg_index "+rg_index);
+										}
+									}
+									 var g = document.createElementNS(svgNS,'g');
+									 var title = document.createElementNS(svgNS,'title');
+									 var title_text = document.createTextNode(track_name+":"+chr_id+": "+pos+"th bp");
+									 var rect = document.createElementNS(svgNS,'rect');
+									 rect.setAttribute('x',x);
+									 rect.setAttribute('y',y);
+									 rect.setAttribute('width',width);
+									 rect.setAttribute('height',2*height);
+									 rect.setAttribute('fill',highligh_color);
+									 title.append(title_text);
+									 g.append(title);
+									 g.append(rect);
+									 svg.appendChild(g);
 
-								 console.log('rect is '+rect.innerHTML);
-								 console.log("x="+x+",y="+y+",width="+width+",height="+height);
-								 search_result_num +=1;
+									 console.log('rect is '+rect.innerHTML);
+									 console.log("x="+x+",y="+y+",width="+width+",height="+height);
+									 search_result_num +=1;
+									}
 								}
+	
 							}
-
 						}
 					}
 				}
+
 			}
 		}
 	}
@@ -2158,8 +2195,12 @@ function search_by_key(){
 
 <g class='myth'><title>NC_017659.1:1-7000</title>
 <rect x="130" y="149" width="975" height="2" style="fill:blue;opacity:0.2"   /></g>
+<text x="129" y="150" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='end' alignment-baseline="middle" >5'</text>
+ <text x="1106" y="150" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='start' alignment-baseline="middle" >3'</text>
 <g class='myth'><title>NC_017659.1.fake:1-7000</title>
 <rect x="130" y="349" width="975" height="2" style="fill:blue;opacity:0.2"   /></g>
+<text x="129" y="350" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='end' alignment-baseline="middle" >5'</text>
+ <text x="1106" y="350" font-family="Times New Roman" font-size="7px" fill="black"  text-anchor='start' alignment-baseline="middle" >3'</text>
 
 
 
@@ -2210,17 +2251,17 @@ function search_by_key(){
 
 
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.5460.147060.1.+.1</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1</tspan>
 <tspan>track name -> pO83_CORR</tspan>
 <tspan>ref start-end -> NC_017659.1:5460-147060</tspan></title>
-<path id="pO83_CORR.NC_017659.1.5460.147060.1.+.1"  d="M890.360714285714 149 L890.360714285714 151 L20613.3571428571 151 L20613.3571428571 149 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+<path id="pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1"  d="M890.360714285714 149 L890.360714285714 151 L20613.3571428571 151 L20613.3571428571 149 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>track name -> pO83_CORR.indel</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:5460-147060</tspan></title>
-<path id="pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1"  d="M890.360714285714 349 L890.360714285714 351 L20613.3571428571 351 L20613.3571428571 349 Z" clip-path="url(#cut-pO83_CORR.indel-NC_017659.1.fake-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+<path id="pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1"  d="M890.360714285714 349 L890.360714285714 351 L20613.3571428571 351 L20613.3571428571 349 Z" clip-path="url(#cut-pO83_CORR.indel-NC_017659.1.fake-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
-<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.5460.147060.1.+.1 -> pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.1</tspan>
+<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>query -> NC_017659.1.fake: 5460-147060</tspan>
 <tspan>target -> NC_017659.1: 5460-147060</tspan>
 <tspan>strand -> +</tspan>
@@ -2232,17 +2273,17 @@ function search_by_key(){
 
 
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.2101.5468.1.+.1</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.2101.5468.1.+.t.q_block_index=1.t_block_index=1</tspan>
 <tspan>track name -> pO83_CORR</tspan>
 <tspan>ref start-end -> NC_017659.1:2101-5468</tspan></title>
-<polygon id="pO83_CORR.NC_017659.1.2101.5468.1.+.1" points="422.5,149 422.5,151 891.614285714286,151 891.614285714286,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+<polygon id="pO83_CORR.NC_017659.1.2101.5468.1.+.t.q_block_index=1.t_block_index=1" points="422.5,149 422.5,151 891.614285714286,151 891.614285714286,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.1</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>track name -> pO83_CORR.indel</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:1891-5257</tspan></title>
-<polygon id="pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.1" points="393.25,349 393.25,351 862.225,351 862.225,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+<polygon id="pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.q.q_block_index=1.t_block_index=1" points="393.25,349 393.25,351 862.225,351 862.225,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
-<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.2101.5468.1.+.1 -> pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.1</tspan>
+<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.2101.5468.1.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>query -> NC_017659.1.fake: 1891-5257</tspan>
 <tspan>target -> NC_017659.1: 2101-5468</tspan>
 <tspan>strand -> +</tspan>
@@ -2253,17 +2294,17 @@ function search_by_key(){
 
 
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1898.1.+.1</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1</tspan>
 <tspan>track name -> pO83_CORR</tspan>
 <tspan>ref start-end -> NC_017659.1:1-1898</tspan></title>
-<polygon id="pO83_CORR.NC_017659.1.1.1898.1.+.1" points="130,149 130,151 394.364285714286,151 394.364285714286,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+<polygon id="pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1" points="130,149 130,151 394.364285714286,151 394.364285714286,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>track name -> pO83_CORR.indel</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:1-1898</tspan></title>
-<polygon id="pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1" points="130,349 130,351 394.364285714286,351 394.364285714286,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+<polygon id="pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1" points="130,349 130,351 394.364285714286,351 394.364285714286,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
-<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1.1898.1.+.1 -> pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.1</tspan>
+<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>query -> NC_017659.1.fake: 1-1898</tspan>
 <tspan>target -> NC_017659.1: 1-1898</tspan>
 <tspan>strand -> +</tspan>
@@ -2274,17 +2315,17 @@ function search_by_key(){
 
 
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1891.2100.1.+.1</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1</tspan>
 <tspan>track name -> pO83_CORR</tspan>
 <tspan>ref start-end -> NC_017659.1:1891-2100</tspan></title>
-<polygon id="pO83_CORR.NC_017659.1.1891.2100.1.+.1" points="393.25,149 393.25,151 422.5,151 422.5,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+<polygon id="pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1" points="393.25,149 393.25,151 422.5,151 422.5,149 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>track name -> pO83_CORR.indel</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:5251-5460</tspan></title>
-<polygon id="pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1" points="861.25,349 861.25,351 890.5,351 890.5,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+<polygon id="pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1" points="861.25,349 861.25,351 890.5,351 890.5,349 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
-<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1891.2100.1.+.1 -> pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.1</tspan>
+<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>query -> NC_017659.1.fake: 5251-5460</tspan>
 <tspan>target -> NC_017659.1: 1891-2100</tspan>
 <tspan>strand -> +</tspan>
