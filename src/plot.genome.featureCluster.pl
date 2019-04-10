@@ -172,7 +172,7 @@ while(@track_order){
 	$conf{sample_name_old2new2}{$sample}{new_name} = $sample if(not exists $conf{sample_name_old2new2}{$sample}{new_name});
 	$conf{sample_name_old2new2}{$sample}{new_color} = $conf{sample_name_color_default} if(not exists $conf{sample_name_old2new2}{$sample}{new_color});
 	$conf{sample_name_old2new2}{$sample}{new_font_size} = $conf{sample_name_font_size_default} if(not exists $conf{sample_name_old2new2}{$sample}{new_font_size});
-	$svg.="<text x=\"$ref_name_x\" y=\"$ref_name_y\" font-size=\"$conf{sample_name_old2new2}{$sample}{new_font_size}px\" fill=\"$conf{sample_name_old2new2}{$sample}{new_color}\"  text-anchor='end' alignment-baseline=\"middle\" >$conf{sample_name_old2new2}{$sample}{new_name}</text>\n"; # draw sample name
+	$svg.="<text class='myth' x=\"$ref_name_x\" y=\"$ref_name_y\" style=\"font-size:$conf{sample_name_old2new2}{$sample}{new_font_size}px;fill:$conf{sample_name_old2new2}{$sample}{new_color};text-anchor:end;alignment-baseline:middle\" >$conf{sample_name_old2new2}{$sample}{new_name}</text>\n"; # draw sample name
 	print "draw sample name $conf{sample_name_old2new2}{$sample}{new_name}\n";
 
 
@@ -252,7 +252,7 @@ while(@track_order){
 				die "error:display_segment_name_shift_y not support $display_segment_name_shift_y in $display_segment_name, should like +1 or -1 or 0\n";
 			}
 			my $segment_name=($gff{$sample}{chooselen_single}{$block_index}{len} == $gff{$sample}{scf}{$scf[0]})? "$scf[0]":"$scf[0]:$block_region[0]bp";
-			$orders{$display_segment_name_order}.="<text x=\"$segment_name_x\" y=\"$segment_name_y\" font-size=\"${display_segment_name_fontsize}px\" fill=\"$display_segment_name_color\"  text-anchor='$segment_text_anchor' alignment-baseline=\"$segment_baseline\" transform=\"rotate($segment_name_angle $segment_name_x $segment_name_y)\" >$segment_name</text>\n"; # draw sample name
+			$orders{$display_segment_name_order}.="<text class='myth' x=\"$segment_name_x\" y=\"$segment_name_y\" style=\"font-size:${display_segment_name_fontsize}px;fill:$display_segment_name_color;text-anchor:$segment_text_anchor;alignment-baseline:$segment_baseline;\" transform=\"rotate($segment_name_angle $segment_name_x $segment_name_y)\" >$segment_name</text>\n"; # draw sample name
 		}elsif($display_segment_name_flag!~ /no/i){
 			die "error:$display_segment_name should be start with yes or no, not $display_segment_name_flag\n"
 		}
@@ -900,7 +900,7 @@ if($conf{scale_display}=~ /yes/i){
 			$tick_label=&format_scale($tick_label);
 			$tick_label.="bp" if($tick == 0);
 			$orders{$conf{scale_order}}.="<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # ticks
-			$orders{$conf{scale_order}}.= "<text x=\"$tick_x\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$tick_label</text>\n"; # label of feature
+			$orders{$conf{scale_order}}.= "<text class='myth' x=\"$tick_x\" y=\"$tick_label_y\" style=\"font-size:${font_size}px;fill:$conf{scale_color};text-anchor:middle;font-family:Times New Roman;\">$tick_label</text>\n"; # label of feature
 
 		}
 		print "cluster_width_ratio $cluster_width_ratio*$svg_width % $unit_scale\n";
@@ -910,7 +910,7 @@ if($conf{scale_display}=~ /yes/i){
 				my $last_tick_label=&format_scale($max_length+$scale_start-1);
 			$last_tick_label.="bp";
 
-			$orders{$conf{scale_order}}.= "<text x=\"$x_end_scale\" y=\"$tick_label_y\" font-size=\"${font_size}px\" fill=\"$conf{scale_color}\"  text-anchor='middle' font-family=\"Times New Roman\">$last_tick_label</text>\n"; # label of feature
+			$orders{$conf{scale_order}}.= "<text class='myth'  x=\"$x_end_scale\" y=\"$tick_label_y\" style=\"font-size:${font_size}px;fill:$conf{scale_color};text-anchor:middle;font-family:Times New Roman\">$last_tick_label</text>\n"; # label of feature
 
 		}
 
@@ -954,14 +954,19 @@ ul li {
 td {
 }
 </style>
-<script>\n";
+\n";
 		my $navigator="";
 		if(-f "$Bin/navigator"){
 			print "$Bin/navigator\n";
 			$navigator=`cat $Bin/navigator`;chomp $navigator;
 		}
 		my $zoom_js=`cat $zoom`; chomp $zoom_js;
-		print OUT "$zoom_js</script>\n";
+		print OUT "\n<script>$zoom_js</script>\n";
+		my $d3=`cat $Bin/d3.v5.js`;chomp $d3;
+		print OUT "\n<script>$d3</script>\n";
+		my $d3_transform=`cat $Bin/d3-transform.js`;chomp $d3_transform;
+		print OUT "\n<script>$d3_transform</script>\n";
+
 		my $feature_id=(keys %features_height)[-1];
 		print OUT "<script>var blocks_start_ends_cord=".encode_json(\%blocks_start_ends_cord).";\nvar tracks_heigh=".encode_json(\%tracks_height).";var reversed_block=".encode_json(\%reversed_block).";var feature_id_test='$feature_id';var rg_test='$rg_test';</script>\n";
 		print OUT "</head>\n<body>\n<h1>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>\n$navigator\n<div id='container' style=\"width: ${svg_width}px; height: ${svg_height}px; border:1px solid black;display:none\">\n<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox=\"0 0 $svg_width $svg_height\" version=\"1.1\">\n";
@@ -1005,11 +1010,10 @@ td {
           window.zoomTiger.disableControlIcons();
         })
       };
-    </script>
-
-  </body>
-
-</html>";
+    </script>";
+		my $modify_feature=`cat $Bin/modify_feature.js`;chomp $modify_feature;
+		print OUT "\n<script>$modify_feature</script>\n";
+		print OUT "\n</body>\n</html>\n";
 		close OUT;
 		print "$zoom exists,\n	so output $prefix.html, which you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom\n\n";
 	}else{
@@ -1082,6 +1086,12 @@ sub cut_quadrilateral(){
 		die "error: in cut_quadrilateral, edge_coordinate_feature_out_of_list=$edge_coordinate_feature_out_of_list format eror\n"
 	}
 	#print "edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list\n";
+	if($style!~ /stroke-width:\s*([\d\.]+)/){
+		$style="stroke-width: 1.5;$style";
+	}else{
+		my $stroke_width=$1 * 5;
+		$style=~ s/stroke-width:\s*([\d\.]+)/stroke-width: $stroke_width/;
+	}
 	$clip_path.="<path d=\"M$left_up_x $left_up_y L$right_up_x $right_up_y L$right_down_x $right_down_y L$left_down_x $left_down_y Z\"  clip-path=\"url(#$clip_path_id)\" style=\"$style\" />\n";
 	#"""  <defs>    <clipPath id="cut-off-bottom"><path d="M0 0 L170 0 L170 300 L0 300 Z" />	    </clipPath>  </defs> 
 	# <path d="M150 0 L75 200 L225 200 Z"  clip-path="url(#cut-off-bottom)" />"""

@@ -2222,7 +2222,7 @@ sub hist_scatter_line_run(){
 			$depth_setting_conf.="$depth_id\tfeature_label\t$depths{window}{$window}{label}\n";
 			$depth_setting_conf.="$depth_id\ty_margin_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
 			$depth_setting_conf.="$depth_id\tpos_feature_label\tleft_medium\n";
-			$depth_setting_conf.="$depth_id\tfeature_label_dominant_baseline\tcentral\n";
+			#$depth_setting_conf.="$depth_id\tfeature_label_dominant_baseline\tcentral\n";
 			$depth_setting_conf.="$depth_id\tfeature_label_textLength\t1*feature_width\n";
 			$depth_setting_conf.="$depth_id\tfeature_label_lengthAdjust\tspacingAndGlyphs\n"; #
 
