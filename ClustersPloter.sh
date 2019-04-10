@@ -83,6 +83,8 @@ if [ -s $prefix.plot.error ];
 then
 	echo -e "\n\nerror in file $prefix.plot.error, $cmd\n\n"
 else
-	ls -tl $prefix.svg $prefix.notitle.svg $prefix.html
 	echo -e "\n\nfinished, no error~\n\n"
 fi
+echo "output is:"
+ls -tl $prefix.svg $prefix.notitle.svg $prefix.html
+echo 

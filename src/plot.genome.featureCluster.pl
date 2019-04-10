@@ -1090,6 +1090,7 @@ sub cut_quadrilateral(){
 		$style="stroke-width: 1.5;$style";
 	}else{
 		my $stroke_width=$1 * 5;
+		$stroke_width = 1 if($stroke_width == 0);
 		$style=~ s/stroke-width:\s*([\d\.]+)/stroke-width: $stroke_width/;
 	}
 	$clip_path.="<path d=\"M$left_up_x $left_up_y L$right_up_x $right_up_y L$right_down_x $right_down_y L$left_down_x $left_down_y Z\"  clip-path=\"url(#$clip_path_id)\" style=\"$style\" />\n";
