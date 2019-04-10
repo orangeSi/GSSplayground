@@ -944,7 +944,7 @@ sub plot_ylabel(){
 		my $ylabel_color=$4;
 		my $ylabel_id="$sample.$scf.$block_index.$block_start_bp.$block_end_bp.$k_index.$type.ylabel";
 		$ylabel_id.=($yaxis=~ /^\d/)? "+":"-";
-		my $feature_shift_x=5+$gap;
+		my $feature_shift_x=10+$gap;
 		$ylabel_gff.="$scf\tadd\tylabel\t$block_end_bp\t$block_end_bp\t.\t+\t.\tID=$ylabel_id;\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_label_color\t$ylabel_color\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_shift_x\t$feature_shift_x\n";
@@ -957,6 +957,7 @@ sub plot_ylabel(){
 		$ylabel_setting_conf.="$ylabel_id\tdisplay_feature_label\tyes\n";
 		$ylabel_setting_conf.="$ylabel_id\tpos_feature_label\tright_low\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_label_auto_angle_flag\t0\n";
+		$ylabel_setting_conf.="$ylabel_id\tlabel_text_anchor\tstart\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_color\twhite\n";
 		$ylabel_setting_conf.="$ylabel_id\tfeature_shape\trect\n";
 		$ylabel_setting_conf.="$ylabel_id\tlabel_text_alignment_baseline\tmiddle\n";
@@ -2435,6 +2436,7 @@ sub feature_ytick(){
 	$ytick_setting_conf.="$ytick_feature_backbone_id\tdisplay_feature_label\tno\n";
 	$ytick_setting_conf.="$ytick_feature_backbone_id\tpos_feature_label\tright_medium\n";
 	$ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_label\tytick_label\n";
+	$ytick_setting_conf.="$ytick_feature_backbone_id\tlabel_text_anchor\tstart\n";
 	$ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_color\t$tick_colors[0]\n";
 	$ytick_setting_conf.="$ytick_feature_backbone_id\tfeature_opacity\t$tick_opacitys[0]\n";
 #print "\n2ytick_gff is $ytick_gff\n\n";

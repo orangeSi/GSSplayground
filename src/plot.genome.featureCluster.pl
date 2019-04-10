@@ -969,13 +969,14 @@ td {
 
 		my $feature_id=(keys %features_height)[-1];
 		print OUT "<script>var blocks_start_ends_cord=".encode_json(\%blocks_start_ends_cord).";\nvar tracks_heigh=".encode_json(\%tracks_height).";var reversed_block=".encode_json(\%reversed_block).";var feature_id_test='$feature_id';var rg_test='$rg_test';</script>\n";
-		print OUT "</head>\n<body>\n<h1>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h1>\n$navigator\n<div id='container' style=\"width: ${svg_width}px; height: ${svg_height}px; border:1px solid black;display:none\">\n<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox=\"0 0 $svg_width $svg_height\" version=\"1.1\">\n";
+		print OUT "</head>\n<body>\n<input type=button value=\"if you want pan and zoom the imgine, hit me\" style=\"color:green;font-weight:bold\" onclick=\"svgpanzoom(1);this.value='ok, you can pan and zoom now'\" />\n<div id='container' style=\"width: ${svg_width}px; height: ${svg_height}px; border:1px solid black;display:none\">\n<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox=\"0 0 $svg_width $svg_height\" version=\"1.1\">\n";
 		my $svg=`sed '1d' $prefix.svg`;chomp $svg;
 		print OUT "$svg\n";
 		print OUT " </div>
     <button id=\"enable\" style='display:none'>enable</button>
     <button id=\"disable\" style='display:none'>disable</button>
-
+	$navigator
+	<h3>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h3>
     <script>
 	window.refresh_flag = 0 ;
     // Don't use window.onLoad like this in production, because it can only listen to one function.

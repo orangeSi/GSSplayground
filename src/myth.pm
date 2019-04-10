@@ -613,7 +613,7 @@ sub draw_genes(){
 	chomp $feature_popup_title;
 	my @alignment_baseline=("auto","baseline","before-edge","text-before-edge","middle","central", "after-edge","text-after-edge","ideographic","alphabetic","hanging","mathematical","inherit");
 	die "error: not support label_text_alignment_baseline=$label_text_alignment_baseline, only support @alignment_baseline\n" if(!grep(/^$label_text_alignment_baseline$/, @alignment_baseline));
-	$label_text_alignment_baseline=($label_text_alignment_baseline eq "baseline")? "":" alignment-baseline:\"$label_text_alignment_baseline\" ";
+	$label_text_alignment_baseline=($label_text_alignment_baseline eq "baseline")? "":" alignment-baseline:$label_text_alignment_baseline;";
 
 
 	if($feature_shift_x!~ /^[\+\-]?\d+\.?\d*$/){
@@ -674,7 +674,7 @@ sub draw_genes(){
 	my $textLength=$1;
 	$feature_label_textLength=($feature_label_textLength)? $textLength:"";
 	my $feature_label_lengthAdjust = &get_para("feature_label_lengthAdjust", $feature_id, $conf);
-	$feature_label_lengthAdjust=($feature_label_lengthAdjust)? "lengthAdjust:$feature_label_lengthAdjust":"";
+	$feature_label_lengthAdjust=($feature_label_lengthAdjust)? "lengthAdjust:$feature_label_lengthAdjust;":"";
 	#
 	my $order_f=&get_para("feature_order", $feature_id, $conf);
 	my $order_f_label=&get_para("feature_label_order", $feature_id, $conf);
@@ -731,11 +731,11 @@ sub draw_genes(){
 	($start, $end)=&get_real_coordinate($start,$end,$feature_id);
 	if($feature_label_textLength){
 		$feature_label_textLength = $feature_label_textLength * ($end -$start)*$ratio;
-		$feature_label_textLength = "textLength:$feature_label_textLength";
+		$feature_label_textLength = "textLength:$feature_label_textLength;";
 		$index_label_angle=0;
 	}
 	#my $feature_label_autowidth="$feature_label_dominant_baseline;$feature_label_textLength;$feature_label_lengthAdjust";
-	my $feature_label_autowidth="$feature_label_textLength;$feature_label_lengthAdjust";
+	my $feature_label_autowidth="$feature_label_textLength$feature_label_lengthAdjust";
 	my $fake=0;
 	#$fake=0 if($end==$start);
 	if($shape=~ /arrow/){
@@ -850,7 +850,7 @@ sub draw_genes(){
 			}
 
 ## draw label of feature
-			$orders->{$order_f_label}.= "<text class='myth'  x=\"$label_x\" y=\"$label_y\" style=\"font-family:Times New Roman;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline;$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
+			$orders->{$order_f_label}.= "<text class='myth'  x=\"$label_x\" y=\"$label_y\" style=\"font-family:Times New Roman;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
 		}
 # check this feature if is in crossing_link
 		#print "ssfeature_id is $feature_id\n";
@@ -962,7 +962,7 @@ sub draw_genes(){
 
 ## draw label of feature
 			die "die:label_y is $label_y, id is $feature_id\n" if(!$label_y);
-			$orders->{$order_f_label}.= "<text class='myth' x=\"$label_x\" y=\"$label_y\" style=\"font-family:Times New Roman;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline;$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
+			$orders->{$order_f_label}.= "<text class='myth' x=\"$label_x\" y=\"$label_y\" style=\"font-family:Times New Roman;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		}
 # check this feature if is in crossing_link
 		#print "feature_id is $feature_id\n";
@@ -1046,7 +1046,7 @@ sub draw_genes(){
 
 
 ## draw label of feature
-			$orders->{$order_f_label}.= "<text class='myth'  x=\"$label_x\" y=\"$label_y\" style=\"font-family:Times New Roman;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline;$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
+			$orders->{$order_f_label}.= "<text class='myth'  x=\"$label_x\" y=\"$label_y\" style=\"font-family:Times New Roman;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		}
 # check this feature if is in crossing_link
 		if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
@@ -1219,7 +1219,7 @@ sub default_setting(){
 	$conf{feature_label_lengthAdjust} ||="";
 	$conf{tracks_block_reverse} ||="";
 	$conf{feature_id_is_unique} ||="yes";
-	$conf{display_segment_strand} ||="5:5',3:3',color:black,fontsize:7";
+	$conf{display_segment_strand} ||="5:5',3:3',color:black,fontsize:14";
 	$conf{legend_height_ratio} ||=0.9;
 
 ##$conf{feature_ytick_region} ||="0-3:0-10;";
