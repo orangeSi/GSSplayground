@@ -12,6 +12,9 @@ n" value="if you want pan and zoom the imgine, hit me" style="color:green;font-w
 <td><input id="search_the_rg" type="value" value="track_name:chr_id:start:end" size=50 title="track_name:chr_id:start:end" /></td>
 <td><input id="search_by_rg" value="search by track_name1:chr_id1:start1:end1;track_name2:chr_id2:start2:end2;" type="button" onclick="search_by_rg()" /></td>
 </li><br>
+<li>
+<td><input onclick="saveSVG('demo-tiger', svg_width_raw, svg_height_raw)" type=button value='download current image to svg file' ></td>
+</li>
 </ul>
 <script>
 

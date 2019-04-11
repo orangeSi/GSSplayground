@@ -1145,7 +1145,7 @@ sub default_setting(){
 	$conf{feature_color} ||= 'ForestGreen'; #ForestGreen,LimeGreen
 	$conf{color_sample_name_default} ||= 'green';
 	$conf{sample_name_color_default} ||='black';
-	$conf{sample_name_font_size_default} ||=15;
+	$conf{sample_name_font_size_default} ||=10;
 	$conf{legend_font_size} ||= $conf{feature_label_size}; #legend中文字字体大小
 	$conf{legend_height_percent} ||= 0.2; # legends的高度占整个图高度的比例
 	$conf{legend_width_margin} ||= 0.1; # legends左右两侧的margin

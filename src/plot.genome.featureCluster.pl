@@ -41,7 +41,7 @@ my %conf = &read_conf($conf,@funcs);
 
 my $shift_angle_closed_feature=0;
 my ($svg_width,$svg_height) = split(',',$conf{'svg_width_height'});
-
+print "svg_width is $svg_width, svg_height is svg_height\n";
 
 ## position of features for  crosslink
 my %feature_reverse_for_crosslink;
@@ -968,7 +968,7 @@ td {
 		print OUT "\n<script>$d3_transform</script>\n";
 
 		my $feature_id=(keys %features_height)[-1];
-		print OUT "<script>var blocks_start_ends_cord=".encode_json(\%blocks_start_ends_cord).";\nvar tracks_heigh=".encode_json(\%tracks_height).";var reversed_block=".encode_json(\%reversed_block).";var feature_id_test='$feature_id';var rg_test='$rg_test';</script>\n";
+		print OUT "<script>var blocks_start_ends_cord=".encode_json(\%blocks_start_ends_cord).";\nvar tracks_heigh=".encode_json(\%tracks_height).";var reversed_block=".encode_json(\%reversed_block).";var feature_id_test='$feature_id';var rg_test='$rg_test'; var svg_width_raw = ${svg_width}; var svg_height_raw = ${svg_height};</script>\n";
 		print OUT "</head>\n<body>\n<input type=button value=\"if you want pan and zoom the imgine, hit me\" style=\"color:green;font-weight:bold\" onclick=\"svgpanzoom(1);this.value='ok, you can pan and zoom now'\" />\n<div id='container' style=\"width: ${svg_width}px; height: ${svg_height}px; border:1px solid black;display:none\">\n<svg id='demo-tiger' xmlns='http://www.w3.org/2000/svg' style='display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;' viewBox=\"0 0 $svg_width $svg_height\" version=\"1.1\">\n";
 		my $svg=`sed '1d' $prefix.svg`;chomp $svg;
 		print OUT "$svg\n";
@@ -980,7 +980,7 @@ td {
     <script>
 	window.refresh_flag = 0 ;
     // Don't use window.onLoad like this in production, because it can only listen to one function.
-	document.getElementById(\"container\").style.width=document.documentElement.clientWidth*0.97 + \"px\";
+	document.getElementById(\"container\").style.width=document.documentElement.clientWidth*0.98 + \"px\";
 	document.getElementById(\"container\").style.height=document.documentElement.clientHeight*0.93 + \"px\";
 	document.getElementById(\"container\").style['margin']='auto';
 	document.getElementById(\"container\").style.display=\"block\";

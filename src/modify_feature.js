@@ -365,9 +365,41 @@ function caculate_translate(target, shift_xy_id, xy_step_id, xy, change){
 	
 	//transform_it(target, value, type)
 	transform_it(target, shift_x + " " + shift_y, 'translate');
-	
-	
+		
 }
-	
+
+function saveSVG(svg_id, width, height){
+	console.log("xxxxxx");
+	var myDate=new Date();
+	myDate=myDate.toString().replace(/\s+/g,"_").replace(/\(.*\)/g, "");
+	var textToWrite = document.getElementById(svg_id).outerHTML;
+	//textToWrite="<svg id=\"circos_orange\" width=\"1600px\" height=\"1600px\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" >"+textToWrite+"</svg>";
+	textToWrite = textToWrite.replace(/;\s*width:\s*\S+/, "; width:"+width).replace(/;\s*height:\s*\S+/, "; height:"+height).replace(/<g id="svg-pan-zoom-controls.*<\/g>/, "");
+
+    var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+    //var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+	var  fileNameToSaveAs="out."+myDate+".svg";
+      var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    if (window.webkitURL != null)
+    {
+        // Chrome allows the link to be clicked
+        // without actually adding it to the DOM.
+        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+    }
+    else
+    {
+        // Firefox requires the link to be added to the DOM
+        // before it can be clicked.
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+    }
+
+    downloadLink.click();	
+}
+
 
 
