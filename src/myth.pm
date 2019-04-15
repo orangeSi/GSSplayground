@@ -1219,7 +1219,7 @@ sub default_setting(){
 	$conf{feature_label_lengthAdjust} ||="";
 	$conf{tracks_block_reverse} ||="";
 	$conf{feature_id_is_unique} ||="yes";
-	$conf{display_segment_strand} ||="5:5',3:3',color:black,fontsize:14";
+	$conf{display_segment_strand} ||="5:5',3:3',color:black,fontsize:10";
 	$conf{legend_height_ratio} ||=0.9;
 
 ##$conf{feature_ytick_region} ||="0-3:0-10;";

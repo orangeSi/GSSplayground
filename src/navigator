@@ -1,8 +1,9 @@
 <ul>
 <li>
 <td><input id="hightligh_ratio" type="value" value="3"  size=5 title="highlight ratio" /> <input type=button value="highlight ratio" /></td>
-n" value="if you want pan and zoom the imgine, hit me" style="color:green;font-weight:bold" onclick="svgpanzoom(1);this.value='ok, you can pan and zoom now'" />
-
+<!--
+	<input type="button" value="if you want pan and zoom the imgine, hit me" style="color:green;font-weight:bold" onclick="svgpanzoom(1);this.value='ok, you can pan and zoom now'" />
+--!>
 </li><br>
 <li>
 <td><input id="search_the_key" type="value" value="use js regrex,example keywordA|keywordB"  size=50 title="use js regrex,example keywordA|keywordB" /></td>
@@ -13,14 +14,50 @@ n" value="if you want pan and zoom the imgine, hit me" style="color:green;font-w
 <td><input id="search_by_rg" value="search by track_name1:chr_id1:start1:end1;track_name2:chr_id2:start2:end2;" type="button" onclick="search_by_rg()" /></td>
 </li><br>
 <li>
-<td><input onclick="saveSVG('demo-tiger', svg_width_raw, svg_height_raw)" type=button value='download current image to svg file' ></td>
+<td><input onclick="saveSVG('svg-pan-zoom_viewport', svg_width_raw, svg_height_raw, svg_bgcolor)" type=button value='download current image to svg file' ></td>
 </li>
 </ul>
 <script>
 
 
+// create left border and right border for svg
+var svgNS = 'http://www.w3.org/2000/svg';
+var border_width=0.5;
+var border_color="red";
+var svg = document.getElementsByClassName('svg-pan-zoom_viewport')[0]; // var svg = document.getElementById("demo-tiger");
+var g1 = document.createElementNS(svgNS,'g');
+var title1 = document.createElementNS(svgNS,'title');
+var title1_text = document.createTextNode("svg left border");
+var rect1 = document.createElementNS(svgNS,'rect');
+rect1.setAttribute('x',1);
+rect1.setAttribute('y',1);
+g1.setAttribute('class', 'myth');
+rect1.setAttribute('width', border_width);
+rect1.setAttribute('height',svg_height_raw);//svg_width_raw
+rect1.setAttribute('fill', border_color);
+title1.append(title1_text);
+g1.append(title1);
+g1.append(rect1);
+svg.appendChild(g1);
 
-
+var g2 = document.createElementNS(svgNS,'g');
+var title2 = document.createElementNS(svgNS,'title');
+var title2_text = document.createTextNode("svg right border");
+var rect2 = document.createElementNS(svgNS,'rect');
+rect2.setAttribute('x',svg_width_raw-border_width);
+rect2.setAttribute('y',1);
+g2.setAttribute('class', 'myth');
+rect2.setAttribute('width', border_width);
+rect2.setAttribute('height', svg_height_raw);//svg_width_raw
+rect2.setAttribute('fill', border_color);
+title2.append(title2_text);
+g2.append(title2);
+g2.append(rect2);
+svg.appendChild(g2);
+window.onload = function(){
+	g1.addEventListener('click', feature_show);
+	g2.addEventListener('click', feature_show);
+}
 
 
 
@@ -46,11 +83,12 @@ function get_hightligh_ratio(){
 	return hightligh_ratio;
 }
 function search_by_rg(){
-	if(window.refresh_flag >0){
-		alert('sorry, you neet to refresh the page, then you can search the region yet~');
-		return 0
-	}
+	//if(window.refresh_flag >0){
+	//	alert('sorry, you neet to refresh the page, then you can search the region yet~');
+	//	return 0
+	//}
 	var search_result_num = 0;	
+	var remove_exists=0;
 	var search_the_rg = document.getElementById("search_the_rg").value;
 	search_the_rg = search_the_rg.replace(/\s*$/, "");
 	search_the_rg = search_the_rg.replace(/^\s*/, "");
@@ -60,6 +98,7 @@ function search_by_rg(){
 	console.log("hightligh_ratio is "+hightligh_ratio);
 	if(hightligh_ratio == 0){return 0}
 
+	var svg = document.getElementsByClassName('svg-pan-zoom_viewport')[0]; //var svg = document.getElementById("demo-tiger");
 	var rgs = search_the_rg.split(/;/);
 	for (var rg_index in rgs){
 		rgs[rg_index] = rgs[rg_index].replace(/\s*$/, "");
@@ -69,7 +108,6 @@ function search_by_rg(){
 		if(rg.length !=4){alert(rgs[rg_index]+" should like track_name:chr_id:start:end");return 1}
 		var [rg_track_name, rg_chr_id, rg_start, rg_end] = rg;
 		rg = [rg_start, rg_end];
-		var svg = document.getElementById("demo-tiger");
 		var svgNS = 'http://www.w3.org/2000/svg';
 		var re = new RegExp(rg_track_name,"g");
 		var highlight_width = 0;
@@ -144,7 +182,17 @@ function search_by_rg(){
 											console.log("reverse_flag==0, rg_index "+rg_index);
 										}
 									}
+									 var gid = track_name+"."+chr_id+"."+block_index+"."+rg_pos;
+									 var exists_rg_pos = document.getElementById(gid);
+									 if(exists_rg_pos){
+										exists_rg_pos.remove();
+										remove_exists = 1;
+									 	continue;
+									 }
+
 									 var g = document.createElementNS(svgNS,'g');
+									 g.setAttribute('class', 'myth');
+									 g.setAttribute('id', gid);
 									 var title = document.createElementNS(svgNS,'title');
 									 var title_text = document.createTextNode(track_name+":"+chr_id+": "+pos+"th bp");
 									 var rect = document.createElementNS(svgNS,'rect');
@@ -157,6 +205,7 @@ function search_by_rg(){
 									 g.append(title);
 									 g.append(rect);
 									 svg.appendChild(g);
+									 g.addEventListener('click', feature_show);
 
 									 console.log('rect is '+rect.innerHTML);
 									 console.log("x="+x+",y="+y+",width="+width+",height="+height);
@@ -172,11 +221,11 @@ function search_by_rg(){
 			}
 		}
 	}
-	if(search_result_num == 0){
+	if(search_result_num == 0 && remove_exists == 0){
 		alert("find nothing~");
 		return 0;
 	}
-	svgpanzoom(0);
+	//svgpanzoom(0);
 	console.log('reload');
 }
 
@@ -258,7 +307,7 @@ function search_by_key(){
 		alert("find nothing~");
 		return 0;
 	}
-	svgpanzoom(0);
+	//svgpanzoom(0);
 	
 }
 </script>

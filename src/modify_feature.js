@@ -368,13 +368,17 @@ function caculate_translate(target, shift_xy_id, xy_step_id, xy, change){
 		
 }
 
-function saveSVG(svg_id, width, height){
+function saveSVG(classname, width, height, bgcolor){
 	console.log("xxxxxx");
+	rect2.style.display="none";
+	rect1.style.display="none";
 	var myDate=new Date();
 	myDate=myDate.toString().replace(/\s+/g,"_").replace(/\(.*\)/g, "");
-	var textToWrite = document.getElementById(svg_id).outerHTML;
-	//textToWrite="<svg id=\"circos_orange\" width=\"1600px\" height=\"1600px\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" >"+textToWrite+"</svg>";
-	textToWrite = textToWrite.replace(/;\s*width:\s*\S+/, "; width:"+width).replace(/;\s*height:\s*\S+/, "; height:"+height).replace(/<g id="svg-pan-zoom-controls.*<\/g>/, "");
+	//var flag = document.getElementById(svg_id).getElementsByClassName("svg-pan-zoom_viewport");
+	//var svg = document.getElementsByClassName(classname)[0];
+	var textToWrite = document.getElementsByClassName(classname)[0].innerHTML;
+	textToWrite = textToWrite.replace(/<g id="viewport->[^>]+>/,"").replace(/<g id="svg-pan-zoom-controls.*<\/g>/, "");
+	textToWrite="<svg id=\"demo-tiger\" width=\""+width+"\" height=\""+height+"\" style=\"background-color:"+bgcolor+"\" ersion=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" >"+textToWrite+"</svg>";
 
     var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
     //var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
@@ -399,6 +403,8 @@ function saveSVG(svg_id, width, height){
     }
 
     downloadLink.click();	
+	rect2.style.display="block";
+	rect1.style.display="block";
 }
 
 
