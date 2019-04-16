@@ -55,6 +55,8 @@ function feature_show(event) {
 					 div1.style.background = "white";
 					 div1.style.border = '2px solid rgba(0, 128, 0, .5)'; //0.6 is opacity, color is green
 					 div1.style.color = "black";
+					 div1.style['box-shadow'] = '6px 6px 8px rgba(0,0,0,0.175)';
+					 div1.style['background-clip'] = 'padding-box';
 					 div1.innerHTML= "<br>&nbsp;"+feature_info;
 					 div1.innerHTML = div1.innerHTML.replace(/<\/tspan>/g, '&nbsp;&nbsp;</tspan><br/>&nbsp;').replace(/<tspan>/, '&nbsp;<tspan>'); 
 					 div1.innerHTML = info_btn+"  "+attr_btn+"<br>" + div1.innerHTML + "<br><br>";
@@ -72,6 +74,8 @@ function feature_show(event) {
 					 div2.style.background = "white";
 					 div2.style.border = '2px solid rgba(0, 128, 0, .5)'; //0.6 is opacity, color is green
 					 div2.style.color = "black";
+					 div2.style['box-shadow'] = '6px 6px 8px rgba(0,0,0,0.175)';
+					 div2.style['background-clip'] = 'padding-box';
 					 var shift_x=0;
 					 var shift_y=0;
 					 var zoom_scale=1;
@@ -305,6 +309,14 @@ function change_style(target, value, style_name){
 		target.innerHTML=value;
 	}else{
 		target.style[style_name]=value;
+		/*
+		if(style_name == "alignment-baseline"){
+			var fontsize = target.style['font-size'];
+			target.style['font-size'] = 3;
+			target.style['font-size'] = fontsize;
+		}
+		*/
+	
 	}
 }
 //onclick='move_feature(\"shift_xy\", \"xy_step\", \"x\", \"+\")'

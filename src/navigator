@@ -3,7 +3,7 @@
 <td><input id="hightligh_ratio" type="value" value="3"  size=5 title="highlight ratio" /> <input type=button value="highlight ratio" /></td>
 <!--
 	<input type="button" value="if you want pan and zoom the imgine, hit me" style="color:green;font-weight:bold" onclick="svgpanzoom(1);this.value='ok, you can pan and zoom now'" />
---!>
+-->
 </li><br>
 <li>
 <td><input id="search_the_key" type="value" value="use js regrex,example keywordA|keywordB"  size=50 title="use js regrex,example keywordA|keywordB" /></td>
