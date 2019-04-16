@@ -82,6 +82,7 @@ echo
 if [ -s $prefix.plot.error ];
 then
 	echo -e "\n\nerror in file $prefix.plot.error, $cmd\n\n"
+	exit
 else
 	echo -e "\n\nfinished, no error~\n\n"
 fi

@@ -22,8 +22,9 @@ sort
 - illunimate pair-end or mate-pair reads or pacbio/nanopore long reads mapping with varation(indel, sv) in bam, support snpindel in vcf file<br>
 
 ### Update:<br>
-- support blast and Mummer and commom alignment format for synteny
-- support reverse fragment in synteny
+- support directly modify almost features attribution(color, opacity, postion, font_size)
+- support minimap2/blast/Mummer and commom alignment format for synteny
+- support both reverse fragment and reverse alignment hit in synteny
 #### 2018-12-28:<br>
 - add html format output, so you can pan or zoom the svg in html<br>
 #### 2018-12-21:<br>

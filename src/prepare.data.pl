@@ -171,7 +171,7 @@ sub synteny(){
 	#my @highs=("blat_block_show", "start_end_xaxis",);
 	my @highs=("blat_block_show", "start_end_xaxis");
 	#my @align_types=("paf", "blast_m8", "blat_psl", "mummer_coords");
-	my @align_types=("blast_m8", "mummer_coords", "common");
+	my @align_types=("blast_m8", "mummer_coords", "common", "paf");
 	for my $k (@{$conf->{synteny}}){
 		$k_index++;
 		$k=~ s/\s+$//;
@@ -352,28 +352,37 @@ sub synteny_run(){
 			my $strand=$arr[4];
 			die "\nerror:$query_scf of $query_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$query_name}{$query_scf});
 			die "\nerror:$target_scf of $target_name in $alignment not in --list\n" if(not exists $conf->{sample_scf}{$target_name}{$target_scf});
-			my ($skip, $edge)=&check_allow_feature_out_of_list($query_name,$target_name,$conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny", $check_all_vs_all_if);
+			my ($skip, $edge, $qt)=&check_allow_feature_out_of_list($query_name,$target_name,$conf->{allow_feature_out_of_list}, $query_start, $query_end, $target_start, $target_end, $query_scf, $target_scf, $blocks_query, $blocks_target, "synteny", $check_all_vs_all_if);
 			next if($skip);
-
-			my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand";
-			my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand";
-			my $query_target_feature_id="$query_feature_id -> $target_feature_id";
-			my $indentity=$arr[9]/$arr[10]*100;
-			my $tmp;
-			$tmp=1+abs($arr[2]-$arr[3]);my $q_cov=$tmp/$arr[1] * 100;$q_cov=" $tmp/$arr[1]=$q_cov";
-			$tmp=1+abs($arr[7]-$arr[8]);my $t_cov=$tmp/$arr[6] * 100;$t_cov=" $tmp/$arr[6]=$t_cov";
-			$align{query}{$query_feature_id}{query_scf}=$query_scf;
-			$align{query}{$query_feature_id}{query_start}=$query_start;
-			$align{query}{$query_feature_id}{query_end}=$query_end;
-			$align{qt}{$query_target_feature_id}{strand}=$strand;
-			$align{qt}{$query_target_feature_id}{indentity}=$indentity;
-			$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
-			$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
-			$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
-			$align{target}{$target_feature_id}{target_scf}=$target_scf;
-			$align{target}{$target_feature_id}{target_start}=$target_start;
-			$align{target}{$target_feature_id}{target_end}=$target_end;
-			push(@pairs,$query_target_feature_id);
+			my @edge=@$edge;
+			my @qt=@$qt;
+			while(@qt){
+				my $qt_index=shift @qt;
+				$edge=shift @edge;
+				#my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.q.$qt_index";
+				#my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.t.$qt_index";
+				#my $query_target_feature_id="$query_feature_id -> $target_feature_id";
+				my $query_feature_id="$query_name.$query_scf.$query_start.$query_end.$k_index.$strand.q.$qt_index";
+				my $target_feature_id="$target_name.$target_scf.$target_start.$target_end.$k_index.$strand.t.$qt_index";
+				my $query_target_feature_id="$query_feature_id -> $target_feature_id";
+				my $indentity=$arr[9]/$arr[10]*100;
+				my $tmp;
+				$tmp=1+abs($arr[2]-$arr[3]);my $q_cov=$tmp/$arr[1] * 100;$q_cov=" $tmp/$arr[1]=$q_cov";
+				$tmp=1+abs($arr[7]-$arr[8]);my $t_cov=$tmp/$arr[6] * 100;$t_cov=" $tmp/$arr[6]=$t_cov";
+				$align{query}{$query_feature_id}{query_scf}=$query_scf;
+				$align{query}{$query_feature_id}{query_start}=$query_start;
+				$align{query}{$query_feature_id}{query_end}=$query_end;
+				$align{qt}{$query_target_feature_id}{strand}=$strand;
+				$align{qt}{$query_target_feature_id}{indentity}=$indentity;
+				$align{qt}{$query_target_feature_id}{q_cov}=$q_cov;
+				$align{qt}{$query_target_feature_id}{t_cov}=$t_cov;
+				$align{qt}{$query_target_feature_id}{align_length}=$arr[10];
+				$align{qt}{$query_target_feature_id}{edge_coordinate_feature_out_of_list}=$edge; # 
+				$align{target}{$target_feature_id}{target_scf}=$target_scf;
+				$align{target}{$target_feature_id}{target_start}=$target_start;
+				$align{target}{$target_feature_id}{target_end}=$target_end;
+				push(@pairs,$query_target_feature_id);
+			}
 		}
 		close PAF;		
 	}elsif($alignment_type eq "blast_m8"){
