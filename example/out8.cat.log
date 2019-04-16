@@ -1,0 +1,48 @@
+
+set -vex;cat pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink;rm pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink
+
+
+set -vex;cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out8.pO83_CORR.out8.synteny.gff;rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out8.pO83_CORR.out8.synteny.gff
+
+
+set -vex;cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out8.pO83_CORR.out8.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out8.pO83_CORR.out8.synteny.setting.conf
+
+
+set -vex;cat out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff >out8.pO83_CORR.indel.blast.out8.synteny.gff;rm out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff;echo output out8.pO83_CORR.indel.blast.out8.synteny.gff
+
+
+set -vex;cat out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf > out8.pO83_CORR.indel.blast.out8.synteny.setting.conf;rm out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf;echo output out8.pO83_CORR.indel.blast.out8.synteny.setting.conf
+
+
+set -vex;cat pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff >out8.pO83_CORR.twin.minimap.out8.synteny.gff;rm pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff;echo output out8.pO83_CORR.twin.minimap.out8.synteny.gff
+
+
+set -vex;cat pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf > out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf;rm pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf;echo output out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf
+
+
+set -vex;cat pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.crosslink.conf >out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink;rm pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.crosslink.conf;echo output out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink
+
+
+set -vex;cat out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink >out8.synteny.crosslink
+
+
+set -vex;cat out8.pO83_CORR.out8.synteny.setting.conf out8.pO83_CORR.indel.blast.out8.synteny.setting.conf out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf >out8.synteny.setting.conf
+
+
+set -vex;cat feature.color.label.6.conf out8.synteny.setting.conf  >feature.color.label.6.conf.out8
+
+
+set -vex;cat out8.synteny.crosslink >feature.crossing.link.out8
+
+
+set -vex;cat out8.pO83_CORR.out8.synteny.gff out8.pO83_CORR.indel.blast.out8.synteny.gff out8.pO83_CORR.twin.minimap.out8.synteny.gff|awk -F   '{print }'|sort -u
+
+
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out8.pO83_CORR.out8.synteny.gff\t/' tracks.8.list >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp
+
+
+set -vex;sed  -r 's/^(pO83_CORR.indel.blast\s.*\.gff)\s/\1,out8.pO83_CORR.indel.blast.out8.synteny.gff\t/' tracks.8.list.out8.tmp >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp
+
+
+set -vex;sed  -r 's/^(pO83_CORR.twin.minimap\s.*\.gff)\s/\1,out8.pO83_CORR.twin.minimap.out8.synteny.gff\t/' tracks.8.list.out8.tmp >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp
+
