@@ -28,11 +28,11 @@ sort
 #### 2018-12-28:<br>
 - add html format output, so you can pan or zoom the svg in html<br>
 #### 2018-12-21:<br>
-- add synteny between genomes, only support paf(like minimap2 ouput) format yet. test is example/out7.sh<br>
+- add synteny between genomes, only support paf(like minimap2 ouput) format yet. example is out8 in example/work.sh<br>
 #### 2018-12-20:<br>
-- support indel of cigar or indel in vcf now, but not support snp yet. test is example/out11.sh<br>
+- support indel of cigar or indel in vcf now, but not support snp yet. test is out3 in example/work.sh<br>
 #### 2018-12-10:<br>
-- add  plot depth and pabio read mapping of bam file, as example/out11.svg or out10.svg , inspired by  https://github.com/nspies/genomeview <br>
+- add  plot depth and pabio read mapping of bam file, as out3 in example/work.sh , inspired by  https://github.com/nspies/genomeview <br>
 #### 2018-11-12:<br>
 - rewrite feature.crossing.link.conf so that defined color and opactity or order or anchor position of every pair of links.<br>
 - add tracks_reorder to plot tracks by new order, otherwise you must adjust --list file <br>
