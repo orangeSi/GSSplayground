@@ -1,0 +1,313 @@
+<ul>
+<li>
+<td><input id="hightligh_ratio" type="value" value="3"  size=5 title="highlight ratio" /> <input type=button value="highlight ratio" /></td>
+<!--
+	<input type="button" value="if you want pan and zoom the imgine, hit me" style="color:green;font-weight:bold" onclick="svgpanzoom(1);this.value='ok, you can pan and zoom now'" />
+-->
+</li><br>
+<li>
+<td><input id="search_the_key" type="value" value="use js regrex,example keywordA|keywordB"  size=50 title="use js regrex,example keywordA|keywordB" /></td>
+<td><input value="search by keyword of feature id" type="button" onclick="search_by_key()" /></td>
+</li><br>
+<li>
+<td><input id="search_the_rg" type="value" value="track_name:chr_id:start:end" size=50 title="track_name:chr_id:start:end" /></td>
+<td><input id="search_by_rg" value="search by track_name1:chr_id1:start1:end1;track_name2:chr_id2:start2:end2;" type="button" onclick="search_by_rg()" /></td>
+</li><br>
+<li>
+<td><input onclick="saveSVG('svg-pan-zoom_viewport', svg_width_raw, svg_height_raw, svg_bgcolor)" type=button value='download current image to svg file' ></td>
+</li>
+</ul>
+<script>
+
+
+// create left border and right border for svg
+var svgNS = 'http://www.w3.org/2000/svg';
+var border_width=0.5;
+var border_color="red";
+var svg = document.getElementsByClassName('svg-pan-zoom_viewport')[0]; // var svg = document.getElementById("demo-tiger");
+var g1 = document.createElementNS(svgNS,'g');
+var title1 = document.createElementNS(svgNS,'title');
+var title1_text = document.createTextNode("svg left border");
+var rect1 = document.createElementNS(svgNS,'rect');
+rect1.setAttribute('x',1);
+rect1.setAttribute('y',1);
+g1.setAttribute('class', 'myth');
+rect1.setAttribute('width', border_width);
+rect1.setAttribute('height',svg_height_raw);//svg_width_raw
+rect1.setAttribute('fill', border_color);
+title1.append(title1_text);
+g1.append(title1);
+g1.append(rect1);
+svg.appendChild(g1);
+
+var g2 = document.createElementNS(svgNS,'g');
+var title2 = document.createElementNS(svgNS,'title');
+var title2_text = document.createTextNode("svg right border");
+var rect2 = document.createElementNS(svgNS,'rect');
+rect2.setAttribute('x',svg_width_raw-border_width);
+rect2.setAttribute('y',1);
+g2.setAttribute('class', 'myth');
+rect2.setAttribute('width', border_width);
+rect2.setAttribute('height', svg_height_raw);//svg_width_raw
+rect2.setAttribute('fill', border_color);
+title2.append(title2_text);
+g2.append(title2);
+g2.append(rect2);
+svg.appendChild(g2);
+window.onload = function(){
+	g1.addEventListener('click', feature_show);
+	g2.addEventListener('click', feature_show);
+}
+
+
+
+document.getElementById("search_the_key").value = feature_id_test;
+document.getElementById("search_the_rg").value = rg_test;
+function refill(chi, fill,opacity,stroke_width){
+		chi.style.fill = fill;
+		chi.style.opacity = opacity;
+		chi.style['stroke-width']=stroke_width;
+		chi.style['stroke']=fill;
+}
+//blocks_start_ends_cord
+
+
+function get_hightligh_ratio(){
+	var hightligh_ratio=document.getElementById("hightligh_ratio").value;
+	hightligh_ratio = hightligh_ratio.replace(/^\s*|\s*$/g, "");
+	if(hightligh_ratio.match(/[^\d^\.]/)){
+		alert(hightligh_ratio+" should be number, like 1.1 or 1 or 2");
+		return 0;
+	}
+	hightligh_ratio = parseFloat(hightligh_ratio);
+	return hightligh_ratio;
+}
+function search_by_rg(){
+	//if(window.refresh_flag >0){
+	//	alert('sorry, you neet to refresh the page, then you can search the region yet~');
+	//	return 0
+	//}
+	var search_result_num = 0;	
+	var remove_exists=0;
+	var search_the_rg = document.getElementById("search_the_rg").value;
+	search_the_rg = search_the_rg.replace(/\s*$/, "");
+	search_the_rg = search_the_rg.replace(/^\s*/, "");
+	search_the_rg = search_the_rg.replace(/;\s*$/, "");
+	
+	var hightligh_ratio = get_hightligh_ratio();
+	console.log("hightligh_ratio is "+hightligh_ratio);
+	if(hightligh_ratio == 0){return 0}
+
+	var svg = document.getElementsByClassName('svg-pan-zoom_viewport')[0]; //var svg = document.getElementById("demo-tiger");
+	var rgs = search_the_rg.split(/;/);
+	for (var rg_index in rgs){
+		rgs[rg_index] = rgs[rg_index].replace(/\s*$/, "");
+		rgs[rg_index] = rgs[rg_index].replace(/^\s*/, "");
+		rgs[rg_index] = rgs[rg_index].replace(/;\s*$/, "");
+		rg = rgs[rg_index].split(/:/);
+		if(rg.length !=4){alert(rgs[rg_index]+" should like track_name:chr_id:start:end");return 1}
+		var [rg_track_name, rg_chr_id, rg_start, rg_end] = rg;
+		rg = [rg_start, rg_end];
+		var svgNS = 'http://www.w3.org/2000/svg';
+		var re = new RegExp(rg_track_name,"g");
+		var highlight_width = 0;
+		for (var track_name in blocks_start_ends_cord){
+			if(track_name.match(re)){
+				for (var chr_id in blocks_start_ends_cord[track_name]){
+					for (var block_index in blocks_start_ends_cord[track_name][chr_id]){
+						if( chr_id == rg_chr_id){
+							for (var start_end in blocks_start_ends_cord[track_name][chr_id][block_index]){
+								var [start, end] = start_end.split(/,/);
+								start = parseFloat(start);
+								end = parseFloat(end);
+						
+								var [start_x, start_y, end_x, end_y] = blocks_start_ends_cord[track_name][chr_id][block_index][start_end].split(/,/);
+								console.log(blocks_start_ends_cord[track_name][chr_id][block_index][start_end].split(/,/));
+								start_x = parseFloat(start_x);
+								start_y = parseFloat(start_y);
+								end_x = parseFloat(end_x);
+								end_y = parseFloat(end_y);
+							var highligh_color = "red";
+							for(var rg_index in rg){
+								var rg_pos = parseFloat(rg[rg_index]);
+								console.log(rg_pos);
+								if( rg_pos >= start && rg_pos <= end){
+									//reversed_block[track_name][block_index]="";
+									var scale_ratio = (end_x-start_x)/(end-start+1); 
+									var x = start_x + (rg_pos-start) * scale_ratio;
+									var reverse_flag = 0;
+									if(track_name in reversed_block && block_index in reversed_block[track_name]){
+										//start end is real , rg_pos is also real, but this is reverse strand block	
+										console.log("reverse_flag in track:"+track_name+", block_index "+block_index)
+										reverse_flag = 1;
+									}
+									console.log("track_name "+track_name+", block_index "+block_index+", reverse_flag "+reverse_flag+", start "+start+", end "+end+", rg_pos "+rg_pos);
+									console.log('ratio is '+scale_ratio);
+									var height= tracks_heigh[track_name];
+									var y=(start_y+end_y)/2 - height;
+									var width=scale_ratio*(end-start)/1000;
+									var pos;
+									if(y<0){y=0};
+								
+									width *=hightligh_ratio;
+									if(highlight_width > width){
+										width = highlight_width;
+									}else{
+										highlight_width = width;
+									}
+
+									/// cread a child ,demo-tiger
+									if(rg_index == 1){
+										highligh_color = "red";
+										pos = rg_pos +1;
+										if(reverse_flag == 1){
+											x = start_x + (end - rg_pos) * scale_ratio;
+											x = x - width;
+											pos = "forward strand:"+pos;
+											console.log("reverse_flag==1, rg_index "+rg_index);
+										}else{
+											x = x + scale_ratio;
+											console.log("reverse_flag==0, rg_index "+rg_index);
+										}
+									}else{
+										highligh_color = "black";
+										pos = rg_pos -1;
+										if(reverse_flag == 1){
+											x = start_x + (end - rg_pos) * scale_ratio;
+											x = x + scale_ratio;
+											pos = "forward strand:"+pos;
+											console.log("reverse_flag==1, rg_index "+rg_index);
+										}else{
+											x = x - width;
+											console.log("reverse_flag==0, rg_index "+rg_index);
+										}
+									}
+									 var gid = track_name+"."+chr_id+"."+block_index+"."+rg_pos;
+									 var exists_rg_pos = document.getElementById(gid);
+									 if(exists_rg_pos){
+										exists_rg_pos.remove();
+										remove_exists = 1;
+									 	continue;
+									 }
+
+									 var g = document.createElementNS(svgNS,'g');
+									 g.setAttribute('class', 'myth');
+									 g.setAttribute('id', gid);
+									 var title = document.createElementNS(svgNS,'title');
+									 var title_text = document.createTextNode(track_name+":"+chr_id+": "+pos+"th bp");
+									 var rect = document.createElementNS(svgNS,'rect');
+									 rect.setAttribute('x',x);
+									 rect.setAttribute('y',y);
+									 rect.setAttribute('width',width);
+									 rect.setAttribute('height',2*height);
+									 rect.setAttribute('fill',highligh_color);
+									 title.append(title_text);
+									 g.append(title);
+									 g.append(rect);
+									 svg.appendChild(g);
+									 g.addEventListener('click', feature_show);
+
+									 console.log('rect is '+rect.innerHTML);
+									 console.log("x="+x+",y="+y+",width="+width+",height="+height);
+									 search_result_num +=1;
+									}
+								}
+	
+							}
+						}
+					}
+				}
+
+			}
+		}
+	}
+	if(search_result_num == 0 && remove_exists == 0){
+		alert("find nothing~");
+		return 0;
+	}
+	//svgpanzoom(0);
+	console.log('reload');
+}
+
+
+function search_by_key(){
+	var hightlight_time = 6;
+	var search_result_num = 0;
+	var new_color = "red";
+	var new_opacity = 1;
+	var new_stroke_width = 1;
+	var gs = document.getElementsByClassName("myth");
+	var key = document.getElementById("search_the_key").value;
+	
+	if(key.length == 0){alert("keyword is empty");return 1;}
+
+	var hightligh_ratio = get_hightligh_ratio();
+	console.log("hightligh_ratio is "+hightligh_ratio);
+	if(hightligh_ratio == 0){return 0}
+
+	var re = new RegExp(key,"g");
+	for (var i=0; i < gs.length; i++){
+		if(gs[i].innerHTML.match(re)){
+			//console.log(gs[i].innerHTML);
+			search_result_num +=1;
+			if (gs[i].hasChildNodes()) {
+				var children = gs[i].childNodes;
+				for (var ii = 0; ii < children.length; ii++) {
+					// do something with each child as children[i]
+					// NOTE: List is live, adding or removing children will change the list
+					
+					if(children[ii].tagName == "title" || children[ii].tagName === undefined){
+						continue;
+					}
+					console.log("tagname is "+children[ii].tagName);
+					console.log("style is "+children[ii].style);
+					var rawfill = children[ii].style.fill;
+					var rawopacity = children[ii].style.opacity;
+					var raw_stroke_width =  children[ii].style['stroke-width'];
+					console.log("raw_stroke_width is "+raw_stroke_width);
+					if(rawopacity>0.8){
+						new_opacity=0.5;
+					}else{
+						new_opacity=1;
+					}
+					if(raw_stroke_width == 0 ||raw_stroke_width == "0px"){
+						new_stroke_width = 1;
+					}
+					
+					new_stroke_width *=hightligh_ratio;
+
+					children[ii].style.fill = new_color;
+					var the_time=0;
+					var color="";
+					var opacity=1;
+					var loops=1;
+					var stroke_width=0;
+					if(loops%2 == 0){alert("loops must be even,like 20, not "+loops)}
+					refill(children[ii], new_color,new_opacity, new_stroke_width);
+					for(var j=1; j<=loops; j++){ // 100 loops
+						the_time += j * 1000 * hightlight_time;
+						if(j%2 == 0){
+							color=new_color;
+							opacity=new_opacity;
+							stroke_width=new_stroke_width;
+						}else{
+							color=rawfill;
+							opacity=rawopacity;
+							stroke_width=raw_stroke_width;
+							}
+						setTimeout(refill, the_time,children[ii], color,opacity, stroke_width);
+					}
+							
+				}
+			}
+		}
+	}
+	
+	if(search_result_num == 0){
+		alert("find nothing~");
+		return 0;
+	}
+	//svgpanzoom(0);
+	
+}
+</script>

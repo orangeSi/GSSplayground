@@ -1,0 +1,2 @@
++ sed -r 's/^(pO83_CORR1\s.*\.gff)\s/\1,tracks.7.list.out7.out7.legend.gff\t/' tracks.7.list.out7
++ sed -r -e 's/^\s*<g[^>]*>.*//' -e 's/<\/g>//' -e 's/^<tspan.*//' ./out7.svg

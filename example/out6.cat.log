@@ -1,0 +1,60 @@
+
+set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff >out6.pO83_CORR.indel.reverse.out6.synteny.gff;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff;echo output out6.pO83_CORR.indel.reverse.out6.synteny.gff
+
+
+set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf > out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf;echo output out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf
+
+
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out6.pO83_CORR.out6.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out6.pO83_CORR.out6.synteny.gff
+
+
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out6.pO83_CORR.out6.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out6.pO83_CORR.out6.synteny.setting.conf
+
+
+set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink
+
+
+set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.out6.synteny.gff;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.out6.synteny.gff
+
+
+set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.out6.synteny.setting.conf
+
+
+set -vex;cat out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.twin.out6.synteny.gff;rm out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.twin.out6.synteny.gff
+
+
+set -vex;cat out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.twin.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.twin.out6.synteny.setting.conf
+
+
+set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink
+
+
+set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink
+
+
+set -vex;cat out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink >out6.synteny.crosslink
+
+
+set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf out6.pO83_CORR.out6.synteny.setting.conf out6.pO83_CORR.indel.out6.synteny.setting.conf out6.pO83_CORR.indel.twin.out6.synteny.setting.conf >out6.synteny.setting.conf
+
+
+set -vex;cat feature.color.label.6.conf out6.synteny.setting.conf  >feature.color.label.6.conf.out6
+
+
+set -vex;cat out6.synteny.crosslink >feature.crossing.link.out6
+
+
+set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.gff out6.pO83_CORR.out6.synteny.gff out6.pO83_CORR.indel.out6.synteny.gff out6.pO83_CORR.indel.twin.out6.synteny.gff|awk -F   '{print }'|sort -u
+
+
+set -vex;sed  -r 's/^(pO83_CORR.indel.reverse\s.*\.gff)\s/\1,out6.pO83_CORR.indel.reverse.out6.synteny.gff\t/' tracks.6.list >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
+
+
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out6.pO83_CORR.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
+
+
+set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out6.pO83_CORR.indel.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
+
+
+set -vex;sed  -r 's/^(pO83_CORR.indel.twin\s.*\.gff)\s/\1,out6.pO83_CORR.indel.twin.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
+
