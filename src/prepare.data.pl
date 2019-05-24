@@ -1210,7 +1210,7 @@ sub reads_mapping_run(){
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
 	my $color_height_cs;
 	if(not exists $highss->{color_height_cs}){
-		$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect" 
+		$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect" 
 	}else{
 		$color_height_cs=$highss->{color_height_cs};
 	}
@@ -1439,9 +1439,11 @@ sub check_vcf(){
 		my $feature_label="$pos:$ref_base.to.$query_base";
 		my ($mutation_type, $mutation_length, $start, $end, $skip)=&check_vcf_mutation_type($ref_base, $query_base, $pos);
 		if($skip){
-			print "warn: not support $query_base in line$. in $vcf_file, skip this line\n";
-			next
+			#print "warn: not support $query_base in line$. in $vcf_file, skip this line\n";
+			#next
+			die "error: not support $_ line$. in $vcf_file, only support snp and small indel \n";
 		}
+		die "\nerror: not support $mutation_type yet, you can add it to color_height_cs of reads_mapping,example: color_height_cs->$mutation_type:red:opacity0.8:height0.5:1bp:rect\n\n" if(not exists $colors_height{$mutation_type});
 		my $feature_color=$colors_height{$mutation_type}{color};
 		my $feature_height=$colors_height{$mutation_type}{height}*abs($s1-$e1);
 		my $feature_opacity=$colors_height{$mutation_type}{opacity};
@@ -1483,10 +1485,16 @@ sub check_vcf_mutation_type(){
 	my ($ref_base, $query_base, $pos)=@_;
 	my ($mutation_type, $mutation_length, $start, $end, $skip);
 	$skip="";
-	if($query_base=~ /[^A^T^C^G^N]/){
+	if($query_base=~ /[^A^T^C^G^N^,]/){
 		return ("", "", "", "", 1);
 	}
-	if(length($ref_base) == length($query_base)){ # snp
+	die "error: ref_base $ref_base should not  have ,\n" if($ref_base=~ /,/);
+	if($query_base=~ /,/){
+		$mutation_type="diploid";
+		$mutation_length=length($ref_base);
+		$start=$pos;
+		$end=$pos+$mutation_length-1;
+	}elsif(length($ref_base) == length($query_base)){ # snp
 		die "\nerror:$ref_base  == $query_base \n" if($ref_base eq $query_base);
 		$mutation_type="X";
 		$mutation_length=1;
@@ -1801,7 +1809,7 @@ sub cigar_setting(){
 	my ($color_height_cs)=@_;
 	my $color_height_cs_usage="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:#1E90FF:opacity0.6:height0.8:6bp:arrow,read2:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect";
 		my %tmp;
-	my @cgs=("M","I","D","N","S","H","P","X","reverse","forward","fake","read1","read2");
+	my @cgs=("M","I","D","N","S","H","P","X","reverse","forward","fake","read1","read2", "diploid");
 	my (%colors_height);
 	$color_height_cs=~ s/\s//g;
 	my @color_height_cses=split(/,/, $color_height_cs);
@@ -1953,7 +1961,7 @@ sub detail_cigar(){
 	my $soft_clip_chop_len;
 	my $cs_start=$ref_start_pos;
 	for my $cs(0..$cigars_len-1){
-		print "detail cr is $cigars[$cs]\n\n";
+		#print "detail cr is $cigars[$cs]\n\n";
 		if($cs < $M_index){
 			$cigars[0]=~ /^(\d+)([^\d]+)$/;
 			my $step=$1;

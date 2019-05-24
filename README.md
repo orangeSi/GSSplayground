@@ -13,14 +13,14 @@
 # had been tested only in Linux yet
 samtools >=1.7 # add this to linux PATH 
 perl >=v5.10.1
-Imager::Font  # perl package, had been installed in sr/Imager-1.011(if it now work, try reinstall it by https://www.cpan.org/)
+Imager::Font  # this perl package had been installed in src/Imager-1.011(if it doesn't work, try reinstall it by https://www.cpan.org/)
 ```
 
 ### Features:<br>
 - plot gene clusters of many samples, one track means one sample, one track contain more than one fragments. one fragment contain gene cluster. you can defined every gene or feature(rotation,color,label,order depth,font size) in clusters. And add crossing link for any pair of genes.<br>
 - every track mean one sample , one sample can has more than one fragments. you can defind the feature color/lable font size/label color/label rotaion in feature.color.label.conf <br>
-- you can draw crosslink or sysnteny among features of different tracks<br>
-- illunimate pair-end or mate-pair reads or pacbio/nanopore long reads mapping with varation(indel, sv) in bam, support snpindel in vcf file<br>
+- you can draw crosslink or sysnteny among features of different tracks or same track<br>
+- illunimate pair-end or mate-pair reads or pacbio/nanopore long reads mapping with varation(indel, sv) in bam, support snpindel in vcf file, not support complex sv yet<br>
 
 ### Update:<br>
 - support directly modify almost features attribution in html with mouse-click (color, opacity, postion, font_size)
@@ -47,17 +47,17 @@ Imager::Font  # perl package, had been installed in sr/Imager-1.011(if it now wo
 
 #### Tips:<br>
 ```
-SamFixCigar.jar of jvarkit will convert M to X or = in cigar of sam file
+SamFixCigar.jar of jvarkit will convert M to X/= in cigar of sam file, if do this, will see snp of reads
 ```
 
 #### ToDo:<br>
+&nbsp;&nbsp;&nbsp;&nbsp; support julia/python api to call clustersploter
 &nbsp;&nbsp;**2018-12-28**:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. add gtf fomrat, not only gff format<br>
 &nbsp;&nbsp;&nbsp;&nbsp;2. add blat_spl and mummer4 fomrat, not only blast_m8 or paf format<br>
 &nbsp;&nbsp;**2018-11-09**:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. sort by feature,so same feature of different tracks can align centre<br>
 &nbsp;&nbsp;&nbsp;&nbsp;2. add ratio scale in the bottom to recognise the approximate length of every feature <br>
-&nbsp;&nbsp;&nbsp;&nbsp;3. embed svg in svg to make heatmap or scatter or line or histogram more easy to product, like example/out.svg*svg or \<foreignObject\> <br> <br>
 
 
 
@@ -92,3 +92,8 @@ cat example/work.sh
 contact:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;QQ: 1522051171<br>
 &nbsp;&nbsp;&nbsp;&nbsp;mail: ilikeorangeapple@gmail.com
+
+
+## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
