@@ -7,7 +7,7 @@
 # or go to https://clustersploter.readthedocs.io/en/latest/# 
 ```
 <br>
-![gene cluster image](example/out3.gif)
+![gene cluster image](https://github.com/orangeSi/ClustersPloter/blob/master/example/out3.gif)
 <br>
 
 ### Dependence<br>
