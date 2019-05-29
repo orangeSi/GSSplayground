@@ -90,6 +90,8 @@ cat example/work.sh
 <br><br>
 ![gene cluster image](example_old/out8.notitle.svg)
 <br><br><br>
+![gene cluster image](https://github.com/orangeSi/ClustersPloter/blob/master/example/out3.gif)
+<br><br><br>
 
 contact:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;QQ: 1522051171<br>
