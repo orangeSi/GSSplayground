@@ -507,17 +507,20 @@ sub get_para(){
 sub get_real_coordinate(){
 	my ($s,$e,$feature_id)=@_;
 	die "error:for feature_id: $feature_id ,$s should <= $e, but not in fact\n" if($s>$e);
-	my $s_precision=($s=~ /\./)? length(($s =~ /\.(.*)/)[0]):0;
-	my $e_precision=($e=~ /\./)? length(($e =~ /\.(.*)/)[0]):0;
-	my $s_unit=1/(10**$s_precision);
-	my $e_unit=1/(10**$e_precision);
-	$s-=$s_unit;
-	$e-=$e_unit;
-	#print "s_precision $s_precision , e_precision $e_precision\n";
-	#die "error: precision of $s and $e are not equal\n" if($s_precision != $e_precision);
-	return $s,$e if($s_precision != $e_precision);
-	$e=$e+$s_unit;
+	my $s_precision=($s=~ /\./)? length(($s =~ /\.(\d+)/)[0]):0;
+	my $e_precision=($e=~ /\./)? length(($e =~ /\.(\d+)/)[0]):0;
+	#my $s_unit=1/(10**$s_precision);
+	#my $e_unit=1/(10**$e_precision);
+	#$s-=$s_unit;
+	#$e-=$e_unit;
+	#return $s,$e if($s_precision != $e_precision);
+	#$e=$e+$s_unit;
+	#return ($s,$e);
+	my $unit=1/(10 ** (1+max($s_precision, $e_precision)));
+	$s-=10*$unit;
 	return ($s,$e);
+
+	
 }
 
 
@@ -575,6 +578,8 @@ sub draw_genes(){
 	#$gff{$sample}{scf}{$scf}
 	my $feature_pos;
 	print "draw feature_id = $feature_id\n";
+	die "error: $end should > $start for $feature_id\n" if($end < $start);
+	print "1brefore, feature_id\t$feature_id,\tfeature_shift_x\t,start\t$start\tend\t$end\n";
 	($feature_pos, $start, $end, $strand)=&get_real_feature_region($reverse_block_flag, $start, $end, $start_block, $end_block, $strand, 0, "feature"); # "$start-$end", $start, $end, $strand);
 	&check_para(%{$conf->{feature_setting2}->{$feature_id}});
 	my $feature_opacity=&get_para("feature_opacity", $feature_id, $conf);
@@ -647,8 +652,8 @@ sub draw_genes(){
 	$feature_shift_y=~ s/^([1-9].*)/\+$1/;
 	my $circle_point=0;
 	$circle_point=1 if($shape=~ /^circle_point/);
-	if($feature_shift_y=~ /^([+-])([\d\.]+)/){
-		if($1 eq "+"){
+	if($feature_shift_y=~ /^(\+?-?)([\d\.]+)/){
+		if($1 eq "+" || $1 eq ""){
 			#print "shift_y is $shift_y\n";
 			if($circle_point){
 				$shift_y +=  1 * $2 * $shift_unit + 0.5 * $id_line_height;
@@ -730,7 +735,7 @@ sub draw_genes(){
 	}else{
 		die "error: feature_x_extent=$feature_x_extent format error, shoule like 0bp,0bp or -1bp,+1bp or +1bp,+2bp \n";	
 	}
-
+	print "2brefore, feature_id\t$feature_id,\tfeature_shift_x\t$feature_shift_x,start\t$start\tend\t$end\tratio\t$ratio\n";
 	($start, $end)=&get_real_coordinate($start,$end,$feature_id);
 	if($feature_label_textLength){
 		$feature_label_textLength = $feature_label_textLength * ($end -$start)*$ratio;
@@ -741,6 +746,7 @@ sub draw_genes(){
 	my $feature_label_autowidth="$feature_label_textLength$feature_label_lengthAdjust";
 	my $fake=0;
 	#$fake=0 if($end==$start);
+	print "feature_id\t$feature_id,\tfeature_shift_x\t$feature_shift_x,start\t$start\tend\t$end\tratio\t$ratio\n";
 	if($shape=~ /arrow/){
 
 		if($strand){
@@ -815,7 +821,7 @@ sub draw_genes(){
 			$crossing_link_end_y=$y4-0.5*$gene_height_medium;
 
 		}
-		$label_x_shift = $x_margin_feature_label * min($gene_height_medium, ($end -$start)*$ratio);
+		$label_x_shift = $x_margin_feature_label * min($gene_height_medium, abs($end -$start)*$ratio);
 		if($index_label_position=~ /^medium_/){
 			$label_x = $x1 + ($end - $start)/2 * $ratio + $label_x_shift;
 		}elsif($index_label_position=~ /^left_/){
@@ -918,7 +924,7 @@ sub draw_genes(){
 			$crossing_link_end_y=$crossing_link_start_y;
 		}
 
-		$label_x_shift = $x_margin_feature_label * min($gene_height_medium, ($end -$start)*$ratio);
+		$label_x_shift = $x_margin_feature_label * min($gene_height_medium, abs($end -$start)*$ratio);
 		if($index_label_position=~ /^medium_/){
 			$label_x = $x1 + ($end - $start)/2 * $ratio + $label_x_shift;
 		}elsif($index_label_position=~ /^left_/){
@@ -1080,7 +1086,7 @@ sub draw_genes(){
 		die "error: not support $shape yet~\n";
 	}
 
-
+	print "$feature_id label_x_shift is $label_x_shift , x_margin_feature_label is $x_margin_feature_label, gene_height_medium is $gene_height_medium, ($end -$start)*$ratio\n" if($feature_id=~ /tick/);
 	return ($back, $shift_angle_closed_feature, $orders, $feature_reverse_for_crosslink);
 
 }

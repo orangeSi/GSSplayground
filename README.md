@@ -6,7 +6,9 @@
 %  cat work.sh # output svg and html
 # or go to https://clustersploter.readthedocs.io/en/latest/# 
 ```
-
+<br>
+![gene cluster image](example/out3.gif)
+<br>
 
 ### Dependence<br>
 ```

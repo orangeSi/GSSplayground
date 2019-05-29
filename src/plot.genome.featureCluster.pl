@@ -949,7 +949,7 @@ td {
 	window.refresh_flag = 0 ;
     // Don't use window.onLoad like this in production, because it can only listen to one function.
 	document.getElementById(\"container\").style.width=document.documentElement.clientWidth*0.98 + \"px\";
-	document.getElementById(\"container\").style.height=document.documentElement.clientHeight*0.93 + \"px\";
+	document.getElementById(\"container\").style.height=document.documentElement.clientHeight*0.88 + \"px\";
 	document.getElementById(\"container\").style['margin']='auto';
 	document.getElementById(\"container\").style.display=\"block\";
     function svgpanzoom(the_alert) {

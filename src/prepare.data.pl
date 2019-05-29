@@ -937,14 +937,14 @@ sub plot_ylabel(){
 	my @yaxis_list=@$yaxis_list;
 	my $feature_shift_x;
 	my $feature_shift_y;
-	if($yaxis_list[0]=~ /^\+?\d/ && $yaxis_list[1]=~ /^\+?\d/){
+	if($yaxis_list[0] >=0 && $yaxis_list[1] >=0){
 		$feature_shift_y=(abs($yaxis_list[0])+abs($yaxis_list[1]))/2;
 		$feature_shift_y="-$feature_shift_y";
-	}elsif($yaxis_list[0]=~ /^-\d/ && $yaxis_list[1]=~ /^-\d/){
+	}elsif($yaxis_list[0] <=0 && $yaxis_list[1] <=0){
 		$feature_shift_y=(abs($yaxis_list[0])+abs($yaxis_list[1]))/2;
 		$feature_shift_y="+$feature_shift_y";
 	}else{
-		die "\nerror:plot_ylabel @yaxis_list\n";
+		die "\nerror:plot_ylabel @yaxis_list shoult  be both >0 or <0\n";
 	}
 	if($k=~ /\sylabel->([^,]+),gap:([\d\.]+)bp,fontsize:([\d\.]+),color:(\S+)/){
 		my $ylabel_content=$1;
@@ -2163,6 +2163,12 @@ sub hist_scatter_line_run(){
 	my @infos=@$infos;
 	my ($depth_gff,$depth_setting_conf);
 	my $max_depth=$depths{max_depth};
+	die "error: $s1 shoud not be 0 in $info\n" if($s1=~ /^\+?-?0$/);
+	die "error: for depth_file $depth_file, $s1 == $e1 || $s2 == $e2 is not allowed, in $info\n" if($s1 == $e1 || $s2 == $e2);
+	die "error: ${s1}->${e1} must be both + or -, in $info\n" if(($s1 >0 && $e1 <0) || ($s1 <0 && $e1 >0));
+	die "error: ${s2}->${e2} must be both + or -, in $info\n" if(($s2 >0 && $e2 <0) || ($s2 <0 && $e2 >0));
+	die "error: $s1 should > $e1, in $info\n" if($s1>=0 && $e1 >=0 && $s1 >=$e1);
+	die "error: $s1 should < $e1, in $info\n" if($s1<=0 && $e1 <=0 && $s1 <=$e1);
 	my $depth_depth_ratio=(abs($s1-$e1)) / (abs($e2-$s2));
 	my $depth_overflow_flag=0;    
 	print scalar(keys %{$depths{window}});
@@ -2173,23 +2179,42 @@ sub hist_scatter_line_run(){
 	for my $window(sort {$a<=>$b}keys %{$depths{window}}){
 		my $depth=$depths{window}{$window}{depth};
 #$depth=int($depth);
-		my $diff_depth=$depth-abs($s2);
-		next if($depth<abs($s2));
-		my $depth_height=($diff_depth)*$depth_depth_ratio;
+		my $diff_depth;
+		my $depth_height;
 		my $display_feature_label="no";
-		if($depth>abs($e2)){
-			$depth_height=abs($s1-$e1);
-			$depth_overflow_flag=1;
-			$display_feature_label="yes";
-		}else{
-			$depth_overflow_flag=0;    
+		#if($s1 >=0 && $e1 >=0){	
+		if($s2 >=0 && $e2 >=0){
+				next if($depth < min($s2, $e2));
+				$diff_depth = $depth- min($s2, $e2);
+				$diff_depth=abs($diff_depth);
+				if($depth>max($s2, $e2)){
+					$depth_height=abs($s1-$e1);
+					$depth_overflow_flag=1;
+					$display_feature_label="yes";
+				}else{
+					$depth_overflow_flag=0;
+					$depth_height=($diff_depth)*$depth_depth_ratio
+				}
+		}else{ # s2 <=0 && e2 <=0
+				next if($depth > max($s2, $e2));
+				$diff_depth = $depth - max($s2, $e2);
+				$diff_depth=abs($diff_depth);
+				if($depth < min($s2, $e2)){
+					$depth_height=abs($s1-$e1);
+					$depth_overflow_flag=1;
+					$display_feature_label="yes";
+				}else{
+					$depth_overflow_flag=0;
+					$depth_height=($diff_depth)*$depth_depth_ratio
+				}
 		}
+
 		
 		if($depth_type eq "brand"){
 			die "error:brand, $s1>$e1, $s1 should not be $e1\n" if($s1 == $e1);
 			#$display_feature_label="yes";
 			$display_feature_label="no";
-			$depth_height=abs($s1-$e1);
+			# $depth_height=abs($s1-$e1); 
 		}
 
 		my $depth_shift_y;
@@ -2210,7 +2235,19 @@ sub hist_scatter_line_run(){
 		$depth_setting_conf.="$depth_id\tpos_feature_label\tmedium_up\n";
 		$depth_setting_conf.="$depth_id\tfeature_popup_title\t$feature_popup_title\n";
 		if($depth_overflow_flag){
-			$depth_setting_conf.="$depth_id\tpos_feature_label\tmedium_up\n";
+			if($s2 < $e2){
+				if($e1>0){
+					$depth_setting_conf.="$depth_id\tpos_feature_label\tmedium_up\n";
+				}else{
+					$depth_setting_conf.="$depth_id\tpos_feature_label\tmedium_low\n";
+				}
+			}else{
+				if($e1>0){
+					$depth_setting_conf.="$depth_id\tpos_feature_label\tmedium_low\n";
+				}else{
+					$depth_setting_conf.="$depth_id\tpos_feature_label\tmedium_up\n";
+				}
+			}
 			$depth_setting_conf.="$depth_id\tfeature_label\t$depth\n";
 			$depth_setting_conf.="$depth_id\tlabel_text_anchor\tmiddle\n";
 			$depth_setting_conf.="$depth_id\tlabel_rotate_angle\t0\n";
@@ -2221,13 +2258,13 @@ sub hist_scatter_line_run(){
 
 		if($depth_type eq "brand"){
 			if($e1=~ /-/){
-				$depth_shift_y=abs($e1)-$depth_height;
+				$depth_shift_y=($s2 < $e2)? abs($e1)-$depth_height : abs($s1);
 				$depth_shift_y="+$depth_shift_y";
-				$padding_depth_label="-0.01";
+				$padding_depth_label=($s2 < $e2)? "+0.1": "-0.02";;
 			}else{
-				$depth_shift_y=abs($s1);
+				$depth_shift_y=($s2 < $e2)? abs($s1): abs($e1) - $depth_height;
 				$depth_shift_y="-$depth_shift_y";
-				$padding_depth_label="+0.01";
+				$padding_depth_label=($s2 < $e2)? "-0.02":"+0.1";
 			}
 			$feature_popup_title="base -> $depths{window}{$window}{label}";
 			$feature_popup_title.=";$depths{window}{$window}{popup}" if(exists $depths{window}{$window}{popup});
@@ -2237,22 +2274,22 @@ sub hist_scatter_line_run(){
 			$depth_setting_conf.="$depth_id\tfeature_shape\trect\n";
 			$depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
 			$depth_setting_conf.="$depth_id\tfeature_shift_y_unit\tpercent\n";
-			$depth_setting_conf.="$depth_id\tfeature_label\t$depths{window}{$window}{label}\n";
-			$depth_setting_conf.="$depth_id\ty_margin_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
-			$depth_setting_conf.="$depth_id\tpos_feature_label\tleft_medium\n";
+			#$depth_setting_conf.="$depth_id\tfeature_label\t$depths{window}{$window}{label}\n";
+			#$depth_setting_conf.="$depth_id\ty_margin_feature_label\t$padding_depth_label\n" if($depth_overflow_flag); 
+			#$depth_setting_conf.="$depth_id\tpos_feature_label\tleft_medium\n";
 			#$depth_setting_conf.="$depth_id\tfeature_label_dominant_baseline\tcentral\n";
-			$depth_setting_conf.="$depth_id\tfeature_label_textLength\t1*feature_width\n";
-			$depth_setting_conf.="$depth_id\tfeature_label_lengthAdjust\tspacingAndGlyphs\n"; #
+			#$depth_setting_conf.="$depth_id\tfeature_label_textLength\t1*feature_width\n";
+			#$depth_setting_conf.="$depth_id\tfeature_label_lengthAdjust\tspacingAndGlyphs\n"; #
 
 		}elsif($depth_type eq "hist"){
 			if($e1=~ /-/){
-				$depth_shift_y=abs($e1)-$depth_height;
+				$depth_shift_y=($s2 > $e2)? abs($e1)-$depth_height: abs($s1);
 				$depth_shift_y="+$depth_shift_y";
-				$padding_depth_label="-0.01";
+				$padding_depth_label=($s2 < $e2)? "+0.1": "-0.02";
 			}else{
-				$depth_shift_y=abs($s1);
+				$depth_shift_y=($s2 < $e2)? abs($s1): abs($e1) - $depth_height;
 				$depth_shift_y="-$depth_shift_y";
-				$padding_depth_label="+0.01";
+				$padding_depth_label= ($s2 < $e2)? "-0.02":"+0.1";
 			}
 			$depth_setting_conf.="\n$depth_id\tfeature_height_ratio\t$depth_height\n";
 			$depth_setting_conf.="\n$depth_id\tfeature_height_unit\tpercent\n";
@@ -2263,15 +2300,15 @@ sub hist_scatter_line_run(){
 
 		}elsif($depth_type=~ /^scatter/){
 			if($e1=~ /-/){
-				$depth_shift_y=$s1-$depth_height;
+				$depth_shift_y=($s2 < $e2)? abs($e1)- $depth_height: abs($s1) + $depth_height;
 				$depth_shift_y=abs($depth_shift_y);
 				$depth_shift_y="+$depth_shift_y";
-				$padding_depth_label="-0.01";
+				$padding_depth_label=($s2 < $e2)? "+0.1":"-0.02";
 			}else{
-				$depth_shift_y=$s1+$depth_height;
+				$depth_shift_y=($s2 < $e2)? abs($s1)+$depth_height: abs($e2) - $depth_height;
 				$depth_shift_y=abs($depth_shift_y);
 				$depth_shift_y="-$depth_shift_y";
-				$padding_depth_label="+0.01";
+				$padding_depth_label= ($s2 < $e2)? "-0.02":"+0.1";
 			}
 			$depth_setting_conf.="$depth_id\tfeature_shape\tcircle_point\n";
 			$depth_setting_conf.="$depth_id\tfeature_shift_y\t$depth_shift_y\n";
@@ -2420,13 +2457,13 @@ sub feature_ytick(){
 
 	print "s1 is $s1, e1 is $e1\n";
 	my $ytick_orientation="up";
-	$ytick_orientation="down" if($s1=~ /-/ && $e1=~ /-/);
+	$ytick_orientation="down" if($s1=~ /-/ || $e1=~ /-/);
 
 	my $block_start_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{start};
 	my $block_end_bp = $gff->{$ytick_sample}->{chooselen_single}->{$block}->{end};
 	my $ytick_feature_backbone_width = $tick_borders[0]; # bp 
-		my $tick_gap_with_backbone=3; # ytick 和染色体之间的空隙
-		my $feature_backbone_shift_x = $ytick_feature_backbone_width+$tick_gap_with_backbone; 
+	my $tick_gap_with_backbone=3; # ytick 和染色体之间的空隙, 3bp
+	my $feature_backbone_shift_x = $ytick_feature_backbone_width+$tick_gap_with_backbone; 
 	my $ytick_feature_backbone_start = $block_end_bp - $ytick_feature_backbone_width;
 	my $ytick_feature_backbone_end = $block_end_bp;
 	my $ytick_feature_backbone_id = "$ytick_sample.$ytick_scf.$block.$block_start_bp.$block_end_bp.$type.ytickbackbone$kk";
@@ -2434,8 +2471,14 @@ sub feature_ytick(){
 	my $feature_backbone_shift_y = abs($s1);
 	if($ytick_orientation=~ /up/i){
 		$feature_backbone_shift_y *=-1;
+		$feature_backbone_shift_y= "+0" if($feature_backbone_shift_y == 0);
 	}elsif($ytick_orientation=~ /down/i){
-		$feature_backbone_shift_y=~ s/^(\d)/+$1/;
+		if($feature_backbone_shift_y == 0){
+			$feature_backbone_shift_y = "-$feature_backbone_shift_y";
+		}else{
+			$feature_backbone_shift_y="+$feature_backbone_shift_y";
+		}
+
 	}else{
 		die "die:\n";
 	}
@@ -2468,34 +2511,60 @@ sub feature_ytick(){
 		my $ytick_feature_tick_height=$tick_borders[2];
 		my $feature_label_size=$tick_label_size;
 		my $y_margin_feature_label=$feature_label_size*0.3;
+		my $x_margin_feature_label=$y_margin_feature_label;
 		my $ytick_feature_tick_id="$ytick_feature_backbone_id.tick$k";
 #my $feature_tick_shift_x=0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width - $ytick_feature_backbone_width*0.5+$tick_gap_with_backbone; # bp 
-		my $feature_tick_shift_x=$tick_gap_with_backbone+0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width; # bp 
+		#my $feature_tick_shift_x=$tick_gap_with_backbone+0.5*$ytick_feature_backbone_width+$ytick_feature_tick_width; # bp 
+		my $feature_tick_shift_x=$feature_backbone_shift_x+$ytick_feature_tick_width; # bp 
 
 #my $feature_tick_shift_y = 0.5 + $s1 + $k * $ytick_unit + 0.5*$ytick_feature_tick_height;
-			my $feature_tick_shift_y = $s1 + $k * $ytick_unit - $ytick_feature_tick_height/2;
+		my $feature_tick_shift_y;
+		if($s2 < $e2){
+			if((abs($s1) + $k * $ytick_unit) == 0){
+				$feature_tick_shift_y = 0;
+			}else{
+				$feature_tick_shift_y = abs($s1) + $k * $ytick_unit;
+				$feature_tick_shift_y*=-1 if($s1>=0 && $e1 >=0);
+			}
+		}else{
+			$feature_tick_shift_y = abs($e1) - $k * $ytick_unit;
+			$feature_tick_shift_y*=-1 if($s1>=0 && $e1 >=0);
+			print "tick_label2 feature_tick_shift_y is $feature_tick_shift_y\n";
+		}
+
+		if($feature_tick_shift_y == 0){
+			if($s1 >=0 && $e1 >=0){
+				$feature_tick_shift_y = "+0"
+			}else{
+				$feature_tick_shift_y = "-0"
+			}
+		}
 		my $ytick_ratio=(abs($e2-$s2)) / (abs($e1-$s1));
 		my $tick_label;
 
 #s1 e1 s2 e2        
 
-		$feature_tick_shift_y =abs($feature_tick_shift_y);
 		my $hgrid_id="$ytick_feature_tick_id.hgrid";
 		my $hgrid_height=$ytick_feature_tick_height*$tick_borders[3];
-		my $hgrid_shift_y=$feature_tick_shift_y+($ytick_feature_tick_height-$hgrid_height)/2;
-		if($ytick_orientation=~ /up/i){
-			$feature_tick_shift_y ="-$feature_tick_shift_y";
-			$tick_label=$s2 + $k*$ytick_unit*$ytick_ratio;
-			$hgrid_shift_y="-$hgrid_shift_y";
-		}elsif($ytick_orientation=~ /down/i){
-			$feature_tick_shift_y = abs($e1) - + $k * $ytick_unit + $ytick_feature_tick_height/2;
-			$hgrid_shift_y = $feature_tick_shift_y - ($ytick_feature_tick_height-$hgrid_height)/2;
-			$feature_tick_shift_y ="+$feature_tick_shift_y";
-			$tick_label=abs($s2) + $k*$ytick_unit*$ytick_ratio;
-			$hgrid_shift_y="+$hgrid_shift_y";
-		}else{
-			die "die:\n";
-		}
+		#my $hgrid_shift_y=$feature_tick_shift_y+($ytick_feature_tick_height-$hgrid_height)/2;
+		my $hgrid_shift_y=$feature_tick_shift_y;
+		#if($ytick_orientation=~ /up/i){
+			if($s2<$e2){
+				$tick_label=$s2 + $k*$ytick_unit*$ytick_ratio;
+				#print "tick_label1 is $tick_label\n";
+			}else{
+				$tick_label=$e2 + $k*$ytick_unit*$ytick_ratio;
+				#print "tick_label2 is $tick_label\n";
+			}
+			#}elsif($ytick_orientation=~ /down/i){
+			#if($s2<$e2){
+			#	$tick_label=$s2 + $k*$ytick_unit*$ytick_ratio;
+			#}else{
+			#	$tick_label=$e2 + $k*$ytick_unit*$ytick_ratio;
+			#}
+			#}else{
+			#die "die:\n";
+			#}
 		if($hgrid_flag){
 			$ytick_gff.="$ytick_scf\tadd\tytick\t$block_start_bp\t$block_end_bp\t.\t+\t.\tID=$hgrid_id;\n";
 			$ytick_setting_conf.="\n$hgrid_id\tfeature_height_ratio\t$hgrid_height\n";
@@ -2521,9 +2590,13 @@ sub feature_ytick(){
 		$ytick_setting_conf.="$ytick_feature_tick_id\tlabel_rotate_angle\t0\n";
 		$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label_size\t$feature_label_size\n";
 		$ytick_setting_conf.="$ytick_feature_tick_id\ty_margin_feature_label\t$y_margin_feature_label\n";
-		$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label_auto_angle_flag\t0\n\n";
-		$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_color\t$tick_colors[0]\n\n";
-		$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_opacity\t$tick_opacitys[0]\n\n";
+		$ytick_setting_conf.="$ytick_feature_tick_id\tlabel_text_alignment_baseline\tmiddle\n";
+		$ytick_setting_conf.="$ytick_feature_tick_id\tx_margin_feature_label\t$x_margin_feature_label\n";
+		$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_label_auto_angle_flag\t0\n";
+		$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_color\t$tick_colors[0]\n";
+		$ytick_setting_conf.="$ytick_feature_tick_id\tfeature_opacity\t$tick_opacitys[0]\n";
+		$ytick_setting_conf.="$ytick_feature_tick_id\tlabel_text_anchor\tstart\n\n";
+
 #feature_ytick_hgrid_line=1
 
 	}

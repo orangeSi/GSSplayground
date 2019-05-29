@@ -62,6 +62,7 @@ fi
 
 if [ -s $prefix.prepare.data.error ];
 then
+	cat $prefix.prepare.data.error
 	echo -e "\n\nerror in file: $prefix.prepare.data.error\n\n"
 	exit
 else
@@ -81,6 +82,7 @@ ls -ltrh $prefix.prepare.data.error $prefix.plot.error 2>/dev/null
 echo 
 if [ -s $prefix.plot.error ];
 then
+	cat $prefix.plot.error
 	echo -e "\n\nerror in file $prefix.plot.error, $cmd\n\n"
 	exit
 else
