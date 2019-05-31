@@ -10,15 +10,15 @@ use myth qw(format_scale read_list draw_genes display_conf read_conf default_set
 
 my ($list,$prefix,$outdir,$conf,$track_reorder);
 GetOptions("list:s"=>\$list,
-		"prefix:s"=>\$prefix,
-		"outdir:s"=>\$outdir,
-		"conf:s"=>\$conf
-	  );
+	"prefix:s"=>\$prefix,
+	"outdir:s"=>\$outdir,
+	"conf:s"=>\$conf
+);
 
 die "
 perl $0 [options]:
 * --list <str>  two formats: [sample gff genome seq_id1 seq_draw_start1 seq_draw_end1 genome seq_id2 seq_draw_start2 seq_draw_end2 ...]
-or [sample gff genome]no seq_id mean full length of whole gff
+	or [sample gff genome]no seq_id mean full length of whole gff
 * --prefix <str>
 * --outdir <str>
 * --conf <str> 
@@ -86,7 +86,7 @@ my $ratio=$cluster_width_ratio*$svg_width/$max_length;
 #($conf, $list)=&legend2gff($list, $conf, $svg_width, $legend_width_ratio, $ratio, $fontsize);
 # create gff and setting for legend
 my $legend_number;
-($conf, $list, $legend_number)=&legend2gff($list, $conf, $svg_width, $legend_width_ratio, $ratio, $conf{legend_font_size});
+($conf, $list, $legend_number)=&legend2gff($list, $conf, $svg_width, $svg_height, $legend_width_ratio, $ratio, $conf{legend_font_size});
 %conf=%$conf;
 ($conf, $track_reorder) = &default_setting(0, %conf);
 %conf=%$conf;
@@ -156,15 +156,15 @@ while(@track_order){
 
 	die "error: sample :$sample: is not in gff file of --list \n" if (not exists $gff{$sample});
 	my $block_distance = $space_len*$ratio; # block_distance 是每个block的间距
-		my $flag;
+	my $flag;
 	my $left_distance = $left_distance_init ;#block左侧起点的x轴,0.1是指ref name和第一个block的间隔
 #my $line_to_sample_single_top_dis=0.45; #track cluster顶部 y 轴在一个track高度的0.45，即cluster的y轴的底部在0.55，即一个cluster高度是整个track的0.55-0.45=0.1
-		my $line_to_sample_single_top_dis = 0.5 - $conf{genome_height_ratio}/2/100;#genome_height_ratio
-		my $shift_x = $left_distance;
+	my $line_to_sample_single_top_dis = 0.5 - $conf{genome_height_ratio}/2/100;#genome_height_ratio
+	my $shift_x = $left_distance;
 
 # write sample name for track
 	my $text_size = $id_line_height * 1; # sample name 文字大小
-		$common_size = $text_size;
+	$common_size = $text_size;
 	my $ref_name_x = (1- $ref_name_right_gap )* $svg_width * $ref_name_width_ratio; # sample name 右下角end的x和y轴
 #my $ref_name_y = $top_distance + (0.5 + 0.05*$conf{genome_height_ratio}) * $sample_single_height; #和block的genome起点的y坐标+block的genome的高度
 	my $ref_name_y=$top_distance+0.5*$sample_single_height;
@@ -179,7 +179,7 @@ while(@track_order){
 	my $pre_block='';
 	#foreach my $block_index(sort {$a<=>$b} keys %{$gff{$sample}{block}}){ # one block_index ---> one scaffold ---> one cluster of genes
 	foreach my $block_index(sort {$a<=>$b} keys %{$gff{$sample}{chooselen_single}}){
-	#print "xxxx is $sample, block_index is $block_index\n";
+		#print "xxxx is $sample, block_index is $block_index\n";
 #print "block_index is $block_index, sample is $sample\n";
 		$flag++;
 		my $shift_angle_closed_feature=0;
@@ -189,20 +189,20 @@ while(@track_order){
 #print "scff is @scf, $block_index\n";
 		die "error:block_index $block_index should not have two scf\n" if(@scf!=1);
 		$shift_x += ($tracks_shift_x{$sample}{$block_index}{shift_x_left}*$ratio) if(exists $tracks_shift_x{$sample}{$block_index}{shift_x_left});
-		
+
 		my $block_clip_path_id="cut-$sample-$scf[0]-$block_index";
 		my %block_clip_path_ids;
 		my $reverse_block_flag=(exists $reversed_block{$sample}{$block_index})? 1:0;
 		#$rg_test = "$sample:$scf[0]:" if(!$reverse_block_flag);
 
 		my $id_line_x=$shift_x; # 每个block的genome的起点的x,y坐标
-			my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
-			my $id_line_width=$gff{$sample}{chooselen_single}{$block_index}{len} * $ratio; # 每个block的genome的宽度
+		my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
+		my $id_line_width=$gff{$sample}{chooselen_single}{$block_index}{len} * $ratio; # 每个block的genome的宽度
 #print "chooselen_single is $sample $gff{$sample}{chooselen_single}{$block_index} * $ratio\n";
 
 ### draw main scaffold line track
 #$svg.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_style}\"   />\n";
-			my $track_order=$conf{track_order};
+		my $track_order=$conf{track_order};
 		foreach my $f(keys %{$conf{feature_setting2}}){
 			next if ( (not exists $conf{feature_setting2}{$f}{track_order}) || $conf{feature_setting2}{$f}{scf_id} ne $scf[0] || $conf{feature_setting2}{$f}{sample} ne $sample);
 #print "$conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample\n";
@@ -221,7 +221,7 @@ while(@track_order){
 		my @block_region=&get_real_feature_region($reverse_block_flag, $start_once, $end_once, $start_once, $end_once, "+", $gff{$sample}{scf}{$scf[0]}, "block"); # "$start-$end", $start, $end, $strand);
 		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$block_region[0]</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
 		$orders{$track_order}.=&show_segment_strand($conf{display_segment_strand}, $id_line_x, $id_line_y, $id_line_height, $id_line_width, $reverse_block_flag);
-		 
+
 		if($display_segment_name_flag=~ /yes/i){
 			my $segment_baseline;
 			my $segment_text_anchor;
@@ -246,7 +246,8 @@ while(@track_order){
 			}elsif($display_segment_name_shift_y=~ /^[\d\+\.]+$/){
 				$segment_baseline="hanging";
 				$segment_name_y+=$display_segment_name_shift_y;
-				$segment_name_y += &check_font_size_by_estimate(0, 0, $segment_name, $display_segment_name_fontsize);
+				
+				$segment_name_y += &check_font_size_by_estimate(0, "height", $segment_name, $display_segment_name_fontsize);
 				$segment_baseline="baseline";
 			}elsif($display_segment_name_shift_y=~ /^-([\d\.])+$/){	
 				$segment_baseline="baseline";
@@ -276,7 +277,7 @@ while(@track_order){
 		$gff{$sample}{chooselen_single}{$block_index}{end_y_in_svg} = $id_line_y;
 
 		$left_distance+=($block_distance+$id_line_width); #每个block左侧起点的x坐标shift
-			$pre_block = $scf[0];
+		$pre_block = $scf[0];
 
 
 ### draw genes
@@ -302,12 +303,12 @@ while(@track_order){
 			}
 
 			if(exists $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag} && $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag}){
-			my ($clip_x1_x,$clip_x1_y,$clip_x2_x,$clip_x2_y,$clip_x3_x,$clip_x3_y,$clip_x4_x,$clip_x4_y)=($shift_x,$top_distance,$shift_x+$id_line_width,$top_distance,$shift_x+$id_line_width,$top_distance + $sample_single_height,$shift_x,$top_distance + $sample_single_height);
-			$svg.="<defs>    <clipPath id=\"$block_clip_path_id\"><path d=\"M$clip_x1_x $clip_x1_y L$clip_x2_x $clip_x2_y L$clip_x3_x $clip_x3_y L$clip_x4_x $clip_x4_y Z\" />     </clipPath>  </defs>\n" if(not exists $block_clip_path_ids{$block_clip_path_id});
-			$block_clip_path_ids{$block_clip_path_id}="";
-		}
+				my ($clip_x1_x,$clip_x1_y,$clip_x2_x,$clip_x2_y,$clip_x3_x,$clip_x3_y,$clip_x4_x,$clip_x4_y)=($shift_x,$top_distance,$shift_x+$id_line_width,$top_distance,$shift_x+$id_line_width,$top_distance + $sample_single_height,$shift_x,$top_distance + $sample_single_height);
+				$svg.="<defs>    <clipPath id=\"$block_clip_path_id\"><path d=\"M$clip_x1_x $clip_x1_y L$clip_x2_x $clip_x2_y L$clip_x3_x $clip_x3_y L$clip_x4_x $clip_x4_y Z\" />     </clipPath>  </defs>\n" if(not exists $block_clip_path_ids{$block_clip_path_id});
+				$block_clip_path_ids{$block_clip_path_id}="";
+			}
 
-		#print "index_id is $index_id, sample is $sample\n";
+			#print "index_id is $index_id, sample is $sample\n";
 #$gff{$sample}{block}{$block}{$scf}{$gene}{id}
 #print "\nindex id is $index_id\n";
 			die "die:index_id is $index_id,$sample $block_index $scf[0] $index\n" if(not $index_id);
@@ -382,29 +383,29 @@ while(@track_order){
 			my $orders;
 			my $feature_reverse_for_crosslink;
 			($svg_gene, $shift_angle_closed_feature, $orders, $feature_reverse_for_crosslink)=&draw_genes(
-					$index_id,
-					$index_start, 
-					$index_end, 
-					$index_strand,
-					$index_start_raw, 
-					$index_end_raw, 
-					$gene_height_medium,
-					$gene_height_top,
-					$gene_width_arrow,
-					$shift_x,
-					$top_distance,
-					$feature_shift_y,
-					$sample_single_height,
-					$sample,
-					$scf[0],
-					$index_color,
-					$index_label_content,
-					$index_label_size,
-					$index_label_col,
-					$index_label_position,
-					$index_label_angle,
-					$angle_flag, \%conf, $ratio, $id_line_height, $shift_angle_closed_feature, \%orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id, $reverse_block_flag, $start_once, $end_once, \%feature_reverse_for_crosslink); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可  #reversed_block{$sample}{$block_index}
-						$svg.=$svg_gene;
+				$index_id,
+				$index_start, 
+				$index_end, 
+				$index_strand,
+				$index_start_raw, 
+				$index_end_raw, 
+				$gene_height_medium,
+				$gene_height_top,
+				$gene_width_arrow,
+				$shift_x,
+				$top_distance,
+				$feature_shift_y,
+				$sample_single_height,
+				$sample,
+				$scf[0],
+				$index_color,
+				$index_label_content,
+				$index_label_size,
+				$index_label_col,
+				$index_label_position,
+				$index_label_angle,
+				$angle_flag, \%conf, $ratio, $id_line_height, $shift_angle_closed_feature, \%orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id, $reverse_block_flag, $start_once, $end_once, \%feature_reverse_for_crosslink); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可  #reversed_block{$sample}{$block_index}
+			$svg.=$svg_gene;
 			%orders=%$orders;
 			%feature_reverse_for_crosslink=%$feature_reverse_for_crosslink;
 			$pre_index_end = $index_end;
@@ -609,13 +610,13 @@ foreach my $pair(@pairs){
 #$r2 = $r2*$id_line_height * $ytick_region_ratio;
 #$r2_rev = $r2_rev*$id_line_height * $ytick_region_ratio;
 
-			$r2 = $r2 * $ytick_region_ratio;
+		$r2 = $r2 * $ytick_region_ratio;
 		$r2_rev = $r2_rev * $ytick_region_ratio;
 		my $rotate=0;
 		my $rotate_rev=0;
 		my ($large_arc_flag, $sweep_flag, $large_arc_flag_rev, $sweep_flag_rev)=split(",", $cross_link_orientation_ellipse); #http://xahlee.info/js/svg_path_ellipse_arc.html
 
-			$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\" /></g>";
+		$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\" /></g>";
 #$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"fill:white;stroke:black;stroke-width:0.5;fill-opacity:0;stroke-opacity:1\" /></g>";
 #print "downid is $down_id, up is is $up_id\n";
 		next;
@@ -696,7 +697,7 @@ foreach my $pair(@pairs){
 # 把gff读取之后，把有legend_label的features挑出来,去掉冗余的（运行同一个label对应不同的颜色和透明度和feature_shape），创建新的id然后写入一个legened.gff和legend.setting.conf，重新用read_list读入legened.gff和legend.setting.conf，然后在开始draw_gene
 
 sub legend2gff(){
-	my ($list, $conf, $svg_width, $legend_width_ratio, $ratio, $fontsize)=@_;
+	my ($list, $conf, $svg_width, $svg_height, $legend_width_ratio, $ratio, $fontsize)=@_;
 	#my ($list, $conf, $svg_width, $legend_width_ratio, $fontsize)=@_;
 	my %legends;
 	#my $legend_levels="label,color,shape,opacity,strand";
@@ -718,77 +719,151 @@ sub legend2gff(){
 				$id.="$hash{$level}.";
 			}
 			$id=~ s/\.$//;
+			#print "id is $id\n";
 			$legends{$id}{label}=$hash{label};
 			$legends{$id}{color}=$hash{color};
 			$legends{$id}{shape}=$hash{shape};
 			$legends{$id}{opacity}=$hash{opacity};
+			$legends{$id}{id}=$f;
+
 		}
 	}
 	print "lenged number is ",scalar(keys %legends),"\n";	
 	return $conf, $list, 0 if(scalar(keys %legends) == 0);
+	my %all_pos_legends = &check_legends_positon(\%conf, \%legends);
+
+	my ($sample, $block_id, $block_start, $block_end)=&get_one_block($list);
 	my $legend_width_margin = $conf->{legend_width_margin};
 	my $legend_width_textpercent = $conf->{legend_width_textpercent};
 	my $feature_width = (1-$legend_width_margin*2)*(1-$legend_width_textpercent)*$svg_width*$legend_width_ratio;
-	my $feature_setting;
+	my $feature_setting="";
 	my $gff="";
-	my ($sample, $block_id, $block_start, $block_end)=&get_one_block($list);
-	my $feature_start=$block_start;
 	my $total_height=0;
-	my $legend_height_extend=1.2;
+	my $legend_height_extend=1.3;
 	my $text="";
 	foreach my $l(keys %legends){
 		$text.=$legends{$l}{label};
 	}
-	my $feature_height = &check_font_size_by_estimate(0, $feature_width, $text, $fontsize);
-	my $feature_end;
-	my $feature_length_ratio=2;
+	my $feature_height = &check_font_size_by_estimate(0, "height", $text, $fontsize);
+	my $feature_length_ratio=1.5;
 	foreach my $l(keys %legends){
 		$legends{$l}{height}=$feature_height;
 		$total_height+=$legends{$l}{height}*$legend_height_extend;
 	}
-	my $feature_shift_y_to=($svg_height-$total_height)/2;
 	my $keyword="legend";
-	foreach my $l(keys %legends){
-		my $id=$l;
-		my $strand="+";
-		my $y_margin_feature_label=-0.2;
-		my $x_margin_feature_label=0.2;
-		my $feature_shift_x_to = $svg_width*(1-$legend_width_ratio) + $legend_width_margin*$svg_width*$legend_width_ratio-1;	
-		if($legends{$l}{shape}=~ /^circle_point/){
-			$feature_end=$feature_start + 1 * $feature_height/$ratio-1;
-			#$feature_shift_x_to = $feature_shift_x_to + ($feature_length_ratio -1)* $feature_height /2;
-			#$x_margin_feature_label += (($feature_length_ratio -1)* $feature_height /2)/(2*$feature_height);
-			$feature_shift_x_to = $feature_shift_x_to + ($feature_length_ratio -1)* $feature_height ;
-			$y_margin_feature_label -=0.1;
+	foreach my $pos (keys %all_pos_legends){
+		my $feature_shift_y_to;
+		my $feature_shift_x_to; # $svg_width*(1-$legend_width_ratio) + $legend_width_margin*$svg_width*$legend_width_ratio-1;	
+		my $gap = 1.3;
+		my ($every_legend_width, $lengend_total_width) = &caculate_every_legend_width(\%all_pos_legends, \%legends, $pos, $fontsize, $feature_height, $gap) if($pos eq "baseline" || $pos eq "top");
+		my %every_legend_width;
+		print "pos is $pos\n";
+		if($pos eq "baseline"){
+			%every_legend_width = %$every_legend_width ;
+			$feature_shift_x_to = ($svg_width - $lengend_total_width)/2;
+			print "feature_shift_x_to = $feature_shift_x_to = ($svg_width - $lengend_total_width)/2\n";
+			$feature_shift_y_to = $svg_height * 0.9;
+		}elsif($pos eq "right"){
+			$feature_shift_y_to = ($svg_height-$total_height)/2;
+			$feature_shift_x_to = $svg_width*(1-$legend_width_ratio) + $legend_width_margin*$svg_width*$legend_width_ratio-1;
+		}elsif($pos eq "top"){
+			%every_legend_width = %$every_legend_width ;
+			$feature_shift_x_to = ($svg_width - $lengend_total_width)/2;
+			$feature_shift_x_to = ($svg_width - $lengend_total_width)/2;
+			$feature_shift_y_to = $svg_height * 0.1;
 		}else{
-			$feature_end=$feature_start + $feature_length_ratio * $feature_height/$ratio-1;
+				die "error: not support legend_position = $pos \n";
 		}
-		$gff.="$block_id\tadd\t$keyword\t$feature_start\t$feature_end\t.\t$strand\t.\tID=$id;\n";
-		$feature_setting.="$id\tfeature_label\t$legends{$l}{label}\n";
-		$feature_setting.="$id\tfeature_label_size\t$fontsize\n";
-		$feature_setting.="$id\tdisplay_feature_label\tyes\n";
-		$feature_setting.="$id\tfeature_shape\t$legends{$l}{shape}\n";
-		$feature_setting.="$id\tfeature_color\t$legends{$l}{color}\n";
-		$feature_setting.="$id\tfeature_opacity\t$legends{$l}{opacity}\n";
-		$feature_setting.="$id\tpos_feature_label\tright_low_skip_arrow_sharp\n";
-		$feature_setting.="$id\ty_margin_feature_label\t$y_margin_feature_label\n";
-		$feature_setting.="$id\tx_margin_feature_label\t$x_margin_feature_label\n";
-		$feature_setting.="$id\tlabel_text_anchor\tstart\n";
-		$feature_setting.="$id\tlabel_text_alignment_baseline\tbaseline\n";
-		$feature_setting.="$id\tfeature_shift_x_to\t$feature_shift_x_to\n";
-		$feature_setting.="$id\tfeature_shift_y_to\t$feature_shift_y_to\n";
-		$feature_setting.="$id\tfeature_arrow_width_extent\t0.2\n";
-		$feature_setting.="$id\tfeature_height_ratio\t$legends{$l}{height}\n";
-		$feature_setting.="$id\tfeature_height_unit\tpx\n";
-		$feature_shift_y_to+=$feature_height*$legend_height_extend;
+		foreach my $l(sort {$legends{$a}{label} cmp $legends{$b}{label}} keys %legends){
+			next if(not exists $all_pos_legends{$pos}{$l});
+			my $id=$l;
+			my $strand="+";
+			#my $y_margin_feature_label = -0.2;
+			#my $x_margin_feature_label = 0.2;
+			my $y_margin_feature_label = 0;
+			my $x_margin_feature_label = 0.1;
+			my $feature_start;# =$block_start;
+			my $feature_end;
+			$feature_start = $block_start;
+
+			if($legends{$l}{shape}=~ /circle_point|ellipse/){
+					$feature_end=$feature_start + 1 * $feature_height/$ratio;
+					$feature_shift_x_to = $feature_shift_x_to + $feature_height*($feature_length_ratio/2 - 0.5) ;
+					#$y_margin_feature_label -=0.1;
+			}else{
+					$feature_end=$feature_start + $feature_length_ratio * $feature_height/$ratio;
+			}
+
+			$gff.="$block_id\tadd\t$keyword\t$feature_start\t$feature_end\t.\t$strand\t.\tID=$id;\n";
+			$feature_setting.="$id\tfeature_label\t$legends{$l}{label}\n";
+			$feature_setting.="$id\tfeature_label_size\t$fontsize\n";
+			$feature_setting.="$id\tdisplay_feature_label\tyes\n";
+			$feature_setting.="$id\tfeature_shape\t$legends{$l}{shape}\n";
+			$feature_setting.="$id\tfeature_color\t$legends{$l}{color}\n";
+			$feature_setting.="$id\tfeature_opacity\t$legends{$l}{opacity}\n";
+			#$feature_setting.="$id\tpos_feature_label\tright_low_skip_arrow_sharp\n";
+			$feature_setting.="$id\tpos_feature_label\tright_medium_skip_arrow_sharp\n";
+			$feature_setting.="$id\ty_margin_feature_label\t$y_margin_feature_label\n";
+			$feature_setting.="$id\tx_margin_feature_label\t$x_margin_feature_label\n";
+			$feature_setting.="$id\tlabel_text_anchor\tstart\n";
+			#$feature_setting.="$id\tlabel_text_alignment_baseline\tbaseline\n";
+			$feature_setting.="$id\tlabel_text_alignment_baseline\tmiddle\n";
+			$feature_setting.="$id\tfeature_shift_x_to\t$feature_shift_x_to\n";
+			$feature_setting.="$id\tfeature_shift_y_to\t$feature_shift_y_to\n";
+			$feature_setting.="$id\tfeature_arrow_width_extent\t0.2\n";
+			$feature_setting.="$id\tfeature_height_ratio\t$legends{$l}{height}\n";
+			$feature_setting.="$id\tfeature_height_unit\tpx\n";
+			$feature_shift_y_to+=$feature_height*$legend_height_extend if($pos eq "right");
+			if($pos eq "baseline"){
+				$feature_shift_x_to += $every_legend_width{$l};
+			}elsif($pos eq "right"){
+				$feature_shift_x_to = $feature_shift_x_to;
+			}elsif($pos eq "top"){
+				$feature_shift_x_to +=	$every_legend_width{$l};
+			}
+
+		}
 	}
+	
 	$list=&write_to_list($sample, $gff, $list);
 	$conf->{feature_setting}=&write_to_setting($feature_setting, $conf->{feature_setting});
 	$conf->{feature_keywords}.=",$keyword";
+	
 	print "add legend list is $list\nadd legend feature_setting is $conf->{feature_setting}\nlenged end\n";
 	return $conf, $list, scalar(keys %legends);
 }
 
+#my %every_legend_width = &caculate_every_legend_width(\%all_pos_legends, $pos) if($pos eq "baseline" || $pos eq "top");
+sub caculate_every_legend_width(){
+	my ($all_pos_legends, $legends, $pos, $fontsize, $feature_height, $gap) = @_;
+	my %every_legend_width;
+	my %legends = %$legends;
+	my $legend_symbol_width = $feature_height;
+	my %all_pos_legends = %$all_pos_legends;
+	my $lengend_total_width;
+	foreach my $f(keys %{$all_pos_legends{$pos}}){
+		my $legend_text_width = &check_font_size_by_estimate(0, "width", $legends{$f}{label}, $fontsize);
+		$every_legend_width{$f} = $legend_symbol_width + $legend_text_width * $gap;
+		$lengend_total_width += $every_legend_width{$f};
+	}
+	return \%every_legend_width, $lengend_total_width;
+}
+#	%all_pos_legends = &check_legends_positon(\%conf, \%legends);
+sub check_legends_positon(){
+	my ($conf, $legends) = @_;
+	my %conf = %$conf;
+	my %legends = %$legends;
+	my %all_pos_legends;
+	#$hash{label}=&get_para("legend_label", $f, \%conf);
+	foreach my $f(keys %legends){
+
+		my $pos = &get_para("legend_position", $legends{$f}{id}, \%conf);
+		print "pos 2 is $pos, $legends{$f}{id}\n";
+		$all_pos_legends{$pos}{$f}="";
+	}
+
+	return %all_pos_legends;
+}
 sub write_to_list(){
 	my ($sample, $gff, $list)=@_;
 	my $legend_gff="$list.$prefix.legend.gff";
@@ -817,7 +892,7 @@ sub write_to_setting(){
 #my ($sample, $block_id, $block_start, $block_end)=&get_one_block($list)
 sub get_one_block(){
 	my ($list)=@_;
-	my $tmp=`cat $list|awk '\$1!~ /^#/'|awk '{print \$1,\$4,\$5,\$6}'`;chomp $tmp;
+	my $tmp=`cat $list|awk '\$1!~ /^#/'|awk '{print \$1,\$4,\$5,\$6}'|head -1`;chomp $tmp;
 	return split(/\s+/,$tmp);
 }
 
@@ -851,7 +926,7 @@ if($conf{scale_display}=~ /yes/i){
 		#die "tick is $ticks =int($cluster_width_ratio*$svg_width/$unit_scale)\n";
 		print "ticks number is $ticks\n";
 		my $tick_y1= $y_scale + $tick_height; #single tick hegith
-			my $tick_y2= $y_scale ;
+		my $tick_y2= $y_scale ;
 		my $tick_label_y=$y_scale+$y_tick_shift;
 		my $scale_start=1;
 		if(scalar(keys %gff) == 1){
@@ -872,8 +947,8 @@ if($conf{scale_display}=~ /yes/i){
 		print "cluster_width_ratio $cluster_width_ratio*$svg_width % $unit_scale\n";
 		if($unit_scale >=1 && $cluster_width_ratio*$svg_width % $unit_scale){
 			$orders{$conf{scale_order}}.="<line x1=\"$x_end_scale\" y1=\"$tick_y1\" x2=\"$x_end_scale\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # last tick
-			
-				my $last_tick_label=&format_scale($max_length+$scale_start-1);
+
+			my $last_tick_label=&format_scale($max_length+$scale_start-1);
 			$last_tick_label.="bp";
 
 			$orders{$conf{scale_order}}.= "<text class='myth'  x=\"$x_end_scale\" y=\"$tick_label_y\" style=\"font-size:${font_size}px;fill:$conf{scale_color};text-anchor:middle;font-family:Times New Roman\">$last_tick_label</text>\n"; # label of feature
@@ -909,18 +984,18 @@ sub jstohtml(){
 		#my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_width\" height=\"$svg_height\" style=\"background-color:$conf{svg_background_color};\">\n";
 		open OUT,">$prefix.html";
 		print OUT "<!DOCTYPE html>\n<html>\n<head>\n<style>\n
-ul {
-    font-size:0;
-    text-align:center
-}
-ul li {
-    display:inline;
-    zoom:1
-}
-td {
-}
-</style>
-\n";
+		ul {
+		font-size:0;
+		text-align:center
+		}
+		ul li {
+		display:inline;
+		zoom:1
+		}
+		td {
+		}
+		</style>
+		\n";
 		my $navigator="";
 		if(-f "$Bin/navigator"){
 			print "$Bin/navigator\n";
@@ -943,48 +1018,48 @@ td {
 		my $svg=`sed '1d' $prefix.svg`;chomp $svg;
 		print OUT "$svg\n";
 		print OUT " </div>
-    <button id=\"enable\" style='display:none'>enable</button>
-    <button id=\"disable\" style='display:none'>disable</button>
-    <script>
-	window.refresh_flag = 0 ;
-    // Don't use window.onLoad like this in production, because it can only listen to one function.
-	document.getElementById(\"container\").style.width=document.documentElement.clientWidth*0.98 + \"px\";
-	document.getElementById(\"container\").style.height=document.documentElement.clientHeight*0.88 + \"px\";
-	document.getElementById(\"container\").style['margin']='auto';
-	document.getElementById(\"container\").style.display=\"block\";
-    function svgpanzoom(the_alert) {
-	  if(window.hasOwnProperty(\"zoomTiger\")){
-	  	if(the_alert){alert('there is not need to hit me anymore~');}
-	  	return 0
-	  }
-	  console.log(\"start svgpanzoom\")
-	  window.refresh_flag +=1 ;
-      // Expose to window namespase for testing purposes
+		<button id=\"enable\" style='display:none'>enable</button>
+		<button id=\"disable\" style='display:none'>disable</button>
+		<script>
+		window.refresh_flag = 0 ;
+		// Don't use window.onLoad like this in production, because it can only listen to one function.
+		document.getElementById(\"container\").style.width=document.documentElement.clientWidth*0.98 + \"px\";
+		document.getElementById(\"container\").style.height=document.documentElement.clientHeight*0.88 + \"px\";
+		document.getElementById(\"container\").style['margin']='auto';
+		document.getElementById(\"container\").style.display=\"block\";
+		function svgpanzoom(the_alert) {
+		if(window.hasOwnProperty(\"zoomTiger\")){
+		if(the_alert){alert('there is not need to hit me anymore~');}
+		return 0
+		}
+		console.log(\"start svgpanzoom\")
+		window.refresh_flag +=1 ;
+		// Expose to window namespase for testing purposes
 
-      window.zoomTiger = svgPanZoom('#demo-tiger', {
-	  maxZoom: 500,
-     	  minZoom:0.01,
-          zoomEnabled: true,
-          controlIconsEnabled: true,
-		  fit: false, 
-		  center: false,
-		  destroy: function() {this.destroy(); return this.pi}
-          // viewportSelector: document.getElementById('demo-tiger').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
-        });
+		window.zoomTiger = svgPanZoom('#demo-tiger', {
+		maxZoom: 500,
+		minZoom:0.01,
+		zoomEnabled: true,
+		controlIconsEnabled: true,
+		fit: false, 
+		center: false,
+		destroy: function() {this.destroy(); return this.pi}
+		// viewportSelector: document.getElementById('demo-tiger').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
+		});
 
-        document.getElementById('enable').addEventListener('click', function() {
-          window.zoomTiger.enableControlIcons();
-        });
-        document.getElementById('disable').addEventListener('click', function() {
-          window.zoomTiger.disableControlIcons();
-        });
-	    console.log(\"end svgpanzoom\")
-      };
-     svgpanzoom(1);
-	 </script>
-	 $navigator
-	 <h3>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h3>
-    ";
+		document.getElementById('enable').addEventListener('click', function() {
+		window.zoomTiger.enableControlIcons();
+		});
+		document.getElementById('disable').addEventListener('click', function() {
+		window.zoomTiger.disableControlIcons();
+		});
+		console.log(\"end svgpanzoom\")
+		};
+		svgpanzoom(1);
+		</script>
+		$navigator
+		<h3>$prefix, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h3>
+		";
 		my $modify_feature=`cat $Bin/modify_feature.js`;chomp $modify_feature;
 		print OUT "\n<script>$modify_feature</script>\n";
 		print OUT "\n</body>\n</html>\n";
@@ -1016,7 +1091,7 @@ sub cut_quadrilateral(){
 	my $clip_path="";
 	my $clip_path_id;
 	#print "\ncut_quadrilateral $conf->{feature_setting2}->{$up_id}->{block_start_end}\ncut_quadrilateral $conf->{feature_setting2}->{$down_id}->{block_start_end}\n";
-	
+
 	#my $clip_path_id="cut-off-bottom-$left_up_x-$left_up_y-$right_up_x-$right_up_y-$right_down_x-$right_down_y-$left_down_x-$left_down_y";
 	#my $clip_path_id="cut-$sample-$scf-$start-$end";
 	if($edge_coordinate_feature_out_of_list=~ /^([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)\s*->\s*([\d\.]+),([\d\.]+):([\d\.]+),([\d\.]+)\s.*->(\d+),(\d+)$/){
@@ -1038,7 +1113,7 @@ sub cut_quadrilateral(){
 		my $down_scf_id=$conf->{feature_setting2}->{$down_id}->{scf_id};
 		my $down_block_start= min(keys %{$blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}});
 		my $down_block_end= max(keys %{$blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}});
-		
+
 		if(!$blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start} || !$blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_end} || not exists $blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}{$down_block_start} || not exists $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start} || !$blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start}){
 			die "error: up_id is $up_id, down_id is $down_id,up_block_start is blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start}, edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start}, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_end}, blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}{$down_block_start}, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start}, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_start}\n";
 			return $clip_path,\%clip_for_crosslink;
@@ -1047,7 +1122,7 @@ sub cut_quadrilateral(){
 		my ($up_end_x, $up_end_y)     = split(/,/, $blocks_two_ends_cord{$up_sample}{$up_scf_id}{$up_block_index}{$up_block_end});
 		my ($down_start_x, $down_start_y)=split(/,/, $blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}{$down_block_start});
 		my ($down_end_x, $down_end_y)=split(/,/, $blocks_two_ends_cord{$down_sample}{$down_scf_id}{$down_block_index}{$down_block_end});
-			
+
 		$clip_path_id="clip_$up_start_x-$up_start_y-$up_end_x-$up_end_y-$down_start_x-$down_start_y-$down_end_x-$down_end_y";
 		#print "clip_path_id is $clip_path_id\n";
 		print "edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list\n";
@@ -1070,21 +1145,21 @@ sub cut_quadrilateral(){
 	$clip_path.="<path d=\"M$left_up_x $left_up_y L$right_up_x $right_up_y L$right_down_x $right_down_y L$left_down_x $left_down_y Z\"  clip-path=\"url(#$clip_path_id)\" style=\"$style\" />\n";
 	#"""  <defs>    <clipPath id="cut-off-bottom"><path d="M0 0 L170 0 L170 300 L0 300 Z" />	    </clipPath>  </defs> 
 	# <path d="M150 0 L75 200 L225 200 Z"  clip-path="url(#cut-off-bottom)" />"""
-	
+
 	return $clip_path,\%clip_for_crosslink;
 }
 
 sub get_block_index_from_id(){
-		my ($type, $id)=@_;
-		if($type eq "crosslink"){
-			die "error: id is $id format error should like *q.q_block_index=1.t_block_index=1 in get_block_index_from_id\n" if($id!~ /\.([qt])\.q_block_index=(\d+).t_block_index=(\d+)$/);
-			my ($qt, $q, $t)=($1, $2, $3);
-			if($qt eq "q"){
-				return $q;
-			}else{
-				return $t;
-			}
+	my ($type, $id)=@_;
+	if($type eq "crosslink"){
+		die "error: id is $id format error should like *q.q_block_index=1.t_block_index=1 in get_block_index_from_id\n" if($id!~ /\.([qt])\.q_block_index=(\d+).t_block_index=(\d+)$/);
+		my ($qt, $q, $t)=($1, $2, $3);
+		if($qt eq "q"){
+			return $q;
 		}else{
-			die "error: not support $type for $id in get_block_index_from_id\n"
+			return $t;
 		}
+	}else{
+		die "error: not support $type for $id in get_block_index_from_id\n"
+	}
 }

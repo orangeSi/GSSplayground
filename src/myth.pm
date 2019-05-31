@@ -651,8 +651,10 @@ sub draw_genes(){
 	}
 	$feature_shift_y=~ s/^([1-9].*)/\+$1/;
 	my $circle_point=0;
-	$circle_point=1 if($shape=~ /^circle_point/);
-	if($feature_shift_y=~ /^(\+?-?)([\d\.]+)/){
+	$circle_point=1 if($shape=~ /circle_point|ellipse/);
+	if($feature_shift_y=~ /^\s*0[^\.]*$/){
+		print "";
+	}elsif($feature_shift_y=~ /^(\+?-?)([\d\.]+)/){
 		if($1 eq "+" || $1 eq ""){
 			#print "shift_y is $shift_y\n";
 			if($circle_point){
@@ -669,8 +671,9 @@ sub draw_genes(){
 		}else{
 			die "die:feature_shift_y \n";
 		}
-	}elsif($feature_shift_y=~ /^\s*0$/){
-		print "";
+	
+	#elsif($feature_shift_y=~ /^\s*0$/){
+	#	print "";
 	}else{
 		die "error: for $feature_id, feature_shift_y is $feature_shift_y, but should be like +1 or -1, +2, so on\n"
 	}
@@ -988,10 +991,10 @@ sub draw_genes(){
 	}elsif($shape=~ /^round_rect/){
 		die "error: not support $shape yet~\n";
 	}elsif($shape=~ /^circle_point|ellipse/){
-		my ($center_point_x, $center_point_y, $ellipse_xr, $ellipse_yr);
+		my ($center_point_x, $center_point_y, $ellipse_yr);
 		my $radius= ($end - $start+$fake)*$ratio*0.5 ; # 0.5*$gene_height_medium;
-		$ellipse_xr = $gene_height_medium/2;
 		$ellipse_yr = $gene_height_medium/2;
+		$ellipse_yr = $radius*0.5 if($feature_type eq "legend" && $ellipse_yr/$radius > 0.5);
 
 		if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}){
 				die "error: feature_shift_x_to=$conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to} for $feature_id is error format, should be number\n" if($conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to}!~ /^[\d\.]+$/);
@@ -1004,14 +1007,18 @@ sub draw_genes(){
 				$center_point_y=$conf->{feature_setting2}->{$feature_id}->{feature_shift_y_to} + $radius;
 		}else{
 				$center_point_y=($sample_single_height - $gene_height_medium)/2 + $shift_y + 0.5*$gene_height_medium;
+				#print "feature_id $feature_id -> $center_point_y=($sample_single_height - $gene_height_medium)/2 + $shift_y + 0.5*$gene_height_medium;\n" if($feature_id=~ /gene4537|gene4538/);
 		}
 		$y_margin_feature_label=&get_para("y_margin_feature_label", $feature_id, $conf);
+		my $radius_y=$radius;
+		$radius_y = $ellipse_yr if($shape=~ /^ellipse/);
+
 		if($index_label_position=~ /_up_?/){
-			$label_y_shift = $y_margin_feature_label * $radius - $radius;
+			$label_y_shift = $y_margin_feature_label * $radius_y - $radius_y;
 		}elsif($index_label_position=~ /_low_?/){
-			$label_y_shift = $y_margin_feature_label * $radius + $radius;
+			$label_y_shift = $y_margin_feature_label * $radius_y + $radius_y;
 		}elsif($index_label_position=~ /_medium_?/){
-			$label_y_shift = $y_margin_feature_label * $radius ;
+			$label_y_shift = $y_margin_feature_label * $radius_y;
 		}
 		$label_y=$center_point_y+$label_y_shift;
 
@@ -1188,6 +1195,7 @@ sub default_setting(){
 	$conf{display_feature} ||="yes";
 	$conf{legend_stroke_color} ||="black";
 	$conf{legend_stroke_width} ||=0;
+	$conf{legend_position} ||="right"; # top/baseline/right
 	$conf{track_order}=(defined $conf{track_order})? $conf{track_order}:0;
 	$conf{feature_order} =(defined $conf{feature_order})? $conf{feature_order}:1;
 	$conf{feature_label_order} =(defined $conf{feature_label_order})? $conf{feature_label_order}:1;
@@ -1454,7 +1462,7 @@ sub check_block_reverse(){
 }
 
 sub check_font_size_by_estimate(){
-	my ($height, $width, $text, $fontsize) = @_;
+	my ($height, $type, $text, $fontsize) = @_;
 	print "fontsize is $fontsize before, height is $height\n";
 	use Imager::Font;
 	my $ttf="$Bin/Times_New_Roman.ttf";
@@ -1462,34 +1470,40 @@ sub check_font_size_by_estimate(){
 	print "using $ttf\n";
 	my $font = Imager::Font->new(file => $ttf);
 	my $bbox = $font->bounding_box(string=>"$text", size=>$fontsize);
-	my $fheight = ($bbox->font_height + $bbox->text_height)/2;
+	#my $fheight = ($bbox->font_height + $bbox->text_height)/2;
 	#my $total_width = $bbox->total_width;
-	my $end_flag=1;
-	my $status=($fheight > $height)? 1:0;
-	while($end_flag){
-		if($fheight > $height){
+	#my $end_flag=1;
+	#my $status=($fheight > $height)? 1:0;
+	#while($end_flag){
+	#	if($fheight > $height){
 			#$fontsize -=0.5;
-			$height +=0.5;
-			$end_flag = 0 if(!$status);
-			$status=1;
-		}else{
+			#$height +=0.5;
+			#$end_flag = 0 if(!$status);
+			#$status=1;
+			#}else{
 			#$fontsize +=0.5;
-			$height -=0.5;
-			$end_flag = 0 if($status);
-			$status=0;
-		}
+			#$height -=0.5;
+			#$end_flag = 0 if($status);
+			#$status=0;
+		#}
 		#$bbox = $font->bounding_box(string=>"$text", size=>$fontsize);
 		#$fheight = ($bbox->font_height + $bbox->text_height)/2;
 		#$total_width = $bbox->total_width;
-		
+	#}
+	if($type eq "height"){
+		return ($bbox->font_height+$bbox->text_height)/2;
+	}elsif($type eq "width"){
+		return $bbox->total_width;
+	}else{
+		die "error: not support $type for check_font_size_by_estimate， only height or width"
 	}
-	print "fontsize is $fontsize after, height is $height\n";
-	return $height;
+	#print "fontsize is $fontsize after, height is $height\n";
+	#return $height;
 }
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "y_margin_feature_label", "x_margin_feature_label", "pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique", "cross_link_opacity_reverse", "feature_color_reverse", "feature_opacity_reverse", "display_segment_strand", "feature_shift_x_to", "feature_shift_y_to", "ref_name_right_gap");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "y_margin_feature_label", "x_margin_feature_label", "pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique", "cross_link_opacity_reverse", "feature_color_reverse", "feature_opacity_reverse", "display_segment_strand", "feature_shift_x_to", "feature_shift_y_to", "ref_name_right_gap", "legend_position");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}
