@@ -82,11 +82,25 @@ foreach my $s(sort {$gff{$b}{chooselen_all}<=>$gff{$a}{chooselen_all}} keys %gff
 	last;
 }
 my $ratio=$cluster_width_ratio*$svg_width/$max_length;
-
 #($conf, $list)=&legend2gff($list, $conf, $svg_width, $legend_width_ratio, $ratio, $fontsize);
 # create gff and setting for legend
 my $legend_number;
-($conf, $list, $legend_number)=&legend2gff($list, $conf, $svg_width, $svg_height, $legend_width_ratio, $ratio, $conf{legend_font_size});
+my $top_bottom_margin=$conf{top_bottom_margin};
+my $top_distance;
+my $sample_single_height;
+my $top_margin;
+my $bottom_margin;
+if($top_bottom_margin!~ /([\d\.]+),([\d\.]+)/){
+	$top_distance = $top_bottom_margin/2*$svg_height;
+	$top_margin = $top_bottom_margin/2;
+	$bottom_margin = $top_bottom_margin/2;
+}else{
+	die "error: top_bottom_margin = $top_bottom_margin should be < 1\n" if($1+$2 >1);
+	$top_distance = $1 * $svg_height;
+	$top_margin=$1;
+	$bottom_margin=$2;
+}
+($conf, $list, $legend_number)=&legend2gff($list, $conf, $svg_width, $svg_height, $legend_width_ratio, $ratio, $conf{legend_font_size}, $top_margin, $bottom_margin);
 %conf=%$conf;
 ($conf, $track_reorder) = &default_setting(0, %conf);
 %conf=%$conf;
@@ -109,18 +123,17 @@ if($legend_number){
 
 my $index;
 my $common_size;
-my $top_bottom_margin=$conf{top_bottom_margin};
 my %orders;
 my $svg="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"$svg_width\" height=\"$svg_height\" style=\"background-color:$conf{svg_background_color};\">\n";
-my $top_distance=$top_bottom_margin/2*$svg_height;
+
+
 #tracks_shift_y=chr14,0,+1 #sampl
 #die "track_order is @track_order\n";
 my %tracks_shift_y = &shift_tracks_y($conf{tracks_shift_y}, \@track_order);
 my %tracks_shift_x = &shift_tracks_x($conf{tracks_shift_x});
 
+$sample_single_height = (1 - $bottom_margin - $top_margin)*$svg_height/$tracks_shift_y{num}; # 每个track的高度
 
-my $sample_single_height = (1 - $top_bottom_margin)*$svg_height/$tracks_shift_y{num}; # 每个track的高度
-#die "num is $tracks_shift_y{num}\n";
 my $id_line_height = $sample_single_height/100 * $conf{genome_height_ratio}; # 每个block的genome的高度
 
 my $ref_name_right_gap=$conf{ref_name_right_gap};
@@ -247,7 +260,7 @@ while(@track_order){
 				$segment_baseline="hanging";
 				$segment_name_y+=$display_segment_name_shift_y;
 				
-				$segment_name_y += &check_font_size_by_estimate(0, "height", $segment_name, $display_segment_name_fontsize);
+				$segment_name_y += &check_font_size_by_estimate("", "height", $segment_name, $display_segment_name_fontsize);
 				$segment_baseline="baseline";
 			}elsif($display_segment_name_shift_y=~ /^-([\d\.])+$/){	
 				$segment_baseline="baseline";
@@ -697,7 +710,7 @@ foreach my $pair(@pairs){
 # 把gff读取之后，把有legend_label的features挑出来,去掉冗余的（运行同一个label对应不同的颜色和透明度和feature_shape），创建新的id然后写入一个legened.gff和legend.setting.conf，重新用read_list读入legened.gff和legend.setting.conf，然后在开始draw_gene
 
 sub legend2gff(){
-	my ($list, $conf, $svg_width, $svg_height, $legend_width_ratio, $ratio, $fontsize)=@_;
+	my ($list, $conf, $svg_width, $svg_height, $legend_width_ratio, $ratio, $fontsize, $top_margin, $bottom_margin)=@_;
 	#my ($list, $conf, $svg_width, $legend_width_ratio, $fontsize)=@_;
 	my %legends;
 	#my $legend_levels="label,color,shape,opacity,strand";
@@ -744,7 +757,7 @@ sub legend2gff(){
 	foreach my $l(keys %legends){
 		$text.=$legends{$l}{label};
 	}
-	my $feature_height = &check_font_size_by_estimate(0, "height", $text, $fontsize);
+	my $feature_height = &check_font_size_by_estimate("min", "height", $text, $fontsize);
 	my $feature_length_ratio=1.5;
 	foreach my $l(keys %legends){
 		$legends{$l}{height}=$feature_height;
@@ -762,7 +775,7 @@ sub legend2gff(){
 			%every_legend_width = %$every_legend_width ;
 			$feature_shift_x_to = ($svg_width - $lengend_total_width)/2;
 			print "feature_shift_x_to = $feature_shift_x_to = ($svg_width - $lengend_total_width)/2\n";
-			$feature_shift_y_to = $svg_height * 0.9;
+			$feature_shift_y_to = $svg_height - $feature_height * 1.1; # (1- $bottom_margin*0.5)* $svg_height;
 		}elsif($pos eq "right"){
 			$feature_shift_y_to = ($svg_height-$total_height)/2;
 			$feature_shift_x_to = $svg_width*(1-$legend_width_ratio) + $legend_width_margin*$svg_width*$legend_width_ratio-1;
@@ -770,7 +783,7 @@ sub legend2gff(){
 			%every_legend_width = %$every_legend_width ;
 			$feature_shift_x_to = ($svg_width - $lengend_total_width)/2;
 			$feature_shift_x_to = ($svg_width - $lengend_total_width)/2;
-			$feature_shift_y_to = $svg_height * 0.1;
+			$feature_shift_y_to = $feature_height * 0.1;
 		}else{
 				die "error: not support legend_position = $pos \n";
 		}
@@ -842,7 +855,7 @@ sub caculate_every_legend_width(){
 	my %all_pos_legends = %$all_pos_legends;
 	my $lengend_total_width;
 	foreach my $f(keys %{$all_pos_legends{$pos}}){
-		my $legend_text_width = &check_font_size_by_estimate(0, "width", $legends{$f}{label}, $fontsize);
+		my $legend_text_width = &check_font_size_by_estimate("", "width", $legends{$f}{label}, $fontsize);
 		$every_legend_width{$f} = $legend_symbol_width + $legend_text_width * $gap;
 		$lengend_total_width += $every_legend_width{$f};
 	}
@@ -912,10 +925,10 @@ if($conf{scale_display}=~ /yes/i){
 		my $font_size=$conf{scale_tick_fontsize};
 		my $tick_height=$conf{scale_tick_height}* $svg_height;
 		if($scale=~ /up/){
-			$y_scale=$top_bottom_margin/2* 0.5 * (1-$conf{scale_padding_y})* $svg_height;
-#$y_tick_shift=-$conf{scale_tick_padding_y};
+			$y_scale=$top_margin * (1-abs($conf{scale_padding_y}))* $svg_height;
+			#$y_tick_shift=-$conf{scale_tick_padding_y};
 		}else{
-			$y_scale=(1- $top_bottom_margin/2*(1-$conf{scale_padding_y})) * $svg_height;
+			$y_scale=(1- $bottom_margin*(1-abs($conf{scale_padding_y}))) * $svg_height;
 			$y_tick_shift=$conf{scale_tick_padding_y};
 			$tick_height=-$tick_height;
 		}
@@ -938,6 +951,7 @@ if($conf{scale_display}=~ /yes/i){
 			my $tick_label=$tick*$conf{scale_ratio};
 			last if( ($max_length - $tick_label) < $conf{scale_ratio} );
 			$tick_label+=($scale_start-1);
+			$tick_label = 1 if($tick_label == 0);
 			$tick_label=&format_scale($tick_label);
 			$tick_label.="bp" if($tick == 0);
 			$orders{$conf{scale_order}}.="<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # ticks

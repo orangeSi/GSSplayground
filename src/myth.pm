@@ -1208,7 +1208,7 @@ sub default_setting(){
 	$conf{scale_color} ||="black";
 	$conf{scale_width} ||=1;
 	$conf{scale_ratio} ||=100;
-	$conf{scale_padding_y} ||=-0.1;
+	$conf{scale_padding_y} ||=0.1;
 	$conf{scale_tick_height} ||=0.01;
 	$conf{scale_tick_opacity} ||=0.5;
 	$conf{scale_order} ||=0;
@@ -1462,8 +1462,8 @@ sub check_block_reverse(){
 }
 
 sub check_font_size_by_estimate(){
-	my ($height, $type, $text, $fontsize) = @_;
-	print "fontsize is $fontsize before, height is $height\n";
+	my ($value, $type, $text, $fontsize) = @_;
+	#print "fontsize is $fontsize before, height is $height\n";
 	use Imager::Font;
 	my $ttf="$Bin/Times_New_Roman.ttf";
 	die "error: ttf $ttf not exists" if(!-f $ttf);
@@ -1491,6 +1491,8 @@ sub check_font_size_by_estimate(){
 		#$total_width = $bbox->total_width;
 	#}
 	if($type eq "height"){
+		return min($bbox->font_height, $bbox->text_height) if($value eq "min");
+		return max($bbox->font_height, $bbox->text_height) if($value eq "max");
 		return ($bbox->font_height+$bbox->text_height)/2;
 	}elsif($type eq "width"){
 		return $bbox->total_width;
