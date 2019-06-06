@@ -12,6 +12,7 @@
 <li>
 <td><input id="search_the_rg" type="value" value="track_name:chr_id:start:end" size=50 title="track_name:chr_id:start:end" /></td>
 <td><input id="search_by_rg" value="search by track_name1:chr_id1:start1:end1;track_name2:chr_id2:start2:end2;" type="button" onclick="search_by_rg()" /></td>
+<td><input id="remove_exists_rg" value="remove all exists regions" type="button" onclick="remove_exists_rg()"></td>
 </li><br>
 <li>
 <td><input onclick="saveSVG('svg-pan-zoom_viewport', svg_width_raw, svg_height_raw, svg_bgcolor)" type=button value='download current image to svg file' ></td>
@@ -82,6 +83,19 @@ function get_hightligh_ratio(){
 	hightligh_ratio = parseFloat(hightligh_ratio);
 	return hightligh_ratio;
 }
+
+function remove_exists_rg(){
+	for(var index in rg_lists){
+		var gid = rg_lists[index];
+		var exists_rg_pos = document.getElementById(gid);
+		if(exists_rg_pos){
+			exists_rg_pos.remove();
+			console.log("remove "+gid);
+		}
+	}
+	rg_lists = new Array();
+}
+var rg_lists = new Array();
 function search_by_rg(){
 	//if(window.refresh_flag >0){
 	//	alert('sorry, you neet to refresh the page, then you can search the region yet~');
@@ -185,7 +199,7 @@ function search_by_rg(){
 									 var gid = track_name+"."+chr_id+"."+block_index+"."+rg_pos;
 									 var exists_rg_pos = document.getElementById(gid);
 									 if(exists_rg_pos){
-										exists_rg_pos.remove();
+										//exists_rg_pos.remove();
 										remove_exists = 1;
 									 	continue;
 									 }
@@ -210,6 +224,7 @@ function search_by_rg(){
 									 console.log('rect is '+rect.innerHTML);
 									 console.log("x="+x+",y="+y+",width="+width+",height="+height);
 									 search_result_num +=1;
+									 rg_lists.push(gid)
 									}
 								}
 	
