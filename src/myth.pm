@@ -66,7 +66,7 @@ sub shift_tracks_x(){
 }
 
 sub show_segment_strand(){
-	my ($info, $id_line_x, $id_line_y, $id_line_height, $id_line_width, $reverse)=@_;
+	my ($info, $id_line_x, $id_line_y, $id_line_height, $id_line_width, $reverse,$font_family)=@_;
 	die "error: display_segment_strand=$info format error, should like display_segment_strand=5:5,3:3,color:black,fontsize:5\n" if($info!~ /^5:(.*),3:(.*),color:(.*),fontsize:([\d\.]+)$/);
 	my ($five,$three,$color,$fsize)=($1, $2, $3, $4);
 	return "" if(!$five || !$three);
@@ -81,8 +81,8 @@ sub show_segment_strand(){
 		$five=$three_tmp;
 		$three=$five_tmp;
 	}
-	my $left="<text class='myth'  x=\"$five_x\" y=\"$five_y\" style=\"font-family:Times New Roman;font-size:${fsize}px;fill:$color;text-anchor:end;alignment-baseline:middle\" >$five</text>\n"; 
-	my $right="<text class='myth'  x=\"$three_x\" y=\"$three_y\" style=\"font-family:Times New Roman;font-size:${fsize}px;fill:$color;text-anchor:start;alignment-baseline:middle\" >$three</text>\n";
+	my $left="<text class='myth'  x=\"$five_x\" y=\"$five_y\" style=\"font-family:$font_family;font-size:${fsize}px;fill:$color;text-anchor:end;alignment-baseline:middle\" >$five</text>\n"; 
+	my $right="<text class='myth'  x=\"$three_x\" y=\"$three_y\" style=\"font-family:$font_family;font-size:${fsize}px;fill:$color;text-anchor:start;alignment-baseline:middle\" >$three</text>\n";
 	return "$left $right";
 }
 
@@ -610,6 +610,7 @@ sub draw_genes(){
 	my $feature_shift_x=&get_para("feature_shift_x", $feature_id, $conf);
 	my $label_text_alignment_baseline=&get_para("label_text_alignment_baseline", $feature_id, $conf);
 	my $feature_popup_title=&get_para("feature_popup_title", $feature_id, $conf);
+	my $font_family = $conf->{font_family};
 	if($feature_popup_title){
 		my @kvs=split(/;/, $feature_popup_title);
 		$feature_popup_title="\n";
@@ -862,7 +863,7 @@ sub draw_genes(){
 			}
 
 ## draw label of feature
-			$orders->{$order_f_label}.= "<text class='myth'  x=\"$label_x\" y=\"$label_y\" style=\"font-family:Times New Roman;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
+			$orders->{$order_f_label}.= "<text class='myth'  x=\"$label_x\" y=\"$label_y\" style=\"font-family:$font_family;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i ); # label of feature
 		}
 # check this feature if is in crossing_link
 		#print "ssfeature_id is $feature_id\n";
@@ -974,7 +975,7 @@ sub draw_genes(){
 
 ## draw label of feature
 			die "die:label_y is $label_y, id is $feature_id\n" if(!$label_y);
-			$orders->{$order_f_label}.= "<text class='myth' x=\"$label_x\" y=\"$label_y\" style=\"font-family:Times New Roman;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
+			$orders->{$order_f_label}.= "<text class='myth' x=\"$label_x\" y=\"$label_y\" style=\"font-family:$font_family;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		}
 # check this feature if is in crossing_link
 		#print "feature_id is $feature_id\n";
@@ -1077,7 +1078,7 @@ sub draw_genes(){
 
 
 ## draw label of feature
-			$orders->{$order_f_label}.= "<text class='myth'  x=\"$label_x\" y=\"$label_y\" style=\"font-family:Times New Roman;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
+			$orders->{$order_f_label}.= "<text class='myth'  x=\"$label_x\" y=\"$label_y\" style=\"font-family:$font_family;font-size:${index_label_size}px;fill:$index_label_col;text-anchor:$label_text_anchor;$label_text_alignment_baseline$feature_label_autowidth\" transform=\"rotate($index_label_angle $label_x $label_y)\" >$index_label_content</text>\n" if($display_feature_label!~ /no/i && $display_feature_label!~ /no,no/i); # label of feature
 		}
 # check this feature if is in crossing_link
 		if(exists $conf->{crossing_link2}->{features}->{$feature_id}){
@@ -1161,6 +1162,7 @@ sub read_conf(){
 
 sub default_setting(){
 	my ($skip_not_exists, %conf) = @_;
+	$conf{font_family} ||="Times New Roman";
 	$conf{svg_width_height} ||= '600,1500';
 	#$conf{anchor_positon_ratio} ||= 1;
 	$conf{feature_keywords} ||=",";
