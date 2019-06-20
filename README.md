@@ -54,8 +54,9 @@ SamFixCigar.jar of jvarkit will convert M to X/= in cigar of sam file, if do thi
 ```
 
 #### ToDo:<br>
-&nbsp;&nbsp;&nbsp;&nbsp; support Hi-C data/reads mapping
-&nbsp;&nbsp;&nbsp;&nbsp; support julia/python api to call clustersploter
+&nbsp;&nbsp;&nbsp;&nbsp; support GC plot and defined subtrack for gff file,like read_mapping subtrack<br>
+&nbsp;&nbsp;&nbsp;&nbsp; support Hi-C data/reads mapping<br>
+&nbsp;&nbsp;&nbsp;&nbsp; support julia/python api to call clustersploter<br>
 &nbsp;&nbsp;**2018-12-28**:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1. add gtf fomrat, not only gff format<br>
 &nbsp;&nbsp;&nbsp;&nbsp;2. add blat_spl and mummer4 fomrat, not only blast_m8 or paf format<br>

@@ -17,11 +17,10 @@ GetOptions("list:s"=>\$list,
 
 die "
 perl $0 [options]:
-* --list <str>  two formats: [sample gff genome seq_id1 seq_draw_start1 seq_draw_end1 genome seq_id2 seq_draw_start2 seq_draw_end2 ...]
-	or [sample gff genome]no seq_id mean full length of whole gff
+* --list   <str> [track_name gene.gff genome.fa seq_id1 seq_draw_start1 seq_draw_end1 seq_id2 seq_draw_start2 seq_draw_end2 ...]
 * --prefix <str>
 * --outdir <str>
-* --conf <str> 
+* --conf   <str> 
 
 writed by myth
 " unless($list && $prefix && $outdir && $conf);
@@ -233,7 +232,7 @@ while(@track_order){
 		#reversed_block{$sample}{$block_index}
 		my @block_region=&get_real_feature_region($reverse_block_flag, $start_once, $end_once, $start_once, $end_once, "+", $gff{$sample}{scf}{$scf[0]}, "block"); # "$start-$end", $start, $end, $strand);
 		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$block_region[0]</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
-		$orders{$track_order}.=&show_segment_strand($conf{display_segment_strand}, $id_line_x, $id_line_y, $id_line_height, $id_line_width, $reverse_block_flag);
+		$orders{$track_order}.=&show_segment_strand($conf{display_segment_strand}, $id_line_x, $id_line_y, $id_line_height, $id_line_width, $reverse_block_flag, $conf{font_family});
 
 		if($display_segment_name_flag=~ /yes/i){
 			my $segment_baseline;
@@ -955,7 +954,7 @@ if($conf{scale_display}=~ /yes/i){
 			$tick_label=&format_scale($tick_label);
 			$tick_label.="bp" if($tick == 0);
 			$orders{$conf{scale_order}}.="<line x1=\"$tick_x\" y1=\"$tick_y1\" x2=\"$tick_x\" y2=\"$tick_y2\" style=\"stroke:$conf{scale_color};stroke-width:$conf{scale_width};opacity:$conf{scale_tick_opacity}\"/>\n"; # ticks
-			$orders{$conf{scale_order}}.= "<text class='myth' x=\"$tick_x\" y=\"$tick_label_y\" style=\"font-size:${font_size}px;fill:$conf{scale_color};text-anchor:middle;font-family:Times New Roman;\">$tick_label</text>\n"; # label of feature
+			$orders{$conf{scale_order}}.= "<text class='myth' x=\"$tick_x\" y=\"$tick_label_y\" style=\"font-size:${font_size}px;fill:$conf{scale_color};text-anchor:middle;font-family:$conf{font_family};\">$tick_label</text>\n"; # label of feature
 
 		}
 		print "cluster_width_ratio $cluster_width_ratio*$svg_width % $unit_scale\n";
@@ -965,7 +964,7 @@ if($conf{scale_display}=~ /yes/i){
 			my $last_tick_label=&format_scale($max_length+$scale_start-1);
 			$last_tick_label.="bp";
 
-			$orders{$conf{scale_order}}.= "<text class='myth'  x=\"$x_end_scale\" y=\"$tick_label_y\" style=\"font-size:${font_size}px;fill:$conf{scale_color};text-anchor:middle;font-family:Times New Roman\">$last_tick_label</text>\n"; # label of feature
+			$orders{$conf{scale_order}}.= "<text class='myth'  x=\"$x_end_scale\" y=\"$tick_label_y\" style=\"font-size:${font_size}px;fill:$conf{scale_color};text-anchor:middle;font-family:$conf{font_family}\">$last_tick_label</text>\n"; # label of feature
 
 		}
 
