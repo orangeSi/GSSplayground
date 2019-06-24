@@ -527,8 +527,8 @@ sub get_real_coordinate(){
 
 #($reverse_block_flag) ? "":"$start_once-$end_once"; $gff{$sample}{scf}{$scf}
 sub get_real_feature_region(){
-	my ($reverse_block_flag, $start, $end, $block_start, $block_end, $strand, $scf_len, $type)=@_;
-	if($reverse_block_flag){ # 3-7 of 1-10 -> 8-4
+	my ($reverse_block_flag, $start, $end, $block_start, $block_end, $strand, $scf_len, $type, $feature_type)=@_;
+	if($reverse_block_flag && $feature_type ne "ytick" && $feature_type  ne "ylabel"){ # 3-7 of 1-10 -> 8-4
 		my $raw_start=$start;
 		my $raw_end=$end;
 		if($type eq "feature"){ #feature is 1, -10, 147049, 1, 6992, +, 0, feature
@@ -548,7 +548,8 @@ sub get_real_feature_region(){
 		$end=$start_tmp;
 		$start=$end_tmp;
 		$strand=~ tr/01/10/; # relative start and end
-		return ("reverse:$start-$end($raw_start-$raw_end)", $start, $end, $strand);
+		#return ("reverse:$start-$end($raw_start-$raw_end)", $start, $end, $strand);
+		return ("reverse:[$raw_end -> $raw_start]", $start, $end, $strand);
 	}else{
 		return ("$start-$end", $start, $end, $strand);
 	}
@@ -580,10 +581,11 @@ sub draw_genes(){
 	print "draw feature_id = $feature_id\n";
 	die "error: $end should > $start for $feature_id\n" if($end < $start);
 	print "1brefore, feature_id\t$feature_id,\tfeature_shift_x\t,start\t$start\tend\t$end\n";
-	($feature_pos, $start, $end, $strand)=&get_real_feature_region($reverse_block_flag, $start, $end, $start_block, $end_block, $strand, 0, "feature"); # "$start-$end", $start, $end, $strand);
+	my $feature_type=$conf->{feature_setting2}->{$feature_id}->{type}; # if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to})
+	($feature_pos, $start, $end, $strand)=&get_real_feature_region($reverse_block_flag, $start, $end, $start_block, $end_block, $strand, 0, "feature", $feature_type); # "$start-$end", $start, $end, $strand);
 	&check_para(%{$conf->{feature_setting2}->{$feature_id}});
 	my $feature_opacity=&get_para("feature_opacity", $feature_id, $conf);
-	if($reverse_block_flag){
+	if($reverse_block_flag && $feature_type ne "ytick" && $feature_type  ne "ylabel"){
 		$feature_reverse_for_crosslink->{$feature_id}="";
 		if(exists $conf->{feature_setting2}->{$feature_id}{feature_opacity_reverse}){
 			$feature_opacity = $conf->{feature_setting2}->{$feature_id}{feature_opacity_reverse}
@@ -592,7 +594,6 @@ sub draw_genes(){
 			$index_color = $conf->{feature_setting2}->{$feature_id}{feature_color_reverse}
 		}
 	}
-	my $feature_type=$conf->{feature_setting2}->{$feature_id}->{type}; # if(exists $conf->{feature_setting2}->{$feature_id}->{feature_shift_x_to})
 	my $skip_feature_type_keep_crosslink=0;
 	$skip_feature_type_keep_crosslink=1 if(grep(/^$feature_type$/, split(/,/, $conf->{skip_feature_type_keep_crosslink})));
 	if($index_color=~ /rgb\(\d+,\d+,\d+\),[^,]/ or $index_color=~ /[^,],rgb\(\d+,\d+,\d+\)/){

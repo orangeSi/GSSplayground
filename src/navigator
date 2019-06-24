@@ -1,15 +1,17 @@
 <ul>
 <li>
-<td><input id="hightligh_ratio" type="value" value="3"  size=5 title="highlight ratio" /> <input type=button value="highlight ratio" /></td>
+<td><input type="button" value="clear" onclick="document.getElementById('hightligh_ratio').value=''" /><input id="hightligh_ratio" type="value" value="3"  size=5 title="highlight ratio" /> <input type=button value="highlight ratio" /></td>
 <!--
 	<input type="button" value="if you want pan and zoom the imgine, hit me" style="color:green;font-weight:bold" onclick="svgpanzoom(1);this.value='ok, you can pan and zoom now'" />
 -->
 </li><br>
 <li>
+<td><input type="button" value="clear" onclick="document.getElementById('search_the_key').value=''" /></td>
 <td><input id="search_the_key" type="value" value="use js regrex,example keywordA|keywordB"  size=50 title="use js regrex,example keywordA|keywordB" /></td>
 <td><input value="search by keyword of feature id" type="button" onclick="search_by_key()" /></td>
 </li><br>
 <li>
+<td><input type="button" value="clear" onclick="document.getElementById('search_the_rg').value=''" /></td>
 <td><input id="search_the_rg" type="value" value="track_name:chr_id:start:end" size=50 title="track_name:chr_id:start:end" /></td>
 <td><input id="search_by_rg" value="search by track_name1:chr_id1:start1:end1;track_name2:chr_id2:start2:end2;" type="button" onclick="search_by_rg()" /></td>
 <td><input id="remove_exists_rg" value="remove all exists regions" type="button" onclick="remove_exists_rg()"></td>
@@ -104,9 +106,7 @@ function search_by_rg(){
 	var search_result_num = 0;	
 	var remove_exists=0;
 	var search_the_rg = document.getElementById("search_the_rg").value;
-	search_the_rg = search_the_rg.replace(/\s*$/, "");
-	search_the_rg = search_the_rg.replace(/^\s*/, "");
-	search_the_rg = search_the_rg.replace(/;\s*$/, "");
+	search_the_rg = search_the_rg.replace(/\s*$/, "").replace(/^\s*/, "").replace(/;\s*$/, "");
 	
 	var hightligh_ratio = get_hightligh_ratio();
 	console.log("hightligh_ratio is "+hightligh_ratio);
@@ -253,6 +253,7 @@ function search_by_key(){
 	var new_stroke_width = 1;
 	var gs = document.getElementsByClassName("myth");
 	var key = document.getElementById("search_the_key").value;
+	key = key.replace(/\s*$/, "").replace(/^\s*/, "");
 	
 	if(key.length == 0){alert("keyword is empty");return 1;}
 

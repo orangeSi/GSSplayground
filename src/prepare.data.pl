@@ -406,7 +406,7 @@ sub synteny_run(){
 			next if($_=~ /^#/ ||$_=~ /^\s*$/);
 #print "line$. is $_\n";
 			my @arr=split(/\s+/,$_);
-			die "error:alignment sholud be 12 columns in $alignment\n" if(@arr!=12);
+			die "error:alignment sholud be 12 columns in $alignment, but get @arr\n" if(@arr!=12);
 			my $query_scf=$arr[0];
 			my $target_scf=$arr[1];
 			my $query_start=$arr[6];
@@ -1124,7 +1124,7 @@ sub hist_scatter_line(){
 		print "$k_index is $k\n\n";
 		my @ks = split(/\t+/, $k);
 		my @infos=split(/,/, $ks[0]);
-#highlight_hgrid->26:2:green,28:2:black    highlight_columns->0:20:green:0.7,20:100:black:0.5 start_end_xaxis->61:661,711:1311,1361:1961
+		#highlight_hgrid->26:2:green,28:2:black    highlight_columns->0:20:green:0.7,20:100:black:0.5 start_end_xaxis->61:661,711:1311,1361:1961
 		my $infos_len=scalar(@infos);
 		if($infos_len != 17){
 			die "\nerror: hist_scatter_line should have 17 colums for hist_scatter_line=$k, but only have $infos_len\nvalid like hist_scatter_line=$ex\n";
@@ -1135,11 +1135,16 @@ sub hist_scatter_line(){
 		my $the_opacity=$2;
 
 		die "\nerror: depth_order should be number, not $depth_order\n" if($depth_order!~ /^-?\d+$/);
-		my @depth_types=("hist", "scatter", "scatter_line", "brand");
-		die "\nerror: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/, @depth_types));
-		$depth_file=~ /^([^:]+):([^:]+)$/;
-		die "\nerror: $1 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $1);
-		die "\nerror: $2 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $2);
+		my @depth_types=("hist", "scatter", "scatter_line", "brand", "GC");
+		die "\nerror: not support $depth_type~ only support @depth_types\n" if(! grep(/^$depth_type$/i, @depth_types));
+		if($depth_type!~ /^GC$/i){
+			$depth_file=~ /^([^:]+):([^:]+)$/;
+			die "\nerror: $1 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $1);
+			die "\nerror: $2 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $2);		
+		}else{
+			$depth_file=~ /^([^:]+)$/;
+			die "\nerror: $1 not exists in $depth_file for hist_scatter_line=$k\n" if(! -f $1);
+		}
 		for(my $i=0;$i<$infos_len;$i++){
 			next if($i==8);
 			$infos[$i]=~ s/\s//g;
@@ -2159,7 +2164,7 @@ sub get_regions(){
 sub hist_scatter_line_run(){
 	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type, $block_start_bp, $block_end_bp,$depth_order, $the_color, $the_opacity, $infos)=@_;
 	print "info is $info\n";
-	my %depths=&read_depth_file($depth_file, $sample, $scf,$block_start_bp, $block_end_bp, $window_size, $info);
+	my %depths=&read_depth_file($depth_file, $sample, $scf,$block_start_bp, $block_end_bp, $window_size, $info, $depth_type);
 	my @infos=@$infos;
 	my ($depth_gff,$depth_setting_conf);
 	my $max_depth=$depths{max_depth};
@@ -2281,7 +2286,7 @@ sub hist_scatter_line_run(){
 			#$depth_setting_conf.="$depth_id\tfeature_label_textLength\t1*feature_width\n";
 			#$depth_setting_conf.="$depth_id\tfeature_label_lengthAdjust\tspacingAndGlyphs\n"; #
 
-		}elsif($depth_type eq "hist"){
+		}elsif($depth_type eq "hist" || $depth_type eq "GC"){
 			if($e1=~ /-/){
 				$depth_shift_y=($s2 > $e2)? abs($e1)-$depth_height: abs($s1);
 				$depth_shift_y="+$depth_shift_y";
@@ -2334,14 +2339,14 @@ sub hist_scatter_line_run(){
 
 
 sub read_depth_file(){
-	my ($depth_file, $sample, $scf,$block_start_bp, $block_end_bp,$window_size, $info)=@_;
-	print "is:$depth_file, $sample, $scf,$block_start_bp, $block_end_bp,$window_size, $info\n";
+	my ($depth_file, $sample, $scf,$block_start_bp, $block_end_bp,$window_size, $info, $depth_type)=@_;
+	print "is:$depth_file, $sample, $scf,$block_start_bp, $block_end_bp,$window_size, $info, $depth_type\n";
 	my %tmp;
 	my %depths;		
 	my %windows;
 	my $max=0;
 	die "\nerror:window_size $window_size need >=1\n" if($window_size<0 or $window_size=~ /[^\d^\.]+/);
-	if($depth_file=~ /\.bam:.*/){
+	if($depth_file=~ /\.bam:.*/){ # for read depths
 		my @tmps=&check_sort_bam($depth_file);
 		$depth_file=$tmps[0];
 		my $bam_depth_file="$depth_file.$scf.$block_start_bp.$block_end_bp.depth";
@@ -2359,6 +2364,42 @@ sub read_depth_file(){
 	}elsif($depth_file=~ /\.sam:.*/){
 		die "error: need a bam file , not sam file in $depth_file\n";
 	}
+
+	## for genome GC
+	if($depth_type=~ /^GC$/i){
+		#depth_file		
+		open OUT,">$depth_file.GC" or die "$!";
+		print OUT "#chr_id\tbase_position\tbase_depth\n";
+		open FA,"$depth_file" or die "$!";
+		$/=">";<FA>;
+		my $hold=1;
+		while(<FA>){
+			chomp;
+			my ($id, $seq)=split(/\n/, $_, 2);
+			$seq=~ s/\s+//g;
+			$id=~ s/\s.*$//;
+			next if($id ne "$scf");
+			$hold=0;
+			my @bps=split(//, $seq);
+			my $gc;
+			foreach my $pos($block_start_bp..$block_end_bp){
+				if($bps[$pos-1]=~ /[GC]/i){
+					$gc = 1;
+				}elsif($bps[$pos-1]!~ /[ATCGNatcgn]/){
+					die "error: $scf $pos th is $bps[$pos-1], not ATCGN\n";
+				}else{
+					$gc = 0;
+				}
+				print OUT "$id\t$pos\t$gc\n";
+			}
+		}
+		close FA;
+		close OUT;
+		die "error, cannot find $scf in $depth_file\n" if($hold);
+		$/="\n";
+		$depth_file="$depth_file.GC";
+	}
+
 	$depth_file=~ /^([^:]+)/;
 	$depth_file=$1;
 #s3      s3      3       10 #sample scf_id  pos depth

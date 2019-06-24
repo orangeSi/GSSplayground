@@ -231,7 +231,7 @@ while(@track_order){
 		$end_once=$gff{$sample}{chooselen_single}{$block_index}{end};
 		$rg_test = "$sample:$scf[0]:$start_once:$end_once;" if(!$reverse_block_flag);
 		#reversed_block{$sample}{$block_index}
-		my @block_region=&get_real_feature_region($reverse_block_flag, $start_once, $end_once, $start_once, $end_once, "+", $gff{$sample}{scf}{$scf[0]}, "block"); # "$start-$end", $start, $end, $strand);
+		my @block_region=&get_real_feature_region($reverse_block_flag, $start_once, $end_once, $start_once, $end_once, "+", $gff{$sample}{scf}{$scf[0]}, "block", ""); # "$start-$end", $start, $end, $strand);
 		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$block_region[0]</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
 		$orders{$track_order}.=&show_segment_strand($conf{display_segment_strand}, $id_line_x, $id_line_y, $id_line_height, $id_line_width, $reverse_block_flag);
 

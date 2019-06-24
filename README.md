@@ -26,6 +26,7 @@ Imager::Font  # this perl package had been installed in src/Imager-1.011(if it d
 - illunimate pair-end or mate-pair reads or pacbio/nanopore long reads mapping with varation(indel, sv) in bam, support snpindel in vcf file, not support complex sv yet<br>
 
 ### Update:<br>
+- support GC plot 
 - support directly modify almost features attribution in html with mouse-click (color, opacity, postion, font_size)
 - support minimap2/blast/Mummer and commom alignment format for synteny
 - support both reverse fragment and reverse alignment hit in synteny
