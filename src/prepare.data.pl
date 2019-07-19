@@ -1,12 +1,15 @@
-#!/usr/binmin()/env perl -w
+#!/usr/bin/perl -w
 #use strict;
 use warnings;
 use Getopt::Long;
 use List::Util qw(max min);
 use FindBin qw($Bin);
-use JSON qw(encode_json);
 use lib "$Bin";
-use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para);
+use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_x shift_tracks_y get_real_feature_region check_block_reverse show_segment_strand draw_feature check_font_size_by_estimate);
+
+
+&is_exists('FindBin', "JSON");
+
 
 my ($list,$prefix_name,$outdir,$conf, $confile, $track_reorder);
 GetOptions("list:s"=>\$list,
@@ -1116,7 +1119,7 @@ sub hist_scatter_line(){
 	print "hist_scatter_line start\n";
 	my $k_index;
 	my (%outname);
-	my @highs=("highlight_columns", "highlight_hgrid", "start_end_xaxis", "ylabel");
+	my @highs=("highlight_columns", "highlight_hgrid", "start_end_xaxis", "ylabel", "hide_max");
 	for my $k (@{$conf->{hist_scatter_line}}){
 		$k_index++;
 		$k=~ s/\s+$//;
@@ -1197,7 +1200,7 @@ sub hist_scatter_line(){
 			for my $rg(@start_end_xaxis){
 				my ($rg_start, $rg_end)=split(/,/, $rg);
 				print "hist_scatter_line_run rg is $rg  :$rg_start,$rg_end\n";
-				my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&hist_scatter_line_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type, $rg_start, $rg_end, $depth_order, $the_color, $the_opacity, \@infos);
+				my ($depth_gff, $depth_setting_conf, $cross_link_conf)=&hist_scatter_line_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label,$window_size, $depth_file, $sample,$scf,$block_index, $gff, $k, $depth_label_size, $k_index, $depth_type, $rg_start, $rg_end, $depth_order, $the_color, $the_opacity, \@infos, \%highss);
 				my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.depth";
 				#print "depth_gff gff is $depth_gff\n";
 				%outname = &gather_gff_conf_link($prefix,$depth_gff,$depth_setting_conf,$cross_link_conf, \%outname, $sample);
@@ -2144,6 +2147,9 @@ sub get_regions(){
 				}else{
 					$hash{$a}="no";
 				}
+			}elsif($a eq "hide_max"){
+				die "error: $a error in $info\n" if($info!~ /\s$a->\s*(\S+)/);
+				$hash{$a}=$1;
 			}
 		}
 	}
@@ -2157,15 +2163,19 @@ sub get_regions(){
 	if(not exists $hash{chop_soft_clip}){
 		$hash{chop_soft_clip}=10; #default 10bp
 	}
+	if(not exists $hash{hide_max}){
+		$hash{hide_max} = 0;
+	}
 	return %hash;
 }
 
 
 sub hist_scatter_line_run(){
-	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type, $block_start_bp, $block_end_bp,$depth_order, $the_color, $the_opacity, $infos)=@_;
+	my ($s1, $e1, $s2, $e2, $axis_gap,$title, $window_size, $depth_file, $sample,$scf,$block, $gff, $info, $depth_label_size, $k_index, $depth_type, $block_start_bp, $block_end_bp,$depth_order, $the_color, $the_opacity, $infos, $highss)=@_;
 	print "info is $info\n";
 	my %depths=&read_depth_file($depth_file, $sample, $scf,$block_start_bp, $block_end_bp, $window_size, $info, $depth_type);
 	my @infos=@$infos;
+	my %highss=%$highss;
 	my ($depth_gff,$depth_setting_conf);
 	my $max_depth=$depths{max_depth};
 	die "error: $s1 shoud not be 0 in $info\n" if($s1=~ /^\+?-?0$/);
@@ -2193,6 +2203,7 @@ sub hist_scatter_line_run(){
 				$diff_depth = $depth- min($s2, $e2);
 				$diff_depth=abs($diff_depth);
 				if($depth>max($s2, $e2)){
+					next if($highss{hide_max});
 					$depth_height=abs($s1-$e1);
 					$depth_overflow_flag=1;
 					$display_feature_label="yes";
@@ -2205,6 +2216,7 @@ sub hist_scatter_line_run(){
 				$diff_depth = $depth - max($s2, $e2);
 				$diff_depth=abs($diff_depth);
 				if($depth < min($s2, $e2)){
+					next if($highss{hide_max});
 					$depth_height=abs($s1-$e1);
 					$depth_overflow_flag=1;
 					$display_feature_label="yes";
@@ -2644,5 +2656,19 @@ sub feature_ytick(){
 	return ($ytick_gff, $ytick_setting_conf, $cross_link_conf);
 }
 
+
+
+sub is_exists(){
+	for my $pkg(@_){
+		eval "use $pkg";
+		if($@){
+			my $xx="/xxx/ClustersPloter/src/";
+			die "error: can't find package $pkg. Do you \$ source /xxx/ClustersPloter/env.sh  or export PERL5LIB=$xx:\$PERL5LIB ? because I had install $pkg in $xx\n"
+		}else{
+			print "find package $pkg\n";
+		}
+	}
+	return 0;
+}
 
 

@@ -153,6 +153,7 @@ sub read_list(){
 			}
 
 			$genome{$sample}{$id}{len}=$len;
+			$genome{$sample}{$id}{seq}=$seq;
 			if(not exists $scf_block_id{$id}){
 				$scf_block_id_flag++;
 				$scf_block_id{$id}=$scf_block_id_flag;
@@ -575,7 +576,7 @@ sub draw_feature(){
 
 sub draw_genes(){
 #draw_genes($index_id, $index_start, $index_end, $index_strand, $gene_height_medium, $gene_height_top, $gene_width_arrow, $shift_x, $top_distance, $sample_single_height, $sample, $scf[0], $index_color,  $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可
-	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag, $conf, $ratio, $id_line_height, $shift_angle_closed_feature, $orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id, $reverse_block_flag, $start_block, $end_block, $feature_reverse_for_crosslink)=@_;
+	my ($feature_id,$start,$end,$strand,$start_raw,$end_raw,$gene_height_medium,$gene_height_top,$gene_width_arrow,$shift_x,$shift_y,$feature_shift_y,$sample_single_height,$sample,$id, $index_color, $index_label_content, $index_label_size, $index_label_col, $index_label_position, $index_label_angle, $angle_flag, $conf, $ratio, $id_line_height, $shift_angle_closed_feature, $orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id, $reverse_block_flag, $start_block, $end_block, $feature_reverse_for_crosslink, $chr_seq, $feature_content_display_keywords)=@_;
 	#$gff{$sample}{scf}{$scf}
 	my $feature_pos;
 	print "draw feature_id = $feature_id\n";
@@ -609,6 +610,7 @@ sub draw_genes(){
 	my $shape=&get_para("feature_shape", $feature_id, $conf);
 	my $feature_shift_y_unit=&get_para("feature_shift_y_unit", $feature_id, $conf);
 	my $feature_shift_x=&get_para("feature_shift_x", $feature_id, $conf);
+	my $feature_content_display=&get_para("feature_content_display", $feature_id, $conf);
 	my $label_text_alignment_baseline=&get_para("label_text_alignment_baseline", $feature_id, $conf);
 	my $feature_popup_title=&get_para("feature_popup_title", $feature_id, $conf);
 	if($feature_popup_title){
@@ -618,7 +620,22 @@ sub draw_genes(){
 			$feature_popup_title.="<tspan>$kv</tspan>\n";	
 		}
 	}
-	chomp $feature_popup_title;
+	if($feature_content_display=~ /yes/i || grep(/^\s*$feature_type\s*$/, @$feature_content_display_keywords) ){
+		my $feature_content;
+		if($chr_seq){
+			$feature_content = substr($chr_seq, $start_raw-1, $end_raw-$start_raw+1);
+			if(!$strand){
+				$feature_content=reverse($feature_content);
+				$feature_content=~ tr/ATCGNatcgn/TAGCNtagcn/;
+			}
+			$feature_content=~ s/(.{60})/$1<br>/g;
+		}else{
+			$feature_content="warn:not find feature_content";
+		}
+		$feature_popup_title.="\n<tspan>$feature_type content -> $feature_content</tspan>";
+	}elsif($feature_content_display!~ /no/i){
+		die "error: feature_content_display should be yes or no for feature_id $feature_id\n";
+	}
 	my @alignment_baseline=("auto","baseline","before-edge","text-before-edge","middle","central", "after-edge","text-after-edge","ideographic","alphabetic","hanging","mathematical","inherit");
 	die "error: not support label_text_alignment_baseline=$label_text_alignment_baseline, only support @alignment_baseline\n" if(!grep(/^$label_text_alignment_baseline$/, @alignment_baseline));
 	$label_text_alignment_baseline=($label_text_alignment_baseline eq "baseline")? "":" alignment-baseline:$label_text_alignment_baseline;";
@@ -1255,6 +1272,8 @@ sub default_setting(){
 	$conf{feature_id_is_unique} ||="yes";
 	$conf{display_segment_strand} ||="5:5',3:3',color:black,fontsize:10";
 	$conf{legend_height_ratio} ||=0.9;
+	$conf{feature_content_display} ||="no";
+	$conf{feature_content_display_keywords} ||="";
 
 ##$conf{feature_ytick_region} ||="0-3:0-10;";
 ##$conf{feature_ytick_hgrid_line} =(exists $conf{feature_ytick_hgrid_line})? $conf{feature_ytick_hgrid_line}:0;
@@ -1506,7 +1525,7 @@ sub check_font_size_by_estimate(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "y_margin_feature_label", "x_margin_feature_label", "pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique", "cross_link_opacity_reverse", "feature_color_reverse", "feature_opacity_reverse", "display_segment_strand", "feature_shift_x_to", "feature_shift_y_to", "ref_name_right_gap", "legend_position");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link","default_legend", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "y_margin_feature_label", "x_margin_feature_label", "pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique", "cross_link_opacity_reverse", "feature_color_reverse", "feature_opacity_reverse", "display_segment_strand", "feature_shift_x_to", "feature_shift_y_to", "ref_name_right_gap", "legend_position", "feature_content_display_keywords", "feature_content_display");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

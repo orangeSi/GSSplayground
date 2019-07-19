@@ -1,12 +1,13 @@
-#!/usr/bin/env perl -w
+#!/usr/bin/perl -w
 use strict;
 use warnings;
-use JSON qw(encode_json);
 use Getopt::Long;
 use FindBin qw($Bin);
 use List::Util qw(max min);
 use lib "$Bin";
-use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_y shift_tracks_x  get_real_feature_region check_block_reverse show_segment_strand check_font_size_by_estimate);
+use myth qw(format_scale read_list draw_genes display_conf read_conf default_setting check_track_order check_para get_para shift_tracks_x shift_tracks_y get_real_feature_region check_block_reverse show_segment_strand draw_feature check_font_size_by_estimate);
+
+&is_exists('FindBin', "JSON");
 
 my ($list,$prefix,$outdir,$conf,$track_reorder);
 GetOptions("list:s"=>\$list,
@@ -154,7 +155,7 @@ my $display_segment_name_order=$6;
 my $segment_name_angle=$7;
 my %up_down_percent_unit;
 
-
+my @feature_content_display_keywords=split(/,/, $conf{feature_content_display_keywords});
 
 while(@track_order){
 	$index++;
@@ -201,6 +202,7 @@ while(@track_order){
 		die "error:scf element number is not one for $sample and $block_index, @scf\n" if(@scf != 1);
 #print "scff is @scf, $block_index\n";
 		die "error:block_index $block_index should not have two scf\n" if(@scf!=1);
+		my $chr_seq=$genome{$sample}{$scf[0]}{seq};
 		$shift_x += ($tracks_shift_x{$sample}{$block_index}{shift_x_left}*$ratio) if(exists $tracks_shift_x{$sample}{$block_index}{shift_x_left});
 
 		my $block_clip_path_id="cut-$sample-$scf[0]-$block_index";
@@ -417,7 +419,7 @@ while(@track_order){
 				$index_label_col,
 				$index_label_position,
 				$index_label_angle,
-				$angle_flag, \%conf, $ratio, $id_line_height, $shift_angle_closed_feature, \%orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id, $reverse_block_flag, $start_once, $end_once, \%feature_reverse_for_crosslink); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可  #reversed_block{$sample}{$block_index}
+				$angle_flag, \%conf, $ratio, $id_line_height, $shift_angle_closed_feature, \%orders, $up_percent_unit, $down_percent_unit, $block_clip_path_id, $reverse_block_flag, $start_once, $end_once, \%feature_reverse_for_crosslink, $chr_seq, \@feature_content_display_keywords); 		## draw_gene 函数需要重写，输入起点的xy坐标，正负链等信息即可  #reversed_block{$sample}{$block_index}
 			$svg.=$svg_gene;
 			%orders=%$orders;
 			%feature_reverse_for_crosslink=%$feature_reverse_for_crosslink;
@@ -1177,3 +1179,17 @@ sub get_block_index_from_id(){
 		die "error: not support $type for $id in get_block_index_from_id\n"
 	}
 }
+
+sub is_exists(){
+	for my $pkg(@_){
+		eval "use $pkg";
+		if($@){
+			my $xx="/xxx/ClustersPloter/src/";
+			die "error: can't find package $pkg. Do you \$ source /xxx/ClustersPloter/env.sh  or export PERL5LIB=$xx:\$PERL5LIB ? because I had install $pkg in $xx\n"
+		}else{
+			print "find package $pkg\n";
+		}
+	}
+	return 0;
+}
+

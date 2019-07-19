@@ -130,7 +130,7 @@ function feature_show(event) {
 						//alert('font size'+font_size);
 						div2.innerHTML+="<br>"+font_size+value+font_color+font_opacity+alignment_baseline+text_anchor+scale_xy+rotate+shift_xy+display+"<br><br>";
 						
-					}else if(tagname == "rect" || tagname == "polygon" || tagname == "path" || tagname == "polygon" || tagname == "circle"){
+					}else if(tagname == "rect" || tagname == "polygon" || tagname == "path" || tagname == "polygon" || tagname == "circle"|| tagname == "ellipse"){
 						// fill color, opacity, strike-border, strike color
 						//style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"
 						var fill_color=childs[i].style['fill'];
