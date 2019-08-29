@@ -1,0 +1,3 @@
+gene1	feature_color	blue
+gene3	feature_color	black
+gene2	feature_color	green

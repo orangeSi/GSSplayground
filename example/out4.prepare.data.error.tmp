@@ -18,8 +18,8 @@
 + cat out4.synteny.setting.conf
 + cat out4.synteny.crosslink
 + cat out4.pO83_CORR.out4.synteny.gff out4.pO83_CORR.indel.out4.synteny.gff
-+ sort -u
 + awk -F '	' '{print $3}'
++ sort -u
 + sed -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out4.pO83_CORR.out4.synteny.gff\t/' tracks.4.list
 + cp tracks.4.list.out4 tracks.4.list.out4.tmp
 + sed -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out4.pO83_CORR.indel.out4.synteny.gff\t/' tracks.4.list.out4.tmp

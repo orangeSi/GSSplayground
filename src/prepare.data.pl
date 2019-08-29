@@ -13,15 +13,14 @@ use myth qw(format_scale read_list draw_genes display_conf read_conf default_set
 
 my ($list,$prefix_name,$outdir,$conf, $confile, $track_reorder);
 GetOptions("list:s"=>\$list,
-		"prefix:s"=>\$prefix_name,
-		"outdir:s"=>\$outdir,
-		"conf:s"=>\$confile
-	  );
+	"prefix:s"=>\$prefix_name,
+	"outdir:s"=>\$outdir,
+	"conf:s"=>\$confile
+);
 
 die "
 perl $0 [options]:
-* --list <str>  two formats: [sample gff genome seq_id1 seq_draw_start1 seq_draw_end1 genome seq_id2 seq_draw_start2 seq_draw_end2 ...]
-or [sample gff genome]no seq_id mean full length of whole gff
+* --list <file>  file format: [sample gff genome seq_id1 seq_draw_start1 seq_draw_end1 genome seq_id2 seq_draw_start2 seq_draw_end2 ...]
 * --prefix <str>
 * --outdir <str>
 * --conf <str> 
@@ -36,8 +35,8 @@ my @track_reorder;
 my %func_output;
 my %list_gff; #push @{$list_gff{$s}}, $file;
 
-my @funcs=("hist_scatter_line", "reads_mapping", "synteny");
-my %conf = &read_conf($confile, @funcs);
+my @funcs=("hist_scatter_line", "reads_mapping", "synteny", "general_features");
+my %conf = &read_conf($outdir, $confile, @funcs);
 
 ($conf, $track_reorder) = &default_setting(1, %conf);
 %conf=%$conf;
@@ -58,7 +57,7 @@ my $log="$prefix_name.cat.log";`rm $log` if (-f "$log");
 my @settings;
 my @crosslinks;
 my @gffs;
-for my $fun (@funcs){ # my @funcs=("hist_scatter_line", "reads_mapping", "synteny");
+for my $fun (@funcs){ # my @funcs=("hist_scatter_line", "reads_mapping", "synteny", "general_features");
 	&$fun(\%gff, \%conf, \%genome);
 	if(exists $func_output{$fun}){
 		for my $t(keys %{$func_output{$fun}}){ # t is gff/crosslink/setting.conf
@@ -171,8 +170,8 @@ sub synteny(){
 	my (%outname);
 	my @show_types=("quadrilateral");
 	#my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel");
-	#my @highs=("blat_block_show", "start_end_xaxis",);
-	my @highs=("blat_block_show", "start_end_xaxis");
+	#my @highs=("blat_block_show", "start_end_xaxis");
+	my @highs=();
 	#my @align_types=("paf", "blast_m8", "blat_psl", "mummer_coords");
 	my @align_types=("blast_m8", "mummer_coords", "common", "paf");
 	for my $k (@{$conf->{synteny}}){
@@ -225,7 +224,7 @@ sub check_all_vs_all(){
 	my $flag=0;
 	for my $sample(keys %$gff){
 		for my $block_index(keys %{$gff->{$sample}->{chooselen_single}}){
-			
+
 			my $scf_id=$gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id};
 			die "error:gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id} is empty\n" if(not exists $gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id});
 			#die "$gff->{$sample}->{chooselen_single}->{$block_index}->{len} != $genome->{$sample}->{$scf_id}{len}, scf_id is $scf_id\n";
@@ -502,7 +501,7 @@ sub synteny_run(){
 				#$tmp=abs($target_start-$target_end)+1;
 				#my $t_cov=$tmp/$align_length * 100;
 				#$t_cov=" $tmp/$align_length=$t_cov";
-				
+
 				$align{query}{$query_feature_id}{query_scf}=$query_scf;
 				$align{query}{$query_feature_id}{query_start}=$query_start;
 				$align{query}{$query_feature_id}{query_end}=$query_end;
@@ -655,7 +654,7 @@ sub synteny_run(){
 			my @arr=split(/\s+/,$_);
 			#die "arr leng is ".scalar(@arr)."\narr is @arr\n";
 			die "error:alignment sholud be 11 columns in $alignment, but only get ".scalar(@arr)." columns, for line $.:$_\n. example: show-coords -rTl out.delta >out.delta.coords\n" if(@arr!=11);
-			
+
 			my $query_scf=$arr[10];
 			my $target_scf=$arr[9];
 			my $query_start=($arr[2] >$arr[3])? $arr[3]:$arr[2];
@@ -723,7 +722,7 @@ sub synteny_common_write(){
 			die "if sort->0, so synteny_order=$synteny_order should not equal\n";
 		}
 	}else{
-		die "synteny_order=$synteny_order format error\n";
+		die "synteny_order=$synteny_order format error, should be like 2->3\n";
 	}
 	my $depths=scalar @pairs;
 	my $index_pair;
@@ -820,6 +819,403 @@ sub synteny_common_write(){
 	return $synteny_gff_q, $synteny_setting_conf_q,$synteny_gff_t, $synteny_setting_conf_t, $cross_link_conf;
 }
 
+
+
+
+
+sub general_features(){
+	my ($gff, $conf, $genome)=@_;
+	my $ex="";
+	my $funcname="general_features";
+
+	unless(exists $conf->{$funcname} && $conf->{$funcname}){
+		print "$funcname not\n";
+		return 0;
+	}
+	print "$funcname start\n";
+	my $k_index;
+	my (%outname);
+	#my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel", "chop_soft_clip");
+	my @highs=("start_end_xaxis", "display_feature_label", "ylabel");
+	#my @mapping_types=("short_reads", "long_reads", "vcf", "gff", "bed");
+	my @data_types=("gff", "bed");
+	for my $k (@{$conf->{$funcname}}){
+		$k_index++;
+		my %kvs=%$k;
+		#&check_highs(\@highs,$k);
+		print "$funcname k_index is $k_index\n\n";		
+		my ($input_file, $refasta);
+		if($kvs{data_file}=~ /^([^:]+):([^:]+)/){
+			$input_file=$1;
+			$refasta=$2;
+		}else{
+			$input_file=$1;
+			$refasta="";
+		}
+		my $data_type=$kvs{data_type};
+		my $block_flag=$kvs{block_flag};
+		my $scf=$kvs{chr_id};
+		my $sample=$kvs{track_name};
+		my $yaxis=$kvs{subtrack_yaxis_bg_region};
+		my $yaxis_show=$kvs{subtrack_yaxis_display_region};
+		my $label_size=$kvs{label_size};
+		my $tick_color=$kvs{ytick_color};
+		my $tick_opacity=$kvs{ytick_opacity};
+		my $hgrid_flag=$kvs{hgrid_flag};
+		my $tick_order=$kvs{tick_order};
+		my $ytick_flag=$kvs{ytick_display_flag};
+		my $kvalues="";
+		foreach my $ks(keys %kvs){$kvalues.="\t$ks->$kvs{$ks}"};
+		print "kvalues is $kvalues\n";
+		die "error:data_display_order=$kvs{data_display_order} should be like 2->3\n" if($kvs{data_display_order}!~ /^\s*[\d\.]+\s*->\s*[\d\.]+\s*$/);
+		die "\nerror: not support $data_type~ only support @data_types in $0\n" if(! grep(/^$data_type$/, @data_types));
+		#&show_type_check($show_type,\@{$show_types{$reads_type}});
+		die "\nerror: block_flag=$block_flag should >=0, 0 mean all\n" if($block_flag<0 ||$block_flag!~ /^\d+$/);
+		die "\nerror: $sample or $scf not are friends in ${k_index}th of $funcname and $list \n" if(not exists $gff->{$sample}->{scf}->{$scf});
+		die "\nerror: $sample don't have block_flag $block_flag fragments in $kvalues\n" if($block_flag!=0 && not exists $gff->{$sample}->{chooselen_single}->{$block_flag});
+		my $ytick_flag_exists=0;
+		for my $block_index(sort {$b<=>$a} keys %{$gff->{$sample}->{chooselen_single}}){
+			print "block_index is $block_index,$sample\n";
+			next if($block_flag != 0 && $block_flag != $block_index);
+			die "error: when block_flag=$block_flag, start_end_xaxis should be delete\n" if($block_flag == 0 && exists $kvs{start_end_xaxis});
+			my @scfs=keys %{$gff->{$sample}->{block2}->{$block_index}};
+			if($scf ne $scfs[0]){
+				if($block_flag == 0){
+					next;
+				}else{
+					die "error: block_index is $block_index, the scaffold id should be $scfs[0] instead of $scf in ${k_index}th of $funcname \n";	
+				}
+			}
+			my @yaxis_list=split(/->/,$yaxis);
+			die "\nerror:yaxis_list neet two elements, not $yaxis, should like 10->50\n" if(@yaxis_list!=2 || $yaxis!~ /[-\d\.]+->[-\d\.]+/);
+			my @yaxis_show_list=split(/->/,$yaxis_show);
+			die "\nerror:yaxis_list neet three elements, not $yaxis_show, sholud like 10->30->5\n" if(@yaxis_show_list!=3 || $yaxis_show!~ /[-\d\.]+->[-\d\.]+->[-\d\.]+/);
+
+#my $tick="$yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$ytick_label";
+			my @label_sizes=split(/:/,$label_size);
+			die "\nerror:label_size $label_size format like 6:6 for ${k_index}th of $funcname\n" if(@label_sizes!=2);
+			my ($mapping_label_size, $tick_label_size)=@label_sizes;
+			my $block_start_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{start};
+			my $block_end_bp = $gff->{$sample}->{chooselen_single}->{$block_index}->{end};
+			if($ytick_flag_exists == 0){
+				my ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf)=&plot_ylabel($kvalues, $block_start_bp, $block_end_bp, $sample, $block_index, $scf, $k_index, $yaxis, $data_type, \@yaxis_list);
+				my $prefix_ylabel="$prefix_name.$sample.$scf.$block_index.$k_index.$data_type.ylabel";
+				%outname = &gather_gff_conf_link($prefix_ylabel,$ylabel_gff,$ylabel_setting_conf,$ylabel_cross_link_conf, \%outname, $sample);
+
+				if($ytick_flag){
+					my ($ytick_gff, $ytick_setting_conf, $cross_link_conf)=&feature_ytick($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2], $ytick_label,$sample, $scf, $block_index, $gff,$k_index, $hgrid_flag, $tick_color, $tick_opacity, $tick_order, $kvalues, $tick_label_size, $data_type);
+					my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.ytick";
+					%outname = &gather_gff_conf_link($prefix,$ytick_gff,$ytick_setting_conf,$cross_link_conf, \%outname, $sample);
+				}
+			}
+			$ytick_flag_exists++;
+			#print "kvalues is $kvalues\n";
+			my %highss = &get_regions(\@highs, $kvalues, $block_start_bp, $block_end_bp);
+			next if(not exists $highss{start_end_xaxis});
+			my @start_end_xaxis = @{$highss{start_end_xaxis}};
+			print "start_end_xaxis is @start_end_xaxis\n";
+			#my $max_depth=&get_max_depth(\@start_end_xaxis,$mapping_file,$sample,$scf, $reads_type);
+			#print "max_depth max_depth is $max_depth\n";
+			for my $rg(@start_end_xaxis){
+				my ($rg_start, $rg_end)=split(/,/, $rg);
+				print "rg is $rg,  :$rg_start,$rg_end\n";
+				my ($general_gff, $general_setting_conf, $cross_link_conf)=&general_features_run($yaxis_list[0],$yaxis_list[1],$yaxis_show_list[0],$yaxis_show_list[1],$yaxis_show_list[2],$ytick_label, $sample,$scf,$block_index, $mapping_label_size, $k_index, $rg_start, $rg_end, \%highss, $refasta, $input_file, \%kvs);
+				my $prefix="$prefix_name.$sample.$scf.$block_index.$k_index.$rg_start.$rg_end.general_features";	
+				%outname = &gather_gff_conf_link($prefix,$general_gff,$general_setting_conf,$cross_link_conf, \%outname, $sample);
+			}
+		}
+	}
+
+	&write_gff_conf_link(\%outname, "$prefix_name.$funcname");
+}
+
+
+sub general_features_run(){
+	my ($yaxis_s1,$yaxis_e1,$yaxis_show_s1,$yaxis_show_e1,$yaxis_show_gap,$ytick_label, $sample,$scf,$block_index, $mapping_label_size, $k_index, $rg_start, $rg_end, $highss, $refasta, $input_file, $kvs)=@_;
+	my %kvs=%$kvs;
+	my %highss=%$highss;
+	my $suffix_id="ilikeorangeapple";
+	print "start general_features_run\n";
+	foreach my $k(keys %kvs){print "$k -> $kvs{$k}\n"}
+	
+	my $feature_gff="";
+	my $feature_setting_conf="";
+	my $feature_cross_link_conf="";
+	
+	my ($gff_file) = &convert_to_gff($kvs{data_type}, $input_file);
+	my $feature_id_suffix=(exists $kvs{feature_id_suffix} && $kvs{feature_id_suffix})? $kvs{feature_id_suffix}:"$sample.$scf.$block_index.$k_index";
+
+	my ($feature_gff_hash, $feature_setting_conf_hash, $old2new_id) = &read_feature_gff($kvs{data_type}, $kvs{data_display_order}, $gff_file, $refasta, $kvs{data_keyword}, $feature_id_suffix, $suffix_id, $scf, $rg_start, $rg_end, $yaxis_s1, $yaxis_e1);
+	$feature_setting_conf_hash = &add_setting_by_match_suffix($kvs, $feature_setting_conf_hash, $old2new_id); # replace id in setting.conf with newID in add_suffix	
+	foreach my $f(keys %$feature_gff_hash){
+		$feature_gff.="$feature_gff_hash->{$f}->{line}\n";
+		foreach my $setting(keys %{$feature_setting_conf_hash->{$f}}){
+			die "error: feature $f have not $setting or null\n" if(not exists $feature_setting_conf_hash->{$f}->{$setting} || $feature_setting_conf_hash->{$f}->{$setting}=="");
+			$feature_setting_conf.="$f\t$setting\t$feature_setting_conf_hash->{$f}->{$setting}\n";
+			print "test\t$f\t$setting\t$feature_setting_conf_hash->{$f}->{$setting}\n";
+		}
+	}
+	return ($feature_gff, $feature_setting_conf, $feature_cross_link_conf);
+}
+
+sub convert_to_gff(){
+	my ($type, $input)=@_;
+	my $gff;
+	my $keys;
+	if($type eq "gff"){
+		$gff=$input;
+		#$keys=$keyword;
+	}elsif($type eq "bed"){
+		#$keys="bed_kw";
+		die "error:not support data_type = $type, only support gff yet, bed bigwig is on the way\n";
+	}elsif($type eq "bigwig"){
+		#$keys="bigwig_kw";
+		die "error:not support data_type = $type, only support gff yet, bed bigwigi is on the way\n";
+	}else{
+		die "error:not support data_type = $type, only support gff bed bigwig yet\n";
+	}
+	return $gff;
+}
+
+#my %features = &read_feature_gff($kvs{data_type}, $kvs{data_display_order}, $gff_file, $refasta, $kvs);
+sub read_feature_gff(){
+	my ($type, $order, $gff_file, $genome, $key, $id_suffix, $suffix_id, $scf, $rg_start, $rg_end, $yaxis_s1, $yaxis_e1)=@_;
+	my ($min_order, $max_order)=split(/\s*->\s*/, $order);
+	die "error:order $order should not be equal\n" if($min_order == $max_order);
+	my (%feature_gff_hash, %feature_setting_conf_hash);
+	my %ref;
+
+	if($genome){
+		$/=">";
+		open IN,"$genome" or die "not open $genome\n";
+		<IN>;
+		while(<IN>){
+			chomp;
+			my ($id, $seq)=split(/\n/, $_, 2);
+			$seq=~ s/\s//g;
+			$id=~ s/\s.*$//;
+			die "error: in genome $genome, id or seq is empty\n" if(!$id || !$seq);
+			$ref{$id}=$seq;
+		}
+		close IN;
+		$/="\n";
+	}
+
+	my %kws_order;
+	$key=~ s/\s//g;
+	my @kws;
+	#my $tmp="";
+	foreach my $kw(split(/;/, $key)){ # data_keyword = gene:exon+origin_of_replication;rRNA;snRNA
+		if($kw=~ /:\S+/){
+			my ($parent, $child)=split(/:/, $kw);
+			my @childs=split(/\+/, $child);
+			my $order_gap=($max_order - $min_order)/(1 + scalar (@childs));
+			my $i=1;
+			$kws_order{$parent}{order}=$min_order;
+			#	$tmp.="p1 is $parent\n";
+			push @kws,$parent;
+			foreach my $c(@childs){
+				$kws_order{$parent}{child}{$c}=$min_order + $i * $order_gap;
+				#$tmp.="p2 is $parent\n";
+				$i++;
+				die "error: for data_keyword=$key, $c should be not appear two times\n" if($c eq $parent);
+				push @kws,$c;
+			}
+		}else{
+			$kw=~ s/:\s*//;
+			$kws_order{$kw}{order}=$min_order;
+			#	$tmp.="p3 is $kw\n";
+			push @kws,$kw;
+		}
+	}
+
+	#die "tmp is $tmp\n";
+	#my @ps=keys %kws_order;
+	#die "pss is @ps\n";
+	my %fs;# fs == features
+	my %old2new_id;
+	my $parent_id;
+	my $parent_chr;
+	my $parent_type;
+	my $parent_start;
+	my $parent_end;
+	my %p2c;
+	open GFF,"$gff_file" or die "not open $gff_file\n";
+	while(<GFF>){ #$scf, $rg_start, $rg_end
+		chomp;
+		next if($_=~ /^\s*$/ || $_=~ /^\s*#/);
+		my @arr=split(/\t/, $_);
+
+		next if($arr[0] ne $scf);
+		next if($arr[3] < $rg_start || $arr[4] > $rg_end);
+
+		die "error: $gff_file is gff format, should have 9 columns in line $.\n" if(@arr!=9);
+		next if(! grep(/^$arr[2]$/, @kws));
+		my $type=$arr[2];
+		my $chr=$arr[0];
+		my $start=$arr[3];
+		my $end=$arr[4];
+		my $strand=$arr[6];
+		my $marker=$arr[1];
+		my $id;
+		if($arr[-1]=~ /^ID=([^;]+)/){
+			$id=$1;
+		}elsif($arr[-1]=~ /;ID=([^;]+)/){
+			$id=$1;	
+		}else{
+			$id="$chr.$start.$end";
+		}
+		my $new_id="${id}_${type}.$id_suffix";
+		$old2new_id{$id}=$new_id;
+		$id=$new_id;
+		
+		if(grep(/^$type$/, keys %kws_order)){
+			$parent_id=$id;
+			$parent_chr=$arr[0];
+			$parent_type=$type;
+			$parent_start=$start;
+			$parent_end=$end;
+		}elsif(exists $kws_order{$parent_type}{child}{$type}){
+			if($parent_chr eq $arr[0] && $start >= $parent_start && $end <= $parent_end ){
+				$p2c{$parent_id}{$id}="";
+			}else{
+				next;
+			}
+		}else{
+			next;
+		}
+
+		if(not exists $feature_gff_hash{$id}){
+			$feature_gff_hash{$id}{line}="$arr[0]\t$arr[1]\t$arr[2]_$id_suffix\t$arr[3]\t$arr[4]\t$arr[5]\t$arr[6]\t$arr[7]\tID=$id;";
+			$feature_gff_hash{$id}{start}=$start;
+			$feature_gff_hash{$id}{end}=$end;
+			$feature_gff_hash{$id}{type}=$type;
+			$feature_gff_hash{$id}{strand}=$strand;
+		}else{
+			die "error: in file $gff_file line$., meet $id again, but $id should be uniq\n";
+		}
+	}
+	close GFF;
+
+	# arrange the feature position to specific y-region
+	my $depth_now=1;
+	my $depth_max=1;
+	my %depth_rigtest_end;
+	$depth_rigtest_end{$depth_now}=0;
+	#my @ps=keys %kws_order;
+	#die "keys %kws_order is @ps\n";
+	foreach my $f(sort {$feature_gff_hash{$a}{start}<=>$feature_gff_hash{$b}{start}} keys %feature_gff_hash){
+		next if(! grep(/^$feature_gff_hash{$f}{type}$/, keys %kws_order));
+		my $start=$feature_gff_hash{$f}{start};
+		my $end=$feature_gff_hash{$f}{end};
+		foreach my $d(sort {$a<=>$b} keys %depth_rigtest_end){
+			if($start > $depth_rigtest_end{$d}){
+				$depth_rigtest_end{$d} = $end;
+				$depth_now=$d;
+				last;
+			}
+			my $next_depth=$d+1;
+			if(not exists $depth_rigtest_end{$next_depth}){
+				$depth_rigtest_end{$next_depth} = $end;
+				$depth_now=$next_depth;
+				$depth_max++;
+			}
+		}
+		$feature_gff_hash{$f}{depth}=$depth_now;
+	
+	}
+	
+	my $child_hight_ratio_as_parent=5;
+	my $unit_height = (abs($yaxis_s1 - $yaxis_e1))/($child_hight_ratio_as_parent * $depth_max);
+	foreach my $f(keys %feature_gff_hash){
+		my $type=$feature_gff_hash{$f}{type};
+		next if(! grep(/^$type$/, keys %kws_order));
+		my $strand=$feature_gff_hash{$f}{strand};
+		## define feature_order
+		$feature_setting_conf_hash{$f}{feature_order}=$kws_order{$type}{order}; # define parent feature_order
+		#die "feature_order is $kws_order{$type}{order}, type is $type\n";
+		my $child_type="";
+		my $child_index=1;
+		my $feature_opacity=1;
+		if(exists $p2c{$f}){ # define child feature_order
+			foreach my $child (keys %{$p2c{$f}}){
+				$child_type=$feature_gff_hash{$child}{type};
+				$feature_opacity=($child_index%2 == 1)? 0.8 : 1;
+				$feature_setting_conf_hash{$child}{feature_opacity}=$feature_opacity;
+				$feature_setting_conf_hash{$child}{feature_order}=$kws_order{$type}{child}{$child_type};
+				#die "child_order is $kws_order{$type}{child}{$child_type}\n";
+				$child_index++;	
+			}
+		}
+			
+		## define feature_height and shift_y
+		#$conf{feature_height_ratio} ||= 2;
+		#$conf{feature_height_unit} ||= "backbone"; # or percent
+		#$conf{feature_shift_y_unit} ||="backbone"; # radius or backbone or percent
+		#$conf{feature_shift_y} ||=0; # radius or backbone or percent
+		#$conf{feature_shape} ||= 'arrow'; # arrow or rect or circle_point, ellipse, not support round_rect yet
+		#$conf{feature_color} ||= 'rgb(50,205,50)'; #ForestGreen,LimeGreen
+		my $feature_height_ratio=$unit_height;
+		my $depth=$feature_gff_hash{$f}{depth};
+		my $feature_shift_y_flag=($yaxis_s1>0)? -1 : 1;
+
+		$feature_setting_conf_hash{$f}{feature_height_unit}="percent";
+		$feature_setting_conf_hash{$f}{feature_shift_y_unit}="percent";
+		$feature_setting_conf_hash{$f}{feature_shape}="rect";
+		$feature_setting_conf_hash{$f}{feature_color}="black";
+		$feature_setting_conf_hash{$f}{feature_height_ratio}=$feature_height_ratio;
+		$feature_setting_conf_hash{$f}{feature_shift_y} = $feature_shift_y_flag *(abs($yaxis_s1)+ ($depth -1)*$child_hight_ratio_as_parent*$unit_height + ($child_hight_ratio_as_parent - 1)/2*$unit_height );
+		$feature_setting_conf_hash{$f}{feature_popup_title}="type -> $type;strand -> $strand";
+		if(exists $p2c{$f}){ # define child feature_order
+			foreach my $child (keys %{$p2c{$f}}){
+				$type=$feature_gff_hash{$child}{type};
+				$strand=$feature_gff_hash{$child}{strand};
+				$feature_setting_conf_hash{$child}{feature_height_unit}="percent";
+				$feature_setting_conf_hash{$child}{feature_shift_y_unit}="percent";
+				$feature_setting_conf_hash{$child}{feature_shape}="rect";
+				$feature_setting_conf_hash{$child}{feature_color}="black";
+				$feature_setting_conf_hash{$child}{feature_height_ratio}= $feature_height_ratio * $child_hight_ratio_as_parent;
+				$feature_setting_conf_hash{$child}{feature_shift_y}= $feature_shift_y_flag * (abs($yaxis_s1)+  ($depth -1)*$child_hight_ratio_as_parent*$unit_height + 0*$unit_height );
+				$feature_setting_conf_hash{$child}{feature_popup_title}="type -> $type;strand -> $strand";
+			}
+		}
+
+	}
+		
+
+
+	return \%feature_gff_hash, \%feature_setting_conf_hash, \%old2new_id; #$feature_gff, $features, $add_suffix
+
+}
+
+#&add_setting_by_match_suffix($kvs, $feature_setting_conf_hash
+sub add_setting_by_match_suffix(){
+	my ($kvs, $feature_setting_conf_hash, $old2new_id)=@_;
+	my %feature_setting_conf_hash=%$feature_setting_conf_hash;
+	if(exists $kvs->{data_feature_setting}){
+		die "error:data_feature_setting=$kvs->{data_feature_setting} not exists\n" if(! -f "$kvs->{data_feature_setting}");
+		open SET,"$kvs->{data_feature_setting}" or die "not open $kvs->{data_feature_setting}\n";
+		while(<SET>){
+			chomp;
+			next if($_=~ /^\s*$/ ||$_=~ /^#/);
+			my @arr=split(/\t/, $_);
+			die "error: in $kvs->{data_feature_setting} line$. format error, need 3 cols. line is $_\n" if(@arr != 3);
+			my $id=$arr[0];
+			my $para=$arr[1];
+			my $value=$arr[2];
+			if(exists $old2new_id->{$id}){
+				$feature_setting_conf_hash{$old2new_id->{$id}}{$para} = $value;
+			}else{
+				die "error: in data_feature_setting $kvs->{data_feature_setting} line$. feature_id $id not in "
+			}
+		}
+		close SET;
+	}
+
+	return \%feature_setting_conf_hash;
+}
+
+
 sub reads_mapping(){
 	my ($gff, $conf, $genome)=@_;
 	my $ex="";
@@ -836,8 +1232,11 @@ sub reads_mapping(){
 	@{$show_types{short_reads}}=(qr/^rainbow:color->[^:]+:opacity->[\d\.]+:cross_link_width_ellipse->[\d\.]+/,"stack",qr/^paired:color->[^:]+:opacity->[\d\.]+:cross_link_height_line->[\d\.]+/);
 	@{$show_types{long_reads}}=("stack");
 	@{$show_types{vcf}}=("stack");
+	#@{$show_types{gff}}=("stack");
+	#@{$show_types{bed}}=("stack");
 	#my @highs=("highlight_vlines", "start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel", "chop_soft_clip");
 	my @highs=("start_end_xaxis","color_height_cs", "display_feature_label", "feature_x_extent","ylabel", "chop_soft_clip");
+	#my @mapping_types=("short_reads", "long_reads", "vcf", "gff", "bed");
 	my @mapping_types=("short_reads", "long_reads", "vcf");
 	for my $k (@{$conf->{reads_mapping}}){
 		$k_index++;
@@ -870,6 +1269,7 @@ sub reads_mapping(){
 		for my $block_index(sort {$b<=>$a} keys %{$gff->{$sample}->{chooselen_single}}){
 			print "block_index is $block_index,$sample\n";
 			next if($block_flag != 0 && $block_flag != $block_index);
+			die "error: when block_flag=$block_flag, start_end_xaxis should be delete\n" if($block_flag == 0 && $k=~ /start_end_xaxis/);
 			my @scfs=keys %{$gff->{$sample}->{block2}->{$block_index}};
 			if($scf ne $scfs[0]){
 				if($block_flag == 0){
@@ -938,7 +1338,6 @@ sub plot_ylabel(){
 	my $ylabel_setting_conf="";
 	my $ylabel_cross_link_conf="";	
 	my @yaxis_list=@$yaxis_list;
-	my $feature_shift_x;
 	my $feature_shift_y;
 	if($yaxis_list[0] >=0 && $yaxis_list[1] >=0){
 		$feature_shift_y=(abs($yaxis_list[0])+abs($yaxis_list[1]))/2;
@@ -949,33 +1348,45 @@ sub plot_ylabel(){
 	}else{
 		die "\nerror:plot_ylabel @yaxis_list shoult  be both >0 or <0\n";
 	}
-	if($k=~ /\sylabel->([^,]+),gap:([\d\.]+)bp,fontsize:([\d\.]+),color:(\S+)/){
-		my $ylabel_content=$1;
-		my $gap=$2;
-		my $ylabel_fontsize=$3;
-		my $ylabel_color=$4;
-		my $ylabel_id="$sample.$scf.$block_index.$block_start_bp.$block_end_bp.$k_index.$type.ylabel";
-		$ylabel_id.=($yaxis=~ /^\d/)? "+":"-";
-		my $feature_shift_x=10+$gap;
-		$ylabel_gff.="$scf\tadd\tylabel\t$block_end_bp\t$block_end_bp\t.\t+\t.\tID=$ylabel_id;\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeature_label_color\t$ylabel_color\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeature_shift_x\t$feature_shift_x\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeature_height_ratio\t0\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeature_height_unit\tpercent\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeature_label_size\t$ylabel_fontsize\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeature_shift_y\t$feature_shift_y\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeature_shift_y_unit\tpercent\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeature_label\t$ylabel_content\n";
-		$ylabel_setting_conf.="$ylabel_id\tdisplay_feature_label\tyes\n";
-		$ylabel_setting_conf.="$ylabel_id\tpos_feature_label\tright_low\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeature_label_auto_angle_flag\t0\n";
-		$ylabel_setting_conf.="$ylabel_id\tlabel_text_anchor\tstart\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeature_color\twhite\n";
-		$ylabel_setting_conf.="$ylabel_id\tfeature_shape\trect\n";
-		$ylabel_setting_conf.="$ylabel_id\tlabel_text_alignment_baseline\tmiddle\n";
-	}elsif($k=~ /\sylabel->/){
-		die "\nerror:k is $k\n";
+	my $ylabel_content="";
+	my $gap=30;
+	my $ylabel_fontsize=15;
+	my $ylabel_color="black";	
+	if($k=~ /\sylabel->([^,]+)/){
+		$ylabel_content=$1;
 	}
+	if($k=~ /\sylabel->([^,]+),gap:([\d\.]+)/){
+		$gap=$2;
+	}
+	if($k=~ /\sylabel->([^,]+),gap:([\d\.]+)b?p?,fontsize:([\d\.]+),color:(\S+)/){
+		$ylabel_fontsize=$3;
+	}
+	if($k=~ /\sylabel->([^,]+),gap:([\d\.]+)b?p?,fontsize:([\d\.]+),color:(\S+)/){
+		$ylabel_color=$4;	
+	}
+	if(!$ylabel_content){
+		$ylabel_content="ylabel";
+		$ylabel_fontsize=0;
+	}
+	my $ylabel_id="$sample.$scf.$block_index.$block_start_bp.$block_end_bp.$k_index.$type.ylabel";
+	$ylabel_id.=($yaxis=~ /^\d/)? "+":"-";
+	my $feature_shift_x=10+$gap;
+	$ylabel_gff.="$scf\tadd\tylabel\t$block_end_bp\t$block_end_bp\t.\t+\t.\tID=$ylabel_id;\n";
+	$ylabel_setting_conf.="$ylabel_id\tfeature_label_color\t$ylabel_color\n";
+	$ylabel_setting_conf.="$ylabel_id\tfeature_shift_x\t$feature_shift_x\n";
+	$ylabel_setting_conf.="$ylabel_id\tfeature_height_ratio\t0\n";
+	$ylabel_setting_conf.="$ylabel_id\tfeature_height_unit\tpercent\n";
+	$ylabel_setting_conf.="$ylabel_id\tfeature_label_size\t$ylabel_fontsize\n";
+	$ylabel_setting_conf.="$ylabel_id\tfeature_shift_y\t$feature_shift_y\n";
+	$ylabel_setting_conf.="$ylabel_id\tfeature_shift_y_unit\tpercent\n";
+	$ylabel_setting_conf.="$ylabel_id\tfeature_label\t$ylabel_content\n";
+	$ylabel_setting_conf.="$ylabel_id\tdisplay_feature_label\tyes\n";
+	$ylabel_setting_conf.="$ylabel_id\tpos_feature_label\tright_low\n";
+	$ylabel_setting_conf.="$ylabel_id\tfeature_label_auto_angle_flag\t0\n";
+	$ylabel_setting_conf.="$ylabel_id\tlabel_text_anchor\tstart\n";
+	$ylabel_setting_conf.="$ylabel_id\tfeature_color\twhite\n";
+	$ylabel_setting_conf.="$ylabel_id\tfeature_shape\trect\n";
+	$ylabel_setting_conf.="$ylabel_id\tlabel_text_alignment_baseline\tmiddle\n";
 	return ($ylabel_gff, $ylabel_setting_conf, $ylabel_cross_link_conf);
 }
 
@@ -1004,7 +1415,7 @@ sub write_gff_conf_link(){
 			&run_system($command,"$prefix_name.cat.log");
 			push @{$func_output{$func_name}{gff}}, $file;
 			push @{$list_gff{$s}}, $file;
-			
+
 		}
 		if($outname{$s}{conf}){
 			$file="$prefix_name.$s.$prefix.setting.conf";
@@ -1133,7 +1544,7 @@ sub hist_scatter_line(){
 			die "\nerror: hist_scatter_line should have 17 colums for hist_scatter_line=$k, but only have $infos_len\nvalid like hist_scatter_line=$ex\n";
 		}
 		my ($depth_type,$depth_order,$sample,$scf,$block_flag,$window_size,$depth_file,$color_opacity,$yaxis,$ytick_flag,$yaxis_show,$ytick_label,$hgrid_flag,$tick_color,$tick_opacity,$tick_border,$label_size) = @infos;
-		die "\nerror:color_opacity $color_opacity should be like color->green:opacity->0.9\n" if($color_opacity!~ /^color->([^:]+):opacity->([\d\.+])$/);
+		die "\nerror:color_opacity $color_opacity should be like color->green:opacity->0.9 in $0\n" if($color_opacity!~ /^\s*color->([^:]+):opacity->([\d\.]+)\s*$/);
 		my $the_color=$1;
 		my $the_opacity=$2;
 
@@ -1153,13 +1564,15 @@ sub hist_scatter_line(){
 			$infos[$i]=~ s/\s//g;
 		}
 		die "\nerror: block_flag should >=0, 0 mean all\n" if($block_flag<0 ||$block_flag!~ /^\d+$/);
-		die "\nerror: window_size should >=1\n" if($window_size!~ /^\d+$/);
+		die "\nerror: window_size $window_size should like 40bp\n" if($window_size!~ /^(\d+)\s*b?p?$/);
+		$window_size=$1;
 		die "\nerror: $sample or $scf not are friends in $k\n" if(not exists $gff->{$sample}->{scf}->{$scf});
 		die "\nerror: $sample don't have $block_flag fragments in $k\n" if($block_flag!=0 && not exists $gff->{$sample}->{chooselen_single}->{$block_flag});
 		my $ytick_flag_exists=0;
 		for my $block_index(sort {$b<=>$a} keys %{$gff->{$sample}->{chooselen_single}}){
 			print "block_index is $block_index,$sample\n";
 			next if($block_flag != 0 && $block_flag != $block_index);
+			die "error: when block_flag=$block_flag, start_end_xaxis should be delete\n" if($block_flag == 0 && $k=~ /start_end_xaxis/);
 			my @scfs=keys %{$gff->{$sample}->{block2}->{$block_index}};
 			if($scf ne $scfs[0]){
 				if($block_flag == 0){
@@ -1218,7 +1631,9 @@ sub reads_mapping_run(){
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
 	my $color_height_cs;
 	if(not exists $highss->{color_height_cs}){
-		$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect" 
+		die "error:color_height_cs not exists in $0\n";
+		#$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect";
+		#$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:1bp:rect,D:black:opacity1:height0.8:1bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:1bp:rect,H:blue:opacity0.6:height0.2:1bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:1bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:1bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect";
 	}else{
 		$color_height_cs=$highss->{color_height_cs};
 	}
@@ -1288,7 +1703,7 @@ sub reads_mapping_run(){
 
 				$cr_type=$reads{$read_id}{cigar}{$cr}{type};
 				my $cg=$reads{$read_id}{cigar}{$cr}{cr};
-				print "cr is $cg\n";
+				#print "cr is $cg\n";
 				($feature_color, $feature_height,$feature_opacity, $feature_shape)=&cs_color_height($cg, \%colors_height, $map_pos_strand_cr,$cr, $reads{$read_id}{r1_r2});
 				$feature_opacity*=$opacity_ratio_mapq;
 				$feature_opacity=0 if($cr_type eq "fake");
@@ -1301,10 +1716,11 @@ sub reads_mapping_run(){
 				$read_shift_y = ($updown == 1)? "+$read_shift_y":"-$read_shift_y";
 
 				$cr_id="$read_id.cr.$cr.$cg.$updown.$k_index.$infos[4]";
-#my $feature_shape="rect";
+				#$map_pos_strand_cr="+";
+				#my $feature_shape="rect";
 				if($cr_type=~ /reverse/ || $cr_type=~ /forward/){
-#$feature_shape="arrow";
-					my $feature_arrow_sharp_extent=($read_type eq "short_reads")? 0.08:0.01;
+					#$feature_shape="arrow";
+					my $feature_arrow_sharp_extent=($read_type eq "short_reads")? 0.08 : 0.01;
 					$reads_setting_conf.="$cr_id\tfeature_arrow_sharp_extent\t0\n";
 					$reads_setting_conf.="$cr_id\tfeature_arrow_width_extent\t$feature_arrow_sharp_extent\n";
 					$reads_setting_conf.="$cr_id\tfeature_popup_title\t$feature_popup_title\n";
@@ -1352,6 +1768,14 @@ sub reads_mapping_run(){
 				$reads_setting_conf.="$cr_id\tfeature_order\t$cr_order\n";
 				$reads_setting_conf.="$cr_id\tfeature_opacity\t$feature_opacity\n";
 				$reads_setting_conf.="$cr_id\tfeature_popup_title\t$feature_popup_title\n" if($cr_type!~ /reverse/ && $cr_type!~ /forward/);
+				if($cg=~ /^(\d+)[IX]$/){ #insert,  X for reads
+					my $feature_content="not support yet in $0\n";
+					#my $feature_content=&get_feature_content($cg);
+					$reads_setting_conf.="$cr_id\tfeature_content_display\tyes\n";
+					$reads_setting_conf.="$cr_id\tfeature_content\t$feature_content\n";
+				}elsif($cg=~ /^(\d+)D$/){
+					$reads_setting_conf.="$cr_id\tfeature_content_display\tyes\n";
+				}
 
 				if($read_type eq "short_reads" && $cr == -1 && $reads{$read_id}{mate_read_id} ne "null"  &&  ($reads{$read_id}{mate_ref} eq "=" || $reads{$read_id}{ref_id} eq $reads{$read_id}{mate_ref}) ){
 					next if(exists $reads{$read_id}{flag} && ($reads{$read_id}{flag} & 8));
@@ -1734,14 +2158,14 @@ sub get_mapping_reads(){
 #die "\nerror:r_id. is $r_id.\n";
 			}
 			my $strand=($flag & $reverse_flag); # if ture, mean read reverse
-				$cigar=&convert_cigar($cigar, $colors_height);
+			$cigar=&convert_cigar($cigar, $colors_height);
 			%reads=&detail_cigar($strand, $cigar, $ref_start_pos, $reads_order, $r_id, $rg_start, $rg_end, \%reads, $_, $header_bam, $scf, $refasta, $mapq_percent, $mapq, $flag, $highss);
 			$reads{$r_id}{ref_start}=$ref_start_pos;
 			$reads{$r_id}{ref_end}=$ref_start_pos + $ref_consumes_length -1;
 			$reads{$r_id}{ref_id}="$ref_id"; # "*0"
-				$reads{$r_id}{mate_ref}=($rnext eq "=")? $ref_id:$rnext;
+			$reads{$r_id}{mate_ref}=($rnext eq "=")? $ref_id:$rnext;
 			$reads{$r_id}{mate_pos}="$pnext"; # "*0"
-				$reads{$r_id}{read_id}="$read_id_raw";
+			$reads{$r_id}{read_id}="$read_id_raw";
 			$reads{$r_id}{flag}=$flag;
 			$reads{$r_id}{r1_r2}=$r1_r2;
 			#print "\nisis $r_id, flag $flag\n" if($r_id=~ /2113:2681:5522/);
@@ -1816,7 +2240,7 @@ sub get_mapping_reads(){
 sub cigar_setting(){
 	my ($color_height_cs)=@_;
 	my $color_height_cs_usage="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:10bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:#1E90FF:opacity0.6:height0.8:6bp:arrow,read2:green:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect";
-		my %tmp;
+	my %tmp;
 	my @cgs=("M","I","D","N","S","H","P","X","reverse","forward","fake","read1","read2", "diploid");
 	my (%colors_height);
 	$color_height_cs=~ s/\s//g;
@@ -1950,13 +2374,13 @@ sub detail_cigar(){
 	my @deeper_orders=("M", "reverse", "=");
 # 4H3S6M1P1I4M
 	my $complete_match=0;
-	my $tmp_flag=0;
-	$tmp_flag=1 if($r_id=~ /5776_15063/);
+	#my $tmp_flag=0;
+	#$tmp_flag=1 if($r_id=~ /5776_15063/);
 #if($tmp_flag == 1){die "cigar is $cigar\n"}
 #if($tmp_flag == 1){print "r_id is $r_id cigar is $cigar\n"}
 
 	for my $cs(0..$cigars_len-1){
-		if($cigars[$cs]=~ /M/){
+		if($cigars[$cs]=~ /M|X|=/){
 			$M_index=$cs;
 #print "r_id is $r_id M_index is $M_index cigars_len is $cigars_len\n" if($tmp_flag == 1);
 			last;
@@ -1971,20 +2395,22 @@ sub detail_cigar(){
 	for my $cs(0..$cigars_len-1){
 		#print "detail cr is $cigars[$cs]\n\n";
 		if($cs < $M_index){
-			$cigars[0]=~ /^(\d+)([^\d]+)$/;
+			die "error:cs $cs !=0 in $cigar in $0\n" if($cs != 0);
+			$cigars[$cs]=~ /^(\d+)([^\d]+)$/;
 			my $step=$1;
 			$reads{$r_id}{cigar}{0}{type}=$2;
-			$reads{$r_id}{cigar}{0}{cr}=$cigars[0];
-			$reads{$r_id}{cigar}{0}{start}=$ref_start_pos-$step;
-			if($highss->{chop_soft_clip}!~ /no/ && $reads{$r_id}{cigar}{0}{type}=~ /^[SH]$/){
+			die "error:cs $cs first is not S or H in $cigar in $0\n" if($reads{$r_id}{cigar}{0}{type}!~ /S|H/);
+			$reads{$r_id}{cigar}{$cs}{cr}=$cigars[$cs];
+			$reads{$r_id}{cigar}{$cs}{start}=$ref_start_pos-$step;
+			if($highss->{chop_soft_clip}!~ /no/ && $reads{$r_id}{cigar}{$cs}{type}=~ /^[SH]$/){
 				$soft_clip_chop_len=($step > $highss->{chop_soft_clip})? $highss->{chop_soft_clip}:$step;
-				$reads{$r_id}{cigar}{0}{start}=$ref_start_pos-$soft_clip_chop_len;  # cut soft_clip to 10bp
+				$reads{$r_id}{cigar}{$cs}{start}=$ref_start_pos-$soft_clip_chop_len;  # cut soft_clip to 10bp
 				#print "chop first S for $r_id\n";
 			}
-			$reads{$r_id}{cigar}{0}{end}=$ref_start_pos-1;
-			$reads{$r_id}{cigar}{0}{order}=$read_order;
-			$cs_start=$reads{$r_id}{cigar}{0}{start};
-			$previous_end=$reads{$r_id}{cigar}{0}{end}+1;
+			$reads{$r_id}{cigar}{$cs}{end}=$ref_start_pos-1;
+			$reads{$r_id}{cigar}{$cs}{order}=$read_order;
+			$cs_start=$reads{$r_id}{cigar}{$cs}{start};
+			$previous_end=$reads{$r_id}{cigar}{$cs}{end}+1;
 			#print "r_id is $r_id M_index is $M_index cs1 is $cs\n" if($tmp_flag == 1);
 		}else{
 			$cigars[$cs]=~ /^(\d+)([^\d])$/;
@@ -1995,7 +2421,7 @@ sub detail_cigar(){
 			$reads{$r_id}{cigar}{$cs}{type}=$2;
 			$reads{$r_id}{cigar}{$cs}{cr}=$cigars[$cs];
 			#print "$cigars[$cs],type is $reads{$r_id}{cigar}{$cs}{type}, chop_soft_clip is $highss->{chop_soft_clip}, $r_id\n";
-			if(grep(/^$reads{$r_id}{cigar}{$cs}{type}$/, @ref_consumes) || $reads{$r_id}{cigar}{$cs}{type}=~ /^[SH]$/){
+			if(grep(/^$reads{$r_id}{cigar}{$cs}{type}$/, @ref_consumes) || $reads{$r_id}{cigar}{$cs}{type}=~ /^[SH]$/){ # last element of cigars mabybe S or H
 				$reads{$r_id}{cigar}{$cs}{start}=$previous_end;
 				#print "$highss->{chop_soft_clip}!~ /no/ && $reads{$r_id}{cigar}{$cs}{type}\n";
 				#print "$highss->{chop_soft_clip}!~ /no/ && \n";
@@ -2114,7 +2540,7 @@ sub get_regions(){
 	if($info=~ /\s+(\S+)->/){
 		my @arr=$info=~ /\s+(\S+)->/g;
 		for my $a(@arr){
-			die "\nerror: not support $a, only @highs\n" if(! grep(/^$a$/, @highs));
+			#die "\nerror: not support $a, only @highs in sub get_regions of $0\n" if(! grep(/^$a$/, @highs));
 			if($a eq "start_end_xaxis"){
 				$info=~ /\s+$a->(\S+)/;
 				my $poss=$1;
@@ -2199,34 +2625,34 @@ sub hist_scatter_line_run(){
 		my $display_feature_label="no";
 		#if($s1 >=0 && $e1 >=0){	
 		if($s2 >=0 && $e2 >=0){
-				next if($depth < min($s2, $e2));
-				$diff_depth = $depth- min($s2, $e2);
-				$diff_depth=abs($diff_depth);
-				if($depth>max($s2, $e2)){
-					next if($highss{hide_max});
-					$depth_height=abs($s1-$e1);
-					$depth_overflow_flag=1;
-					$display_feature_label="yes";
-				}else{
-					$depth_overflow_flag=0;
-					$depth_height=($diff_depth)*$depth_depth_ratio
-				}
+			next if($depth < min($s2, $e2));
+			$diff_depth = $depth- min($s2, $e2);
+			$diff_depth=abs($diff_depth);
+			if($depth>max($s2, $e2)){
+				next if($highss{hide_max});
+				$depth_height=abs($s1-$e1);
+				$depth_overflow_flag=1;
+				$display_feature_label="yes";
+			}else{
+				$depth_overflow_flag=0;
+				$depth_height=($diff_depth)*$depth_depth_ratio
+			}
 		}else{ # s2 <=0 && e2 <=0
-				next if($depth > max($s2, $e2));
-				$diff_depth = $depth - max($s2, $e2);
-				$diff_depth=abs($diff_depth);
-				if($depth < min($s2, $e2)){
-					next if($highss{hide_max});
-					$depth_height=abs($s1-$e1);
-					$depth_overflow_flag=1;
-					$display_feature_label="yes";
-				}else{
-					$depth_overflow_flag=0;
-					$depth_height=($diff_depth)*$depth_depth_ratio
-				}
+			next if($depth > max($s2, $e2));
+			$diff_depth = $depth - max($s2, $e2);
+			$diff_depth=abs($diff_depth);
+			if($depth < min($s2, $e2)){
+				next if($highss{hide_max});
+				$depth_height=abs($s1-$e1);
+				$depth_overflow_flag=1;
+				$display_feature_label="yes";
+			}else{
+				$depth_overflow_flag=0;
+				$depth_height=($diff_depth)*$depth_depth_ratio
+			}
 		}
 
-		
+
 		if($depth_type eq "brand"){
 			die "error:brand, $s1>$e1, $s1 should not be $e1\n" if($s1 == $e1);
 			#$display_feature_label="yes";
@@ -2559,7 +2985,7 @@ sub feature_ytick(){
 	$ytick_unit=$ytick_unit * (abs($e1-$s1))/(abs($e2-$s2));
 	for my $k (0..$ytick_nums){
 		my $ytick_feature_tick_width = $tick_borders[1]; # bp 
-			my $ytick_feature_tick_start=$block_end_bp - $ytick_feature_tick_width;
+		my $ytick_feature_tick_start=$block_end_bp - $ytick_feature_tick_width;
 		my $ytick_feature_tick_end=$block_end_bp;
 		my $ytick_feature_tick_height=$tick_borders[2];
 		my $feature_label_size=$tick_label_size;
@@ -2602,22 +3028,22 @@ sub feature_ytick(){
 		#my $hgrid_shift_y=$feature_tick_shift_y+($ytick_feature_tick_height-$hgrid_height)/2;
 		my $hgrid_shift_y=$feature_tick_shift_y;
 		#if($ytick_orientation=~ /up/i){
-			if($s2<$e2){
-				$tick_label=$s2 + $k*$ytick_unit*$ytick_ratio;
-				#print "tick_label1 is $tick_label\n";
-			}else{
-				$tick_label=$e2 + $k*$ytick_unit*$ytick_ratio;
-				#print "tick_label2 is $tick_label\n";
-			}
-			#}elsif($ytick_orientation=~ /down/i){
-			#if($s2<$e2){
-			#	$tick_label=$s2 + $k*$ytick_unit*$ytick_ratio;
-			#}else{
-			#	$tick_label=$e2 + $k*$ytick_unit*$ytick_ratio;
-			#}
-			#}else{
-			#die "die:\n";
-			#}
+		if($s2<$e2){
+			$tick_label=$s2 + $k*$ytick_unit*$ytick_ratio;
+			#print "tick_label1 is $tick_label\n";
+		}else{
+			$tick_label=$e2 + $k*$ytick_unit*$ytick_ratio;
+			#print "tick_label2 is $tick_label\n";
+		}
+		#}elsif($ytick_orientation=~ /down/i){
+		#if($s2<$e2){
+		#	$tick_label=$s2 + $k*$ytick_unit*$ytick_ratio;
+		#}else{
+		#	$tick_label=$e2 + $k*$ytick_unit*$ytick_ratio;
+		#}
+		#}else{
+		#die "die:\n";
+		#}
 		if($hgrid_flag){
 			$ytick_gff.="$ytick_scf\tadd\tytick\t$block_start_bp\t$block_end_bp\t.\t+\t.\tID=$hgrid_id;\n";
 			$ytick_setting_conf.="\n$hgrid_id\tfeature_height_ratio\t$hgrid_height\n";

@@ -1,3 +1,5 @@
+find package FindBin
+find package JSON
 synteny -> order->2->3,query->pO83_CORR.indel:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6.common,common,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
 svg_width_height -> 1300,500
 pdf_dpi -> 100

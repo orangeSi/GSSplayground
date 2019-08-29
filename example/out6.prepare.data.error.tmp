@@ -36,8 +36,8 @@
 + cat feature.color.label.6.conf out6.synteny.setting.conf
 + cat out6.synteny.crosslink
 + cat out6.pO83_CORR.indel.reverse.out6.synteny.gff out6.pO83_CORR.out6.synteny.gff out6.pO83_CORR.indel.out6.synteny.gff out6.pO83_CORR.indel.twin.out6.synteny.gff
-+ sort -u
 + awk -F '	' '{print $3}'
++ sort -u
 + sed -r 's/^(pO83_CORR.indel.reverse\s.*\.gff)\s/\1,out6.pO83_CORR.indel.reverse.out6.synteny.gff\t/' tracks.6.list
 + cp tracks.6.list.out6 tracks.6.list.out6.tmp
 + sed -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out6.pO83_CORR.out6.synteny.gff\t/' tracks.6.list.out6.tmp

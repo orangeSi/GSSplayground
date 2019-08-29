@@ -5,7 +5,7 @@
 
 <line x1="130" y1="480" x2="1105" y2="480" style="stroke:green;stroke-width:0.5"/>
 <line x1="130" y1="475" x2="130" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text class='myth' x="130" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">0bp</text>
+<text class='myth' x="130" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">1bp</text>
 <line x1="141.270909832721" y1="475" x2="141.270909832721" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
 <text class='myth' x="141.270909832721" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">1,700</text>
 <line x1="152.541819665443" y1="475" x2="152.541819665443" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
@@ -1128,8 +1128,8 @@
 
 
 
-<text class='myth' x="616.5" y="125.333333333333" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 125.333333333333)" >NC_017659.1</text>
-<text class='myth' x="616.5" y="259.166666666667" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 259.166666666667)" >NC_017659.1.fake</text>
-<text class='myth' x="616.5" y="392" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 392)" >NC_017659.1</text>
+<text class='myth' x="616.5" y="125.833333333333" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 125.833333333333)" >NC_017659.1</text>
+<text class='myth' x="616.5" y="259.666666666667" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 259.666666666667)" >NC_017659.1.fake</text>
+<text class='myth' x="616.5" y="392.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 392.5)" >NC_017659.1</text>
 
 </svg>

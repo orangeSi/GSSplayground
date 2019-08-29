@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1300" height="700" style="background-color:white;">
+<text class='myth' x="110.5" y="350" style="font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >mychr1</text>
+<g fill="none" stroke="black" stroke-width="2"><path stroke-dasharray="2,2" d="M484.593784078517,350 L572.311886586696,350" /></g>
+<line x1="130" y1="673.75" x2="1105" y2="673.75" style="stroke:green;stroke-width:0.5"/>
+<line x1="130" y1="666.75" x2="130" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="130" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">1bp</text>
+<line x1="307.208287895311" y1="666.75" x2="307.208287895311" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="307.208287895311" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">1,000</text>
+<line x1="484.416575790622" y1="666.75" x2="484.416575790622" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="484.416575790622" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">2,000</text>
+<line x1="661.624863685932" y1="666.75" x2="661.624863685932" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="661.624863685932" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">3,000</text>
+<line x1="838.833151581243" y1="666.75" x2="838.833151581243" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="838.833151581243" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">4,000</text>
+<line x1="1105" y1="666.75" x2="1105" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth'  x="1105" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman">5,502bp</text>
+
+
+<g class='myth'><title>chr1:1000-3000</title>
+<rect x="130" y="347.025" width="354.593784078517" height="5.95" style="fill:green"   /></g>
+<text class='myth'  x="129" y="350" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5'</text>
+ <text class='myth'  x="485.593784078517" y="350" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3'</text>
+<g class='myth'><title>chr1:5000-8000</title>
+<rect x="573.197928026172" y="347.025" width="531.802071973828" height="5.95" style="fill:green"   /></g>
+<text class='myth'  x="572.197928026172" y="350" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5'</text>
+ <text class='myth'  x="1106" y="350" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3'</text>
+
+
+
+				<g class='myth'><title><tspan>feature_id -> gene1</tspan>
+<tspan>track name -> mychr1</tspan>
+<tspan>ref start-end -> chr1:1300-1600</tspan></title>
+				<polygon id="gene1" points="183.162486368593,341.075 183.162486368593,358.925 225.834242093784,358.925 225.834242093784,360.71 236.502181025082,350 225.834242093784,339.29 225.834242093784,341.075" style="fill:blue;stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> gene2</tspan>
+<tspan>track name -> mychr1</tspan>
+<tspan>ref start-end -> chr1:1800-2600</tspan></title>
+				<polygon id="gene2" points="271.766630316249,341.075 271.766630316249,358.925 385.321701199564,358.925 385.321701199564,360.71 413.710468920393,350 385.321701199564,339.29 385.321701199564,341.075" style="fill:green;stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> gene3</tspan>
+<tspan>track name -> mychr1</tspan>
+<tspan>ref start-end -> chr1:5700-6000</tspan></title>
+				<polygon id="gene3" points="697.24372955289,341.075 697.24372955289,358.925 739.915485278081,358.925 739.915485278081,360.71 750.583424209378,350 739.915485278081,339.29 739.915485278081,341.075" style="fill:black;stroke:black;stroke-width:0;opacity:1"/></g>
+
+</svg>

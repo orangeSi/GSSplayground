@@ -3,14 +3,19 @@ die "perl $0
 <input.gff>
 <input.genome.fa>
 <prefix of output>
-<keywords>
+<keywords> gene:{exon+origin_of_replication};rRNA;snRNA
 " if(@ARGV!=4);
 
 
-my $gff=shift;
-my $genome=shift;
-my $prefix=shift;
+my $gff_genome=shift;
+my $type=shift;
+my $outdir=shift;
 my $keys=shift;
+
+my ($gff, $genome)=split(/:/, $gff_genome);
+die "error: need xxx.gff:xxx.genome.fa, not $gff_genome\n" if(!$gff || !$genome);
+die "error: gff $gff or genome $genome not exists\n" if(! -f $gff || ! -f $genome);
+
 
 my @keywords=split(/,/, $keys);
 my %gffs;

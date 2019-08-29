@@ -1,3 +1,5 @@
-NC_017659.1	add	legend	1	282.4	.	+	.	ID=gene4538.blue.ellipse.1;
-NC_017659.1	add	legend	1	141.2	.	+	.	ID=gene4537.yellow.circle_point.1;
-NC_017659.1	add	legend	1	282.4	.	+	.	ID=gene4532.black.arrow.1;
+NC_017659.1	add	legend	1	198.68	.	+	.	ID=gene4549.lenged.red.arrow.1;
+NC_017659.1	add	legend	1	198.68	.	+	.	ID=gene4559.lengend.black.arrow.0.6;
+NC_017659.1	add	legend	1	198.68	.	+	.	ID=gene4532.black.arrow.1;
+NC_017659.1	add	legend	1	132.786666666667	.	+	.	ID=gene4537.yellow.circle_point.1;
+NC_017659.1	add	legend	1	132.786666666667	.	+	.	ID=gene4538.blue.ellipse.1;

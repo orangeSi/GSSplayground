@@ -1,1 +1,16 @@
-Undefined subroutine &main::read_conf called at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src//prepare.data.pl line 39.
+"my" variable $error masks earlier declaration in same scope at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1310.
+"my" variable $error masks earlier declaration in same scope at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1311.
+"state" variable @_ masks earlier declaration in same scope at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1579.
+syntax error at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1284, near ""$k," ("
+syntax error at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1306, near "}elsif"
+Global symbol "$zoon_id" requires explicit package name at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1306.
+syntax error at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1315, near ""$k," ("
+Global symbol "$zoon_id" requires explicit package name at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1319.
+Can't use global @_ in "my" at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1329, near "= @_"
+syntax error at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1575, near "}"
+Can't use global @_ in "my" at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1579, near "=@_"
+syntax error at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1591, near "}"
+Can't use global @_ in "my" at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm line 1593, near "{$_"
+/hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/myth.pm has too many errors.
+Compilation failed in require at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/prepare.data.pl line 8.
+BEGIN failed--compilation aborted at /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/prepare.data.pl line 8.

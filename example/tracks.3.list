@@ -1,4 +1,5 @@
 #track_name	genome.gff	genome.fa	chr_id	fragment_start	fragment_end	chr_id	fragment_start	fragment_end ...
 #chr14	../data/chr14.gff	../data/chr14.fa.length	14	66901400	66901400+1000
 #chr14	../data/chr14.gff	../data/chr14.fa.length	14	66900400	66917974	
-chr14	../data/chr14.gff	../data/chr14.fa.length	14	66901400	66901400+2000
+#chr14	../data/chr14.gff	../data/chr14.fa.length	14	66901400	66901400+2000
+yeast	../data/yeast/GCF_000146045.2_R64_genomic.gff	../data/yeast/GCF_000146045.2_R64_genomic.fna	NC_001133.9	24000	54000	NC_001133.9	54000	87752	

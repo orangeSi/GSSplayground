@@ -1,3 +1,5 @@
+find package FindBin
+find package JSON
 connect_stroke_dasharray -> 2,5
 genome_height_ratio -> 1
 feature_label_order -> 4
@@ -49,12 +51,14 @@ label_rotate_angle -> 0
 top_bottom_margin -> 0.2
 crossing_link -> feature.crossing.link.out4
 cross_link_shape -> quadrilateral
+legend_position -> right
 feature_arrow_width_extent -> 0.3
 connect_stroke_width -> 2
 display_feature_label -> no
 default_legend -> other
 cross_link_orientation -> forward
 shift_angle_closed_feature -> 10
+feature_content_display -> no
 space_between_blocks -> 500
 feature_color -> rgb(50,205,50)
 scale_position -> low
@@ -106,14 +110,38 @@ end read tracks.4.list.out4
 lenged number is 0
 draw sample name pO83_CORR
 draw feature_id = pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1
+1brefore, feature_id	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	,start	1	end	1898
+2brefore, feature_id	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	1	end	1898	ratio	0.139285714285714
+feature_id	pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	0	end	1898	ratio	0.139285714285714
 draw feature_id = pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1
+1brefore, feature_id	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	,start	1891	end	2100
+2brefore, feature_id	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	1891	end	2100	ratio	0.139285714285714
+feature_id	pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	1890	end	2100	ratio	0.139285714285714
 draw feature_id = pO83_CORR.NC_017659.1.2101.5468.1.+.t.q_block_index=1.t_block_index=1
+1brefore, feature_id	pO83_CORR.NC_017659.1.2101.5468.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	,start	2101	end	5468
+2brefore, feature_id	pO83_CORR.NC_017659.1.2101.5468.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	2101	end	5468	ratio	0.139285714285714
+feature_id	pO83_CORR.NC_017659.1.2101.5468.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	2100	end	5468	ratio	0.139285714285714
 draw feature_id = pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1
+1brefore, feature_id	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	,start	5460	end	147060
+2brefore, feature_id	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	5460	end	147060	ratio	0.139285714285714
+feature_id	pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	5459	end	147060	ratio	0.139285714285714
 draw sample name pO83_CORR.indel
 draw feature_id = pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1
+1brefore, feature_id	pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	,start	1	end	1898
+2brefore, feature_id	pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	1	end	1898	ratio	0.139285714285714
+feature_id	pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	0	end	1898	ratio	0.139285714285714
 draw feature_id = pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.q.q_block_index=1.t_block_index=1
+1brefore, feature_id	pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	,start	1891	end	5257
+2brefore, feature_id	pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	1891	end	5257	ratio	0.139285714285714
+feature_id	pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	1890	end	5257	ratio	0.139285714285714
 draw feature_id = pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1
+1brefore, feature_id	pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	,start	5251	end	5460
+2brefore, feature_id	pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	5251	end	5460	ratio	0.139285714285714
+feature_id	pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	5250	end	5460	ratio	0.139285714285714
 draw feature_id = pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1
+1brefore, feature_id	pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	,start	5460	end	147060
+2brefore, feature_id	pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	5460	end	147060	ratio	0.139285714285714
+feature_id	pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	5459	end	147060	ratio	0.139285714285714
 check_blocks_two_ends_cord pO83_CORR,NC_017659.1,1,1 -> 130,149
 check_blocks_two_ends_cord pO83_CORR,NC_017659.1,1,7000 -> 1105,149
 check_blocks_two_ends_cord pO83_CORR.indel,NC_017659.1.fake,1,1 -> 130,349

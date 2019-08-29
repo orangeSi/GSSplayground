@@ -1,10 +1,14 @@
+find package FindBin
+find package JSON
 tracks_block_reverse -> pO83_CORR5,0;
 display_segment_name -> yes,center,shift_y:+2,fontsize:6,color:black,order:5,rotate:0
 display_segment_strand -> 5:5',3:3',color:black,fontsize:10
+tracks_shift_y -> pO83_CORR5,0,+0:-0.5,
 svg_width_height -> 1000,500
 pdf_dpi -> 100
 svg_background_color -> white
 feature_keywords -> gene
+feature_content_display_keywords -> gene
 feature_setting -> feature.color.label.7.conf
 width_ratio_ref_cluster_legend -> 0.1-0.75-0.15
 feature_shape -> arrow
@@ -40,12 +44,13 @@ connect_stroke_color -> black
 absolute_postion_in_title -> yes
 distance_closed_feature -> 10
 shift_angle_closed_feature -> 10
-top_bottom_margin -> 0.2
+top_bottom_margin -> 0.1,0.2
 space_between_blocks -> 500
 default_legend -> other
 sample_name_color_default -> black
 sample_name_font_size_default -> 12
-display_legend -> yes
+display_legend -> no
+legend_position -> right
 legend_font_size -> 15
 legend_height_ratio -> 0.7
 legend_width_margin -> 0.15
@@ -117,20 +122,30 @@ read gff, pO83_CORR5:NC_017659.1:28000-35000 block_index 1 for NC_017659.1	RefSe
 read_list pO83_CORR5 end
 end read tracks.7.list.out7
 reverse pO83_CORR5 -> 1
-lenged number is 3
-fontsize is 15 before, height is 0
+lenged number is 5
+pos 2 is right, gene4537
+pos 2 is right, gene4538
+pos 2 is baseline, gene4549
+pos 2 is right, gene4532
+pos 2 is baseline, gene4559
 using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
-fontsize is 15 after, height is 15
+using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
+using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
+pos is baseline
+feature_shift_x_to = 343.65 = (1000 - 312.7)/2
+pos is right
 add legend list is tracks.7.list.out7.out7.legend.list
 add legend feature_setting is feature.color.label.7.conf.legend.setting.conf
 lenged end
-start read tracks.7.list.out7.out7.legend.list again, legend_number=3
+start read tracks.7.list.out7.out7.legend.list again, legend_number=5
 parse pO83_CORR1 pO83_CORR1:NC_017659.1:1-7060 -> block_index 1
 
 read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	RefSeq	gene	2313	3428	.	+	.	ID=gene4532;Dbxref=GeneID:12657366;Name=iroB;gbkey=Gene;gene=iroB;gene_biotype=protein_coding;locus_tag=NRG857_30008
-read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	282.4	.	+	.	ID=gene4538.blue.ellipse.1;
-read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	141.2	.	+	.	ID=gene4537.yellow.circle_point.1;
-read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	282.4	.	+	.	ID=gene4532.black.arrow.1;
+read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	198.68	.	+	.	ID=gene4549.lenged.red.arrow.1;
+read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	198.68	.	+	.	ID=gene4559.lengend.black.arrow.0.6;
+read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	198.68	.	+	.	ID=gene4532.black.arrow.1;
+read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	132.786666666667	.	+	.	ID=gene4537.yellow.circle_point.1;
+read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	132.786666666667	.	+	.	ID=gene4538.blue.ellipse.1;
 read_list pO83_CORR1 end
 parse pO83_CORR2 pO83_CORR2:NC_017659.1:7060-14060 -> block_index 1
 
@@ -171,77 +186,165 @@ read gff, pO83_CORR5:NC_017659.1:28000-35000 block_index 1 for NC_017659.1	RefSe
 read gff, pO83_CORR5:NC_017659.1:28000-35000 block_index 1 for NC_017659.1	RefSeq	gene	34369	34692	.	+	.	ID=gene4561;Dbxref=GeneID:12657241;Name=NRG857_30061;gbkey=Gene;gene_biotype=protein_coding;locus_tag=NRG857_30061
 read_list pO83_CORR5 end
 draw sample name pO83_CORR1
-fontsize is 6 before, height is 0
 using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
-fontsize is 6 after, height is 6.5
-draw feature_id = gene4532.black.arrow.1
-draw feature_id = gene4537.yellow.circle_point.1
 draw feature_id = gene4538.blue.ellipse.1
+1brefore, feature_id	gene4538.blue.ellipse.1,	feature_shift_x	,start	1	end	132.786666666667
+2brefore, feature_id	gene4538.blue.ellipse.1,	feature_shift_x	0,start	1	end	132.786666666667	ratio	0.106232294617564
+feature_id	gene4538.blue.ellipse.1,	feature_shift_x	0,start	0.999999999999	end	132.786666666667	ratio	0.106232294617564
+draw feature_id = gene4532.black.arrow.1
+1brefore, feature_id	gene4532.black.arrow.1,	feature_shift_x	,start	1	end	198.68
+2brefore, feature_id	gene4532.black.arrow.1,	feature_shift_x	0,start	1	end	198.68	ratio	0.106232294617564
+feature_id	gene4532.black.arrow.1,	feature_shift_x	0,start	0.99	end	198.68	ratio	0.106232294617564
+draw feature_id = gene4559.lengend.black.arrow.0.6
+1brefore, feature_id	gene4559.lengend.black.arrow.0.6,	feature_shift_x	,start	1	end	198.68
+2brefore, feature_id	gene4559.lengend.black.arrow.0.6,	feature_shift_x	0,start	1	end	198.68	ratio	0.106232294617564
+feature_id	gene4559.lengend.black.arrow.0.6,	feature_shift_x	0,start	0.99	end	198.68	ratio	0.106232294617564
+draw feature_id = gene4549.lenged.red.arrow.1
+1brefore, feature_id	gene4549.lenged.red.arrow.1,	feature_shift_x	,start	1	end	198.68
+2brefore, feature_id	gene4549.lenged.red.arrow.1,	feature_shift_x	0,start	1	end	198.68	ratio	0.106232294617564
+feature_id	gene4549.lenged.red.arrow.1,	feature_shift_x	0,start	0.99	end	198.68	ratio	0.106232294617564
+draw feature_id = gene4537.yellow.circle_point.1
+1brefore, feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	,start	1	end	132.786666666667
+2brefore, feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	0,start	1	end	132.786666666667	ratio	0.106232294617564
+feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	0,start	0.999999999999	end	132.786666666667	ratio	0.106232294617564
 draw feature_id = gene4532
+1brefore, feature_id	gene4532,	feature_shift_x	,start	2313	end	3428
+2brefore, feature_id	gene4532,	feature_shift_x	0,start	2313	end	3428	ratio	0.106232294617564
+feature_id	gene4532,	feature_shift_x	0,start	2312	end	3428	ratio	0.106232294617564
 draw sample name pO83_CORR2
-fontsize is 6 before, height is 0
 using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
-fontsize is 6 after, height is 6.5
 draw feature_id = gene4534
+1brefore, feature_id	gene4534,	feature_shift_x	,start	272	end	1501
+2brefore, feature_id	gene4534,	feature_shift_x	0,start	272	end	1501	ratio	0.106232294617564
+feature_id	gene4534,	feature_shift_x	0,start	271	end	1501	ratio	0.106232294617564
 draw feature_id = gene4535
+1brefore, feature_id	gene4535,	feature_shift_x	,start	1586	end	2542
+2brefore, feature_id	gene4535,	feature_shift_x	0,start	1586	end	2542	ratio	0.106232294617564
+feature_id	gene4535,	feature_shift_x	0,start	1585	end	2542	ratio	0.106232294617564
 draw feature_id = gene4536
+1brefore, feature_id	gene4536,	feature_shift_x	,start	2587	end	4764
+2brefore, feature_id	gene4536,	feature_shift_x	0,start	2587	end	4764	ratio	0.106232294617564
+feature_id	gene4536,	feature_shift_x	0,start	2586	end	4764	ratio	0.106232294617564
 draw feature_id = gene4537
+1brefore, feature_id	gene4537,	feature_shift_x	,start	5062	end	5289
+2brefore, feature_id	gene4537,	feature_shift_x	0,start	5062	end	5289	ratio	0.106232294617564
+feature_id	gene4537,	feature_shift_x	0,start	5061	end	5289	ratio	0.106232294617564
 draw feature_id = gene4538
+1brefore, feature_id	gene4538,	feature_shift_x	,start	5619	end	6455
+2brefore, feature_id	gene4538,	feature_shift_x	0,start	5619	end	6455	ratio	0.106232294617564
+feature_id	gene4538,	feature_shift_x	0,start	5618	end	6455	ratio	0.106232294617564
 draw sample name pO83_CORR3
-fontsize is 6 before, height is 0
 using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
-fontsize is 6 after, height is 6.5
 draw feature_id = gene4540
+1brefore, feature_id	gene4540,	feature_shift_x	,start	958	end	1269
+2brefore, feature_id	gene4540,	feature_shift_x	0,start	958	end	1269	ratio	0.106232294617564
+feature_id	gene4540,	feature_shift_x	0,start	957	end	1269	ratio	0.106232294617564
 draw feature_id = gene4541
+1brefore, feature_id	gene4541,	feature_shift_x	,start	1247	end	1483
+2brefore, feature_id	gene4541,	feature_shift_x	0,start	1247	end	1483	ratio	0.106232294617564
+feature_id	gene4541,	feature_shift_x	0,start	1246	end	1483	ratio	0.106232294617564
 draw feature_id = gene4542
+1brefore, feature_id	gene4542,	feature_shift_x	,start	1623	end	1799
+2brefore, feature_id	gene4542,	feature_shift_x	0,start	1623	end	1799	ratio	0.106232294617564
+feature_id	gene4542,	feature_shift_x	0,start	1622	end	1799	ratio	0.106232294617564
 draw feature_id = gene4543
+1brefore, feature_id	gene4543,	feature_shift_x	,start	1947	end	2228
+2brefore, feature_id	gene4543,	feature_shift_x	0,start	1947	end	2228	ratio	0.106232294617564
+feature_id	gene4543,	feature_shift_x	0,start	1946	end	2228	ratio	0.106232294617564
 draw feature_id = gene4544
+1brefore, feature_id	gene4544,	feature_shift_x	,start	3357	end	4172
+2brefore, feature_id	gene4544,	feature_shift_x	0,start	3357	end	4172	ratio	0.106232294617564
+feature_id	gene4544,	feature_shift_x	0,start	3356	end	4172	ratio	0.106232294617564
 draw feature_id = gene4545
+1brefore, feature_id	gene4545,	feature_shift_x	,start	4222	end	4575
+2brefore, feature_id	gene4545,	feature_shift_x	0,start	4222	end	4575	ratio	0.106232294617564
+feature_id	gene4545,	feature_shift_x	0,start	4221	end	4575	ratio	0.106232294617564
 draw feature_id = gene4546
+1brefore, feature_id	gene4546,	feature_shift_x	,start	4753	end	5529
+2brefore, feature_id	gene4546,	feature_shift_x	0,start	4753	end	5529	ratio	0.106232294617564
+feature_id	gene4546,	feature_shift_x	0,start	4752	end	5529	ratio	0.106232294617564
 draw feature_id = gene4547
+1brefore, feature_id	gene4547,	feature_shift_x	,start	5541	end	6230
+2brefore, feature_id	gene4547,	feature_shift_x	0,start	5541	end	6230	ratio	0.106232294617564
+feature_id	gene4547,	feature_shift_x	0,start	5540	end	6230	ratio	0.106232294617564
 draw feature_id = gene4548
+1brefore, feature_id	gene4548,	feature_shift_x	,start	6274	end	6624
+2brefore, feature_id	gene4548,	feature_shift_x	0,start	6274	end	6624	ratio	0.106232294617564
+feature_id	gene4548,	feature_shift_x	0,start	6273	end	6624	ratio	0.106232294617564
 draw sample name pO83_CORR4
-fontsize is 6 before, height is 0
 using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
-fontsize is 6 after, height is 6.5
 draw feature_id = gene4549
+1brefore, feature_id	gene4549,	feature_shift_x	,start	225	end	1316
+2brefore, feature_id	gene4549,	feature_shift_x	0,start	225	end	1316	ratio	0.106232294617564
+feature_id	gene4549,	feature_shift_x	0,start	224	end	1316	ratio	0.106232294617564
 draw feature_id = gene4550
+1brefore, feature_id	gene4550,	feature_shift_x	,start	1318	end	3543
+2brefore, feature_id	gene4550,	feature_shift_x	0,start	1318	end	3543	ratio	0.106232294617564
+feature_id	gene4550,	feature_shift_x	0,start	1317	end	3543	ratio	0.106232294617564
 draw feature_id = gene4551
+1brefore, feature_id	gene4551,	feature_shift_x	,start	3593	end	4492
+2brefore, feature_id	gene4551,	feature_shift_x	0,start	3593	end	4492	ratio	0.106232294617564
+feature_id	gene4551,	feature_shift_x	0,start	3592	end	4492	ratio	0.106232294617564
 draw feature_id = gene4552
+1brefore, feature_id	gene4552,	feature_shift_x	,start	4482	end	4772
+2brefore, feature_id	gene4552,	feature_shift_x	0,start	4482	end	4772	ratio	0.106232294617564
+feature_id	gene4552,	feature_shift_x	0,start	4481	end	4772	ratio	0.106232294617564
 draw feature_id = gene4553
+1brefore, feature_id	gene4553,	feature_shift_x	,start	5068	end	5298
+2brefore, feature_id	gene4553,	feature_shift_x	0,start	5068	end	5298	ratio	0.106232294617564
+feature_id	gene4553,	feature_shift_x	0,start	5067	end	5298	ratio	0.106232294617564
 draw feature_id = gene4554
+1brefore, feature_id	gene4554,	feature_shift_x	,start	5295	end	5711
+2brefore, feature_id	gene4554,	feature_shift_x	0,start	5295	end	5711	ratio	0.106232294617564
+feature_id	gene4554,	feature_shift_x	0,start	5294	end	5711	ratio	0.106232294617564
 draw sample name pO83_CORR5
-fontsize is 6 before, height is 0
 using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
-fontsize is 6 after, height is 7
 draw feature_id = gene4556
+1brefore, feature_id	gene4556,	feature_shift_x	,start	1365	end	1622
 
 feature is 1, 1365, 1622, 1, 7001, 1, 0, feature
+2brefore, feature_id	gene4556,	feature_shift_x	0,start	5380	end	5637	ratio	0.106232294617564
+feature_id	gene4556,	feature_shift_x	0,start	5379	end	5637	ratio	0.106232294617564
 draw feature_id = gene4557
+1brefore, feature_id	gene4557,	feature_shift_x	,start	1622	end	2212
 
 feature is 1, 1622, 2212, 1, 7001, 1, 0, feature
+2brefore, feature_id	gene4557,	feature_shift_x	0,start	4790	end	5380	ratio	0.106232294617564
+feature_id	gene4557,	feature_shift_x	0,start	4789	end	5380	ratio	0.106232294617564
 draw feature_id = gene4558
+1brefore, feature_id	gene4558,	feature_shift_x	,start	2475	end	4031
 
 feature is 1, 2475, 4031, 1, 7001, 1, 0, feature
+2brefore, feature_id	gene4558,	feature_shift_x	0,start	2971	end	4527	ratio	0.106232294617564
+feature_id	gene4558,	feature_shift_x	0,start	2970	end	4527	ratio	0.106232294617564
 draw feature_id = gene4559
+1brefore, feature_id	gene4559,	feature_shift_x	,start	4222	end	4839
 
 feature is 1, 4222, 4839, 1, 7001, 1, 0, feature
+2brefore, feature_id	gene4559,	feature_shift_x	0,start	2163	end	2780	ratio	0.106232294617564
+feature_id	gene4559,	feature_shift_x	0,start	2162	end	2780	ratio	0.106232294617564
 draw feature_id = gene4560
+1brefore, feature_id	gene4560,	feature_shift_x	,start	5132	end	6265
 
 feature is 1, 5132, 6265, 1, 7001, 0, 0, feature
+2brefore, feature_id	gene4560,	feature_shift_x	0,start	737	end	1870	ratio	0.106232294617564
+feature_id	gene4560,	feature_shift_x	0,start	736	end	1870	ratio	0.106232294617564
 draw feature_id = gene4561
+1brefore, feature_id	gene4561,	feature_shift_x	,start	6370	end	6693
 
 feature is 1, 6370, 6693, 1, 7001, 1, 0, feature
-check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,35000 -> 843.732294617564,409.6
-check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,28000 -> 100,409.6
-check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,14060 -> 843.732294617564,169.6
-check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,7060 -> 100,169.6
-check_blocks_two_ends_cord pO83_CORR4,NC_017659.1,1,21000 -> 100,329.6
-check_blocks_two_ends_cord pO83_CORR4,NC_017659.1,1,28000 -> 843.732294617564,329.6
-check_blocks_two_ends_cord pO83_CORR3,NC_017659.1,1,21000 -> 837.35835694051,249.6
-check_blocks_two_ends_cord pO83_CORR3,NC_017659.1,1,14060 -> 100,249.6
-check_blocks_two_ends_cord pO83_CORR1,NC_017659.1,1,1 -> 100,89.6
-check_blocks_two_ends_cord pO83_CORR1,NC_017659.1,1,7060 -> 850,89.6
+2brefore, feature_id	gene4561,	feature_shift_x	0,start	309	end	632	ratio	0.106232294617564
+feature_id	gene4561,	feature_shift_x	0,start	308	end	632	ratio	0.106232294617564
+check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,35000 -> 843.732294617564,399.611111111111
+check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,28000 -> 100,399.611111111111
+check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,14060 -> 843.732294617564,166.277777777778
+check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,7060 -> 100,166.277777777778
+check_blocks_two_ends_cord pO83_CORR4,NC_017659.1,1,21000 -> 100,321.833333333333
+check_blocks_two_ends_cord pO83_CORR4,NC_017659.1,1,28000 -> 843.732294617564,321.833333333333
+check_blocks_two_ends_cord pO83_CORR3,NC_017659.1,1,21000 -> 837.35835694051,244.055555555556
+check_blocks_two_ends_cord pO83_CORR3,NC_017659.1,1,14060 -> 100,244.055555555556
+check_blocks_two_ends_cord pO83_CORR1,NC_017659.1,1,1 -> 100,88.5
+check_blocks_two_ends_cord pO83_CORR1,NC_017659.1,1,7060 -> 850,88.5
 
 
 

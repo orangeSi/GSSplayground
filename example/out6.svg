@@ -13,7 +13,7 @@
 
 <line x1="130" y1="480" x2="1105" y2="480" style="stroke:green;stroke-width:0.5"/>
 <line x1="130" y1="475" x2="130" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text class='myth' x="130" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">0bp</text>
+<text class='myth' x="130" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">1bp</text>
 <line x1="140.724545783943" y1="475" x2="140.724545783943" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
 <text class='myth' x="140.724545783943" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">1,700</text>
 <line x1="151.449091567887" y1="475" x2="151.449091567887" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
@@ -4855,7 +4855,7 @@
 <rect x="1060.82748848284" y="299.5" width="44.1725115171593" height="1" style="fill:blue;opacity:0.2"   /></g>
 <text class='myth'  x="1059.82748848284" y="300" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5"</text>
  <text class='myth'  x="1106" y="300" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3"</text>
-<g class='myth'><title>NC_017659.1.fake:reverse:1-147049(12-147060)</title>
+<g class='myth'><title>NC_017659.1.fake:reverse:[147060 -> 12]</title>
 <rect x="130" y="399.5" width="927.666901754749" height="1" style="fill:blue;opacity:0.2"   /></g>
 <text class='myth'  x="129" y="400" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >3"</text>
  <text class='myth'  x="1058.66690175475" y="400" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >5"</text>
@@ -7789,12 +7789,12 @@
 				<polygon id="NC_017659.1.indelGL000187" points="132.428794192246,398.5 132.428794192246,401.5 133.034415601222,401.5 133.034415601222,401.5 133.223672291526,400 133.034415601222,398.5 133.034415601222,398.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
 
 
-<text class='myth' x="151.083101480408" y="108.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 151.083101480408 108.5)" >NC_017659.1:1-7001bp</text>
-<text class='myth' x="198.403582612972" y="108.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 198.403582612972 108.5)" >NC_017659.1:1-7001bp</text>
-<text class='myth' x="592.836605155546" y="208.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.836605155546 208.5)" >NC_017659.1.fake:11-147060bp</text>
-<text class='myth' x="1081.91374424142" y="208.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1081.91374424142 208.5)" >NC_017659.1.fake:1-7002bp</text>
-<text class='myth' x="592.836605155546" y="308.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.836605155546 308.5)" >NC_017659.1.fake:11-147060bp</text>
-<text class='myth' x="1081.91374424142" y="308.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1081.91374424142 308.5)" >NC_017659.1.fake:1-7002bp</text>
-<text class='myth' x="592.833450877375" y="409" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.833450877375 409)" >NC_017659.1.fake:reverse:1-147049(12-147060)bp</text>
+<text class='myth' x="151.083101480408" y="109" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 151.083101480408 109)" >NC_017659.1:1-7001bp</text>
+<text class='myth' x="198.403582612972" y="109" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 198.403582612972 109)" >NC_017659.1:1-7001bp</text>
+<text class='myth' x="592.836605155546" y="209" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.836605155546 209)" >NC_017659.1.fake:11-147060bp</text>
+<text class='myth' x="1081.91374424142" y="209" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1081.91374424142 209)" >NC_017659.1.fake:1-7002bp</text>
+<text class='myth' x="592.836605155546" y="309" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.836605155546 309)" >NC_017659.1.fake:11-147060bp</text>
+<text class='myth' x="1081.91374424142" y="309" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1081.91374424142 309)" >NC_017659.1.fake:1-7002bp</text>
+<text class='myth' x="592.833450877375" y="409" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.833450877375 409)" >NC_017659.1.fake:reverse:[147060 -> 12]bp</text>
 
 </svg>

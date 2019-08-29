@@ -18,8 +18,7 @@ GetOptions("list:s"=>\$list,
 
 die "
 perl $0 [options]:
-* --list <str>  two formats: [sample gff genome seq_id1 seq_draw_start1 seq_draw_end1 genome seq_id2 seq_draw_start2 seq_draw_end2 ...]
-	or [sample gff genome]no seq_id mean full length of whole gff
+* --list <file>  file format: [sample gff genome seq_id1 seq_draw_start1 seq_draw_end1 genome seq_id2 seq_draw_start2 seq_draw_end2 ...]
 * --prefix <str>
 * --outdir <str>
 * --conf <str> 
@@ -31,8 +30,8 @@ if(! -d "$outdir"){
 }
 my $rg_test;
 my @track_reorder;
-my @funcs=();
-my %conf = &read_conf($conf,@funcs);
+my @funcs=("hist_scatter_line", "reads_mapping", "synteny", "general_features");
+my %conf = &read_conf($outdir,$conf,@funcs);
 
 ($conf, $track_reorder) = &default_setting(0, %conf);
 %conf=%$conf;
@@ -481,6 +480,8 @@ foreach my $pair(@pairs){
 #$conf{crossing_link2}{index}{"$arr[0],$arr[1]"}{$arr[2]} = $arr[3];
 	$pairs_index++;
 	my ($up_id, $down_id) = split(",", $pair);
+	die "error: up_id $up_id of crosslink not exists in feature_setting2\n" if(not exists $conf{feature_setting2}{$up_id});
+	die "error: down_id $down_id of crosslink not exists in feature_setting2\n" if(not exists $conf{feature_setting2}{$down_id});
 #print "2id is $up_id\n";
 	my $color=(exists $conf{crossing_link2}{index}{$pair}{cross_link_color})? $conf{crossing_link2}{index}{$pair}{cross_link_color}:$conf{cross_link_color};
 	my $cross_link_orientation=(exists $conf{crossing_link2}{index}{$pair}{cross_link_orientation})? $conf{crossing_link2}{index}{$pair}{cross_link_orientation}:$conf{cross_link_orientation};
@@ -1024,7 +1025,9 @@ sub jstohtml(){
 		my $d3_transform=`cat $Bin/d3-transform.js`;chomp $d3_transform;
 		print OUT "\n<script>$d3_transform</script>\n";
 
+		die "error: nothing to plot\n" if((keys %features_height) == 0);
 		my $feature_id=(keys %features_height)[-1];
+
 		print OUT "<script>var blocks_start_ends_cord=".encode_json(\%blocks_start_ends_cord).";\nvar tracks_heigh=".encode_json(\%tracks_height).";var reversed_block=".encode_json(\%reversed_block).";var feature_id_test='$feature_id';var rg_test='$rg_test'; var svg_width_raw = ${svg_width}; var svg_height_raw = ${svg_height}; var svg_bgcolor=\"$conf{svg_background_color}\";</script>\n";
 		print OUT "</head>\n<body>\n
 		<!--

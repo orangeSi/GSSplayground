@@ -4,7 +4,7 @@
 %  git clone http://github.com/orangeSi/ClustersPloter.git
 %  cd  ClustersPloter/example/
 %  cat work.sh # output svg and html
-# or go to https://clustersploter.readthedocs.io/en/latest/# 
+#  or go to https://github.com/orangeSi/ClustersPloter/wiki or https://clustersploter.readthedocs.io/en/latest/# 
 ```
 
 <br><br>

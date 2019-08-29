@@ -6,7 +6,7 @@
 
 <line x1="130" y1="480" x2="1105" y2="480" style="stroke:green;stroke-width:0.5"/>
 <line x1="130" y1="475" x2="130" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text class='myth' x="130" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">0bp</text>
+<text class='myth' x="130" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">1bp</text>
 <line x1="366.785714285714" y1="475" x2="366.785714285714" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
 <text class='myth' x="366.785714285714" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">1,700</text>
 <line x1="603.571428571429" y1="475" x2="603.571428571429" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>

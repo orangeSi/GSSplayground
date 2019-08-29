@@ -5,7 +5,7 @@ tracks_block_reverse=pO83_CORR5,0;
 #feature_id_is_unique = no
 display_segment_name=yes,center,shift_y:+2,fontsize:6,color:black,order:5,rotate:0
 display_segment_strand=5:5',3:3',color:black,fontsize:10
-
+tracks_shift_y=pO83_CORR5,0,+0:-0.5,
 
 
 
@@ -26,6 +26,7 @@ svg_background_color = white #background color of whole figure
 
 # plot feature type
 feature_keywords = gene # *, gene,point,hist,heatmap
+feature_content_display_keywords = gene # *, gene,point,hist,heatmap
 feature_setting = feature.color.label.7.conf # *
 
 # figure width layout
@@ -82,7 +83,7 @@ distance_closed_feature=10 # xxbp, if the distancetwo feature is too close, so s
 shift_angle_closed_feature = 10
 
 # layout
-top_bottom_margin = 0.2 # 高度上 top和bottom占的比例,top和bottom可能有scale
+top_bottom_margin = 0.1,0.2 # 高度上 top和bottom占的比例,top和bottom可能有scale
 space_between_blocks = 500 # bp, mean space of every block in one track
 default_legend = other
 
@@ -93,7 +94,8 @@ sample_name_font_size_default = 12
 
 
 # legend
-display_legend=yes # yes or other
+display_legend= no # yes or other
+legend_position = right # baseline or right
 legend_font_size = 15 #legend中文字字体大小
 legend_height_ratio = 0.7 # compare with feature height
 legend_width_margin = 0.15 # legends左右两侧的margin

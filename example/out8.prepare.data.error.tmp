@@ -27,8 +27,8 @@
 + cat feature.color.label.6.conf out8.synteny.setting.conf
 + cat out8.synteny.crosslink
 + cat out8.pO83_CORR.out8.synteny.gff out8.pO83_CORR.indel.blast.out8.synteny.gff out8.pO83_CORR.twin.minimap.out8.synteny.gff
-+ sort -u
 + awk -F '	' '{print $3}'
++ sort -u
 + sed -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out8.pO83_CORR.out8.synteny.gff\t/' tracks.8.list
 + cp tracks.8.list.out8 tracks.8.list.out8.tmp
 + sed -r 's/^(pO83_CORR.indel.blast\s.*\.gff)\s/\1,out8.pO83_CORR.indel.blast.out8.synteny.gff\t/' tracks.8.list.out8.tmp

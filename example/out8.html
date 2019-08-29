@@ -3,18 +3,18 @@
 <head>
 <style>
 
-ul {
-    font-size:0;
-    text-align:center
-}
-ul li {
-    display:inline;
-    zoom:1
-}
-td {
-}
-</style>
-
+		ul {
+		font-size:0;
+		text-align:center
+		}
+		ul li {
+		display:inline;
+		zoom:1
+		}
+		td {
+		}
+		</style>
+		
 
 <script>// svg-pan-zoom v3.6.0
 // https://github.com/ariutta/svg-pan-zoom
@@ -20280,7 +20280,7 @@ var tracks_heigh={"pO83_CORR.indel.blast":133.333333333333,"pO83_CORR":133.33333
 
 <line x1="130" y1="480" x2="1105" y2="480" style="stroke:green;stroke-width:0.5"/>
 <line x1="130" y1="475" x2="130" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
-<text class='myth' x="130" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">0bp</text>
+<text class='myth' x="130" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">1bp</text>
 <line x1="141.270909832721" y1="475" x2="141.270909832721" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
 <text class='myth' x="141.270909832721" y="490" style="font-size:6px;fill:green;text-anchor:middle;font-family:Times New Roman;">1,700</text>
 <line x1="152.541819665443" y1="475" x2="152.541819665443" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
@@ -21403,65 +21403,68 @@ var tracks_heigh={"pO83_CORR.indel.blast":133.333333333333,"pO83_CORR":133.33333
 </g>
 
 
-<text class='myth' x="616.5" y="125.333333333333" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 125.333333333333)" >NC_017659.1</text>
-<text class='myth' x="616.5" y="259.166666666667" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 259.166666666667)" >NC_017659.1.fake</text>
-<text class='myth' x="616.5" y="392" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 392)" >NC_017659.1</text>
+<text class='myth' x="616.5" y="125.833333333333" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 125.833333333333)" >NC_017659.1</text>
+<text class='myth' x="616.5" y="259.666666666667" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 259.666666666667)" >NC_017659.1.fake</text>
+<text class='myth' x="616.5" y="392.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 616.5 392.5)" >NC_017659.1</text>
 
 </svg>
  </div>
-    <button id="enable" style='display:none'>enable</button>
-    <button id="disable" style='display:none'>disable</button>
-    <script>
-	window.refresh_flag = 0 ;
-    // Don't use window.onLoad like this in production, because it can only listen to one function.
-	document.getElementById("container").style.width=document.documentElement.clientWidth*0.98 + "px";
-	document.getElementById("container").style.height=document.documentElement.clientHeight*0.93 + "px";
-	document.getElementById("container").style['margin']='auto';
-	document.getElementById("container").style.display="block";
-    function svgpanzoom(the_alert) {
-	  if(window.hasOwnProperty("zoomTiger")){
-	  	if(the_alert){alert('there is not need to hit me anymore~');}
-	  	return 0
-	  }
-	  console.log("start svgpanzoom")
-	  window.refresh_flag +=1 ;
-      // Expose to window namespase for testing purposes
+		<button id="enable" style='display:none'>enable</button>
+		<button id="disable" style='display:none'>disable</button>
+		<script>
+		window.refresh_flag = 0 ;
+		// Don't use window.onLoad like this in production, because it can only listen to one function.
+		document.getElementById("container").style.width=document.documentElement.clientWidth*0.98 + "px";
+		document.getElementById("container").style.height=document.documentElement.clientHeight*0.88 + "px";
+		document.getElementById("container").style['margin']='auto';
+		document.getElementById("container").style.display="block";
+		function svgpanzoom(the_alert) {
+		if(window.hasOwnProperty("zoomTiger")){
+		if(the_alert){alert('there is not need to hit me anymore~');}
+		return 0
+		}
+		console.log("start svgpanzoom")
+		window.refresh_flag +=1 ;
+		// Expose to window namespase for testing purposes
 
-      window.zoomTiger = svgPanZoom('#demo-tiger', {
-	  maxZoom: 500,
-     	  minZoom:0.01,
-          zoomEnabled: true,
-          controlIconsEnabled: true,
-		  fit: false, 
-		  center: false,
-		  destroy: function() {this.destroy(); return this.pi}
-          // viewportSelector: document.getElementById('demo-tiger').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
-        });
+		window.zoomTiger = svgPanZoom('#demo-tiger', {
+		maxZoom: 500,
+		minZoom:0.01,
+		zoomEnabled: true,
+		controlIconsEnabled: true,
+		fit: false, 
+		center: false,
+		destroy: function() {this.destroy(); return this.pi}
+		// viewportSelector: document.getElementById('demo-tiger').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
+		});
 
-        document.getElementById('enable').addEventListener('click', function() {
-          window.zoomTiger.enableControlIcons();
-        });
-        document.getElementById('disable').addEventListener('click', function() {
-          window.zoomTiger.disableControlIcons();
-        });
-	    console.log("end svgpanzoom")
-      };
-     svgpanzoom(1);
-	 </script>
-	 <ul>
+		document.getElementById('enable').addEventListener('click', function() {
+		window.zoomTiger.enableControlIcons();
+		});
+		document.getElementById('disable').addEventListener('click', function() {
+		window.zoomTiger.disableControlIcons();
+		});
+		console.log("end svgpanzoom")
+		};
+		svgpanzoom(1);
+		</script>
+		<ul>
 <li>
-<td><input id="hightligh_ratio" type="value" value="3"  size=5 title="highlight ratio" /> <input type=button value="highlight ratio" /></td>
+<td><input type="button" value="clear" onclick="document.getElementById('hightligh_ratio').value=''" /><input id="hightligh_ratio" type="value" value="3"  size=5 title="highlight ratio" /> <input type=button value="highlight ratio" /></td>
 <!--
 	<input type="button" value="if you want pan and zoom the imgine, hit me" style="color:green;font-weight:bold" onclick="svgpanzoom(1);this.value='ok, you can pan and zoom now'" />
 -->
 </li><br>
 <li>
+<td><input type="button" value="clear" onclick="document.getElementById('search_the_key').value=''" /></td>
 <td><input id="search_the_key" type="value" value="use js regrex,example keywordA|keywordB"  size=50 title="use js regrex,example keywordA|keywordB" /></td>
 <td><input value="search by keyword of feature id" type="button" onclick="search_by_key()" /></td>
 </li><br>
 <li>
+<td><input type="button" value="clear" onclick="document.getElementById('search_the_rg').value=''" /></td>
 <td><input id="search_the_rg" type="value" value="track_name:chr_id:start:end" size=50 title="track_name:chr_id:start:end" /></td>
 <td><input id="search_by_rg" value="search by track_name1:chr_id1:start1:end1;track_name2:chr_id2:start2:end2;" type="button" onclick="search_by_rg()" /></td>
+<td><input id="remove_exists_rg" value="remove all exists regions" type="button" onclick="remove_exists_rg()"></td>
 </li><br>
 <li>
 <td><input onclick="saveSVG('svg-pan-zoom_viewport', svg_width_raw, svg_height_raw, svg_bgcolor)" type=button value='download current image to svg file' ></td>
@@ -21532,6 +21535,19 @@ function get_hightligh_ratio(){
 	hightligh_ratio = parseFloat(hightligh_ratio);
 	return hightligh_ratio;
 }
+
+function remove_exists_rg(){
+	for(var index in rg_lists){
+		var gid = rg_lists[index];
+		var exists_rg_pos = document.getElementById(gid);
+		if(exists_rg_pos){
+			exists_rg_pos.remove();
+			console.log("remove "+gid);
+		}
+	}
+	rg_lists = new Array();
+}
+var rg_lists = new Array();
 function search_by_rg(){
 	//if(window.refresh_flag >0){
 	//	alert('sorry, you neet to refresh the page, then you can search the region yet~');
@@ -21540,9 +21556,7 @@ function search_by_rg(){
 	var search_result_num = 0;	
 	var remove_exists=0;
 	var search_the_rg = document.getElementById("search_the_rg").value;
-	search_the_rg = search_the_rg.replace(/\s*$/, "");
-	search_the_rg = search_the_rg.replace(/^\s*/, "");
-	search_the_rg = search_the_rg.replace(/;\s*$/, "");
+	search_the_rg = search_the_rg.replace(/\s*$/, "").replace(/^\s*/, "").replace(/;\s*$/, "");
 	
 	var hightligh_ratio = get_hightligh_ratio();
 	console.log("hightligh_ratio is "+hightligh_ratio);
@@ -21635,7 +21649,7 @@ function search_by_rg(){
 									 var gid = track_name+"."+chr_id+"."+block_index+"."+rg_pos;
 									 var exists_rg_pos = document.getElementById(gid);
 									 if(exists_rg_pos){
-										exists_rg_pos.remove();
+										//exists_rg_pos.remove();
 										remove_exists = 1;
 									 	continue;
 									 }
@@ -21660,6 +21674,7 @@ function search_by_rg(){
 									 console.log('rect is '+rect.innerHTML);
 									 console.log("x="+x+",y="+y+",width="+width+",height="+height);
 									 search_result_num +=1;
+									 rg_lists.push(gid)
 									}
 								}
 	
@@ -21688,6 +21703,7 @@ function search_by_key(){
 	var new_stroke_width = 1;
 	var gs = document.getElementsByClassName("myth");
 	var key = document.getElementById("search_the_key").value;
+	key = key.replace(/\s*$/, "").replace(/^\s*/, "");
 	
 	if(key.length == 0){alert("keyword is empty");return 1;}
 
@@ -21761,8 +21777,8 @@ function search_by_key(){
 	
 }
 </script>
-	 <h3>./out8, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h3>
-    
+		<h3>./out8, you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom</h3>
+		
 <script>
 
 // 每个feature或者文字都可以点击后出现一个窗口，可以在里面设置这个feature的移动transform="translate(-110 0)"(即整体x-10,y不变)，color，opacity，text font size
@@ -21895,7 +21911,7 @@ function feature_show(event) {
 						//alert('font size'+font_size);
 						div2.innerHTML+="<br>"+font_size+value+font_color+font_opacity+alignment_baseline+text_anchor+scale_xy+rotate+shift_xy+display+"<br><br>";
 						
-					}else if(tagname == "rect" || tagname == "polygon" || tagname == "path" || tagname == "polygon" || tagname == "circle"){
+					}else if(tagname == "rect" || tagname == "polygon" || tagname == "path" || tagname == "polygon" || tagname == "circle"|| tagname == "ellipse"){
 						// fill color, opacity, strike-border, strike color
 						//style="stroke:black;stroke-width:0.2;fill:orange;opacity:0.5"
 						var fill_color=childs[i].style['fill'];

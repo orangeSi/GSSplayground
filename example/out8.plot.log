@@ -1,3 +1,5 @@
+find package FindBin
+find package JSON
 connect_stroke_dasharray -> 2,5
 genome_height_ratio -> 1
 feature_label_order -> 4
@@ -50,12 +52,14 @@ label_rotate_angle -> 0
 top_bottom_margin -> 0.2
 crossing_link -> feature.crossing.link.out8
 cross_link_shape -> quadrilateral
+legend_position -> right
 feature_arrow_width_extent -> 30bp
 connect_stroke_width -> 2
 display_feature_label -> no
 default_legend -> other
 cross_link_orientation -> forward
 shift_angle_closed_feature -> 10
+feature_content_display -> no
 space_between_blocks -> 500
 feature_color -> rgb(50,205,50)
 scale_position -> low
@@ -187,103 +191,355 @@ read_list pO83_CORR.twin.minimap end
 end read tracks.8.list.out8
 lenged number is 0
 draw sample name pO83_CORR
-fontsize is 6 before, height is 0
 using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
-fontsize is 6 after, height is 6
 draw feature_id = pO83_CORR.NC_017659.1.1.1898.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.1.1898.1.+.t.1,	feature_shift_x	,start	1	end	1898
+2brefore, feature_id	pO83_CORR.NC_017659.1.1.1898.1.+.t.1,	feature_shift_x	0,start	1	end	1898	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.1.1898.1.+.t.1,	feature_shift_x	0,start	0	end	1898	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.1891.2100.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.1891.2100.1.+.t.1,	feature_shift_x	,start	1891	end	2100
+2brefore, feature_id	pO83_CORR.NC_017659.1.1891.2100.1.+.t.1,	feature_shift_x	0,start	1891	end	2100	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.1891.2100.1.+.t.1,	feature_shift_x	0,start	1890	end	2100	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.2101.5468.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.2101.5468.1.+.t.1,	feature_shift_x	,start	2101	end	5468
+2brefore, feature_id	pO83_CORR.NC_017659.1.2101.5468.1.+.t.1,	feature_shift_x	0,start	2101	end	5468	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.2101.5468.1.+.t.1,	feature_shift_x	0,start	2100	end	5468	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.5460.147060.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.5460.147060.1.+.t.1,	feature_shift_x	,start	5460	end	147060
+2brefore, feature_id	pO83_CORR.NC_017659.1.5460.147060.1.+.t.1,	feature_shift_x	0,start	5460	end	147060	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.5460.147060.1.+.t.1,	feature_shift_x	0,start	5459	end	147060	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.15942.15820.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.15942.15820.1.-.t.1,	feature_shift_x	,start	15820	end	15942
+2brefore, feature_id	pO83_CORR.NC_017659.1.15942.15820.1.-.t.1,	feature_shift_x	0,start	15820	end	15942	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.15942.15820.1.-.t.1,	feature_shift_x	0,start	15819	end	15942	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.36500.34724.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.36500.34724.1.-.t.1,	feature_shift_x	,start	34724	end	36500
+2brefore, feature_id	pO83_CORR.NC_017659.1.36500.34724.1.-.t.1,	feature_shift_x	0,start	34724	end	36500	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.36500.34724.1.-.t.1,	feature_shift_x	0,start	34723	end	36500	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.42262.40487.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.42262.40487.1.-.t.1,	feature_shift_x	,start	40487	end	42262
+2brefore, feature_id	pO83_CORR.NC_017659.1.42262.40487.1.-.t.1,	feature_shift_x	0,start	40487	end	42262	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.42262.40487.1.-.t.1,	feature_shift_x	0,start	40486	end	42262	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.44534.43766.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.44534.43766.1.-.t.1,	feature_shift_x	,start	43766	end	44534
+2brefore, feature_id	pO83_CORR.NC_017659.1.44534.43766.1.-.t.1,	feature_shift_x	0,start	43766	end	44534	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.44534.43766.1.-.t.1,	feature_shift_x	0,start	43765	end	44534	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.44534.43767.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.44534.43767.1.-.t.1,	feature_shift_x	,start	43767	end	44534
+2brefore, feature_id	pO83_CORR.NC_017659.1.44534.43767.1.-.t.1,	feature_shift_x	0,start	43767	end	44534	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.44534.43767.1.-.t.1,	feature_shift_x	0,start	43766	end	44534	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.43767.44534.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.43767.44534.1.+.t.1,	feature_shift_x	,start	43767	end	44534
+2brefore, feature_id	pO83_CORR.NC_017659.1.43767.44534.1.+.t.1,	feature_shift_x	0,start	43767	end	44534	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.43767.44534.1.+.t.1,	feature_shift_x	0,start	43766	end	44534	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.43767.44540.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.43767.44540.1.+.t.1,	feature_shift_x	,start	43767	end	44540
+2brefore, feature_id	pO83_CORR.NC_017659.1.43767.44540.1.+.t.1,	feature_shift_x	0,start	43767	end	44540	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.43767.44540.1.+.t.1,	feature_shift_x	0,start	43766	end	44540	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.45999.45180.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.45999.45180.1.-.t.1,	feature_shift_x	,start	45180	end	45999
+2brefore, feature_id	pO83_CORR.NC_017659.1.45999.45180.1.-.t.1,	feature_shift_x	0,start	45180	end	45999	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.45999.45180.1.-.t.1,	feature_shift_x	0,start	45179	end	45999	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.48349.47530.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.48349.47530.1.-.t.1,	feature_shift_x	,start	47530	end	48349
+2brefore, feature_id	pO83_CORR.NC_017659.1.48349.47530.1.-.t.1,	feature_shift_x	0,start	47530	end	48349	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.48349.47530.1.-.t.1,	feature_shift_x	0,start	47529	end	48349	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.74013.74783.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.74013.74783.1.+.t.1,	feature_shift_x	,start	74013	end	74783
+2brefore, feature_id	pO83_CORR.NC_017659.1.74013.74783.1.+.t.1,	feature_shift_x	0,start	74013	end	74783	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.74013.74783.1.+.t.1,	feature_shift_x	0,start	74012	end	74783	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.74783.74015.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.74783.74015.1.-.t.1,	feature_shift_x	,start	74015	end	74783
+2brefore, feature_id	pO83_CORR.NC_017659.1.74783.74015.1.-.t.1,	feature_shift_x	0,start	74015	end	74783	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.74783.74015.1.-.t.1,	feature_shift_x	0,start	74014	end	74783	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.74783.74016.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.74783.74016.1.-.t.1,	feature_shift_x	,start	74016	end	74783
+2brefore, feature_id	pO83_CORR.NC_017659.1.74783.74016.1.-.t.1,	feature_shift_x	0,start	74016	end	74783	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.74783.74016.1.-.t.1,	feature_shift_x	0,start	74015	end	74783	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.74784.74016.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.74784.74016.1.-.t.1,	feature_shift_x	,start	74016	end	74784
+2brefore, feature_id	pO83_CORR.NC_017659.1.74784.74016.1.-.t.1,	feature_shift_x	0,start	74016	end	74784	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.74784.74016.1.-.t.1,	feature_shift_x	0,start	74015	end	74784	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.75060.74940.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.75060.74940.1.-.t.1,	feature_shift_x	,start	74940	end	75060
+2brefore, feature_id	pO83_CORR.NC_017659.1.75060.74940.1.-.t.1,	feature_shift_x	0,start	74940	end	75060	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.75060.74940.1.-.t.1,	feature_shift_x	0,start	74939	end	75060	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.103111.103472.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.103111.103472.1.+.t.1,	feature_shift_x	,start	103111	end	103472
+2brefore, feature_id	pO83_CORR.NC_017659.1.103111.103472.1.+.t.1,	feature_shift_x	0,start	103111	end	103472	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.103111.103472.1.+.t.1,	feature_shift_x	0,start	103110	end	103472	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.106746.107107.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.106746.107107.1.+.t.1,	feature_shift_x	,start	106746	end	107107
+2brefore, feature_id	pO83_CORR.NC_017659.1.106746.107107.1.+.t.1,	feature_shift_x	0,start	106746	end	107107	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.106746.107107.1.+.t.1,	feature_shift_x	0,start	106745	end	107107	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.107471.107703.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.107471.107703.1.+.t.1,	feature_shift_x	,start	107471	end	107703
+2brefore, feature_id	pO83_CORR.NC_017659.1.107471.107703.1.+.t.1,	feature_shift_x	0,start	107471	end	107703	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.107471.107703.1.+.t.1,	feature_shift_x	0,start	107470	end	107703	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.107471.107875.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.107471.107875.1.+.t.1,	feature_shift_x	,start	107471	end	107875
+2brefore, feature_id	pO83_CORR.NC_017659.1.107471.107875.1.+.t.1,	feature_shift_x	0,start	107471	end	107875	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.107471.107875.1.+.t.1,	feature_shift_x	0,start	107470	end	107875	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.107471.107789.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.107471.107789.1.+.t.1,	feature_shift_x	,start	107471	end	107789
+2brefore, feature_id	pO83_CORR.NC_017659.1.107471.107789.1.+.t.1,	feature_shift_x	0,start	107471	end	107789	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.107471.107789.1.+.t.1,	feature_shift_x	0,start	107470	end	107789	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.107471.107574.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.107471.107574.1.+.t.1,	feature_shift_x	,start	107471	end	107574
+2brefore, feature_id	pO83_CORR.NC_017659.1.107471.107574.1.+.t.1,	feature_shift_x	0,start	107471	end	107574	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.107471.107574.1.+.t.1,	feature_shift_x	0,start	107470	end	107574	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.107477.107617.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.107477.107617.1.+.t.1,	feature_shift_x	,start	107477	end	107617
+2brefore, feature_id	pO83_CORR.NC_017659.1.107477.107617.1.+.t.1,	feature_shift_x	0,start	107477	end	107617	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.107477.107617.1.+.t.1,	feature_shift_x	0,start	107476	end	107617	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.107557.107961.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.107557.107961.1.+.t.1,	feature_shift_x	,start	107557	end	107961
+2brefore, feature_id	pO83_CORR.NC_017659.1.107557.107961.1.+.t.1,	feature_shift_x	0,start	107557	end	107961	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.107557.107961.1.+.t.1,	feature_shift_x	0,start	107556	end	107961	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.107959.107600.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.107959.107600.1.-.t.1,	feature_shift_x	,start	107600	end	107959
+2brefore, feature_id	pO83_CORR.NC_017659.1.107959.107600.1.-.t.1,	feature_shift_x	0,start	107600	end	107959	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.107959.107600.1.-.t.1,	feature_shift_x	0,start	107599	end	107959	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.107643.107961.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.107643.107961.1.+.t.1,	feature_shift_x	,start	107643	end	107961
+2brefore, feature_id	pO83_CORR.NC_017659.1.107643.107961.1.+.t.1,	feature_shift_x	0,start	107643	end	107961	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.107643.107961.1.+.t.1,	feature_shift_x	0,start	107642	end	107961	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.107729.107961.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.107729.107961.1.+.t.1,	feature_shift_x	,start	107729	end	107961
+2brefore, feature_id	pO83_CORR.NC_017659.1.107729.107961.1.+.t.1,	feature_shift_x	0,start	107729	end	107961	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.107729.107961.1.+.t.1,	feature_shift_x	0,start	107728	end	107961	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.107821.107961.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.107821.107961.1.+.t.1,	feature_shift_x	,start	107821	end	107961
+2brefore, feature_id	pO83_CORR.NC_017659.1.107821.107961.1.+.t.1,	feature_shift_x	0,start	107821	end	107961	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.107821.107961.1.+.t.1,	feature_shift_x	0,start	107820	end	107961	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.107858.107961.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.107858.107961.1.+.t.1,	feature_shift_x	,start	107858	end	107961
+2brefore, feature_id	pO83_CORR.NC_017659.1.107858.107961.1.+.t.1,	feature_shift_x	0,start	107858	end	107961	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.107858.107961.1.+.t.1,	feature_shift_x	0,start	107857	end	107961	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.110471.111241.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.110471.111241.1.+.t.1,	feature_shift_x	,start	110471	end	111241
+2brefore, feature_id	pO83_CORR.NC_017659.1.110471.111241.1.+.t.1,	feature_shift_x	0,start	110471	end	111241	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.110471.111241.1.+.t.1,	feature_shift_x	0,start	110470	end	111241	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.111244.110474.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.111244.110474.1.-.t.1,	feature_shift_x	,start	110474	end	111244
+2brefore, feature_id	pO83_CORR.NC_017659.1.111244.110474.1.-.t.1,	feature_shift_x	0,start	110474	end	111244	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.111244.110474.1.-.t.1,	feature_shift_x	0,start	110473	end	111244	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.111241.110474.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.111241.110474.1.-.t.1,	feature_shift_x	,start	110474	end	111241
+2brefore, feature_id	pO83_CORR.NC_017659.1.111241.110474.1.-.t.1,	feature_shift_x	0,start	110474	end	111241	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.111241.110474.1.-.t.1,	feature_shift_x	0,start	110473	end	111241	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.126723.127490.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.126723.127490.1.+.t.1,	feature_shift_x	,start	126723	end	127490
+2brefore, feature_id	pO83_CORR.NC_017659.1.126723.127490.1.+.t.1,	feature_shift_x	0,start	126723	end	127490	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.126723.127490.1.+.t.1,	feature_shift_x	0,start	126722	end	127490	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.127490.126723.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.127490.126723.1.-.t.1,	feature_shift_x	,start	126723	end	127490
+2brefore, feature_id	pO83_CORR.NC_017659.1.127490.126723.1.-.t.1,	feature_shift_x	0,start	126723	end	127490	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.127490.126723.1.-.t.1,	feature_shift_x	0,start	126722	end	127490	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.139568.138798.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.139568.138798.1.-.t.1,	feature_shift_x	,start	138798	end	139568
+2brefore, feature_id	pO83_CORR.NC_017659.1.139568.138798.1.-.t.1,	feature_shift_x	0,start	138798	end	139568	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.139568.138798.1.-.t.1,	feature_shift_x	0,start	138797	end	139568	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.139569.138801.1.-.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.139569.138801.1.-.t.1,	feature_shift_x	,start	138801	end	139569
+2brefore, feature_id	pO83_CORR.NC_017659.1.139569.138801.1.-.t.1,	feature_shift_x	0,start	138801	end	139569	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.139569.138801.1.-.t.1,	feature_shift_x	0,start	138800	end	139569	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.138801.139568.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.138801.139568.1.+.t.1,	feature_shift_x	,start	138801	end	139568
+2brefore, feature_id	pO83_CORR.NC_017659.1.138801.139568.1.+.t.1,	feature_shift_x	0,start	138801	end	139568	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.138801.139568.1.+.t.1,	feature_shift_x	0,start	138800	end	139568	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.138801.139574.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.138801.139574.1.+.t.1,	feature_shift_x	,start	138801	end	139574
+2brefore, feature_id	pO83_CORR.NC_017659.1.138801.139574.1.+.t.1,	feature_shift_x	0,start	138801	end	139574	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.138801.139574.1.+.t.1,	feature_shift_x	0,start	138800	end	139574	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.141329.141474.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.141329.141474.1.+.t.1,	feature_shift_x	,start	141329	end	141474
+2brefore, feature_id	pO83_CORR.NC_017659.1.141329.141474.1.+.t.1,	feature_shift_x	0,start	141329	end	141474	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.141329.141474.1.+.t.1,	feature_shift_x	0,start	141328	end	141474	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.NC_017659.1.144228.144373.1.+.t.1
+1brefore, feature_id	pO83_CORR.NC_017659.1.144228.144373.1.+.t.1,	feature_shift_x	,start	144228	end	144373
+2brefore, feature_id	pO83_CORR.NC_017659.1.144228.144373.1.+.t.1,	feature_shift_x	0,start	144228	end	144373	ratio	0.00662994696042432
+feature_id	pO83_CORR.NC_017659.1.144228.144373.1.+.t.1,	feature_shift_x	0,start	144227	end	144373	ratio	0.00662994696042432
 draw sample name pO83_CORR.indel.blast
-fontsize is 6 before, height is 0
 using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
-fontsize is 6 after, height is 6.5
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.1.1898.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.1.1898.1.+.q.1,	feature_shift_x	,start	1	end	1898
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.1.1898.1.+.q.1,	feature_shift_x	0,start	1	end	1898	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.1.1898.1.+.q.1,	feature_shift_x	0,start	0	end	1898	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1,	feature_shift_x	,start	1	end	147060
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1,	feature_shift_x	0,start	1	end	147060	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1,	feature_shift_x	0,start	0	end	147060	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.1891.5257.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.1891.5257.1.+.q.1,	feature_shift_x	,start	1891	end	5257
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.1891.5257.1.+.q.1,	feature_shift_x	0,start	1891	end	5257	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.1891.5257.1.+.q.1,	feature_shift_x	0,start	1890	end	5257	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.5251.5460.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.5251.5460.1.+.q.1,	feature_shift_x	,start	5251	end	5460
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.5251.5460.1.+.q.1,	feature_shift_x	0,start	5251	end	5460	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.5251.5460.1.+.q.1,	feature_shift_x	0,start	5250	end	5460	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.5460.147060.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.5460.147060.1.+.q.1,	feature_shift_x	,start	5460	end	147060
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.5460.147060.1.+.q.1,	feature_shift_x	0,start	5460	end	147060	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.5460.147060.1.+.q.1,	feature_shift_x	0,start	5459	end	147060	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.15820.15942.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.15820.15942.1.-.q.1,	feature_shift_x	,start	15820	end	15942
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.15820.15942.1.-.q.1,	feature_shift_x	0,start	15820	end	15942	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.15820.15942.1.-.q.1,	feature_shift_x	0,start	15819	end	15942	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.34724.36500.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.34724.36500.1.-.q.1,	feature_shift_x	,start	34724	end	36500
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.34724.36500.1.-.q.1,	feature_shift_x	0,start	34724	end	36500	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.34724.36500.1.-.q.1,	feature_shift_x	0,start	34723	end	36500	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.40487.42262.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.40487.42262.1.-.q.1,	feature_shift_x	,start	40487	end	42262
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.40487.42262.1.-.q.1,	feature_shift_x	0,start	40487	end	42262	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.40487.42262.1.-.q.1,	feature_shift_x	0,start	40486	end	42262	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.43766.44534.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43766.44534.1.-.q.1,	feature_shift_x	,start	43766	end	44534
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43766.44534.1.-.q.1,	feature_shift_x	0,start	43766	end	44534	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43766.44534.1.-.q.1,	feature_shift_x	0,start	43765	end	44534	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.43767.44534.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43767.44534.1.+.q.1,	feature_shift_x	,start	43767	end	44534
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43767.44534.1.+.q.1,	feature_shift_x	0,start	43767	end	44534	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43767.44534.1.+.q.1,	feature_shift_x	0,start	43766	end	44534	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.43767.44540.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43767.44540.1.+.q.1,	feature_shift_x	,start	43767	end	44540
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43767.44540.1.+.q.1,	feature_shift_x	0,start	43767	end	44540	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43767.44540.1.+.q.1,	feature_shift_x	0,start	43766	end	44540	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.43767.44534.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43767.44534.1.-.q.1,	feature_shift_x	,start	43767	end	44534
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43767.44534.1.-.q.1,	feature_shift_x	0,start	43767	end	44534	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.43767.44534.1.-.q.1,	feature_shift_x	0,start	43766	end	44534	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.45180.45999.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.45180.45999.1.-.q.1,	feature_shift_x	,start	45180	end	45999
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.45180.45999.1.-.q.1,	feature_shift_x	0,start	45180	end	45999	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.45180.45999.1.-.q.1,	feature_shift_x	0,start	45179	end	45999	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.47530.48349.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.47530.48349.1.-.q.1,	feature_shift_x	,start	47530	end	48349
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.47530.48349.1.-.q.1,	feature_shift_x	0,start	47530	end	48349	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.47530.48349.1.-.q.1,	feature_shift_x	0,start	47529	end	48349	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.74013.74783.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74013.74783.1.+.q.1,	feature_shift_x	,start	74013	end	74783
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74013.74783.1.+.q.1,	feature_shift_x	0,start	74013	end	74783	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74013.74783.1.+.q.1,	feature_shift_x	0,start	74012	end	74783	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.74015.74783.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74015.74783.1.-.q.1,	feature_shift_x	,start	74015	end	74783
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74015.74783.1.-.q.1,	feature_shift_x	0,start	74015	end	74783	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74015.74783.1.-.q.1,	feature_shift_x	0,start	74014	end	74783	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.74016.74783.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74016.74783.1.-.q.1,	feature_shift_x	,start	74016	end	74783
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74016.74783.1.-.q.1,	feature_shift_x	0,start	74016	end	74783	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74016.74783.1.-.q.1,	feature_shift_x	0,start	74015	end	74783	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.74016.74784.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74016.74784.1.-.q.1,	feature_shift_x	,start	74016	end	74784
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74016.74784.1.-.q.1,	feature_shift_x	0,start	74016	end	74784	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74016.74784.1.-.q.1,	feature_shift_x	0,start	74015	end	74784	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.74940.75060.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74940.75060.1.-.q.1,	feature_shift_x	,start	74940	end	75060
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74940.75060.1.-.q.1,	feature_shift_x	0,start	74940	end	75060	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.74940.75060.1.-.q.1,	feature_shift_x	0,start	74939	end	75060	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.103111.103472.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.103111.103472.1.+.q.1,	feature_shift_x	,start	103111	end	103472
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.103111.103472.1.+.q.1,	feature_shift_x	0,start	103111	end	103472	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.103111.103472.1.+.q.1,	feature_shift_x	0,start	103110	end	103472	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.106746.107107.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.106746.107107.1.+.q.1,	feature_shift_x	,start	106746	end	107107
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.106746.107107.1.+.q.1,	feature_shift_x	0,start	106746	end	107107	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.106746.107107.1.+.q.1,	feature_shift_x	0,start	106745	end	107107	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.107471.107703.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107703.1.+.q.1,	feature_shift_x	,start	107471	end	107703
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107703.1.+.q.1,	feature_shift_x	0,start	107471	end	107703	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107703.1.+.q.1,	feature_shift_x	0,start	107470	end	107703	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.107471.107789.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107789.1.+.q.1,	feature_shift_x	,start	107471	end	107789
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107789.1.+.q.1,	feature_shift_x	0,start	107471	end	107789	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107789.1.+.q.1,	feature_shift_x	0,start	107470	end	107789	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.107471.107875.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107875.1.+.q.1,	feature_shift_x	,start	107471	end	107875
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107875.1.+.q.1,	feature_shift_x	0,start	107471	end	107875	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107875.1.+.q.1,	feature_shift_x	0,start	107470	end	107875	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.107471.107574.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107574.1.+.q.1,	feature_shift_x	,start	107471	end	107574
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107574.1.+.q.1,	feature_shift_x	0,start	107471	end	107574	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107471.107574.1.+.q.1,	feature_shift_x	0,start	107470	end	107574	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.107477.107617.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107477.107617.1.+.q.1,	feature_shift_x	,start	107477	end	107617
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107477.107617.1.+.q.1,	feature_shift_x	0,start	107477	end	107617	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107477.107617.1.+.q.1,	feature_shift_x	0,start	107476	end	107617	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.107557.107961.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107557.107961.1.+.q.1,	feature_shift_x	,start	107557	end	107961
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107557.107961.1.+.q.1,	feature_shift_x	0,start	107557	end	107961	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107557.107961.1.+.q.1,	feature_shift_x	0,start	107556	end	107961	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.107600.107959.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107600.107959.1.-.q.1,	feature_shift_x	,start	107600	end	107959
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107600.107959.1.-.q.1,	feature_shift_x	0,start	107600	end	107959	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107600.107959.1.-.q.1,	feature_shift_x	0,start	107599	end	107959	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.107643.107961.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107643.107961.1.+.q.1,	feature_shift_x	,start	107643	end	107961
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107643.107961.1.+.q.1,	feature_shift_x	0,start	107643	end	107961	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107643.107961.1.+.q.1,	feature_shift_x	0,start	107642	end	107961	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.107729.107961.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107729.107961.1.+.q.1,	feature_shift_x	,start	107729	end	107961
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107729.107961.1.+.q.1,	feature_shift_x	0,start	107729	end	107961	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107729.107961.1.+.q.1,	feature_shift_x	0,start	107728	end	107961	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.107821.107961.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107821.107961.1.+.q.1,	feature_shift_x	,start	107821	end	107961
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107821.107961.1.+.q.1,	feature_shift_x	0,start	107821	end	107961	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107821.107961.1.+.q.1,	feature_shift_x	0,start	107820	end	107961	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.107858.107961.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107858.107961.1.+.q.1,	feature_shift_x	,start	107858	end	107961
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107858.107961.1.+.q.1,	feature_shift_x	0,start	107858	end	107961	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.107858.107961.1.+.q.1,	feature_shift_x	0,start	107857	end	107961	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.110471.111241.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.110471.111241.1.+.q.1,	feature_shift_x	,start	110471	end	111241
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.110471.111241.1.+.q.1,	feature_shift_x	0,start	110471	end	111241	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.110471.111241.1.+.q.1,	feature_shift_x	0,start	110470	end	111241	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.110474.111241.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.110474.111241.1.-.q.1,	feature_shift_x	,start	110474	end	111241
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.110474.111241.1.-.q.1,	feature_shift_x	0,start	110474	end	111241	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.110474.111241.1.-.q.1,	feature_shift_x	0,start	110473	end	111241	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.110474.111244.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.110474.111244.1.-.q.1,	feature_shift_x	,start	110474	end	111244
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.110474.111244.1.-.q.1,	feature_shift_x	0,start	110474	end	111244	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.110474.111244.1.-.q.1,	feature_shift_x	0,start	110473	end	111244	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.126723.127490.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.126723.127490.1.-.q.1,	feature_shift_x	,start	126723	end	127490
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.126723.127490.1.-.q.1,	feature_shift_x	0,start	126723	end	127490	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.126723.127490.1.-.q.1,	feature_shift_x	0,start	126722	end	127490	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.126723.127490.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.126723.127490.1.+.q.1,	feature_shift_x	,start	126723	end	127490
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.126723.127490.1.+.q.1,	feature_shift_x	0,start	126723	end	127490	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.126723.127490.1.+.q.1,	feature_shift_x	0,start	126722	end	127490	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.138798.139568.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138798.139568.1.-.q.1,	feature_shift_x	,start	138798	end	139568
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138798.139568.1.-.q.1,	feature_shift_x	0,start	138798	end	139568	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138798.139568.1.-.q.1,	feature_shift_x	0,start	138797	end	139568	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.138801.139569.1.-.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138801.139569.1.-.q.1,	feature_shift_x	,start	138801	end	139569
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138801.139569.1.-.q.1,	feature_shift_x	0,start	138801	end	139569	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138801.139569.1.-.q.1,	feature_shift_x	0,start	138800	end	139569	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.138801.139568.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138801.139568.1.+.q.1,	feature_shift_x	,start	138801	end	139568
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138801.139568.1.+.q.1,	feature_shift_x	0,start	138801	end	139568	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138801.139568.1.+.q.1,	feature_shift_x	0,start	138800	end	139568	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.138801.139574.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138801.139574.1.+.q.1,	feature_shift_x	,start	138801	end	139574
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138801.139574.1.+.q.1,	feature_shift_x	0,start	138801	end	139574	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.138801.139574.1.+.q.1,	feature_shift_x	0,start	138800	end	139574	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.141329.141474.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.141329.141474.1.+.q.1,	feature_shift_x	,start	141329	end	141474
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.141329.141474.1.+.q.1,	feature_shift_x	0,start	141329	end	141474	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.141329.141474.1.+.q.1,	feature_shift_x	0,start	141328	end	141474	ratio	0.00662994696042432
 draw feature_id = pO83_CORR.indel.blast.NC_017659.1.fake.144228.144373.1.+.q.1
+1brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.144228.144373.1.+.q.1,	feature_shift_x	,start	144228	end	144373
+2brefore, feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.144228.144373.1.+.q.1,	feature_shift_x	0,start	144228	end	144373	ratio	0.00662994696042432
+feature_id	pO83_CORR.indel.blast.NC_017659.1.fake.144228.144373.1.+.q.1,	feature_shift_x	0,start	144227	end	144373	ratio	0.00662994696042432
 draw sample name pO83_CORR.twin.minimap
-fontsize is 6 before, height is 0
 using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
-fontsize is 6 after, height is 6
 draw feature_id = pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1
+1brefore, feature_id	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1,	feature_shift_x	,start	1	end	147060
+2brefore, feature_id	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1,	feature_shift_x	0,start	1	end	147060	ratio	0.00662994696042432
+feature_id	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1,	feature_shift_x	0,start	0	end	147060	ratio	0.00662994696042432
 check_blocks_two_ends_cord pO83_CORR.indel.blast,NC_017659.1.fake,1,1 -> 130,249.333333333333
 check_blocks_two_ends_cord pO83_CORR.indel.blast,NC_017659.1.fake,1,147060 -> 1105,249.333333333333
 check_blocks_two_ends_cord pO83_CORR,NC_017659.1,1,1 -> 130,116

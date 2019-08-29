@@ -1,0 +1,62 @@
+find package FindBin
+find package JSON
+feature_keywords -> gene,
+feature_setting -> myfeature_setting.txt
+
+not_exists hist_scatter_line in confs
+
+not_exists reads_mapping in confs
+
+not_exists synteny in confs
+svg_width is 1300, svg_height is svg_height
+start read mytrack.list.out1
+parse mychr1 mychr1:chr1:1000-3000 -> block_index 1
+
+parse mychr1 mychr1:chr1:5000-8000 -> block_index 2
+
+read gff, mychr1:chr1:1000-3000 block_index 1 for chr1	fake	gene	1300	1600	.	+	.	ID=gene1;xxx=yyy;
+read gff, mychr1:chr1:1000-3000 block_index 1 for chr1	fake	gene	1800	2600	.	+	.	ID=gene2;xxx=yyy;
+read gff, mychr1:chr1:5000-8000 block_index 2 for chr1	fake	gene	5700	6000	.	+	.	ID=gene3;xxx=yyy;
+read_list mychr1 end
+end read mytrack.list.out1
+lenged number is 0
+draw sample name mychr1
+draw feature_id = gene1
+1brefore, feature_id	gene1,	feature_shift_x	,start	301	end	601
+2brefore, feature_id	gene1,	feature_shift_x	0,start	301	end	601	ratio	0.177208287895311
+feature_id	gene1,	feature_shift_x	0,start	300	end	601	ratio	0.177208287895311
+draw feature_id = gene2
+1brefore, feature_id	gene2,	feature_shift_x	,start	801	end	1601
+2brefore, feature_id	gene2,	feature_shift_x	0,start	801	end	1601	ratio	0.177208287895311
+feature_id	gene2,	feature_shift_x	0,start	800	end	1601	ratio	0.177208287895311
+draw feature_id = gene3
+1brefore, feature_id	gene3,	feature_shift_x	,start	701	end	1001
+2brefore, feature_id	gene3,	feature_shift_x	0,start	701	end	1001	ratio	0.177208287895311
+feature_id	gene3,	feature_shift_x	0,start	700	end	1001	ratio	0.177208287895311
+check_blocks_two_ends_cord mychr1,chr1,1,3000 -> 484.593784078517,347.025
+check_blocks_two_ends_cord mychr1,chr1,1,1000 -> 130,347.025
+check_blocks_two_ends_cord mychr1,chr1,2,8000 -> 1105,347.025
+check_blocks_two_ends_cord mychr1,chr1,2,5000 -> 573.197928026172,347.025
+
+
+
+
+scale_display is yes
+disply scale
+unit_scale is 177.208287895311=1000*0.177208287895311
+ticks number is 5
+cluster_width_ratio 0.75*1300 % 177.208287895311
+order is -1
+order is 0
+order is 1
+
+outfile is  ./out1.svg and ./out1.notitle.svg ./out1.html
+
+if you want png or pdf format,you could use convert or cairosvg to convert svg to pdf or png:
+	convert  -density 100 ./out1.svg ./out1.png
+	convert -density 100 ./out1.svg ./out1.dpi100.pdf
+
+/hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/navigator
+/hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/svg-pan-zoom.js exists,
+	so output ./out1.html, which you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom
+
