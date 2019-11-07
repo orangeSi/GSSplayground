@@ -993,7 +993,7 @@ for my $order(sort {$a<=>$b}keys %orders){
 }
 print SVG "</svg>";
 close SVG;
-my $rm_title="set -vex;sed -r -e 's/^\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//' -e 's/\\sid=\"\\S*//g' $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
+my $rm_title="set -vex;sed -r -e 's/^\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//' $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
 `$rm_title`;
 die "\nerror:$rm_title\n\n" if($?);
 
