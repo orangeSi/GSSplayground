@@ -1,1 +1,1 @@
-+ sed -r -e 's/^\s*<g[^>]*>.*//' -e 's/<\/g>//' -e 's/^<tspan.*//' ./out2.svg
++ sed -r -e 's/^\s*<g[^>]*>.*//' -e 's/<\/g>//' -e 's/^<tspan.*//' -e 's/\sid="\S*//g' ./out2.svg

@@ -619,9 +619,9 @@ sub draw_genes(){
 	my $feature_popup_title=&get_para("feature_popup_title", $feature_id, $conf);
 	if($feature_popup_title){
 		my @kvs=split(/;/, $feature_popup_title);
-		$feature_popup_title="\n";
+		$feature_popup_title="";
 		for my $kv(@kvs){
-			$feature_popup_title.="<tspan>$kv</tspan>\n";	
+			$feature_popup_title.="<tspan>$kv</tspan>\t";	
 		}
 	}
 	if($feature_content_display=~ /yes/i || grep(/^\s*$feature_type\s*$/, @$feature_content_display_keywords) ){
