@@ -1,0 +1,411 @@
+find package FindBin
+find package JSON
+hist_scatter_line -> brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0.01->10,0,0->2->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black
+hist_scatter_line -> GC,1,pO83_CORR,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+hist_scatter_line -> GC,1,pO83_CORR.reverse,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+key is data_display_order, value is 2->3
+key is query, value is pO83_CORR.indel
+key is target, value is pO83_CORR
+key is alignment_file, value is ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6
+key is alignment_format, value is blast_m8
+key is alignment_block_shape, value is quadrilateral
+key is forward_color, value is orange->opacity0.5
+key is reverse_color, value is blue->opacity0.7
+key is cross_link_shift_y, value is +3:-3
+key is sort, value is 1
+display_segment_name -> yes,center,shift_y:+2,fontsize:10,color:black,order:5,rotate:0
+tracks_block_reverse -> pO83_CORR.reverse,1;
+svg_width_height -> 1300,500
+pdf_dpi -> 100
+svg_background_color -> white
+feature_keywords -> xx
+width_ratio_ref_cluster_legend -> 0.1-0.75-0.15
+feature_shape -> arrow
+feature_arrow_width_extent -> 0.3
+feature_label_size -> 10
+feature_label_color -> black
+feature_shift_y -> 0
+feature_shift_y_unit -> backbone
+feature_shift_x -> 0
+feature_height_ratio -> 2
+feature_height_unit -> backbone
+track_style -> fill:blue;opacity:0.2
+feature_color -> rgb(50,205,50)
+feature_border_size -> 0
+feature_border_color -> black
+genome_height_ratio -> 1
+feature_arrow_sharp_extent -> 0
+track_order -> 1
+feature_order -> 2
+feature_label_order -> 4
+cross_link_order -> 0
+display_feature -> yes
+display_feature_label -> no
+pos_feature_label -> right_low
+y_margin_feature_label -> 0.01
+label_rotate_angle -> 0
+feature_label_auto_angle_flag -> 1
+connect_with_same_scaffold -> no
+connect_stroke_dasharray -> 2,5
+connect_stroke_width -> 2
+connect_stroke_color -> black
+absolute_postion_in_title -> yes
+distance_closed_feature -> 1
+shift_angle_closed_feature -> 10
+top_bottom_margin -> 0.2
+space_between_blocks -> 500
+sample_name_color_default -> black
+sample_name_font_size_default -> 15
+display_legend -> yes
+legend_font_size -> 20
+legend_height_ratio -> 0.7
+legend_width_margin -> 0.15
+legend_height_space -> 0.1
+legend_width_textpercent -> 0.7
+legend_stroke_color -> black
+legend_stroke_width -> 0.5
+cross_link_color -> #FF8C00
+cross_link_opacity -> 1
+cross_link_anchor_pos -> low_up
+ignore_sharp_arrow -> no
+cross_link_orientation_ellipse -> up
+cross_link_shape -> quadrilateral
+cross_link_height_ellipse -> 10,8
+scale_display -> yes
+scale_position -> low
+scale_color -> green
+scale_width -> 0.5
+scale_ratio -> 1700
+scale_padding_y -> 0.2
+scale_tick_opacity -> 1
+scale_tick_height -> 0.01
+scale_order -> -1
+scale_tick_padding_y -> 10
+scale_tick_fontsize -> 6
+key hist_scatter_line = brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0.01->10,0,0->2->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black
+
+key hist_scatter_line = GC,1,pO83_CORR,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+
+key hist_scatter_line = GC,1,pO83_CORR.reverse,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+
+
+not_exists reads_mapping in confs
+key synteny = 2->3,pO83_CORR.indel,pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
+
+parse pO83_CORR.reverse pO83_CORR.reverse:NC_017659.1:1000-7060 -> block_index 1
+
+parse pO83_CORR.reverse pO83_CORR.reverse:NC_017659.1:7061-8061 -> block_index 2
+
+read_list pO83_CORR.reverse end
+parse pO83_CORR pO83_CORR:NC_017659.1:1000-7060 -> block_index 1
+
+read_list pO83_CORR end
+parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:1700-6000 -> block_index 1
+
+read_list pO83_CORR.indel end
+hist_scatter_line start
+1 is brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0.01->10,0,0->2->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black
+
+block_index is 1,pO83_CORR
+
+output out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff
+
+output out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf
+
+no out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.crosslink.conf for pO83_CORR
+hist_scatter_line_run rg is 1000,7060  :1000,7060
+info is brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0.01->10,0,0->2->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black
+is:../data/base_brand.txt:../data/NC_017659.1.fa, pO83_CORR, NC_017659.1,1000, 7060,20, brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0.01->10,0,0->2->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black, brand
+6061
+
+output out1.pO83_CORR.NC_017659.1.1.1.1000.7060.depth.gff
+
+output out1.pO83_CORR.NC_017659.1.1.1.1000.7060.depth.setting.conf
+
+no out1.pO83_CORR.NC_017659.1.1.1.1000.7060.depth.crosslink.conf for pO83_CORR
+2 is GC,1,pO83_CORR,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+
+block_index is 1,pO83_CORR
+
+output out1.pO83_CORR.NC_017659.1.1.2.GC.ylabel.gff
+
+output out1.pO83_CORR.NC_017659.1.1.2.GC.ylabel.setting.conf
+
+no out1.pO83_CORR.NC_017659.1.1.2.GC.ylabel.crosslink.conf for pO83_CORR
+s1 is 13, e1 is 81
+
+output out1.pO83_CORR.NC_017659.1.1.2.ytick.gff
+
+output out1.pO83_CORR.NC_017659.1.1.2.ytick.setting.conf
+
+no out1.pO83_CORR.NC_017659.1.1.2.ytick.crosslink.conf for pO83_CORR
+hist_scatter_line_run rg is 1000,7060  :1000,7060
+info is GC,1,pO83_CORR,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+is:../data/NC_017659.1.fa, pO83_CORR, NC_017659.1,1000, 7060,100, GC,1,pO83_CORR,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black, GC
+60
+
+output out1.pO83_CORR.NC_017659.1.1.2.1000.7060.depth.gff
+
+output out1.pO83_CORR.NC_017659.1.1.2.1000.7060.depth.setting.conf
+
+no out1.pO83_CORR.NC_017659.1.1.2.1000.7060.depth.crosslink.conf for pO83_CORR
+3 is GC,1,pO83_CORR.reverse,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+
+block_index is 2,pO83_CORR.reverse
+
+output out1.pO83_CORR.reverse.NC_017659.1.2.3.GC.ylabel.gff
+
+output out1.pO83_CORR.reverse.NC_017659.1.2.3.GC.ylabel.setting.conf
+
+no out1.pO83_CORR.reverse.NC_017659.1.2.3.GC.ylabel.crosslink.conf for pO83_CORR.reverse
+s1 is 13, e1 is 81
+
+output out1.pO83_CORR.reverse.NC_017659.1.2.3.ytick.gff
+
+output out1.pO83_CORR.reverse.NC_017659.1.2.3.ytick.setting.conf
+
+no out1.pO83_CORR.reverse.NC_017659.1.2.3.ytick.crosslink.conf for pO83_CORR.reverse
+hist_scatter_line_run rg is 7061,8061  :7061,8061
+info is GC,1,pO83_CORR.reverse,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+is:../data/NC_017659.1.fa, pO83_CORR.reverse, NC_017659.1,7061, 8061,100, GC,1,pO83_CORR.reverse,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black, GC
+10
+
+output out1.pO83_CORR.reverse.NC_017659.1.2.3.7061.8061.depth.gff
+
+output out1.pO83_CORR.reverse.NC_017659.1.2.3.7061.8061.depth.setting.conf
+
+no out1.pO83_CORR.reverse.NC_017659.1.2.3.7061.8061.depth.crosslink.conf for pO83_CORR.reverse
+block_index is 1,pO83_CORR.reverse
+hist_scatter_line_run rg is 1000,7060  :1000,7060
+info is GC,1,pO83_CORR.reverse,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+is:../data/NC_017659.1.fa, pO83_CORR.reverse, NC_017659.1,1000, 7060,100, GC,1,pO83_CORR.reverse,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black, GC
+60
+
+output out1.pO83_CORR.reverse.NC_017659.1.1.3.1000.7060.depth.gff
+
+output out1.pO83_CORR.reverse.NC_017659.1.1.3.1000.7060.depth.setting.conf
+
+no out1.pO83_CORR.reverse.NC_017659.1.1.3.1000.7060.depth.crosslink.conf for pO83_CORR.reverse
+func_name is hist_scatter_line
+echo "
+set -vex;cat out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff out1.pO83_CORR.NC_017659.1.1.1.1000.7060.depth.gff out1.pO83_CORR.NC_017659.1.1.2.GC.ylabel.gff out1.pO83_CORR.NC_017659.1.1.2.ytick.gff out1.pO83_CORR.NC_017659.1.1.2.1000.7060.depth.gff >out1.pO83_CORR.out1.hist_scatter_line.gff;rm out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff out1.pO83_CORR.NC_017659.1.1.1.1000.7060.depth.gff out1.pO83_CORR.NC_017659.1.1.2.GC.ylabel.gff out1.pO83_CORR.NC_017659.1.1.2.ytick.gff out1.pO83_CORR.NC_017659.1.1.2.1000.7060.depth.gff;echo output out1.pO83_CORR.out1.hist_scatter_line.gff
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff out1.pO83_CORR.NC_017659.1.1.1.1000.7060.depth.gff out1.pO83_CORR.NC_017659.1.1.2.GC.ylabel.gff out1.pO83_CORR.NC_017659.1.1.2.ytick.gff out1.pO83_CORR.NC_017659.1.1.2.1000.7060.depth.gff >out1.pO83_CORR.out1.hist_scatter_line.gff;rm out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.gff out1.pO83_CORR.NC_017659.1.1.1.1000.7060.depth.gff out1.pO83_CORR.NC_017659.1.1.2.GC.ylabel.gff out1.pO83_CORR.NC_017659.1.1.2.ytick.gff out1.pO83_CORR.NC_017659.1.1.2.1000.7060.depth.gff;echo output out1.pO83_CORR.out1.hist_scatter_line.gff done
+echo "
+set -vex;cat out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.1.1000.7060.depth.setting.conf out1.pO83_CORR.NC_017659.1.1.2.GC.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.2.ytick.setting.conf out1.pO83_CORR.NC_017659.1.1.2.1000.7060.depth.setting.conf > out1.pO83_CORR.out1.hist_scatter_line.setting.conf;rm out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.1.1000.7060.depth.setting.conf out1.pO83_CORR.NC_017659.1.1.2.GC.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.2.ytick.setting.conf out1.pO83_CORR.NC_017659.1.1.2.1000.7060.depth.setting.conf;echo output out1.pO83_CORR.out1.hist_scatter_line.setting.conf
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.1.1000.7060.depth.setting.conf out1.pO83_CORR.NC_017659.1.1.2.GC.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.2.ytick.setting.conf out1.pO83_CORR.NC_017659.1.1.2.1000.7060.depth.setting.conf > out1.pO83_CORR.out1.hist_scatter_line.setting.conf;rm out1.pO83_CORR.NC_017659.1.1.1.brand.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.1.1000.7060.depth.setting.conf out1.pO83_CORR.NC_017659.1.1.2.GC.ylabel.setting.conf out1.pO83_CORR.NC_017659.1.1.2.ytick.setting.conf out1.pO83_CORR.NC_017659.1.1.2.1000.7060.depth.setting.conf;echo output out1.pO83_CORR.out1.hist_scatter_line.setting.conf done
+echo "
+set -vex;cat out1.pO83_CORR.reverse.NC_017659.1.2.3.GC.ylabel.gff out1.pO83_CORR.reverse.NC_017659.1.2.3.ytick.gff out1.pO83_CORR.reverse.NC_017659.1.2.3.7061.8061.depth.gff out1.pO83_CORR.reverse.NC_017659.1.1.3.1000.7060.depth.gff >out1.pO83_CORR.reverse.out1.hist_scatter_line.gff;rm out1.pO83_CORR.reverse.NC_017659.1.2.3.GC.ylabel.gff out1.pO83_CORR.reverse.NC_017659.1.2.3.ytick.gff out1.pO83_CORR.reverse.NC_017659.1.2.3.7061.8061.depth.gff out1.pO83_CORR.reverse.NC_017659.1.1.3.1000.7060.depth.gff;echo output out1.pO83_CORR.reverse.out1.hist_scatter_line.gff
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.reverse.NC_017659.1.2.3.GC.ylabel.gff out1.pO83_CORR.reverse.NC_017659.1.2.3.ytick.gff out1.pO83_CORR.reverse.NC_017659.1.2.3.7061.8061.depth.gff out1.pO83_CORR.reverse.NC_017659.1.1.3.1000.7060.depth.gff >out1.pO83_CORR.reverse.out1.hist_scatter_line.gff;rm out1.pO83_CORR.reverse.NC_017659.1.2.3.GC.ylabel.gff out1.pO83_CORR.reverse.NC_017659.1.2.3.ytick.gff out1.pO83_CORR.reverse.NC_017659.1.2.3.7061.8061.depth.gff out1.pO83_CORR.reverse.NC_017659.1.1.3.1000.7060.depth.gff;echo output out1.pO83_CORR.reverse.out1.hist_scatter_line.gff done
+echo "
+set -vex;cat out1.pO83_CORR.reverse.NC_017659.1.2.3.GC.ylabel.setting.conf out1.pO83_CORR.reverse.NC_017659.1.2.3.ytick.setting.conf out1.pO83_CORR.reverse.NC_017659.1.2.3.7061.8061.depth.setting.conf out1.pO83_CORR.reverse.NC_017659.1.1.3.1000.7060.depth.setting.conf > out1.pO83_CORR.reverse.out1.hist_scatter_line.setting.conf;rm out1.pO83_CORR.reverse.NC_017659.1.2.3.GC.ylabel.setting.conf out1.pO83_CORR.reverse.NC_017659.1.2.3.ytick.setting.conf out1.pO83_CORR.reverse.NC_017659.1.2.3.7061.8061.depth.setting.conf out1.pO83_CORR.reverse.NC_017659.1.1.3.1000.7060.depth.setting.conf;echo output out1.pO83_CORR.reverse.out1.hist_scatter_line.setting.conf
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.reverse.NC_017659.1.2.3.GC.ylabel.setting.conf out1.pO83_CORR.reverse.NC_017659.1.2.3.ytick.setting.conf out1.pO83_CORR.reverse.NC_017659.1.2.3.7061.8061.depth.setting.conf out1.pO83_CORR.reverse.NC_017659.1.1.3.1000.7060.depth.setting.conf > out1.pO83_CORR.reverse.out1.hist_scatter_line.setting.conf;rm out1.pO83_CORR.reverse.NC_017659.1.2.3.GC.ylabel.setting.conf out1.pO83_CORR.reverse.NC_017659.1.2.3.ytick.setting.conf out1.pO83_CORR.reverse.NC_017659.1.2.3.7061.8061.depth.setting.conf out1.pO83_CORR.reverse.NC_017659.1.1.3.1000.7060.depth.setting.conf;echo output out1.pO83_CORR.reverse.out1.hist_scatter_line.setting.conf done
+out1.hist_scatter_line end
+echo "
+set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.setting.conf out1.pO83_CORR.reverse.out1.hist_scatter_line.setting.conf >out1.hist_scatter_line.setting.conf
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.setting.conf out1.pO83_CORR.reverse.out1.hist_scatter_line.setting.conf >out1.hist_scatter_line.setting.conf done
+reads_mapping not
+synteny start
+1 is 2->3,pO83_CORR.indel,pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
+
+start read ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6
+../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6 is plain file
+query_overlap_length=541, target_overlap_length=1601, blast:5460:147060 -> 5460:147060 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=3367, target_overlap_length=3368, blast:1891:5257 -> 2101:5468 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=199, target_overlap_length=899, blast:1:1898 -> 1:1898 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:34724:36500 -> 42262:40487 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:40487:42262 -> 36500:34724 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 48349:47530 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45999:45180 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:138801:139574 -> 43767:44540 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:43767:44540 -> 138801:139574 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:110471:111241 -> 74013:74783 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:74013:74783 -> 110471:111241 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:110474:111244 -> 139568:138798 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:138798:139568 -> 111244:110474 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74784:74016 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 44534:43766 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:138801:139569 -> 74783:74015 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:74015:74783 -> 139569:138801 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 44534:43767 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 111241:110474 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 43767:44534 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 74783:74016 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:43767:44534 -> 126723:127490 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:74016:74783 -> 127490:126723 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 138801:139568 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 126723:127490 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 127490:126723 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 111241:110474 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107471:107875 -> 107557:107961 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107557:107961 -> 107471:107875 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:103111:103472 -> 106746:107107 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:106746:107107 -> 103111:103472 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107600:107959 -> 107959:107600 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107471:107789 -> 107643:107961 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107643:107961 -> 107471:107789 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107471:107703 -> 107729:107961 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107729:107961 -> 107471:107703 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=210, target_overlap_length=210, blast:5251:5460 -> 1891:2100 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:141329:141474 -> 144228:144373 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:144228:144373 -> 141329:141474 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107477:107617 -> 107821:107961 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107821:107961 -> 107477:107617 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:15820:15942 -> 75060:74940 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:74940:75060 -> 15942:15820 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107471:107574 -> 107858:107961 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:107858:107961 -> 107471:107574 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1000,7060,1
+
+qt is 
+end read ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6, paris num is4
+
+output out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff
+
+output out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf
+
+no out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf for pO83_CORR.indel
+
+output pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff
+
+output pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf
+
+no pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf for pO83_CORR
+
+no pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff for pO83_CORR.indel.to.pO83_CORR
+
+no pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf for pO83_CORR.indel.to.pO83_CORR
+
+output pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf
+func_name is synteny
+echo "
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out1.pO83_CORR.out1.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out1.pO83_CORR.out1.synteny.gff
+" >> out1.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out1.pO83_CORR.out1.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out1.pO83_CORR.out1.synteny.gff done
+echo "
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out1.pO83_CORR.out1.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out1.pO83_CORR.out1.synteny.setting.conf
+" >> out1.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out1.pO83_CORR.out1.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out1.pO83_CORR.out1.synteny.setting.conf done
+echo "
+set -vex;cat out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out1.pO83_CORR.indel.out1.synteny.gff;rm out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out1.pO83_CORR.indel.out1.synteny.gff
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out1.pO83_CORR.indel.out1.synteny.gff;rm out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out1.pO83_CORR.indel.out1.synteny.gff done
+echo "
+set -vex;cat out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out1.pO83_CORR.indel.out1.synteny.setting.conf;rm out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out1.pO83_CORR.indel.out1.synteny.setting.conf
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out1.pO83_CORR.indel.out1.synteny.setting.conf;rm out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out1.pO83_CORR.indel.out1.synteny.setting.conf done
+echo "
+set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink
+" >> out1.cat.log;set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink done
+out1.synteny end
+echo "
+set -vex;cat out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink >out1.synteny.crosslink
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink >out1.synteny.crosslink done
+echo "
+set -vex;cat out1.pO83_CORR.out1.synteny.setting.conf out1.pO83_CORR.indel.out1.synteny.setting.conf >out1.synteny.setting.conf
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.out1.synteny.setting.conf out1.pO83_CORR.indel.out1.synteny.setting.conf >out1.synteny.setting.conf done
+general_features not
+add out1.hist_scatter_line.setting.conf out1.synteny.setting.conf to feature_setting 
+echo "
+set -vex;cat out1.hist_scatter_line.setting.conf out1.synteny.setting.conf >feature.color.label.conf.out1
+" >> out1.cat.log;set -vex;cat out1.hist_scatter_line.setting.conf out1.synteny.setting.conf >feature.color.label.conf.out1 done
+add out1.synteny.crosslink to crossing_link 
+echo "
+set -vex;cat out1.synteny.crosslink >feature.crossing.link.out1
+" >> out1.cat.log;set -vex;cat out1.synteny.crosslink >feature.crossing.link.out1 done
+echo "
+set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.gff out1.pO83_CORR.reverse.out1.hist_scatter_line.gff out1.pO83_CORR.out1.synteny.gff out1.pO83_CORR.indel.out1.synteny.gff|awk -F "	" '{print $3}'|sort -u
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.gff out1.pO83_CORR.reverse.out1.hist_scatter_line.gff out1.pO83_CORR.out1.synteny.gff out1.pO83_CORR.indel.out1.synteny.gff|awk -F "	" '{print $3}'|sort -u done
+echo "
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.hist_scatter_line.gff,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp
+" >> out1.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.hist_scatter_line.gff,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp done
+echo "
+set -vex;sed  -r 's/^(pO83_CORR.reverse\s.*\.gff)\s/\1,out1.pO83_CORR.reverse.out1.hist_scatter_line.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp
+" >> out1.cat.log;set -vex;sed  -r 's/^(pO83_CORR.reverse\s.*\.gff)\s/\1,out1.pO83_CORR.reverse.out1.hist_scatter_line.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp done
+echo "
+set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out1.pO83_CORR.indel.out1.synteny.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp
+" >> out1.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out1.pO83_CORR.indel.out1.synteny.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp done
+
+data done

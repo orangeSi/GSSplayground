@@ -897,7 +897,7 @@ sub write_to_list(){
 	open GFF,">$legend_gff" or die "error: cannot open $legend_gff\n";
 	print GFF "$gff";
 	close GFF;
-	my $command="set -vex;sed  -r 's/^($sample\\s.*\\.gff)\\s/\\1,$legend_gff\\t/' $list > $legend_list";
+	my $command="set -vex;sed  -r -e 's/^($sample\\s.*\\.gff)\\s/\\1,$legend_gff\\t/' $list > $legend_list";
 	`$command`;
 	if($?){
 		die "\nerror: $command in write_to_list\n";	
@@ -993,7 +993,7 @@ for my $order(sort {$a<=>$b}keys %orders){
 }
 print SVG "</svg>";
 close SVG;
-my $rm_title="set -vex;sed -r -e 's/^\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//'  $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
+my $rm_title="set -vex;sed -r -e 's/\\sid=\"\\S*//g' -e 's/^\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//'  $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
 `$rm_title`;
 die "\nerror:$rm_title\n\n" if($?);
 

@@ -5,7 +5,7 @@ genome_height_ratio -> 1
 feature_label_order -> 4
 feature_label_size -> 10
 scale_ratio -> 1700
-synteny -> order->2->3,query->pO83_CORR.indel:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
+synteny -> 2->3,pO83_CORR.indel,pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
 legend_stroke_width -> 0.5
 scale_display -> yes
 scale_color -> green
@@ -14,10 +14,10 @@ cross_link_anchor_pos -> low_up
 sample_name_font_size_default -> 15
 cross_link_width_ellipse -> 0.2
 display_segment_strand -> 5:5',3:3',color:black,fontsize:10
-feature_border_color -> black
 hist_scatter_line -> brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0.01->10,0,0->2->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black
 hist_scatter_line -> GC,1,pO83_CORR,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
 hist_scatter_line -> GC,1,pO83_CORR.reverse,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+feature_border_color -> black
 width_ratio_ref_cluster_legend -> 0.1-0.75-0.15
 display_feature -> yes
 feature_opacity -> 1
@@ -33,15 +33,15 @@ correct_ellipse_coordinate -> no
 svg_background_color -> white
 connect_with_same_scaffold -> no
 cross_link_color_reverse -> #3CB371
-display_legend -> yes
 connect_stroke_color -> black
+display_legend -> yes
 legend_stroke_color -> black
 crosslink_stroke_style -> stroke:black;stroke-width:0.1;
 feature_shift_y -> 0
 svg_width_height -> 1300,500
 ignore_sharp_arrow -> no
-sample_name_color_default -> black
 feature_height_unit -> backbone
+sample_name_color_default -> black
 scale_tick_opacity -> 1
 feature_setting -> feature.color.label.conf.out1
 scale_tick_height -> 0.01
@@ -56,10 +56,9 @@ top_bottom_margin -> 0.2
 crossing_link -> feature.crossing.link.out1
 cross_link_shape -> quadrilateral
 legend_position -> right
-feature_arrow_width_extent -> 0.3
 connect_stroke_width -> 2
+feature_arrow_width_extent -> 0.3
 display_feature_label -> no
-default_legend -> other
 cross_link_orientation -> forward
 shift_angle_closed_feature -> 10
 feature_content_display -> no
@@ -69,24 +68,25 @@ scale_position -> low
 x_margin_feature_label -> 0.01
 feature_border_size -> 0
 y_margin_feature_label -> 0.01
-feature_shape -> arrow
-display_segment_name -> yes,center,shift_y:+2,fontsize:10,color:black,order:5,rotate:0
 legend_font_size -> 20
+display_segment_name -> yes,center,shift_y:+2,fontsize:10,color:black,order:5,rotate:0
+feature_shape -> arrow
 legend_height_percent -> 0.2
 track_order -> 1
-distance_closed_feature -> 1
 scale_width -> 0.5
+distance_closed_feature -> 1
 color_sample_name_default -> green
 allow_feature_out_of_list -> synteny
-scale_tick_padding_y -> 10
 absolute_postion_in_title -> yes
+scale_tick_padding_y -> 10
 pos_feature_label -> right_low
 cross_link_color -> #FF8C00
 legend_width_textpercent -> 0.7
-feature_id_is_unique -> yes
+feature_id_is_unique -> no
 cross_link_order -> 0
 label_text_anchor -> middle
 pdf_dpi -> 100
+chop_soft_clip -> yes
 label_text_alignment_baseline -> baseline
 scale_order -> -1
 legend_height_ratio -> 0.7
@@ -94,6 +94,16 @@ feature_arrow_sharp_extent -> 0
 feature_height_ratio -> 2
 ref_name_right_gap -> 0.15
 scale_padding_y -> 0.2
+key hist_scatter_line = brand,3,pO83_CORR,NC_017659.1,0,20,../data/base_brand.txt:../data/NC_017659.1.fa,color->green:opacity->1,0.01->10,0,0->2->4,ytick_label_text,0,green:green,0.6:0.3,0.6:0.6:0.2:0.2,5:5	ylabel->ref base,gap:60bp,fontsize:13,color:black
+
+key hist_scatter_line = GC,1,pO83_CORR,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+
+key hist_scatter_line = GC,1,pO83_CORR.reverse,NC_017659.1,0,100,../data/NC_017659.1.fa,color->black:opacity->1,13->81,1,0->1->0.2,ytick_label_text,hgrid_flag,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->genome GC percents(%),gap:60bp,fontsize:13,color:black
+
+
+not_exists reads_mapping in confs
+key synteny = 2->3,pO83_CORR.indel,pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
+
 svg_width is 1300, svg_height is svg_height
 start read tracks.1.list.out1
 parse pO83_CORR.reverse pO83_CORR.reverse:NC_017659.1:1000-7060 -> block_index 1
