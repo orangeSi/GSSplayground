@@ -160,7 +160,8 @@ sub write2newconf(){
 
 sub synteny(){
 	my ($gff, $conf, $genome)=@_;
-	my $ex="synteny=order->1->2,query->s1:target->s2,../data/s1.mapto.s2.paf.gz,paf,quadrilateral,forward->yellow->opacity1,reverse->blue->opacity1,cross_link_shift_y->+1:-1,sort->1";
+	#my $ex="synteny=order->1->2,query->s1:target->s2,../data/s1.mapto.s2.paf.gz,paf,quadrilateral,forward->yellow->opacity1,reverse->blue->opacity1,cross_link_shift_y->+1:-1,sort->1";
+	my $ex="synteny=1->2,s1,s2,../data/s1.mapto.s2.paf.gz,paf,quadrilateral,forward->yellow->opacity1,reverse->blue->opacity1,cross_link_shift_y->+1:-1,sort->1";
 	unless(exists $conf->{synteny} && $conf->{synteny}){
 		print "synteny not\n";
 		return 0;
@@ -182,11 +183,13 @@ sub synteny(){
 		my @ks = split(/\t+/, $k);
 		my @infos=split(/,/, $ks[0]);
 		my $infos_len=scalar(@infos);
-		if($infos_len != 9 ){
-			die "\nerror: synteny=$k, error format~\n valid like $ex\n";
+		my $infos_len_limit=10;
+		if($infos_len != $infos_len_limit ){
+			die "\nerror: synteny=$k, error format,get $infos_len~\n valid like $ex\n";
 		}
-		my @arr=$ks[0]=~ /^order->(-?\d+->-?\d+),query->([^:]+):target->([^,]+),(\S+),(\S+),(\S+),forward->([^-]+)->opacity([\d\.]+),reverse->([^-]+)->opacity([\d\.]+),cross_link_shift_y->(\+[\d\.]+:-[\d\.]+),sort->([01])$/;
-		die "\nerror: $ks[0] format \nerror, should like $ex\n" if(@arr!=12);
+		#my @arr=$ks[0]=~ /^order->(-?\d+->-?\d+),query->([^:]+):target->([^,]+),(\S+),(\S+),(\S+),forward->([^-]+)->opacity([\d\.]+),reverse->([^-]+)->opacity([\d\.]+),cross_link_shift_y->(\+[\d\.]+:-[\d\.]+),sort->([01])$/;
+		my @arr=$ks[0]=~ /^(-?\d+->-?\d+),([^,]+),([^,]+),(\S+),(\S+),(\S+),([^-]+)->opacity([\d\.]+),([^-]+)->opacity([\d\.]+),(\+[\d\.]+:-[\d\.]+),([01])$/;
+		die "\nerror: $ks[0] format error get $#arr+1, should like $ex\n" if(@arr != $infos_len_limit+2);
 		my ($synteny_order,$query_name,$target_name,$alignment,$alignment_type,$crosslink_shape,$forward_color,$forward_opacity,$reverse_color,$reverse_opacity, $cross_link_shift_y,$sort) = @arr;
 		die "\nerror: not support $alignment_type, only support @align_types\n" if(! grep(/^$alignment_type$/, @align_types));
 		die "\nerror: not support $crosslink_shape, only support @show_types\n" if(! grep(/^$crosslink_shape$/, @show_types));
@@ -1242,7 +1245,7 @@ sub reads_mapping(){
 		$k_index++;
 		$k=~ s/\s+$//;
 		&check_highs(\@highs,$k);
-		print "$k_index is $k\n\n";
+		print "k_index $k_index is $k\n\n";
 		my @ks = split(/\t+/, $k);
 		my @infos=split(/,/, $ks[0]);
 		my $infos_len=scalar(@infos);
@@ -1631,7 +1634,8 @@ sub reads_mapping_run(){
 	my ($reads_gff, $reads_setting_conf, $cross_link_conf);
 	my $color_height_cs;
 	if(not exists $highss->{color_height_cs}){
-		die "error:color_height_cs not exists in $0\n";
+		#die "error:color_height_cs not exists in $0\n";
+		$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect";
 		#$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect";
 		#$color_height_cs="M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:1bp:rect,D:black:opacity1:height0.8:1bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:1bp:rect,H:blue:opacity0.6:height0.2:1bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:1bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:1bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect";
 	}else{
@@ -2244,10 +2248,13 @@ sub cigar_setting(){
 	my @cgs=("M","I","D","N","S","H","P","X","reverse","forward","fake","read1","read2", "diploid");
 	my (%colors_height);
 	$color_height_cs=~ s/\s//g;
+	$color_height_cs=~ s/;$//;
 	my @color_height_cses=split(/,/, $color_height_cs);
+	print "color_height_cs is $color_height_cs\nafter split is @color_height_cses\n";
 	for my $ch(@color_height_cses){
+		next if($ch=~ /^\s*$/);
 		my @arr=split(/:/, $ch);
-		die "\nerror:cigar_setting $ch                         of $color_height_cs format is wrong, should like $color_height_cs_usage\n" if(@arr!=6 || $ch!~ /^[^:]+:[^:]+:opacity[\d\.]+:height[\d\.]+:\d+bp:\S+$/);
+		die "\nerror:cigar_setting $ch of $color_height_cs format is wrong\n, should like $color_height_cs_usage\n" if(@arr!=6 || $ch!~ /^[^:]+:[^:]+:opacity[\d\.]+:height[\d\.]+:\d+bp:\S+$/);
 		my ($cg,$color,$opacity,$height,$limit_len,$feature_shape)=@arr;
 		die "\nerror: not support cg $cg in $color_height_cs, only support @cgs\n" if(!grep(/^$cg$/, @cgs));
 		$limit_len=~ s/bp//g;

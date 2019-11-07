@@ -52,7 +52,7 @@ Imager::Font  # this perl package had been installed in src/Imager-1.011(if it d
 
 #### Tips:<br>
 ```
-SamFixCigar.jar of jvarkit will convert M to X/= in cigar of sam file, if do this, will see snp of reads
+$samtools calmd or SamFixCigar.jar of jvarkit will convert M to X/= in cigar of sam file, if do this, will see snp of reads in read_mapping
 ```
 
 #### ToDo:<br>

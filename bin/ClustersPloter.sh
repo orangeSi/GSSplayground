@@ -45,7 +45,8 @@ then
 	echo 
 	date
 	echo -e "$(tput setaf 3)perl $base/src/prepare.data.pl --list $list --prefix $prefix --outdir . --conf $conf$(tput setaf 7)"
-	time perl $base/src/prepare.data.pl --list $list --prefix $prefix --outdir . --conf $conf >$prefix.prepare.data.log 2>$prefix.prepare.data.error.tmp
+	#echo "perl $base/src/prepare.data.pl --list $list --prefix $prefix --outdir . --conf $conf >$prefix.prepare.data.log 2>$prefix.prepare.data.error.tmp"
+	perl $base/src/prepare.data.pl --list $list --prefix $prefix --outdir . --conf $conf >$prefix.prepare.data.log 2>$prefix.prepare.data.error.tmp
 	cat $prefix.prepare.data.error.tmp|grep -v '^+ ' > $prefix.prepare.data.error && rm $prefix.prepare.data.error.tmp
 	echo
 else
@@ -55,8 +56,8 @@ fi
 
 if [ -s $prefix.prepare.data.error ];
 then
-	cat $prefix.prepare.data.error
-	echo -e "\n\n$(tput setaf 1)error in file: $prefix.prepare.data.error$(tput setaf 7)\n\n"
+	error=`cat $prefix.prepare.data.error`
+	echo -e "$(tput setaf 2)$error$(tput setaf 7)\n\n$(tput setaf 1)error in file: $prefix.prepare.data.error$(tput setaf 7)\n\n"
 	date
 	exit
 else
@@ -65,7 +66,8 @@ echo
 echo 
 date
 echo -e "$(tput setaf 3)perl $base/src/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix $(tput setaf 7)"
-time perl $base/src/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.plot.log 2>$prefix.plot.error.tmp
+#echo "perl $base/src/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.plot.log 2>$prefix.plot.error.tmp"
+perl $base/src/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.plot.log 2>$prefix.plot.error.tmp
 cat $prefix.plot.error.tmp|grep -v '^+ ' >$prefix.plot.error && rm $prefix.plot.error.tmp
 echo
 fi
@@ -74,8 +76,8 @@ echo
 #ls -ltrh $prefix.prepare.data.error $prefix.plot.error 2>/dev/null
 if [ -s $prefix.plot.error ];
 then
-	cat $prefix.plot.error
-	echo -e "\n\n$(tput setaf 1)detail error in file $prefix.plot.error, $(tput setaf 7)\n\n"
+	error=`cat $prefix.plot.error`
+	echo -e "$(tput setaf 2)$error$(tput setaf 7)\n\n$(tput setaf 1)detail error in file $prefix.plot.error, $(tput setaf 7)\n\n"
 	date
 	exit
 else

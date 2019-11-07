@@ -121,7 +121,7 @@ sub read_list(){
 		push @track_order, $sample;
 
 		if(exists $uniq_sample{$sample}){
-			die "error:more than one $sample, not allow same 1th column in $list~\n " 
+			die "error:more than one $sample, not allow same 1th column in track.list $list~\n " 
 		}else{
 			$uniq_sample{$sample}="";
 		}
@@ -428,20 +428,20 @@ sub go_line(){
 	#if($feature_id!~ /$marker$/){
 	#	$feature_id="$feature_id.$marker.$sample.$marker";
 	#}
+	my $feature_id_is_unique=(exists $conf->{feature_setting2}->{$feature_id}->{feature_id_is_unique})? $conf->{feature_setting2}->{$feature_id}->{feature_id_is_unique} : $conf->{feature_id_is_unique};
 	if($feature_id=~ /\.[+-]\.[qt]\.q_block_index=(\d+).t_block_index=(\d+)$/ && $arr[2] eq "synteny"){
 		#my $feature_id_block_index=$1;
 		#return ($conf, $gff, $block_index, $gene_index, $fts) if($feature_id_block_index != $block_index);
 		my $the_block_index=&get_block_index_from_id("crosslink", $feature_id);
 		return ($conf, $gff, $block_index, $gene_index, $fts) if($block_index != $the_block_index);
-		#if($feature_id eq "pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=1"){
-			#die "id is $feature_id, block_index is $block_index, the_block_index is $the_block_index\n";
-		#}
 		if(exists $fts->{$feature_id}){ # check feature_id if had exists in one block of --list, in fact one feature_id may occurs in more than one block of --list
-			if($conf->{feature_id_is_unique}=~ /yes/){
+			if($feature_id_is_unique=~ /yes/){
 				print "\n1 is ,block_index is $block_index, line is $line\n";
 				die "error: 1feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+			}elsif($feature_id_is_unique=~ /no/){
+				print "warn: feature_id can be uniq or not for $feature_id  \n\n";
 			}else{
-				print "warn: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+				die "error: feature_id_is_unique for $feature_id should be yes or no, instead of $feature_id_is_unique \n\n";
 			}
 		}else{
 			$fts->{$feature_id}{sample} = $sample;
@@ -450,10 +450,12 @@ sub go_line(){
 		}
 	}else{
 		if(exists $fts->{$feature_id}){ # check feature_id if had exists in one block of --list, in fact one feature_id may occurs in more than one block of --list
-			if($conf->{feature_id_is_unique}=~ /yes/){
-				die "error: 2feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+			if($feature_id_is_unique=~ /yes/){
+				die "error: feature_id should be uniq, but $feature_id appear more than one time in --list or add feature_id_is_unique = no \n\n";
+			}elsif($feature_id_is_unique=~ /no/){
+				print "warn: feature_id can be uniq or not for $feature_id  \n\n";
 			}else{
-				print "warn: feature_id should be uniq, but $feature_id appear more than one time in --list \n\n";
+				die "error: feature_id_is_unique for $feature_id should be yes or no, instead of $feature_id_is_unique \n\n";
 			}
 		}else{
 			$fts->{$feature_id}{sample} = $sample;
@@ -1164,11 +1166,16 @@ sub read_conf(){
 	open IN, "$conf" or die "error: can not open $conf\n";
 	while(<IN>){
 		chomp;
+		last if($_=~ /^\s*exit\s/ || $_=~ /^\s*exit$/);
 		next if($_=~ /^\s*#/ || $_=~ /^\s*$/);
-		$_=~ s/\s*#.*$//g if($_=~ /^\s*\S+\s*=\s*\S.*#/);
+		$_=~ s/\s+#.*$//g if($_=~ /^\s*[^=]+\s*=\s*\S.*\s#/);
+		#$_=~ s/\\#/#/g if($_=~ /\\#/);
+		
 		if($_=~ /=/ && !$zone_flag){ # key = value
 			$_=~ s/([^=^\s])\s+#.*$/$1/g;
-			my ($key, $value) = split(/\s*=\s*/, $_);
+			$_=~ /^\s*([^=^\s]+)\s*=\s*(.*)$/;
+			my ($key, $value) = ($1, $2);
+			#split(/\s*=\s*/, $_);
 			$value=~ s/\s+$//;
 			$value=~ s/^\s+//;
 			$key=~ s/\s//g;
@@ -1197,7 +1204,7 @@ sub read_conf(){
 			}
 
 		}elsif($zone_flag && $_!~ /^\s*}/){
-				die "error: format of $zone_id: $_ in $conf line$.\n" if($_!~ /^\s*(\S+)\s*=\s*([^#]*)/);
+				die "error: format of $zone_id: $_ in $conf line$.\n" if($_!~ /^\s*([^=^\s]+)\s*=\s*(.*)/);
 				push @zone,$_;
 		}elsif($_=~ /^\s*}\s*.*$/){
 			my $skip=0;
@@ -1235,7 +1242,7 @@ sub read_conf(){
 			print "\nnot_exists $k in confs\n" 
 		}else{
 			foreach my $t(@{$confs{$k}}){
-				print "$k = $t\n\n";
+				print "key $k = $t\n\n";
 			}
 		}
 		
@@ -1305,8 +1312,8 @@ sub recover_special_keys(){
 	die "error:not support $zoon_id in recover_special_keys of myth.pm, only @funcs\n" if(!grep(/$zoon_id/, @funcs));
 	my %kvs;
 	foreach my $kv(@zone){
-		$kv=~ /^\s*(\S+)\s*=\s*([^#]*)/;
-		print "key is $1\n";
+		$kv=~ /^\s*([^=^\s]+)\s*=\s*(.*)/;
+		print "key is $1, value is $2\n";
 		$kvs{$1}=$2;
 	}
 
@@ -1342,8 +1349,10 @@ sub recover_special_keys(){
 			die "\nerror:$high\->$kvs{$high} should be not empty\n" if(exists $kvs{$high} && !$kvs{$high});
 			$value.="\t$high\->$kvs{$high}" if(exists $kvs{$high} && $kvs{$high});
 		}
-		foreach my $data_file(split(/\s*:\s*/, $kvs{data_file})){
-			die "error: data_file $data_file not exists! in $kvs{data_file}\n" if(! -f "$data_file");
+		if(exists $kvs{data_file}){
+			foreach my $data_file(split(/\s*:\s*/, $kvs{data_file})){
+				die "error: data_file $data_file not exists! in $kvs{data_file}\n" if(! -f "$data_file");
+			}
 		}
 	}
 	
@@ -1417,7 +1426,7 @@ sub check_special_keys(){
 			"ytick_order"=>"2:6:0.2:0.1",
 			"label_size"=>"15:15",
 			"mapqs"=>"0:10:40",
-			"color_height_cs"=>"M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect"
+			"color_height_cs"=>"M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;",
 		);
 		foreach my $k(keys %default_params){
 			$kvs{$k}=$default_params{$k} if(not exists $kvs{$k});
@@ -1518,22 +1527,21 @@ sub check_parameter_format(){
 
 		}
 		die "error:data_display_order=$kvs{data_display_order} should be like 2 or 2->3\n" if($kvs{data_display_order}!~ /^\s*[\d\.]+\s*$/ &&  $kvs{data_display_order}!~ /^\s*[\d\.]+\s*->\s*[\d\.]+\s*$/);
-		die "error: data_feature_shape=$kvs{data_feature_shape}, only support rect or arrow or circle yet~" if($kvs{data_feature_shape}!~ /rect|arrow|circle/);
-		die "error: block_flag=$kvs{block_flag} should be number\n" if($kvs{block_flag}!~ /^\s*\d+\s*$/);
-		die "error: subtrack_yaxis_display_region=$kvs{subtrack_yaxis_display_region} should be like 5->55->10\n" if($kvs{subtrack_yaxis_display_region}!~ /^\s*[\d\.]+\s*->\s*[\d\.]+\s*->\s*[\d\.]+\s*$/);
+		die "error: data_feature_shape=$kvs{data_feature_shape}, only support rect or arrow or circle yet~" if(exists $kvs{data_feature_shape} && $kvs{data_feature_shape}!~ /rect|arrow|circle/);
+		die "error: block_flag=$kvs{block_flag} should be number\n" if(exists $kvs{block_flag} && $kvs{block_flag}!~ /^\s*\d+\s*$/);
+		die "error: subtrack_yaxis_display_region=$kvs{subtrack_yaxis_display_region} should be like 5->55->10\n" if(exists $kvs{subtrack_yaxis_display_region} && $kvs{subtrack_yaxis_display_region}!~ /^\s*[\d\.]+\s*->\s*[\d\.]+\s*->\s*[\d\.]+\s*$/);
 }
 
 sub default_setting(){
 	my ($skip_not_exists, %conf) = @_;
-	$conf{svg_width_height} ||= '1300,700';
-	#$conf{anchor_positon_ratio} ||= 1;
+	$conf{svg_width_height} ||= "1300,700";
 	$conf{feature_keywords} ||=""; # gene
 	$conf{pdf_dpi} ||=100;
 	$conf{width_ratio_ref_cluster_legend} ||='0.1-0.75-0.15';
 	$conf{ref_name_right_gap} ||=0.15;
 	$conf{top_bottom_margin} ||=0.15;
 	$conf{genome_height_ratio} ||= 1;
-	$conf{feature_height_ratio} ||= 3;
+	$conf{feature_height_ratio} ||= 3.5;
 	$conf{feature_height_unit} ||= "backbone"; # or percent
 	$conf{space_between_blocks} ||= 500; # bp
 	$conf{feature_label_size} ||=10;
@@ -1568,6 +1576,7 @@ sub default_setting(){
 	$conf{cross_link_order} =(defined $conf{cross_link_order})? $conf{cross_link_order}:2; # bigger mean upper 
 	$conf{cross_link_opacity} ||=0.8;
 	$conf{display_feature_label} ||="no";
+	$conf{chop_soft_clip} ||="yes";
 	$conf{display_legend} ||="yes";
 	$conf{cross_link_anchor_pos} ||="medium_medium";
 	$conf{ignore_sharp_arrow} ||="no";
@@ -1583,7 +1592,7 @@ sub default_setting(){
 	$conf{feature_arrow_width_extent} ||=0.2;
 	$conf{connect_with_same_scaffold} ||="yes";
 	$conf{connect_stroke_dasharray} ||="2,2";
-	$conf{connect_stroke_width} ||=2;
+	$conf{connect_stroke_width} ||=1;
 	$conf{connect_stroke_color} ||="black";
 	$conf{absolute_postion_in_title} ||="yes";
 	$conf{feature_shift_y} ||=0;
@@ -1617,7 +1626,7 @@ sub default_setting(){
 	$conf{feature_label_textLength} ||="";
 	$conf{feature_label_lengthAdjust} ||="";
 	$conf{tracks_block_reverse} ||="";
-	$conf{feature_id_is_unique} ||="yes";
+	$conf{feature_id_is_unique} ||="no"; # yes or no
 	$conf{display_segment_strand} ||="5:5',3:3',color:black,fontsize:10";
 	$conf{legend_height_ratio} ||=0.9;
 	$conf{feature_content_display} ||="no";
@@ -1874,7 +1883,7 @@ sub check_font_size_by_estimate(){
 
 sub check_para(){
 	my (%conf)=@_;
-	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "y_margin_feature_label", "x_margin_feature_label", "pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique", "cross_link_opacity_reverse", "feature_color_reverse", "feature_opacity_reverse", "display_segment_strand", "feature_shift_x_to", "feature_shift_y_to", "ref_name_right_gap", "legend_position", "feature_content_display_keywords", "feature_content_display", "feature_content", "general_features", "feature_id_suffix", "data_feature_setting");
+	my @paras=("absolute_postion_in_title","connect_stroke_color","connect_stroke_dasharray","connect_stroke_width","connect_with_same_scaffold","cross_link_anchor_pos","cross_link_color","cross_link_height_ellipse","cross_link_opacity","cross_link_order","cross_link_orientation_ellipse","cross_link_shape","crossing_link", "display_feature","display_feature_label","display_legend","distance_closed_feature","feature_arrow_sharp_extent","feature_arrow_width_extent","feature_border_color","feature_border_size","feature_color","feature_height_ratio","feature_keywords","feature_label_auto_angle_flag","feature_label_color","feature_label_order","feature_label_size","feature_order","feature_setting","feature_shape","feature_shift_x","feature_shift_y","feature_shift_y_unit", "genome_height_ratio","ignore_sharp_arrow","label_rotate_angle","legend_font_size","legend_height_ratio","legend_height_space","legend_stroke_color","legend_stroke_width","legend_width_margin","legend_width_textpercent", "y_margin_feature_label", "x_margin_feature_label", "pdf_dpi","pos_feature_label","sample_name_color_default","sample_name_font_size_default","sample_name_old2new","scale_color","scale_display","scale_order","scale_padding_y","scale_position","scale_ratio","scale_tick_fontsize","scale_tick_height","scale_tick_opacity","scale_tick_padding_y","scale_width","shift_angle_closed_feature","space_between_blocks","svg_background_color","svg_width_height","top_bottom_margin","track_order","track_style","width_ratio_ref_cluster_legend", "cross_link_color_reverse", "feature_opacity", "color_sample_name_default", "cross_link_orientation", "legend_height_percent","feature_height_unit", "sample_name_old2new2", "crossing_link2", "feature_setting2", "reads_mapping", "feature_x_extent", "tracks_shift_x", "tracks_shift_y", "tracks_reorder", "cross_link_width_ellipse", "correct_ellipse_coordinate", "hist_scatter_line", "label_text_anchor", "cross_link_shift_y", "start", "scf_id", "sample", "end", "type", "feature_label", "legend_label", "synteny", "label_text_alignment_baseline", "crosslink_stroke_style", "display_segment_name", "feature_popup_title", "allow_feature_out_of_list", "edge_coordinate_feature_out_of_list", "allow_feature_out_of_list_flag", "skip_feature_type_keep_crosslink", "cross_link_track_name", "block_start_end", "feature_label_textLength", "feature_label_lengthAdjust", "tracks_block_reverse", "feature_id_is_unique", "cross_link_opacity_reverse", "feature_color_reverse", "feature_opacity_reverse", "display_segment_strand", "feature_shift_x_to", "feature_shift_y_to", "ref_name_right_gap", "legend_position", "feature_content_display_keywords", "feature_content_display", "feature_content", "general_features", "feature_id_suffix", "data_feature_setting", "chop_soft_clip");
 	for my $k (keys %conf){
 		die "\nerror: not support $k in --conf . only support @paras\n" if(!grep(/^$k$/, @paras));
 	}

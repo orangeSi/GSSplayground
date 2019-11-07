@@ -42,6 +42,8 @@ my %conf = &read_conf($outdir,$conf,@funcs);
 my $shift_angle_closed_feature=0;
 my ($svg_width,$svg_height) = split(',',$conf{'svg_width_height'});
 print "svg_width is $svg_width, svg_height is svg_height\n";
+$svg_width=~ s/\s*px$//g;
+$svg_height=~ s/\s*px$//g;
 
 ## position of features for  crosslink
 my %feature_reverse_for_crosslink;
@@ -190,6 +192,7 @@ while(@track_order){
 
 
 	my $pre_block='';
+	my ($id_line_x_last, $id_line_y_last);
 	#foreach my $block_index(sort {$a<=>$b} keys %{$gff{$sample}{block}}){ # one block_index ---> one scaffold ---> one cluster of genes
 	foreach my $block_index(sort {$a<=>$b} keys %{$gff{$sample}{chooselen_single}}){
 		#print "xxxx is $sample, block_index is $block_index\n";
@@ -210,7 +213,10 @@ while(@track_order){
 		#$rg_test = "$sample:$scf[0]:" if(!$reverse_block_flag);
 
 		my $id_line_x=$shift_x; # 每个block的genome的起点的x,y坐标
+		$id_line_x_last=$id_line_x;
 		my $id_line_y=$top_distance + $line_to_sample_single_top_dis * $sample_single_height; # 每个block的genome的起点的x,y坐标
+		$id_line_y_last=$id_line_y;
+
 		my $id_line_width=$gff{$sample}{chooselen_single}{$block_index}{len} * $ratio; # 每个block的genome的宽度
 #print "chooselen_single is $sample $gff{$sample}{chooselen_single}{$block_index} * $ratio\n";
 
@@ -233,7 +239,7 @@ while(@track_order){
 		$rg_test = "$sample:$scf[0]:$start_once:$end_once;" if(!$reverse_block_flag);
 		#reversed_block{$sample}{$block_index}
 		my @block_region=&get_real_feature_region($reverse_block_flag, $start_once, $end_once, $start_once, $end_once, "+", $gff{$sample}{scf}{$scf[0]}, "block", ""); # "$start-$end", $start, $end, $strand);
-		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$block_region[0]</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n";
+		$orders{$track_order}.="<g class='myth'><title>$scf[0]:$block_region[0]</title>\n<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"$conf{track_style}\"   /></g>\n"; # draw backbone for every block 
 		$orders{$track_order}.=&show_segment_strand($conf{display_segment_strand}, $id_line_x, $id_line_y, $id_line_height, $id_line_width, $reverse_block_flag);
 
 		if($display_segment_name_flag=~ /yes/i){
@@ -275,16 +281,20 @@ while(@track_order){
 			die "error:$display_segment_name should be start with yes or no, not $display_segment_name_flag\n"
 		}
 ## 判断相邻的block是否来自同一条scaffold
-		if($scf[0] eq $pre_block and $conf{connect_with_same_scaffold}=~ /yes/i){
-			my $pre_x = $id_line_x - $block_distance;
-			my $pre_y = $id_line_y + 0.5 * $id_line_height;
-			my $now_x = $pre_x + $block_distance * 0.99;
-			my $now_y = $pre_y;
+		if($block_index >=2 and ($scf[0] eq $pre_block) and $conf{connect_with_same_scaffold}=~ /yes/i){
+			#my $pre_x = $id_line_x - $block_distance;
+			#my $pre_y = $id_line_y + 0.5 * $id_line_height;
+			#my $now_x = $pre_x + $block_distance * 0.99;
+			#my $now_y = $pre_y;
+			my $pre_x = $id_line_x_last;
+			my $pre_y = $id_line_y_last;
+			my $now_x = $id_line_x - $block_distance /100;
+			my $now_y = $id_line_y + 0.5 * $id_line_height;
 #print "pre_block $pre_block $pre_x $pre_y $now_x $now_y\n";
 			my $stroke_dasharray=$conf{connect_stroke_dasharray};
 			my $stroke_width=$conf{connect_stroke_width};
 			my $stroke_color=$conf{connect_stroke_color};
-			$svg.="<g fill=\"none\" stroke=\"$stroke_color\" stroke-width=\"$stroke_width\"><path stroke-dasharray=\"$stroke_dasharray\" d=\"M$pre_x,$pre_y L$now_x,$now_y\" /></g>";
+			$svg.="<g fill=\"none\"><path class='myth' stroke=\"$stroke_color\" stroke-width=\"$stroke_width\" stroke-dasharray=\"$stroke_dasharray\" d=\"M$pre_x,$pre_y L$now_x,$now_y\" /></g>";
 		}
 #$gff{$sample}{chooselen_single}{$block_index}{end_x_in_svg} = $shift_x+$id_line_width;
 		$gff{$sample}{chooselen_single}{$block_index}{end_x_in_svg} = $id_line_x+$id_line_width;
@@ -318,7 +328,7 @@ while(@track_order){
 
 			if(exists $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag} && $conf{feature_setting2}{$index_id}{allow_feature_out_of_list_flag}){
 				my ($clip_x1_x,$clip_x1_y,$clip_x2_x,$clip_x2_y,$clip_x3_x,$clip_x3_y,$clip_x4_x,$clip_x4_y)=($shift_x,$top_distance,$shift_x+$id_line_width,$top_distance,$shift_x+$id_line_width,$top_distance + $sample_single_height,$shift_x,$top_distance + $sample_single_height);
-				$svg.="<defs>    <clipPath id=\"$block_clip_path_id\"><path d=\"M$clip_x1_x $clip_x1_y L$clip_x2_x $clip_x2_y L$clip_x3_x $clip_x3_y L$clip_x4_x $clip_x4_y Z\" />     </clipPath>  </defs>\n" if(not exists $block_clip_path_ids{$block_clip_path_id});
+				$svg.="<defs>    <clipPath id=\"$block_clip_path_id\"><path class='myth' d=\"M$clip_x1_x $clip_x1_y L$clip_x2_x $clip_x2_y L$clip_x3_x $clip_x3_y L$clip_x4_x $clip_x4_y Z\" />     </clipPath>  </defs>\n" if(not exists $block_clip_path_ids{$block_clip_path_id});
 				$block_clip_path_ids{$block_clip_path_id}="";
 			}
 
@@ -632,7 +642,7 @@ foreach my $pair(@pairs){
 		my $rotate_rev=0;
 		my ($large_arc_flag, $sweep_flag, $large_arc_flag_rev, $sweep_flag_rev)=split(",", $cross_link_orientation_ellipse); #http://xahlee.info/js/svg_path_ellipse_arc.html
 
-		$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\" /></g>";
+		$orders{$cross_link_order}.="$title_clink<path class='myth' d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"${crosslink_stroke_style}fill:$color;opacity:$cross_link_opacity\" /></g>";
 #$orders{$cross_link_order}.="$title_clink<path d=\"M$right_up_x $right_up_y L$left_up_x $left_up_y A$r1 $r2  $rotate $large_arc_flag $sweep_flag   $right_down_x $right_down_y L$left_down_x $left_down_y A$r1_rev $r2_rev $rotate_rev $large_arc_flag_rev $sweep_flag_rev $right_up_x $right_up_y Z\"  style=\"fill:white;stroke:black;stroke-width:0.5;fill-opacity:0;stroke-opacity:1\" /></g>";
 #print "downid is $down_id, up is is $up_id\n";
 		next;
@@ -1145,7 +1155,7 @@ sub cut_quadrilateral(){
 		$clip_path_id="clip_$up_start_x-$up_start_y-$up_end_x-$up_end_y-$down_start_x-$down_start_y-$down_end_x-$down_end_y";
 		#print "clip_path_id is $clip_path_id\n";
 		print "edge_coordinate_feature_out_of_list is $edge_coordinate_feature_out_of_list\n";
-		my $clip="<defs>    <clipPath id=\"$clip_path_id\"><path d=\"M$up_start_x $up_start_y L$up_end_x $up_end_y L$down_end_x $down_end_y L$down_start_x $down_start_y Z\" /></clipPath>  </defs>\n";
+		my $clip="<defs>    <clipPath id=\"$clip_path_id\"><path class='myth' d=\"M$up_start_x $up_start_y L$up_end_x $up_end_y L$down_end_x $down_end_y L$down_start_x $down_start_y Z\" /></clipPath>  </defs>\n";
 		if(not exists $clip_for_crosslink{$clip_path_id}){
 			$clip_path.="$clip";
 			$clip_for_crosslink{$clip_path_id}="";
@@ -1161,7 +1171,7 @@ sub cut_quadrilateral(){
 		$stroke_width = 1 if($stroke_width == 0);
 		$style=~ s/stroke-width:\s*([\d\.]+)/stroke-width: $stroke_width/;
 	}
-	$clip_path.="<path d=\"M$left_up_x $left_up_y L$right_up_x $right_up_y L$right_down_x $right_down_y L$left_down_x $left_down_y Z\"  clip-path=\"url(#$clip_path_id)\" style=\"$style\" />\n";
+	$clip_path.="<path class='myth' d=\"M$left_up_x $left_up_y L$right_up_x $right_up_y L$right_down_x $right_down_y L$left_down_x $left_down_y Z\"  clip-path=\"url(#$clip_path_id)\" style=\"$style\" />\n";
 	#"""  <defs>    <clipPath id="cut-off-bottom"><path d="M0 0 L170 0 L170 300 L0 300 Z" />	    </clipPath>  </defs> 
 	# <path d="M150 0 L75 200 L225 200 Z"  clip-path="url(#cut-off-bottom)" />"""
 
