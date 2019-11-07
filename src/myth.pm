@@ -628,7 +628,7 @@ sub draw_genes(){
 		my $feature_content;
 		if(exists $conf->{feature_setting2}->{$feature_id}->{feature_content}){
 				$feature_content=$conf->{feature_setting2}->{$feature_id}->{feature_content};
-				$feature_content=~ s/(.{60})/$1<br>/g;
+				$feature_content=~ s/(.{60})/<tspan>$1<\/tspan>/g;
 		}else{
 			if($chr_seq){
 				$feature_content = substr($chr_seq, $start_raw-1, $end_raw-$start_raw+1);
@@ -636,12 +636,12 @@ sub draw_genes(){
 					$feature_content=reverse($feature_content);
 					$feature_content=~ tr/ATCGNatcgn/TAGCNtagcn/;
 				}
-				$feature_content=~ s/(.{60})/$1<br>/g;
+				$feature_content=~ s/(.{60})/<tspan>$1<\/tspan>/g;
 			}else{
 				$feature_content="warn:not find feature_content, maybe you can try input fasta file instead of xx.fa.length to track.list\n";
 			}
 		}
-		$feature_popup_title.="\n<tspan>$feature_type content -> $feature_content</tspan>";
+		$feature_popup_title.="\n<tspan>$feature_type content -></tspan> $feature_content";
 	}elsif($feature_content_display!~ /no/i){
 		die "error: feature_content_display should be yes or no for feature_id $feature_id\n";
 	}

@@ -294,7 +294,7 @@ while(@track_order){
 			my $stroke_dasharray=$conf{connect_stroke_dasharray};
 			my $stroke_width=$conf{connect_stroke_width};
 			my $stroke_color=$conf{connect_stroke_color};
-			$svg.="<g fill=\"none\"><path class='myth' stroke=\"$stroke_color\" stroke-width=\"$stroke_width\" stroke-dasharray=\"$stroke_dasharray\" d=\"M$pre_x,$pre_y L$now_x,$now_y\" /></g>";
+			$svg.="<g fill=\"none\">\n<path class='myth' stroke=\"$stroke_color\" stroke-width=\"$stroke_width\" stroke-dasharray=\"$stroke_dasharray\" d=\"M$pre_x,$pre_y L$now_x,$now_y\" /></g>";
 		}
 #$gff{$sample}{chooselen_single}{$block_index}{end_x_in_svg} = $shift_x+$id_line_width;
 		$gff{$sample}{chooselen_single}{$block_index}{end_x_in_svg} = $id_line_x+$id_line_width;
@@ -993,7 +993,7 @@ for my $order(sort {$a<=>$b}keys %orders){
 }
 print SVG "</svg>";
 close SVG;
-my $rm_title="set -vex;sed -r -e 's/^\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//' $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
+my $rm_title="set -vex;sed -r -e 's/\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//' $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
 `$rm_title`;
 die "\nerror:$rm_title\n\n" if($?);
 

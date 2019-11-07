@@ -42,7 +42,7 @@ key is chr_id, value is NC_017659.1.fake
 key is data_file, value is ../data/NC_017659.1.indel.fa.longreads.map2ref.sort.bam:../data/NC_017659.1.indel.fa
 key is data_display_shape, value is stack
 key is ylabel, value is pacbio read mapping stack,gap:50bp,fontsize:13,color:black
-tracks_shift_y -> pO83_CORR,0,+1:+0;pO83_CORR.twin,0,+1:-0.5
+tracks_shift_y -> pO83_CORR,0,+0.1:+0;pO83_CORR.twin,0,+0.1:-0.5
 tracks_shift_x -> pO83_CORR,1,+200bp:+0bp;pO83_CORR,2,-400bp:+0bp;pO83_CORR.twin,1,+300bp:+0bp
 key is data_display_order, value is 0->1
 key is query, value is pO83_CORR.indel
