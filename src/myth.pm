@@ -1247,7 +1247,7 @@ sub read_conf(){
 		}
 		
 	}
-	%confs=&auto_add_subtracks_region(%confs);
+	#%confs=&auto_add_subtracks_region(%confs);
 	&check_para(%confs);
 	return %confs;
 }
@@ -1360,6 +1360,15 @@ sub recover_special_keys(){
 	return $value, \%kvs;
 }
 
+sub display_hash(){
+	my ($kvs)=@_;
+	my %kvs=%$kvs;
+	my $res="\n";
+	foreach my $key(keys %kvs){
+		$res.="$key = $kvs{$key}\n"
+	}
+	return $res;
+}
 #check_special_keys($zoon_id, \@hist_scatter_line_params, \@reads_mapping_params, \@synteny_params, \%kvs, ); # check must have params or should not have params.
 sub check_special_keys(){
 	my ($zoon_id, $params, $kvs)=@_; # check must have params or should not have params.
@@ -1374,17 +1383,17 @@ sub check_special_keys(){
 		die "error: not support $error, only @all_params in $zoon_id\n" if($error);
 		$error="";
 
-		my @must_params=("data_type", "track_name", "chr_id", "data_file");
+		my @must_params=("data_type", "track_name", "chr_id", "data_file", "subtrack_yaxis_bg_region");
 		for my $k(@must_params){
 			$error.="$k," if(not exists $kvs{$k});
 		}
-		die "error: need paramater $error for $zoon_id\n" if($error);
+		die "error: need paramater $error for $zoon_id in ",&display_hash($kvs),"\n" if($error);
 		my %default_params=(
 		"data_display_order"=>1, 
 		"block_flag"=>0,
 		"window_size"=>"500bp",
 		"data_color"=>"color->black:opacity->1", 
-		"subtrack_yaxis_bg_region"=>"subtrack_yaxis_bg_region",
+		#"subtrack_yaxis_bg_region"=>"subtrack_yaxis_bg_region",
 		"subtrack_yaxis_display_region"=>"1->100->10", # 1->100->10
 		"ytick_display_flag"=>1,
 		"ytick_label"=>"ytick_label",
@@ -1406,11 +1415,11 @@ sub check_special_keys(){
 		die "error: not support $error, only @all_params in $zoon_id\n" if($error);
 		$error="";
 
-		my @must_params=("data_type", "track_name", "chr_id", "data_file");
+		my @must_params=("data_type", "track_name", "chr_id", "data_file", "subtrack_yaxis_bg_region");
 		for my $k(@must_params){
 			$error.="$k," if(not exists $kvs{$k});
 		}
-		die "error: need paramater $error for $zoon_id\n" if($error);
+		die "error: need paramater $error for $zoon_id, in ",&display_hash($kvs),"\n" if($error);
 
 		my %default_params=(
 			"data_display_order"=>1,
@@ -1419,7 +1428,7 @@ sub check_special_keys(){
 			"ytick_display_flag"=>0,
 			"ytick_label"=>"ytick_label",
 			"hgrid_flag"=>0,
-			"subtrack_yaxis_bg_region"=>"subtrack_yaxis_bg_region",
+			#"subtrack_yaxis_bg_region"=>"subtrack_yaxis_bg_region",
 			"subtrack_yaxis_display_region"=>"1->100->10", # 1->100->10
 			"ytick_color"=>"green:black",
 			"ytick_opacity"=>"1:1",
@@ -1445,7 +1454,7 @@ sub check_special_keys(){
 		for my $k(@must_params){
 			$error.="$k," if(not exists $kvs{$k});
 		}
-		die "error: need paramater $error for $zoon_id\n" if($error);
+		die "error: need paramater $error for $zoon_id in ",&display_hash($kvs),"\n" if($error);
 
 
 		my %default_params=(
@@ -1469,11 +1478,11 @@ sub check_special_keys(){
 		die "error: not support $error, only @all_params in $zoon_id\n" if($error);
 		$error="";
 
-		my @must_params=("data_type", "track_name", "chr_id", "data_file");
+		my @must_params=("data_type", "track_name", "chr_id", "data_file", "subtrack_yaxis_bg_region");
 		for my $k(@must_params){
 			$error.="$k," if(not exists $kvs{$k});
 		}
-		die "error: need paramater $error for $zoon_id\n" if($error);
+		die "error: need paramater $error for $zoon_id in ",&display_hash($kvs),"\n" if($error);
 
 		my %default_params=(
 			"data_display_order"=>"1->2",
@@ -1482,7 +1491,7 @@ sub check_special_keys(){
 			"ytick_display_flag"=>0,
 			"ytick_label"=>"ytick_label",
 			"hgrid_flag"=>0,
-			"subtrack_yaxis_bg_region"=>"subtrack_yaxis_bg_region",
+			#"subtrack_yaxis_bg_region"=>"subtrack_yaxis_bg_region",
 			"subtrack_yaxis_display_region"=>"1->100->10", # 1->100->10
 			"ytick_color"=>"green:black",
 			"ytick_opacity"=>"1:1",
