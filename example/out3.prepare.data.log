@@ -1,1285 +1,296 @@
 find package FindBin
 find package JSON
-key is data_type, value is gff
-key is track_name, value is yeast
-key is chr_id, value is NC_001133.9
-key is data_file, value is ../data/yeast/GCF_000146045.2_R64_genomic.gff:../data/yeast/GCF_000146045.2_R64_genomic.fna
-key is data_keyword, value is gene:exon+origin_of_replication;rRNA;snRNA
-key is subtrack_yaxis_bg_region, value is 1->5
-key is data_type, value is gff
-key is track_name, value is yeast
-key is chr_id, value is NC_001133.9
-key is data_file, value is ../data/yeast/GCF_000146045.2_R64_genomic.gff:../data/yeast/GCF_000146045.2_R64_genomic.fna
-key is data_keyword, value is gene:exon+origin_of_replication;rRNA;snRNA
-key is subtrack_yaxis_bg_region, value is -1->-5
+key is data_type, value is long_reads
+key is track_name, value is chr14
+key is chr_id, value is 14
+key is data_file, value is ../data/pacbio.chr14.sort.bam:../data/chr14.fa
+key is data_display_shape, value is stack
+key is subtrack_yaxis_bg_region, value is -10->-110
+key is ylabel, value is pacbio read mapping stack,gap:30bp,fontsize:13,color:black
+key is data_type, value is short_reads
+key is track_name, value is chr14
+key is chr_id, value is 14
+key is data_file, value is ../data/illumina.chr14.sort.bam:../data/chr14.fa
+key is data_display_shape, value is paired:color->Orange:opacity->1:cross_link_height_line->0.3
+key is subtrack_yaxis_bg_region, value is 79->117
+key is ylabel, value is illuminate read mapping paired,gap:30bp,fontsize:13,color:black
+key is data_type, value is short_reads
+key is track_name, value is chr14
+key is chr_id, value is 14
+key is data_file, value is ../data/illumina.chr14.sort.bam:../data/chr14.fa
+key is data_display_shape, value is stack
+key is subtrack_yaxis_bg_region, value is 53->77
+key is ylabel, value is illumnate read mapping stack,gap:30bp,fontsize:13,color:black
+key is data_type, value is hist
+key is track_name, value is chr14
+key is chr_id, value is 14
+key is window_size, value is 40
+key is data_file, value is ../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa
+key is data_color, value is color->green:opacity->0.7
+key is subtrack_yaxis_bg_region, value is 42->52
+key is subtrack_yaxis_display_region, value is 5->25->10
+key is ytick_display_flag, value is 1
+key is ylabel, value is illuminate read depth,gap:30bp,fontsize:13,color:black
+key is data_type, value is hist
+key is track_name, value is chr14
+key is chr_id, value is 14
+key is window_size, value is 20bp
+key is data_file, value is ../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa
+key is subtrack_yaxis_bg_region, value is 31->41
+key is subtrack_yaxis_display_region, value is 25->5->10
+key is ytick_display_flag, value is 1
+key is data_type, value is short_reads
+key is track_name, value is chr14
+key is chr_id, value is 14
+key is data_file, value is ../data/illumina.chr14.sort.bam:../data/chr14.fa
+key is data_display_shape, value is rainbow:color->blue:opacity->0.5:cross_link_width_ellipse->0.05
+key is subtrack_yaxis_bg_region, value is 10->30
+key is ylabel, value is illuminate short-read rainbow,gap:30bp,fontsize:15,color:red
+key is data_type, value is vcf
+key is track_name, value is chr14
+key is chr_id, value is 14
+key is data_file, value is ../data/hg002.chr14.vcf.gz:../data/chr14.fa
+key is subtrack_yaxis_bg_region, value is 5->9
+key is ylabel, value is vcf,gap:30bp,fontsize:15,color:green
+key hist_scatter_line = hist,1,chr14,14,0,40,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black
 
-not_exists hist_scatter_line in confs
+key hist_scatter_line = hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8
 
-not_exists reads_mapping in confs
+key reads_mapping = long_reads,1,chr14,14,0,../data/pacbio.chr14.sort.bam:../data/chr14.fa,stack,-10->-110,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->pacbio read mapping stack,gap:30bp,fontsize:13,color:black
+
+key reads_mapping = short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,paired:color->Orange:opacity->1:cross_link_height_line->0.3,79->117,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illuminate read mapping paired,gap:30bp,fontsize:13,color:black
+
+key reads_mapping = short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,stack,53->77,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illumnate read mapping stack,gap:30bp,fontsize:13,color:black
+
+key reads_mapping = short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,rainbow:color->blue:opacity->0.5:cross_link_width_ellipse->0.05,10->30,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illuminate short-read rainbow,gap:30bp,fontsize:15,color:red
+
+key reads_mapping = vcf,1,chr14,14,0,../data/hg002.chr14.vcf.gz:../data/chr14.fa,stack,5->9,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->vcf,gap:30bp,fontsize:15,color:green
+
 
 not_exists synteny in confs
-parse yeast yeast:NC_001133.9:24000-54000 -> block_index 1
+parse chr14 chr14:14:66901400-66903400 -> block_index 1
 
-parse yeast yeast:NC_001133.9:54000-87752 -> block_index 2
+read_list chr14 end
+hist_scatter_line start
+1 is hist,1,chr14,14,0,40,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black
 
-read_list yeast end
-hist_scatter_line not
-reads_mapping not
+block_index is 1,chr14
+
+output out3.chr14.14.1.1.hist.ylabel.gff
+
+output out3.chr14.14.1.1.hist.ylabel.setting.conf
+
+no out3.chr14.14.1.1.hist.ylabel.crosslink.conf for chr14
+s1 is 42, e1 is 52
+
+output out3.chr14.14.1.1.ytick.gff
+
+output out3.chr14.14.1.1.ytick.setting.conf
+
+no out3.chr14.14.1.1.ytick.crosslink.conf for chr14
+hist_scatter_line_run rg is 66901400,66903400  :66901400,66903400
+info is hist,1,chr14,14,0,40,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black
+is:../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa, chr14, 14,66901400, 66903400,40, hist,1,chr14,14,0,40,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black, hist
+50
+
+output out3.chr14.14.1.1.66901400.66903400.depth.gff
+
+output out3.chr14.14.1.1.66901400.66903400.depth.setting.conf
+
+no out3.chr14.14.1.1.66901400.66903400.depth.crosslink.conf for chr14
+2 is hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8
+
+block_index is 1,chr14
+
+output out3.chr14.14.1.2.hist.ylabel.gff
+
+output out3.chr14.14.1.2.hist.ylabel.setting.conf
+
+no out3.chr14.14.1.2.hist.ylabel.crosslink.conf for chr14
+s1 is 31, e1 is 41
+tick_label2 feature_tick_shift_y is -41
+tick_label2 feature_tick_shift_y is -36
+tick_label2 feature_tick_shift_y is -31
+
+output out3.chr14.14.1.2.ytick.gff
+
+output out3.chr14.14.1.2.ytick.setting.conf
+
+no out3.chr14.14.1.2.ytick.crosslink.conf for chr14
+hist_scatter_line_run rg is 66901400,66903400  :66901400,66903400
+info is hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8
+is:../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa, chr14, 14,66901400, 66903400,20, hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8, hist
+100
+
+output out3.chr14.14.1.2.66901400.66903400.depth.gff
+
+output out3.chr14.14.1.2.66901400.66903400.depth.setting.conf
+
+no out3.chr14.14.1.2.66901400.66903400.depth.crosslink.conf for chr14
+func_name is hist_scatter_line
+echo "
+set -vex;cat out3.chr14.14.1.1.hist.ylabel.gff out3.chr14.14.1.1.ytick.gff out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff out3.chr14.14.1.2.66901400.66903400.depth.gff >out3.chr14.out3.hist_scatter_line.gff;rm out3.chr14.14.1.1.hist.ylabel.gff out3.chr14.14.1.1.ytick.gff out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff out3.chr14.14.1.2.66901400.66903400.depth.gff;echo output out3.chr14.out3.hist_scatter_line.gff
+" >> out3.cat.log;set -vex;cat out3.chr14.14.1.1.hist.ylabel.gff out3.chr14.14.1.1.ytick.gff out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff out3.chr14.14.1.2.66901400.66903400.depth.gff >out3.chr14.out3.hist_scatter_line.gff;rm out3.chr14.14.1.1.hist.ylabel.gff out3.chr14.14.1.1.ytick.gff out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff out3.chr14.14.1.2.66901400.66903400.depth.gff;echo output out3.chr14.out3.hist_scatter_line.gff done
+echo "
+set -vex;cat out3.chr14.14.1.1.hist.ylabel.setting.conf out3.chr14.14.1.1.ytick.setting.conf out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf out3.chr14.14.1.2.66901400.66903400.depth.setting.conf > out3.chr14.out3.hist_scatter_line.setting.conf;rm out3.chr14.14.1.1.hist.ylabel.setting.conf out3.chr14.14.1.1.ytick.setting.conf out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf out3.chr14.14.1.2.66901400.66903400.depth.setting.conf;echo output out3.chr14.out3.hist_scatter_line.setting.conf
+" >> out3.cat.log;set -vex;cat out3.chr14.14.1.1.hist.ylabel.setting.conf out3.chr14.14.1.1.ytick.setting.conf out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf out3.chr14.14.1.2.66901400.66903400.depth.setting.conf > out3.chr14.out3.hist_scatter_line.setting.conf;rm out3.chr14.14.1.1.hist.ylabel.setting.conf out3.chr14.14.1.1.ytick.setting.conf out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf out3.chr14.14.1.2.66901400.66903400.depth.setting.conf;echo output out3.chr14.out3.hist_scatter_line.setting.conf done
+out3.hist_scatter_line end
+echo "
+set -vex;cat out3.chr14.out3.hist_scatter_line.setting.conf >out3.hist_scatter_line.setting.conf
+" >> out3.cat.log;set -vex;cat out3.chr14.out3.hist_scatter_line.setting.conf >out3.hist_scatter_line.setting.conf done
+reads_mapping start
+k_index 1 is long_reads,1,chr14,14,0,../data/pacbio.chr14.sort.bam:../data/chr14.fa,stack,-10->-110,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->pacbio read mapping stack,gap:30bp,fontsize:13,color:black
+
+block_index is 1,chr14
+
+output out3.chr14.14.1.1.long_reads.ylabel.gff
+
+output out3.chr14.14.1.1.long_reads.ylabel.setting.conf
+
+no out3.chr14.14.1.1.long_reads.ylabel.crosslink.conf for chr14
+start_end_xaxis is 66901400,66903400
+cmd is set -vex;samtools depth  -r 14:66901400-66903400 ../data/pacbio.chr14.sort.bam|awk '{print $NF}'|sort -k 1nr|head -1
+max_depth max_depth is 47
+
+rg is 66901400,66903400,  :66901400,66903400
+color_height_cs is M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect
+after split is M:green:opacity0.8:height0.5:1bp:rect I:red:opacity1:height0.9:6bp:rect D:black:opacity1:height0.8:3bp:rect N:blue:opacity1:height0.2:1bp:rect S:blue:opacity0.6:height0.9:5bp:rect H:blue:opacity0.6:height0.2:10bp:rect P:blue:opacity1:height0.2:1bp:rect X:Purple:opacity1:height0.6:1bp:rect reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow forward:green:opacity0.6:height0.8:1bp:arrow read1:green:opacity0.6:height0.8:6bp:arrow read2:#1E90FF:opacity0.6:height0.8:1bp:arrow fake:white:opacity1:height0.8:0bp:rect diploid:red:opacity0.8:height0.5:1bp:rect
+shift_y start
+max_depth is 46.5, read_type is long_reads
+read number is 57
+
+output out3.chr14.14.1.1.66901400.66903400.mapping.gff
+
+output out3.chr14.14.1.1.66901400.66903400.mapping.setting.conf
+
+no out3.chr14.14.1.1.66901400.66903400.mapping.crosslink.conf for chr14
+k_index 2 is short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,paired:color->Orange:opacity->1:cross_link_height_line->0.3,79->117,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illuminate read mapping paired,gap:30bp,fontsize:13,color:black
+
+block_index is 1,chr14
+
+output out3.chr14.14.1.2.short_reads.ylabel.gff
+
+output out3.chr14.14.1.2.short_reads.ylabel.setting.conf
+
+no out3.chr14.14.1.2.short_reads.ylabel.crosslink.conf for chr14
+start_end_xaxis is 66901400,66903400
+cmd is set -vex;samtools depth  -r 14:66901400-66903400 ../data/illumina.chr14.sort.bam|awk '{print $NF}'|sort -k 1nr|head -1
+max_depth max_depth is 26
+
+rg is 66901400,66903400,  :66901400,66903400
+color_height_cs is M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect
+after split is M:green:opacity0.8:height0.5:1bp:rect I:red:opacity1:height0.9:6bp:rect D:black:opacity1:height0.8:3bp:rect N:blue:opacity1:height0.2:1bp:rect S:blue:opacity0.6:height0.9:5bp:rect H:blue:opacity0.6:height0.2:10bp:rect P:blue:opacity1:height0.2:1bp:rect X:Purple:opacity1:height0.6:1bp:rect reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow forward:green:opacity0.6:height0.8:1bp:arrow read1:green:opacity0.6:height0.8:6bp:arrow read2:#1E90FF:opacity0.6:height0.8:1bp:arrow fake:white:opacity1:height0.8:0bp:rect diploid:red:opacity0.8:height0.5:1bp:rect
+shift_y start
+max_depth is 37.5, read_type is short_reads
+read number is 291
+
+output out3.chr14.14.1.2.66901400.66903400.mapping.gff
+
+output out3.chr14.14.1.2.66901400.66903400.mapping.setting.conf
+
+output out3.chr14.14.1.2.66901400.66903400.mapping.crosslink.conf
+k_index 3 is short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,stack,53->77,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illumnate read mapping stack,gap:30bp,fontsize:13,color:black
+
+block_index is 1,chr14
+
+output out3.chr14.14.1.3.short_reads.ylabel.gff
+
+output out3.chr14.14.1.3.short_reads.ylabel.setting.conf
+
+no out3.chr14.14.1.3.short_reads.ylabel.crosslink.conf for chr14
+start_end_xaxis is 66901400,66903400
+cmd is set -vex;samtools depth  -r 14:66901400-66903400 ../data/illumina.chr14.sort.bam|awk '{print $NF}'|sort -k 1nr|head -1
+max_depth max_depth is 26
+
+rg is 66901400,66903400,  :66901400,66903400
+color_height_cs is M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect
+after split is M:green:opacity0.8:height0.5:1bp:rect I:red:opacity1:height0.9:6bp:rect D:black:opacity1:height0.8:3bp:rect N:blue:opacity1:height0.2:1bp:rect S:blue:opacity0.6:height0.9:5bp:rect H:blue:opacity0.6:height0.2:10bp:rect P:blue:opacity1:height0.2:1bp:rect X:Purple:opacity1:height0.6:1bp:rect reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow forward:green:opacity0.6:height0.8:1bp:arrow read1:green:opacity0.6:height0.8:6bp:arrow read2:#1E90FF:opacity0.6:height0.8:1bp:arrow fake:white:opacity1:height0.8:0bp:rect diploid:red:opacity0.8:height0.5:1bp:rect
+shift_y start
+max_depth is 25.5, read_type is short_reads
+read number is 238
+
+output out3.chr14.14.1.3.66901400.66903400.mapping.gff
+
+output out3.chr14.14.1.3.66901400.66903400.mapping.setting.conf
+
+no out3.chr14.14.1.3.66901400.66903400.mapping.crosslink.conf for chr14
+k_index 4 is short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,rainbow:color->blue:opacity->0.5:cross_link_width_ellipse->0.05,10->30,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illuminate short-read rainbow,gap:30bp,fontsize:15,color:red
+
+block_index is 1,chr14
+
+output out3.chr14.14.1.4.short_reads.ylabel.gff
+
+output out3.chr14.14.1.4.short_reads.ylabel.setting.conf
+
+no out3.chr14.14.1.4.short_reads.ylabel.crosslink.conf for chr14
+start_end_xaxis is 66901400,66903400
+cmd is set -vex;samtools depth  -r 14:66901400-66903400 ../data/illumina.chr14.sort.bam|awk '{print $NF}'|sort -k 1nr|head -1
+max_depth max_depth is 26
+
+rg is 66901400,66903400,  :66901400,66903400
+color_height_cs is M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect
+after split is M:green:opacity0.8:height0.5:1bp:rect I:red:opacity1:height0.9:6bp:rect D:black:opacity1:height0.8:3bp:rect N:blue:opacity1:height0.2:1bp:rect S:blue:opacity0.6:height0.9:5bp:rect H:blue:opacity0.6:height0.2:10bp:rect P:blue:opacity1:height0.2:1bp:rect X:Purple:opacity1:height0.6:1bp:rect reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow forward:green:opacity0.6:height0.8:1bp:arrow read1:green:opacity0.6:height0.8:6bp:arrow read2:#1E90FF:opacity0.6:height0.8:1bp:arrow fake:white:opacity1:height0.8:0bp:rect diploid:red:opacity0.8:height0.5:1bp:rect
+shift_y start
+max_depth is 37.5, read_type is short_reads
+read number is 291
+
+output out3.chr14.14.1.4.66901400.66903400.mapping.gff
+
+output out3.chr14.14.1.4.66901400.66903400.mapping.setting.conf
+
+output out3.chr14.14.1.4.66901400.66903400.mapping.crosslink.conf
+k_index 5 is vcf,1,chr14,14,0,../data/hg002.chr14.vcf.gz:../data/chr14.fa,stack,5->9,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->vcf,gap:30bp,fontsize:15,color:green
+
+block_index is 1,chr14
+
+output out3.chr14.14.1.5.vcf.ylabel.gff
+
+output out3.chr14.14.1.5.vcf.ylabel.setting.conf
+
+no out3.chr14.14.1.5.vcf.ylabel.crosslink.conf for chr14
+start_end_xaxis is 66901400,66903400
+max_depth max_depth is 1
+rg is 66901400,66903400,  :66901400,66903400
+color_height_cs is M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect
+after split is M:green:opacity0.8:height0.5:1bp:rect I:red:opacity1:height0.9:6bp:rect D:black:opacity1:height0.8:3bp:rect N:blue:opacity1:height0.2:1bp:rect S:blue:opacity0.6:height0.9:5bp:rect H:blue:opacity0.6:height0.2:10bp:rect P:blue:opacity1:height0.2:1bp:rect X:Purple:opacity1:height0.6:1bp:rect reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow forward:green:opacity0.6:height0.8:1bp:arrow read1:green:opacity0.6:height0.8:6bp:arrow read2:#1E90FF:opacity0.6:height0.8:1bp:arrow fake:white:opacity1:height0.8:0bp:rect diploid:red:opacity0.8:height0.5:1bp:rect
+
+output out3.chr14.14.1.5.66901400.66903400.mapping.gff
+
+output out3.chr14.14.1.5.66901400.66903400.mapping.setting.conf
+
+no out3.chr14.14.1.5.66901400.66903400.mapping.crosslink.conf for chr14
+func_name is reads_mapping
+echo "
+set -vex;cat out3.chr14.14.1.1.long_reads.ylabel.gff out3.chr14.14.1.1.66901400.66903400.mapping.gff out3.chr14.14.1.2.short_reads.ylabel.gff out3.chr14.14.1.2.66901400.66903400.mapping.gff out3.chr14.14.1.3.short_reads.ylabel.gff out3.chr14.14.1.3.66901400.66903400.mapping.gff out3.chr14.14.1.4.short_reads.ylabel.gff out3.chr14.14.1.4.66901400.66903400.mapping.gff out3.chr14.14.1.5.vcf.ylabel.gff out3.chr14.14.1.5.66901400.66903400.mapping.gff >out3.chr14.out3.reads_mapping.gff;rm out3.chr14.14.1.1.long_reads.ylabel.gff out3.chr14.14.1.1.66901400.66903400.mapping.gff out3.chr14.14.1.2.short_reads.ylabel.gff out3.chr14.14.1.2.66901400.66903400.mapping.gff out3.chr14.14.1.3.short_reads.ylabel.gff out3.chr14.14.1.3.66901400.66903400.mapping.gff out3.chr14.14.1.4.short_reads.ylabel.gff out3.chr14.14.1.4.66901400.66903400.mapping.gff out3.chr14.14.1.5.vcf.ylabel.gff out3.chr14.14.1.5.66901400.66903400.mapping.gff;echo output out3.chr14.out3.reads_mapping.gff
+" >> out3.cat.log;set -vex;cat out3.chr14.14.1.1.long_reads.ylabel.gff out3.chr14.14.1.1.66901400.66903400.mapping.gff out3.chr14.14.1.2.short_reads.ylabel.gff out3.chr14.14.1.2.66901400.66903400.mapping.gff out3.chr14.14.1.3.short_reads.ylabel.gff out3.chr14.14.1.3.66901400.66903400.mapping.gff out3.chr14.14.1.4.short_reads.ylabel.gff out3.chr14.14.1.4.66901400.66903400.mapping.gff out3.chr14.14.1.5.vcf.ylabel.gff out3.chr14.14.1.5.66901400.66903400.mapping.gff >out3.chr14.out3.reads_mapping.gff;rm out3.chr14.14.1.1.long_reads.ylabel.gff out3.chr14.14.1.1.66901400.66903400.mapping.gff out3.chr14.14.1.2.short_reads.ylabel.gff out3.chr14.14.1.2.66901400.66903400.mapping.gff out3.chr14.14.1.3.short_reads.ylabel.gff out3.chr14.14.1.3.66901400.66903400.mapping.gff out3.chr14.14.1.4.short_reads.ylabel.gff out3.chr14.14.1.4.66901400.66903400.mapping.gff out3.chr14.14.1.5.vcf.ylabel.gff out3.chr14.14.1.5.66901400.66903400.mapping.gff;echo output out3.chr14.out3.reads_mapping.gff done
+echo "
+set -vex;cat out3.chr14.14.1.1.long_reads.ylabel.setting.conf out3.chr14.14.1.1.66901400.66903400.mapping.setting.conf out3.chr14.14.1.2.short_reads.ylabel.setting.conf out3.chr14.14.1.2.66901400.66903400.mapping.setting.conf out3.chr14.14.1.3.short_reads.ylabel.setting.conf out3.chr14.14.1.3.66901400.66903400.mapping.setting.conf out3.chr14.14.1.4.short_reads.ylabel.setting.conf out3.chr14.14.1.4.66901400.66903400.mapping.setting.conf out3.chr14.14.1.5.vcf.ylabel.setting.conf out3.chr14.14.1.5.66901400.66903400.mapping.setting.conf > out3.chr14.out3.reads_mapping.setting.conf;rm out3.chr14.14.1.1.long_reads.ylabel.setting.conf out3.chr14.14.1.1.66901400.66903400.mapping.setting.conf out3.chr14.14.1.2.short_reads.ylabel.setting.conf out3.chr14.14.1.2.66901400.66903400.mapping.setting.conf out3.chr14.14.1.3.short_reads.ylabel.setting.conf out3.chr14.14.1.3.66901400.66903400.mapping.setting.conf out3.chr14.14.1.4.short_reads.ylabel.setting.conf out3.chr14.14.1.4.66901400.66903400.mapping.setting.conf out3.chr14.14.1.5.vcf.ylabel.setting.conf out3.chr14.14.1.5.66901400.66903400.mapping.setting.conf;echo output out3.chr14.out3.reads_mapping.setting.conf
+" >> out3.cat.log;set -vex;cat out3.chr14.14.1.1.long_reads.ylabel.setting.conf out3.chr14.14.1.1.66901400.66903400.mapping.setting.conf out3.chr14.14.1.2.short_reads.ylabel.setting.conf out3.chr14.14.1.2.66901400.66903400.mapping.setting.conf out3.chr14.14.1.3.short_reads.ylabel.setting.conf out3.chr14.14.1.3.66901400.66903400.mapping.setting.conf out3.chr14.14.1.4.short_reads.ylabel.setting.conf out3.chr14.14.1.4.66901400.66903400.mapping.setting.conf out3.chr14.14.1.5.vcf.ylabel.setting.conf out3.chr14.14.1.5.66901400.66903400.mapping.setting.conf > out3.chr14.out3.reads_mapping.setting.conf;rm out3.chr14.14.1.1.long_reads.ylabel.setting.conf out3.chr14.14.1.1.66901400.66903400.mapping.setting.conf out3.chr14.14.1.2.short_reads.ylabel.setting.conf out3.chr14.14.1.2.66901400.66903400.mapping.setting.conf out3.chr14.14.1.3.short_reads.ylabel.setting.conf out3.chr14.14.1.3.66901400.66903400.mapping.setting.conf out3.chr14.14.1.4.short_reads.ylabel.setting.conf out3.chr14.14.1.4.66901400.66903400.mapping.setting.conf out3.chr14.14.1.5.vcf.ylabel.setting.conf out3.chr14.14.1.5.66901400.66903400.mapping.setting.conf;echo output out3.chr14.out3.reads_mapping.setting.conf done
+echo "
+set -vex;cat out3.chr14.14.1.2.66901400.66903400.mapping.crosslink.conf out3.chr14.14.1.4.66901400.66903400.mapping.crosslink.conf >out3.chr14.out3.reads_mapping.crosslink;rm out3.chr14.14.1.2.66901400.66903400.mapping.crosslink.conf out3.chr14.14.1.4.66901400.66903400.mapping.crosslink.conf;echo output out3.chr14.out3.reads_mapping.crosslink
+" >> out3.cat.log;set -vex;cat out3.chr14.14.1.2.66901400.66903400.mapping.crosslink.conf out3.chr14.14.1.4.66901400.66903400.mapping.crosslink.conf >out3.chr14.out3.reads_mapping.crosslink;rm out3.chr14.14.1.2.66901400.66903400.mapping.crosslink.conf out3.chr14.14.1.4.66901400.66903400.mapping.crosslink.conf;echo output out3.chr14.out3.reads_mapping.crosslink done
+out3.reads_mapping end
+echo "
+set -vex;cat out3.chr14.out3.reads_mapping.setting.conf >out3.reads_mapping.setting.conf
+" >> out3.cat.log;set -vex;cat out3.chr14.out3.reads_mapping.setting.conf >out3.reads_mapping.setting.conf done
+echo "
+set -vex;cat out3.chr14.out3.reads_mapping.crosslink >out3.reads_mapping.crosslink
+" >> out3.cat.log;set -vex;cat out3.chr14.out3.reads_mapping.crosslink >out3.reads_mapping.crosslink done
 synteny not
-general_features start
-general_features k_index is 1
-
-kvalues is 	subtrack_yaxis_display_region->1->100->10	track_name->yeast	chr_id->NC_001133.9	data_display_order->1->2	data_file->../data/yeast/GCF_000146045.2_R64_genomic.gff:../data/yeast/GCF_000146045.2_R64_genomic.fna	block_flag->0	hgrid_flag->0	label_size->15:15	data_keyword->gene:exon+origin_of_replication;rRNA;snRNA	data_type->gff	subtrack_yaxis_bg_region->1->5	ytick_display_flag->0	data_feature_shape->rect	ytick_opacity->1:1	ytick_color->green:black	ytick_order->2:6:0.2:0.1	ytick_label->ytick_label
-block_index is 2,yeast
-
-output out3.yeast.NC_001133.9.2.1.gff.ylabel.gff
-
-output out3.yeast.NC_001133.9.2.1.gff.ylabel.setting.conf
-
-no out3.yeast.NC_001133.9.2.1.gff.ylabel.crosslink.conf for yeast
-start_end_xaxis is 54000,87752
-rg is 54000,87752,  :54000,87752
-start general_features_run
-chr_id -> NC_001133.9
-track_name -> yeast
-subtrack_yaxis_display_region -> 1->100->10
-block_flag -> 0
-data_file -> ../data/yeast/GCF_000146045.2_R64_genomic.gff:../data/yeast/GCF_000146045.2_R64_genomic.fna
-data_display_order -> 1->2
-ytick_display_flag -> 0
-data_keyword -> gene:exon+origin_of_replication;rRNA;snRNA
-data_type -> gff
-subtrack_yaxis_bg_region -> 1->5
-label_size -> 15:15
-hgrid_flag -> 0
-ytick_order -> 2:6:0.2:0.1
-ytick_label -> ytick_label
-ytick_color -> green:black
-ytick_opacity -> 1:1
-data_feature_shape -> rect
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-2.33333333333333
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.1	feature_shift_y	-2.86666666666667
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> +
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.1	feature_shift_y	-4.2
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-3.66666666666667
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> -
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	1
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1	feature_shape	rect
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y	-1
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1	feature_height_ratio	1.33333333333333
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1	feature_opacity	0.8
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1	feature_color	black
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1	feature_order	1.33333333333333
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.1	feature_shift_y_unit	percent
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.1	feature_order	1
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.1	feature_height_ratio	0.266666666666667
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.1	feature_color	black
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.1	feature_shape	rect
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.1	feature_shift_y	-1.53333333333333
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.1	feature_height_unit	percent
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.1	feature_popup_title	type -> gene;strand -> +
-
-output out3.yeast.NC_001133.9.2.1.54000.87752.general_features.gff
-
-output out3.yeast.NC_001133.9.2.1.54000.87752.general_features.setting.conf
-
-no out3.yeast.NC_001133.9.2.1.54000.87752.general_features.crosslink.conf for yeast
-block_index is 1,yeast
-start_end_xaxis is 24000,54000
-rg is 24000,54000,  :24000,54000
-start general_features_run
-hgrid_flag -> 0
-label_size -> 15:15
-ytick_display_flag -> 0
-subtrack_yaxis_bg_region -> 1->5
-data_type -> gff
-data_keyword -> gene:exon+origin_of_replication;rRNA;snRNA
-ytick_opacity -> 1:1
-data_feature_shape -> rect
-ytick_label -> ytick_label
-ytick_order -> 2:6:0.2:0.1
-ytick_color -> green:black
-track_name -> yeast
-subtrack_yaxis_display_region -> 1->100->10
-chr_id -> NC_001133.9
-data_display_order -> 1->2
-block_flag -> 0
-data_file -> ../data/yeast/GCF_000146045.2_R64_genomic.gff:../data/yeast/GCF_000146045.2_R64_genomic.fna
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> -
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> -
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> -
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> +
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.1	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.1	feature_shift_y	-2.6
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.1	feature_shape	rect
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.1	feature_height_ratio	0.8
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.1	feature_color	black
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.1	feature_order	1
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1	feature_height_unit	percent
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y	-1
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1	feature_shape	rect
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1	feature_color	black
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1	feature_opacity	0.8
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1	feature_height_ratio	4
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1	feature_shift_y_unit	percent
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1	feature_order	1.33333333333333
-
-output out3.yeast.NC_001133.9.1.1.24000.54000.general_features.gff
-
-output out3.yeast.NC_001133.9.1.1.24000.54000.general_features.setting.conf
-
-no out3.yeast.NC_001133.9.1.1.24000.54000.general_features.crosslink.conf for yeast
-general_features k_index is 2
-
-kvalues is 	ytick_opacity->1:1	data_feature_shape->rect	ytick_order->2:6:0.2:0.1	ytick_label->ytick_label	ytick_color->green:black	label_size->15:15	hgrid_flag->0	ytick_display_flag->0	data_type->gff	data_keyword->gene:exon+origin_of_replication;rRNA;snRNA	subtrack_yaxis_bg_region->-1->-5	data_display_order->1->2	block_flag->0	data_file->../data/yeast/GCF_000146045.2_R64_genomic.gff:../data/yeast/GCF_000146045.2_R64_genomic.fna	track_name->yeast	subtrack_yaxis_display_region->1->100->10	chr_id->NC_001133.9
-block_index is 2,yeast
-
-output out3.yeast.NC_001133.9.2.2.gff.ylabel.gff
-
-output out3.yeast.NC_001133.9.2.2.gff.ylabel.setting.conf
-
-no out3.yeast.NC_001133.9.2.2.gff.ylabel.crosslink.conf for yeast
-start_end_xaxis is 54000,87752
-rg is 54000,87752,  :54000,87752
-start general_features_run
-subtrack_yaxis_display_region -> 1->100->10
-track_name -> yeast
-chr_id -> NC_001133.9
-data_display_order -> 1->2
-data_file -> ../data/yeast/GCF_000146045.2_R64_genomic.gff:../data/yeast/GCF_000146045.2_R64_genomic.fna
-block_flag -> 0
-label_size -> 15:15
-hgrid_flag -> 0
-subtrack_yaxis_bg_region -> -1->-5
-data_keyword -> gene:exon+origin_of_replication;rRNA;snRNA
-data_type -> gff
-ytick_display_flag -> 0
-data_feature_shape -> rect
-ytick_opacity -> 1:1
-ytick_color -> green:black
-ytick_label -> ytick_label
-ytick_order -> 2:6:0.2:0.1
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL035W_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL037W_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL038W_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	2.33333333333333
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL044W-A_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL036C_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL032C_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL030W_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.2	feature_shift_y	2.86666666666667
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL043C_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL041W_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2	feature_opacity	1
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL046C_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL033W_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.2	feature_shift_y	4.2
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL042W_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL034C_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	3.66666666666667
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL037C-A_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL040C_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL047C_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> -
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y	1
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2	feature_shape	rect
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2	feature_order	1.33333333333333
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2	feature_color	black
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2	feature_opacity	0.8
-test	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2	feature_height_ratio	1.33333333333333
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL039C_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.2	feature_order	1
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL031C_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.2	feature_height_unit	percent
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.2	feature_shift_y	1.53333333333333
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.2	feature_shape	rect
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.2	feature_color	black
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.2	feature_height_ratio	0.266666666666667
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.2	feature_shift_y_unit	percent
-test	gene-YAL044C_gene.yeast.NC_001133.9.2.2	feature_order	1
-
-output out3.yeast.NC_001133.9.2.2.54000.87752.general_features.gff
-
-output out3.yeast.NC_001133.9.2.2.54000.87752.general_features.setting.conf
-
-no out3.yeast.NC_001133.9.2.2.54000.87752.general_features.crosslink.conf for yeast
-block_index is 1,yeast
-start_end_xaxis is 24000,54000
-rg is 24000,54000,  :24000,54000
-start general_features_run
-data_feature_shape -> rect
-ytick_opacity -> 1:1
-ytick_color -> green:black
-ytick_order -> 2:6:0.2:0.1
-ytick_label -> ytick_label
-label_size -> 15:15
-hgrid_flag -> 0
-data_keyword -> gene:exon+origin_of_replication;rRNA;snRNA
-data_type -> gff
-subtrack_yaxis_bg_region -> -1->-5
-ytick_display_flag -> 0
-data_display_order -> 1->2
-data_file -> ../data/yeast/GCF_000146045.2_R64_genomic.gff:../data/yeast/GCF_000146045.2_R64_genomic.fna
-block_flag -> 0
-subtrack_yaxis_display_region -> 1->100->10
-track_name -> yeast
-chr_id -> NC_001133.9
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL059W_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL058W_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> +
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL060W_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> +
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> -
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> +
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL061W_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL053W_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL051W_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL049C_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL056W_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL063C_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2	feature_order	1.33333333333333
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2	feature_height_ratio	4
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2	feature_opacity	0.8
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2	feature_color	black
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2	feature_shape	rect
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2	feature_shift_y	1
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2	feature_popup_title	type -> exon;strand -> +
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> +
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL062W_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> -
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL054C_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.2	feature_order	1
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.2	feature_shift_y_unit	percent
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.2	feature_height_ratio	0.8
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.2	feature_color	black
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.2	feature_shift_y	2.6
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.2	feature_shape	rect
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.2	feature_height_unit	percent
-test	gene-YAL055W_gene.yeast.NC_001133.9.1.2	feature_popup_title	type -> gene;strand -> +
-
-output out3.yeast.NC_001133.9.1.2.24000.54000.general_features.gff
-
-output out3.yeast.NC_001133.9.1.2.24000.54000.general_features.setting.conf
-
-no out3.yeast.NC_001133.9.1.2.24000.54000.general_features.crosslink.conf for yeast
-func_name is general_features
+general_features not
+add out3.hist_scatter_line.setting.conf out3.reads_mapping.setting.conf to feature_setting 
 echo "
-set -vex;cat out3.yeast.NC_001133.9.2.1.gff.ylabel.gff out3.yeast.NC_001133.9.2.1.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.1.24000.54000.general_features.gff out3.yeast.NC_001133.9.2.2.gff.ylabel.gff out3.yeast.NC_001133.9.2.2.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.2.24000.54000.general_features.gff >out3.yeast.out3.general_features.gff;rm out3.yeast.NC_001133.9.2.1.gff.ylabel.gff out3.yeast.NC_001133.9.2.1.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.1.24000.54000.general_features.gff out3.yeast.NC_001133.9.2.2.gff.ylabel.gff out3.yeast.NC_001133.9.2.2.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.2.24000.54000.general_features.gff;echo output out3.yeast.out3.general_features.gff
-" >> out3.cat.log;set -vex;cat out3.yeast.NC_001133.9.2.1.gff.ylabel.gff out3.yeast.NC_001133.9.2.1.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.1.24000.54000.general_features.gff out3.yeast.NC_001133.9.2.2.gff.ylabel.gff out3.yeast.NC_001133.9.2.2.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.2.24000.54000.general_features.gff >out3.yeast.out3.general_features.gff;rm out3.yeast.NC_001133.9.2.1.gff.ylabel.gff out3.yeast.NC_001133.9.2.1.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.1.24000.54000.general_features.gff out3.yeast.NC_001133.9.2.2.gff.ylabel.gff out3.yeast.NC_001133.9.2.2.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.2.24000.54000.general_features.gff;echo output out3.yeast.out3.general_features.gff done
+set -vex;cat out3.hist_scatter_line.setting.conf out3.reads_mapping.setting.conf >feature.color.label.conf.out3
+" >> out3.cat.log;set -vex;cat out3.hist_scatter_line.setting.conf out3.reads_mapping.setting.conf >feature.color.label.conf.out3 done
+add out3.reads_mapping.crosslink to crossing_link 
 echo "
-set -vex;cat out3.yeast.NC_001133.9.2.1.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.1.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.1.24000.54000.general_features.setting.conf out3.yeast.NC_001133.9.2.2.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.2.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.2.24000.54000.general_features.setting.conf > out3.yeast.out3.general_features.setting.conf;rm out3.yeast.NC_001133.9.2.1.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.1.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.1.24000.54000.general_features.setting.conf out3.yeast.NC_001133.9.2.2.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.2.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.2.24000.54000.general_features.setting.conf;echo output out3.yeast.out3.general_features.setting.conf
-" >> out3.cat.log;set -vex;cat out3.yeast.NC_001133.9.2.1.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.1.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.1.24000.54000.general_features.setting.conf out3.yeast.NC_001133.9.2.2.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.2.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.2.24000.54000.general_features.setting.conf > out3.yeast.out3.general_features.setting.conf;rm out3.yeast.NC_001133.9.2.1.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.1.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.1.24000.54000.general_features.setting.conf out3.yeast.NC_001133.9.2.2.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.2.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.2.24000.54000.general_features.setting.conf;echo output out3.yeast.out3.general_features.setting.conf done
-out3.general_features end
+set -vex;cat out3.reads_mapping.crosslink >feature.crossing.link.out3
+" >> out3.cat.log;set -vex;cat out3.reads_mapping.crosslink >feature.crossing.link.out3 done
 echo "
-set -vex;cat out3.yeast.out3.general_features.setting.conf >out3.general_features.setting.conf
-" >> out3.cat.log;set -vex;cat out3.yeast.out3.general_features.setting.conf >out3.general_features.setting.conf done
-add out3.general_features.setting.conf to feature_setting 
+set -vex;cat out3.chr14.out3.hist_scatter_line.gff out3.chr14.out3.reads_mapping.gff|awk -F "	" '{print $3}'|sort -u
+" >> out3.cat.log;set -vex;cat out3.chr14.out3.hist_scatter_line.gff out3.chr14.out3.reads_mapping.gff|awk -F "	" '{print $3}'|sort -u done
 echo "
-set -vex;cat out3.general_features.setting.conf >feature.color.label.conf.out3
-" >> out3.cat.log;set -vex;cat out3.general_features.setting.conf >feature.color.label.conf.out3 done
-add  to crossing_link 
-echo "
-set -vex;cat out3.yeast.out3.general_features.gff|awk -F "	" '{print $3}'|sort -u
-" >> out3.cat.log;set -vex;cat out3.yeast.out3.general_features.gff|awk -F "	" '{print $3}'|sort -u done
-echo "
-set -vex;sed  -r 's/^(yeast\s.*\.gff)\s/\1,out3.yeast.out3.general_features.gff\t/' tracks.3.list >tracks.3.list.out3;cp tracks.3.list.out3 tracks.3.list.out3.tmp
-" >> out3.cat.log;set -vex;sed  -r 's/^(yeast\s.*\.gff)\s/\1,out3.yeast.out3.general_features.gff\t/' tracks.3.list >tracks.3.list.out3;cp tracks.3.list.out3 tracks.3.list.out3.tmp done
+set -vex;sed  -r 's/^(chr14\s.*\.gff)\s/\1,out3.chr14.out3.hist_scatter_line.gff,out3.chr14.out3.reads_mapping.gff\t/' tracks.3.list >tracks.3.list.out3;cp tracks.3.list.out3 tracks.3.list.out3.tmp
+" >> out3.cat.log;set -vex;sed  -r 's/^(chr14\s.*\.gff)\s/\1,out3.chr14.out3.hist_scatter_line.gff,out3.chr14.out3.reads_mapping.gff\t/' tracks.3.list >tracks.3.list.out3;cp tracks.3.list.out3 tracks.3.list.out3.tmp done
 
 data done

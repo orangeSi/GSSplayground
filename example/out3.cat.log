@@ -1,18 +1,36 @@
 
-set -vex;cat out3.yeast.NC_001133.9.2.1.gff.ylabel.gff out3.yeast.NC_001133.9.2.1.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.1.24000.54000.general_features.gff out3.yeast.NC_001133.9.2.2.gff.ylabel.gff out3.yeast.NC_001133.9.2.2.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.2.24000.54000.general_features.gff >out3.yeast.out3.general_features.gff;rm out3.yeast.NC_001133.9.2.1.gff.ylabel.gff out3.yeast.NC_001133.9.2.1.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.1.24000.54000.general_features.gff out3.yeast.NC_001133.9.2.2.gff.ylabel.gff out3.yeast.NC_001133.9.2.2.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.2.24000.54000.general_features.gff;echo output out3.yeast.out3.general_features.gff
+set -vex;cat out3.chr14.14.1.1.hist.ylabel.gff out3.chr14.14.1.1.ytick.gff out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff out3.chr14.14.1.2.66901400.66903400.depth.gff >out3.chr14.out3.hist_scatter_line.gff;rm out3.chr14.14.1.1.hist.ylabel.gff out3.chr14.14.1.1.ytick.gff out3.chr14.14.1.1.66901400.66903400.depth.gff out3.chr14.14.1.2.hist.ylabel.gff out3.chr14.14.1.2.ytick.gff out3.chr14.14.1.2.66901400.66903400.depth.gff;echo output out3.chr14.out3.hist_scatter_line.gff
 
 
-set -vex;cat out3.yeast.NC_001133.9.2.1.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.1.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.1.24000.54000.general_features.setting.conf out3.yeast.NC_001133.9.2.2.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.2.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.2.24000.54000.general_features.setting.conf > out3.yeast.out3.general_features.setting.conf;rm out3.yeast.NC_001133.9.2.1.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.1.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.1.24000.54000.general_features.setting.conf out3.yeast.NC_001133.9.2.2.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.2.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.2.24000.54000.general_features.setting.conf;echo output out3.yeast.out3.general_features.setting.conf
+set -vex;cat out3.chr14.14.1.1.hist.ylabel.setting.conf out3.chr14.14.1.1.ytick.setting.conf out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf out3.chr14.14.1.2.66901400.66903400.depth.setting.conf > out3.chr14.out3.hist_scatter_line.setting.conf;rm out3.chr14.14.1.1.hist.ylabel.setting.conf out3.chr14.14.1.1.ytick.setting.conf out3.chr14.14.1.1.66901400.66903400.depth.setting.conf out3.chr14.14.1.2.hist.ylabel.setting.conf out3.chr14.14.1.2.ytick.setting.conf out3.chr14.14.1.2.66901400.66903400.depth.setting.conf;echo output out3.chr14.out3.hist_scatter_line.setting.conf
 
 
-set -vex;cat out3.yeast.out3.general_features.setting.conf >out3.general_features.setting.conf
+set -vex;cat out3.chr14.out3.hist_scatter_line.setting.conf >out3.hist_scatter_line.setting.conf
 
 
-set -vex;cat out3.general_features.setting.conf >feature.color.label.conf.out3
+set -vex;cat out3.chr14.14.1.1.long_reads.ylabel.gff out3.chr14.14.1.1.66901400.66903400.mapping.gff out3.chr14.14.1.2.short_reads.ylabel.gff out3.chr14.14.1.2.66901400.66903400.mapping.gff out3.chr14.14.1.3.short_reads.ylabel.gff out3.chr14.14.1.3.66901400.66903400.mapping.gff out3.chr14.14.1.4.short_reads.ylabel.gff out3.chr14.14.1.4.66901400.66903400.mapping.gff out3.chr14.14.1.5.vcf.ylabel.gff out3.chr14.14.1.5.66901400.66903400.mapping.gff >out3.chr14.out3.reads_mapping.gff;rm out3.chr14.14.1.1.long_reads.ylabel.gff out3.chr14.14.1.1.66901400.66903400.mapping.gff out3.chr14.14.1.2.short_reads.ylabel.gff out3.chr14.14.1.2.66901400.66903400.mapping.gff out3.chr14.14.1.3.short_reads.ylabel.gff out3.chr14.14.1.3.66901400.66903400.mapping.gff out3.chr14.14.1.4.short_reads.ylabel.gff out3.chr14.14.1.4.66901400.66903400.mapping.gff out3.chr14.14.1.5.vcf.ylabel.gff out3.chr14.14.1.5.66901400.66903400.mapping.gff;echo output out3.chr14.out3.reads_mapping.gff
 
 
-set -vex;cat out3.yeast.out3.general_features.gff|awk -F   '{print }'|sort -u
+set -vex;cat out3.chr14.14.1.1.long_reads.ylabel.setting.conf out3.chr14.14.1.1.66901400.66903400.mapping.setting.conf out3.chr14.14.1.2.short_reads.ylabel.setting.conf out3.chr14.14.1.2.66901400.66903400.mapping.setting.conf out3.chr14.14.1.3.short_reads.ylabel.setting.conf out3.chr14.14.1.3.66901400.66903400.mapping.setting.conf out3.chr14.14.1.4.short_reads.ylabel.setting.conf out3.chr14.14.1.4.66901400.66903400.mapping.setting.conf out3.chr14.14.1.5.vcf.ylabel.setting.conf out3.chr14.14.1.5.66901400.66903400.mapping.setting.conf > out3.chr14.out3.reads_mapping.setting.conf;rm out3.chr14.14.1.1.long_reads.ylabel.setting.conf out3.chr14.14.1.1.66901400.66903400.mapping.setting.conf out3.chr14.14.1.2.short_reads.ylabel.setting.conf out3.chr14.14.1.2.66901400.66903400.mapping.setting.conf out3.chr14.14.1.3.short_reads.ylabel.setting.conf out3.chr14.14.1.3.66901400.66903400.mapping.setting.conf out3.chr14.14.1.4.short_reads.ylabel.setting.conf out3.chr14.14.1.4.66901400.66903400.mapping.setting.conf out3.chr14.14.1.5.vcf.ylabel.setting.conf out3.chr14.14.1.5.66901400.66903400.mapping.setting.conf;echo output out3.chr14.out3.reads_mapping.setting.conf
 
 
-set -vex;sed  -r 's/^(yeast\s.*\.gff)\s/,out3.yeast.out3.general_features.gff	/' tracks.3.list >tracks.3.list.out3;cp tracks.3.list.out3 tracks.3.list.out3.tmp
+set -vex;cat out3.chr14.14.1.2.66901400.66903400.mapping.crosslink.conf out3.chr14.14.1.4.66901400.66903400.mapping.crosslink.conf >out3.chr14.out3.reads_mapping.crosslink;rm out3.chr14.14.1.2.66901400.66903400.mapping.crosslink.conf out3.chr14.14.1.4.66901400.66903400.mapping.crosslink.conf;echo output out3.chr14.out3.reads_mapping.crosslink
+
+
+set -vex;cat out3.chr14.out3.reads_mapping.setting.conf >out3.reads_mapping.setting.conf
+
+
+set -vex;cat out3.chr14.out3.reads_mapping.crosslink >out3.reads_mapping.crosslink
+
+
+set -vex;cat out3.hist_scatter_line.setting.conf out3.reads_mapping.setting.conf >feature.color.label.conf.out3
+
+
+set -vex;cat out3.reads_mapping.crosslink >feature.crossing.link.out3
+
+
+set -vex;cat out3.chr14.out3.hist_scatter_line.gff out3.chr14.out3.reads_mapping.gff|awk -F   '{print }'|sort -u
+
+
+set -vex;sed  -r 's/^(chr14\s.*\.gff)\s/,out3.chr14.out3.hist_scatter_line.gff,out3.chr14.out3.reads_mapping.gff	/' tracks.3.list >tracks.3.list.out3;cp tracks.3.list.out3 tracks.3.list.out3.tmp
 
