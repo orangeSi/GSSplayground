@@ -13,7 +13,10 @@
 
 ### Dependence<br>
 ```
-# had been tested only in Linux yet
+# install by docker
+docker pull ilikeorange/clustersploter:v0.5.8 
+
+# or manually install, tested only in Centos yet
 samtools >=1.7 # add this to linux PATH 
 perl >=v5.10.1
 Imager::Font  # this perl package had been installed in src/Imager-1.011(if it doesn't work, try reinstall it by https://www.cpan.org/)
