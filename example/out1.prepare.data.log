@@ -365,11 +365,8 @@ no pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf fo
 output pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf
 func_name is synteny
 echo "
-set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out1.pO83_CORR.out1.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out1.pO83_CORR.out1.synteny.gff
-" >> out1.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out1.pO83_CORR.out1.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out1.pO83_CORR.out1.synteny.gff done
-echo "
-set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out1.pO83_CORR.out1.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out1.pO83_CORR.out1.synteny.setting.conf
-" >> out1.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out1.pO83_CORR.out1.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out1.pO83_CORR.out1.synteny.setting.conf done
+set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink
+" >> out1.cat.log;set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink done
 echo "
 set -vex;cat out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out1.pO83_CORR.indel.out1.synteny.gff;rm out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out1.pO83_CORR.indel.out1.synteny.gff
 " >> out1.cat.log;set -vex;cat out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out1.pO83_CORR.indel.out1.synteny.gff;rm out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out1.pO83_CORR.indel.out1.synteny.gff done
@@ -377,15 +374,18 @@ echo "
 set -vex;cat out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out1.pO83_CORR.indel.out1.synteny.setting.conf;rm out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out1.pO83_CORR.indel.out1.synteny.setting.conf
 " >> out1.cat.log;set -vex;cat out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out1.pO83_CORR.indel.out1.synteny.setting.conf;rm out1.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out1.pO83_CORR.indel.out1.synteny.setting.conf done
 echo "
-set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink
-" >> out1.cat.log;set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink done
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out1.pO83_CORR.out1.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out1.pO83_CORR.out1.synteny.gff
+" >> out1.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out1.pO83_CORR.out1.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out1.pO83_CORR.out1.synteny.gff done
+echo "
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out1.pO83_CORR.out1.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out1.pO83_CORR.out1.synteny.setting.conf
+" >> out1.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out1.pO83_CORR.out1.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out1.pO83_CORR.out1.synteny.setting.conf done
 out1.synteny end
+echo "
+set -vex;cat out1.pO83_CORR.indel.out1.synteny.setting.conf out1.pO83_CORR.out1.synteny.setting.conf >out1.synteny.setting.conf
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.indel.out1.synteny.setting.conf out1.pO83_CORR.out1.synteny.setting.conf >out1.synteny.setting.conf done
 echo "
 set -vex;cat out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink >out1.synteny.crosslink
 " >> out1.cat.log;set -vex;cat out1.pO83_CORR.indel.to.pO83_CORR.out1.synteny.crosslink >out1.synteny.crosslink done
-echo "
-set -vex;cat out1.pO83_CORR.out1.synteny.setting.conf out1.pO83_CORR.indel.out1.synteny.setting.conf >out1.synteny.setting.conf
-" >> out1.cat.log;set -vex;cat out1.pO83_CORR.out1.synteny.setting.conf out1.pO83_CORR.indel.out1.synteny.setting.conf >out1.synteny.setting.conf done
 general_features not
 add out1.hist_scatter_line.setting.conf out1.synteny.setting.conf to feature_setting 
 echo "
@@ -396,16 +396,16 @@ echo "
 set -vex;cat out1.synteny.crosslink >feature.crossing.link.out1
 " >> out1.cat.log;set -vex;cat out1.synteny.crosslink >feature.crossing.link.out1 done
 echo "
-set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.gff out1.pO83_CORR.reverse.out1.hist_scatter_line.gff out1.pO83_CORR.out1.synteny.gff out1.pO83_CORR.indel.out1.synteny.gff|awk -F "	" '{print $3}'|sort -u
-" >> out1.cat.log;set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.gff out1.pO83_CORR.reverse.out1.hist_scatter_line.gff out1.pO83_CORR.out1.synteny.gff out1.pO83_CORR.indel.out1.synteny.gff|awk -F "	" '{print $3}'|sort -u done
+set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.gff out1.pO83_CORR.reverse.out1.hist_scatter_line.gff out1.pO83_CORR.indel.out1.synteny.gff out1.pO83_CORR.out1.synteny.gff|awk -F "	" '{print $3}'|sort -u
+" >> out1.cat.log;set -vex;cat out1.pO83_CORR.out1.hist_scatter_line.gff out1.pO83_CORR.reverse.out1.hist_scatter_line.gff out1.pO83_CORR.indel.out1.synteny.gff out1.pO83_CORR.out1.synteny.gff|awk -F "	" '{print $3}'|sort -u done
 echo "
-set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.hist_scatter_line.gff,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp
-" >> out1.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.hist_scatter_line.gff,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp done
+set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out1.pO83_CORR.indel.out1.synteny.gff\t/' tracks.1.list >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp
+" >> out1.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out1.pO83_CORR.indel.out1.synteny.gff\t/' tracks.1.list >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp done
 echo "
 set -vex;sed  -r 's/^(pO83_CORR.reverse\s.*\.gff)\s/\1,out1.pO83_CORR.reverse.out1.hist_scatter_line.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp
 " >> out1.cat.log;set -vex;sed  -r 's/^(pO83_CORR.reverse\s.*\.gff)\s/\1,out1.pO83_CORR.reverse.out1.hist_scatter_line.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp done
 echo "
-set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out1.pO83_CORR.indel.out1.synteny.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp
-" >> out1.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out1.pO83_CORR.indel.out1.synteny.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp done
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.hist_scatter_line.gff,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp
+" >> out1.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out1.pO83_CORR.out1.hist_scatter_line.gff,out1.pO83_CORR.out1.synteny.gff\t/' tracks.1.list.out1.tmp >tracks.1.list.out1;cp tracks.1.list.out1 tracks.1.list.out1.tmp done
 
 data done

@@ -1,95 +1,102 @@
 find package FindBin
 find package JSON
-connect_stroke_dasharray -> 2,5
-genome_height_ratio -> 1
-feature_label_order -> 4
-feature_label_size -> 10
-scale_ratio -> 1700
-synteny -> order->2->3,query->pO83_CORR.indel:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
-legend_stroke_width -> 0.5
-scale_display -> yes
-scale_color -> green
-feature_order -> 2
-cross_link_anchor_pos -> low_up
-sample_name_font_size_default -> 15
-cross_link_width_ellipse -> 0.2
-display_segment_strand -> 5:5',3:3',color:black,fontsize:10
-feature_border_color -> black
-width_ratio_ref_cluster_legend -> 0.1-0.75-0.15
-display_feature -> yes
-feature_opacity -> 1
-cross_link_opacity -> 1
-feature_label_auto_angle_flag -> 1
-cross_link_orientation_ellipse -> up
-feature_label_color -> black
-scale_tick_fontsize -> 6
-cross_link_height_ellipse -> 10,8
-feature_shift_y_unit -> backbone
-correct_ellipse_coordinate -> no
-svg_background_color -> white
-connect_with_same_scaffold -> no
-cross_link_color_reverse -> #3CB371
-display_legend -> yes
-connect_stroke_color -> black
-legend_stroke_color -> black
-crosslink_stroke_style -> stroke:black;stroke-width:0.1;
-feature_shift_y -> 0
-svg_width_height -> 1300,500
-ignore_sharp_arrow -> no
-sample_name_color_default -> black
-feature_height_unit -> backbone
-scale_tick_opacity -> 1
-feature_setting -> feature.color.label.conf.out5
-scale_tick_height -> 0.01
-legend_height_space -> 0.1
-legend_width_margin -> 0.15
-feature_shift_x -> 0
-feature_keywords -> gene,synteny
-track_style -> fill:blue;opacity:0.2
-feature_x_extent -> 0bp,0bp
-label_rotate_angle -> 0
-top_bottom_margin -> 0.2
-crossing_link -> feature.crossing.link.out5
-cross_link_shape -> quadrilateral
-legend_position -> right
-feature_arrow_width_extent -> 0.3
-connect_stroke_width -> 2
-display_feature_label -> no
-default_legend -> other
-cross_link_orientation -> forward
-shift_angle_closed_feature -> 10
 feature_content_display -> no
-space_between_blocks -> 500
-feature_color -> rgb(50,205,50)
-scale_position -> low
-x_margin_feature_label -> 0.01
-feature_border_size -> 0
-y_margin_feature_label -> 0.01
-display_segment_name -> no,center,shift_y:+1,fontsize:10,color:black,order:5,rotate:90
 feature_shape -> arrow
-legend_font_size -> 20
-legend_height_percent -> 0.2
-track_order -> 1
-distance_closed_feature -> 1
-scale_width -> 0.5
-color_sample_name_default -> green
-allow_feature_out_of_list -> synteny
-scale_tick_padding_y -> 10
-absolute_postion_in_title -> yes
-pos_feature_label -> right_low
-cross_link_color -> #FF8C00
-legend_width_textpercent -> 0.7
-feature_id_is_unique -> yes
-cross_link_order -> 0
-label_text_anchor -> middle
-pdf_dpi -> 100
-label_text_alignment_baseline -> baseline
-scale_order -> -1
-legend_height_ratio -> 0.7
-feature_arrow_sharp_extent -> 0
+synteny -> 2->3,pO83_CORR.indel,pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
 feature_height_ratio -> 2
+scale_tick_fontsize -> 6
+cross_link_order -> 0
+space_between_blocks -> 500
+connect_with_same_scaffold -> no
+svg_width_height -> 1300,500
+cross_link_width_ellipse -> 0.2
+feature_label_auto_angle_flag -> 1
 ref_name_right_gap -> 0.15
+feature_order -> 2
+legend_stroke_color -> black
+scale_tick_padding_y -> 10
+scale_tick_opacity -> 1
+cross_link_orientation_ellipse -> up
+connect_stroke_width -> 2
+svg_background_color -> white
+display_segment_strand -> 5:5',3:3',color:black,fontsize:10
+y_margin_feature_label -> 0.01
+chop_soft_clip -> yes
+display_feature -> yes
+feature_label_color -> black
+feature_border_color -> black
+label_rotate_angle -> 0
+connect_stroke_color -> black
+track_order -> 1
+display_segment_name -> no,center,shift_y:+1,fontsize:10,color:black,order:5,rotate:90
+feature_label_size -> 10
+legend_width_textpercent -> 0.7
+legend_height_percent -> 0.2
+cross_link_color_reverse -> #3CB371
 scale_padding_y -> 0.6
+feature_arrow_width_extent -> 0.3
+feature_shift_y -> 0
+scale_color -> green
+feature_setting -> feature.color.label.conf.out5
+crossing_link -> feature.crossing.link.out5
+legend_font_size -> 20
+display_feature_label -> no
+feature_shift_x -> 0
+feature_shift_y_unit -> backbone
+color_sample_name_default -> green
+feature_arrow_sharp_extent -> 0
+genome_height_ratio -> 1
+legend_width_margin -> 0.15
+label_text_anchor -> middle
+correct_ellipse_coordinate -> no
+legend_height_space -> 0.1
+cross_link_color -> #FF8C00
+legend_height_ratio -> 0.7
+feature_color -> rgb(50,205,50)
+feature_label_order -> 4
+cross_link_opacity -> 1
+feature_height_unit -> backbone
+cross_link_shape -> quadrilateral
+width_ratio_ref_cluster_legend -> 0.1-0.75-0.15
+pos_feature_label -> right_low
+scale_tick_height -> 0.01
+label_text_alignment_baseline -> baseline
+feature_border_size -> 0
+sample_name_color_default -> black
+cross_link_anchor_pos -> low_up
+feature_keywords -> gene,synteny
+cross_link_height_ellipse -> 10,8
+cross_link_orientation -> forward
+scale_ratio -> 1700
+feature_x_extent -> 0bp,0bp
+legend_position -> right
+ignore_sharp_arrow -> no
+sample_name_font_size_default -> 15
+crosslink_stroke_style -> stroke:black;stroke-width:0.1;
+default_legend -> other
+scale_order -> -1
+scale_width -> 0.5
+scale_position -> low
+top_bottom_margin -> 0.2
+connect_stroke_dasharray -> 2,5
+legend_stroke_width -> 0.5
+feature_opacity -> 1
+pdf_dpi -> 100
+allow_feature_out_of_list -> synteny
+absolute_postion_in_title -> yes
+scale_display -> yes
+feature_id_is_unique -> no
+x_margin_feature_label -> 0.01
+shift_angle_closed_feature -> 10
+distance_closed_feature -> 1
+display_legend -> yes
+track_style -> fill:blue;opacity:0.2
+
+not_exists hist_scatter_line in confs
+
+not_exists reads_mapping in confs
+key synteny = 2->3,pO83_CORR.indel,pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
+
 svg_width is 1300, svg_height is svg_height
 start read tracks.5.list.out5
 parse pO83_CORR pO83_CORR:NC_017659.1:1-7000 -> block_index 1
@@ -187,18 +194,18 @@ draw feature_id = pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_ind
 1brefore, feature_id	pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	,start	5460	end	147060
 2brefore, feature_id	pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	5460	end	147060	ratio	0.139285714285714
 feature_id	pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1,	feature_shift_x	0,start	5459	end	147060	ratio	0.139285714285714
-check_blocks_two_ends_cord pO83_CORR,NC_017659.1,1,1 -> 130,149
 check_blocks_two_ends_cord pO83_CORR,NC_017659.1,1,7000 -> 1105,149
-check_blocks_two_ends_cord pO83_CORR.indel,NC_017659.1.fake,1,1 -> 130,349
+check_blocks_two_ends_cord pO83_CORR,NC_017659.1,1,1 -> 130,149
 check_blocks_two_ends_cord pO83_CORR.indel,NC_017659.1.fake,1,7000 -> 1105,349
+check_blocks_two_ends_cord pO83_CORR.indel,NC_017659.1.fake,1,1 -> 130,349
 
 
 
 
+plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1,pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1, 1th -> 4
+plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.q.q_block_index=1.t_block_index=1,pO83_CORR.NC_017659.1.2101.5468.1.+.t.q_block_index=1.t_block_index=1, 2th -> 4
 edge_coordinate_feature_out_of_list is 130,349:1105,349 -> 130,149:1105,149 ->1,1
-plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1,pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1, 1th -> 4
-plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1,pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1, 2th -> 4
-plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.1891.5257.1.+.q.q_block_index=1.t_block_index=1,pO83_CORR.NC_017659.1.2101.5468.1.+.t.q_block_index=1.t_block_index=1, 3th -> 4
+plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1,pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1, 3th -> 4
 plot crosslink pair pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1,pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1, 4th -> 4
 scale_display is yes
 disply scale
@@ -219,7 +226,7 @@ if you want png or pdf format,you could use convert or cairosvg to convert svg t
 	convert  -density 100 ./out5.svg ./out5.png
 	convert -density 100 ./out5.svg ./out5.dpi100.pdf
 
-/hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/navigator
-/hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/svg-pan-zoom.js exists,
+/ClustersPloter/src/navigator
+/ClustersPloter/src/svg-pan-zoom.js exists,
 	so output ./out5.html, which you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom
 

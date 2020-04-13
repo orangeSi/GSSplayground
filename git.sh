@@ -1,4 +1,4 @@
-if [ "$2" == "" ];
+if [ $# -ne 2 ];
 then
 	echo -e "sh $0 <git commit -m > <git add >\nexample: sh $0 'update readme' 'README.md */*' "
 	exit

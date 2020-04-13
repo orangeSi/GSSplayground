@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1300" height="500" style="background-color:white;">
 <text class='myth' x="110.5" y="100" style="font-size:15px;fill:black;text-anchor:end;alignment-baseline:middle" >pO83_CORR</text>
-<defs>    <clipPath id="cut-pO83_CORR-NC_017659.1-1"><path d="M130 50 L174.166202960816 50 L174.166202960816 150 L130 150 Z" />     </clipPath>  </defs>
-<defs>    <clipPath id="cut-pO83_CORR-NC_017659.1-2"><path d="M177.320481132564 50 L221.48668409338 50 L221.48668409338 150 L177.320481132564 150 Z" />     </clipPath>  </defs>
+<defs>    <clipPath id="cut-pO83_CORR-NC_017659.1-1"><path class='myth' d="M130 50 L174.166202960816 50 L174.166202960816 150 L130 150 Z" />     </clipPath>  </defs>
+<defs>    <clipPath id="cut-pO83_CORR-NC_017659.1-2"><path class='myth' d="M177.320481132564 50 L221.48668409338 50 L221.48668409338 150 L177.320481132564 150 Z" />     </clipPath>  </defs>
 <text class='myth' x="110.5" y="200" style="font-size:15px;fill:black;text-anchor:end;alignment-baseline:middle" >pO83_CORR.indel</text>
-<defs>    <clipPath id="cut-pO83_CORR.indel-NC_017659.1.fake-1"><path d="M130 150 L1057.67321031109 150 L1057.67321031109 250 L130 250 Z" />     </clipPath>  </defs>
-<defs>    <clipPath id="cut-pO83_CORR.indel-NC_017659.1.fake-2"><path d="M1060.82748848284 150 L1105 150 L1105 250 L1060.82748848284 250 Z" />     </clipPath>  </defs>
+<defs>    <clipPath id="cut-pO83_CORR.indel-NC_017659.1.fake-1"><path class='myth' d="M130 150 L1057.67321031109 150 L1057.67321031109 250 L130 250 Z" />     </clipPath>  </defs>
+<defs>    <clipPath id="cut-pO83_CORR.indel-NC_017659.1.fake-2"><path class='myth' d="M1060.82748848284 150 L1105 150 L1105 250 L1060.82748848284 250 Z" />     </clipPath>  </defs>
 <text class='myth' x="110.5" y="300" style="font-size:15px;fill:black;text-anchor:end;alignment-baseline:middle" >pO83_CORR.indel.twin</text>
-<defs>    <clipPath id="cut-pO83_CORR.indel.twin-NC_017659.1.fake-1"><path d="M130 250 L1057.67321031109 250 L1057.67321031109 350 L130 350 Z" />     </clipPath>  </defs>
-<defs>    <clipPath id="cut-pO83_CORR.indel.twin-NC_017659.1.fake-2"><path d="M1060.82748848284 250 L1105 250 L1105 350 L1060.82748848284 350 Z" />     </clipPath>  </defs>
+<defs>    <clipPath id="cut-pO83_CORR.indel.twin-NC_017659.1.fake-1"><path class='myth' d="M130 250 L1057.67321031109 250 L1057.67321031109 350 L130 350 Z" />     </clipPath>  </defs>
+<defs>    <clipPath id="cut-pO83_CORR.indel.twin-NC_017659.1.fake-2"><path class='myth' d="M1060.82748848284 250 L1105 250 L1105 350 L1060.82748848284 350 Z" />     </clipPath>  </defs>
 <text class='myth' x="110.5" y="400" style="font-size:15px;fill:black;text-anchor:end;alignment-baseline:middle" >pO83_CORR.indel.reverse</text>
-<defs>    <clipPath id="cut-pO83_CORR.indel.reverse-NC_017659.1.fake-1"><path d="M130 350 L1057.66690175475 350 L1057.66690175475 450 L130 450 Z" />     </clipPath>  </defs>
+<defs>    <clipPath id="cut-pO83_CORR.indel.reverse-NC_017659.1.fake-1"><path class='myth' d="M130 350 L1057.66690175475 350 L1057.66690175475 450 L130 450 Z" />     </clipPath>  </defs>
 
 <line x1="130" y1="480" x2="1105" y2="480" style="stroke:green;stroke-width:0.5"/>
 <line x1="130" y1="475" x2="130" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
@@ -213,8 +213,8 @@
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 100.00%</tspan>
 <tspan>alignment_length -> 147060</tspan></title>
- <defs>    <clipPath id="clip_130-199.5-1057.67321031109-199.5-130-299.5-1057.67321031109-299.5"><path d="M130 199.5 L1057.67321031109 199.5 L1057.67321031109 299.5 L130 299.5 Z" /></clipPath>  </defs>
-<path d="M129.936914436565 203.5 L1057.67321031109 203.5 L1057.67321031109 296.5 L129.936914436565 296.5 Z"  clip-path="url(#clip_130-199.5-1057.67321031109-199.5-130-299.5-1057.67321031109-299.5)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
+ <defs>    <clipPath id="clip_130-199.5-1057.67321031109-199.5-130-299.5-1057.67321031109-299.5"><path class='myth' d="M130 199.5 L1057.67321031109 199.5 L1057.67321031109 299.5 L130 299.5 Z" /></clipPath>  </defs>
+<path class='myth' d="M129.936914436565 203.5 L1057.67321031109 203.5 L1057.67321031109 296.5 L129.936914436565 296.5 Z"  clip-path="url(#clip_130-199.5-1057.67321031109-199.5-130-299.5-1057.67321031109-299.5)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
 </g>
 
 
@@ -235,8 +235,8 @@
 <tspan>strand -> -+</tspan>
 <tspan>indentity -> 100.00%</tspan>
 <tspan>alignment_length -> 147060</tspan></title>
- <defs>    <clipPath id="clip_130-299.5-1057.67321031109-299.5-130-399.5-1057.66690175475-399.5"><path d="M130 299.5 L1057.67321031109 299.5 L1057.66690175475 399.5 L130 399.5 Z" /></clipPath>  </defs>
-<path d="M129.936914436565 303.5 L1057.67321031109 303.5 L130 396.5 L1057.73629587453 396.5 Z"  clip-path="url(#clip_130-299.5-1057.67321031109-299.5-130-399.5-1057.66690175475-399.5)" style="stroke:black;stroke-width: 1;fill:blue;opacity:0.5" />
+ <defs>    <clipPath id="clip_130-299.5-1057.67321031109-299.5-130-399.5-1057.66690175475-399.5"><path class='myth' d="M130 299.5 L1057.67321031109 299.5 L1057.66690175475 399.5 L130 399.5 Z" /></clipPath>  </defs>
+<path class='myth' d="M129.936914436565 303.5 L1057.67321031109 303.5 L130 396.5 L1057.73629587453 396.5 Z"  clip-path="url(#clip_130-299.5-1057.67321031109-299.5-130-399.5-1057.66690175475-399.5)" style="stroke:black;stroke-width: 1;fill:blue;opacity:0.5" />
 </g>
 
 
@@ -249,7 +249,7 @@
 				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.twin.NC_017659.1.fake.1.147060.3.+.q.q_block_index=2.t_block_index=2</tspan>
 <tspan>track name -> pO83_CORR.indel.twin</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:1-147060</tspan></title>
-<path id="pO83_CORR.indel.twin.NC_017659.1.fake.1.147060.3.+.q.q_block_index=2.t_block_index=2"  d="M1060.76440291941 299.5 L1060.76440291941 300.5 L1988.50069879393 300.5 L1988.50069879393 299.5 Z" clip-path="url(#cut-pO83_CORR.indel.twin-NC_017659.1.fake-2)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+<path id="pO83_CORR.indel.twin.NC_017659.1.fake.1.147060.3.+.q.q_block_index=2.t_block_index=2"  d="M1060.82748848284 299.5 L1060.82748848284 300.5 L1988.56378435737 300.5 L1988.56378435737 299.5 Z" clip-path="url(#cut-pO83_CORR.indel.twin-NC_017659.1.fake-2)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
 <g class='myth'><title><tspan>pO83_CORR.indel.NC_017659.1.fake.1.147060.3.+.t.q_block_index=2.t_block_index=2 -> pO83_CORR.indel.twin.NC_017659.1.fake.1.147060.3.+.q.q_block_index=2.t_block_index=2</tspan>
 <tspan>query -> NC_017659.1.fake: 1-147060</tspan>
@@ -257,8 +257,8 @@
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 100.00%</tspan>
 <tspan>alignment_length -> 147060</tspan></title>
- <defs>    <clipPath id="clip_1060.82748848284-199.5-1105-199.5-1060.82748848284-299.5-1105-299.5"><path d="M1060.82748848284 199.5 L1105 199.5 L1105 299.5 L1060.82748848284 299.5 Z" /></clipPath>  </defs>
-<path d="M1060.76440291941 203.5 L1988.50069879393 203.5 L1988.50069879393 296.5 L1060.76440291941 296.5 Z"  clip-path="url(#clip_1060.82748848284-199.5-1105-199.5-1060.82748848284-299.5-1105-299.5)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
+ <defs>    <clipPath id="clip_1060.82748848284-199.5-1105-199.5-1060.82748848284-299.5-1105-299.5"><path class='myth' d="M1060.82748848284 199.5 L1105 199.5 L1105 299.5 L1060.82748848284 299.5 Z" /></clipPath>  </defs>
+<path class='myth' d="M1060.76440291941 203.5 L1988.50069879393 203.5 L1988.56378435737 296.5 L1060.82748848284 296.5 Z"  clip-path="url(#clip_1060.82748848284-199.5-1105-199.5-1060.82748848284-299.5-1105-299.5)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
 </g>
 
 
@@ -760,8 +760,8 @@
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 100.00%</tspan>
 <tspan>alignment_length -> 141601</tspan></title>
- <defs>    <clipPath id="clip_130-99.5-174.166202960816-99.5-130-199.5-1057.67321031109-199.5"><path d="M130 99.5 L174.166202960816 99.5 L1057.67321031109 199.5 L130 199.5 Z" /></clipPath>  </defs>
-<path d="M164.438409079145 103.5 L1057.73629587453 103.5 L1057.67321031109 196.5 L164.37532351571 196.5 Z"  clip-path="url(#clip_130-99.5-174.166202960816-99.5-130-199.5-1057.67321031109-199.5)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
+ <defs>    <clipPath id="clip_130-99.5-174.166202960816-99.5-130-199.5-1057.67321031109-199.5"><path class='myth' d="M130 99.5 L174.166202960816 99.5 L1057.67321031109 199.5 L130 199.5 Z" /></clipPath>  </defs>
+<path class='myth' d="M164.438409079145 103.5 L1057.73629587453 103.5 L1057.67321031109 196.5 L164.37532351571 196.5 Z"  clip-path="url(#clip_130-99.5-174.166202960816-99.5-130-199.5-1057.67321031109-199.5)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
 </g>
 
 <g class='myth'><title><tspan>pO83_CORR.indel.NC_017659.1.fake.44534.43766.3.-.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.twin.NC_017659.1.fake.74016.74784.3.-.q.q_block_index=1.t_block_index=1</tspan>
@@ -1303,8 +1303,8 @@
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 100.00%</tspan>
 <tspan>alignment_length -> 141601</tspan></title>
- <defs>    <clipPath id="clip_177.320481132564-99.5-221.48668409338-99.5-1060.82748848284-199.5-1105-199.5"><path d="M177.320481132564 99.5 L221.48668409338 99.5 L1105 199.5 L1060.82748848284 199.5 Z" /></clipPath>  </defs>
-<path d="M211.758890211709 103.5 L1105.05677700709 103.5 L1988.50069879393 196.5 L1095.20281199855 196.5 Z"  clip-path="url(#clip_177.320481132564-99.5-221.48668409338-99.5-1060.82748848284-199.5-1105-199.5)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
+ <defs>    <clipPath id="clip_177.320481132564-99.5-221.48668409338-99.5-1060.82748848284-199.5-1105-199.5"><path class='myth' d="M177.320481132564 99.5 L221.48668409338 99.5 L1105 199.5 L1060.82748848284 199.5 Z" /></clipPath>  </defs>
+<path class='myth' d="M211.758890211709 103.5 L1105.05677700709 103.5 L1988.50069879393 196.5 L1095.20281199855 196.5 Z"  clip-path="url(#clip_177.320481132564-99.5-221.48668409338-99.5-1060.82748848284-199.5-1105-199.5)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
 </g>
 
 
@@ -3074,7 +3074,7 @@
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 99.89%</tspan>
 <tspan>alignment_length -> 1898</tspan></title>
- <path d="M130 103.5 L141.973639939955 103.5 L141.910554376521 196.5 L129.936914436565 196.5 Z"  clip-path="url(#clip_130-99.5-174.166202960816-99.5-130-199.5-1057.67321031109-199.5)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.49945" />
+ <path class='myth' d="M130 103.5 L141.973639939955 103.5 L141.910554376521 196.5 L129.936914436565 196.5 Z"  clip-path="url(#clip_130-99.5-174.166202960816-99.5-130-199.5-1057.67321031109-199.5)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.49945" />
 </g>
 
 <g class='myth'><title><tspan>pO83_CORR.indel.NC_017659.1.fake.68065.68033.3.-.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.twin.NC_017659.1.fake.40103.40134.3.-.q.q_block_index=1.t_block_index=1</tspan>
@@ -3661,15 +3661,6 @@
 <tspan>ref start-end -> NC_017659.1.fake:138401-138425</tspan></title>
 <polygon id="pO83_CORR.indel.twin.NC_017659.1.fake.138401.138425.3.-.q.q_block_index=1.t_block_index=1" points="1003.04111237642,299.5 1003.04111237642,300.5 1003.198826285,300.5 1003.198826285,299.5 " style="fill:blue;stroke:black;stroke-width:0;opacity:0.7"/></g>
 
-<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=2.t_block_index=2 -> pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=2.t_block_index=2</tspan>
-<tspan>query -> NC_017659.1.fake: 1-1898</tspan>
-<tspan>target -> NC_017659.1: 1-1898</tspan>
-<tspan>strand -> +</tspan>
-<tspan>indentity -> 99.89%</tspan>
-<tspan>alignment_length -> 1898</tspan></title>
- <polygon points="177.320481132564,103.5 189.294121072519,103.5 1072.73804285936,196.5 1060.76440291941,196.5" style="stroke:black;stroke-width:0;fill:orange;opacity:0.49945"/>
-</g>
-
 <g class='myth'><title><tspan>pO83_CORR.indel.NC_017659.1.fake.137140.137116.3.-.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.twin.NC_017659.1.fake.138401.138425.3.-.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>query -> NC_017659.1.fake: 138401-138425</tspan>
 <tspan>target -> NC_017659.1.fake: 137140-137116</tspan>
@@ -3677,6 +3668,15 @@
 <tspan>indentity -> 92.00%</tspan>
 <tspan>alignment_length -> 25</tspan></title>
  <polygon points="994.934617475025,203.5 995.092331383612,203.5 1003.198826285,296.5 1003.04111237642,296.5" style="stroke:black;stroke-width:0;fill:blue;opacity:0.644"/>
+</g>
+
+<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=2.t_block_index=2 -> pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=2.t_block_index=2</tspan>
+<tspan>query -> NC_017659.1.fake: 1-1898</tspan>
+<tspan>target -> NC_017659.1: 1-1898</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 99.89%</tspan>
+<tspan>alignment_length -> 1898</tspan></title>
+ <polygon points="177.320481132564,103.5 189.294121072519,103.5 1072.73804285936,196.5 1060.76440291941,196.5" style="stroke:black;stroke-width:0;fill:orange;opacity:0.49945"/>
 </g>
 
 
@@ -4254,15 +4254,6 @@
 <tspan>ref start-end -> NC_017659.1.fake:130580-130599</tspan></title>
 <polygon id="pO83_CORR.indel.twin.NC_017659.1.fake.130580.130599.3.+.q.q_block_index=1.t_block_index=1" points="953.701893213935,299.5 953.701893213935,300.5 953.828064340805,300.5 953.828064340805,299.5 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 
-<g class='myth'><title><tspan>pO83_CORR.indel.NC_017659.1.fake.130413.130432.3.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.twin.NC_017659.1.fake.130580.130599.3.+.q.q_block_index=1.t_block_index=1</tspan>
-<tspan>query -> NC_017659.1.fake: 130580-130599</tspan>
-<tspan>target -> NC_017659.1.fake: 130413-130432</tspan>
-<tspan>strand -> +</tspan>
-<tspan>indentity -> 95.00%</tspan>
-<tspan>alignment_length -> 20</tspan></title>
- <polygon points="952.648364304571,203.5 952.774535431441,203.5 953.828064340805,296.5 953.701893213935,296.5" style="stroke:black;stroke-width:0;fill:orange;opacity:0.475"/>
-</g>
-
 <g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>query -> NC_017659.1.fake: 5251-5460</tspan>
 <tspan>target -> NC_017659.1: 1891-2100</tspan>
@@ -4270,6 +4261,15 @@
 <tspan>indentity -> 100.00%</tspan>
 <tspan>alignment_length -> 210</tspan></title>
  <polygon points="141.923171489208,103.5 143.247968321342,103.5 164.381632072053,196.5 163.056835239919,196.5" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5"/>
+</g>
+
+<g class='myth'><title><tspan>pO83_CORR.indel.NC_017659.1.fake.130413.130432.3.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.twin.NC_017659.1.fake.130580.130599.3.+.q.q_block_index=1.t_block_index=1</tspan>
+<tspan>query -> NC_017659.1.fake: 130580-130599</tspan>
+<tspan>target -> NC_017659.1.fake: 130413-130432</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 95.00%</tspan>
+<tspan>alignment_length -> 20</tspan></title>
+ <polygon points="952.648364304571,203.5 952.774535431441,203.5 953.828064340805,296.5 953.701893213935,296.5" style="stroke:black;stroke-width:0;fill:orange;opacity:0.475"/>
 </g>
 
 
@@ -4842,15 +4842,15 @@
 <text class='myth'  x="129" y="300" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5"</text>
  <text class='myth'  x="1058.67321031109" y="300" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3"</text>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.twin.NC_017659.1.fake.93181.93197.3.+.q.q_block_index=1.t_block_index=1</tspan>
-<tspan>track name -> pO83_CORR.indel.twin</tspan>
-<tspan>ref start-end -> NC_017659.1.fake:93181-93197</tspan></title>
-<polygon id="pO83_CORR.indel.twin.NC_017659.1.fake.93181.93197.3.+.q.q_block_index=1.t_block_index=1" points="717.768194523526,299.5 717.768194523526,300.5 717.875439981366,300.5 717.875439981366,299.5 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
-
 				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.twin.NC_017659.1.fake.93181.93197.2.+.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>track name -> pO83_CORR.indel.twin</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:93181-93197</tspan></title>
 <polygon id="pO83_CORR.indel.twin.NC_017659.1.fake.93181.93197.2.+.q.q_block_index=1.t_block_index=1" points="717.768194523526,299.5 717.768194523526,300.5 717.875439981366,300.5 717.875439981366,299.5 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.twin.NC_017659.1.fake.93181.93197.3.+.q.q_block_index=1.t_block_index=1</tspan>
+<tspan>track name -> pO83_CORR.indel.twin</tspan>
+<tspan>ref start-end -> NC_017659.1.fake:93181-93197</tspan></title>
+<polygon id="pO83_CORR.indel.twin.NC_017659.1.fake.93181.93197.3.+.q.q_block_index=1.t_block_index=1" points="717.768194523526,299.5 717.768194523526,300.5 717.875439981366,300.5 717.875439981366,299.5 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
 <g class='myth'><title>NC_017659.1.fake:1-7002</title>
 <rect x="1060.82748848284" y="299.5" width="44.1725115171593" height="1" style="fill:blue;opacity:0.2"   /></g>
 <text class='myth'  x="1059.82748848284" y="300" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5"</text>
@@ -4864,6 +4864,15 @@
 <tspan>track name -> pO83_CORR.indel.reverse</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:4969-4985</tspan></title>
 <polygon id="pO83_CORR.indel.reverse.NC_017659.1.fake.4969.4985.2.+.t.q_block_index=1.t_block_index=1" points="1026.2881425022,399.5 1026.2881425022,400.5 1026.39538796004,400.5 1026.39538796004,399.5 " style="fill:blue;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=2.t_block_index=2 -> pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=2.t_block_index=2</tspan>
+<tspan>query -> NC_017659.1.fake: 5251-5460</tspan>
+<tspan>target -> NC_017659.1: 1891-2100</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 100.00%</tspan>
+<tspan>alignment_length -> 210</tspan></title>
+ <polygon points="189.243652621771,103.5 190.568449453905,103.5 1095.20912055489,196.5 1093.88432372276,196.5" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5"/>
+</g>
 
 <g class='myth'><title><tspan>pO83_CORR.indel.NC_017659.1.fake.4969.4985.3.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.twin.NC_017659.1.fake.93181.93197.3.+.q.q_block_index=1.t_block_index=1</tspan>
 <tspan>query -> NC_017659.1.fake: 93181-93197</tspan>
@@ -4881,15 +4890,6 @@
 <tspan>indentity -> 100.00%</tspan>
 <tspan>alignment_length -> 17</tspan></title>
  <polygon points="717.768194523526,303.5 717.875439981366,303.5 1026.2881425022,396.5 1026.39538796004,396.5" style="stroke:black;stroke-width:0;fill:blue;opacity:0.5"/></g>
-
-<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=2.t_block_index=2 -> pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=2.t_block_index=2</tspan>
-<tspan>query -> NC_017659.1.fake: 5251-5460</tspan>
-<tspan>target -> NC_017659.1: 1891-2100</tspan>
-<tspan>strand -> +</tspan>
-<tspan>indentity -> 100.00%</tspan>
-<tspan>alignment_length -> 210</tspan></title>
- <polygon points="189.243652621771,103.5 190.568449453905,103.5 1095.20912055489,196.5 1093.88432372276,196.5" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5"/>
-</g>
 
 
 
@@ -6816,42 +6816,42 @@
 				<g class='myth'><title><tspan>feature_id -> NC_017659.1.indelGL000001</tspan>
 <tspan>track name -> pO83_CORR.indel.twin</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:44-334</tspan></title>
-				<polygon id="NC_017659.1.indelGL000001" points="1061.03567084218,298.5 1061.03567084218,301.5 1062.68220404783,301.5 1062.68220404783,301.5 1062.87146073813,300 1062.68220404783,298.5 1062.68220404783,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+				<polygon id="NC_017659.1.indelGL000001" points="1061.09875640561,298.5 1061.09875640561,301.5 1062.74528961126,301.5 1062.74528961126,301.5 1062.93454630157,300 1062.74528961126,298.5 1062.74528961126,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> NC_017659.1.indelGL000002</tspan>
 <tspan>track name -> pO83_CORR.indel.twin</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:516-1076</tspan></title>
-				<polygon id="NC_017659.1.indelGL000002" points="1064.01330943631,298.5 1064.01330943631,301.5 1067.3631528547,301.5 1067.3631528547,301.5 1067.55240954501,300 1067.3631528547,298.5 1067.3631528547,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+				<polygon id="NC_017659.1.indelGL000002" points="1064.07639499974,298.5 1064.07639499974,301.5 1067.42623841814,301.5 1067.42623841814,301.5 1067.61549510844,300 1067.42623841814,298.5 1067.42623841814,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> NC_017659.1.indelGL000003</tspan>
 <tspan>track name -> pO83_CORR.indel.twin</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:1039-1158</tspan></title>
-				<polygon id="NC_017659.1.indelGL000003" points="1067.31268440395,298.5 1067.31268440395,301.5 1067.88045447487,301.5 1067.88045447487,301.5 1068.06971116517,300 1067.88045447487,298.5 1067.88045447487,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+				<polygon id="NC_017659.1.indelGL000003" points="1067.37576996739,298.5 1067.37576996739,301.5 1067.9435400383,301.5 1067.9435400383,301.5 1068.13279672861,300 1067.9435400383,298.5 1067.9435400383,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> NC_017659.1.indelGL000004</tspan>
 <tspan>track name -> pO83_CORR.indel.twin</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:1463-1597</tspan></title>
-				<polygon id="NC_017659.1.indelGL000004" points="1069.9875122936,300 1070.1767689839,301.5 1070.1767689839,301.5 1070.83916739997,301.5 1070.83916739997,298.5 1070.1767689839,298.5 1070.1767689839,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+				<polygon id="NC_017659.1.indelGL000004" points="1070.05059785703,300 1070.23985454734,301.5 1070.23985454734,301.5 1070.9022529634,301.5 1070.9022529634,298.5 1070.23985454734,298.5 1070.23985454734,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> NC_017659.1.indelGL000005</tspan>
 <tspan>track name -> pO83_CORR.indel.twin</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:1643-1771</tspan></title>
-				<polygon id="NC_017659.1.indelGL000005" points="1071.12305243543,300 1071.31230912573,301.5 1071.31230912573,301.5 1071.93685620374,301.5 1071.93685620374,298.5 1071.31230912573,298.5 1071.31230912573,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+				<polygon id="NC_017659.1.indelGL000005" points="1071.18613799886,300 1071.37539468917,301.5 1071.37539468917,301.5 1071.99994176717,301.5 1071.99994176717,298.5 1071.37539468917,298.5 1071.37539468917,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> NC_017659.1.indelGL000006</tspan>
 <tspan>track name -> pO83_CORR.indel.twin</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:1901-2050</tspan></title>
-				<polygon id="NC_017659.1.indelGL000006" points="1072.75065997205,300 1072.93991666235,301.5 1072.93991666235,301.5 1073.69694342357,301.5 1073.69694342357,298.5 1072.93991666235,298.5 1072.93991666235,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+				<polygon id="NC_017659.1.indelGL000006" points="1072.81374553548,300 1073.00300222579,301.5 1073.00300222579,301.5 1073.76002898701,301.5 1073.76002898701,298.5 1073.00300222579,298.5 1073.00300222579,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> NC_017659.1.indelGL000007</tspan>
 <tspan>track name -> pO83_CORR.indel.twin</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:2055-3218</tspan></title>
-				<polygon id="NC_017659.1.indelGL000007" points="1073.72217764895,298.5 1073.72217764895,301.5 1080.87608054247,301.5 1080.87608054247,301.5 1081.06533723278,300 1080.87608054247,298.5 1080.87608054247,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+				<polygon id="NC_017659.1.indelGL000007" points="1073.78526321238,298.5 1073.78526321238,301.5 1080.93916610591,301.5 1080.93916610591,301.5 1081.12842279621,300 1080.93916610591,298.5 1080.93916610591,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> NC_017659.1.indelGL000008</tspan>
 <tspan>track name -> pO83_CORR.indel.twin</tspan>
 <tspan>ref start-end -> NC_017659.1.fake:3280-5334</tspan></title>
-				<polygon id="NC_017659.1.indelGL000008" points="1081.45015916973,298.5 1081.45015916973,301.5 1094.22498576531,301.5 1094.22498576531,301.5 1094.41424245561,300 1094.22498576531,298.5 1094.22498576531,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
+				<polygon id="NC_017659.1.indelGL000008" points="1081.51324473316,298.5 1081.51324473316,301.5 1094.28807132874,301.5 1094.28807132874,301.5 1094.47732801905,300 1094.28807132874,298.5 1094.28807132874,298.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> NC_017659.1.indelGL000001</tspan>
 <tspan>track name -> pO83_CORR.indel.reverse</tspan>
@@ -7789,12 +7789,12 @@
 				<polygon id="NC_017659.1.indelGL000187" points="132.428794192246,398.5 132.428794192246,401.5 133.034415601222,401.5 133.034415601222,401.5 133.223672291526,400 133.034415601222,398.5 133.034415601222,398.5" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/></g>
 
 
-<text class='myth' x="151.083101480408" y="109" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 151.083101480408 109)" >NC_017659.1:1-7001bp</text>
-<text class='myth' x="198.403582612972" y="109" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 198.403582612972 109)" >NC_017659.1:1-7001bp</text>
-<text class='myth' x="592.836605155546" y="209" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.836605155546 209)" >NC_017659.1.fake:11-147060bp</text>
-<text class='myth' x="1081.91374424142" y="209" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1081.91374424142 209)" >NC_017659.1.fake:1-7002bp</text>
-<text class='myth' x="592.836605155546" y="309" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.836605155546 309)" >NC_017659.1.fake:11-147060bp</text>
-<text class='myth' x="1081.91374424142" y="309" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1081.91374424142 309)" >NC_017659.1.fake:1-7002bp</text>
-<text class='myth' x="592.833450877375" y="409" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.833450877375 409)" >NC_017659.1.fake:reverse:[147060 -> 12]bp</text>
+<text class='myth' x="151.083101480408" y="109.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 151.083101480408 109.5)" >NC_017659.1:1-7001bp</text>
+<text class='myth' x="198.403582612972" y="109.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 198.403582612972 109.5)" >NC_017659.1:1-7001bp</text>
+<text class='myth' x="592.836605155546" y="209.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.836605155546 209.5)" >NC_017659.1.fake:11-147060bp</text>
+<text class='myth' x="1081.91374424142" y="209.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1081.91374424142 209.5)" >NC_017659.1.fake:1-7002bp</text>
+<text class='myth' x="592.836605155546" y="309.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.836605155546 309.5)" >NC_017659.1.fake:11-147060bp</text>
+<text class='myth' x="1081.91374424142" y="309.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1081.91374424142 309.5)" >NC_017659.1.fake:1-7002bp</text>
+<text class='myth' x="592.833450877375" y="409.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 592.833450877375 409.5)" >NC_017659.1.fake:reverse:[147060 -> 12]bp</text>
 
 </svg>

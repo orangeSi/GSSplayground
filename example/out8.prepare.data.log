@@ -1,7 +1,25 @@
 find package FindBin
 find package JSON
-synteny -> order->0->1,query->pO83_CORR.indel.blast:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
-synteny -> order->0->1,query->pO83_CORR.indel.blast:target->pO83_CORR.twin.minimap,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.paf.gz,paf,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
+key is data_display_order, value is 0->1
+key is query, value is pO83_CORR.indel.blast
+key is target, value is pO83_CORR
+key is alignment_file, value is ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6
+key is alignment_format, value is blast_m8
+key is alignment_block_shape, value is quadrilateral
+key is forward_color, value is orange->opacity0.5
+key is reverse_color, value is blue->opacity0.7
+key is cross_link_shift_y, value is +3:-3
+key is sort, value is 1
+key is data_display_order, value is 0->1
+key is query, value is pO83_CORR.indel.blast
+key is target, value is pO83_CORR.twin.minimap
+key is alignment_file, value is ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.paf.gz
+key is alignment_format, value is paf
+key is alignment_block_shape, value is quadrilateral
+key is forward_color, value is orange->opacity0.5
+key is reverse_color, value is blue->opacity0.7
+key is cross_link_shift_y, value is +3:-3
+key is sort, value is 1
 feature_id_is_unique -> no
 display_segment_name -> yes,center,shift_y:+2,fontsize:6,color:black,order:5,rotate:0
 display_segment_strand -> 5:5",3:3",color:black,fontsize:10
@@ -74,6 +92,14 @@ scale_tick_height -> 0.01
 scale_order -> -1
 scale_tick_padding_y -> 10
 scale_tick_fontsize -> 6
+
+not_exists hist_scatter_line in confs
+
+not_exists reads_mapping in confs
+key synteny = 0->1,pO83_CORR.indel.blast,pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
+
+key synteny = 0->1,pO83_CORR.indel.blast,pO83_CORR.twin.minimap,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.paf.gz,paf,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
+
 parse pO83_CORR pO83_CORR:NC_017659.1:1-147060 -> block_index 1
 
 read_list pO83_CORR end
@@ -86,7 +112,7 @@ read_list pO83_CORR.twin.minimap end
 hist_scatter_line not
 reads_mapping not
 synteny start
-1 is order->0->1,query->pO83_CORR.indel.blast:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
+1 is 0->1,pO83_CORR.indel.blast,pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
 
 start read ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6
 ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6 is plain file
@@ -109,7 +135,7 @@ no pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff for p
 no pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf for pO83_CORR.indel.blast.to.pO83_CORR
 
 output pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf
-2 is order->0->1,query->pO83_CORR.indel.blast:target->pO83_CORR.twin.minimap,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.paf.gz,paf,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
+2 is 0->1,pO83_CORR.indel.blast,pO83_CORR.twin.minimap,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.paf.gz,paf,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
 
 start read ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.paf.gz
 ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.paf.gz is gz file
@@ -134,15 +160,6 @@ no pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.s
 output pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.crosslink.conf
 func_name is synteny
 echo "
-set -vex;cat pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink;rm pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink
-" >> out8.cat.log;set -vex;cat pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink;rm pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink done
-echo "
-set -vex;cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out8.pO83_CORR.out8.synteny.gff;rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out8.pO83_CORR.out8.synteny.gff
-" >> out8.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out8.pO83_CORR.out8.synteny.gff;rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out8.pO83_CORR.out8.synteny.gff done
-echo "
-set -vex;cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out8.pO83_CORR.out8.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out8.pO83_CORR.out8.synteny.setting.conf
-" >> out8.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out8.pO83_CORR.out8.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out8.pO83_CORR.out8.synteny.setting.conf done
-echo "
 set -vex;cat out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff >out8.pO83_CORR.indel.blast.out8.synteny.gff;rm out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff;echo output out8.pO83_CORR.indel.blast.out8.synteny.gff
 " >> out8.cat.log;set -vex;cat out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff >out8.pO83_CORR.indel.blast.out8.synteny.gff;rm out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff;echo output out8.pO83_CORR.indel.blast.out8.synteny.gff done
 echo "
@@ -155,15 +172,25 @@ echo "
 set -vex;cat pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf > out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf;rm pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf;echo output out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf
 " >> out8.cat.log;set -vex;cat pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf > out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf;rm pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf;echo output out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf done
 echo "
+set -vex;cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out8.pO83_CORR.out8.synteny.gff;rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out8.pO83_CORR.out8.synteny.gff
+" >> out8.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out8.pO83_CORR.out8.synteny.gff;rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out8.pO83_CORR.out8.synteny.gff done
+echo "
+set -vex;cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out8.pO83_CORR.out8.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out8.pO83_CORR.out8.synteny.setting.conf
+" >> out8.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out8.pO83_CORR.out8.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out8.pO83_CORR.out8.synteny.setting.conf done
+echo "
+set -vex;cat pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink;rm pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink
+" >> out8.cat.log;set -vex;cat pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink;rm pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink done
+echo "
 set -vex;cat pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.crosslink.conf >out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink;rm pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.crosslink.conf;echo output out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink
 " >> out8.cat.log;set -vex;cat pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.crosslink.conf >out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink;rm pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.crosslink.conf;echo output out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink done
 out8.synteny end
 echo "
+set -vex;cat out8.pO83_CORR.indel.blast.out8.synteny.setting.conf out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf out8.pO83_CORR.out8.synteny.setting.conf >out8.synteny.setting.conf
+" >> out8.cat.log;set -vex;cat out8.pO83_CORR.indel.blast.out8.synteny.setting.conf out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf out8.pO83_CORR.out8.synteny.setting.conf >out8.synteny.setting.conf done
+echo "
 set -vex;cat out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink >out8.synteny.crosslink
 " >> out8.cat.log;set -vex;cat out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink >out8.synteny.crosslink done
-echo "
-set -vex;cat out8.pO83_CORR.out8.synteny.setting.conf out8.pO83_CORR.indel.blast.out8.synteny.setting.conf out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf >out8.synteny.setting.conf
-" >> out8.cat.log;set -vex;cat out8.pO83_CORR.out8.synteny.setting.conf out8.pO83_CORR.indel.blast.out8.synteny.setting.conf out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf >out8.synteny.setting.conf done
+general_features not
 add out8.synteny.setting.conf to feature_setting 
 echo "
 set -vex;cat feature.color.label.6.conf out8.synteny.setting.conf  >feature.color.label.6.conf.out8
@@ -173,16 +200,16 @@ echo "
 set -vex;cat out8.synteny.crosslink >feature.crossing.link.out8
 " >> out8.cat.log;set -vex;cat out8.synteny.crosslink >feature.crossing.link.out8 done
 echo "
-set -vex;cat out8.pO83_CORR.out8.synteny.gff out8.pO83_CORR.indel.blast.out8.synteny.gff out8.pO83_CORR.twin.minimap.out8.synteny.gff|awk -F "	" '{print $3}'|sort -u
-" >> out8.cat.log;set -vex;cat out8.pO83_CORR.out8.synteny.gff out8.pO83_CORR.indel.blast.out8.synteny.gff out8.pO83_CORR.twin.minimap.out8.synteny.gff|awk -F "	" '{print $3}'|sort -u done
+set -vex;cat out8.pO83_CORR.indel.blast.out8.synteny.gff out8.pO83_CORR.twin.minimap.out8.synteny.gff out8.pO83_CORR.out8.synteny.gff|awk -F "	" '{print $3}'|sort -u
+" >> out8.cat.log;set -vex;cat out8.pO83_CORR.indel.blast.out8.synteny.gff out8.pO83_CORR.twin.minimap.out8.synteny.gff out8.pO83_CORR.out8.synteny.gff|awk -F "	" '{print $3}'|sort -u done
 echo "
-set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out8.pO83_CORR.out8.synteny.gff\t/' tracks.8.list >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp
-" >> out8.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out8.pO83_CORR.out8.synteny.gff\t/' tracks.8.list >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp done
-echo "
-set -vex;sed  -r 's/^(pO83_CORR.indel.blast\s.*\.gff)\s/\1,out8.pO83_CORR.indel.blast.out8.synteny.gff\t/' tracks.8.list.out8.tmp >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp
-" >> out8.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel.blast\s.*\.gff)\s/\1,out8.pO83_CORR.indel.blast.out8.synteny.gff\t/' tracks.8.list.out8.tmp >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp done
+set -vex;sed  -r 's/^(pO83_CORR.indel.blast\s.*\.gff)\s/\1,out8.pO83_CORR.indel.blast.out8.synteny.gff\t/' tracks.8.list >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp
+" >> out8.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel.blast\s.*\.gff)\s/\1,out8.pO83_CORR.indel.blast.out8.synteny.gff\t/' tracks.8.list >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp done
 echo "
 set -vex;sed  -r 's/^(pO83_CORR.twin.minimap\s.*\.gff)\s/\1,out8.pO83_CORR.twin.minimap.out8.synteny.gff\t/' tracks.8.list.out8.tmp >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp
 " >> out8.cat.log;set -vex;sed  -r 's/^(pO83_CORR.twin.minimap\s.*\.gff)\s/\1,out8.pO83_CORR.twin.minimap.out8.synteny.gff\t/' tracks.8.list.out8.tmp >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp done
+echo "
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out8.pO83_CORR.out8.synteny.gff\t/' tracks.8.list.out8.tmp >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp
+" >> out8.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out8.pO83_CORR.out8.synteny.gff\t/' tracks.8.list.out8.tmp >tracks.8.list.out8;cp tracks.8.list.out8 tracks.8.list.out8.tmp done
 
 data done

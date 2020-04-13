@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1300" height="500" style="background-color:white;">
 <text class='myth' x="110.5" y="150" style="font-size:15px;fill:black;text-anchor:end;alignment-baseline:middle" >pO83_CORR</text>
-<defs>    <clipPath id="cut-pO83_CORR-NC_017659.1-1"><path d="M130 50 L1105 50 L1105 250 L130 250 Z" />     </clipPath>  </defs>
+<defs>    <clipPath id="cut-pO83_CORR-NC_017659.1-1"><path class='myth' d="M130 50 L1105 50 L1105 250 L130 250 Z" />     </clipPath>  </defs>
 <text class='myth' x="110.5" y="350" style="font-size:15px;fill:black;text-anchor:end;alignment-baseline:middle" >pO83_CORR.indel</text>
-<defs>    <clipPath id="cut-pO83_CORR.indel-NC_017659.1.fake-1"><path d="M130 250 L1105 250 L1105 450 L130 450 Z" />     </clipPath>  </defs>
+<defs>    <clipPath id="cut-pO83_CORR.indel-NC_017659.1.fake-1"><path class='myth' d="M130 250 L1105 250 L1105 450 L130 450 Z" />     </clipPath>  </defs>
 
 <line x1="130" y1="480" x2="1105" y2="480" style="stroke:green;stroke-width:0.5"/>
 <line x1="130" y1="475" x2="130" y2="480" style="stroke:green;stroke-width:0.5;opacity:1"/>
@@ -44,8 +44,8 @@
 <tspan>strand -> +</tspan>
 <tspan>indentity -> 100.00%</tspan>
 <tspan>alignment_length -> 141601</tspan></title>
- <defs>    <clipPath id="clip_130-149-1105-149-130-349-1105-349"><path d="M130 149 L1105 149 L1105 349 L130 349 Z" /></clipPath>  </defs>
-<path d="M890.360714285714 157 L20613.3571428571 157 L20613.3571428571 343 L890.360714285714 343 Z"  clip-path="url(#clip_130-149-1105-149-130-349-1105-349)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
+ <defs>    <clipPath id="clip_130-149-1105-149-130-349-1105-349"><path class='myth' d="M130 149 L1105 149 L1105 349 L130 349 Z" /></clipPath>  </defs>
+<path class='myth' d="M890.360714285714 157 L20613.3571428571 157 L20613.3571428571 343 L890.360714285714 343 Z"  clip-path="url(#clip_130-149-1105-149-130-349-1105-349)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
 </g>
 
 

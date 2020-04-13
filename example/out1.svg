@@ -687,21 +687,6 @@
 
 
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick4.hgrid</tspan>
-<tspan>track name -> pO83_CORR.reverse</tspan>
-<tspan>ref start-end -> NC_017659.1:7061-8061</tspan></title>
-<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick4.hgrid" points="975.936921449352,72.151 975.936921449352,72.19 1105,72.19 1105,72.151 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
-
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick2.hgrid</tspan>
-<tspan>track name -> pO83_CORR.reverse</tspan>
-<tspan>ref start-end -> NC_017659.1:7061-8061</tspan></title>
-<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick2.hgrid" points="975.936921449352,89.831 975.936921449352,89.87 1105,89.87 1105,89.831 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
-
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick5.hgrid</tspan>
-<tspan>track name -> pO83_CORR.reverse</tspan>
-<tspan>ref start-end -> NC_017659.1:7061-8061</tspan></title>
-<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick5.hgrid" points="975.936921449352,63.311 975.936921449352,63.35 1105,63.35 1105,63.311 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
-
 				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick0.hgrid</tspan>
 <tspan>track name -> pO83_CORR.reverse</tspan>
 <tspan>ref start-end -> NC_017659.1:7061-8061</tspan></title>
@@ -717,25 +702,40 @@
 <tspan>ref start-end -> NC_017659.1:7061-8061</tspan></title>
 <polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick1.hgrid" points="975.936921449352,98.671 975.936921449352,98.71 1105,98.71 1105,98.671 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick4.hgrid</tspan>
 <tspan>track name -> pO83_CORR.reverse</tspan>
-<tspan>ref start-end -> NC_017659.1:8060-8061</tspan></title>
-<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3" points="1105.25786828881,63.35 1105.25786828881,107.55 1105.51573657762,107.55 1105.51573657762,63.35 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
+<tspan>ref start-end -> NC_017659.1:7061-8061</tspan></title>
+<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick4.hgrid" points="975.936921449352,72.151 975.936921449352,72.19 1105,72.19 1105,72.151 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick2.hgrid</tspan>
+<tspan>track name -> pO83_CORR.reverse</tspan>
+<tspan>ref start-end -> NC_017659.1:7061-8061</tspan></title>
+<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick2.hgrid" points="975.936921449352,89.831 975.936921449352,89.87 1105,89.87 1105,89.831 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick5.hgrid</tspan>
+<tspan>track name -> pO83_CORR.reverse</tspan>
+<tspan>ref start-end -> NC_017659.1:7061-8061</tspan></title>
+<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick5.hgrid" points="975.936921449352,63.311 975.936921449352,63.35 1105,63.35 1105,63.311 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick1</tspan>
 <tspan>track name -> pO83_CORR.reverse</tspan>
 <tspan>ref start-end -> NC_017659.1:8060-8061</tspan></title>
 <polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick1" points="1105.38680243322,98.58 1105.38680243322,98.71 1105.64467072203,98.71 1105.64467072203,98.58 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3</tspan>
+<tspan>track name -> pO83_CORR.reverse</tspan>
+<tspan>ref start-end -> NC_017659.1:8060-8061</tspan></title>
+<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3" points="1105.25786828881,63.35 1105.25786828881,107.55 1105.51573657762,107.55 1105.51573657762,63.35 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
+
 				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick4</tspan>
 <tspan>track name -> pO83_CORR.reverse</tspan>
 <tspan>ref start-end -> NC_017659.1:8060-8061</tspan></title>
 <polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick4" points="1105.38680243322,72.06 1105.38680243322,72.19 1105.64467072203,72.19 1105.64467072203,72.06 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick5</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick3</tspan>
 <tspan>track name -> pO83_CORR.reverse</tspan>
 <tspan>ref start-end -> NC_017659.1:8060-8061</tspan></title>
-<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick5" points="1105.38680243322,63.22 1105.38680243322,63.35 1105.64467072203,63.35 1105.64467072203,63.22 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
+<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick3" points="1105.38680243322,80.9 1105.38680243322,81.03 1105.64467072203,81.03 1105.64467072203,80.9 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick2</tspan>
 <tspan>track name -> pO83_CORR.reverse</tspan>
@@ -747,15 +747,30 @@
 <tspan>ref start-end -> NC_017659.1:8060-8061</tspan></title>
 <polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick0" points="1105.38680243322,107.42 1105.38680243322,107.55 1105.64467072203,107.55 1105.64467072203,107.42 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick3</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick5</tspan>
 <tspan>track name -> pO83_CORR.reverse</tspan>
 <tspan>ref start-end -> NC_017659.1:8060-8061</tspan></title>
-<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick3" points="1105.38680243322,80.9 1105.38680243322,81.03 1105.64467072203,81.03 1105.64467072203,80.9 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
+<polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.GC.ytickbackbone3.tick5" points="1105.38680243322,63.22 1105.38680243322,63.35 1105.64467072203,63.35 1105.64467072203,63.22 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> pO83_CORR.reverse.NC_017659.1.2.7061.8061.3.GC.ylabel+</tspan>
 <tspan>track name -> pO83_CORR.reverse</tspan>
 <tspan>ref start-end -> NC_017659.1:8061-8061</tspan></title>
 <polygon id="pO83_CORR.reverse.NC_017659.1.2.7061.8061.3.GC.ylabel+" points="1113.89645596403,85.45 1113.89645596403,85.45 1114.02539010844,85.45 1114.02539010844,85.45 " style="fill:white;stroke:black;stroke-width:0;opacity:1"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick0.hgrid</tspan>
+<tspan>track name -> pO83_CORR</tspan>
+<tspan>ref start-end -> NC_017659.1:1000-7060</tspan></title>
+<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick0.hgrid" points="130,240.844333333333 130,240.883333333333 911.469849246231,240.883333333333 911.469849246231,240.844333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick4.hgrid</tspan>
+<tspan>track name -> pO83_CORR</tspan>
+<tspan>ref start-end -> NC_017659.1:1000-7060</tspan></title>
+<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick4.hgrid" points="130,205.484333333333 130,205.523333333333 911.469849246231,205.523333333333 911.469849246231,205.484333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick3.hgrid</tspan>
+<tspan>track name -> pO83_CORR</tspan>
+<tspan>ref start-end -> NC_017659.1:1000-7060</tspan></title>
+<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick3.hgrid" points="130,214.324333333333 130,214.363333333333 911.469849246231,214.363333333333 911.469849246231,214.324333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick2.hgrid</tspan>
 <tspan>track name -> pO83_CORR</tspan>
@@ -772,20 +787,20 @@
 <tspan>ref start-end -> NC_017659.1:1000-7060</tspan></title>
 <polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick1.hgrid" points="130,232.004333333333 130,232.043333333333 911.469849246231,232.043333333333 911.469849246231,232.004333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick3.hgrid</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick1</tspan>
 <tspan>track name -> pO83_CORR</tspan>
-<tspan>ref start-end -> NC_017659.1:1000-7060</tspan></title>
-<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick3.hgrid" points="130,214.324333333333 130,214.363333333333 911.469849246231,214.363333333333 911.469849246231,214.324333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
+<tspan>ref start-end -> NC_017659.1:7059-7060</tspan></title>
+<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick1" points="911.85665167945,231.913333333333 911.85665167945,232.043333333333 912.114519968262,232.043333333333 912.114519968262,231.913333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick0.hgrid</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick0</tspan>
 <tspan>track name -> pO83_CORR</tspan>
-<tspan>ref start-end -> NC_017659.1:1000-7060</tspan></title>
-<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick0.hgrid" points="130,240.844333333333 130,240.883333333333 911.469849246231,240.883333333333 911.469849246231,240.844333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
+<tspan>ref start-end -> NC_017659.1:7059-7060</tspan></title>
+<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick0" points="911.85665167945,240.753333333333 911.85665167945,240.883333333333 912.114519968262,240.883333333333 912.114519968262,240.753333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick4.hgrid</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick3</tspan>
 <tspan>track name -> pO83_CORR</tspan>
-<tspan>ref start-end -> NC_017659.1:1000-7060</tspan></title>
-<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick4.hgrid" points="130,205.484333333333 130,205.523333333333 911.469849246231,205.523333333333 911.469849246231,205.484333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.3"/></g>
+<tspan>ref start-end -> NC_017659.1:7059-7060</tspan></title>
+<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick3" points="911.85665167945,214.233333333333 911.85665167945,214.363333333333 912.114519968262,214.363333333333 912.114519968262,214.233333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick5</tspan>
 <tspan>track name -> pO83_CORR</tspan>
@@ -797,40 +812,25 @@
 <tspan>ref start-end -> NC_017659.1:7059-7060</tspan></title>
 <polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick4" points="911.85665167945,205.393333333333 911.85665167945,205.523333333333 912.114519968262,205.523333333333 912.114519968262,205.393333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick0</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2</tspan>
 <tspan>track name -> pO83_CORR</tspan>
 <tspan>ref start-end -> NC_017659.1:7059-7060</tspan></title>
-<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick0" points="911.85665167945,240.753333333333 911.85665167945,240.883333333333 912.114519968262,240.883333333333 912.114519968262,240.753333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
-
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick1</tspan>
-<tspan>track name -> pO83_CORR</tspan>
-<tspan>ref start-end -> NC_017659.1:7059-7060</tspan></title>
-<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick1" points="911.85665167945,231.913333333333 911.85665167945,232.043333333333 912.114519968262,232.043333333333 912.114519968262,231.913333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
+<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2" points="911.727717535044,196.683333333333 911.727717535044,240.883333333333 911.985585823856,240.883333333333 911.985585823856,196.683333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick2</tspan>
 <tspan>track name -> pO83_CORR</tspan>
 <tspan>ref start-end -> NC_017659.1:7059-7060</tspan></title>
 <polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick2" points="911.85665167945,223.073333333333 911.85665167945,223.203333333333 912.114519968262,223.203333333333 912.114519968262,223.073333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2</tspan>
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.2.GC.ylabel+</tspan>
 <tspan>track name -> pO83_CORR</tspan>
-<tspan>ref start-end -> NC_017659.1:7059-7060</tspan></title>
-<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2" points="911.727717535044,196.683333333333 911.727717535044,240.883333333333 911.985585823856,240.883333333333 911.985585823856,196.683333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
-
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick3</tspan>
-<tspan>track name -> pO83_CORR</tspan>
-<tspan>ref start-end -> NC_017659.1:7059-7060</tspan></title>
-<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.GC.ytickbackbone2.tick3" points="911.85665167945,214.233333333333 911.85665167945,214.363333333333 912.114519968262,214.363333333333 912.114519968262,214.233333333333 " style="fill:green;stroke:black;stroke-width:0;opacity:0.6"/></g>
+<tspan>ref start-end -> NC_017659.1:7060-7060</tspan></title>
+<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.2.GC.ylabel+" points="920.366305210262,218.783333333333 920.366305210262,218.783333333333 920.495239354668,218.783333333333 920.495239354668,218.783333333333 " style="fill:white;stroke:black;stroke-width:0;opacity:1"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.1.brand.ylabel+</tspan>
 <tspan>track name -> pO83_CORR</tspan>
 <tspan>ref start-end -> NC_017659.1:7060-7060</tspan></title>
 <polygon id="pO83_CORR.NC_017659.1.1.1000.7060.1.brand.ylabel+" points="920.366305210262,246.080083333333 920.366305210262,246.080083333333 920.495239354668,246.080083333333 920.495239354668,246.080083333333 " style="fill:white;stroke:black;stroke-width:0;opacity:1"/></g>
-
-				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1000.7060.2.GC.ylabel+</tspan>
-<tspan>track name -> pO83_CORR</tspan>
-<tspan>ref start-end -> NC_017659.1:7060-7060</tspan></title>
-<polygon id="pO83_CORR.NC_017659.1.1.1000.7060.2.GC.ylabel+" points="920.366305210262,218.783333333333 920.366305210262,218.783333333333 920.495239354668,218.783333333333 920.495239354668,218.783333333333 " style="fill:white;stroke:black;stroke-width:0;opacity:1"/></g>
 
 
 
@@ -31225,24 +31225,24 @@
 
 <text class='myth' x="1105.95667072203" y="98.957" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 1105.95667072203 98.957)" >0.2</text>
 <text class='myth' x="1105.95667072203" y="72.437" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 1105.95667072203 72.437)" >0.8</text>
-<text class='myth' x="1105.95667072203" y="63.597" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 1105.95667072203 63.597)" >1</text>
+<text class='myth' x="1105.95667072203" y="81.277" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 1105.95667072203 81.277)" >0.6</text>
 <text class='myth' x="1105.95667072203" y="90.117" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 1105.95667072203 90.117)" >0.4</text>
 <text class='myth' x="1105.95667072203" y="107.797" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 1105.95667072203 107.797)" >0</text>
-<text class='myth' x="1105.95667072203" y="81.277" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 1105.95667072203 81.277)" >0.6</text>
+<text class='myth' x="1105.95667072203" y="63.597" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 1105.95667072203 63.597)" >1</text>
 <text class='myth' x="1114.02539010844" y="85.45" style="font-family:Times New Roman;font-size:13px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 1114.02539010844 85.45)" >genome GC percents(%)</text>
+<text class='myth' x="912.426519968262" y="232.290333333333" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 912.426519968262 232.290333333333)" >0.2</text>
+<text class='myth' x="912.426519968262" y="241.130333333333" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 912.426519968262 241.130333333333)" >0</text>
+<text class='myth' x="912.426519968262" y="214.610333333333" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 912.426519968262 214.610333333333)" >0.6</text>
 <text class='myth' x="912.426519968262" y="196.930333333333" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 912.426519968262 196.930333333333)" >1</text>
 <text class='myth' x="912.426519968262" y="205.770333333333" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 912.426519968262 205.770333333333)" >0.8</text>
-<text class='myth' x="912.426519968262" y="241.130333333333" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 912.426519968262 241.130333333333)" >0</text>
-<text class='myth' x="912.426519968262" y="232.290333333333" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 912.426519968262 232.290333333333)" >0.2</text>
 <text class='myth' x="912.426519968262" y="223.450333333333" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 912.426519968262 223.450333333333)" >0.4</text>
-<text class='myth' x="912.426519968262" y="214.610333333333" style="font-family:Times New Roman;font-size:8px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 912.426519968262 214.610333333333)" >0.6</text>
-<text class='myth' x="920.495239354668" y="246.080083333333" style="font-family:Times New Roman;font-size:13px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 920.495239354668 246.080083333333)" >ref base</text>
 <text class='myth' x="920.495239354668" y="218.783333333333" style="font-family:Times New Roman;font-size:13px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 920.495239354668 218.783333333333)" >genome GC percents(%)</text>
+<text class='myth' x="920.495239354668" y="246.080083333333" style="font-family:Times New Roman;font-size:13px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 920.495239354668 246.080083333333)" >ref base</text>
 
 
-<text class='myth' x="519.734924623116" y="130.333333333333" style="font-size:10px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 519.734924623116 130.333333333333)" >NC_017659.1:reverse:[7060 -> 1000]bp</text>
-<text class='myth' x="1039.46846072468" y="130.333333333333" style="font-size:10px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1039.46846072468 130.333333333333)" >NC_017659.1:7061-8061bp</text>
-<text class='myth' x="519.734924623116" y="263.666666666667" style="font-size:10px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 519.734924623116 263.666666666667)" >NC_017659.1:1000-7060bp</text>
-<text class='myth' x="406.272877545623" y="397" style="font-size:10px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 406.272877545623 397)" >NC_017659.1.fake:1700-6000bp</text>
+<text class='myth' x="519.734924623116" y="129.833333333333" style="font-size:10px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 519.734924623116 129.833333333333)" >NC_017659.1:reverse:[7060 -> 1000]bp</text>
+<text class='myth' x="1039.46846072468" y="129.833333333333" style="font-size:10px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1039.46846072468 129.833333333333)" >NC_017659.1:7061-8061bp</text>
+<text class='myth' x="519.734924623116" y="263.166666666667" style="font-size:10px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 519.734924623116 263.166666666667)" >NC_017659.1:1000-7060bp</text>
+<text class='myth' x="406.272877545623" y="396.5" style="font-size:10px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 406.272877545623 396.5)" >NC_017659.1.fake:1700-6000bp</text>
 
 </svg>

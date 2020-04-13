@@ -1,23 +1,23 @@
 
-set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out5.pO83_CORR.out5.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out5.pO83_CORR.out5.synteny.gff
-
-
-set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out5.pO83_CORR.out5.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out5.pO83_CORR.out5.synteny.setting.conf
-
-
 set -vex;cat out5.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out5.pO83_CORR.indel.out5.synteny.gff;rm out5.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out5.pO83_CORR.indel.out5.synteny.gff
 
 
 set -vex;cat out5.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out5.pO83_CORR.indel.out5.synteny.setting.conf;rm out5.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out5.pO83_CORR.indel.out5.synteny.setting.conf
 
 
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out5.pO83_CORR.out5.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out5.pO83_CORR.out5.synteny.gff
+
+
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out5.pO83_CORR.out5.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out5.pO83_CORR.out5.synteny.setting.conf
+
+
 set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out5.pO83_CORR.indel.to.pO83_CORR.out5.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out5.pO83_CORR.indel.to.pO83_CORR.out5.synteny.crosslink
 
 
+set -vex;cat out5.pO83_CORR.indel.out5.synteny.setting.conf out5.pO83_CORR.out5.synteny.setting.conf >out5.synteny.setting.conf
+
+
 set -vex;cat out5.pO83_CORR.indel.to.pO83_CORR.out5.synteny.crosslink >out5.synteny.crosslink
-
-
-set -vex;cat out5.pO83_CORR.out5.synteny.setting.conf out5.pO83_CORR.indel.out5.synteny.setting.conf >out5.synteny.setting.conf
 
 
 set -vex;cat out5.synteny.setting.conf >feature.color.label.conf.out5
@@ -26,11 +26,11 @@ set -vex;cat out5.synteny.setting.conf >feature.color.label.conf.out5
 set -vex;cat out5.synteny.crosslink >feature.crossing.link.out5
 
 
-set -vex;cat out5.pO83_CORR.out5.synteny.gff out5.pO83_CORR.indel.out5.synteny.gff|awk -F   '{print }'|sort -u
+set -vex;cat out5.pO83_CORR.indel.out5.synteny.gff out5.pO83_CORR.out5.synteny.gff|awk -F   '{print }'|sort -u
 
 
-set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out5.pO83_CORR.out5.synteny.gff\t/' tracks.5.list >tracks.5.list.out5;cp tracks.5.list.out5 tracks.5.list.out5.tmp
+set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/,out5.pO83_CORR.indel.out5.synteny.gff	/' tracks.5.list >tracks.5.list.out5;cp tracks.5.list.out5 tracks.5.list.out5.tmp
 
 
-set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out5.pO83_CORR.indel.out5.synteny.gff\t/' tracks.5.list.out5.tmp >tracks.5.list.out5;cp tracks.5.list.out5 tracks.5.list.out5.tmp
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/,out5.pO83_CORR.out5.synteny.gff	/' tracks.5.list.out5.tmp >tracks.5.list.out5;cp tracks.5.list.out5 tracks.5.list.out5.tmp
 

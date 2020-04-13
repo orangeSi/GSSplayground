@@ -1,0 +1,13 @@
++ cat out3.yeast.NC_001133.9.2.1.gff.ylabel.gff out3.yeast.NC_001133.9.2.1.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.1.24000.54000.general_features.gff out3.yeast.NC_001133.9.2.2.gff.ylabel.gff out3.yeast.NC_001133.9.2.2.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.2.24000.54000.general_features.gff
++ rm out3.yeast.NC_001133.9.2.1.gff.ylabel.gff out3.yeast.NC_001133.9.2.1.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.1.24000.54000.general_features.gff out3.yeast.NC_001133.9.2.2.gff.ylabel.gff out3.yeast.NC_001133.9.2.2.54000.87752.general_features.gff out3.yeast.NC_001133.9.1.2.24000.54000.general_features.gff
++ echo output out3.yeast.out3.general_features.gff
++ cat out3.yeast.NC_001133.9.2.1.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.1.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.1.24000.54000.general_features.setting.conf out3.yeast.NC_001133.9.2.2.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.2.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.2.24000.54000.general_features.setting.conf
++ rm out3.yeast.NC_001133.9.2.1.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.1.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.1.24000.54000.general_features.setting.conf out3.yeast.NC_001133.9.2.2.gff.ylabel.setting.conf out3.yeast.NC_001133.9.2.2.54000.87752.general_features.setting.conf out3.yeast.NC_001133.9.1.2.24000.54000.general_features.setting.conf
++ echo output out3.yeast.out3.general_features.setting.conf
++ cat out3.yeast.out3.general_features.setting.conf
++ cat out3.general_features.setting.conf
++ awk -F 	 {print $3}
++ cat out3.yeast.out3.general_features.gff
++ sort -u
++ sed -r s/^(yeast\s.*\.gff)\s/\1,out3.yeast.out3.general_features.gff\t/ tracks.3.list
++ cp tracks.3.list.out3 tracks.3.list.out3.tmp

@@ -1,8 +1,35 @@
 find package FindBin
 find package JSON
-synteny -> order->0->1,query->pO83_CORR.indel:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
-synteny -> order->0->1,query->pO83_CORR.indel.twin:target->pO83_CORR.indel.reverse,../data/NC_017659.1.indel.fa.to.self.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
-synteny -> order->0->1,query->pO83_CORR.indel.twin:target->pO83_CORR.indel,../data/NC_017659.1.indel.fa.to.self.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
+key is data_display_order, value is 0->1
+key is query, value is pO83_CORR.indel
+key is target, value is pO83_CORR
+key is alignment_file, value is ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6
+key is alignment_format, value is blast_m8
+key is alignment_block_shape, value is quadrilateral
+key is forward_color, value is orange->opacity0.5
+key is reverse_color, value is blue->opacity0.7
+key is cross_link_shift_y, value is +3:-3
+key is sort, value is 1
+key is data_display_order, value is 0->1
+key is query, value is pO83_CORR.indel.twin
+key is target, value is pO83_CORR.indel.reverse
+key is alignment_file, value is ../data/NC_017659.1.indel.fa.to.self.m6
+key is alignment_format, value is blast_m8
+key is alignment_block_shape, value is quadrilateral
+key is forward_color, value is orange->opacity0.5
+key is reverse_color, value is blue->opacity0.7
+key is cross_link_shift_y, value is +3:-3
+key is sort, value is 1
+key is data_display_order, value is 0->1
+key is query, value is pO83_CORR.indel.twin
+key is target, value is pO83_CORR.indel
+key is alignment_file, value is ../data/NC_017659.1.indel.fa.to.self.m6
+key is alignment_format, value is blast_m8
+key is alignment_block_shape, value is quadrilateral
+key is forward_color, value is orange->opacity0.5
+key is reverse_color, value is blue->opacity0.7
+key is cross_link_shift_y, value is +3:-3
+key is sort, value is 1
 tracks_block_reverse -> pO83_CORR.indel.reverse,0;
 feature_id_is_unique -> no
 display_segment_name -> yes,center,shift_y:+2,fontsize:6,color:black,order:5,rotate:0
@@ -76,12 +103,22 @@ scale_tick_height -> 0.01
 scale_order -> -1
 scale_tick_padding_y -> 10
 scale_tick_fontsize -> 6
+
+not_exists hist_scatter_line in confs
+
+not_exists reads_mapping in confs
+key synteny = 0->1,pO83_CORR.indel,pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
+
+key synteny = 0->1,pO83_CORR.indel.twin,pO83_CORR.indel.reverse,../data/NC_017659.1.indel.fa.to.self.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
+
+key synteny = 0->1,pO83_CORR.indel.twin,pO83_CORR.indel,../data/NC_017659.1.indel.fa.to.self.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
+
 parse pO83_CORR pO83_CORR:NC_017659.1:1-7001 -> block_index 1
 
 parse pO83_CORR pO83_CORR:NC_017659.1:1-7001 -> block_index 2
 
 read gff, pO83_CORR:NC_017659.1:1-7001 block_index 1 for NC_017659.1	RefSeq	gene	2313	3428	.	+	.	ID=gene4532;Dbxref=GeneID:12657366;Name=iroB;gbkey=Gene;gene=iroB;gene_biotype=protein_coding;locus_tag=NRG857_30008
-warn: feature_id should be uniq, but gene4532 appear more than one time in --list 
+warn: feature_id can be uniq or not for gene4532  
 
 read gff, pO83_CORR:NC_017659.1:1-7001 block_index 2 for NC_017659.1	RefSeq	gene	2313	3428	.	+	.	ID=gene4532;Dbxref=GeneID:12657366;Name=iroB;gbkey=Gene;gene=iroB;gene_biotype=protein_coding;locus_tag=NRG857_30008
 read_list pO83_CORR end
@@ -90,35 +127,35 @@ parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:11-147060 -> block_index 
 parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:1-7002 -> block_index 2
 
 read gff, pO83_CORR.indel:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	44	334	.	+	.	ID=NC_017659.1.indelGL000001;Name=NC_017659.1.indelGL000001;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000001 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000001  
 
 read gff, pO83_CORR.indel:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	44	334	.	+	.	ID=NC_017659.1.indelGL000001;Name=NC_017659.1.indelGL000001;
 read gff, pO83_CORR.indel:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	516	1076	.	+	.	ID=NC_017659.1.indelGL000002;Name=NC_017659.1.indelGL000002;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000002 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000002  
 
 read gff, pO83_CORR.indel:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	516	1076	.	+	.	ID=NC_017659.1.indelGL000002;Name=NC_017659.1.indelGL000002;
 read gff, pO83_CORR.indel:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1039	1158	.	+	.	ID=NC_017659.1.indelGL000003;Name=NC_017659.1.indelGL000003;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000003 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000003  
 
 read gff, pO83_CORR.indel:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1039	1158	.	+	.	ID=NC_017659.1.indelGL000003;Name=NC_017659.1.indelGL000003;
 read gff, pO83_CORR.indel:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1463	1597	.	-	.	ID=NC_017659.1.indelGL000004;Name=NC_017659.1.indelGL000004;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000004 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000004  
 
 read gff, pO83_CORR.indel:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1463	1597	.	-	.	ID=NC_017659.1.indelGL000004;Name=NC_017659.1.indelGL000004;
 read gff, pO83_CORR.indel:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1643	1771	.	-	.	ID=NC_017659.1.indelGL000005;Name=NC_017659.1.indelGL000005;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000005 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000005  
 
 read gff, pO83_CORR.indel:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1643	1771	.	-	.	ID=NC_017659.1.indelGL000005;Name=NC_017659.1.indelGL000005;
 read gff, pO83_CORR.indel:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1901	2050	.	-	.	ID=NC_017659.1.indelGL000006;Name=NC_017659.1.indelGL000006;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000006 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000006  
 
 read gff, pO83_CORR.indel:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1901	2050	.	-	.	ID=NC_017659.1.indelGL000006;Name=NC_017659.1.indelGL000006;
 read gff, pO83_CORR.indel:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	2055	3218	.	+	.	ID=NC_017659.1.indelGL000007;Name=NC_017659.1.indelGL000007;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000007 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000007  
 
 read gff, pO83_CORR.indel:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	2055	3218	.	+	.	ID=NC_017659.1.indelGL000007;Name=NC_017659.1.indelGL000007;
 read gff, pO83_CORR.indel:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	3280	5334	.	+	.	ID=NC_017659.1.indelGL000008;Name=NC_017659.1.indelGL000008;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000008 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000008  
 
 read gff, pO83_CORR.indel:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	3280	5334	.	+	.	ID=NC_017659.1.indelGL000008;Name=NC_017659.1.indelGL000008;
 read gff, pO83_CORR.indel:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	5437	7227	.	+	.	ID=NC_017659.1.indelGL000009;Name=NC_017659.1.indelGL000009;
@@ -305,1160 +342,1160 @@ parse pO83_CORR.indel.twin pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 -> bl
 
 parse pO83_CORR.indel.twin pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 -> block_index 2
 
-warn: feature_id should be uniq, but NC_017659.1.indelGL000001 appear more than one time in --list 
-
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	44	334	.	+	.	ID=NC_017659.1.indelGL000001;Name=NC_017659.1.indelGL000001;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000001 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000001  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	44	334	.	+	.	ID=NC_017659.1.indelGL000001;Name=NC_017659.1.indelGL000001;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000002 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000001  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	516	1076	.	+	.	ID=NC_017659.1.indelGL000002;Name=NC_017659.1.indelGL000002;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000002 appear more than one time in --list 
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	44	334	.	+	.	ID=NC_017659.1.indelGL000001;Name=NC_017659.1.indelGL000001;
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000002  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	516	1076	.	+	.	ID=NC_017659.1.indelGL000002;Name=NC_017659.1.indelGL000002;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000003 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000002  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1039	1158	.	+	.	ID=NC_017659.1.indelGL000003;Name=NC_017659.1.indelGL000003;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000003 appear more than one time in --list 
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	516	1076	.	+	.	ID=NC_017659.1.indelGL000002;Name=NC_017659.1.indelGL000002;
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000003  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1039	1158	.	+	.	ID=NC_017659.1.indelGL000003;Name=NC_017659.1.indelGL000003;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000004 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000003  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1463	1597	.	-	.	ID=NC_017659.1.indelGL000004;Name=NC_017659.1.indelGL000004;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000004 appear more than one time in --list 
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1039	1158	.	+	.	ID=NC_017659.1.indelGL000003;Name=NC_017659.1.indelGL000003;
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000004  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1463	1597	.	-	.	ID=NC_017659.1.indelGL000004;Name=NC_017659.1.indelGL000004;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000005 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000004  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1643	1771	.	-	.	ID=NC_017659.1.indelGL000005;Name=NC_017659.1.indelGL000005;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000005 appear more than one time in --list 
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1463	1597	.	-	.	ID=NC_017659.1.indelGL000004;Name=NC_017659.1.indelGL000004;
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000005  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1643	1771	.	-	.	ID=NC_017659.1.indelGL000005;Name=NC_017659.1.indelGL000005;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000006 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000005  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1901	2050	.	-	.	ID=NC_017659.1.indelGL000006;Name=NC_017659.1.indelGL000006;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000006 appear more than one time in --list 
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1643	1771	.	-	.	ID=NC_017659.1.indelGL000005;Name=NC_017659.1.indelGL000005;
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000006  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1901	2050	.	-	.	ID=NC_017659.1.indelGL000006;Name=NC_017659.1.indelGL000006;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000007 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000006  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	2055	3218	.	+	.	ID=NC_017659.1.indelGL000007;Name=NC_017659.1.indelGL000007;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000007 appear more than one time in --list 
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1901	2050	.	-	.	ID=NC_017659.1.indelGL000006;Name=NC_017659.1.indelGL000006;
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000007  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	2055	3218	.	+	.	ID=NC_017659.1.indelGL000007;Name=NC_017659.1.indelGL000007;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000008 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000007  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	3280	5334	.	+	.	ID=NC_017659.1.indelGL000008;Name=NC_017659.1.indelGL000008;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000008 appear more than one time in --list 
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	2055	3218	.	+	.	ID=NC_017659.1.indelGL000007;Name=NC_017659.1.indelGL000007;
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000008  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	3280	5334	.	+	.	ID=NC_017659.1.indelGL000008;Name=NC_017659.1.indelGL000008;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000009 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000008  
+
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	3280	5334	.	+	.	ID=NC_017659.1.indelGL000008;Name=NC_017659.1.indelGL000008;
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000009  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	5437	7227	.	+	.	ID=NC_017659.1.indelGL000009;Name=NC_017659.1.indelGL000009;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000010 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000010  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	7331	8560	.	+	.	ID=NC_017659.1.indelGL000010;Name=NC_017659.1.indelGL000010;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000011 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000011  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	8645	9601	.	+	.	ID=NC_017659.1.indelGL000011;Name=NC_017659.1.indelGL000011;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000012 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000012  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	9646	11823	.	-	.	ID=NC_017659.1.indelGL000012;Name=NC_017659.1.indelGL000012;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000013 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000013  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	12678	13451	.	-	.	ID=NC_017659.1.indelGL000013;Name=NC_017659.1.indelGL000013;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000014 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000014  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	13611	14579	.	-	.	ID=NC_017659.1.indelGL000014;Name=NC_017659.1.indelGL000014;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000015 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000015  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	14707	14847	.	+	.	ID=NC_017659.1.indelGL000015;Name=NC_017659.1.indelGL000015;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000016 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000016  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	16006	16287	.	-	.	ID=NC_017659.1.indelGL000016;Name=NC_017659.1.indelGL000016;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000017 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000017  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	16316	16432	.	+	.	ID=NC_017659.1.indelGL000017;Name=NC_017659.1.indelGL000017;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000018 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000018  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	16478	16627	.	+	.	ID=NC_017659.1.indelGL000018;Name=NC_017659.1.indelGL000018;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000019 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000019  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	16645	17223	.	-	.	ID=NC_017659.1.indelGL000019;Name=NC_017659.1.indelGL000019;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000020 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000020  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	17204	17320	.	-	.	ID=NC_017659.1.indelGL000020;Name=NC_017659.1.indelGL000020;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000021 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000021  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	17416	18231	.	+	.	ID=NC_017659.1.indelGL000021;Name=NC_017659.1.indelGL000021;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000022 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000022  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	18281	18706	.	-	.	ID=NC_017659.1.indelGL000022;Name=NC_017659.1.indelGL000022;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000023 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000023  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	18812	19603	.	-	.	ID=NC_017659.1.indelGL000023;Name=NC_017659.1.indelGL000023;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000024 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000024  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	19600	20289	.	-	.	ID=NC_017659.1.indelGL000024;Name=NC_017659.1.indelGL000024;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000025 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000025  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	20333	20683	.	-	.	ID=NC_017659.1.indelGL000025;Name=NC_017659.1.indelGL000025;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000026 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000026  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	20829	21005	.	-	.	ID=NC_017659.1.indelGL000026;Name=NC_017659.1.indelGL000026;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000027 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000027  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	21224	22315	.	+	.	ID=NC_017659.1.indelGL000027;Name=NC_017659.1.indelGL000027;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000028 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000028  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	22317	24542	.	+	.	ID=NC_017659.1.indelGL000028;Name=NC_017659.1.indelGL000028;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000029 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000029  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	24592	25491	.	-	.	ID=NC_017659.1.indelGL000029;Name=NC_017659.1.indelGL000029;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000030 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000030  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	25481	25771	.	-	.	ID=NC_017659.1.indelGL000030;Name=NC_017659.1.indelGL000030;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000031 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000031  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	26067	26297	.	+	.	ID=NC_017659.1.indelGL000031;Name=NC_017659.1.indelGL000031;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000032 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000032  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	26309	26710	.	+	.	ID=NC_017659.1.indelGL000032;Name=NC_017659.1.indelGL000032;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000033 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000033  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	26872	29010	.	-	.	ID=NC_017659.1.indelGL000033;Name=NC_017659.1.indelGL000033;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000034 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000034  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	29248	29406	.	+	.	ID=NC_017659.1.indelGL000034;Name=NC_017659.1.indelGL000034;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000035 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000035  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	29364	29621	.	+	.	ID=NC_017659.1.indelGL000035;Name=NC_017659.1.indelGL000035;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000036 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000036  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	29621	30211	.	+	.	ID=NC_017659.1.indelGL000036;Name=NC_017659.1.indelGL000036;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000037 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000037  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	30474	32030	.	+	.	ID=NC_017659.1.indelGL000037;Name=NC_017659.1.indelGL000037;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000038 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000038  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	32049	32168	.	+	.	ID=NC_017659.1.indelGL000038;Name=NC_017659.1.indelGL000038;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000039 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000039  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	32221	32838	.	+	.	ID=NC_017659.1.indelGL000039;Name=NC_017659.1.indelGL000039;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000040 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000040  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	33131	34246	.	-	.	ID=NC_017659.1.indelGL000040;Name=NC_017659.1.indelGL000040;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000041 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000041  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	34369	34692	.	+	.	ID=NC_017659.1.indelGL000041;Name=NC_017659.1.indelGL000041;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000042 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000042  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	34747	36543	.	-	.	ID=NC_017659.1.indelGL000042;Name=NC_017659.1.indelGL000042;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000043 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000043  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	36502	36894	.	+	.	ID=NC_017659.1.indelGL000043;Name=NC_017659.1.indelGL000043;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000044 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000044  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	37032	37916	.	+	.	ID=NC_017659.1.indelGL000044;Name=NC_017659.1.indelGL000044;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000045 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000045  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	37948	39222	.	-	.	ID=NC_017659.1.indelGL000045;Name=NC_017659.1.indelGL000045;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000046 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000046  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	39226	39903	.	+	.	ID=NC_017659.1.indelGL000046;Name=NC_017659.1.indelGL000046;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000047 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000047  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	39935	40177	.	-	.	ID=NC_017659.1.indelGL000047;Name=NC_017659.1.indelGL000047;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000048 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000048  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	40311	42239	.	+	.	ID=NC_017659.1.indelGL000048;Name=NC_017659.1.indelGL000048;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000049 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000049  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	42330	42647	.	-	.	ID=NC_017659.1.indelGL000049;Name=NC_017659.1.indelGL000049;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000050 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000050  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	42884	43543	.	-	.	ID=NC_017659.1.indelGL000050;Name=NC_017659.1.indelGL000050;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000051 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000051  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	43597	43788	.	+	.	ID=NC_017659.1.indelGL000051;Name=NC_017659.1.indelGL000051;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000052 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000052  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	44016	44519	.	+	.	ID=NC_017659.1.indelGL000052;Name=NC_017659.1.indelGL000052;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000053 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000053  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	45055	45192	.	-	.	ID=NC_017659.1.indelGL000053;Name=NC_017659.1.indelGL000053;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000054 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000054  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	45232	45954	.	-	.	ID=NC_017659.1.indelGL000054;Name=NC_017659.1.indelGL000054;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000055 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000055  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	46148	47008	.	-	.	ID=NC_017659.1.indelGL000055;Name=NC_017659.1.indelGL000055;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000056 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000056  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	47191	47523	.	-	.	ID=NC_017659.1.indelGL000056;Name=NC_017659.1.indelGL000056;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000057 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000057  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	47575	48297	.	+	.	ID=NC_017659.1.indelGL000057;Name=NC_017659.1.indelGL000057;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000058 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000058  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	48359	49066	.	+	.	ID=NC_017659.1.indelGL000058;Name=NC_017659.1.indelGL000058;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000059 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000059  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	49053	49904	.	+	.	ID=NC_017659.1.indelGL000059;Name=NC_017659.1.indelGL000059;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000060 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000060  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	50087	50203	.	+	.	ID=NC_017659.1.indelGL000060;Name=NC_017659.1.indelGL000060;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000061 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000061  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	50212	51027	.	+	.	ID=NC_017659.1.indelGL000061;Name=NC_017659.1.indelGL000061;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000062 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000062  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	51088	51891	.	+	.	ID=NC_017659.1.indelGL000062;Name=NC_017659.1.indelGL000062;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000063 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000063  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	51891	52727	.	+	.	ID=NC_017659.1.indelGL000063;Name=NC_017659.1.indelGL000063;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000064 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000064  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	52699	53817	.	-	.	ID=NC_017659.1.indelGL000064;Name=NC_017659.1.indelGL000064;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000065 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000065  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	53989	54447	.	+	.	ID=NC_017659.1.indelGL000065;Name=NC_017659.1.indelGL000065;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000066 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000066  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	54486	55331	.	+	.	ID=NC_017659.1.indelGL000066;Name=NC_017659.1.indelGL000066;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000067 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000067  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	55809	56675	.	+	.	ID=NC_017659.1.indelGL000067;Name=NC_017659.1.indelGL000067;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000068 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000068  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	56977	57195	.	-	.	ID=NC_017659.1.indelGL000068;Name=NC_017659.1.indelGL000068;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000069 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000069  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	57479	58261	.	-	.	ID=NC_017659.1.indelGL000069;Name=NC_017659.1.indelGL000069;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000070 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000070  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	58251	59774	.	-	.	ID=NC_017659.1.indelGL000070;Name=NC_017659.1.indelGL000070;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000071 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000071  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	59876	60604	.	-	.	ID=NC_017659.1.indelGL000071;Name=NC_017659.1.indelGL000071;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000072 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000072  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	60686	60964	.	+	.	ID=NC_017659.1.indelGL000072;Name=NC_017659.1.indelGL000072;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000073 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000073  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	60972	61223	.	-	.	ID=NC_017659.1.indelGL000073;Name=NC_017659.1.indelGL000073;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000074 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000074  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	61259	61975	.	+	.	ID=NC_017659.1.indelGL000074;Name=NC_017659.1.indelGL000074;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000075 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000075  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	62255	62467	.	+	.	ID=NC_017659.1.indelGL000075;Name=NC_017659.1.indelGL000075;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000076 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000076  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	62877	63494	.	+	.	ID=NC_017659.1.indelGL000076;Name=NC_017659.1.indelGL000076;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000077 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000077  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	63531	64370	.	+	.	ID=NC_017659.1.indelGL000077;Name=NC_017659.1.indelGL000077;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000078 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000078  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	64407	65315	.	+	.	ID=NC_017659.1.indelGL000078;Name=NC_017659.1.indelGL000078;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000079 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000079  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	65354	65623	.	-	.	ID=NC_017659.1.indelGL000079;Name=NC_017659.1.indelGL000079;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000080 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000080  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	65834	67501	.	-	.	ID=NC_017659.1.indelGL000080;Name=NC_017659.1.indelGL000080;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000081 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000081  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	67504	69183	.	-	.	ID=NC_017659.1.indelGL000081;Name=NC_017659.1.indelGL000081;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000082 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000082  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	69258	69965	.	-	.	ID=NC_017659.1.indelGL000082;Name=NC_017659.1.indelGL000082;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000083 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000083  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	69962	70198	.	-	.	ID=NC_017659.1.indelGL000083;Name=NC_017659.1.indelGL000083;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000084 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000084  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	70195	70500	.	-	.	ID=NC_017659.1.indelGL000084;Name=NC_017659.1.indelGL000084;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000085 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000085  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	70575	72224	.	-	.	ID=NC_017659.1.indelGL000085;Name=NC_017659.1.indelGL000085;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000086 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000086  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	72321	72782	.	-	.	ID=NC_017659.1.indelGL000086;Name=NC_017659.1.indelGL000086;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000087 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000087  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	72779	73054	.	-	.	ID=NC_017659.1.indelGL000087;Name=NC_017659.1.indelGL000087;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000088 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000088  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	73068	73418	.	-	.	ID=NC_017659.1.indelGL000088;Name=NC_017659.1.indelGL000088;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000089 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000089  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	73490	73924	.	+	.	ID=NC_017659.1.indelGL000089;Name=NC_017659.1.indelGL000089;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000090 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000090  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	74031	74534	.	-	.	ID=NC_017659.1.indelGL000090;Name=NC_017659.1.indelGL000090;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000091 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000091  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	75093	75425	.	-	.	ID=NC_017659.1.indelGL000091;Name=NC_017659.1.indelGL000091;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000092 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000092  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	75427	75645	.	-	.	ID=NC_017659.1.indelGL000092;Name=NC_017659.1.indelGL000092;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000093 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000093  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	75777	76430	.	-	.	ID=NC_017659.1.indelGL000093;Name=NC_017659.1.indelGL000093;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000094 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000094  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	76427	76549	.	-	.	ID=NC_017659.1.indelGL000094;Name=NC_017659.1.indelGL000094;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000095 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000095  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	76528	76668	.	-	.	ID=NC_017659.1.indelGL000095;Name=NC_017659.1.indelGL000095;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000096 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000096  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	77248	77400	.	+	.	ID=NC_017659.1.indelGL000096;Name=NC_017659.1.indelGL000096;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000097 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000097  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	77370	78227	.	-	.	ID=NC_017659.1.indelGL000097;Name=NC_017659.1.indelGL000097;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000098 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000098  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	78220	78714	.	-	.	ID=NC_017659.1.indelGL000098;Name=NC_017659.1.indelGL000098;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000099 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000099  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	79001	79258	.	-	.	ID=NC_017659.1.indelGL000099;Name=NC_017659.1.indelGL000099;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000100 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000100  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	79225	79392	.	+	.	ID=NC_017659.1.indelGL000100;Name=NC_017659.1.indelGL000100;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000101 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000101  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	79438	79560	.	+	.	ID=NC_017659.1.indelGL000101;Name=NC_017659.1.indelGL000101;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000102 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000102  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	79542	79691	.	-	.	ID=NC_017659.1.indelGL000102;Name=NC_017659.1.indelGL000102;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000103 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000103  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	79747	79956	.	+	.	ID=NC_017659.1.indelGL000103;Name=NC_017659.1.indelGL000103;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000104 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000104  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	80022	80138	.	-	.	ID=NC_017659.1.indelGL000104;Name=NC_017659.1.indelGL000104;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000105 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000105  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	80372	80584	.	-	.	ID=NC_017659.1.indelGL000105;Name=NC_017659.1.indelGL000105;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000106 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000106  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	80720	81280	.	-	.	ID=NC_017659.1.indelGL000106;Name=NC_017659.1.indelGL000106;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000107 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000107  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	81383	82243	.	-	.	ID=NC_017659.1.indelGL000107;Name=NC_017659.1.indelGL000107;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000108 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000108  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	82302	83048	.	-	.	ID=NC_017659.1.indelGL000108;Name=NC_017659.1.indelGL000108;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000109 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000109  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	83068	88359	.	-	.	ID=NC_017659.1.indelGL000109;Name=NC_017659.1.indelGL000109;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000110 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000110  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	88420	88647	.	+	.	ID=NC_017659.1.indelGL000110;Name=NC_017659.1.indelGL000110;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000111 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000111  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	88647	89045	.	+	.	ID=NC_017659.1.indelGL000111;Name=NC_017659.1.indelGL000111;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000112 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000112  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	89054	91207	.	-	.	ID=NC_017659.1.indelGL000112;Name=NC_017659.1.indelGL000112;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000113 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000113  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	91460	92290	.	-	.	ID=NC_017659.1.indelGL000113;Name=NC_017659.1.indelGL000113;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000114 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000114  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	92455	92574	.	+	.	ID=NC_017659.1.indelGL000114;Name=NC_017659.1.indelGL000114;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000115 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000115  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	92736	95558	.	-	.	ID=NC_017659.1.indelGL000115;Name=NC_017659.1.indelGL000115;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000116 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000116  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	95555	96865	.	-	.	ID=NC_017659.1.indelGL000116;Name=NC_017659.1.indelGL000116;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000117 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000117  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	96865	97593	.	-	.	ID=NC_017659.1.indelGL000117;Name=NC_017659.1.indelGL000117;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000118 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000118  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	97580	98146	.	-	.	ID=NC_017659.1.indelGL000118;Name=NC_017659.1.indelGL000118;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000119 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000119  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	98168	98479	.	-	.	ID=NC_017659.1.indelGL000119;Name=NC_017659.1.indelGL000119;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000120 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000120  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	98494	98859	.	-	.	ID=NC_017659.1.indelGL000120;Name=NC_017659.1.indelGL000120;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000121 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000121  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	98892	99293	.	-	.	ID=NC_017659.1.indelGL000121;Name=NC_017659.1.indelGL000121;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000122 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000122  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	99386	100075	.	-	.	ID=NC_017659.1.indelGL000122;Name=NC_017659.1.indelGL000122;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000123 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000123  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	100262	100645	.	-	.	ID=NC_017659.1.indelGL000123;Name=NC_017659.1.indelGL000123;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000124 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000124  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	100966	101568	.	+	.	ID=NC_017659.1.indelGL000124;Name=NC_017659.1.indelGL000124;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000125 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000125  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	101594	101728	.	-	.	ID=NC_017659.1.indelGL000125;Name=NC_017659.1.indelGL000125;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000126 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000126  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	101864	102793	.	-	.	ID=NC_017659.1.indelGL000126;Name=NC_017659.1.indelGL000126;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000127 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000127  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	102803	103090	.	-	.	ID=NC_017659.1.indelGL000127;Name=NC_017659.1.indelGL000127;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000128 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000128  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	103323	103568	.	-	.	ID=NC_017659.1.indelGL000128;Name=NC_017659.1.indelGL000128;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000129 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000129  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	103561	103791	.	-	.	ID=NC_017659.1.indelGL000129;Name=NC_017659.1.indelGL000129;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000130 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000130  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	104011	104127	.	-	.	ID=NC_017659.1.indelGL000130;Name=NC_017659.1.indelGL000130;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000131 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000131  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	104312	104449	.	-	.	ID=NC_017659.1.indelGL000131;Name=NC_017659.1.indelGL000131;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000132 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000132  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	104449	105168	.	-	.	ID=NC_017659.1.indelGL000132;Name=NC_017659.1.indelGL000132;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000133 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000133  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	105165	105599	.	-	.	ID=NC_017659.1.indelGL000133;Name=NC_017659.1.indelGL000133;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000134 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000134  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	105654	105788	.	-	.	ID=NC_017659.1.indelGL000134;Name=NC_017659.1.indelGL000134;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000135 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000135  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	105879	106139	.	-	.	ID=NC_017659.1.indelGL000135;Name=NC_017659.1.indelGL000135;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000136 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000136  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	106185	106760	.	-	.	ID=NC_017659.1.indelGL000136;Name=NC_017659.1.indelGL000136;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000137 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000137  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	106750	106878	.	-	.	ID=NC_017659.1.indelGL000137;Name=NC_017659.1.indelGL000137;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000138 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000138  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	106958	107467	.	-	.	ID=NC_017659.1.indelGL000138;Name=NC_017659.1.indelGL000138;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000139 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000139  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	108052	109023	.	-	.	ID=NC_017659.1.indelGL000139;Name=NC_017659.1.indelGL000139;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000140 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000140  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	109023	110198	.	-	.	ID=NC_017659.1.indelGL000140;Name=NC_017659.1.indelGL000140;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000141 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000141  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	110489	110992	.	-	.	ID=NC_017659.1.indelGL000141;Name=NC_017659.1.indelGL000141;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000142 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000142  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	111215	111331	.	-	.	ID=NC_017659.1.indelGL000142;Name=NC_017659.1.indelGL000142;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000143 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000143  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	111671	113818	.	-	.	ID=NC_017659.1.indelGL000143;Name=NC_017659.1.indelGL000143;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000144 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000144  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	113954	115231	.	-	.	ID=NC_017659.1.indelGL000144;Name=NC_017659.1.indelGL000144;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000145 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000145  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	115228	116970	.	-	.	ID=NC_017659.1.indelGL000145;Name=NC_017659.1.indelGL000145;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000146 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000146  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	116970	117917	.	-	.	ID=NC_017659.1.indelGL000146;Name=NC_017659.1.indelGL000146;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000147 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000147  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	117918	119699	.	-	.	ID=NC_017659.1.indelGL000147;Name=NC_017659.1.indelGL000147;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000148 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000148  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	119778	120971	.	+	.	ID=NC_017659.1.indelGL000148;Name=NC_017659.1.indelGL000148;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000149 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000149  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	121351	121731	.	-	.	ID=NC_017659.1.indelGL000149;Name=NC_017659.1.indelGL000149;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000150 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000150  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	122072	122506	.	-	.	ID=NC_017659.1.indelGL000150;Name=NC_017659.1.indelGL000150;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000151 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000151  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	122862	123008	.	-	.	ID=NC_017659.1.indelGL000151;Name=NC_017659.1.indelGL000151;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000152 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000152  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	122974	123831	.	-	.	ID=NC_017659.1.indelGL000152;Name=NC_017659.1.indelGL000152;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000153 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000153  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	123828	124685	.	-	.	ID=NC_017659.1.indelGL000153;Name=NC_017659.1.indelGL000153;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000154 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000154  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	124682	125506	.	-	.	ID=NC_017659.1.indelGL000154;Name=NC_017659.1.indelGL000154;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000155 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000155  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	125481	126422	.	-	.	ID=NC_017659.1.indelGL000155;Name=NC_017659.1.indelGL000155;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000156 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000156  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	126972	127475	.	+	.	ID=NC_017659.1.indelGL000156;Name=NC_017659.1.indelGL000156;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000157 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000157  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	127477	127653	.	+	.	ID=NC_017659.1.indelGL000157;Name=NC_017659.1.indelGL000157;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000158 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000158  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	127655	127891	.	-	.	ID=NC_017659.1.indelGL000158;Name=NC_017659.1.indelGL000158;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000159 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000159  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	128302	128658	.	-	.	ID=NC_017659.1.indelGL000159;Name=NC_017659.1.indelGL000159;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000160 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000160  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	128699	128995	.	+	.	ID=NC_017659.1.indelGL000160;Name=NC_017659.1.indelGL000160;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000161 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000161  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	129241	129411	.	+	.	ID=NC_017659.1.indelGL000161;Name=NC_017659.1.indelGL000161;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000162 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000162  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	129404	130381	.	+	.	ID=NC_017659.1.indelGL000162;Name=NC_017659.1.indelGL000162;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000163 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000163  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	130457	130576	.	-	.	ID=NC_017659.1.indelGL000163;Name=NC_017659.1.indelGL000163;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000164 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000164  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	130666	131406	.	-	.	ID=NC_017659.1.indelGL000164;Name=NC_017659.1.indelGL000164;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000165 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000165  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	131563	131688	.	+	.	ID=NC_017659.1.indelGL000165;Name=NC_017659.1.indelGL000165;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000166 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000166  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	132089	132997	.	-	.	ID=NC_017659.1.indelGL000166;Name=NC_017659.1.indelGL000166;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000167 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000167  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	133060	134169	.	-	.	ID=NC_017659.1.indelGL000167;Name=NC_017659.1.indelGL000167;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000168 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000168  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	134419	134574	.	+	.	ID=NC_017659.1.indelGL000168;Name=NC_017659.1.indelGL000168;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000169 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000169  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	134602	135555	.	-	.	ID=NC_017659.1.indelGL000169;Name=NC_017659.1.indelGL000169;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000170 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000170  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	135728	136048	.	+	.	ID=NC_017659.1.indelGL000170;Name=NC_017659.1.indelGL000170;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000171 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000171  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	136000	136140	.	+	.	ID=NC_017659.1.indelGL000171;Name=NC_017659.1.indelGL000171;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000172 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000172  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	136828	136986	.	-	.	ID=NC_017659.1.indelGL000172;Name=NC_017659.1.indelGL000172;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000173 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000173  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	137221	137496	.	+	.	ID=NC_017659.1.indelGL000173;Name=NC_017659.1.indelGL000173;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000174 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000174  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	137493	138383	.	+	.	ID=NC_017659.1.indelGL000174;Name=NC_017659.1.indelGL000174;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000175 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000175  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	138653	138772	.	-	.	ID=NC_017659.1.indelGL000175;Name=NC_017659.1.indelGL000175;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000176 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000176  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	139050	139553	.	+	.	ID=NC_017659.1.indelGL000176;Name=NC_017659.1.indelGL000176;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000177 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000177  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	139631	140017	.	-	.	ID=NC_017659.1.indelGL000177;Name=NC_017659.1.indelGL000177;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000178 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000178  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	140154	141020	.	-	.	ID=NC_017659.1.indelGL000178;Name=NC_017659.1.indelGL000178;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000179 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000179  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	141207	141371	.	-	.	ID=NC_017659.1.indelGL000179;Name=NC_017659.1.indelGL000179;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000180 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000180  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	141657	142850	.	-	.	ID=NC_017659.1.indelGL000180;Name=NC_017659.1.indelGL000180;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000181 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000181  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	143470	143592	.	+	.	ID=NC_017659.1.indelGL000181;Name=NC_017659.1.indelGL000181;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000182 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000182  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	143738	143902	.	+	.	ID=NC_017659.1.indelGL000182;Name=NC_017659.1.indelGL000182;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000183 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000183  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	144073	144978	.	-	.	ID=NC_017659.1.indelGL000183;Name=NC_017659.1.indelGL000183;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000184 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000184  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	144971	145309	.	-	.	ID=NC_017659.1.indelGL000184;Name=NC_017659.1.indelGL000184;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000185 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000185  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	145921	146229	.	+	.	ID=NC_017659.1.indelGL000185;Name=NC_017659.1.indelGL000185;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000186 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000186  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	146343	146525	.	-	.	ID=NC_017659.1.indelGL000186;Name=NC_017659.1.indelGL000186;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000187 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000187  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	146550	146675	.	-	.	ID=NC_017659.1.indelGL000187;Name=NC_017659.1.indelGL000187;
 read_list pO83_CORR.indel.twin end
 parse pO83_CORR.indel.reverse pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 -> block_index 1
 
-warn: feature_id should be uniq, but NC_017659.1.indelGL000001 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000001  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	44	334	.	+	.	ID=NC_017659.1.indelGL000001;Name=NC_017659.1.indelGL000001;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000002 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000002  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	516	1076	.	+	.	ID=NC_017659.1.indelGL000002;Name=NC_017659.1.indelGL000002;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000003 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000003  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1039	1158	.	+	.	ID=NC_017659.1.indelGL000003;Name=NC_017659.1.indelGL000003;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000004 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000004  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1463	1597	.	-	.	ID=NC_017659.1.indelGL000004;Name=NC_017659.1.indelGL000004;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000005 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000005  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1643	1771	.	-	.	ID=NC_017659.1.indelGL000005;Name=NC_017659.1.indelGL000005;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000006 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000006  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1901	2050	.	-	.	ID=NC_017659.1.indelGL000006;Name=NC_017659.1.indelGL000006;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000007 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000007  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	2055	3218	.	+	.	ID=NC_017659.1.indelGL000007;Name=NC_017659.1.indelGL000007;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000008 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000008  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	3280	5334	.	+	.	ID=NC_017659.1.indelGL000008;Name=NC_017659.1.indelGL000008;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000009 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000009  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	5437	7227	.	+	.	ID=NC_017659.1.indelGL000009;Name=NC_017659.1.indelGL000009;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000010 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000010  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	7331	8560	.	+	.	ID=NC_017659.1.indelGL000010;Name=NC_017659.1.indelGL000010;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000011 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000011  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	8645	9601	.	+	.	ID=NC_017659.1.indelGL000011;Name=NC_017659.1.indelGL000011;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000012 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000012  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	9646	11823	.	-	.	ID=NC_017659.1.indelGL000012;Name=NC_017659.1.indelGL000012;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000013 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000013  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	12678	13451	.	-	.	ID=NC_017659.1.indelGL000013;Name=NC_017659.1.indelGL000013;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000014 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000014  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	13611	14579	.	-	.	ID=NC_017659.1.indelGL000014;Name=NC_017659.1.indelGL000014;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000015 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000015  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	14707	14847	.	+	.	ID=NC_017659.1.indelGL000015;Name=NC_017659.1.indelGL000015;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000016 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000016  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	16006	16287	.	-	.	ID=NC_017659.1.indelGL000016;Name=NC_017659.1.indelGL000016;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000017 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000017  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	16316	16432	.	+	.	ID=NC_017659.1.indelGL000017;Name=NC_017659.1.indelGL000017;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000018 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000018  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	16478	16627	.	+	.	ID=NC_017659.1.indelGL000018;Name=NC_017659.1.indelGL000018;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000019 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000019  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	16645	17223	.	-	.	ID=NC_017659.1.indelGL000019;Name=NC_017659.1.indelGL000019;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000020 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000020  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	17204	17320	.	-	.	ID=NC_017659.1.indelGL000020;Name=NC_017659.1.indelGL000020;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000021 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000021  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	17416	18231	.	+	.	ID=NC_017659.1.indelGL000021;Name=NC_017659.1.indelGL000021;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000022 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000022  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	18281	18706	.	-	.	ID=NC_017659.1.indelGL000022;Name=NC_017659.1.indelGL000022;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000023 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000023  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	18812	19603	.	-	.	ID=NC_017659.1.indelGL000023;Name=NC_017659.1.indelGL000023;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000024 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000024  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	19600	20289	.	-	.	ID=NC_017659.1.indelGL000024;Name=NC_017659.1.indelGL000024;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000025 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000025  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	20333	20683	.	-	.	ID=NC_017659.1.indelGL000025;Name=NC_017659.1.indelGL000025;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000026 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000026  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	20829	21005	.	-	.	ID=NC_017659.1.indelGL000026;Name=NC_017659.1.indelGL000026;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000027 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000027  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	21224	22315	.	+	.	ID=NC_017659.1.indelGL000027;Name=NC_017659.1.indelGL000027;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000028 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000028  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	22317	24542	.	+	.	ID=NC_017659.1.indelGL000028;Name=NC_017659.1.indelGL000028;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000029 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000029  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	24592	25491	.	-	.	ID=NC_017659.1.indelGL000029;Name=NC_017659.1.indelGL000029;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000030 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000030  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	25481	25771	.	-	.	ID=NC_017659.1.indelGL000030;Name=NC_017659.1.indelGL000030;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000031 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000031  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	26067	26297	.	+	.	ID=NC_017659.1.indelGL000031;Name=NC_017659.1.indelGL000031;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000032 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000032  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	26309	26710	.	+	.	ID=NC_017659.1.indelGL000032;Name=NC_017659.1.indelGL000032;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000033 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000033  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	26872	29010	.	-	.	ID=NC_017659.1.indelGL000033;Name=NC_017659.1.indelGL000033;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000034 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000034  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	29248	29406	.	+	.	ID=NC_017659.1.indelGL000034;Name=NC_017659.1.indelGL000034;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000035 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000035  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	29364	29621	.	+	.	ID=NC_017659.1.indelGL000035;Name=NC_017659.1.indelGL000035;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000036 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000036  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	29621	30211	.	+	.	ID=NC_017659.1.indelGL000036;Name=NC_017659.1.indelGL000036;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000037 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000037  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	30474	32030	.	+	.	ID=NC_017659.1.indelGL000037;Name=NC_017659.1.indelGL000037;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000038 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000038  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	32049	32168	.	+	.	ID=NC_017659.1.indelGL000038;Name=NC_017659.1.indelGL000038;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000039 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000039  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	32221	32838	.	+	.	ID=NC_017659.1.indelGL000039;Name=NC_017659.1.indelGL000039;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000040 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000040  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	33131	34246	.	-	.	ID=NC_017659.1.indelGL000040;Name=NC_017659.1.indelGL000040;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000041 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000041  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	34369	34692	.	+	.	ID=NC_017659.1.indelGL000041;Name=NC_017659.1.indelGL000041;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000042 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000042  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	34747	36543	.	-	.	ID=NC_017659.1.indelGL000042;Name=NC_017659.1.indelGL000042;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000043 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000043  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	36502	36894	.	+	.	ID=NC_017659.1.indelGL000043;Name=NC_017659.1.indelGL000043;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000044 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000044  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	37032	37916	.	+	.	ID=NC_017659.1.indelGL000044;Name=NC_017659.1.indelGL000044;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000045 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000045  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	37948	39222	.	-	.	ID=NC_017659.1.indelGL000045;Name=NC_017659.1.indelGL000045;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000046 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000046  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	39226	39903	.	+	.	ID=NC_017659.1.indelGL000046;Name=NC_017659.1.indelGL000046;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000047 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000047  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	39935	40177	.	-	.	ID=NC_017659.1.indelGL000047;Name=NC_017659.1.indelGL000047;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000048 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000048  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	40311	42239	.	+	.	ID=NC_017659.1.indelGL000048;Name=NC_017659.1.indelGL000048;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000049 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000049  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	42330	42647	.	-	.	ID=NC_017659.1.indelGL000049;Name=NC_017659.1.indelGL000049;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000050 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000050  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	42884	43543	.	-	.	ID=NC_017659.1.indelGL000050;Name=NC_017659.1.indelGL000050;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000051 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000051  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	43597	43788	.	+	.	ID=NC_017659.1.indelGL000051;Name=NC_017659.1.indelGL000051;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000052 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000052  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	44016	44519	.	+	.	ID=NC_017659.1.indelGL000052;Name=NC_017659.1.indelGL000052;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000053 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000053  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	45055	45192	.	-	.	ID=NC_017659.1.indelGL000053;Name=NC_017659.1.indelGL000053;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000054 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000054  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	45232	45954	.	-	.	ID=NC_017659.1.indelGL000054;Name=NC_017659.1.indelGL000054;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000055 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000055  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	46148	47008	.	-	.	ID=NC_017659.1.indelGL000055;Name=NC_017659.1.indelGL000055;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000056 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000056  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	47191	47523	.	-	.	ID=NC_017659.1.indelGL000056;Name=NC_017659.1.indelGL000056;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000057 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000057  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	47575	48297	.	+	.	ID=NC_017659.1.indelGL000057;Name=NC_017659.1.indelGL000057;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000058 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000058  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	48359	49066	.	+	.	ID=NC_017659.1.indelGL000058;Name=NC_017659.1.indelGL000058;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000059 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000059  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	49053	49904	.	+	.	ID=NC_017659.1.indelGL000059;Name=NC_017659.1.indelGL000059;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000060 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000060  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	50087	50203	.	+	.	ID=NC_017659.1.indelGL000060;Name=NC_017659.1.indelGL000060;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000061 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000061  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	50212	51027	.	+	.	ID=NC_017659.1.indelGL000061;Name=NC_017659.1.indelGL000061;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000062 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000062  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	51088	51891	.	+	.	ID=NC_017659.1.indelGL000062;Name=NC_017659.1.indelGL000062;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000063 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000063  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	51891	52727	.	+	.	ID=NC_017659.1.indelGL000063;Name=NC_017659.1.indelGL000063;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000064 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000064  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	52699	53817	.	-	.	ID=NC_017659.1.indelGL000064;Name=NC_017659.1.indelGL000064;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000065 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000065  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	53989	54447	.	+	.	ID=NC_017659.1.indelGL000065;Name=NC_017659.1.indelGL000065;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000066 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000066  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	54486	55331	.	+	.	ID=NC_017659.1.indelGL000066;Name=NC_017659.1.indelGL000066;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000067 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000067  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	55809	56675	.	+	.	ID=NC_017659.1.indelGL000067;Name=NC_017659.1.indelGL000067;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000068 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000068  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	56977	57195	.	-	.	ID=NC_017659.1.indelGL000068;Name=NC_017659.1.indelGL000068;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000069 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000069  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	57479	58261	.	-	.	ID=NC_017659.1.indelGL000069;Name=NC_017659.1.indelGL000069;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000070 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000070  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	58251	59774	.	-	.	ID=NC_017659.1.indelGL000070;Name=NC_017659.1.indelGL000070;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000071 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000071  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	59876	60604	.	-	.	ID=NC_017659.1.indelGL000071;Name=NC_017659.1.indelGL000071;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000072 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000072  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	60686	60964	.	+	.	ID=NC_017659.1.indelGL000072;Name=NC_017659.1.indelGL000072;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000073 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000073  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	60972	61223	.	-	.	ID=NC_017659.1.indelGL000073;Name=NC_017659.1.indelGL000073;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000074 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000074  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	61259	61975	.	+	.	ID=NC_017659.1.indelGL000074;Name=NC_017659.1.indelGL000074;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000075 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000075  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	62255	62467	.	+	.	ID=NC_017659.1.indelGL000075;Name=NC_017659.1.indelGL000075;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000076 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000076  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	62877	63494	.	+	.	ID=NC_017659.1.indelGL000076;Name=NC_017659.1.indelGL000076;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000077 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000077  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	63531	64370	.	+	.	ID=NC_017659.1.indelGL000077;Name=NC_017659.1.indelGL000077;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000078 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000078  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	64407	65315	.	+	.	ID=NC_017659.1.indelGL000078;Name=NC_017659.1.indelGL000078;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000079 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000079  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	65354	65623	.	-	.	ID=NC_017659.1.indelGL000079;Name=NC_017659.1.indelGL000079;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000080 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000080  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	65834	67501	.	-	.	ID=NC_017659.1.indelGL000080;Name=NC_017659.1.indelGL000080;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000081 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000081  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	67504	69183	.	-	.	ID=NC_017659.1.indelGL000081;Name=NC_017659.1.indelGL000081;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000082 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000082  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	69258	69965	.	-	.	ID=NC_017659.1.indelGL000082;Name=NC_017659.1.indelGL000082;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000083 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000083  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	69962	70198	.	-	.	ID=NC_017659.1.indelGL000083;Name=NC_017659.1.indelGL000083;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000084 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000084  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	70195	70500	.	-	.	ID=NC_017659.1.indelGL000084;Name=NC_017659.1.indelGL000084;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000085 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000085  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	70575	72224	.	-	.	ID=NC_017659.1.indelGL000085;Name=NC_017659.1.indelGL000085;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000086 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000086  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	72321	72782	.	-	.	ID=NC_017659.1.indelGL000086;Name=NC_017659.1.indelGL000086;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000087 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000087  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	72779	73054	.	-	.	ID=NC_017659.1.indelGL000087;Name=NC_017659.1.indelGL000087;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000088 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000088  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	73068	73418	.	-	.	ID=NC_017659.1.indelGL000088;Name=NC_017659.1.indelGL000088;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000089 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000089  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	73490	73924	.	+	.	ID=NC_017659.1.indelGL000089;Name=NC_017659.1.indelGL000089;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000090 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000090  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	74031	74534	.	-	.	ID=NC_017659.1.indelGL000090;Name=NC_017659.1.indelGL000090;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000091 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000091  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	75093	75425	.	-	.	ID=NC_017659.1.indelGL000091;Name=NC_017659.1.indelGL000091;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000092 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000092  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	75427	75645	.	-	.	ID=NC_017659.1.indelGL000092;Name=NC_017659.1.indelGL000092;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000093 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000093  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	75777	76430	.	-	.	ID=NC_017659.1.indelGL000093;Name=NC_017659.1.indelGL000093;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000094 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000094  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	76427	76549	.	-	.	ID=NC_017659.1.indelGL000094;Name=NC_017659.1.indelGL000094;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000095 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000095  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	76528	76668	.	-	.	ID=NC_017659.1.indelGL000095;Name=NC_017659.1.indelGL000095;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000096 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000096  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	77248	77400	.	+	.	ID=NC_017659.1.indelGL000096;Name=NC_017659.1.indelGL000096;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000097 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000097  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	77370	78227	.	-	.	ID=NC_017659.1.indelGL000097;Name=NC_017659.1.indelGL000097;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000098 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000098  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	78220	78714	.	-	.	ID=NC_017659.1.indelGL000098;Name=NC_017659.1.indelGL000098;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000099 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000099  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	79001	79258	.	-	.	ID=NC_017659.1.indelGL000099;Name=NC_017659.1.indelGL000099;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000100 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000100  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	79225	79392	.	+	.	ID=NC_017659.1.indelGL000100;Name=NC_017659.1.indelGL000100;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000101 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000101  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	79438	79560	.	+	.	ID=NC_017659.1.indelGL000101;Name=NC_017659.1.indelGL000101;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000102 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000102  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	79542	79691	.	-	.	ID=NC_017659.1.indelGL000102;Name=NC_017659.1.indelGL000102;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000103 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000103  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	79747	79956	.	+	.	ID=NC_017659.1.indelGL000103;Name=NC_017659.1.indelGL000103;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000104 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000104  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	80022	80138	.	-	.	ID=NC_017659.1.indelGL000104;Name=NC_017659.1.indelGL000104;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000105 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000105  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	80372	80584	.	-	.	ID=NC_017659.1.indelGL000105;Name=NC_017659.1.indelGL000105;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000106 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000106  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	80720	81280	.	-	.	ID=NC_017659.1.indelGL000106;Name=NC_017659.1.indelGL000106;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000107 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000107  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	81383	82243	.	-	.	ID=NC_017659.1.indelGL000107;Name=NC_017659.1.indelGL000107;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000108 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000108  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	82302	83048	.	-	.	ID=NC_017659.1.indelGL000108;Name=NC_017659.1.indelGL000108;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000109 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000109  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	83068	88359	.	-	.	ID=NC_017659.1.indelGL000109;Name=NC_017659.1.indelGL000109;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000110 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000110  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	88420	88647	.	+	.	ID=NC_017659.1.indelGL000110;Name=NC_017659.1.indelGL000110;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000111 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000111  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	88647	89045	.	+	.	ID=NC_017659.1.indelGL000111;Name=NC_017659.1.indelGL000111;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000112 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000112  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	89054	91207	.	-	.	ID=NC_017659.1.indelGL000112;Name=NC_017659.1.indelGL000112;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000113 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000113  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	91460	92290	.	-	.	ID=NC_017659.1.indelGL000113;Name=NC_017659.1.indelGL000113;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000114 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000114  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	92455	92574	.	+	.	ID=NC_017659.1.indelGL000114;Name=NC_017659.1.indelGL000114;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000115 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000115  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	92736	95558	.	-	.	ID=NC_017659.1.indelGL000115;Name=NC_017659.1.indelGL000115;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000116 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000116  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	95555	96865	.	-	.	ID=NC_017659.1.indelGL000116;Name=NC_017659.1.indelGL000116;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000117 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000117  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	96865	97593	.	-	.	ID=NC_017659.1.indelGL000117;Name=NC_017659.1.indelGL000117;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000118 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000118  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	97580	98146	.	-	.	ID=NC_017659.1.indelGL000118;Name=NC_017659.1.indelGL000118;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000119 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000119  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	98168	98479	.	-	.	ID=NC_017659.1.indelGL000119;Name=NC_017659.1.indelGL000119;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000120 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000120  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	98494	98859	.	-	.	ID=NC_017659.1.indelGL000120;Name=NC_017659.1.indelGL000120;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000121 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000121  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	98892	99293	.	-	.	ID=NC_017659.1.indelGL000121;Name=NC_017659.1.indelGL000121;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000122 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000122  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	99386	100075	.	-	.	ID=NC_017659.1.indelGL000122;Name=NC_017659.1.indelGL000122;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000123 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000123  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	100262	100645	.	-	.	ID=NC_017659.1.indelGL000123;Name=NC_017659.1.indelGL000123;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000124 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000124  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	100966	101568	.	+	.	ID=NC_017659.1.indelGL000124;Name=NC_017659.1.indelGL000124;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000125 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000125  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	101594	101728	.	-	.	ID=NC_017659.1.indelGL000125;Name=NC_017659.1.indelGL000125;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000126 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000126  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	101864	102793	.	-	.	ID=NC_017659.1.indelGL000126;Name=NC_017659.1.indelGL000126;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000127 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000127  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	102803	103090	.	-	.	ID=NC_017659.1.indelGL000127;Name=NC_017659.1.indelGL000127;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000128 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000128  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	103323	103568	.	-	.	ID=NC_017659.1.indelGL000128;Name=NC_017659.1.indelGL000128;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000129 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000129  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	103561	103791	.	-	.	ID=NC_017659.1.indelGL000129;Name=NC_017659.1.indelGL000129;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000130 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000130  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	104011	104127	.	-	.	ID=NC_017659.1.indelGL000130;Name=NC_017659.1.indelGL000130;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000131 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000131  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	104312	104449	.	-	.	ID=NC_017659.1.indelGL000131;Name=NC_017659.1.indelGL000131;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000132 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000132  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	104449	105168	.	-	.	ID=NC_017659.1.indelGL000132;Name=NC_017659.1.indelGL000132;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000133 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000133  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	105165	105599	.	-	.	ID=NC_017659.1.indelGL000133;Name=NC_017659.1.indelGL000133;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000134 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000134  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	105654	105788	.	-	.	ID=NC_017659.1.indelGL000134;Name=NC_017659.1.indelGL000134;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000135 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000135  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	105879	106139	.	-	.	ID=NC_017659.1.indelGL000135;Name=NC_017659.1.indelGL000135;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000136 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000136  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	106185	106760	.	-	.	ID=NC_017659.1.indelGL000136;Name=NC_017659.1.indelGL000136;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000137 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000137  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	106750	106878	.	-	.	ID=NC_017659.1.indelGL000137;Name=NC_017659.1.indelGL000137;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000138 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000138  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	106958	107467	.	-	.	ID=NC_017659.1.indelGL000138;Name=NC_017659.1.indelGL000138;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000139 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000139  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	108052	109023	.	-	.	ID=NC_017659.1.indelGL000139;Name=NC_017659.1.indelGL000139;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000140 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000140  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	109023	110198	.	-	.	ID=NC_017659.1.indelGL000140;Name=NC_017659.1.indelGL000140;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000141 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000141  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	110489	110992	.	-	.	ID=NC_017659.1.indelGL000141;Name=NC_017659.1.indelGL000141;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000142 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000142  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	111215	111331	.	-	.	ID=NC_017659.1.indelGL000142;Name=NC_017659.1.indelGL000142;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000143 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000143  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	111671	113818	.	-	.	ID=NC_017659.1.indelGL000143;Name=NC_017659.1.indelGL000143;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000144 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000144  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	113954	115231	.	-	.	ID=NC_017659.1.indelGL000144;Name=NC_017659.1.indelGL000144;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000145 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000145  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	115228	116970	.	-	.	ID=NC_017659.1.indelGL000145;Name=NC_017659.1.indelGL000145;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000146 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000146  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	116970	117917	.	-	.	ID=NC_017659.1.indelGL000146;Name=NC_017659.1.indelGL000146;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000147 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000147  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	117918	119699	.	-	.	ID=NC_017659.1.indelGL000147;Name=NC_017659.1.indelGL000147;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000148 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000148  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	119778	120971	.	+	.	ID=NC_017659.1.indelGL000148;Name=NC_017659.1.indelGL000148;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000149 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000149  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	121351	121731	.	-	.	ID=NC_017659.1.indelGL000149;Name=NC_017659.1.indelGL000149;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000150 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000150  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	122072	122506	.	-	.	ID=NC_017659.1.indelGL000150;Name=NC_017659.1.indelGL000150;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000151 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000151  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	122862	123008	.	-	.	ID=NC_017659.1.indelGL000151;Name=NC_017659.1.indelGL000151;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000152 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000152  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	122974	123831	.	-	.	ID=NC_017659.1.indelGL000152;Name=NC_017659.1.indelGL000152;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000153 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000153  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	123828	124685	.	-	.	ID=NC_017659.1.indelGL000153;Name=NC_017659.1.indelGL000153;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000154 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000154  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	124682	125506	.	-	.	ID=NC_017659.1.indelGL000154;Name=NC_017659.1.indelGL000154;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000155 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000155  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	125481	126422	.	-	.	ID=NC_017659.1.indelGL000155;Name=NC_017659.1.indelGL000155;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000156 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000156  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	126972	127475	.	+	.	ID=NC_017659.1.indelGL000156;Name=NC_017659.1.indelGL000156;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000157 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000157  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	127477	127653	.	+	.	ID=NC_017659.1.indelGL000157;Name=NC_017659.1.indelGL000157;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000158 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000158  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	127655	127891	.	-	.	ID=NC_017659.1.indelGL000158;Name=NC_017659.1.indelGL000158;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000159 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000159  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	128302	128658	.	-	.	ID=NC_017659.1.indelGL000159;Name=NC_017659.1.indelGL000159;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000160 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000160  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	128699	128995	.	+	.	ID=NC_017659.1.indelGL000160;Name=NC_017659.1.indelGL000160;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000161 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000161  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	129241	129411	.	+	.	ID=NC_017659.1.indelGL000161;Name=NC_017659.1.indelGL000161;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000162 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000162  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	129404	130381	.	+	.	ID=NC_017659.1.indelGL000162;Name=NC_017659.1.indelGL000162;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000163 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000163  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	130457	130576	.	-	.	ID=NC_017659.1.indelGL000163;Name=NC_017659.1.indelGL000163;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000164 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000164  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	130666	131406	.	-	.	ID=NC_017659.1.indelGL000164;Name=NC_017659.1.indelGL000164;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000165 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000165  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	131563	131688	.	+	.	ID=NC_017659.1.indelGL000165;Name=NC_017659.1.indelGL000165;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000166 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000166  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	132089	132997	.	-	.	ID=NC_017659.1.indelGL000166;Name=NC_017659.1.indelGL000166;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000167 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000167  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	133060	134169	.	-	.	ID=NC_017659.1.indelGL000167;Name=NC_017659.1.indelGL000167;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000168 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000168  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	134419	134574	.	+	.	ID=NC_017659.1.indelGL000168;Name=NC_017659.1.indelGL000168;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000169 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000169  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	134602	135555	.	-	.	ID=NC_017659.1.indelGL000169;Name=NC_017659.1.indelGL000169;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000170 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000170  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	135728	136048	.	+	.	ID=NC_017659.1.indelGL000170;Name=NC_017659.1.indelGL000170;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000171 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000171  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	136000	136140	.	+	.	ID=NC_017659.1.indelGL000171;Name=NC_017659.1.indelGL000171;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000172 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000172  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	136828	136986	.	-	.	ID=NC_017659.1.indelGL000172;Name=NC_017659.1.indelGL000172;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000173 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000173  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	137221	137496	.	+	.	ID=NC_017659.1.indelGL000173;Name=NC_017659.1.indelGL000173;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000174 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000174  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	137493	138383	.	+	.	ID=NC_017659.1.indelGL000174;Name=NC_017659.1.indelGL000174;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000175 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000175  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	138653	138772	.	-	.	ID=NC_017659.1.indelGL000175;Name=NC_017659.1.indelGL000175;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000176 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000176  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	139050	139553	.	+	.	ID=NC_017659.1.indelGL000176;Name=NC_017659.1.indelGL000176;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000177 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000177  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	139631	140017	.	-	.	ID=NC_017659.1.indelGL000177;Name=NC_017659.1.indelGL000177;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000178 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000178  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	140154	141020	.	-	.	ID=NC_017659.1.indelGL000178;Name=NC_017659.1.indelGL000178;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000179 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000179  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	141207	141371	.	-	.	ID=NC_017659.1.indelGL000179;Name=NC_017659.1.indelGL000179;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000180 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000180  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	141657	142850	.	-	.	ID=NC_017659.1.indelGL000180;Name=NC_017659.1.indelGL000180;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000181 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000181  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	143470	143592	.	+	.	ID=NC_017659.1.indelGL000181;Name=NC_017659.1.indelGL000181;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000182 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000182  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	143738	143902	.	+	.	ID=NC_017659.1.indelGL000182;Name=NC_017659.1.indelGL000182;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000183 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000183  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	144073	144978	.	-	.	ID=NC_017659.1.indelGL000183;Name=NC_017659.1.indelGL000183;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000184 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000184  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	144971	145309	.	-	.	ID=NC_017659.1.indelGL000184;Name=NC_017659.1.indelGL000184;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000185 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000185  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	145921	146229	.	+	.	ID=NC_017659.1.indelGL000185;Name=NC_017659.1.indelGL000185;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000186 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000186  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	146343	146525	.	-	.	ID=NC_017659.1.indelGL000186;Name=NC_017659.1.indelGL000186;
-warn: feature_id should be uniq, but NC_017659.1.indelGL000187 appear more than one time in --list 
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000187  
 
 read gff, pO83_CORR.indel.reverse:NC_017659.1.fake:12-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	146550	146675	.	-	.	ID=NC_017659.1.indelGL000187;Name=NC_017659.1.indelGL000187;
 read_list pO83_CORR.indel.reverse end
 hist_scatter_line not
 reads_mapping not
 synteny start
-1 is order->0->1,query->pO83_CORR.indel:target->pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
+1 is 0->1,pO83_CORR.indel,pO83_CORR,../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
 
 start read ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6
 ../data/NC_017659.1.indel.fa.to.NC_017659.1.fa.blast.m6 is plain file
@@ -1886,7 +1923,7 @@ no pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff for pO83_CO
 no pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf for pO83_CORR.indel.to.pO83_CORR
 
 output pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf
-2 is order->0->1,query->pO83_CORR.indel.twin:target->pO83_CORR.indel.reverse,../data/NC_017659.1.indel.fa.to.self.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
+2 is 0->1,pO83_CORR.indel.twin,pO83_CORR.indel.reverse,../data/NC_017659.1.indel.fa.to.self.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
 
 start read ../data/NC_017659.1.indel.fa.to.self.m6
 ../data/NC_017659.1.indel.fa.to.self.m6 is plain file
@@ -2464,7 +2501,7 @@ no pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synt
 no pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf for pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse
 
 output pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf
-3 is order->0->1,query->pO83_CORR.indel.twin:target->pO83_CORR.indel,../data/NC_017659.1.indel.fa.to.self.m6,blast_m8,quadrilateral,forward->orange->opacity0.5,reverse->blue->opacity0.7,cross_link_shift_y->+3:-3,sort->1
+3 is 0->1,pO83_CORR.indel.twin,pO83_CORR.indel,../data/NC_017659.1.indel.fa.to.self.m6,blast_m8,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
 
 start read ../data/NC_017659.1.indel.fa.to.self.m6
 ../data/NC_017659.1.indel.fa.to.self.m6 is plain file
@@ -3488,11 +3525,20 @@ no pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.sett
 output pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf
 func_name is synteny
 echo "
+set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink
+" >> out6.cat.log;set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink done
+echo "
+set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink
+" >> out6.cat.log;set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink done
+echo "
 set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff >out6.pO83_CORR.indel.reverse.out6.synteny.gff;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff;echo output out6.pO83_CORR.indel.reverse.out6.synteny.gff
 " >> out6.cat.log;set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff >out6.pO83_CORR.indel.reverse.out6.synteny.gff;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff;echo output out6.pO83_CORR.indel.reverse.out6.synteny.gff done
 echo "
 set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf > out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf;echo output out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf
 " >> out6.cat.log;set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf > out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf;echo output out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf done
+echo "
+set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink
+" >> out6.cat.log;set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink done
 echo "
 set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out6.pO83_CORR.out6.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out6.pO83_CORR.out6.synteny.gff
 " >> out6.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out6.pO83_CORR.out6.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out6.pO83_CORR.out6.synteny.gff done
@@ -3500,33 +3546,25 @@ echo "
 set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out6.pO83_CORR.out6.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out6.pO83_CORR.out6.synteny.setting.conf
 " >> out6.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out6.pO83_CORR.out6.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out6.pO83_CORR.out6.synteny.setting.conf done
 echo "
-set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink
-" >> out6.cat.log;set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink done
-echo "
-set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.out6.synteny.gff;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.out6.synteny.gff
-" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.out6.synteny.gff;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.out6.synteny.gff done
-echo "
-set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.out6.synteny.setting.conf
-" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.out6.synteny.setting.conf done
-echo "
 set -vex;cat out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.twin.out6.synteny.gff;rm out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.twin.out6.synteny.gff
 " >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.twin.out6.synteny.gff;rm out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.twin.out6.synteny.gff done
 echo "
 set -vex;cat out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.twin.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.twin.out6.synteny.setting.conf
 " >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.twin.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.twin.out6.synteny.setting.conf done
 echo "
-set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink
-" >> out6.cat.log;set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink done
+set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.out6.synteny.gff;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.out6.synteny.gff
+" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.out6.synteny.gff;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.out6.synteny.gff done
 echo "
-set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink
-" >> out6.cat.log;set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink done
+set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.out6.synteny.setting.conf
+" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.out6.synteny.setting.conf done
 out6.synteny end
 echo "
-set -vex;cat out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink >out6.synteny.crosslink
-" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink >out6.synteny.crosslink done
+set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf out6.pO83_CORR.out6.synteny.setting.conf out6.pO83_CORR.indel.twin.out6.synteny.setting.conf out6.pO83_CORR.indel.out6.synteny.setting.conf >out6.synteny.setting.conf
+" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf out6.pO83_CORR.out6.synteny.setting.conf out6.pO83_CORR.indel.twin.out6.synteny.setting.conf out6.pO83_CORR.indel.out6.synteny.setting.conf >out6.synteny.setting.conf done
 echo "
-set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf out6.pO83_CORR.out6.synteny.setting.conf out6.pO83_CORR.indel.out6.synteny.setting.conf out6.pO83_CORR.indel.twin.out6.synteny.setting.conf >out6.synteny.setting.conf
-" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf out6.pO83_CORR.out6.synteny.setting.conf out6.pO83_CORR.indel.out6.synteny.setting.conf out6.pO83_CORR.indel.twin.out6.synteny.setting.conf >out6.synteny.setting.conf done
+set -vex;cat out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink >out6.synteny.crosslink
+" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink >out6.synteny.crosslink done
+general_features not
 add out6.synteny.setting.conf to feature_setting 
 echo "
 set -vex;cat feature.color.label.6.conf out6.synteny.setting.conf  >feature.color.label.6.conf.out6
@@ -3536,19 +3574,19 @@ echo "
 set -vex;cat out6.synteny.crosslink >feature.crossing.link.out6
 " >> out6.cat.log;set -vex;cat out6.synteny.crosslink >feature.crossing.link.out6 done
 echo "
-set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.gff out6.pO83_CORR.out6.synteny.gff out6.pO83_CORR.indel.out6.synteny.gff out6.pO83_CORR.indel.twin.out6.synteny.gff|awk -F "	" '{print $3}'|sort -u
-" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.gff out6.pO83_CORR.out6.synteny.gff out6.pO83_CORR.indel.out6.synteny.gff out6.pO83_CORR.indel.twin.out6.synteny.gff|awk -F "	" '{print $3}'|sort -u done
+set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.gff out6.pO83_CORR.out6.synteny.gff out6.pO83_CORR.indel.twin.out6.synteny.gff out6.pO83_CORR.indel.out6.synteny.gff|awk -F "	" '{print $3}'|sort -u
+" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.gff out6.pO83_CORR.out6.synteny.gff out6.pO83_CORR.indel.twin.out6.synteny.gff out6.pO83_CORR.indel.out6.synteny.gff|awk -F "	" '{print $3}'|sort -u done
 echo "
-set -vex;sed  -r 's/^(pO83_CORR.indel.reverse\s.*\.gff)\s/\1,out6.pO83_CORR.indel.reverse.out6.synteny.gff\t/' tracks.6.list >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
-" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel.reverse\s.*\.gff)\s/\1,out6.pO83_CORR.indel.reverse.out6.synteny.gff\t/' tracks.6.list >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
+set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out6.pO83_CORR.indel.out6.synteny.gff\t/' tracks.6.list >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
+" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out6.pO83_CORR.indel.out6.synteny.gff\t/' tracks.6.list >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
+echo "
+set -vex;sed  -r 's/^(pO83_CORR.indel.twin\s.*\.gff)\s/\1,out6.pO83_CORR.indel.twin.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
+" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel.twin\s.*\.gff)\s/\1,out6.pO83_CORR.indel.twin.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
 echo "
 set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out6.pO83_CORR.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
 " >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out6.pO83_CORR.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
 echo "
-set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out6.pO83_CORR.indel.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
-" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out6.pO83_CORR.indel.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
-echo "
-set -vex;sed  -r 's/^(pO83_CORR.indel.twin\s.*\.gff)\s/\1,out6.pO83_CORR.indel.twin.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
-" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel.twin\s.*\.gff)\s/\1,out6.pO83_CORR.indel.twin.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
+set -vex;sed  -r 's/^(pO83_CORR.indel.reverse\s.*\.gff)\s/\1,out6.pO83_CORR.indel.reverse.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
+" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel.reverse\s.*\.gff)\s/\1,out6.pO83_CORR.indel.reverse.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
 
 data done

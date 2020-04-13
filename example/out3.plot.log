@@ -1,2 +1,992 @@
 find package FindBin
 find package JSON
+feature_border_color -> black
+feature_arrow_width_extent -> 0.2
+legend_stroke_width -> 0.2
+scale_ratio -> 1000
+feature_arrow_sharp_extent -> 0.3
+ignore_sharp_arrow -> no
+space_between_blocks -> 500
+general_features -> HASH(0x5578ffc55898)
+general_features -> HASH(0x5579001aba98)
+track_order -> 0
+sample_name_color_default -> black
+top_bottom_margin -> 0.15
+svg_width_height -> 1300,700
+legend_height_percent -> 0.2
+scale_padding_y -> 0.5
+cross_link_orientation_ellipse -> up
+feature_height_ratio -> 3.5
+connect_stroke_color -> black
+cross_link_anchor_pos -> medium_medium
+feature_shift_x -> 0
+genome_height_ratio -> 1
+scale_tick_height -> 0.01
+feature_order -> 1
+feature_label_order -> 1
+cross_link_order -> 2
+pdf_dpi -> 100
+correct_ellipse_coordinate -> no
+feature_shape -> arrow
+svg_background_color -> white
+connect_with_same_scaffold -> yes
+sample_name_font_size_default -> 10
+scale_position -> low
+legend_height_space -> 0.1
+display_feature_label -> no
+feature_setting -> feature.color.label.conf.out3
+track_style -> fill:green
+shift_angle_closed_feature -> 10
+scale_order -> -1
+width_ratio_ref_cluster_legend -> 0.1-0.75-0.15
+label_rotate_angle -> 0
+label_text_alignment_baseline -> baseline
+allow_feature_out_of_list -> synteny
+scale_tick_padding_y -> 10
+cross_link_width_ellipse -> 0.2
+feature_height_unit -> backbone
+connect_stroke_width -> 1
+feature_label_auto_angle_flag -> 1
+cross_link_color -> #FF8C00
+cross_link_color_reverse -> #3CB371
+display_segment_name -> no,center,shift_y:+1,fontsize:10,color:black,order:5,rotate:90
+feature_keywords -> ,exon_yeast.NC_001133.9.1.1,exon_yeast.NC_001133.9.1.2,exon_yeast.NC_001133.9.2.1,exon_yeast.NC_001133.9.2.2,gene_yeast.NC_001133.9.1.1,gene_yeast.NC_001133.9.1.2,gene_yeast.NC_001133.9.2.1,gene_yeast.NC_001133.9.2.2,ylabel
+x_margin_feature_label -> 0.01
+crosslink_stroke_style -> stroke:black;stroke-width:0.1;
+scale_color -> green
+scale_tick_opacity -> 0.9
+feature_opacity -> 1
+scale_tick_fontsize -> 10
+legend_width_margin -> 0.1
+pos_feature_label -> medium_up_skip_arrow_sharp
+feature_label_color -> black
+feature_border_size -> 0
+feature_shift_y -> 0
+ref_name_right_gap -> 0.15
+cross_link_height_ellipse -> 10,8
+cross_link_opacity -> 0.8
+display_legend -> yes
+connect_stroke_dasharray -> 2,2
+absolute_postion_in_title -> yes
+legend_height_ratio -> 0.9
+chop_soft_clip -> yes
+display_segment_strand -> 5:5',3:3',color:black,fontsize:10
+cross_link_orientation -> forward
+feature_shift_y_unit -> backbone
+legend_position -> right
+display_feature -> yes
+legend_font_size -> 15
+legend_width_textpercent -> 0.6
+distance_closed_feature -> 1
+feature_id_is_unique -> no
+scale_width -> 0.5
+feature_x_extent -> 0bp,0bp
+color_sample_name_default -> green
+legend_stroke_color -> black
+feature_content_display -> no
+feature_color -> rgb(50,205,50)
+y_margin_feature_label -> 0.05
+scale_display -> yes
+label_text_anchor -> middle
+cross_link_shape -> quadrilateral
+feature_label_size -> 10
+
+not_exists hist_scatter_line in confs
+
+not_exists reads_mapping in confs
+
+not_exists synteny in confs
+svg_width is 1300, svg_height is svg_height
+start read tracks.3.list.out3
+parse yeast yeast:NC_001133.9:24000-54000 -> block_index 1
+
+parse yeast yeast:NC_001133.9:54000-87752 -> block_index 2
+
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	add	ylabel	87752	87752	.	+	.	ID=yeast.NC_001133.9.2.54000.87752.1.gff.ylabel+;
+warn: feature_id can be uniq or not for yeast.NC_001133.9.2.54000.87752.1.gff.ylabel+  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	add	ylabel	87752	87752	.	+	.	ID=yeast.NC_001133.9.2.54000.87752.1.gff.ylabel+;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	58695	61052	.	-	.	ID=exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	75043	76152	.	-	.	ID=gene-YAL036C_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	65778	67520	.	-	.	ID=exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	58162	61052	.	-	.	ID=gene-YAL043C_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	84749	87031	.	-	.	ID=exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	84749	87031	.	-	.	ID=exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	87501	87752	.	+	.	ID=exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	87501	87752	.	+	.	ID=exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	82706	83227	.	+	.	ID=exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	82706	83227	.	+	.	ID=exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	58461	62563	.	+	.	ID=gene-YAL042W_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	57029	57385	.	-	.	ID=exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	61316	62563	.	+	.	ID=exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	73426	73518	.	-	.	ID=exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	76427	79435	.	+	.	ID=gene-YAL035W_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	71786	73288	.	+	.	ID=exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	76427	79435	.	+	.	ID=exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	79718	80587	.	+	.	ID=exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	79718	80587	.	+	.	ID=exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	57950	58462	.	-	.	ID=gene-YAL044C_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	75043	76152	.	-	.	ID=exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	80710	81951	.	-	.	ID=exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	80710	81951	.	-	.	ID=exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	62840	65404	.	+	.	ID=exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	80710	81951	.	-	.	ID=gene-YAL034C_gene.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for gene-YAL034C_gene.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	80710	81951	.	-	.	ID=gene-YAL034C_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	84749	87031	.	-	.	ID=gene-YAL031C_gene.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for gene-YAL031C_gene.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	84749	87031	.	-	.	ID=gene-YAL031C_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	65778	67520	.	-	.	ID=gene-YAL040C_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	83335	84474	.	-	.	ID=exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	83335	84474	.	-	.	ID=exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	68716	69525	.	-	.	ID=gene-YAL039C_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	74020	74823	.	+	.	ID=exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	87286	87387	.	+	.	ID=exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	87286	87387	.	+	.	ID=exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	57950	58462	.	-	.	ID=exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	68716	69525	.	-	.	ID=exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	54989	56857	.	-	.	ID=exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	82706	83227	.	+	.	ID=gene-YAL033W_gene.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for gene-YAL033W_gene.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	82706	83227	.	+	.	ID=gene-YAL033W_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	73426	73518	.	-	.	ID=gene-YAL037C-A_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.1	57518	57850	.	+	.	ID=exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	71786	73288	.	+	.	ID=gene-YAL038W_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	79718	80587	.	+	.	ID=gene-YAL034W-A_gene.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for gene-YAL034W-A_gene.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	79718	80587	.	+	.	ID=gene-YAL034W-A_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	57518	57850	.	+	.	ID=gene-YAL044W-A_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	54989	56857	.	-	.	ID=gene-YAL047C_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	57029	57385	.	-	.	ID=gene-YAL046C_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	83335	84474	.	-	.	ID=gene-YAL032C_gene.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for gene-YAL032C_gene.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	83335	84474	.	-	.	ID=gene-YAL032C_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	62840	65404	.	+	.	ID=gene-YAL041W_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	74020	74823	.	+	.	ID=gene-YAL037W_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	87286	87752	.	+	.	ID=gene-YAL030W_gene.yeast.NC_001133.9.2.1;
+warn: feature_id can be uniq or not for gene-YAL030W_gene.yeast.NC_001133.9.2.1  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.1	87286	87752	.	+	.	ID=gene-YAL030W_gene.yeast.NC_001133.9.2.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	36509	37147	.	+	.	ID=gene-YAL059W_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	48564	51707	.	+	.	ID=gene-YAL051W_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	39259	41901	.	+	.	ID=gene-YAL056W_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	37464	38972	.	+	.	ID=gene-YAL058W_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	51855	52595	.	-	.	ID=exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	33448	34701	.	+	.	ID=gene-YAL061W_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	35155	36303	.	+	.	ID=exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	48564	51707	.	+	.	ID=exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	42881	45022	.	-	.	ID=exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	45899	48250	.	+	.	ID=gene-YAL053W_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	24000	27968	.	-	.	ID=gene-YAL063C_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	42177	42719	.	+	.	ID=exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	36509	37147	.	+	.	ID=exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	42881	45022	.	-	.	ID=gene-YAL054C_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	31567	32940	.	+	.	ID=exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	42177	42719	.	+	.	ID=gene-YAL055W_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	35155	36303	.	+	.	ID=gene-YAL060W_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	31567	32940	.	+	.	ID=gene-YAL062W_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	45899	48250	.	+	.	ID=exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.1	51855	52595	.	-	.	ID=gene-YAL049C_gene.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	39259	41901	.	+	.	ID=exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	33448	34701	.	+	.	ID=exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	24000	27968	.	-	.	ID=exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.1	37464	38972	.	+	.	ID=exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	add	ylabel	87752	87752	.	+	.	ID=yeast.NC_001133.9.2.54000.87752.2.gff.ylabel-;
+warn: feature_id can be uniq or not for yeast.NC_001133.9.2.54000.87752.2.gff.ylabel-  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	add	ylabel	87752	87752	.	+	.	ID=yeast.NC_001133.9.2.54000.87752.2.gff.ylabel-;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	57518	57850	.	+	.	ID=exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	76427	79435	.	+	.	ID=gene-YAL035W_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	71786	73288	.	+	.	ID=exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	87286	87387	.	+	.	ID=exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	87286	87387	.	+	.	ID=exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	74020	74823	.	+	.	ID=gene-YAL037W_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	57950	58462	.	-	.	ID=exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	65778	67520	.	-	.	ID=exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	71786	73288	.	+	.	ID=gene-YAL038W_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	58695	61052	.	-	.	ID=exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	57518	57850	.	+	.	ID=gene-YAL044W-A_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	75043	76152	.	-	.	ID=gene-YAL036C_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	83335	84474	.	-	.	ID=gene-YAL032C_gene.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for gene-YAL032C_gene.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	83335	84474	.	-	.	ID=gene-YAL032C_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	80710	81951	.	-	.	ID=exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	80710	81951	.	-	.	ID=exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	87286	87752	.	+	.	ID=gene-YAL030W_gene.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for gene-YAL030W_gene.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	87286	87752	.	+	.	ID=gene-YAL030W_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	58162	61052	.	-	.	ID=gene-YAL043C_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	62840	65404	.	+	.	ID=gene-YAL041W_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	75043	76152	.	-	.	ID=exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	62840	65404	.	+	.	ID=exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	87501	87752	.	+	.	ID=exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	87501	87752	.	+	.	ID=exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	79718	80587	.	+	.	ID=exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	79718	80587	.	+	.	ID=exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	84749	87031	.	-	.	ID=exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	84749	87031	.	-	.	ID=exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	57029	57385	.	-	.	ID=gene-YAL046C_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	82706	83227	.	+	.	ID=gene-YAL033W_gene.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for gene-YAL033W_gene.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	82706	83227	.	+	.	ID=gene-YAL033W_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	83335	84474	.	-	.	ID=exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	83335	84474	.	-	.	ID=exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	54989	56857	.	-	.	ID=exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	58461	62563	.	+	.	ID=gene-YAL042W_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	80710	81951	.	-	.	ID=gene-YAL034C_gene.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for gene-YAL034C_gene.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	80710	81951	.	-	.	ID=gene-YAL034C_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	68716	69525	.	-	.	ID=exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	61316	62563	.	+	.	ID=exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	74020	74823	.	+	.	ID=exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	73426	73518	.	-	.	ID=gene-YAL037C-A_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	79718	80587	.	+	.	ID=gene-YAL034W-A_gene.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for gene-YAL034W-A_gene.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	79718	80587	.	+	.	ID=gene-YAL034W-A_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	65778	67520	.	-	.	ID=gene-YAL040C_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	54989	56857	.	-	.	ID=gene-YAL047C_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	73426	73518	.	-	.	ID=exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	57029	57385	.	-	.	ID=exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	82706	83227	.	+	.	ID=exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	82706	83227	.	+	.	ID=exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.2.2	76427	79435	.	+	.	ID=exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	68716	69525	.	-	.	ID=gene-YAL039C_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	84749	87031	.	-	.	ID=gene-YAL031C_gene.yeast.NC_001133.9.2.2;
+warn: feature_id can be uniq or not for gene-YAL031C_gene.yeast.NC_001133.9.2.2  
+
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	84749	87031	.	-	.	ID=gene-YAL031C_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:54000-87752 block_index 2 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.2.2	57950	58462	.	-	.	ID=gene-YAL044C_gene.yeast.NC_001133.9.2.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	37464	38972	.	+	.	ID=exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	36509	37147	.	+	.	ID=gene-YAL059W_gene.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	37464	38972	.	+	.	ID=gene-YAL058W_gene.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	42177	42719	.	+	.	ID=exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	48564	51707	.	+	.	ID=exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	36509	37147	.	+	.	ID=exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	35155	36303	.	+	.	ID=gene-YAL060W_gene.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	31567	32940	.	+	.	ID=exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	33448	34701	.	+	.	ID=exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	51855	52595	.	-	.	ID=exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	24000	27968	.	-	.	ID=exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	45899	48250	.	+	.	ID=exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	42881	45022	.	-	.	ID=exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	35155	36303	.	+	.	ID=exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	33448	34701	.	+	.	ID=gene-YAL061W_gene.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	45899	48250	.	+	.	ID=gene-YAL053W_gene.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	48564	51707	.	+	.	ID=gene-YAL051W_gene.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	51855	52595	.	-	.	ID=gene-YAL049C_gene.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	39259	41901	.	+	.	ID=gene-YAL056W_gene.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	24000	27968	.	-	.	ID=gene-YAL063C_gene.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	exon_yeast.NC_001133.9.1.2	39259	41901	.	+	.	ID=exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	31567	32940	.	+	.	ID=gene-YAL062W_gene.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	42881	45022	.	-	.	ID=gene-YAL054C_gene.yeast.NC_001133.9.1.2;
+read gff, yeast:NC_001133.9:24000-54000 block_index 1 for NC_001133.9	RefSeq	gene_yeast.NC_001133.9.1.2	42177	42719	.	+	.	ID=gene-YAL055W_gene.yeast.NC_001133.9.1.2;
+read_list yeast end
+end read tracks.3.list.out3
+lenged number is 0
+draw sample name yeast
+draw feature_id = gene-YAL063C_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL063C_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	1	end	3969
+2brefore, feature_id	gene-YAL063C_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	1	end	3969	ratio	0.0151741525819404
+feature_id	gene-YAL063C_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	0	end	3969	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	1	end	3969
+2brefore, feature_id	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	1	end	3969	ratio	0.0151741525819404
+feature_id	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	0	end	3969	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	1	end	3969
+2brefore, feature_id	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	1	end	3969	ratio	0.0151741525819404
+feature_id	exon-NM_001178205.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	0	end	3969	ratio	0.0151741525819404
+draw feature_id = gene-YAL063C_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL063C_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	1	end	3969
+2brefore, feature_id	gene-YAL063C_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	1	end	3969	ratio	0.0151741525819404
+feature_id	gene-YAL063C_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	0	end	3969	ratio	0.0151741525819404
+draw feature_id = gene-YAL034W-A_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	1720	end	2589
+2brefore, feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	1720	end	2589	ratio	0.0151741525819404
+feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	1719	end	2589	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	1720	end	2589
+2brefore, feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	1720	end	2589	ratio	0.0151741525819404
+feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	1719	end	2589	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	1720	end	2589
+2brefore, feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	1720	end	2589	ratio	0.0151741525819404
+feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	1719	end	2589	ratio	0.0151741525819404
+draw feature_id = gene-YAL034W-A_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	1720	end	2589
+2brefore, feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	1720	end	2589	ratio	0.0151741525819404
+feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	1719	end	2589	ratio	0.0151741525819404
+draw feature_id = gene-YAL034C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	2712	end	3953
+2brefore, feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	2712	end	3953	ratio	0.0151741525819404
+feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	2711	end	3953	ratio	0.0151741525819404
+draw feature_id = exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	2712	end	3953
+2brefore, feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	2712	end	3953	ratio	0.0151741525819404
+feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	2711	end	3953	ratio	0.0151741525819404
+draw feature_id = exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	2712	end	3953
+2brefore, feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	2712	end	3953	ratio	0.0151741525819404
+feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	2711	end	3953	ratio	0.0151741525819404
+draw feature_id = gene-YAL034C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	2712	end	3953
+2brefore, feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	2712	end	3953	ratio	0.0151741525819404
+feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	2711	end	3953	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	4708	end	5229
+2brefore, feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	4708	end	5229	ratio	0.0151741525819404
+feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	4707	end	5229	ratio	0.0151741525819404
+draw feature_id = gene-YAL033W_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	4708	end	5229
+2brefore, feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	4708	end	5229	ratio	0.0151741525819404
+feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	4707	end	5229	ratio	0.0151741525819404
+draw feature_id = gene-YAL033W_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	4708	end	5229
+2brefore, feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	4708	end	5229	ratio	0.0151741525819404
+feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	4707	end	5229	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	4708	end	5229
+2brefore, feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	4708	end	5229	ratio	0.0151741525819404
+feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	4707	end	5229	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	5337	end	6476
+2brefore, feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	5337	end	6476	ratio	0.0151741525819404
+feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	5336	end	6476	ratio	0.0151741525819404
+draw feature_id = gene-YAL032C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	5337	end	6476
+2brefore, feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	5337	end	6476	ratio	0.0151741525819404
+feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	5336	end	6476	ratio	0.0151741525819404
+draw feature_id = gene-YAL032C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	5337	end	6476
+2brefore, feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	5337	end	6476	ratio	0.0151741525819404
+feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	5336	end	6476	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	5337	end	6476
+2brefore, feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	5337	end	6476	ratio	0.0151741525819404
+feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	5336	end	6476	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	6751	end	9033
+2brefore, feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	6751	end	9033	ratio	0.0151741525819404
+feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	6750	end	9033	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	6751	end	9033
+2brefore, feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	6751	end	9033	ratio	0.0151741525819404
+feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	6750	end	9033	ratio	0.0151741525819404
+draw feature_id = gene-YAL031C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	6751	end	9033
+2brefore, feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	6751	end	9033	ratio	0.0151741525819404
+feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	6750	end	9033	ratio	0.0151741525819404
+draw feature_id = gene-YAL031C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	6751	end	9033
+2brefore, feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	6751	end	9033	ratio	0.0151741525819404
+feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	6750	end	9033	ratio	0.0151741525819404
+draw feature_id = gene-YAL062W_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL062W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	7568	end	8941
+2brefore, feature_id	gene-YAL062W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	7568	end	8941	ratio	0.0151741525819404
+feature_id	gene-YAL062W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	7567	end	8941	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	7568	end	8941
+2brefore, feature_id	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	7568	end	8941	ratio	0.0151741525819404
+feature_id	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	7567	end	8941	ratio	0.0151741525819404
+draw feature_id = gene-YAL062W_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL062W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	7568	end	8941
+2brefore, feature_id	gene-YAL062W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	7568	end	8941	ratio	0.0151741525819404
+feature_id	gene-YAL062W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	7567	end	8941	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	7568	end	8941
+2brefore, feature_id	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	7568	end	8941	ratio	0.0151741525819404
+feature_id	exon-NM_001178204.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	7567	end	8941	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	9288	end	9389
+2brefore, feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	9288	end	9389	ratio	0.0151741525819404
+feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	9287	end	9389	ratio	0.0151741525819404
+draw feature_id = gene-YAL030W_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	9288	end	9754
+2brefore, feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	9288	end	9754	ratio	0.0151741525819404
+feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	9287	end	9754	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	9288	end	9389
+2brefore, feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	9288	end	9389	ratio	0.0151741525819404
+feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	9287	end	9389	ratio	0.0151741525819404
+draw feature_id = gene-YAL030W_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	9288	end	9754
+2brefore, feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	9288	end	9754	ratio	0.0151741525819404
+feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	9287	end	9754	ratio	0.0151741525819404
+draw feature_id = gene-YAL061W_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL061W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	9449	end	10702
+2brefore, feature_id	gene-YAL061W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	9449	end	10702	ratio	0.0151741525819404
+feature_id	gene-YAL061W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	9448	end	10702	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	9449	end	10702
+2brefore, feature_id	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	9449	end	10702	ratio	0.0151741525819404
+feature_id	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	9448	end	10702	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	9449	end	10702
+2brefore, feature_id	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	9449	end	10702	ratio	0.0151741525819404
+feature_id	exon-NM_001178203.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	9448	end	10702	ratio	0.0151741525819404
+draw feature_id = gene-YAL061W_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL061W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	9449	end	10702
+2brefore, feature_id	gene-YAL061W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	9449	end	10702	ratio	0.0151741525819404
+feature_id	gene-YAL061W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	9448	end	10702	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	9503	end	9754
+2brefore, feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	9503	end	9754	ratio	0.0151741525819404
+feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	9502	end	9754	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	9503	end	9754
+2brefore, feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	9503	end	9754	ratio	0.0151741525819404
+feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	9502	end	9754	ratio	0.0151741525819404
+draw feature_id = yeast.NC_001133.9.2.54000.87752.1.gff.ylabel+
+1brefore, feature_id	yeast.NC_001133.9.2.54000.87752.1.gff.ylabel+,	feature_shift_x	,start	9754	end	9754
+2brefore, feature_id	yeast.NC_001133.9.2.54000.87752.1.gff.ylabel+,	feature_shift_x	40,start	9754	end	9754	ratio	0.0151741525819404
+feature_id	yeast.NC_001133.9.2.54000.87752.1.gff.ylabel+,	feature_shift_x	40,start	9753	end	9754	ratio	0.0151741525819404
+draw feature_id = yeast.NC_001133.9.2.54000.87752.2.gff.ylabel-
+1brefore, feature_id	yeast.NC_001133.9.2.54000.87752.2.gff.ylabel-,	feature_shift_x	,start	9754	end	9754
+2brefore, feature_id	yeast.NC_001133.9.2.54000.87752.2.gff.ylabel-,	feature_shift_x	40,start	9754	end	9754	ratio	0.0151741525819404
+feature_id	yeast.NC_001133.9.2.54000.87752.2.gff.ylabel-,	feature_shift_x	40,start	9753	end	9754	ratio	0.0151741525819404
+draw feature_id = gene-YAL060W_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL060W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	11156	end	12304
+2brefore, feature_id	gene-YAL060W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	11156	end	12304	ratio	0.0151741525819404
+feature_id	gene-YAL060W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	11155	end	12304	ratio	0.0151741525819404
+draw feature_id = gene-YAL060W_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL060W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	11156	end	12304
+2brefore, feature_id	gene-YAL060W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	11156	end	12304	ratio	0.0151741525819404
+feature_id	gene-YAL060W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	11155	end	12304	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	11156	end	12304
+2brefore, feature_id	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	11156	end	12304	ratio	0.0151741525819404
+feature_id	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	11155	end	12304	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	11156	end	12304
+2brefore, feature_id	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	11156	end	12304	ratio	0.0151741525819404
+feature_id	exon-NM_001178202.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	11155	end	12304	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	12510	end	13148
+2brefore, feature_id	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	12510	end	13148	ratio	0.0151741525819404
+feature_id	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	12509	end	13148	ratio	0.0151741525819404
+draw feature_id = gene-YAL059W_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL059W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	12510	end	13148
+2brefore, feature_id	gene-YAL059W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	12510	end	13148	ratio	0.0151741525819404
+feature_id	gene-YAL059W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	12509	end	13148	ratio	0.0151741525819404
+draw feature_id = gene-YAL059W_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL059W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	12510	end	13148
+2brefore, feature_id	gene-YAL059W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	12510	end	13148	ratio	0.0151741525819404
+feature_id	gene-YAL059W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	12509	end	13148	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	12510	end	13148
+2brefore, feature_id	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	12510	end	13148	ratio	0.0151741525819404
+feature_id	exon-NM_001178201.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	12509	end	13148	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	13465	end	14973
+2brefore, feature_id	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	13465	end	14973	ratio	0.0151741525819404
+feature_id	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	13464	end	14973	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	13465	end	14973
+2brefore, feature_id	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	13465	end	14973	ratio	0.0151741525819404
+feature_id	exon-NM_001178200.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	13464	end	14973	ratio	0.0151741525819404
+draw feature_id = gene-YAL058W_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL058W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	13465	end	14973
+2brefore, feature_id	gene-YAL058W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	13465	end	14973	ratio	0.0151741525819404
+feature_id	gene-YAL058W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	13464	end	14973	ratio	0.0151741525819404
+draw feature_id = gene-YAL058W_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL058W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	13465	end	14973
+2brefore, feature_id	gene-YAL058W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	13465	end	14973	ratio	0.0151741525819404
+feature_id	gene-YAL058W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	13464	end	14973	ratio	0.0151741525819404
+draw feature_id = gene-YAL056W_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL056W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	15260	end	17902
+2brefore, feature_id	gene-YAL056W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	15260	end	17902	ratio	0.0151741525819404
+feature_id	gene-YAL056W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	15259	end	17902	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	15260	end	17902
+2brefore, feature_id	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	15260	end	17902	ratio	0.0151741525819404
+feature_id	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	15259	end	17902	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	15260	end	17902
+2brefore, feature_id	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	15260	end	17902	ratio	0.0151741525819404
+feature_id	exon-NM_001178199.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	15259	end	17902	ratio	0.0151741525819404
+draw feature_id = gene-YAL056W_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL056W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	15260	end	17902
+2brefore, feature_id	gene-YAL056W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	15260	end	17902	ratio	0.0151741525819404
+feature_id	gene-YAL056W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	15259	end	17902	ratio	0.0151741525819404
+draw feature_id = gene-YAL055W_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL055W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	18178	end	18720
+2brefore, feature_id	gene-YAL055W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	18178	end	18720	ratio	0.0151741525819404
+feature_id	gene-YAL055W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	18177	end	18720	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	18178	end	18720
+2brefore, feature_id	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	18178	end	18720	ratio	0.0151741525819404
+feature_id	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	18177	end	18720	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	18178	end	18720
+2brefore, feature_id	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	18178	end	18720	ratio	0.0151741525819404
+feature_id	exon-NM_001178198.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	18177	end	18720	ratio	0.0151741525819404
+draw feature_id = gene-YAL055W_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL055W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	18178	end	18720
+2brefore, feature_id	gene-YAL055W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	18178	end	18720	ratio	0.0151741525819404
+feature_id	gene-YAL055W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	18177	end	18720	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	18882	end	21023
+2brefore, feature_id	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	18882	end	21023	ratio	0.0151741525819404
+feature_id	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	18881	end	21023	ratio	0.0151741525819404
+draw feature_id = gene-YAL054C_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL054C_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	18882	end	21023
+2brefore, feature_id	gene-YAL054C_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	18882	end	21023	ratio	0.0151741525819404
+feature_id	gene-YAL054C_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	18881	end	21023	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	18882	end	21023
+2brefore, feature_id	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	18882	end	21023	ratio	0.0151741525819404
+feature_id	exon-NM_001178197.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	18881	end	21023	ratio	0.0151741525819404
+draw feature_id = gene-YAL054C_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL054C_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	18882	end	21023
+2brefore, feature_id	gene-YAL054C_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	18882	end	21023	ratio	0.0151741525819404
+feature_id	gene-YAL054C_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	18881	end	21023	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	21900	end	24251
+2brefore, feature_id	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	21900	end	24251	ratio	0.0151741525819404
+feature_id	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	21899	end	24251	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	21900	end	24251
+2brefore, feature_id	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	21900	end	24251	ratio	0.0151741525819404
+feature_id	exon-NM_001178196.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	21899	end	24251	ratio	0.0151741525819404
+draw feature_id = gene-YAL053W_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL053W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	21900	end	24251
+2brefore, feature_id	gene-YAL053W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	21900	end	24251	ratio	0.0151741525819404
+feature_id	gene-YAL053W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	21899	end	24251	ratio	0.0151741525819404
+draw feature_id = gene-YAL053W_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL053W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	21900	end	24251
+2brefore, feature_id	gene-YAL053W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	21900	end	24251	ratio	0.0151741525819404
+feature_id	gene-YAL053W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	21899	end	24251	ratio	0.0151741525819404
+draw feature_id = gene-YAL051W_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL051W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	24565	end	27708
+2brefore, feature_id	gene-YAL051W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	24565	end	27708	ratio	0.0151741525819404
+feature_id	gene-YAL051W_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	24564	end	27708	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	24565	end	27708
+2brefore, feature_id	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	24565	end	27708	ratio	0.0151741525819404
+feature_id	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	24564	end	27708	ratio	0.0151741525819404
+draw feature_id = gene-YAL051W_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL051W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	24565	end	27708
+2brefore, feature_id	gene-YAL051W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	24565	end	27708	ratio	0.0151741525819404
+feature_id	gene-YAL051W_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	24564	end	27708	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	24565	end	27708
+2brefore, feature_id	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	24565	end	27708	ratio	0.0151741525819404
+feature_id	exon-NM_001178195.2-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	24564	end	27708	ratio	0.0151741525819404
+draw feature_id = gene-YAL049C_gene.yeast.NC_001133.9.1.2
+1brefore, feature_id	gene-YAL049C_gene.yeast.NC_001133.9.1.2,	feature_shift_x	,start	27856	end	28596
+2brefore, feature_id	gene-YAL049C_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	27856	end	28596	ratio	0.0151741525819404
+feature_id	gene-YAL049C_gene.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	27855	end	28596	ratio	0.0151741525819404
+draw feature_id = gene-YAL049C_gene.yeast.NC_001133.9.1.1
+1brefore, feature_id	gene-YAL049C_gene.yeast.NC_001133.9.1.1,	feature_shift_x	,start	27856	end	28596
+2brefore, feature_id	gene-YAL049C_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	27856	end	28596	ratio	0.0151741525819404
+feature_id	gene-YAL049C_gene.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	27855	end	28596	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2
+1brefore, feature_id	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	,start	27856	end	28596
+2brefore, feature_id	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	27856	end	28596	ratio	0.0151741525819404
+feature_id	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.2,	feature_shift_x	0,start	27855	end	28596	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1
+1brefore, feature_id	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	,start	27856	end	28596
+2brefore, feature_id	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	27856	end	28596	ratio	0.0151741525819404
+feature_id	exon-NM_001178194.1-1_exon.yeast.NC_001133.9.1.1,	feature_shift_x	0,start	27855	end	28596	ratio	0.0151741525819404
+draw feature_id = gene-YAL047C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL047C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	990	end	2858
+2brefore, feature_id	gene-YAL047C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	990	end	2858	ratio	0.0151741525819404
+feature_id	gene-YAL047C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	989	end	2858	ratio	0.0151741525819404
+draw feature_id = gene-YAL047C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL047C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	990	end	2858
+2brefore, feature_id	gene-YAL047C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	990	end	2858	ratio	0.0151741525819404
+feature_id	gene-YAL047C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	989	end	2858	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	990	end	2858
+2brefore, feature_id	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	990	end	2858	ratio	0.0151741525819404
+feature_id	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	989	end	2858	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	990	end	2858
+2brefore, feature_id	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	990	end	2858	ratio	0.0151741525819404
+feature_id	exon-NM_001178192.2-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	989	end	2858	ratio	0.0151741525819404
+draw feature_id = gene-YAL046C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL046C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	3030	end	3386
+2brefore, feature_id	gene-YAL046C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3030	end	3386	ratio	0.0151741525819404
+feature_id	gene-YAL046C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3029	end	3386	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	3030	end	3386
+2brefore, feature_id	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3030	end	3386	ratio	0.0151741525819404
+feature_id	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3029	end	3386	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	3030	end	3386
+2brefore, feature_id	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3030	end	3386	ratio	0.0151741525819404
+feature_id	exon-NM_001178191.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3029	end	3386	ratio	0.0151741525819404
+draw feature_id = gene-YAL046C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL046C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	3030	end	3386
+2brefore, feature_id	gene-YAL046C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3030	end	3386	ratio	0.0151741525819404
+feature_id	gene-YAL046C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3029	end	3386	ratio	0.0151741525819404
+draw feature_id = exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	3519	end	3851
+2brefore, feature_id	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3519	end	3851	ratio	0.0151741525819404
+feature_id	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3518	end	3851	ratio	0.0151741525819404
+draw feature_id = exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	3519	end	3851
+2brefore, feature_id	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3519	end	3851	ratio	0.0151741525819404
+feature_id	exon-NM_001184453.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3518	end	3851	ratio	0.0151741525819404
+draw feature_id = gene-YAL044W-A_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL044W-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	3519	end	3851
+2brefore, feature_id	gene-YAL044W-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3519	end	3851	ratio	0.0151741525819404
+feature_id	gene-YAL044W-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3518	end	3851	ratio	0.0151741525819404
+draw feature_id = gene-YAL044W-A_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL044W-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	3519	end	3851
+2brefore, feature_id	gene-YAL044W-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3519	end	3851	ratio	0.0151741525819404
+feature_id	gene-YAL044W-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3518	end	3851	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	3951	end	4463
+2brefore, feature_id	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3951	end	4463	ratio	0.0151741525819404
+feature_id	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3950	end	4463	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	3951	end	4463
+2brefore, feature_id	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3951	end	4463	ratio	0.0151741525819404
+feature_id	exon-NM_001178189.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3950	end	4463	ratio	0.0151741525819404
+draw feature_id = gene-YAL044C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL044C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	3951	end	4463
+2brefore, feature_id	gene-YAL044C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3951	end	4463	ratio	0.0151741525819404
+feature_id	gene-YAL044C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	3950	end	4463	ratio	0.0151741525819404
+draw feature_id = gene-YAL044C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL044C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	3951	end	4463
+2brefore, feature_id	gene-YAL044C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3951	end	4463	ratio	0.0151741525819404
+feature_id	gene-YAL044C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	3950	end	4463	ratio	0.0151741525819404
+draw feature_id = gene-YAL043C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL043C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	4163	end	7053
+2brefore, feature_id	gene-YAL043C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	4163	end	7053	ratio	0.0151741525819404
+feature_id	gene-YAL043C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	4162	end	7053	ratio	0.0151741525819404
+draw feature_id = gene-YAL043C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL043C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	4163	end	7053
+2brefore, feature_id	gene-YAL043C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	4163	end	7053	ratio	0.0151741525819404
+feature_id	gene-YAL043C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	4162	end	7053	ratio	0.0151741525819404
+draw feature_id = gene-YAL042W_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL042W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	4462	end	8564
+2brefore, feature_id	gene-YAL042W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	4462	end	8564	ratio	0.0151741525819404
+feature_id	gene-YAL042W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	4461	end	8564	ratio	0.0151741525819404
+draw feature_id = gene-YAL042W_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL042W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	4462	end	8564
+2brefore, feature_id	gene-YAL042W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	4462	end	8564	ratio	0.0151741525819404
+feature_id	gene-YAL042W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	4461	end	8564	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	4696	end	7053
+2brefore, feature_id	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	4696	end	7053	ratio	0.0151741525819404
+feature_id	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	4695	end	7053	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	4696	end	7053
+2brefore, feature_id	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	4696	end	7053	ratio	0.0151741525819404
+feature_id	exon-NM_001178188.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	4695	end	7053	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	7317	end	8564
+2brefore, feature_id	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	7317	end	8564	ratio	0.0151741525819404
+feature_id	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	7316	end	8564	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	7317	end	8564
+2brefore, feature_id	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	7317	end	8564	ratio	0.0151741525819404
+feature_id	exon-NM_001178187.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	7316	end	8564	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	8841	end	11405
+2brefore, feature_id	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	8841	end	11405	ratio	0.0151741525819404
+feature_id	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	8840	end	11405	ratio	0.0151741525819404
+draw feature_id = gene-YAL041W_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL041W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	8841	end	11405
+2brefore, feature_id	gene-YAL041W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	8841	end	11405	ratio	0.0151741525819404
+feature_id	gene-YAL041W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	8840	end	11405	ratio	0.0151741525819404
+draw feature_id = gene-YAL041W_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL041W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	8841	end	11405
+2brefore, feature_id	gene-YAL041W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	8841	end	11405	ratio	0.0151741525819404
+feature_id	gene-YAL041W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	8840	end	11405	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	8841	end	11405
+2brefore, feature_id	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	8841	end	11405	ratio	0.0151741525819404
+feature_id	exon-NM_001178186.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	8840	end	11405	ratio	0.0151741525819404
+draw feature_id = gene-YAL040C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL040C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	11779	end	13521
+2brefore, feature_id	gene-YAL040C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	11779	end	13521	ratio	0.0151741525819404
+feature_id	gene-YAL040C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	11778	end	13521	ratio	0.0151741525819404
+draw feature_id = gene-YAL040C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL040C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	11779	end	13521
+2brefore, feature_id	gene-YAL040C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	11779	end	13521	ratio	0.0151741525819404
+feature_id	gene-YAL040C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	11778	end	13521	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	11779	end	13521
+2brefore, feature_id	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	11779	end	13521	ratio	0.0151741525819404
+feature_id	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	11778	end	13521	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	11779	end	13521
+2brefore, feature_id	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	11779	end	13521	ratio	0.0151741525819404
+feature_id	exon-NM_001178185.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	11778	end	13521	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	14717	end	15526
+2brefore, feature_id	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	14717	end	15526	ratio	0.0151741525819404
+feature_id	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	14716	end	15526	ratio	0.0151741525819404
+draw feature_id = gene-YAL039C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL039C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	14717	end	15526
+2brefore, feature_id	gene-YAL039C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	14717	end	15526	ratio	0.0151741525819404
+feature_id	gene-YAL039C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	14716	end	15526	ratio	0.0151741525819404
+draw feature_id = gene-YAL039C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL039C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	14717	end	15526
+2brefore, feature_id	gene-YAL039C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	14717	end	15526	ratio	0.0151741525819404
+feature_id	gene-YAL039C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	14716	end	15526	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	14717	end	15526
+2brefore, feature_id	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	14717	end	15526	ratio	0.0151741525819404
+feature_id	exon-NM_001178184.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	14716	end	15526	ratio	0.0151741525819404
+draw feature_id = gene-YAL038W_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL038W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	17787	end	19289
+2brefore, feature_id	gene-YAL038W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	17787	end	19289	ratio	0.0151741525819404
+feature_id	gene-YAL038W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	17786	end	19289	ratio	0.0151741525819404
+draw feature_id = gene-YAL038W_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL038W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	17787	end	19289
+2brefore, feature_id	gene-YAL038W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	17787	end	19289	ratio	0.0151741525819404
+feature_id	gene-YAL038W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	17786	end	19289	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	17787	end	19289
+2brefore, feature_id	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	17787	end	19289	ratio	0.0151741525819404
+feature_id	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	17786	end	19289	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	17787	end	19289
+2brefore, feature_id	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	17787	end	19289	ratio	0.0151741525819404
+feature_id	exon-NM_001178183.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	17786	end	19289	ratio	0.0151741525819404
+draw feature_id = exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	19427	end	19519
+2brefore, feature_id	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	19427	end	19519	ratio	0.0151741525819404
+feature_id	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	19426	end	19519	ratio	0.0151741525819404
+draw feature_id = gene-YAL037C-A_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL037C-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	19427	end	19519
+2brefore, feature_id	gene-YAL037C-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	19427	end	19519	ratio	0.0151741525819404
+feature_id	gene-YAL037C-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	19426	end	19519	ratio	0.0151741525819404
+draw feature_id = exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	19427	end	19519
+2brefore, feature_id	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	19427	end	19519	ratio	0.0151741525819404
+feature_id	exon-NM_001184629.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	19426	end	19519	ratio	0.0151741525819404
+draw feature_id = gene-YAL037C-A_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL037C-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	19427	end	19519
+2brefore, feature_id	gene-YAL037C-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	19427	end	19519	ratio	0.0151741525819404
+feature_id	gene-YAL037C-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	19426	end	19519	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	20021	end	20824
+2brefore, feature_id	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	20021	end	20824	ratio	0.0151741525819404
+feature_id	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	20020	end	20824	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	20021	end	20824
+2brefore, feature_id	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	20021	end	20824	ratio	0.0151741525819404
+feature_id	exon-NM_001178182.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	20020	end	20824	ratio	0.0151741525819404
+draw feature_id = gene-YAL037W_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL037W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	20021	end	20824
+2brefore, feature_id	gene-YAL037W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	20021	end	20824	ratio	0.0151741525819404
+feature_id	gene-YAL037W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	20020	end	20824	ratio	0.0151741525819404
+draw feature_id = gene-YAL037W_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL037W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	20021	end	20824
+2brefore, feature_id	gene-YAL037W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	20021	end	20824	ratio	0.0151741525819404
+feature_id	gene-YAL037W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	20020	end	20824	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	21044	end	22153
+2brefore, feature_id	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	21044	end	22153	ratio	0.0151741525819404
+feature_id	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	21043	end	22153	ratio	0.0151741525819404
+draw feature_id = gene-YAL036C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL036C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	21044	end	22153
+2brefore, feature_id	gene-YAL036C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	21044	end	22153	ratio	0.0151741525819404
+feature_id	gene-YAL036C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	21043	end	22153	ratio	0.0151741525819404
+draw feature_id = gene-YAL036C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL036C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	21044	end	22153
+2brefore, feature_id	gene-YAL036C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	21044	end	22153	ratio	0.0151741525819404
+feature_id	gene-YAL036C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	21043	end	22153	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	21044	end	22153
+2brefore, feature_id	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	21044	end	22153	ratio	0.0151741525819404
+feature_id	exon-NM_001178181.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	21043	end	22153	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	22428	end	25436
+2brefore, feature_id	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	22428	end	25436	ratio	0.0151741525819404
+feature_id	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	22427	end	25436	ratio	0.0151741525819404
+draw feature_id = gene-YAL035W_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL035W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	22428	end	25436
+2brefore, feature_id	gene-YAL035W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	22428	end	25436	ratio	0.0151741525819404
+feature_id	gene-YAL035W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	22427	end	25436	ratio	0.0151741525819404
+draw feature_id = gene-YAL035W_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL035W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	22428	end	25436
+2brefore, feature_id	gene-YAL035W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	22428	end	25436	ratio	0.0151741525819404
+feature_id	gene-YAL035W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	22427	end	25436	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	22428	end	25436
+2brefore, feature_id	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	22428	end	25436	ratio	0.0151741525819404
+feature_id	exon-NM_001178180.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	22427	end	25436	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	25719	end	26588
+2brefore, feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	25719	end	26588	ratio	0.0151741525819404
+feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	25718	end	26588	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	25719	end	26588
+2brefore, feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	25719	end	26588	ratio	0.0151741525819404
+feature_id	exon-NM_001178179.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	25718	end	26588	ratio	0.0151741525819404
+draw feature_id = gene-YAL034W-A_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	25719	end	26588
+2brefore, feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	25719	end	26588	ratio	0.0151741525819404
+feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	25718	end	26588	ratio	0.0151741525819404
+draw feature_id = gene-YAL034W-A_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	25719	end	26588
+2brefore, feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	25719	end	26588	ratio	0.0151741525819404
+feature_id	gene-YAL034W-A_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	25718	end	26588	ratio	0.0151741525819404
+draw feature_id = exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	26711	end	27952
+2brefore, feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	26711	end	27952	ratio	0.0151741525819404
+feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	26710	end	27952	ratio	0.0151741525819404
+draw feature_id = gene-YAL034C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	26711	end	27952
+2brefore, feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	26711	end	27952	ratio	0.0151741525819404
+feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	26710	end	27952	ratio	0.0151741525819404
+draw feature_id = exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	26711	end	27952
+2brefore, feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	26711	end	27952	ratio	0.0151741525819404
+feature_id	exon-NM_001180035.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	26710	end	27952	ratio	0.0151741525819404
+draw feature_id = gene-YAL034C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	26711	end	27952
+2brefore, feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	26711	end	27952	ratio	0.0151741525819404
+feature_id	gene-YAL034C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	26710	end	27952	ratio	0.0151741525819404
+draw feature_id = gene-YAL033W_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	28707	end	29228
+2brefore, feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	28707	end	29228	ratio	0.0151741525819404
+feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	28706	end	29228	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	28707	end	29228
+2brefore, feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	28707	end	29228	ratio	0.0151741525819404
+feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	28706	end	29228	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	28707	end	29228
+2brefore, feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	28707	end	29228	ratio	0.0151741525819404
+feature_id	exon-NM_001178178.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	28706	end	29228	ratio	0.0151741525819404
+draw feature_id = gene-YAL033W_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	28707	end	29228
+2brefore, feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	28707	end	29228	ratio	0.0151741525819404
+feature_id	gene-YAL033W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	28706	end	29228	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	29336	end	30475
+2brefore, feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	29336	end	30475	ratio	0.0151741525819404
+feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	29335	end	30475	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	29336	end	30475
+2brefore, feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	29336	end	30475	ratio	0.0151741525819404
+feature_id	exon-NM_001178177.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	29335	end	30475	ratio	0.0151741525819404
+draw feature_id = gene-YAL032C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	29336	end	30475
+2brefore, feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	29336	end	30475	ratio	0.0151741525819404
+feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	29335	end	30475	ratio	0.0151741525819404
+draw feature_id = gene-YAL032C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	29336	end	30475
+2brefore, feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	29336	end	30475	ratio	0.0151741525819404
+feature_id	gene-YAL032C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	29335	end	30475	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	30750	end	33032
+2brefore, feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	30750	end	33032	ratio	0.0151741525819404
+feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	30749	end	33032	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	30750	end	33032
+2brefore, feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	30750	end	33032	ratio	0.0151741525819404
+feature_id	exon-NM_001178176.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	30749	end	33032	ratio	0.0151741525819404
+draw feature_id = gene-YAL031C_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	30750	end	33032
+2brefore, feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	30750	end	33032	ratio	0.0151741525819404
+feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	30749	end	33032	ratio	0.0151741525819404
+draw feature_id = gene-YAL031C_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	30750	end	33032
+2brefore, feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	30750	end	33032	ratio	0.0151741525819404
+feature_id	gene-YAL031C_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	30749	end	33032	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	33287	end	33388
+2brefore, feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	33287	end	33388	ratio	0.0151741525819404
+feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	33286	end	33388	ratio	0.0151741525819404
+draw feature_id = gene-YAL030W_gene.yeast.NC_001133.9.2.1
+1brefore, feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	,start	33287	end	33753
+2brefore, feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	33287	end	33753	ratio	0.0151741525819404
+feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	33286	end	33753	ratio	0.0151741525819404
+draw feature_id = gene-YAL030W_gene.yeast.NC_001133.9.2.2
+1brefore, feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	,start	33287	end	33753
+2brefore, feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	33287	end	33753	ratio	0.0151741525819404
+feature_id	gene-YAL030W_gene.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	33286	end	33753	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	33287	end	33388
+2brefore, feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	33287	end	33388	ratio	0.0151741525819404
+feature_id	exon-NM_001178175.1-1_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	33286	end	33388	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1
+1brefore, feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1,	feature_shift_x	,start	33502	end	33753
+2brefore, feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	33502	end	33753	ratio	0.0151741525819404
+feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.1,	feature_shift_x	0,start	33501	end	33753	ratio	0.0151741525819404
+draw feature_id = exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2
+1brefore, feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2,	feature_shift_x	,start	33502	end	33753
+2brefore, feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	33502	end	33753	ratio	0.0151741525819404
+feature_id	exon-NM_001178175.1-2_exon.yeast.NC_001133.9.2.2,	feature_shift_x	0,start	33501	end	33753	ratio	0.0151741525819404
+draw feature_id = yeast.NC_001133.9.2.54000.87752.1.gff.ylabel+
+1brefore, feature_id	yeast.NC_001133.9.2.54000.87752.1.gff.ylabel+,	feature_shift_x	,start	33753	end	33753
+2brefore, feature_id	yeast.NC_001133.9.2.54000.87752.1.gff.ylabel+,	feature_shift_x	40,start	33753	end	33753	ratio	0.0151741525819404
+feature_id	yeast.NC_001133.9.2.54000.87752.1.gff.ylabel+,	feature_shift_x	40,start	33752	end	33753	ratio	0.0151741525819404
+draw feature_id = yeast.NC_001133.9.2.54000.87752.2.gff.ylabel-
+1brefore, feature_id	yeast.NC_001133.9.2.54000.87752.2.gff.ylabel-,	feature_shift_x	,start	33753	end	33753
+2brefore, feature_id	yeast.NC_001133.9.2.54000.87752.2.gff.ylabel-,	feature_shift_x	40,start	33753	end	33753	ratio	0.0151741525819404
+feature_id	yeast.NC_001133.9.2.54000.87752.2.gff.ylabel-,	feature_shift_x	40,start	33752	end	33753	ratio	0.0151741525819404
+check_blocks_two_ends_cord yeast,NC_001133.9,2,54000 -> 592.826827901765,347.025
+check_blocks_two_ends_cord yeast,NC_001133.9,2,87752 -> 1105,347.025
+check_blocks_two_ends_cord yeast,NC_001133.9,1,54000 -> 585.239751610795,347.025
+check_blocks_two_ends_cord yeast,NC_001133.9,1,24000 -> 130,347.025
+
+
+
+
+scale_display is yes
+disply scale
+unit_scale is 15.1741525819404=1000*0.0151741525819404
+ticks number is 64
+cluster_width_ratio 0.75*1300 % 15.1741525819404
+order is -1
+order is 0
+order is 1
+order is 1.33333333333333
+
+outfile is  ./out3.svg and ./out3.notitle.svg ./out3.html
+
+if you want png or pdf format,you could use convert or cairosvg to convert svg to pdf or png:
+	convert  -density 100 ./out3.svg ./out3.png
+	convert -density 100 ./out3.svg ./out3.dpi100.pdf
+
+/ClustersPloter/src/navigator
+/ClustersPloter/src/svg-pan-zoom.js exists,
+	so output ./out3.html, which you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom
+

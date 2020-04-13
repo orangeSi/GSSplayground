@@ -76,6 +76,12 @@ scale_tick_height -> 0.01
 scale_order -> -1
 scale_tick_padding_y -> 10
 scale_tick_fontsize -> 6
+
+not_exists hist_scatter_line in confs
+
+not_exists reads_mapping in confs
+
+not_exists synteny in confs
 svg_width is 1000, svg_height is svg_height
 start read tracks.7.list.out7
 parse pO83_CORR1 pO83_CORR1:NC_017659.1:1-7060 -> block_index 1
@@ -123,16 +129,19 @@ read_list pO83_CORR5 end
 end read tracks.7.list.out7
 reverse pO83_CORR5 -> 1
 lenged number is 5
-pos 2 is right, gene4537
-pos 2 is right, gene4538
 pos 2 is baseline, gene4549
 pos 2 is right, gene4532
+pos 2 is right, gene4537
 pos 2 is baseline, gene4559
-using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
-using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
-using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
+pos 2 is right, gene4538
+using /ClustersPloter/src/Times_New_Roman.ttf
+text is gene4532gene4538gene4559.lengendgene4537gene4549.lenged, fontsize is 15, ttf is /ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/Times_New_Roman.ttf
+text is gene4549.lenged, fontsize is 15, ttf is /ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/Times_New_Roman.ttf
+text is gene4559.lengend, fontsize is 15, ttf is /ClustersPloter/src/Times_New_Roman.ttf
 pos is baseline
-feature_shift_x_to = 343.65 = (1000 - 312.7)/2
+feature_shift_x_to = 340.4 = (1000 - 319.2)/2
 pos is right
 add legend list is tracks.7.list.out7.out7.legend.list
 add legend feature_setting is feature.color.label.7.conf.legend.setting.conf
@@ -186,15 +195,12 @@ read gff, pO83_CORR5:NC_017659.1:28000-35000 block_index 1 for NC_017659.1	RefSe
 read gff, pO83_CORR5:NC_017659.1:28000-35000 block_index 1 for NC_017659.1	RefSeq	gene	34369	34692	.	+	.	ID=gene4561;Dbxref=GeneID:12657241;Name=NRG857_30061;gbkey=Gene;gene_biotype=protein_coding;locus_tag=NRG857_30061
 read_list pO83_CORR5 end
 draw sample name pO83_CORR1
-using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/Times_New_Roman.ttf
+text is NC_017659.1:1-7060bp, fontsize is 6, ttf is /ClustersPloter/src/Times_New_Roman.ttf
 draw feature_id = gene4538.blue.ellipse.1
 1brefore, feature_id	gene4538.blue.ellipse.1,	feature_shift_x	,start	1	end	132.786666666667
 2brefore, feature_id	gene4538.blue.ellipse.1,	feature_shift_x	0,start	1	end	132.786666666667	ratio	0.106232294617564
 feature_id	gene4538.blue.ellipse.1,	feature_shift_x	0,start	0.999999999999	end	132.786666666667	ratio	0.106232294617564
-draw feature_id = gene4532.black.arrow.1
-1brefore, feature_id	gene4532.black.arrow.1,	feature_shift_x	,start	1	end	198.68
-2brefore, feature_id	gene4532.black.arrow.1,	feature_shift_x	0,start	1	end	198.68	ratio	0.106232294617564
-feature_id	gene4532.black.arrow.1,	feature_shift_x	0,start	0.99	end	198.68	ratio	0.106232294617564
 draw feature_id = gene4559.lengend.black.arrow.0.6
 1brefore, feature_id	gene4559.lengend.black.arrow.0.6,	feature_shift_x	,start	1	end	198.68
 2brefore, feature_id	gene4559.lengend.black.arrow.0.6,	feature_shift_x	0,start	1	end	198.68	ratio	0.106232294617564
@@ -207,12 +213,17 @@ draw feature_id = gene4537.yellow.circle_point.1
 1brefore, feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	,start	1	end	132.786666666667
 2brefore, feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	0,start	1	end	132.786666666667	ratio	0.106232294617564
 feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	0,start	0.999999999999	end	132.786666666667	ratio	0.106232294617564
+draw feature_id = gene4532.black.arrow.1
+1brefore, feature_id	gene4532.black.arrow.1,	feature_shift_x	,start	1	end	198.68
+2brefore, feature_id	gene4532.black.arrow.1,	feature_shift_x	0,start	1	end	198.68	ratio	0.106232294617564
+feature_id	gene4532.black.arrow.1,	feature_shift_x	0,start	0.99	end	198.68	ratio	0.106232294617564
 draw feature_id = gene4532
 1brefore, feature_id	gene4532,	feature_shift_x	,start	2313	end	3428
 2brefore, feature_id	gene4532,	feature_shift_x	0,start	2313	end	3428	ratio	0.106232294617564
 feature_id	gene4532,	feature_shift_x	0,start	2312	end	3428	ratio	0.106232294617564
 draw sample name pO83_CORR2
-using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/Times_New_Roman.ttf
+text is NC_017659.1:7060-14060bp, fontsize is 6, ttf is /ClustersPloter/src/Times_New_Roman.ttf
 draw feature_id = gene4534
 1brefore, feature_id	gene4534,	feature_shift_x	,start	272	end	1501
 2brefore, feature_id	gene4534,	feature_shift_x	0,start	272	end	1501	ratio	0.106232294617564
@@ -234,7 +245,8 @@ draw feature_id = gene4538
 2brefore, feature_id	gene4538,	feature_shift_x	0,start	5619	end	6455	ratio	0.106232294617564
 feature_id	gene4538,	feature_shift_x	0,start	5618	end	6455	ratio	0.106232294617564
 draw sample name pO83_CORR3
-using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/Times_New_Roman.ttf
+text is NC_017659.1:14060-21000bp, fontsize is 6, ttf is /ClustersPloter/src/Times_New_Roman.ttf
 draw feature_id = gene4540
 1brefore, feature_id	gene4540,	feature_shift_x	,start	958	end	1269
 2brefore, feature_id	gene4540,	feature_shift_x	0,start	958	end	1269	ratio	0.106232294617564
@@ -272,7 +284,8 @@ draw feature_id = gene4548
 2brefore, feature_id	gene4548,	feature_shift_x	0,start	6274	end	6624	ratio	0.106232294617564
 feature_id	gene4548,	feature_shift_x	0,start	6273	end	6624	ratio	0.106232294617564
 draw sample name pO83_CORR4
-using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/Times_New_Roman.ttf
+text is NC_017659.1:21000-28000bp, fontsize is 6, ttf is /ClustersPloter/src/Times_New_Roman.ttf
 draw feature_id = gene4549
 1brefore, feature_id	gene4549,	feature_shift_x	,start	225	end	1316
 2brefore, feature_id	gene4549,	feature_shift_x	0,start	225	end	1316	ratio	0.106232294617564
@@ -298,7 +311,8 @@ draw feature_id = gene4554
 2brefore, feature_id	gene4554,	feature_shift_x	0,start	5295	end	5711	ratio	0.106232294617564
 feature_id	gene4554,	feature_shift_x	0,start	5294	end	5711	ratio	0.106232294617564
 draw sample name pO83_CORR5
-using /hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/Times_New_Roman.ttf
+text is NC_017659.1:reverse:[35000 -> 28000]bp, fontsize is 6, ttf is /ClustersPloter/src/Times_New_Roman.ttf
 draw feature_id = gene4556
 1brefore, feature_id	gene4556,	feature_shift_x	,start	1365	end	1622
 
@@ -335,16 +349,16 @@ draw feature_id = gene4561
 feature is 1, 6370, 6693, 1, 7001, 1, 0, feature
 2brefore, feature_id	gene4561,	feature_shift_x	0,start	309	end	632	ratio	0.106232294617564
 feature_id	gene4561,	feature_shift_x	0,start	308	end	632	ratio	0.106232294617564
-check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,35000 -> 843.732294617564,399.611111111111
-check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,28000 -> 100,399.611111111111
-check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,14060 -> 843.732294617564,166.277777777778
-check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,7060 -> 100,166.277777777778
-check_blocks_two_ends_cord pO83_CORR4,NC_017659.1,1,21000 -> 100,321.833333333333
-check_blocks_two_ends_cord pO83_CORR4,NC_017659.1,1,28000 -> 843.732294617564,321.833333333333
 check_blocks_two_ends_cord pO83_CORR3,NC_017659.1,1,21000 -> 837.35835694051,244.055555555556
 check_blocks_two_ends_cord pO83_CORR3,NC_017659.1,1,14060 -> 100,244.055555555556
-check_blocks_two_ends_cord pO83_CORR1,NC_017659.1,1,1 -> 100,88.5
+check_blocks_two_ends_cord pO83_CORR4,NC_017659.1,1,28000 -> 843.732294617564,321.833333333333
+check_blocks_two_ends_cord pO83_CORR4,NC_017659.1,1,21000 -> 100,321.833333333333
+check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,35000 -> 843.732294617564,399.611111111111
+check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,28000 -> 100,399.611111111111
 check_blocks_two_ends_cord pO83_CORR1,NC_017659.1,1,7060 -> 850,88.5
+check_blocks_two_ends_cord pO83_CORR1,NC_017659.1,1,1 -> 100,88.5
+check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,7060 -> 100,166.277777777778
+check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,14060 -> 843.732294617564,166.277777777778
 
 
 
@@ -366,7 +380,7 @@ if you want png or pdf format,you could use convert or cairosvg to convert svg t
 	convert  -density 100 ./out7.svg ./out7.png
 	convert -density 100 ./out7.svg ./out7.dpi100.pdf
 
-/hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/navigator
-/hwfssz4/BC_COM_P0/F18FTSECKF1389/ASPjisD/ClustersPloter/src/svg-pan-zoom.js exists,
+/ClustersPloter/src/navigator
+/ClustersPloter/src/svg-pan-zoom.js exists,
 	so output ./out7.html, which you can zoom in/out or drag, thanks https://github.com/ariutta/svg-pan-zoom
 
