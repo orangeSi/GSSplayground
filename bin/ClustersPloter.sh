@@ -30,7 +30,7 @@ do
 	if [ "$?" != "0" ];
 	then
 		echo -e "error: not find $i"
-		exit
+		exit 1
 	else
 		j=`which $i`
 		echo find $j
@@ -43,7 +43,7 @@ done
 if [ $# -ne 4 ];
 then
 	echo -e "\nusage:\n sh $0 $(tput setaf 3)track.list$(tput setaf 7) prefix outdir/ $(tput setaf 3)main.conf$(tput setaf 7)\n\nany question, go to https://github.com/orangeSi/ClustersPloter/issues"
-	exit
+	exit 1
 fi
 #set -vex
 
@@ -61,7 +61,7 @@ do
 	if [ ! -f "$i" ];
 	then
 		echo -e "\n$(tput setaf 1)error: file $i not exists$(tput setaf 7)"
-		exit
+		exit 1
 	fi
 done
 
@@ -92,7 +92,7 @@ then
 	error=`cat $prefix.prepare.data.error`
 	echo -e "$(tput setaf 2)$error$(tput setaf 7)\n\n$(tput setaf 1)error in file: $prefix.prepare.data.error$(tput setaf 7)\n\n"
 	date
-	exit
+	exit 1
 else
 date
 echo
@@ -112,7 +112,7 @@ then
 	error=`cat $prefix.plot.error`
 	echo -e "$(tput setaf 2)$error$(tput setaf 7)\n\n$(tput setaf 1)detail error in file $prefix.plot.error, $(tput setaf 7)\n\n"
 	date
-	exit
+	exit 1
 else
 	echo -e "\n\n$(tput setaf 2)finished, no error~$(tput setaf 7)\n\n"
 fi
