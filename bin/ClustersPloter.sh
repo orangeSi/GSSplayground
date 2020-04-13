@@ -73,6 +73,7 @@ fi
 cd $outdir
 
 num=`cat $conf|grep -iE "^\s*hist_scatter_line\s*|^\s*reads_mapping\s*|^\s*synteny\s*"|wc -l`
+error_flag=0
 if [ "$num" -ge 1 ];
 then
 	echo 
@@ -80,14 +81,16 @@ then
 	echo -e "$(tput setaf 3)perl $base/src/prepare.data.pl --list $list --prefix $prefix --outdir . --conf $conf >$prefix.prepare.data.log 2>$prefix.prepare.data.error.tmp $(tput setaf 7)"
 	#echo "perl $base/src/prepare.data.pl --list $list --prefix $prefix --outdir . --conf $conf >$prefix.prepare.data.log 2>$prefix.prepare.data.error.tmp"
 	perl $base/src/prepare.data.pl --list $list --prefix $prefix --outdir . --conf $conf >$prefix.prepare.data.log 2>$prefix.prepare.data.error.tmp
-	cat $prefix.prepare.data.error.tmp|grep -v '^+ ' > $prefix.prepare.data.error && rm $prefix.prepare.data.error.tmp
+	error_flag=$?
+	#cat $prefix.prepare.data.error.tmp|grep -v '^+ ' > $prefix.prepare.data.error && rm $prefix.prepare.data.error.tmp
+	cat $prefix.prepare.data.error.tmp > $prefix.prepare.data.error && rm $prefix.prepare.data.error.tmp
 	echo
 else
 	cp $list $list.$prefix
 	cp $conf $conf.$prefix
 fi
 
-if [ -s $prefix.prepare.data.error ];
+if [ $error_flag -ge 1 ];
 then
 	error=`cat $prefix.prepare.data.error`
 	echo -e "$(tput setaf 2)$error$(tput setaf 7)\n\n$(tput setaf 1)error in file: $prefix.prepare.data.error$(tput setaf 7)\n\n"
@@ -98,16 +101,18 @@ date
 echo
 echo 
 date
+error_flag=0
 echo -e "$(tput setaf 3)perl $base/src/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.plot.log 2>$prefix.plot.error.tmp$(tput setaf 7)"
 #echo "perl $base/src/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.plot.log 2>$prefix.plot.error.tmp"
 perl $base/src/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.plot.log 2>$prefix.plot.error.tmp
-cat $prefix.plot.error.tmp|grep -v '^+ ' >$prefix.plot.error && rm $prefix.plot.error.tmp
+error_flag=$?
+cat $prefix.plot.error.tmp >$prefix.plot.error && rm $prefix.plot.error.tmp
 echo
 fi
 echo 
 #ls -ltrh $prefix.prepare.data.log $prefix.plot.log 2>/dev/null
 #ls -ltrh $prefix.prepare.data.error $prefix.plot.error 2>/dev/null
-if [ -s $prefix.plot.error ];
+if [  $error_flag -ge 1 ];
 then
 	error=`cat $prefix.plot.error`
 	echo -e "$(tput setaf 2)$error$(tput setaf 7)\n\n$(tput setaf 1)detail error in file $prefix.plot.error, $(tput setaf 7)\n\n"
