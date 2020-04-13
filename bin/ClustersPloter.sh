@@ -6,7 +6,40 @@ then
 	echo -e "\n$(tput setaf 1)error: cannot find $base/bin/env.sh$(tput setaf 7)\n"
 	exit 1
 fi
-. $base/bin/env.sh
+
+#. $base/bin/env.sh $base
+# check env
+home=$base
+#export PERL5LIB=$home/src:$home/src/Imager-1.011/lib64/perl5/:$PERL5LIB ## for perl library
+export PERL5LIB=$home/src:$PERL5LIB ## for perl library
+
+# for samtool
+export PATH=/zfssz5/BC_PUB/Software/03.Soft_ALL/samtools-1.7:$PATH
+
+perl -e 'use Imager::Font'
+if [ $? -eq 0 ];
+then	
+	echo -e "\nfind Imager::Font"
+else
+	echo -e "\n$(tput setaf 1)error, not find Imager::Font, maybe you should try to re-install perl package Imager::Font(https://cpan.metacpan.org/authors/id/A/AD/ADDI/Imager-0.41.tar.gz) by cpan or manually-install$(tput setaf 7)\n"
+fi
+dep="samtools sort perl"
+for i in $dep
+do
+	$i --help >/dev/null
+	if [ "$?" != "0" ];
+	then
+		echo -e "error: not find $i"
+		exit
+	else
+		j=`which $i`
+		echo find $j
+	fi
+done
+
+
+
+
 if [ $# -ne 4 ];
 then
 	echo -e "\nusage:\n sh $0 $(tput setaf 3)track.list$(tput setaf 7) prefix outdir/ $(tput setaf 3)main.conf$(tput setaf 7)\n\nany question, go to https://github.com/orangeSi/ClustersPloter/issues"
