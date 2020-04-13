@@ -14,7 +14,9 @@
 ### Dependence<br>
 ```
 # install by docker
-docker pull ilikeorange/clustersploter:v0.5.8 
+docker pull ilikeorange/clustersploter:v0.5.8  
+# then run by:
+docker run --rm  -it clustersploter:v0.5.8  '/ClustersPloter/ClustersPloter.sh'
 
 # or manually install, tested only in Centos yet
 samtools >=1.7 # add this to linux PATH 
