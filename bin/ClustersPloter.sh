@@ -101,6 +101,7 @@ date
 echo
 echo 
 date
+
 error_flag=0
 echo -e "$(tput setaf 3)perl $base/src/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.plot.log 2>$prefix.plot.error.tmp$(tput setaf 7)"
 #echo "perl $base/src/plot.genome.featureCluster.pl --list $list.$prefix --prefix $prefix --outdir . --conf $conf.$prefix >$prefix.plot.log 2>$prefix.plot.error.tmp"
