@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1300" height="700" style="background-color:white;">
+<text class='myth' x="110.5" y="222.5" style="font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >pO83_CORR</text>
+<defs>    <clipPath id="cut-pO83_CORR-NC_017659.1-1"><path class='myth' d="M163.614893983796 80.8333333333333 L869.695742113429 80.8333333333333 L869.695742113429 364.166666666667 L163.614893983796 364.166666666667 Z" />     </clipPath>  </defs>
+
+<path class='myth' stroke="black" stroke-width="1" stroke-dasharray="2,2" d="M886.503189105327,221.083333333333 L885.662816755732,222.5" /><defs>    <clipPath id="cut-pO83_CORR-NC_017659.1-2"><path class='myth' d="M886.503189105327 80.8333333333333 L1071.3851060162 80.8333333333333 L1071.3851060162 364.166666666667 L886.503189105327 364.166666666667 Z" />     </clipPath>  </defs>
+<text class='myth' x="110.5" y="505.833333333333" style="font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >pO83_CORR.indel</text>
+<defs>    <clipPath id="cut-pO83_CORR.indel-NC_017659.1.fake-1"><path class='myth' d="M130 364.166666666667 L852.888295121531 364.166666666667 L852.888295121531 647.5 L130 647.5 Z" />     </clipPath>  </defs>
+
+<path class='myth' stroke="black" stroke-width="1" stroke-dasharray="2,2" d="M936.92553008102,504.416666666667 L936.085157731426,505.833333333333" /><defs>    <clipPath id="cut-pO83_CORR.indel-NC_017659.1.fake-2"><path class='myth' d="M936.92553008102 364.166666666667 L1105 364.166666666667 L1105 647.5 L936.92553008102 647.5 Z" />     </clipPath>  </defs>
+
+<line x1="130" y1="673.75" x2="1105" y2="673.75" style="stroke:green;stroke-width:0.5"/>
+<line x1="130" y1="666.75" x2="130" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="130" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">1bp</text>
+<line x1="298.07446991898" y1="666.75" x2="298.07446991898" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="298.07446991898" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">1,000</text>
+<line x1="466.148939837959" y1="666.75" x2="466.148939837959" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="466.148939837959" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">2,000</text>
+<line x1="634.223409756938" y1="666.75" x2="634.223409756938" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="634.223409756938" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">3,000</text>
+<line x1="802.297879675918" y1="666.75" x2="802.297879675918" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="802.297879675918" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">4,000</text>
+<line x1="1105" y1="666.75" x2="1105" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth'  x="1105" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman">5,801bp</text>
+
+
+
+<rect x="163.614893983796" y="221.083333333333" width="706.080848129633" height="2.83333333333333" style="fill:green"   />
+<text class='myth'  x="162.614893983796" y="222.5" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5'</text>
+ <text class='myth'  x="870.695742113429" y="222.5" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3'</text>
+
+<rect x="886.503189105327" y="221.083333333333" width="184.881916910877" height="2.83333333333333" style="fill:green"   />
+<text class='myth'  x="885.503189105327" y="222.5" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5'</text>
+ <text class='myth'  x="1072.3851060162" y="222.5" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3'</text>
+
+<rect x="130" y="504.416666666667" width="722.888295121531" height="2.83333333333333" style="fill:green"   />
+<text class='myth'  x="129" y="505.833333333333" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5'</text>
+ <text class='myth'  x="853.888295121531" y="505.833333333333" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3'</text>
+
+<rect x="936.92553008102" y="504.416666666667" width="168.074469918979" height="2.83333333333333" style="fill:green"   />
+<text class='myth'  x="935.92553008102" y="505.833333333333" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5'</text>
+ <text class='myth'  x="1106" y="505.833333333333" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3'</text>
+
+
+
+
+
+
+<path id="pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1"  d="M-196.06447164282 208.333333333333 L-196.06447164282 236.666666666667 L23603.4485433546 236.666666666667 L23603.4485433546 208.333333333333 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+
+
+
+
+
+
+
+
+ <defs>    <clipPath id="clip_163.614893983796-221.083333333333-869.695742113429-221.083333333333-130-504.416666666667-852.888295121531-504.416666666667"><path class='myth' d="M163.614893983796 221.083333333333 L869.695742113429 221.083333333333 L852.888295121531 504.416666666667 L130 504.416666666667 Z" /></clipPath>  </defs>
+<path class='myth' d="M-196.06447164282 245.166666666667 L23603.4485433546 245.166666666667 L23553.0262023789 491.525 L-246.486812618514 491.525 Z"  clip-path="url(#clip_163.614893983796-221.083333333333-869.695742113429-221.083333333333-130-504.416666666667-852.888295121531-504.416666666667)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
+
+
+
+
+
+
+
+				<polygon id="pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1" points="-1113.58300293053,217.541666666667 -1113.58300293053,227.458333333333 -858.378727805551,227.458333333333 -858.378727805551,228.308333333333 -794.577659024306,222.5 -858.378727805551,216.691666666667 -858.378727805551,217.541666666667" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/>
+
+
+
+
+				<polygon id="pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1" points="-795.922254783658,217.541666666667 -795.922254783658,227.458333333333 -767.685743837269,227.458333333333 -767.685743837269,228.308333333333 -760.626616100672,222.5 -767.685743837269,216.691666666667 -767.685743837269,217.541666666667" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/>
+
+
+
+
+				<polygon id="pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1" points="-760.626616100672,217.541666666667 -760.626616100672,227.458333333333 -308.842440958455,227.458333333333 -308.842440958455,228.308333333333 -195.896397172901,222.5 -308.842440958455,216.691666666667 -308.842440958455,217.541666666667" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/>
+
+
+
+
+				<polygon id="pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2" points="812.382347871057,217.541666666667 812.382347871057,227.458333333333 19851.992759869,227.458333333333 19851.992759869,228.308333333333 24611.8953628685,222.5 19851.992759869,216.691666666667 19851.992759869,217.541666666667" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/>
+
+
+
+
+				<polygon id="pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1" points="-1164.00534390622,500.875 -1164.00534390622,510.791666666667 -908.801068781245,510.791666666667 -908.801068781245,511.641666666667 -845,505.833333333333 -908.801068781245,500.025 -908.801068781245,500.875" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/>
+
+
+
+
+				<polygon id="pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1" points="-846.344595759352,500.875 -846.344595759352,510.791666666667 -394.560420617135,510.791666666667 -394.560420617135,511.641666666667 -281.614376831581,505.833333333333 -394.560420617135,500.025 -394.560420617135,500.875" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/>
+
+
+
+
+				<polygon id="pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1" points="-281.614376831581,500.875 -281.614376831581,510.791666666667 -253.377865885192,510.791666666667 -253.377865885192,511.641666666667 -246.318738148595,505.833333333333 -253.377865885192,500.025 -253.377865885192,500.875" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/>
+
+
+
+
+				<polygon id="pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1" points="-246.486812618514,500.875 -246.486812618514,510.791666666667 18793.1235993794,510.791666666667 18793.1235993794,511.641666666667 23553.0262023789,505.833333333333 18793.1235993794,500.025 18793.1235993794,500.875" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/>
+
+
+
+
+				<polygon id="pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2" points="845.997241854853,500.875 845.997241854853,510.791666666667 19885.6076538528,510.791666666667 19885.6076538528,511.641666666667 24645.5102568523,505.833333333333 19885.6076538528,500.025 19885.6076538528,500.875" style="fill:rgb(50,205,50);stroke:black;stroke-width:0;opacity:1"/>
+
+
+<text class='myth' x="515.655318048612" y="235.666666666667" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 515.655318048612 235.666666666667)" >NC_017659.1:1700-5900bp</text>
+<text class='myth' x="977.944147560765" y="235.666666666667" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 977.944147560765 235.666666666667)" >NC_017659.1:5901-7000bp</text>
+<text class='myth' x="490.444147560765" y="519" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 490.444147560765 519)" >NC_017659.1.fake:1700-6000bp</text>
+<text class='myth' x="1019.96276504051" y="519" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1019.96276504051 519)" >NC_017659.1.fake:6001-7000bp</text>
+
+</svg>

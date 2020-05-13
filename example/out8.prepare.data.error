@@ -1,37 +1,37 @@
-+ cat out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff
-+ rm out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff
-+ echo output out8.pO83_CORR.indel.blast.out8.synteny.gff
-+ cat out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf
-+ rm out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf
-+ echo output out8.pO83_CORR.indel.blast.out8.synteny.setting.conf
-+ cat pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff
-+ rm pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff
-+ echo output out8.pO83_CORR.twin.minimap.out8.synteny.gff
-+ cat pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf
-+ rm pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf
-+ echo output out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf
 + cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff
 + rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff
 + echo output out8.pO83_CORR.out8.synteny.gff
 + cat pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf
 + rm pO83_CORR.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf
 + echo output out8.pO83_CORR.out8.synteny.setting.conf
-+ cat pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf
-+ rm pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf
-+ echo output out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink
++ cat out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff
++ rm out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff
++ echo output out8.pO83_CORR.indel.blast.out8.synteny.gff
++ cat out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf
++ rm out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf out8.pO83_CORR.indel.blast.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf
++ echo output out8.pO83_CORR.indel.blast.out8.synteny.setting.conf
 + cat pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.crosslink.conf
 + rm pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.crosslink.conf
 + echo output out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink
-+ cat out8.pO83_CORR.indel.blast.out8.synteny.setting.conf out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf out8.pO83_CORR.out8.synteny.setting.conf
-+ cat out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink
++ cat pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf
++ rm pO83_CORR.indel.blast.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf
++ echo output out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink
++ cat pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff
++ rm pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.gff
++ echo output out8.pO83_CORR.twin.minimap.out8.synteny.gff
++ cat pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf
++ rm pO83_CORR.twin.minimap.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.paf.quadrilateral.2.synteny.setting.conf
++ echo output out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf
++ cat out8.pO83_CORR.indel.blast.to.pO83_CORR.twin.minimap.out8.synteny.crosslink out8.pO83_CORR.indel.blast.to.pO83_CORR.out8.synteny.crosslink
++ cat out8.pO83_CORR.out8.synteny.setting.conf out8.pO83_CORR.indel.blast.out8.synteny.setting.conf out8.pO83_CORR.twin.minimap.out8.synteny.setting.conf
 + cat feature.color.label.6.conf out8.synteny.setting.conf
 + cat out8.synteny.crosslink
-+ cat out8.pO83_CORR.indel.blast.out8.synteny.gff out8.pO83_CORR.twin.minimap.out8.synteny.gff out8.pO83_CORR.out8.synteny.gff
++ cat out8.pO83_CORR.out8.synteny.gff out8.pO83_CORR.indel.blast.out8.synteny.gff out8.pO83_CORR.twin.minimap.out8.synteny.gff
 + awk -F 	 {print $3}
 + sort -u
-+ sed -r s/^(pO83_CORR.indel.blast\s.*\.gff)\s/\1,out8.pO83_CORR.indel.blast.out8.synteny.gff\t/ tracks.8.list
++ sed -r s/^(pO83_CORR.twin.minimap\s.*\.gff)\s/\1,out8.pO83_CORR.twin.minimap.out8.synteny.gff\t/ tracks.8.list
 + cp tracks.8.list.out8 tracks.8.list.out8.tmp
-+ sed -r s/^(pO83_CORR.twin.minimap\s.*\.gff)\s/\1,out8.pO83_CORR.twin.minimap.out8.synteny.gff\t/ tracks.8.list.out8.tmp
++ sed -r s/^(pO83_CORR.indel.blast\s.*\.gff)\s/\1,out8.pO83_CORR.indel.blast.out8.synteny.gff\t/ tracks.8.list.out8.tmp
 + cp tracks.8.list.out8 tracks.8.list.out8.tmp
 + sed -r s/^(pO83_CORR\s.*\.gff)\s/\1,out8.pO83_CORR.out8.synteny.gff\t/ tracks.8.list.out8.tmp
 + cp tracks.8.list.out8 tracks.8.list.out8.tmp

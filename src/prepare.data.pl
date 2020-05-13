@@ -60,7 +60,7 @@ my @gffs;
 for my $fun (@funcs){ # my @funcs=("hist_scatter_line", "reads_mapping", "synteny", "general_features");
 	&$fun(\%gff, \%conf, \%genome);
 	if(exists $func_output{$fun}){
-		for my $t(keys %{$func_output{$fun}}){ # t is gff/crosslink/setting.conf
+		foreach my $t(sort keys %{$func_output{$fun}}){ # t is gff/crosslink/setting.conf
 			if($t=~ /^gff$/){
 				#&new_list($list, $prefix_name);
 				push @gffs, @{$func_output{$fun}{$t}};
@@ -89,7 +89,7 @@ print "\ndata done\n";
 sub add_list(){
 	my ($list, %list_gff)=@_; # #push @{$list_gff{$s}}, $file;
 	my $raw_list=$list;	
-	for my $s(keys %list_gff){
+	for my $s(sort keys %list_gff){
 		my $new_gff = join(",", @{$list_gff{$s}});
 		my $command="set -vex;sed  -r 's/^($s\\s.*\\.gff)\\s/\\1,$new_gff\\t/' $list >$raw_list.$prefix_name;cp $raw_list.$prefix_name $raw_list.$prefix_name.tmp";
 		&run_system($command, "$prefix_name.cat.log");
@@ -142,7 +142,7 @@ sub add2conf(){
 sub write2newconf(){
 	my ($out, %conf)=@_;
 	open CONF,">$out" or die "error: canot write to $out\n";
-	foreach my $k(keys %conf){
+	foreach my $k(sort keys %conf){
 		next if(ref $conf{$k} eq ref {});
 		if(grep(/^$k$/, @funcs)){
 			print CONF "\n";
@@ -225,8 +225,8 @@ sub synteny(){
 sub check_all_vs_all(){
 	my ($gff,$genome)=@_;
 	my $flag=0;
-	for my $sample(keys %$gff){
-		for my $block_index(keys %{$gff->{$sample}->{chooselen_single}}){
+	for my $sample(sort keys %$gff){
+		for my $block_index(sort keys %{$gff->{$sample}->{chooselen_single}}){
 
 			my $scf_id=$gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id};
 			die "error:gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id} is empty\n" if(not exists $gff->{$sample}->{chooselen_single}->{$block_index}->{scf_id});
@@ -868,7 +868,7 @@ sub general_features(){
 		my $tick_order=$kvs{tick_order};
 		my $ytick_flag=$kvs{ytick_display_flag};
 		my $kvalues="";
-		foreach my $ks(keys %kvs){$kvalues.="\t$ks->$kvs{$ks}"};
+		foreach my $ks(sort keys %kvs){$kvalues.="\t$ks->$kvs{$ks}"};
 		print "kvalues is $kvalues\n";
 		die "error:data_display_order=$kvs{data_display_order} should be like 2->3\n" if($kvs{data_display_order}!~ /^\s*[\d\.]+\s*->\s*[\d\.]+\s*$/);
 		die "\nerror: not support $data_type~ only support @data_types in $0\n" if(! grep(/^$data_type$/, @data_types));
@@ -939,7 +939,7 @@ sub general_features_run(){
 	my %highss=%$highss;
 	my $suffix_id="ilikeorangeapple";
 	print "start general_features_run\n";
-	foreach my $k(keys %kvs){print "$k -> $kvs{$k}\n"}
+	foreach my $k(sort keys %kvs){print "$k -> $kvs{$k}\n"}
 	
 	my $feature_gff="";
 	my $feature_setting_conf="";
@@ -950,9 +950,9 @@ sub general_features_run(){
 
 	my ($feature_gff_hash, $feature_setting_conf_hash, $old2new_id) = &read_feature_gff($kvs{data_type}, $kvs{data_display_order}, $gff_file, $refasta, $kvs{data_keyword}, $feature_id_suffix, $suffix_id, $scf, $rg_start, $rg_end, $yaxis_s1, $yaxis_e1);
 	$feature_setting_conf_hash = &add_setting_by_match_suffix($kvs, $feature_setting_conf_hash, $old2new_id); # replace id in setting.conf with newID in add_suffix	
-	foreach my $f(keys %$feature_gff_hash){
+	foreach my $f(sort keys %$feature_gff_hash){
 		$feature_gff.="$feature_gff_hash->{$f}->{line}\n";
-		foreach my $setting(keys %{$feature_setting_conf_hash->{$f}}){
+		foreach my $setting(sort keys %{$feature_setting_conf_hash->{$f}}){
 			die "error: feature $f have not $setting or null\n" if(not exists $feature_setting_conf_hash->{$f}->{$setting} || $feature_setting_conf_hash->{$f}->{$setting}=="");
 			$feature_setting_conf.="$f\t$setting\t$feature_setting_conf_hash->{$f}->{$setting}\n";
 			print "test\t$f\t$setting\t$feature_setting_conf_hash->{$f}->{$setting}\n";
@@ -1107,7 +1107,7 @@ sub read_feature_gff(){
 	$depth_rigtest_end{$depth_now}=0;
 	#my @ps=keys %kws_order;
 	#die "keys %kws_order is @ps\n";
-	foreach my $f(sort {$feature_gff_hash{$a}{start}<=>$feature_gff_hash{$b}{start}} keys %feature_gff_hash){
+	foreach my $f(sort {$feature_gff_hash{$a}{start}<=>$feature_gff_hash{$b}{start} || $feature_gff_hash{$b}{end}<=>$feature_gff_hash{$a}{end} || $a cmp $b } keys %feature_gff_hash){
 		next if(! grep(/^$feature_gff_hash{$f}{type}$/, keys %kws_order));
 		my $start=$feature_gff_hash{$f}{start};
 		my $end=$feature_gff_hash{$f}{end};
@@ -1141,7 +1141,7 @@ sub read_feature_gff(){
 		my $child_index=1;
 		my $feature_opacity=1;
 		if(exists $p2c{$f}){ # define child feature_order
-			foreach my $child (keys %{$p2c{$f}}){
+			foreach my $child (sort keys %{$p2c{$f}}){
 				$child_type=$feature_gff_hash{$child}{type};
 				$feature_opacity=($child_index%2 == 1)? 0.8 : 1;
 				$feature_setting_conf_hash{$child}{feature_opacity}=$feature_opacity;
@@ -1170,7 +1170,7 @@ sub read_feature_gff(){
 		$feature_setting_conf_hash{$f}{feature_shift_y} = $feature_shift_y_flag *(abs($yaxis_s1)+ ($depth -1)*$child_hight_ratio_as_parent*$unit_height + ($child_hight_ratio_as_parent - 1)/2*$unit_height );
 		$feature_setting_conf_hash{$f}{feature_popup_title}="type -> $type;strand -> $strand";
 		if(exists $p2c{$f}){ # define child feature_order
-			foreach my $child (keys %{$p2c{$f}}){
+			foreach my $child (sort keys %{$p2c{$f}}){
 				$type=$feature_gff_hash{$child}{type};
 				$strand=$feature_gff_hash{$child}{strand};
 				$feature_setting_conf_hash{$child}{feature_height_unit}="percent";
@@ -1410,7 +1410,7 @@ sub write_gff_conf_link(){
 	my $func_name=$prefix;
 	$func_name=~ s/^$prefix_name.//;
 	print "func_name is $func_name\n";
-	for my $s(keys %outname){
+	for my $s(sort keys %outname){
 		my $file;
 		if($outname{$s}{gff}){
 			$file="$prefix_name.$s.$prefix.gff";
@@ -1678,7 +1678,7 @@ sub reads_mapping_run(){
 	$read_type="long_reads" if($show_type eq "stack");
 	my $read_number=scalar(keys %reads);
 	print "read number is $read_number\n";
-	for my $read_id(sort {$reads{$a}{ref_start}<=>$reads{$b}{ref_start}} keys %reads){
+	for my $read_id(sort {$reads{$a}{ref_start}<=>$reads{$b}{ref_start} || $reads{$b}{ref_end}<=>$reads{$a}{ref_end} || $a cmp $b} keys %reads){
 #print "read_id is $read_id\n";
 		$read_num++;
 #my $read_id="$sample.$scf.$block.$rg_start.$rg_end.$k_index.$read_type.$read_num";
@@ -1979,7 +1979,7 @@ sub get_reads_depth(){
 	print "shift_y start\n";
 	my $rightest_pos;
 	$read_type="long_reads" if($show_type eq "stack");
-	for my $read_id(sort {$reads{$a}{ref_start}<=>$reads{$b}{ref_start}} keys %reads){
+	for my $read_id(sort {$reads{$a}{ref_start}<=>$reads{$b}{ref_start} || $reads{$b}{ref_end}<=>$reads{$a}{ref_end} | $a cmp $b} keys %reads){
 #print "read_id is $read_id\n";
 		$read_num++;
 #my $read_id="$sample.$scf.$block.$rg_start.$rg_end.$k_index.$read_type.$read_num";
@@ -2061,7 +2061,7 @@ sub get_reads_depth(){
 	$reads_depth{max_depth}=max(@max_depths);
 #die "\nerror:max_depths is @max_depths\n";
 	if($read_type ne "long_reads"){
-		for my $read(keys %reads){
+		for my $read(sort keys %reads){
 			next if($reads{$read}{mate_read_id} eq "null");
 			next if($reads{$read}{mate_ref} eq "*" || ($reads{$read}{mate_ref} ne "=" && $reads{$read}{mate_ref} ne $reads{$read}{ref_id}));
 			if(exists $reads{$read}{mate_read_id}){
@@ -2469,7 +2469,7 @@ sub detail_cigar(){
 
 
 
-	for my $cs(keys %{$reads{$r_id}{cigar}}){
+	for my $cs(sort keys %{$reads{$r_id}{cigar}}){
 		if($reads{$r_id}{cigar}{$cs}{type} eq "M"){ # remove all M cigar features, not display
 			delete $reads{$r_id}{cigar}{$cs};
 			next

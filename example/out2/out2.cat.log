@@ -1,0 +1,36 @@
+
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.out2.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.out2.synteny.gff
+
+
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.out2.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.out2.synteny.setting.conf
+
+
+set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.indel.out2.synteny.gff;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.indel.out2.synteny.gff
+
+
+set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.indel.out2.synteny.setting.conf;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.indel.out2.synteny.setting.conf
+
+
+set -vex;cat pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf >out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf;echo output out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink
+
+
+set -vex;cat out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink >out2.synteny.crosslink
+
+
+set -vex;cat out2.pO83_CORR.out2.synteny.setting.conf out2.pO83_CORR.indel.out2.synteny.setting.conf >out2.synteny.setting.conf
+
+
+set -vex;cat out2.synteny.setting.conf >feature.color.label.conf.out2
+
+
+set -vex;cat out2.synteny.crosslink >feature.crossing.link.out2
+
+
+set -vex;cat out2.pO83_CORR.out2.synteny.gff out2.pO83_CORR.indel.out2.synteny.gff|awk -F   '{print }'|sort -u
+
+
+set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/,out2.pO83_CORR.indel.out2.synteny.gff	/' tracks.2.list >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
+
+
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/,out2.pO83_CORR.out2.synteny.gff	/' tracks.2.list.out2.tmp >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
+

@@ -1,3 +1,14 @@
+pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_shape	quadrilateral
+pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_anchor_pos	low_up
+pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_color	orange
+pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_color_reverse	blue
+pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_opacity	0.498574037984912
+pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_opacity_reverse	0.5
+pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_shift_y	+3:-3
+pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	crosslink_stroke_style	stroke:black;stroke-width:0;
+pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	feature_popup_title	query -> NC_017659.1.fake: 1-147060;target -> NC_017659.1: 1-147060;strand -> +;indentity -> 99.7148075969824%;alignment_length -> 147269;query_coverage ->  147061/147060=100.00067999456;ref_coverage ->  147061/147060=100.00067999456;
+pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_order	1
+pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	edge_coordinate_feature_out_of_list	0
 pO83_CORR.indel.blast.NC_017659.1.fake.5460.147060.1.+.q.1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.1	cross_link_shape	quadrilateral
 pO83_CORR.indel.blast.NC_017659.1.fake.5460.147060.1.+.q.1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.1	cross_link_anchor_pos	low_up
 pO83_CORR.indel.blast.NC_017659.1.fake.5460.147060.1.+.q.1	pO83_CORR.NC_017659.1.5460.147060.1.+.t.1	cross_link_color	orange
@@ -493,14 +504,3 @@ pO83_CORR.indel.blast.NC_017659.1.fake.107858.107961.1.+.q.1	pO83_CORR.NC_017659
 pO83_CORR.indel.blast.NC_017659.1.fake.107858.107961.1.+.q.1	pO83_CORR.NC_017659.1.107471.107574.1.+.t.1	feature_popup_title	query -> NC_017659.1.fake: 107858-107961;target -> NC_017659.1: 107471-107574;strand -> +;indentity -> 85.58%;alignment_length -> 104;
 pO83_CORR.indel.blast.NC_017659.1.fake.107858.107961.1.+.q.1	pO83_CORR.NC_017659.1.107471.107574.1.+.t.1	cross_link_order	1
 pO83_CORR.indel.blast.NC_017659.1.fake.107858.107961.1.+.q.1	pO83_CORR.NC_017659.1.107471.107574.1.+.t.1	edge_coordinate_feature_out_of_list	0
-pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_shape	quadrilateral
-pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_anchor_pos	low_up
-pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_color	orange
-pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_color_reverse	blue
-pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_opacity	0.498574037984912
-pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_opacity_reverse	0.5
-pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_shift_y	+3:-3
-pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	crosslink_stroke_style	stroke:black;stroke-width:0;
-pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	feature_popup_title	query -> NC_017659.1.fake: 1-147060;target -> NC_017659.1: 1-147060;strand -> +;indentity -> 99.7148075969824%;alignment_length -> 147269;query_coverage ->  147061/147060=100.00067999456;ref_coverage ->  147061/147060=100.00067999456;
-pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	cross_link_order	1
-pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1	pO83_CORR.twin.minimap.NC_017659.1.1.147060.2.+.t.1	edge_coordinate_feature_out_of_list	0

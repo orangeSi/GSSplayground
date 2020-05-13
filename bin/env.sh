@@ -2,7 +2,8 @@ home=$(dirname `readlink -f $BASH_SOURCE`)
 home="$home/../"
 #echo base is $base
 ## for perl library
-export PERL5LIB=$home/src:$home/src/Imager-1.011/lib64/perl5/:$PERL5LIB ## for perl library
+#export PERL5LIB=$home/src:$home/src/Imager-1.011/lib64/perl5/:$PERL5LIB ## for perl library
+export PERL5LIB=$home/src:$PERL5LIB ## for perl library
 
 # for samtool
 export PATH=/zfssz5/BC_PUB/Software/03.Soft_ALL/samtools-1.7:$PATH

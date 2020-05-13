@@ -223,7 +223,7 @@ while(@track_order){
 ### draw main scaffold line track
 #$svg.="<rect x=\"$id_line_x\" y=\"$id_line_y\" width=\"$id_line_width\" height=\"$id_line_height\" style=\"fill:$conf{track_style}\"   />\n";
 		my $track_order=$conf{track_order};
-		foreach my $f(keys %{$conf{feature_setting2}}){
+		foreach my $f(sort keys %{$conf{feature_setting2}}){
 			next if ( (not exists $conf{feature_setting2}{$f}{track_order}) || $conf{feature_setting2}{$f}{scf_id} ne $scf[0] || $conf{feature_setting2}{$f}{sample} ne $sample);
 #print "$conf{feature_setting}{$f}{scf_id} ne $scf[0] || $conf{feature_setting}{$f}{sample} ne $sample\n";
 #print "f is $f\n\n";
@@ -313,12 +313,14 @@ while(@track_order){
 
 
 		#my @index_id_arr=(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}});
-		foreach my $index(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){
+		#foreach my $index(sort {$gff{$sample}{block}{$block_index}{$scf[0]}{$a}{start}<=>$gff{$sample}{block}{$block_index}{$scf[0]}{$b}{start}} keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){
+		foreach my $index(sort keys %{$gff{$sample}{block}{$block_index}{$scf[0]}}){ # if not sort index, will get different output order of feature in the result. if sort start,when same start, not same end will also different output order of feature in the result
 #next if($index eq "len");
 #print "here $sample $block_index $scf[0] $index\n";
 			#shift @index_id_arr;
 			my $gene_height_medium;
 			my $index_id = $gff{$sample}{block}{$block_index}{$scf[0]}{$index}{id};
+			print "mythlog.index_id is $index_id, sample is $sample, block_index is $block_index\n";
 			#reversed_block{$sample}{$block_index}
 
 			if($index_id=~ /[qt].q_block_index=(\d+).t_block_index=(\d+)$/){ # for crosslink
@@ -435,6 +437,7 @@ while(@track_order){
 			$pre_index_end = $index_end;
 			$pre_scf_id = $scf[0];
 			$index_id_previous=$index_id;
+			#print "mythlog2:$index_id $conf{crossing_link2}{position}{$index_id}{start}{x}\n";
 
 		}
 		my $end_start_x=$shift_x;
@@ -443,7 +446,9 @@ while(@track_order){
 		my $end_end_y=$id_line_y;
 		$blocks_two_ends_cord{$sample}{$scf[0]}{$block_index}{$gff{$sample}{chooselen_single}{$block_index}{start}}="$end_start_x,$end_start_y";
 		$blocks_two_ends_cord{$sample}{$scf[0]}{$block_index}{$gff{$sample}{chooselen_single}{$block_index}{end}}="$end_end_x,$end_end_y";
+		print "mythlog1: $sample $scf[0] $block_index $gff{$sample}{chooselen_single}{$block_index}{start} = $end_start_x,$end_start_y\n";
 		$blocks_start_ends_cord{$sample}{$scf[0]}{$block_index}{"$gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}"}="$end_start_x,$end_start_y,$end_end_x,$end_end_y";
+		print "mythlog3:$sample $scf[0] $block_index $gff{$sample}{chooselen_single}{$block_index}{start},$gff{$sample}{chooselen_single}{$block_index}{end}\n";
 		$shift_x += ($id_line_width+$block_distance);
 		$shift_x += ($tracks_shift_x{$sample}{$block_index}{shift_x_right}*$ratio) if(exists $tracks_shift_x{$sample}{$block_index}{shift_x_right});
 	}
@@ -486,7 +491,7 @@ my %clip_for_crosslink;
 # draw crossing_links for feature crosslink
 my @pairs=keys %{$conf{crossing_link2}{index}};
 my $pairs_index=0;
-foreach my $pair(@pairs){
+foreach my $pair(sort @pairs){
 #$conf{crossing_link2}{index}{"$arr[0],$arr[1]"}{$arr[2]} = $arr[3];
 	$pairs_index++;
 	my ($up_id, $down_id) = split(",", $pair);
@@ -509,7 +514,7 @@ foreach my $pair(@pairs){
 	if($feature_popup_title){
 		my @kvs=split(/;/, $feature_popup_title);
 		$feature_popup_title="\n";
-		for my $kv(@kvs){
+		foreach my $kv(@kvs){
 			$feature_popup_title.="<tspan>$kv</tspan>\n";	
 		}
 	}
@@ -730,10 +735,10 @@ sub legend2gff(){
 	my $legend_levels="label,color,shape,opacity";
 	my @legend_levels=split(/,/, $legend_levels);
 	die "error:legend_levels $legend_levels must have label, such as legend_levels=label,color,shape,opacity\n" if(! grep(/^label$/, @legend_levels));
-	for my $level(@legend_levels){
+	foreach my $level(@legend_levels){
 		die "error: not support $level in legend_levels=$legend_levels\n" if(!grep(/^$level$/, @legend_levels));
 	}
-	for my $f(keys %{$conf{feature_setting2}}){
+	foreach my $f(sort keys %{$conf{feature_setting2}}){
 		if(exists $conf{feature_setting2}{$f}{legend_label} && $conf{feature_setting2}{$f}{legend_label}){
 			my %hash;
 			$hash{label}=&get_para("legend_label", $f, \%conf);
@@ -741,7 +746,7 @@ sub legend2gff(){
 			$hash{shape}=&get_para("feature_shape", $f, \%conf);
 			$hash{opacity}=&get_para("feature_opacity", $f, \%conf);
 			my $id;
-			for my $level(@legend_levels){
+			foreach my $level(@legend_levels){
 				$id.="$hash{$level}.";
 			}
 			$id=~ s/\.$//;
@@ -767,17 +772,17 @@ sub legend2gff(){
 	my $total_height=0;
 	my $legend_height_extend=1.3;
 	my $text="";
-	foreach my $l(keys %legends){
+	foreach my $l(sort keys %legends){
 		$text.=$legends{$l}{label};
 	}
 	my $feature_height = &check_font_size_by_estimate("min", "height", $text, $fontsize);
 	my $feature_length_ratio=1.5;
-	foreach my $l(keys %legends){
+	foreach my $l(sort keys %legends){
 		$legends{$l}{height}=$feature_height;
 		$total_height+=$legends{$l}{height}*$legend_height_extend;
 	}
 	my $keyword="legend";
-	foreach my $pos (keys %all_pos_legends){
+	foreach my $pos (sort keys %all_pos_legends){
 		my $feature_shift_y_to;
 		my $feature_shift_x_to; # $svg_width*(1-$legend_width_ratio) + $legend_width_margin*$svg_width*$legend_width_ratio-1;	
 		my $gap = 1.3;
@@ -867,7 +872,7 @@ sub caculate_every_legend_width(){
 	my $legend_symbol_width = $feature_height;
 	my %all_pos_legends = %$all_pos_legends;
 	my $lengend_total_width;
-	foreach my $f(keys %{$all_pos_legends{$pos}}){
+	foreach my $f(sort keys %{$all_pos_legends{$pos}}){
 		my $legend_text_width = &check_font_size_by_estimate("", "width", $legends{$f}{label}, $fontsize);
 		$every_legend_width{$f} = $legend_symbol_width + $legend_text_width * $gap;
 		$lengend_total_width += $every_legend_width{$f};
@@ -881,7 +886,7 @@ sub check_legends_positon(){
 	my %legends = %$legends;
 	my %all_pos_legends;
 	#$hash{label}=&get_para("legend_label", $f, \%conf);
-	foreach my $f(keys %legends){
+	foreach my $f(sort keys %legends){
 
 		my $pos = &get_para("legend_position", $legends{$f}{id}, \%conf);
 		print "pos 2 is $pos, $legends{$f}{id}\n";
@@ -987,13 +992,13 @@ if($conf{scale_display}=~ /yes/i){
 
 open SVG,">$outdir/$prefix.svg" or die "$!";
 print SVG "$svg";
-for my $order(sort {$a<=>$b}keys %orders){
+foreach my $order(sort {$a<=>$b}keys %orders){
 	print "order is $order\n";
 	print SVG "\n$orders{$order}\n";
 }
 print SVG "</svg>";
 close SVG;
-my $rm_title="set -vex;sed -r -e 's/\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//' $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
+my $rm_title="set -vex;sed -r -e 's/\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//' -e 's/^.*<\\/title>//' $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
 `$rm_title`;
 die "\nerror:$rm_title\n\n" if($?);
 
@@ -1037,7 +1042,7 @@ sub jstohtml(){
 
 		die "error: nothing to plot\n" if((keys %features_height) == 0);
 		my $feature_id=(keys %features_height)[-1];
-
+		
 		print OUT "<script>var blocks_start_ends_cord=".encode_json(\%blocks_start_ends_cord).";\nvar tracks_heigh=".encode_json(\%tracks_height).";var reversed_block=".encode_json(\%reversed_block).";var feature_id_test='$feature_id';var rg_test='$rg_test'; var svg_width_raw = ${svg_width}; var svg_height_raw = ${svg_height}; var svg_bgcolor=\"$conf{svg_background_color}\";</script>\n";
 		print OUT "</head>\n<body>\n
 		<!--
@@ -1100,7 +1105,7 @@ sub jstohtml(){
 }
 
 sub check_blocks_two_ends_cord(){
-	for my $s(keys %blocks_two_ends_cord){
+	foreach my $s(keys %blocks_two_ends_cord){
 		foreach my $scf(keys %{$blocks_two_ends_cord{$s}}){
 			foreach my $block_index(keys %{$blocks_two_ends_cord{$s}{$scf}}){
 				foreach my $pos(keys %{$blocks_two_ends_cord{$s}{$scf}{$block_index}}){
@@ -1194,7 +1199,7 @@ sub get_block_index_from_id(){
 }
 
 sub is_exists(){
-	for my $pkg(@_){
+	foreach my $pkg(@_){
 		eval "use $pkg";
 		if($@){
 			my $xx="/xxx/ClustersPloter/src/";

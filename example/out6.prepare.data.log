@@ -344,52 +344,52 @@ parse pO83_CORR.indel.twin pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 -> block
 
 warn: feature_id can be uniq or not for NC_017659.1.indelGL000001  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	44	334	.	+	.	ID=NC_017659.1.indelGL000001;Name=NC_017659.1.indelGL000001;
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	44	334	.	+	.	ID=NC_017659.1.indelGL000001;Name=NC_017659.1.indelGL000001;
 warn: feature_id can be uniq or not for NC_017659.1.indelGL000001  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	44	334	.	+	.	ID=NC_017659.1.indelGL000001;Name=NC_017659.1.indelGL000001;
-warn: feature_id can be uniq or not for NC_017659.1.indelGL000002  
-
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	516	1076	.	+	.	ID=NC_017659.1.indelGL000002;Name=NC_017659.1.indelGL000002;
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	44	334	.	+	.	ID=NC_017659.1.indelGL000001;Name=NC_017659.1.indelGL000001;
 warn: feature_id can be uniq or not for NC_017659.1.indelGL000002  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	516	1076	.	+	.	ID=NC_017659.1.indelGL000002;Name=NC_017659.1.indelGL000002;
-warn: feature_id can be uniq or not for NC_017659.1.indelGL000003  
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000002  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1039	1158	.	+	.	ID=NC_017659.1.indelGL000003;Name=NC_017659.1.indelGL000003;
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	516	1076	.	+	.	ID=NC_017659.1.indelGL000002;Name=NC_017659.1.indelGL000002;
 warn: feature_id can be uniq or not for NC_017659.1.indelGL000003  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1039	1158	.	+	.	ID=NC_017659.1.indelGL000003;Name=NC_017659.1.indelGL000003;
-warn: feature_id can be uniq or not for NC_017659.1.indelGL000004  
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000003  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1463	1597	.	-	.	ID=NC_017659.1.indelGL000004;Name=NC_017659.1.indelGL000004;
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1039	1158	.	+	.	ID=NC_017659.1.indelGL000003;Name=NC_017659.1.indelGL000003;
 warn: feature_id can be uniq or not for NC_017659.1.indelGL000004  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1463	1597	.	-	.	ID=NC_017659.1.indelGL000004;Name=NC_017659.1.indelGL000004;
-warn: feature_id can be uniq or not for NC_017659.1.indelGL000005  
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000004  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1643	1771	.	-	.	ID=NC_017659.1.indelGL000005;Name=NC_017659.1.indelGL000005;
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1463	1597	.	-	.	ID=NC_017659.1.indelGL000004;Name=NC_017659.1.indelGL000004;
 warn: feature_id can be uniq or not for NC_017659.1.indelGL000005  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1643	1771	.	-	.	ID=NC_017659.1.indelGL000005;Name=NC_017659.1.indelGL000005;
-warn: feature_id can be uniq or not for NC_017659.1.indelGL000006  
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000005  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1901	2050	.	-	.	ID=NC_017659.1.indelGL000006;Name=NC_017659.1.indelGL000006;
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1643	1771	.	-	.	ID=NC_017659.1.indelGL000005;Name=NC_017659.1.indelGL000005;
 warn: feature_id can be uniq or not for NC_017659.1.indelGL000006  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	1901	2050	.	-	.	ID=NC_017659.1.indelGL000006;Name=NC_017659.1.indelGL000006;
-warn: feature_id can be uniq or not for NC_017659.1.indelGL000007  
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000006  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	2055	3218	.	+	.	ID=NC_017659.1.indelGL000007;Name=NC_017659.1.indelGL000007;
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	1901	2050	.	-	.	ID=NC_017659.1.indelGL000006;Name=NC_017659.1.indelGL000006;
 warn: feature_id can be uniq or not for NC_017659.1.indelGL000007  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	2055	3218	.	+	.	ID=NC_017659.1.indelGL000007;Name=NC_017659.1.indelGL000007;
-warn: feature_id can be uniq or not for NC_017659.1.indelGL000008  
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000007  
 
-read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	3280	5334	.	+	.	ID=NC_017659.1.indelGL000008;Name=NC_017659.1.indelGL000008;
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	2055	3218	.	+	.	ID=NC_017659.1.indelGL000007;Name=NC_017659.1.indelGL000007;
 warn: feature_id can be uniq or not for NC_017659.1.indelGL000008  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	3280	5334	.	+	.	ID=NC_017659.1.indelGL000008;Name=NC_017659.1.indelGL000008;
+warn: feature_id can be uniq or not for NC_017659.1.indelGL000008  
+
+read gff, pO83_CORR.indel.twin:NC_017659.1.fake:1-7002 block_index 2 for NC_017659.1.fake	glimmer	gene	3280	5334	.	+	.	ID=NC_017659.1.indelGL000008;Name=NC_017659.1.indelGL000008;
 warn: feature_id can be uniq or not for NC_017659.1.indelGL000009  
 
 read gff, pO83_CORR.indel.twin:NC_017659.1.fake:11-147060 block_index 1 for NC_017659.1.fake	glimmer	gene	5437	7227	.	+	.	ID=NC_017659.1.indelGL000009;Name=NC_017659.1.indelGL000009;
@@ -3525,26 +3525,20 @@ no pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.sett
 output pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf
 func_name is synteny
 echo "
-set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink
-" >> out6.cat.log;set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink done
-echo "
-set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink
-" >> out6.cat.log;set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink done
-echo "
-set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff >out6.pO83_CORR.indel.reverse.out6.synteny.gff;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff;echo output out6.pO83_CORR.indel.reverse.out6.synteny.gff
-" >> out6.cat.log;set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff >out6.pO83_CORR.indel.reverse.out6.synteny.gff;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff;echo output out6.pO83_CORR.indel.reverse.out6.synteny.gff done
-echo "
-set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf > out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf;echo output out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf
-" >> out6.cat.log;set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf > out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf;echo output out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf done
-echo "
-set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink
-" >> out6.cat.log;set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink done
-echo "
 set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out6.pO83_CORR.out6.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out6.pO83_CORR.out6.synteny.gff
 " >> out6.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff >out6.pO83_CORR.out6.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff;echo output out6.pO83_CORR.out6.synteny.gff done
 echo "
 set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out6.pO83_CORR.out6.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out6.pO83_CORR.out6.synteny.setting.conf
 " >> out6.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf > out6.pO83_CORR.out6.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf;echo output out6.pO83_CORR.out6.synteny.setting.conf done
+echo "
+set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink
+" >> out6.cat.log;set -vex;cat pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf >out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink done
+echo "
+set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.out6.synteny.gff;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.out6.synteny.gff
+" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.out6.synteny.gff;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.out6.synteny.gff done
+echo "
+set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.out6.synteny.setting.conf
+" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.out6.synteny.setting.conf done
 echo "
 set -vex;cat out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.twin.out6.synteny.gff;rm out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.twin.out6.synteny.gff
 " >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.twin.out6.synteny.gff;rm out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.twin.out6.synteny.gff done
@@ -3552,15 +3546,21 @@ echo "
 set -vex;cat out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.twin.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.twin.out6.synteny.setting.conf
 " >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.twin.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf out6.pO83_CORR.indel.twin.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.twin.out6.synteny.setting.conf done
 echo "
-set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.out6.synteny.gff;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.out6.synteny.gff
-" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff >out6.pO83_CORR.indel.out6.synteny.gff;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.gff pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.gff;echo output out6.pO83_CORR.indel.out6.synteny.gff done
+set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff >out6.pO83_CORR.indel.reverse.out6.synteny.gff;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff;echo output out6.pO83_CORR.indel.reverse.out6.synteny.gff
+" >> out6.cat.log;set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff >out6.pO83_CORR.indel.reverse.out6.synteny.gff;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.gff;echo output out6.pO83_CORR.indel.reverse.out6.synteny.gff done
 echo "
-set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.out6.synteny.setting.conf
-" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf > out6.pO83_CORR.indel.out6.synteny.setting.conf;rm out6.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.blast_m8.quadrilateral.1.synteny.setting.conf pO83_CORR.indel.pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.setting.conf;echo output out6.pO83_CORR.indel.out6.synteny.setting.conf done
+set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf > out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf;echo output out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf
+" >> out6.cat.log;set -vex;cat pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf > out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf;rm pO83_CORR.indel.reverse.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.setting.conf;echo output out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf done
+echo "
+set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink
+" >> out6.cat.log;set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.blast_m8.quadrilateral.2.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink done
+echo "
+set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink
+" >> out6.cat.log;set -vex;cat pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf >out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink;rm pO83_CORR.indel.twin.to.pO83_CORR.indel.blast_m8.quadrilateral.3.synteny.crosslink.conf;echo output out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink done
 out6.synteny end
 echo "
-set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf out6.pO83_CORR.out6.synteny.setting.conf out6.pO83_CORR.indel.twin.out6.synteny.setting.conf out6.pO83_CORR.indel.out6.synteny.setting.conf >out6.synteny.setting.conf
-" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf out6.pO83_CORR.out6.synteny.setting.conf out6.pO83_CORR.indel.twin.out6.synteny.setting.conf out6.pO83_CORR.indel.out6.synteny.setting.conf >out6.synteny.setting.conf done
+set -vex;cat out6.pO83_CORR.out6.synteny.setting.conf out6.pO83_CORR.indel.out6.synteny.setting.conf out6.pO83_CORR.indel.twin.out6.synteny.setting.conf out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf >out6.synteny.setting.conf
+" >> out6.cat.log;set -vex;cat out6.pO83_CORR.out6.synteny.setting.conf out6.pO83_CORR.indel.out6.synteny.setting.conf out6.pO83_CORR.indel.twin.out6.synteny.setting.conf out6.pO83_CORR.indel.reverse.out6.synteny.setting.conf >out6.synteny.setting.conf done
 echo "
 set -vex;cat out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink >out6.synteny.crosslink
 " >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.to.pO83_CORR.out6.synteny.crosslink out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.reverse.out6.synteny.crosslink out6.pO83_CORR.indel.twin.to.pO83_CORR.indel.out6.synteny.crosslink >out6.synteny.crosslink done
@@ -3574,19 +3574,19 @@ echo "
 set -vex;cat out6.synteny.crosslink >feature.crossing.link.out6
 " >> out6.cat.log;set -vex;cat out6.synteny.crosslink >feature.crossing.link.out6 done
 echo "
-set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.gff out6.pO83_CORR.out6.synteny.gff out6.pO83_CORR.indel.twin.out6.synteny.gff out6.pO83_CORR.indel.out6.synteny.gff|awk -F "	" '{print $3}'|sort -u
-" >> out6.cat.log;set -vex;cat out6.pO83_CORR.indel.reverse.out6.synteny.gff out6.pO83_CORR.out6.synteny.gff out6.pO83_CORR.indel.twin.out6.synteny.gff out6.pO83_CORR.indel.out6.synteny.gff|awk -F "	" '{print $3}'|sort -u done
+set -vex;cat out6.pO83_CORR.out6.synteny.gff out6.pO83_CORR.indel.out6.synteny.gff out6.pO83_CORR.indel.twin.out6.synteny.gff out6.pO83_CORR.indel.reverse.out6.synteny.gff|awk -F "	" '{print $3}'|sort -u
+" >> out6.cat.log;set -vex;cat out6.pO83_CORR.out6.synteny.gff out6.pO83_CORR.indel.out6.synteny.gff out6.pO83_CORR.indel.twin.out6.synteny.gff out6.pO83_CORR.indel.reverse.out6.synteny.gff|awk -F "	" '{print $3}'|sort -u done
 echo "
-set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out6.pO83_CORR.indel.out6.synteny.gff\t/' tracks.6.list >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
-" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out6.pO83_CORR.indel.out6.synteny.gff\t/' tracks.6.list >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
-echo "
-set -vex;sed  -r 's/^(pO83_CORR.indel.twin\s.*\.gff)\s/\1,out6.pO83_CORR.indel.twin.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
-" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel.twin\s.*\.gff)\s/\1,out6.pO83_CORR.indel.twin.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
-echo "
-set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out6.pO83_CORR.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
-" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out6.pO83_CORR.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out6.pO83_CORR.out6.synteny.gff\t/' tracks.6.list >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
+" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out6.pO83_CORR.out6.synteny.gff\t/' tracks.6.list >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
 echo "
 set -vex;sed  -r 's/^(pO83_CORR.indel.reverse\s.*\.gff)\s/\1,out6.pO83_CORR.indel.reverse.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
 " >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel.reverse\s.*\.gff)\s/\1,out6.pO83_CORR.indel.reverse.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
+echo "
+set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out6.pO83_CORR.indel.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
+" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out6.pO83_CORR.indel.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
+echo "
+set -vex;sed  -r 's/^(pO83_CORR.indel.twin\s.*\.gff)\s/\1,out6.pO83_CORR.indel.twin.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp
+" >> out6.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel.twin\s.*\.gff)\s/\1,out6.pO83_CORR.indel.twin.out6.synteny.gff\t/' tracks.6.list.out6.tmp >tracks.6.list.out6;cp tracks.6.list.out6 tracks.6.list.out6.tmp done
 
 data done

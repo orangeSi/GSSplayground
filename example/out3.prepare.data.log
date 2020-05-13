@@ -24,7 +24,7 @@ key is ylabel, value is illumnate read mapping stack,gap:30bp,fontsize:13,color:
 key is data_type, value is hist
 key is track_name, value is chr14
 key is chr_id, value is 14
-key is window_size, value is 40
+key is window_size, value is 20bp
 key is data_file, value is ../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa
 key is data_color, value is color->green:opacity->0.7
 key is subtrack_yaxis_bg_region, value is 42->52
@@ -35,7 +35,7 @@ key is data_type, value is hist
 key is track_name, value is chr14
 key is chr_id, value is 14
 key is window_size, value is 20bp
-key is data_file, value is ../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa
+key is data_file, value is ../data/illumina.chr14.sort.bam:../data/chr14.fa
 key is subtrack_yaxis_bg_region, value is 31->41
 key is subtrack_yaxis_display_region, value is 25->5->10
 key is ytick_display_flag, value is 1
@@ -52,19 +52,19 @@ key is chr_id, value is 14
 key is data_file, value is ../data/hg002.chr14.vcf.gz:../data/chr14.fa
 key is subtrack_yaxis_bg_region, value is 5->9
 key is ylabel, value is vcf,gap:30bp,fontsize:15,color:green
-key hist_scatter_line = hist,1,chr14,14,0,40,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black
+key hist_scatter_line = hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black
 
-key hist_scatter_line = hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8
+key hist_scatter_line = hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8
 
-key reads_mapping = long_reads,1,chr14,14,0,../data/pacbio.chr14.sort.bam:../data/chr14.fa,stack,-10->-110,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->pacbio read mapping stack,gap:30bp,fontsize:13,color:black
+key reads_mapping = long_reads,1,chr14,14,0,../data/pacbio.chr14.sort.bam:../data/chr14.fa,stack,-10->-110,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect	ylabel->pacbio read mapping stack,gap:30bp,fontsize:13,color:black
 
-key reads_mapping = short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,paired:color->Orange:opacity->1:cross_link_height_line->0.3,79->117,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illuminate read mapping paired,gap:30bp,fontsize:13,color:black
+key reads_mapping = short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,paired:color->Orange:opacity->1:cross_link_height_line->0.3,79->117,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect	ylabel->illuminate read mapping paired,gap:30bp,fontsize:13,color:black
 
-key reads_mapping = short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,stack,53->77,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illumnate read mapping stack,gap:30bp,fontsize:13,color:black
+key reads_mapping = short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,stack,53->77,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect	ylabel->illumnate read mapping stack,gap:30bp,fontsize:13,color:black
 
-key reads_mapping = short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,rainbow:color->blue:opacity->0.5:cross_link_width_ellipse->0.05,10->30,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illuminate short-read rainbow,gap:30bp,fontsize:15,color:red
+key reads_mapping = short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,rainbow:color->blue:opacity->0.5:cross_link_width_ellipse->0.05,10->30,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect	ylabel->illuminate short-read rainbow,gap:30bp,fontsize:15,color:red
 
-key reads_mapping = vcf,1,chr14,14,0,../data/hg002.chr14.vcf.gz:../data/chr14.fa,stack,5->9,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->vcf,gap:30bp,fontsize:15,color:green
+key reads_mapping = vcf,1,chr14,14,0,../data/hg002.chr14.vcf.gz:../data/chr14.fa,stack,5->9,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect	ylabel->vcf,gap:30bp,fontsize:15,color:green
 
 
 not_exists synteny in confs
@@ -72,7 +72,7 @@ parse chr14 chr14:14:66901400-66903400 -> block_index 1
 
 read_list chr14 end
 hist_scatter_line start
-1 is hist,1,chr14,14,0,40,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black
+1 is hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black
 
 block_index is 1,chr14
 
@@ -89,16 +89,16 @@ output out3.chr14.14.1.1.ytick.setting.conf
 
 no out3.chr14.14.1.1.ytick.crosslink.conf for chr14
 hist_scatter_line_run rg is 66901400,66903400  :66901400,66903400
-info is hist,1,chr14,14,0,40,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black
-is:../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa, chr14, 14,66901400, 66903400,40, hist,1,chr14,14,0,40,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black, hist
-50
+info is hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black
+is:../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa, chr14, 14,66901400, 66903400,20, hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->green:opacity->0.7,42->52,1,5->25->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8	ylabel->illuminate read depth,gap:30bp,fontsize:13,color:black, hist
+100
 
 output out3.chr14.14.1.1.66901400.66903400.depth.gff
 
 output out3.chr14.14.1.1.66901400.66903400.depth.setting.conf
 
 no out3.chr14.14.1.1.66901400.66903400.depth.crosslink.conf for chr14
-2 is hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8
+2 is hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8
 
 block_index is 1,chr14
 
@@ -118,8 +118,10 @@ output out3.chr14.14.1.2.ytick.setting.conf
 
 no out3.chr14.14.1.2.ytick.crosslink.conf for chr14
 hist_scatter_line_run rg is 66901400,66903400  :66901400,66903400
-info is hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8
-is:../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa, chr14, 14,66901400, 66903400,20, hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam.depth.txt:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8, hist
+info is hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8
+is:../data/illumina.chr14.sort.bam:../data/chr14.fa, chr14, 14,66901400, 66903400,20, hist,1,chr14,14,0,20bp,../data/illumina.chr14.sort.bam:../data/chr14.fa,color->black:opacity->1,31->41,1,25->5->10,ytick_label,0,green:green,0.6:0.3,1:1:0.2:0.3,5:8, hist
+bam
+cmd is samtools depth  -r 14:66901400-66903400 ../data/illumina.chr14.sort.bam|sed -r 's/\s/\t/g' >../data/illumina.chr14.sort.bam.14.66901400.66903400.depth
 100
 
 output out3.chr14.14.1.2.66901400.66903400.depth.gff
@@ -139,7 +141,7 @@ echo "
 set -vex;cat out3.chr14.out3.hist_scatter_line.setting.conf >out3.hist_scatter_line.setting.conf
 " >> out3.cat.log;set -vex;cat out3.chr14.out3.hist_scatter_line.setting.conf >out3.hist_scatter_line.setting.conf done
 reads_mapping start
-k_index 1 is long_reads,1,chr14,14,0,../data/pacbio.chr14.sort.bam:../data/chr14.fa,stack,-10->-110,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->pacbio read mapping stack,gap:30bp,fontsize:13,color:black
+k_index 1 is long_reads,1,chr14,14,0,../data/pacbio.chr14.sort.bam:../data/chr14.fa,stack,-10->-110,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect	ylabel->pacbio read mapping stack,gap:30bp,fontsize:13,color:black
 
 block_index is 1,chr14
 
@@ -164,7 +166,7 @@ output out3.chr14.14.1.1.66901400.66903400.mapping.gff
 output out3.chr14.14.1.1.66901400.66903400.mapping.setting.conf
 
 no out3.chr14.14.1.1.66901400.66903400.mapping.crosslink.conf for chr14
-k_index 2 is short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,paired:color->Orange:opacity->1:cross_link_height_line->0.3,79->117,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illuminate read mapping paired,gap:30bp,fontsize:13,color:black
+k_index 2 is short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,paired:color->Orange:opacity->1:cross_link_height_line->0.3,79->117,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect	ylabel->illuminate read mapping paired,gap:30bp,fontsize:13,color:black
 
 block_index is 1,chr14
 
@@ -189,7 +191,7 @@ output out3.chr14.14.1.2.66901400.66903400.mapping.gff
 output out3.chr14.14.1.2.66901400.66903400.mapping.setting.conf
 
 output out3.chr14.14.1.2.66901400.66903400.mapping.crosslink.conf
-k_index 3 is short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,stack,53->77,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illumnate read mapping stack,gap:30bp,fontsize:13,color:black
+k_index 3 is short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,stack,53->77,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect	ylabel->illumnate read mapping stack,gap:30bp,fontsize:13,color:black
 
 block_index is 1,chr14
 
@@ -214,7 +216,7 @@ output out3.chr14.14.1.3.66901400.66903400.mapping.gff
 output out3.chr14.14.1.3.66901400.66903400.mapping.setting.conf
 
 no out3.chr14.14.1.3.66901400.66903400.mapping.crosslink.conf for chr14
-k_index 4 is short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,rainbow:color->blue:opacity->0.5:cross_link_width_ellipse->0.05,10->30,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->illuminate short-read rainbow,gap:30bp,fontsize:15,color:red
+k_index 4 is short_reads,1,chr14,14,0,../data/illumina.chr14.sort.bam:../data/chr14.fa,rainbow:color->blue:opacity->0.5:cross_link_width_ellipse->0.05,10->30,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect	ylabel->illuminate short-read rainbow,gap:30bp,fontsize:15,color:red
 
 block_index is 1,chr14
 
@@ -239,7 +241,7 @@ output out3.chr14.14.1.4.66901400.66903400.mapping.gff
 output out3.chr14.14.1.4.66901400.66903400.mapping.setting.conf
 
 output out3.chr14.14.1.4.66901400.66903400.mapping.crosslink.conf
-k_index 5 is vcf,1,chr14,14,0,../data/hg002.chr14.vcf.gz:../data/chr14.fa,stack,5->9,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;	ylabel->vcf,gap:30bp,fontsize:15,color:green
+k_index 5 is vcf,1,chr14,14,0,../data/hg002.chr14.vcf.gz:../data/chr14.fa,stack,5->9,0,1->100->10,ytick_label,0,green:black,1:1,2:6:0.2:0.1,15:15,0:10:40	color_height_cs->M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect	ylabel->vcf,gap:30bp,fontsize:15,color:green
 
 block_index is 1,chr14
 
@@ -271,11 +273,11 @@ set -vex;cat out3.chr14.14.1.2.66901400.66903400.mapping.crosslink.conf out3.chr
 " >> out3.cat.log;set -vex;cat out3.chr14.14.1.2.66901400.66903400.mapping.crosslink.conf out3.chr14.14.1.4.66901400.66903400.mapping.crosslink.conf >out3.chr14.out3.reads_mapping.crosslink;rm out3.chr14.14.1.2.66901400.66903400.mapping.crosslink.conf out3.chr14.14.1.4.66901400.66903400.mapping.crosslink.conf;echo output out3.chr14.out3.reads_mapping.crosslink done
 out3.reads_mapping end
 echo "
-set -vex;cat out3.chr14.out3.reads_mapping.setting.conf >out3.reads_mapping.setting.conf
-" >> out3.cat.log;set -vex;cat out3.chr14.out3.reads_mapping.setting.conf >out3.reads_mapping.setting.conf done
-echo "
 set -vex;cat out3.chr14.out3.reads_mapping.crosslink >out3.reads_mapping.crosslink
 " >> out3.cat.log;set -vex;cat out3.chr14.out3.reads_mapping.crosslink >out3.reads_mapping.crosslink done
+echo "
+set -vex;cat out3.chr14.out3.reads_mapping.setting.conf >out3.reads_mapping.setting.conf
+" >> out3.cat.log;set -vex;cat out3.chr14.out3.reads_mapping.setting.conf >out3.reads_mapping.setting.conf done
 synteny not
 general_features not
 add out3.hist_scatter_line.setting.conf out3.reads_mapping.setting.conf to feature_setting 

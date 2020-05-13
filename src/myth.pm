@@ -178,7 +178,7 @@ sub read_list(){
 			# return $gff->{$sample}->{chooselen_single}{$block_index} and %{$gff->{$sample}->{block2}->{$block_index}}
 		}else{
 			die "die: wait, arrs is @arrs, not support this yet\n";
-			for my $scf(keys %{$genome{$sample}}){
+			for my $scf(sort keys %{$genome{$sample}}){
 				#print "scf is $scf\n";
 				my ($gff, $fts, @arr_tmp,$gene_index);
 				@arr_tmp=("$scf");
@@ -256,7 +256,7 @@ sub read_list(){
 		}
 		if(@arrs==0){
 			#$scf_block_id{$id}=$scf_block_id_flag
-			for my $scf(keys %scf_block_id){
+			for my $scf(sort keys %scf_block_id){
 				if(exists $gff{$sample}{scf}{$scf}){
 					$gff{$sample}{scf}{$scf}=$genome{$sample}{$scf}{len};
 					next;
@@ -280,7 +280,7 @@ sub read_list(){
 			}
 
 		}else{
-			for my $scf(keys %{$gff{$sample}{scf}}){
+			for my $scf(sort keys %{$gff{$sample}{scf}}){
 				$gff{$sample}{scf}{$scf}=$genome{$sample}{$scf}{len};
 			}		
 		}
@@ -332,7 +332,7 @@ sub parse_arrs(){
 			print "parse $sample $sample:$seq_id:$seq_draw_start-$seq_draw_end -> block_index $block_index\n\n";
 		}
 	}else{
-		for my $block_index (keys %{$gff->{$sample}->{block3}->{$arr[0]}}){
+		for my $block_index (sort keys %{$gff->{$sample}->{block3}->{$arr[0]}}){
 			#print "block_index is $block_index\n";
 			my $seq_draw_start=$gff->{$sample}->{chooselen_single}->{$block_index}->{start};
 			my $seq_draw_end=$gff->{$sample}->{chooselen_single}->{$block_index}->{end};
@@ -1126,25 +1126,25 @@ sub draw_genes(){
 }
 sub display_conf(){
 	my (%conf) = @_;
-	foreach my $k (keys %conf){
+	foreach my $k (sort keys %conf){
 		if($k eq "sample_name_old2new"){
-			foreach my $old(keys %{$conf{$k}}){
+			foreach my $old(sort keys %{$conf{$k}}){
 				print "$k\t$old\t$conf{$k}{$old}\n";
 			}
 		}elsif($k eq "feature_setting"){
-			foreach my $f(keys %{$conf{$k}}){
-				foreach my $e(keys %{$conf{$k}{$f}}){
+			foreach my $f(sort keys %{$conf{$k}}){
+				foreach my $e(sort keys %{$conf{$k}{$f}}){
 					print "$k\t$f\t$e\t$conf{$k}{$f}{$e}\n";
 				}
 			}
 		}elsif($k eq "crossing_link"){
-			foreach my $n(keys %{$conf{$k}}){
+			foreach my $n(sort keys %{$conf{$k}}){
 #print "$k\t$n\t@{$conf{$k}{$n}}\n";
 				print "$k\t$n\t\n";
 			}
 		}elsif($k eq "scaffold_order"){
-			for my $s(keys %{$conf{$k}}){
-				for my $index(keys %{$conf{$k}{$s}}){
+			foreach my $s(sort keys %{$conf{$k}}){
+				foreach my $index(sort keys %{$conf{$k}{$s}}){
 					print "$k\t$s\t$index\t$conf{$k}{$s}{$index}\n";
 				}
 			}
@@ -1331,7 +1331,7 @@ sub recover_special_keys(){
 
 	## check which paramater is forbidden
 	my @zoon_params=(@{$params{$zoon_id}{must}}, @{$params{$zoon_id}{optional}});
-	foreach my $kv(keys %kvs){
+	foreach my $kv(sort keys %kvs){
 		die "error: not support $kv, only @zoon_params in $zoon_id\n" if(!grep(/$kv/, @zoon_params))	
 	}
 
@@ -1364,7 +1364,7 @@ sub display_hash(){
 	my ($kvs)=@_;
 	my %kvs=%$kvs;
 	my $res="\n";
-	foreach my $key(keys %kvs){
+	foreach my $key(sort keys %kvs){
 		$res.="$key = $kvs{$key}\n"
 	}
 	return $res;
@@ -1377,7 +1377,7 @@ sub check_special_keys(){
 	my $error="";
 	if($zoon_id eq "hist_scatter_line"){
 		my @all_params=(@{$params{hist_scatter_line}{must}}, @{$params{hist_scatter_line}{optional}});
-		foreach my $k(keys %kvs){
+		foreach my $k(sort keys %kvs){
 			$error.="$k " if(!grep(/$k/, @all_params));
 		}
 		die "error: not support $error, only @all_params in $zoon_id\n" if($error);
@@ -1402,14 +1402,14 @@ sub check_special_keys(){
 		"ytick_opacity"=>"0.6:0.3",
 		"ytick_order"=>"1:1:0.2:0.3",
 		"label_size"=>"5:8");
-		foreach my $k(keys %default_params){
+		foreach my $k(sort keys %default_params){
 			$kvs{$k}=$default_params{$k} if(not exists $kvs{$k});
 		}
 
 	}elsif($zoon_id eq "reads_mapping"){
 		my @all_params=(@{$params{reads_mapping}{must}}, @{$params{reads_mapping}{optional}});
 		$error="";
-		foreach my $k(keys %kvs){
+		foreach my $k(sort keys %kvs){
 			$error.="$k " if(!grep(/$k/, @all_params));
 		}
 		die "error: not support $error, only @all_params in $zoon_id\n" if($error);
@@ -1435,16 +1435,16 @@ sub check_special_keys(){
 			"ytick_order"=>"2:6:0.2:0.1",
 			"label_size"=>"15:15",
 			"mapqs"=>"0:10:40",
-			"color_height_cs"=>"M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect;",
+			"color_height_cs"=>"M:green:opacity0.8:height0.5:1bp:rect,I:red:opacity1:height0.9:6bp:rect,D:black:opacity1:height0.8:3bp:rect,N:blue:opacity1:height0.2:1bp:rect,S:blue:opacity0.6:height0.9:5bp:rect,H:blue:opacity0.6:height0.2:10bp:rect,P:blue:opacity1:height0.2:1bp:rect,X:Purple:opacity1:height0.6:1bp:rect,reverse:#1E90FF:opacity0.6:height0.8:6bp:arrow,forward:green:opacity0.6:height0.8:1bp:arrow,read1:green:opacity0.6:height0.8:6bp:arrow,read2:#1E90FF:opacity0.6:height0.8:1bp:arrow,fake:white:opacity1:height0.8:0bp:rect,diploid:red:opacity0.8:height0.5:1bp:rect"
 		);
-		foreach my $k(keys %default_params){
+		foreach my $k(sort keys %default_params){
 			$kvs{$k}=$default_params{$k} if(not exists $kvs{$k});
 		}
 	
 	}elsif($zoon_id eq "synteny"){
 		my @all_params=(@{$params{synteny}{must}}, @{$params{synteny}{optional}});
 		$error="";
-		foreach my $k(keys %kvs){
+		foreach my $k(sort keys %kvs){
 			$error.="$k " if(!grep(/$k/, @all_params));
 		}
 		die "error: not support $error, only @all_params in $zoon_id\n" if($error);
@@ -1465,14 +1465,14 @@ sub check_special_keys(){
 			"cross_link_shift_y"=>"+3:-3",
 			"sort"=>1,
 		);
-		foreach my $k(keys %default_params){
+		foreach my $k(sort keys %default_params){
 			$kvs{$k}=$default_params{$k} if(not exists $kvs{$k});
 		}
 	
 	}elsif($zoon_id eq "general_features"){
 		my @all_params=(@{$params{$zoon_id}{must}}, @{$params{$zoon_id}{optional}});
 		$error="";
-		foreach my $k(keys %kvs){
+		foreach my $k(sort keys %kvs){
 			$error.="$k " if(!grep(/$k/, @all_params));
 		}
 		die "error: not support $error, only @all_params in $zoon_id\n" if($error);
@@ -1498,7 +1498,7 @@ sub check_special_keys(){
 			"ytick_order"=>"2:6:0.2:0.1",
 			"label_size"=>"15:15",
 		);
-		foreach my $k(keys %default_params){
+		foreach my $k(sort keys %default_params){
 			$kvs{$k}=$default_params{$k} if(not exists $kvs{$k});
 		}
 		die "error: when data_type = bed, should delete data_keyword=$kvs{data_keyword}\n" if($kvs{data_type} eq "bed" && exists $kvs{data_keyword});
@@ -1836,7 +1836,7 @@ sub check_block_reverse(){
 		my ($sample, $block_index)=@infos;
 		die "error: error: track $sample not have block_index $block_index in tracks_block_reverse=$tracks_block_reverse\n" if($block_index=~ /^[^\d]*$/ || ($block_index != 0 && not exists $gff->{$sample}->{block}->{$block_index}));
 		if($block_index == 0){
-			foreach my $block_index(keys %{$gff->{$sample}->{block}}){
+			foreach my $block_index(sort keys %{$gff->{$sample}->{block}}){
 				$reversed_block{$sample}{$block_index}="";
 				print "reverse $sample -> $block_index\n";
 			}

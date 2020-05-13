@@ -10,4 +10,4 @@ sh ../ClustersPloter.sh  tracks.7.list  out7 . main.7.conf
 sh ../ClustersPloter.sh  tracks.8.list out8 ./ main.8.conf
 ls -lhtr *error 
 ls -lhtr *html
-convert.sh
+sh convert.sh

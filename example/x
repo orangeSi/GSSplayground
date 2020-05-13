@@ -1,0 +1,9 @@
+< 				<g class='myth'><title><tspan>feature_id -> NC_017659.1.fake_3799_4162_0_1_0_0_1:0:0_0:6:0_678.NC_017659.1.1700.5900.read2.cr.-1.150reverse.-1.1.0</tspan>
+< <tspan>track name -> pO83_CORR</tspan>
+< <tspan>ref start-end -> NC_017659.1:4372-4521</tspan><tspan>strand -> -</tspan>	<tspan>mapq -> 60</tspan>	<tspan>flag -> 147</tspan>	<tspan>pos -> 4372</tspan>	<tspan>cigar ->150M</tspan>	</title>
+< 				<polygon id="NC_017659.1.fake_3799_4162_0_1_0_0_1:0:0_0:6:0_678.NC_017659.1.1700.5900.read2.cr.-1.150reverse.-1.1.0" points="612.709877607309,177.023952436647 614.726771246337,177.096271968811 614.726771246337,177.096271968811 637.921048095156,177.096271968811 637.921048095156,176.951632904483 614.726771246337,176.951632904483 614.726771246337,176.951632904483" style="fill:#1E90FF;stroke:black;stroke-width:0;opacity:0.6"/></g>
+< 
+> 				<g class='myth'><title><tspan>feature_id -> NC_017659.1.fake_3799_4162_0_1_0_0_1:0:0_0:6:0_678.NC_017659.1.1700.5900.read2.cr.-1.150reverse.-1.1.0</tspan>
+> <tspan>track name -> pO83_CORR</tspan>
+> <tspan>ref start-end -> NC_017659.1:4372-4521</tspan><tspan>strand -> -</tspan>	<tspan>mapq -> 60</tspan>	<tspan>flag -> 147</tspan>	<tspan>pos -> 4372</tspan>	<tspan>cigar ->150M</tspan>	</title>
+> 				<polygon id="NC_017659.1.fake_3799_4162_0_1_0_0_1:0:0_0:6:0_678.NC_017659.1.1700.5900.read2.cr.-1.150reverse.-1.1.0" points="612.709877607309,177.023952436647 614.726771246337,177.096271968811 614.726771246337,177.096271968811 637.921048095156,177.096271968811 637.921048095156,176.951632904483 614.726771246337,176.951632904483 614.726771246337,176.951632904483" style="fill:#1E90FF;stroke:black;stroke-width:0;opacity:0.6"/></g>

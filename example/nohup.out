@@ -1,0 +1,463 @@
+for i in $(seq 1 1 8)
+do
+	sh ../ClustersPloter.sh tracks.$i.list out$i . main.$i.conf && cp out$i.html out$i.rep1.html
+	sh ../ClustersPloter.sh tracks.$i.list out$i . main.$i.conf && cp out$i.html out$i.rep2.html
+done
++ seq 1 1 8
++ sh ../ClustersPloter.sh tracks.1.list out1 . main.1.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:17:18 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.1.list --prefix out1 --outdir . --conf main.1.conf >out1.prepare.data.log 2>out1.prepare.data.error.tmp [37m
+
+Mon May 11 03:17:18 UTC 2020
+
+
+Mon May 11 03:17:18 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.1.list.out1 --prefix out1 --outdir . --conf main.1.conf.out1 >out1.plot.log 2>out1.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:17:39 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 3.6M May 11 03:17 out1.html
+-rw-r--r-- 1 root root 1.7M May 11 03:17 out1.notitle.svg
+-rw-r--r-- 1 root root 3.1M May 11 03:17 out1.svg
+
++ cp out1.html out1.rep1.html
++ sh ../ClustersPloter.sh tracks.1.list out1 . main.1.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:17:39 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.1.list --prefix out1 --outdir . --conf main.1.conf >out1.prepare.data.log 2>out1.prepare.data.error.tmp [37m
+
+Mon May 11 03:17:40 UTC 2020
+
+
+Mon May 11 03:17:40 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.1.list.out1 --prefix out1 --outdir . --conf main.1.conf.out1 >out1.plot.log 2>out1.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:18:00 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 3.6M May 11 03:18 out1.html
+-rw-r--r-- 1 root root 1.7M May 11 03:18 out1.notitle.svg
+-rw-r--r-- 1 root root 3.1M May 11 03:18 out1.svg
+
++ cp out1.html out1.rep2.html
++ sh ../ClustersPloter.sh tracks.2.list out2 . main.2.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:18:00 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.2.list --prefix out2 --outdir . --conf main.2.conf >out2.prepare.data.log 2>out2.prepare.data.error.tmp [37m
+
+Mon May 11 03:18:06 UTC 2020
+
+
+Mon May 11 03:18:06 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.2.list.out2 --prefix out2 --outdir . --conf main.2.conf.out2 >out2.plot.log 2>out2.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:18:31 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 7.0M May 11 03:18 out2.html
+-rw-r--r-- 1 root root 3.4M May 11 03:18 out2.notitle.svg
+-rw-r--r-- 1 root root 6.4M May 11 03:18 out2.svg
+
++ cp out2.html out2.rep1.html
++ sh ../ClustersPloter.sh tracks.2.list out2 . main.2.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:18:31 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.2.list --prefix out2 --outdir . --conf main.2.conf >out2.prepare.data.log 2>out2.prepare.data.error.tmp [37m
+
+Mon May 11 03:18:36 UTC 2020
+
+
+Mon May 11 03:18:36 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.2.list.out2 --prefix out2 --outdir . --conf main.2.conf.out2 >out2.plot.log 2>out2.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:02 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 7.0M May 11 03:19 out2.html
+-rw-r--r-- 1 root root 3.4M May 11 03:19 out2.notitle.svg
+-rw-r--r-- 1 root root 6.4M May 11 03:19 out2.svg
+
++ cp out2.html out2.rep2.html
++ sh ../ClustersPloter.sh tracks.3.list out3 . main.3.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:19:02 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.3.list --prefix out3 --outdir . --conf main.3.conf >out3.prepare.data.log 2>out3.prepare.data.error.tmp [37m
+
+Mon May 11 03:19:04 UTC 2020
+
+
+Mon May 11 03:19:04 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.3.list.out3 --prefix out3 --outdir . --conf main.3.conf.out3 >out3.plot.log 2>out3.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:05 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 1.6M May 11 03:19 out3.html
+-rw-r--r-- 1 root root 473K May 11 03:19 out3.notitle.svg
+-rw-r--r-- 1 root root 958K May 11 03:19 out3.svg
+
++ cp out3.html out3.rep1.html
++ sh ../ClustersPloter.sh tracks.3.list out3 . main.3.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:19:05 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.3.list --prefix out3 --outdir . --conf main.3.conf >out3.prepare.data.log 2>out3.prepare.data.error.tmp [37m
+
+Mon May 11 03:19:06 UTC 2020
+
+
+Mon May 11 03:19:06 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.3.list.out3 --prefix out3 --outdir . --conf main.3.conf.out3 >out3.plot.log 2>out3.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:08 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 1.6M May 11 03:19 out3.html
+-rw-r--r-- 1 root root 473K May 11 03:19 out3.notitle.svg
+-rw-r--r-- 1 root root 958K May 11 03:19 out3.svg
+
++ cp out3.html out3.rep2.html
++ sh ../ClustersPloter.sh tracks.4.list out4 . main.4.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:19:08 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.4.list --prefix out4 --outdir . --conf main.4.conf >out4.prepare.data.log 2>out4.prepare.data.error.tmp [37m
+
+Mon May 11 03:19:08 UTC 2020
+
+
+Mon May 11 03:19:08 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.4.list.out4 --prefix out4 --outdir . --conf main.4.conf.out4 >out4.plot.log 2>out4.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:08 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 601K May 11 03:19 out4.html
+-rw-r--r-- 1 root root 5.4K May 11 03:19 out4.notitle.svg
+-rw-r--r-- 1 root root 9.0K May 11 03:19 out4.svg
+
++ cp out4.html out4.rep1.html
++ sh ../ClustersPloter.sh tracks.4.list out4 . main.4.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:19:08 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.4.list --prefix out4 --outdir . --conf main.4.conf >out4.prepare.data.log 2>out4.prepare.data.error.tmp [37m
+
+Mon May 11 03:19:08 UTC 2020
+
+
+Mon May 11 03:19:08 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.4.list.out4 --prefix out4 --outdir . --conf main.4.conf.out4 >out4.plot.log 2>out4.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:09 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 601K May 11 03:19 out4.html
+-rw-r--r-- 1 root root 5.4K May 11 03:19 out4.notitle.svg
+-rw-r--r-- 1 root root 9.0K May 11 03:19 out4.svg
+
++ cp out4.html out4.rep2.html
++ sh ../ClustersPloter.sh tracks.5.list out5 . main.5.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:19:09 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.5.list --prefix out5 --outdir . --conf main.5.conf >out5.prepare.data.log 2>out5.prepare.data.error.tmp [37m
+
+Mon May 11 03:19:09 UTC 2020
+
+
+Mon May 11 03:19:09 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.5.list.out5 --prefix out5 --outdir . --conf main.5.conf.out5 >out5.plot.log 2>out5.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:09 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 605K May 11 03:19 out5.html
+-rw-r--r-- 1 root root 7.7K May 11 03:19 out5.notitle.svg
+-rw-r--r-- 1 root root  13K May 11 03:19 out5.svg
+
++ cp out5.html out5.rep1.html
++ sh ../ClustersPloter.sh tracks.5.list out5 . main.5.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:19:09 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.5.list --prefix out5 --outdir . --conf main.5.conf >out5.prepare.data.log 2>out5.prepare.data.error.tmp [37m
+
+Mon May 11 03:19:09 UTC 2020
+
+
+Mon May 11 03:19:09 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.5.list.out5 --prefix out5 --outdir . --conf main.5.conf.out5 >out5.plot.log 2>out5.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:09 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 605K May 11 03:19 out5.html
+-rw-r--r-- 1 root root 7.7K May 11 03:19 out5.notitle.svg
+-rw-r--r-- 1 root root  13K May 11 03:19 out5.svg
+
++ cp out5.html out5.rep2.html
++ sh ../ClustersPloter.sh tracks.6.list out6 . main.6.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:19:09 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.6.list --prefix out6 --outdir . --conf main.6.conf >out6.prepare.data.log 2>out6.prepare.data.error.tmp [37m
+
+Mon May 11 03:19:10 UTC 2020
+
+
+Mon May 11 03:19:10 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.6.list.out6 --prefix out6 --outdir . --conf main.6.conf.out6 >out6.plot.log 2>out6.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:10 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 1.3M May 11 03:19 out6.html
+-rw-r--r-- 1 root root 352K May 11 03:19 out6.notitle.svg
+-rw-r--r-- 1 root root 680K May 11 03:19 out6.svg
+
++ cp out6.html out6.rep1.html
++ sh ../ClustersPloter.sh tracks.6.list out6 . main.6.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:19:11 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.6.list --prefix out6 --outdir . --conf main.6.conf >out6.prepare.data.log 2>out6.prepare.data.error.tmp [37m
+
+Mon May 11 03:19:11 UTC 2020
+
+
+Mon May 11 03:19:11 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.6.list.out6 --prefix out6 --outdir . --conf main.6.conf.out6 >out6.plot.log 2>out6.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:12 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 1.3M May 11 03:19 out6.html
+-rw-r--r-- 1 root root 352K May 11 03:19 out6.notitle.svg
+-rw-r--r-- 1 root root 680K May 11 03:19 out6.svg
+
++ cp out6.html out6.rep2.html
++ sh ../ClustersPloter.sh tracks.7.list out7 . main.7.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+Mon May 11 03:19:12 UTC 2020
+
+
+Mon May 11 03:19:12 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.7.list.out7 --prefix out7 --outdir . --conf main.7.conf.out7 >out7.plot.log 2>out7.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:12 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 645K May 11 03:19 out7.html
+-rw-r--r-- 1 root root  22K May 11 03:19 out7.notitle.svg
+-rw-r--r-- 1 root root  53K May 11 03:19 out7.svg
+
++ cp out7.html out7.rep1.html
++ sh ../ClustersPloter.sh tracks.7.list out7 . main.7.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+Mon May 11 03:19:12 UTC 2020
+
+
+Mon May 11 03:19:12 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.7.list.out7 --prefix out7 --outdir . --conf main.7.conf.out7 >out7.plot.log 2>out7.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:12 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 645K May 11 03:19 out7.html
+-rw-r--r-- 1 root root  22K May 11 03:19 out7.notitle.svg
+-rw-r--r-- 1 root root  53K May 11 03:19 out7.svg
+
++ cp out7.html out7.rep2.html
++ sh ../ClustersPloter.sh tracks.8.list out8 . main.8.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:19:12 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.8.list --prefix out8 --outdir . --conf main.8.conf >out8.prepare.data.log 2>out8.prepare.data.error.tmp [37m
+
+Mon May 11 03:19:13 UTC 2020
+
+
+Mon May 11 03:19:13 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.8.list.out8 --prefix out8 --outdir . --conf main.8.conf.out8 >out8.plot.log 2>out8.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:13 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 683K May 11 03:19 out8.html
+-rw-r--r-- 1 root root  57K May 11 03:19 out8.notitle.svg
+-rw-r--r-- 1 root root  92K May 11 03:19 out8.svg
+
++ cp out8.html out8.rep1.html
++ sh ../ClustersPloter.sh tracks.8.list out8 . main.8.conf
+-e 
+find Imager::Font
+find /usr/bin/samtools
+find /usr/bin/sort
+find /usr/bin/perl
+
+Mon May 11 03:19:13 UTC 2020
+-e [33mperl /ClustersPloter/src/prepare.data.pl --list tracks.8.list --prefix out8 --outdir . --conf main.8.conf >out8.prepare.data.log 2>out8.prepare.data.error.tmp [37m
+
+Mon May 11 03:19:13 UTC 2020
+
+
+Mon May 11 03:19:13 UTC 2020
+-e [33mperl /ClustersPloter/src/plot.genome.featureCluster.pl --list tracks.8.list.out8 --prefix out8 --outdir . --conf main.8.conf.out8 >out8.plot.log 2>out8.plot.error.tmp[37m
+
+
+-e 
+
+[32mfinished, no error~[37m
+
+
+Mon May 11 03:19:13 UTC 2020
+[32moutput is:[37m
+-rw-r--r-- 1 root root 683K May 11 03:19 out8.html
+-rw-r--r-- 1 root root  57K May 11 03:19 out8.notitle.svg
+-rw-r--r-- 1 root root  92K May 11 03:19 out8.svg
+
++ cp out8.html out8.rep2.html
+

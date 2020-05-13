@@ -1091,12 +1091,12 @@
 
 
 
-<polygon id="pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1" points="130,249.333333333333 130,250.666666666667 1105,250.666666666667 1105,249.333333333333 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
-
-
-
-
 <polygon id="pO83_CORR.indel.blast.NC_017659.1.fake.107858.107961.1.+.q.1" points="845.086189310486,249.333333333333 845.086189310486,250.666666666667 845.77570379437,250.666666666667 845.77570379437,249.333333333333 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
+
+
+
+
+<polygon id="pO83_CORR.indel.blast.NC_017659.1.fake.1.147060.2.+.q.1" points="130,249.333333333333 130,250.666666666667 1105,250.666666666667 1105,249.333333333333 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/>
 
 <rect x="130" y="382.666666666667" width="975" height="1.33333333333333" style="fill:blue;opacity:0.2"   />
 <text class='myth'  x="129" y="383.333333333333" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5"</text>
@@ -1113,18 +1113,18 @@
 
 
 
- <polygon points="842.520399836801,121.333333333333 843.209914320685,121.333333333333 845.77570379437,245.333333333333 845.086189310486,245.333333333333" style="stroke:black;stroke-width:0;fill:orange;opacity:0.4279"/>
-
-
-
-
-
-
-
-
 
 
  <polygon points="130,254.666666666667 1105,254.666666666667 1105,378.666666666667 130,378.666666666667" style="stroke:black;stroke-width:0;fill:orange;opacity:0.498574037984912"/>
+
+
+
+
+
+
+
+
+ <polygon points="842.520399836801,121.333333333333 843.209914320685,121.333333333333 845.77570379437,245.333333333333 845.086189310486,245.333333333333" style="stroke:black;stroke-width:0;fill:orange;opacity:0.4279"/>
 
 
 

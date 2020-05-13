@@ -1,0 +1,7 @@
+#track_name	genome.gff	genome.fa	chr_id	fragment_start	fragment_end	chr_id	fragment_start	fragment_end ...
+pO83_CORR1	../../../data/NC_017659.1.gff,tracks.7.list.out7.out7.legend.gff	../../../data/NC_017659.1.fa	NC_017659.1	1	7060
+pO83_CORR2	../../../data/NC_017659.1.gff	../../../data/NC_017659.1.fa	NC_017659.1	7060	14060
+pO83_CORR3	../../../data/NC_017659.1.gff	../../../data/NC_017659.1.fa	NC_017659.1	14060	21000
+pO83_CORR4	../../../data/NC_017659.1.gff	../../../data/NC_017659.1.fa	NC_017659.1	21000	28000
+pO83_CORR5	../../../data/NC_017659.1.gff	../../../data/NC_017659.1.fa	NC_017659.1	28000	35000
+

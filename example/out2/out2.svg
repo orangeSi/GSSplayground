@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1300" height="700" style="background-color:white;">
+<text class='myth' x="110.5" y="222.5" style="font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >pO83_CORR</text>
+<defs>    <clipPath id="cut-pO83_CORR-NC_017659.1-1"><path class='myth' d="M163.614893983796 80.8333333333333 L869.695742113429 80.8333333333333 L869.695742113429 364.166666666667 L163.614893983796 364.166666666667 Z" />     </clipPath>  </defs>
+<g fill="none">
+<path class='myth' stroke="black" stroke-width="1" stroke-dasharray="2,2" d="M886.503189105327,221.083333333333 L885.662816755732,222.5" /></g><defs>    <clipPath id="cut-pO83_CORR-NC_017659.1-2"><path class='myth' d="M886.503189105327 80.8333333333333 L1071.3851060162 80.8333333333333 L1071.3851060162 364.166666666667 L886.503189105327 364.166666666667 Z" />     </clipPath>  </defs>
+<text class='myth' x="110.5" y="505.833333333333" style="font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >pO83_CORR.indel</text>
+<defs>    <clipPath id="cut-pO83_CORR.indel-NC_017659.1.fake-1"><path class='myth' d="M130 364.166666666667 L852.888295121531 364.166666666667 L852.888295121531 647.5 L130 647.5 Z" />     </clipPath>  </defs>
+<g fill="none">
+<path class='myth' stroke="black" stroke-width="1" stroke-dasharray="2,2" d="M936.92553008102,504.416666666667 L936.085157731426,505.833333333333" /></g><defs>    <clipPath id="cut-pO83_CORR.indel-NC_017659.1.fake-2"><path class='myth' d="M936.92553008102 364.166666666667 L1105 364.166666666667 L1105 647.5 L936.92553008102 647.5 Z" />     </clipPath>  </defs>
+
+<line x1="130" y1="673.75" x2="1105" y2="673.75" style="stroke:green;stroke-width:0.5"/>
+<line x1="130" y1="666.75" x2="130" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="130" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">1bp</text>
+<line x1="298.07446991898" y1="666.75" x2="298.07446991898" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="298.07446991898" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">1,000</text>
+<line x1="466.148939837959" y1="666.75" x2="466.148939837959" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="466.148939837959" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">2,000</text>
+<line x1="634.223409756938" y1="666.75" x2="634.223409756938" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="634.223409756938" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">3,000</text>
+<line x1="802.297879675918" y1="666.75" x2="802.297879675918" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth' x="802.297879675918" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman;">4,000</text>
+<line x1="1105" y1="666.75" x2="1105" y2="673.75" style="stroke:green;stroke-width:0.5;opacity:0.9"/>
+<text class='myth'  x="1105" y="683.75" style="font-size:10px;fill:green;text-anchor:middle;font-family:Times New Roman">5,801bp</text>
+
+
+<g class='myth'><title>NC_017659.1:1700-5900</title>
+<rect x="163.614893983796" y="221.083333333333" width="706.080848129633" height="2.83333333333333" style="fill:green"   /></g>
+<text class='myth'  x="162.614893983796" y="222.5" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5'</text>
+ <text class='myth'  x="870.695742113429" y="222.5" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3'</text>
+<g class='myth'><title>NC_017659.1:5901-7000</title>
+<rect x="886.503189105327" y="221.083333333333" width="184.881916910877" height="2.83333333333333" style="fill:green"   /></g>
+<text class='myth'  x="885.503189105327" y="222.5" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5'</text>
+ <text class='myth'  x="1072.3851060162" y="222.5" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3'</text>
+<g class='myth'><title>NC_017659.1.fake:1700-6000</title>
+<rect x="130" y="504.416666666667" width="722.888295121531" height="2.83333333333333" style="fill:green"   /></g>
+<text class='myth'  x="129" y="505.833333333333" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5'</text>
+ <text class='myth'  x="853.888295121531" y="505.833333333333" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3'</text>
+<g class='myth'><title>NC_017659.1.fake:6001-7000</title>
+<rect x="936.92553008102" y="504.416666666667" width="168.074469918979" height="2.83333333333333" style="fill:green"   /></g>
+<text class='myth'  x="935.92553008102" y="505.833333333333" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:end;alignment-baseline:middle" >5'</text>
+ <text class='myth'  x="1106" y="505.833333333333" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:start;alignment-baseline:middle" >3'</text>
+
+
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1</tspan>
+<tspan>track name -> pO83_CORR</tspan>
+<tspan>ref start-end -> NC_017659.1:5460-147060</tspan></title>
+<path id="pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1"  d="M-196.06447164282 221.083333333333 L-196.06447164282 223.916666666667 L23603.4485433546 223.916666666667 L23603.4485433546 221.083333333333 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1</tspan>
+<tspan>track name -> pO83_CORR.indel</tspan>
+<tspan>ref start-end -> NC_017659.1.fake:5460-147060</tspan></title>
+<path id="pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1"  d="M761.960006895363 504.416666666667 L761.960006895363 507.25 L24561.4730218928 507.25 L24561.4730218928 504.416666666667 Z" clip-path="url(#cut-pO83_CORR.indel-NC_017659.1.fake-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=1.t_block_index=1</tspan>
+<tspan>query -> NC_017659.1.fake: 5460-147060</tspan>
+<tspan>target -> NC_017659.1: 5460-147060</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 100.00%</tspan>
+<tspan>query_coverage -> 141601/147060=0.962879096967224</tspan>
+<tspan>ref_coverage -> 141601/147060=0.962879096967224</tspan></title>
+ <defs>    <clipPath id="clip_163.614893983796-221.083333333333-869.695742113429-221.083333333333-130-504.416666666667-852.888295121531-504.416666666667"><path class='myth' d="M163.614893983796 221.083333333333 L869.695742113429 221.083333333333 L852.888295121531 504.416666666667 L130 504.416666666667 Z" /></clipPath>  </defs>
+<path class='myth' d="M-196.06447164282 232.416666666667 L23603.4485433546 232.416666666667 L24561.4730218928 495.916666666667 L761.960006895363 495.916666666667 Z"  clip-path="url(#clip_163.614893983796-221.083333333333-869.695742113429-221.083333333333-130-504.416666666667-852.888295121531-504.416666666667)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
+</g>
+
+
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2</tspan>
+<tspan>track name -> pO83_CORR</tspan>
+<tspan>ref start-end -> NC_017659.1:5460-147060</tspan></title>
+<path id="pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2"  d="M812.382347871057 221.083333333333 L812.382347871057 223.916666666667 L24611.8953628685 223.916666666667 L24611.8953628685 221.083333333333 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-2)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2</tspan>
+<tspan>track name -> pO83_CORR.indel</tspan>
+<tspan>ref start-end -> NC_017659.1.fake:5460-147060</tspan></title>
+<path id="pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2"  d="M560.438717462506 504.416666666667 L560.438717462506 507.25 L24359.9517324599 507.25 L24359.9517324599 504.416666666667 Z" clip-path="url(#cut-pO83_CORR.indel-NC_017659.1.fake-2)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.5460.147060.1.+.t.q_block_index=2.t_block_index=2 -> pO83_CORR.indel.NC_017659.1.fake.5460.147060.1.+.q.q_block_index=2.t_block_index=2</tspan>
+<tspan>query -> NC_017659.1.fake: 5460-147060</tspan>
+<tspan>target -> NC_017659.1: 5460-147060</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 100.00%</tspan>
+<tspan>query_coverage -> 141601/147060=0.962879096967224</tspan>
+<tspan>ref_coverage -> 141601/147060=0.962879096967224</tspan></title>
+ <defs>    <clipPath id="clip_886.503189105327-221.083333333333-1071.3851060162-221.083333333333-936.92553008102-504.416666666667-1105-504.416666666667"><path class='myth' d="M886.503189105327 221.083333333333 L1071.3851060162 221.083333333333 L1105 504.416666666667 L936.92553008102 504.416666666667 Z" /></clipPath>  </defs>
+<path class='myth' d="M812.382347871057 232.416666666667 L24611.8953628685 232.416666666667 L24359.9517324599 495.916666666667 L560.438717462506 495.916666666667 Z"  clip-path="url(#clip_886.503189105327-221.083333333333-1071.3851060162-221.083333333333-936.92553008102-504.416666666667-1105-504.416666666667)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.5" />
+</g>
+
+
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1</tspan>
+<tspan>track name -> pO83_CORR</tspan>
+<tspan>ref start-end -> NC_017659.1:2101-5460</tspan></title>
+<path id="pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1"  d="M-760.626616100672 221.083333333333 L-760.626616100672 223.916666666667 L-195.896397172901 223.916666666667 L-195.896397172901 221.083333333333 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1</tspan>
+<tspan>track name -> pO83_CORR.indel</tspan>
+<tspan>ref start-end -> NC_017659.1.fake:1891-5250</tspan></title>
+<polygon id="pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1" points="162.102223754525,504.416666666667 162.102223754525,507.25 726.832442682296,507.25 726.832442682296,504.416666666667 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.2101.5460.1.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.NC_017659.1.fake.1891.5250.1.+.q.q_block_index=1.t_block_index=1</tspan>
+<tspan>query -> NC_017659.1.fake: 1891-5250</tspan>
+<tspan>target -> NC_017659.1: 2101-5460</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 100.00%</tspan>
+<tspan>query_coverage -> 3360/147060=0.0228478172174623</tspan>
+<tspan>ref_coverage -> 3360/147060=0.0228478172174623</tspan></title>
+ <polygon points="-760.626616100672,232.416666666667 -195.896397172901,232.416666666667 726.832442682296,495.916666666667 162.102223754525,495.916666666667" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5"/>
+</g>
+
+
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1</tspan>
+<tspan>track name -> pO83_CORR</tspan>
+<tspan>ref start-end -> NC_017659.1:1-1898</tspan></title>
+<path id="pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1"  d="M-1113.58300293053 221.083333333333 L-1113.58300293053 223.916666666667 L-794.577659024306 223.916666666667 L-794.577659024306 221.083333333333 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1</tspan>
+<tspan>track name -> pO83_CORR.indel</tspan>
+<tspan>ref start-end -> NC_017659.1.fake:1-1898</tspan></title>
+<path id="pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1"  d="M-155.558524392346 504.416666666667 L-155.558524392346 507.25 L163.446819513877 507.25 L163.446819513877 504.416666666667 Z" clip-path="url(#cut-pO83_CORR.indel-NC_017659.1.fake-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1.1898.1.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.NC_017659.1.fake.1.1898.1.+.q.q_block_index=1.t_block_index=1</tspan>
+<tspan>query -> NC_017659.1.fake: 1-1898</tspan>
+<tspan>target -> NC_017659.1: 1-1898</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 99.89%</tspan>
+<tspan>query_coverage -> 1898/147060=0.012906296749626</tspan>
+<tspan>ref_coverage -> 1898/147060=0.012906296749626</tspan></title>
+ <path class='myth' d="M-1113.58300293053 232.416666666667 L-794.577659024306 232.416666666667 L163.446819513877 495.916666666667 L-155.558524392346 495.916666666667 Z"  clip-path="url(#clip_163.614893983796-221.083333333333-869.695742113429-221.083333333333-130-504.416666666667-852.888295121531-504.416666666667)" style="stroke:black;stroke-width: 1;fill:orange;opacity:0.49945" />
+</g>
+
+
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1</tspan>
+<tspan>track name -> pO83_CORR</tspan>
+<tspan>ref start-end -> NC_017659.1:1891-2100</tspan></title>
+<path id="pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1"  d="M-795.922254783658 221.083333333333 L-795.922254783658 223.916666666667 L-760.626616100672 223.916666666667 L-760.626616100672 221.083333333333 Z" clip-path="url(#cut-pO83_CORR-NC_017659.1-1)" style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+				<g class='myth'><title><tspan>feature_id -> pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1</tspan>
+<tspan>track name -> pO83_CORR.indel</tspan>
+<tspan>ref start-end -> NC_017659.1.fake:5251-5460</tspan></title>
+<polygon id="pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1" points="726.832442682296,504.416666666667 726.832442682296,507.25 762.128081365282,507.25 762.128081365282,504.416666666667 " style="fill:orange;stroke:black;stroke-width:0;opacity:0.5"/></g>
+
+<g class='myth'><title><tspan>pO83_CORR.NC_017659.1.1891.2100.1.+.t.q_block_index=1.t_block_index=1 -> pO83_CORR.indel.NC_017659.1.fake.5251.5460.1.+.q.q_block_index=1.t_block_index=1</tspan>
+<tspan>query -> NC_017659.1.fake: 5251-5460</tspan>
+<tspan>target -> NC_017659.1: 1891-2100</tspan>
+<tspan>strand -> +</tspan>
+<tspan>indentity -> 100.00%</tspan>
+<tspan>query_coverage -> 210/147060=0.00142798857609139</tspan>
+<tspan>ref_coverage -> 210/147060=0.00142798857609139</tspan></title>
+ <polygon points="-795.922254783658,232.416666666667 -760.626616100672,232.416666666667 762.128081365282,495.916666666667 726.832442682296,495.916666666667" style="stroke:black;stroke-width:0;fill:orange;opacity:0.5"/>
+</g>
+
+
+<text class='myth' x="515.655318048612" y="235.666666666667" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 515.655318048612 235.666666666667)" >NC_017659.1:1700-5900bp</text>
+<text class='myth' x="977.944147560765" y="235.666666666667" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 977.944147560765 235.666666666667)" >NC_017659.1:5901-7000bp</text>
+<text class='myth' x="490.444147560765" y="519" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 490.444147560765 519)" >NC_017659.1.fake:1700-6000bp</text>
+<text class='myth' x="1019.96276504051" y="519" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 1019.96276504051 519)" >NC_017659.1.fake:6001-7000bp</text>
+
+</svg>

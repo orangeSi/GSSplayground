@@ -1,10 +1,4 @@
 
-set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.gff >out2.pO83_CORR.indel.out2.reads_mapping.gff;rm out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.gff;echo output out2.pO83_CORR.indel.out2.reads_mapping.gff
-
-
-set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.setting.conf > out2.pO83_CORR.indel.out2.reads_mapping.setting.conf;rm out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.setting.conf;echo output out2.pO83_CORR.indel.out2.reads_mapping.setting.conf
-
-
 set -vex;cat out2.pO83_CORR.NC_017659.1.2.1.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.1.5901.7000.mapping.gff out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.2.2.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.2.5901.7000.mapping.gff out2.pO83_CORR.NC_017659.1.1.2.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.2.3.long_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.3.5901.7000.mapping.gff out2.pO83_CORR.NC_017659.1.1.3.1700.5900.mapping.gff >out2.pO83_CORR.out2.reads_mapping.gff;rm out2.pO83_CORR.NC_017659.1.2.1.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.1.5901.7000.mapping.gff out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.2.2.short_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.2.5901.7000.mapping.gff out2.pO83_CORR.NC_017659.1.1.2.1700.5900.mapping.gff out2.pO83_CORR.NC_017659.1.2.3.long_reads.ylabel.gff out2.pO83_CORR.NC_017659.1.2.3.5901.7000.mapping.gff out2.pO83_CORR.NC_017659.1.1.3.1700.5900.mapping.gff;echo output out2.pO83_CORR.out2.reads_mapping.gff
 
 
@@ -12,6 +6,12 @@ set -vex;cat out2.pO83_CORR.NC_017659.1.2.1.short_reads.ylabel.setting.conf out2
 
 
 set -vex;cat out2.pO83_CORR.NC_017659.1.2.1.5901.7000.mapping.crosslink.conf out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.crosslink.conf >out2.pO83_CORR.out2.reads_mapping.crosslink;rm out2.pO83_CORR.NC_017659.1.2.1.5901.7000.mapping.crosslink.conf out2.pO83_CORR.NC_017659.1.1.1.1700.5900.mapping.crosslink.conf;echo output out2.pO83_CORR.out2.reads_mapping.crosslink
+
+
+set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.gff >out2.pO83_CORR.indel.out2.reads_mapping.gff;rm out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.gff out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.gff out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.gff;echo output out2.pO83_CORR.indel.out2.reads_mapping.gff
+
+
+set -vex;cat out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.setting.conf > out2.pO83_CORR.indel.out2.reads_mapping.setting.conf;rm out2.pO83_CORR.indel.NC_017659.1.fake.2.7.long_reads.ylabel.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.2.7.6001.7000.mapping.setting.conf out2.pO83_CORR.indel.NC_017659.1.fake.1.7.1700.6000.mapping.setting.conf;echo output out2.pO83_CORR.indel.out2.reads_mapping.setting.conf
 
 
 set -vex;cat out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.gff >out2.pO83_CORR.twin.out2.reads_mapping.gff;rm out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.5.short_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.5.1700.7000.mapping.gff out2.pO83_CORR.twin.NC_017659.1.1.6.long_reads.ylabel.gff out2.pO83_CORR.twin.NC_017659.1.1.6.1700.7000.mapping.gff;echo output out2.pO83_CORR.twin.out2.reads_mapping.gff
@@ -23,16 +23,10 @@ set -vex;cat out2.pO83_CORR.twin.NC_017659.1.1.4.short_reads.ylabel.setting.conf
 set -vex;cat out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.crosslink.conf >out2.pO83_CORR.twin.out2.reads_mapping.crosslink;rm out2.pO83_CORR.twin.NC_017659.1.1.4.1700.7000.mapping.crosslink.conf;echo output out2.pO83_CORR.twin.out2.reads_mapping.crosslink
 
 
-set -vex;cat out2.pO83_CORR.indel.out2.reads_mapping.setting.conf out2.pO83_CORR.out2.reads_mapping.setting.conf out2.pO83_CORR.twin.out2.reads_mapping.setting.conf >out2.reads_mapping.setting.conf
-
-
 set -vex;cat out2.pO83_CORR.out2.reads_mapping.crosslink out2.pO83_CORR.twin.out2.reads_mapping.crosslink >out2.reads_mapping.crosslink
 
 
-set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.indel.out2.synteny.gff;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.indel.out2.synteny.gff
-
-
-set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.indel.out2.synteny.setting.conf;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.indel.out2.synteny.setting.conf
+set -vex;cat out2.pO83_CORR.out2.reads_mapping.setting.conf out2.pO83_CORR.indel.out2.reads_mapping.setting.conf out2.pO83_CORR.twin.out2.reads_mapping.setting.conf >out2.reads_mapping.setting.conf
 
 
 set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.out2.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.out2.synteny.gff
@@ -41,13 +35,19 @@ set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.
 set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.out2.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.out2.synteny.setting.conf
 
 
+set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.indel.out2.synteny.gff;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.indel.out2.synteny.gff
+
+
+set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.indel.out2.synteny.setting.conf;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.indel.out2.synteny.setting.conf
+
+
 set -vex;cat pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf >out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf;echo output out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink
 
 
 set -vex;cat out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink >out2.synteny.crosslink
 
 
-set -vex;cat out2.pO83_CORR.indel.out2.synteny.setting.conf out2.pO83_CORR.out2.synteny.setting.conf >out2.synteny.setting.conf
+set -vex;cat out2.pO83_CORR.out2.synteny.setting.conf out2.pO83_CORR.indel.out2.synteny.setting.conf >out2.synteny.setting.conf
 
 
 set -vex;cat out2.reads_mapping.setting.conf out2.synteny.setting.conf >feature.color.label.conf.out2
@@ -56,14 +56,14 @@ set -vex;cat out2.reads_mapping.setting.conf out2.synteny.setting.conf >feature.
 set -vex;cat out2.reads_mapping.crosslink out2.synteny.crosslink >feature.crossing.link.out2
 
 
-set -vex;cat out2.pO83_CORR.indel.out2.reads_mapping.gff out2.pO83_CORR.out2.reads_mapping.gff out2.pO83_CORR.twin.out2.reads_mapping.gff out2.pO83_CORR.indel.out2.synteny.gff out2.pO83_CORR.out2.synteny.gff|awk -F   '{print }'|sort -u
+set -vex;cat out2.pO83_CORR.out2.reads_mapping.gff out2.pO83_CORR.indel.out2.reads_mapping.gff out2.pO83_CORR.twin.out2.reads_mapping.gff out2.pO83_CORR.out2.synteny.gff out2.pO83_CORR.indel.out2.synteny.gff|awk -F   '{print }'|sort -u
 
 
-set -vex;sed  -r 's/^(pO83_CORR.twin\s.*\.gff)\s/,out2.pO83_CORR.twin.out2.reads_mapping.gff	/' tracks.2.list >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
-
-
-set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/,out2.pO83_CORR.out2.reads_mapping.gff,out2.pO83_CORR.out2.synteny.gff	/' tracks.2.list.out2.tmp >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/,out2.pO83_CORR.out2.reads_mapping.gff,out2.pO83_CORR.out2.synteny.gff	/' tracks.2.list >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
 
 
 set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/,out2.pO83_CORR.indel.out2.reads_mapping.gff,out2.pO83_CORR.indel.out2.synteny.gff	/' tracks.2.list.out2.tmp >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
+
+
+set -vex;sed  -r 's/^(pO83_CORR.twin\s.*\.gff)\s/,out2.pO83_CORR.twin.out2.reads_mapping.gff	/' tracks.2.list.out2.tmp >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
 

@@ -1,0 +1,3 @@
+#track_name	genome.gff	genome.fa	chr_id	fragment_start	fragment_end	chr_id	fragment_start	fragment_end ...
+pO83_CORR	../../data/NC_017659.1.gff,out2.pO83_CORR.out2.synteny.gff	../../data/NC_017659.1.fa	NC_017659.1	1700	5900	NC_017659.1	5901	7000
+pO83_CORR.indel	../../data/NC_017659.1.indel.gff,out2.pO83_CORR.indel.out2.synteny.gff	../../data/NC_017659.1.indel.fa	NC_017659.1.fake	1700	6000	NC_017659.1.fake	6001	7000

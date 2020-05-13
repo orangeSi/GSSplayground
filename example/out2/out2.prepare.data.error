@@ -1,0 +1,26 @@
++ cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff
++ rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff
++ echo output out2.pO83_CORR.out2.synteny.gff
++ cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf
++ rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf
++ echo output out2.pO83_CORR.out2.synteny.setting.conf
++ cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff
++ rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff
++ echo output out2.pO83_CORR.indel.out2.synteny.gff
++ cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf
++ rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf
++ echo output out2.pO83_CORR.indel.out2.synteny.setting.conf
++ cat pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf
++ rm pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf
++ echo output out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink
++ cat out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink
++ cat out2.pO83_CORR.out2.synteny.setting.conf out2.pO83_CORR.indel.out2.synteny.setting.conf
++ cat out2.synteny.setting.conf
++ cat out2.synteny.crosslink
++ cat out2.pO83_CORR.out2.synteny.gff out2.pO83_CORR.indel.out2.synteny.gff
++ awk -F 	 {print $3}
++ sort -u
++ sed -r s/^(pO83_CORR.indel\s.*\.gff)\s/\1,out2.pO83_CORR.indel.out2.synteny.gff\t/ tracks.2.list
++ cp tracks.2.list.out2 tracks.2.list.out2.tmp
++ sed -r s/^(pO83_CORR\s.*\.gff)\s/\1,out2.pO83_CORR.out2.synteny.gff\t/ tracks.2.list.out2.tmp
++ cp tracks.2.list.out2 tracks.2.list.out2.tmp

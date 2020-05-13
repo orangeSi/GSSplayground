@@ -1,0 +1,227 @@
+find package FindBin
+find package JSON
+tracks_shift_y -> pO83_CORR,0,+0.1:+0;
+tracks_shift_x -> pO83_CORR,1,+200bp:+0bp;pO83_CORR,2,-400bp:+0bp;
+key is data_display_order, value is 0->1
+key is query, value is pO83_CORR.indel
+key is target, value is pO83_CORR
+key is alignment_file, value is ../../data/mummer.delta.filter.coords
+key is alignment_format, value is mummer_coords
+key is alignment_block_shape, value is quadrilateral
+key is forward_color, value is orange->opacity0.5
+key is reverse_color, value is blue->opacity0.7
+key is cross_link_shift_y, value is +3:-3
+key is sort, value is 1
+allow_feature_out_of_list -> synteny
+display_segment_name -> yes,center,shift_y:+2,fontsize:6,color:black,order:5,rotate:0
+
+not_exists hist_scatter_line in confs
+
+not_exists reads_mapping in confs
+key synteny = 0->1,pO83_CORR.indel,pO83_CORR,../../data/mummer.delta.filter.coords,mummer_coords,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
+
+parse pO83_CORR pO83_CORR:NC_017659.1:1700-5900 -> block_index 1
+
+parse pO83_CORR pO83_CORR:NC_017659.1:5901-7000 -> block_index 2
+
+read_list pO83_CORR end
+parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:1700-6000 -> block_index 1
+
+parse pO83_CORR.indel pO83_CORR.indel:NC_017659.1.fake:6001-7000 -> block_index 2
+
+read_list pO83_CORR.indel end
+hist_scatter_line not
+reads_mapping not
+synteny start
+1 is 0->1,pO83_CORR.indel,pO83_CORR,../../data/mummer.delta.filter.coords,mummer_coords,quadrilateral,orange->opacity0.5,blue->opacity0.7,+3:-3,1
+
+start read ../../data/mummer.delta.filter.coords
+../../data/mummer.delta.filter.coords is plain file
+query_overlap_length=541, target_overlap_length=441, blast:5460:147060 -> 5460:147060 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=541, target_overlap_length=1100, blast:5460:147060 -> 5460:147060 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=1000, target_overlap_length=441, blast:5460:147060 -> 5460:147060 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=1000, target_overlap_length=1100, blast:5460:147060 -> 5460:147060 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=3360, target_overlap_length=3360, blast:1891:5250 -> 2101:5460 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=3360, target_overlap_length=0, blast:1891:5250 -> 2101:5460 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=3360, blast:1891:5250 -> 2101:5460 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:1891:5250 -> 2101:5460 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=199, target_overlap_length=199, blast:1:1898 -> 1:1898 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=199, target_overlap_length=0, blast:1:1898 -> 1:1898 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=199, blast:1:1898 -> 1:1898 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:1:1898 -> 1:1898 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:40854:42178 -> 34808:36132 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:40854:42178 -> 34808:36132 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=0, blast:40854:42178 -> 34808:36132 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:40854:42178 -> 34808:36132 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:34808:36132 -> 40854:42178 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:34808:36132 -> 40854:42178 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=0, blast:34808:36132 -> 40854:42178 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:34808:36132 -> 40854:42178 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45180:45999 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45180:45999 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45180:45999 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:47530:48349 -> 45180:45999 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 47530:48349 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 47530:48349 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 47530:48349 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:45180:45999 -> 47530:48349 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 43766:44534 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 43766:44534 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 43766:44534 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:74016:74784 -> 43766:44534 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74016:74784 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74016:74784 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74016:74784 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:43766:44534 -> 74016:74784 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 110474:111241 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 110474:111241 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 110474:111241 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:126723:127490 -> 110474:111241 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 110474:111241 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 110474:111241 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 110474:111241 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:138801:139568 -> 110474:111241 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 126723:127490 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 126723:127490 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 126723:127490 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 126723:127490 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 138801:139568 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 138801:139568 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 138801:139568 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:110474:111241 -> 138801:139568 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+query_overlap_length=210, target_overlap_length=210, blast:5251:5460 -> 1891:2100 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=210, target_overlap_length=0, blast:5251:5460 -> 1891:2100 rg:NC_017659.1.fake,1700,6000,1 -> NC_017659.1,5901,7000,2
+
+query_overlap_length=0, target_overlap_length=210, blast:5251:5460 -> 1891:2100 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,1700,5900,1
+
+query_overlap_length=0, target_overlap_length=0, blast:5251:5460 -> 1891:2100 rg:NC_017659.1.fake,6001,7000,2 -> NC_017659.1,5901,7000,2
+
+qt is 
+end read ../../data/mummer.delta.filter.coords, paris num is5
+
+output out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff
+
+output out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf
+
+no out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf for pO83_CORR.indel
+
+output pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff
+
+output pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf
+
+no pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf for pO83_CORR
+
+no pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff for pO83_CORR.indel.to.pO83_CORR
+
+no pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf for pO83_CORR.indel.to.pO83_CORR
+
+output pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf
+func_name is synteny
+echo "
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.out2.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.out2.synteny.gff
+" >> out2.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.out2.synteny.gff;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.out2.synteny.gff done
+echo "
+set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.out2.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.out2.synteny.setting.conf
+" >> out2.cat.log;set -vex;cat pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.out2.synteny.setting.conf;rm pO83_CORR.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.out2.synteny.setting.conf done
+echo "
+set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.indel.out2.synteny.gff;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.indel.out2.synteny.gff
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff >out2.pO83_CORR.indel.out2.synteny.gff;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.gff;echo output out2.pO83_CORR.indel.out2.synteny.gff done
+echo "
+set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.indel.out2.synteny.setting.conf;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.indel.out2.synteny.setting.conf
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf > out2.pO83_CORR.indel.out2.synteny.setting.conf;rm out2.pO83_CORR.indel.pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.setting.conf;echo output out2.pO83_CORR.indel.out2.synteny.setting.conf done
+echo "
+set -vex;cat pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf >out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf;echo output out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink
+" >> out2.cat.log;set -vex;cat pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf >out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink;rm pO83_CORR.indel.to.pO83_CORR.mummer_coords.quadrilateral.1.synteny.crosslink.conf;echo output out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink done
+out2.synteny end
+echo "
+set -vex;cat out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink >out2.synteny.crosslink
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.indel.to.pO83_CORR.out2.synteny.crosslink >out2.synteny.crosslink done
+echo "
+set -vex;cat out2.pO83_CORR.out2.synteny.setting.conf out2.pO83_CORR.indel.out2.synteny.setting.conf >out2.synteny.setting.conf
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.out2.synteny.setting.conf out2.pO83_CORR.indel.out2.synteny.setting.conf >out2.synteny.setting.conf done
+general_features not
+add out2.synteny.setting.conf to feature_setting 
+echo "
+set -vex;cat out2.synteny.setting.conf >feature.color.label.conf.out2
+" >> out2.cat.log;set -vex;cat out2.synteny.setting.conf >feature.color.label.conf.out2 done
+add out2.synteny.crosslink to crossing_link 
+echo "
+set -vex;cat out2.synteny.crosslink >feature.crossing.link.out2
+" >> out2.cat.log;set -vex;cat out2.synteny.crosslink >feature.crossing.link.out2 done
+echo "
+set -vex;cat out2.pO83_CORR.out2.synteny.gff out2.pO83_CORR.indel.out2.synteny.gff|awk -F "	" '{print $3}'|sort -u
+" >> out2.cat.log;set -vex;cat out2.pO83_CORR.out2.synteny.gff out2.pO83_CORR.indel.out2.synteny.gff|awk -F "	" '{print $3}'|sort -u done
+echo "
+set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out2.pO83_CORR.indel.out2.synteny.gff\t/' tracks.2.list >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
+" >> out2.cat.log;set -vex;sed  -r 's/^(pO83_CORR.indel\s.*\.gff)\s/\1,out2.pO83_CORR.indel.out2.synteny.gff\t/' tracks.2.list >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp done
+echo "
+set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out2.pO83_CORR.out2.synteny.gff\t/' tracks.2.list.out2.tmp >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp
+" >> out2.cat.log;set -vex;sed  -r 's/^(pO83_CORR\s.*\.gff)\s/\1,out2.pO83_CORR.out2.synteny.gff\t/' tracks.2.list.out2.tmp >tracks.2.list.out2;cp tracks.2.list.out2 tracks.2.list.out2.tmp done
+
+data done

@@ -80,7 +80,7 @@ while(<GFF>){
 close GFF;
 
 open SAM,">$prefix.sam" or die "cannot write to $prefix.sam\n";
-foreach my $chr(keys %chrs){
+foreach my $chr(sort keys %chrs){
 	my $chrlen;
 	if(exists $gs{$chr}{len}){
 		$chrlen=$gs{$chr}{len};
@@ -94,7 +94,7 @@ foreach my $chr(keys %chrs){
 		die "error: cannot find lenght of chr $chr\n";
 	}
 }
-foreach my $id(keys %gffs){
+foreach my $id(sort keys %gffs){
 	my $seq=(exists $gffs{$id}{seq})? $gffs{$id}{seq}:"null";
 	my $sam = &gff2sam($id, $gffs{$id}{start}, $gffs{$id}{end}, $gffs{$id}{strand}, $gffs{$id}{chr}, $seq);
 	print SAM $sam;
