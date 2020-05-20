@@ -77,29 +77,29 @@ $samtools calmd or SamFixCigar.jar of jvarkit will convert M to X/= in cigar of 
 ```
 cat example/work.sh
 ```
-![gene cluster image](example/out3.notitle.svg)
+![gene cluster image](example/out3.cleaned.svg)
 <br><br><br>
-![gene cluster image](example/out2.notitle.svg)
+![gene cluster image](example/out2.cleaned.svg)
 <br><br><br>
-![gene cluster image](example/out1.notitle.svg)
+![gene cluster image](example/out1.cleaned.svg)
 <br><br><br>
-![gene cluster image](example/out6.notitle.svg)
+![gene cluster image](example/out6.cleaned.svg)
 <br><br><br>
-![gene cluster image](example/out7.notitle.svg)
+![gene cluster image](example/out7.cleaned.svg)
 <br><br><br>
-![gene cluster image](example_old/out7.notitle.svg)
+![gene cluster image](example_old/out7.cleaned.svg)
 <br><br><br>
-![gene cluster image](example_old/out10.notitle.svg)
+![gene cluster image](example_old/out10.cleaned.svg)
 <br><br><br>
-![gene cluster image](example_old/out.notitle.svg)
+![gene cluster image](example_old/out.cleaned.svg)
 <br><br><br>
-![gene cluster image](example_old/out2.notitle.svg)
+![gene cluster image](example_old/out2.cleaned.svg)
 <br><br><br>
-![gene cluster image](example_old/out3.notitle.svg)
+![gene cluster image](example_old/out3.cleaned.svg)
 <br><br>
-![gene cluster image](example_old/out3.2.notitle.svg)
+![gene cluster image](example_old/out3.2.cleaned.svg)
 <br><br>
-![gene cluster image](example_old/out8.notitle.svg)
+![gene cluster image](example_old/out8.cleaned.svg)
 <br><br><br>
 
 
