@@ -267,7 +267,7 @@ while(@track_order){
 				$segment_baseline="hanging";
 				$segment_name_y+=$display_segment_name_shift_y;
 				
-				$segment_name_y += &check_font_size_by_estimate("", "height", $segment_name, $display_segment_name_fontsize);
+				$segment_name_y += &check_font_size_by_estimate("avg", "height", $segment_name, $display_segment_name_fontsize);
 				$segment_baseline="baseline";
 			}elsif($display_segment_name_shift_y=~ /^-([\d\.])+$/){	
 				$segment_baseline="baseline";
@@ -873,7 +873,7 @@ sub caculate_every_legend_width(){
 	my %all_pos_legends = %$all_pos_legends;
 	my $lengend_total_width;
 	foreach my $f(sort keys %{$all_pos_legends{$pos}}){
-		my $legend_text_width = &check_font_size_by_estimate("", "width", $legends{$f}{label}, $fontsize);
+		my $legend_text_width = &check_font_size_by_estimate("avg", "width", $legends{$f}{label}, $fontsize);
 		$every_legend_width{$f} = $legend_symbol_width + $legend_text_width * $gap;
 		$lengend_total_width += $every_legend_width{$f};
 	}
@@ -998,11 +998,11 @@ foreach my $order(sort {$a<=>$b}keys %orders){
 }
 print SVG "</svg>";
 close SVG;
-my $rm_title="set -vex;sed -r -e 's/\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//' -e 's/^.*<\\/title>//' $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
-`$rm_title`;
-die "\nerror:$rm_title\n\n" if($?);
+#my $rm_title="set -vex;sed -r -e 's/\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//' -e 's/^.*<\\/title>//' $outdir/$prefix.svg >$outdir/$prefix.notitle.svg";
+#`$rm_title`;
+#die "\nerror:$rm_title\n\n" if($?);
 
-print "\noutfile is  $outdir/$prefix.svg and $outdir/$prefix.notitle.svg $outdir/$prefix.html\n";
+#print "\noutfile is  $outdir/$prefix.svg and $outdir/$prefix.notitle.svg $outdir/$prefix.html\n";
 print "\nif you want png or pdf format,you could use convert or cairosvg to convert svg to pdf or png:\n\tconvert  -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.png\n\tconvert -density $conf{pdf_dpi} $outdir/$prefix.svg $outdir/$prefix.dpi$conf{pdf_dpi}.pdf\n\n";
 
 &jstohtml("$Bin/svg-pan-zoom.js","$outdir/$prefix");

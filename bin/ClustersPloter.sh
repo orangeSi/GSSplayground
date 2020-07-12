@@ -1,42 +1,40 @@
 #!/bin/sh
 base=`dirname $(readlink -f $0)`/../
 base=`readlink -f $base`
-if [ ! -f "$base/bin/env.sh" ];
-then
-	echo -e "\n$(tput setaf 1)error: cannot find $base/bin/env.sh$(tput setaf 7)\n"
-	exit 1
-fi
-
+#if [ ! -f "$base/bin/env.sh" ];
+##then
+#	echo -e "\n$(tput setaf 1)error: cannot find $base/bin/env.sh$(tput setaf 7)\n"
+#	exit 1
+#fi
+#
 #. $base/bin/env.sh $base
 # check env
 home=$base
-#export PERL5LIB=$home/src:$home/src/Imager-1.011/lib64/perl5/:$PERL5LIB ## for perl library
+export PATH=$home/bin:$PATH
 export PERL5LIB=$home/src:$PERL5LIB ## for perl library
 #echo PERL5LIB is $PERL5LIB
-# for samtool
-export PATH=/zfssz5/BC_PUB/Software/03.Soft_ALL/samtools-1.7:$PATH
 
-perl -e 'use Imager::Font'
-if [ $? -eq 0 ];
-then	
-	echo -e "\nfind Imager::Font"
-else
-	echo -e "\n$(tput setaf 1)error, not find Imager::Font, maybe you should try to re-install perl package Imager::Font(https://cpan.metacpan.org/authors/id/A/AD/ADDI/Imager-0.41.tar.gz) by cpan or manually-install$(tput setaf 7)\n"
-fi
-dep="samtools sort perl"
+#perl -e 'use Imager::Font'
+#if [ $? -eq 0 ];
+#then	
+#	echo -e "\nfind Imager::Font"
+#else
+#	echo -e "\n$(tput setaf 1)error, not find Imager::Font, maybe you should try to re-install perl package Imager::Font(https://cpan.metacpan.org/authors/id/A/AD/ADDI/Imager-0.41.tar.gz) by cpan or manually-install$(tput setaf 7)\n"
+#fi
+#dep="samtools sort perl"
+dep="perl"
 for i in $dep
 do
 	$i --help >/dev/null
 	if [ "$?" != "0" ];
 	then
-		echo -e "error: not find $i"
+		echo  "error: not find $i, need add directory of $i to PATH"
 		exit 1
 	else
 		j=`which $i`
-		echo find $j
+		#echo find $j
 	fi
 done
-
 
 
 
@@ -120,10 +118,20 @@ then
 	date
 	exit 1
 else
-	echo -e "\n\n$(tput setaf 2)finished, no error~$(tput setaf 7)\n\n"
+	echo -e "\n\n$(tput setaf 2)finished~$(tput setaf 7)\n\n"
 fi
 date
 
+which svgcleaner 2>/dev/null >/dev/null
+if [ "$?" == "0" ]:
+then
+	echo "cleaning $prefix.svg with svgcleaner"
+	svgcleaner $prefix.svg $prefix.cleaned.svg 2>$prefix.cleaned.svg.log
+else
+	echo "cleaning $prefix.svg with sed"
+	sed -r -e 's/\\s*<g[^>]*>.*//' -e 's/<\\/g>//' -e 's/^<tspan.*//' -e 's/^.*<\\/title>//' $prefix.svg >$prefix.cleaned.svg
+fi
+
 echo "$(tput setaf 2)output is:$(tput setaf 7)"
-ls -thl $prefix.svg $prefix.notitle.svg $prefix.html
+ls -thl $prefix.svg $prefix.cleaned.svg $prefix.html
 echo 

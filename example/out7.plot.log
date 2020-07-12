@@ -134,14 +134,11 @@ pos 2 is right, gene4537
 pos 2 is right, gene4538
 pos 2 is baseline, gene4549
 pos 2 is baseline, gene4559
-using /ClustersPloter/src/Times_New_Roman.ttf
-text is gene4532gene4537gene4538gene4549.lengedgene4559.lengend, fontsize is 15, ttf is /ClustersPloter/src/Times_New_Roman.ttf
-using /ClustersPloter/src/Times_New_Roman.ttf
-text is gene4549.lenged, fontsize is 15, ttf is /ClustersPloter/src/Times_New_Roman.ttf
-using /ClustersPloter/src/Times_New_Roman.ttf
-text is gene4559.lengend, fontsize is 15, ttf is /ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/text_height_width_by_size.json instead of Imager::Font2
+using /ClustersPloter/src/text_height_width_by_size.json instead of Imager::Font2
+using /ClustersPloter/src/text_height_width_by_size.json instead of Imager::Font2
 pos is baseline
-feature_shift_x_to = 340.4 = (1000 - 319.2)/2
+feature_shift_x_to = 187.75 = (1000 - 624.5)/2
 pos is right
 add legend list is tracks.7.list.out7.out7.legend.list
 add legend feature_setting is feature.color.label.7.conf.legend.setting.conf
@@ -150,11 +147,11 @@ start read tracks.7.list.out7.out7.legend.list again, legend_number=5
 parse pO83_CORR1 pO83_CORR1:NC_017659.1:1-7060 -> block_index 1
 
 read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	RefSeq	gene	2313	3428	.	+	.	ID=gene4532;Dbxref=GeneID:12657366;Name=iroB;gbkey=Gene;gene=iroB;gene_biotype=protein_coding;locus_tag=NRG857_30008
-read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	198.68	.	+	.	ID=gene4549.lenged.red.arrow.1;
-read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	198.68	.	+	.	ID=gene4559.lengend.black.arrow.0.6;
-read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	198.68	.	+	.	ID=gene4532.black.arrow.1;
-read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	132.786666666667	.	+	.	ID=gene4537.yellow.circle_point.1;
-read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	132.786666666667	.	+	.	ID=gene4538.blue.ellipse.1;
+read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	142.2	.	+	.	ID=gene4549.lenged.red.arrow.1;
+read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	142.2	.	+	.	ID=gene4559.lengend.black.arrow.0.6;
+read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	142.2	.	+	.	ID=gene4532.black.arrow.1;
+read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	95.1333333333333	.	+	.	ID=gene4537.yellow.circle_point.1;
+read gff, pO83_CORR1:NC_017659.1:1-7060 block_index 1 for NC_017659.1	add	legend	1	95.1333333333333	.	+	.	ID=gene4538.blue.ellipse.1;
 read_list pO83_CORR1 end
 parse pO83_CORR2 pO83_CORR2:NC_017659.1:7060-14060 -> block_index 1
 
@@ -195,8 +192,7 @@ read gff, pO83_CORR5:NC_017659.1:28000-35000 block_index 1 for NC_017659.1	RefSe
 read gff, pO83_CORR5:NC_017659.1:28000-35000 block_index 1 for NC_017659.1	RefSeq	gene	34369	34692	.	+	.	ID=gene4561;Dbxref=GeneID:12657241;Name=NRG857_30061;gbkey=Gene;gene_biotype=protein_coding;locus_tag=NRG857_30061
 read_list pO83_CORR5 end
 draw sample name pO83_CORR1
-using /ClustersPloter/src/Times_New_Roman.ttf
-text is NC_017659.1:1-7060bp, fontsize is 6, ttf is /ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/text_height_width_by_size.json instead of Imager::Font2
 mythlog.index_id is gene4532, sample is pO83_CORR1, block_index is 1
 draw feature_id = gene4532
 1brefore, feature_id	gene4532,	feature_shift_x	,start	2313	end	3428
@@ -204,34 +200,33 @@ draw feature_id = gene4532
 feature_id	gene4532,	feature_shift_x	0,start	2312	end	3428	ratio	0.106232294617564
 mythlog.index_id is gene4549.lenged.red.arrow.1, sample is pO83_CORR1, block_index is 1
 draw feature_id = gene4549.lenged.red.arrow.1
-1brefore, feature_id	gene4549.lenged.red.arrow.1,	feature_shift_x	,start	1	end	198.68
-2brefore, feature_id	gene4549.lenged.red.arrow.1,	feature_shift_x	0,start	1	end	198.68	ratio	0.106232294617564
-feature_id	gene4549.lenged.red.arrow.1,	feature_shift_x	0,start	0.99	end	198.68	ratio	0.106232294617564
+1brefore, feature_id	gene4549.lenged.red.arrow.1,	feature_shift_x	,start	1	end	142.2
+2brefore, feature_id	gene4549.lenged.red.arrow.1,	feature_shift_x	0,start	1	end	142.2	ratio	0.106232294617564
+feature_id	gene4549.lenged.red.arrow.1,	feature_shift_x	0,start	0.9	end	142.2	ratio	0.106232294617564
 mythlog.index_id is gene4559.lengend.black.arrow.0.6, sample is pO83_CORR1, block_index is 1
 draw feature_id = gene4559.lengend.black.arrow.0.6
-1brefore, feature_id	gene4559.lengend.black.arrow.0.6,	feature_shift_x	,start	1	end	198.68
-2brefore, feature_id	gene4559.lengend.black.arrow.0.6,	feature_shift_x	0,start	1	end	198.68	ratio	0.106232294617564
-feature_id	gene4559.lengend.black.arrow.0.6,	feature_shift_x	0,start	0.99	end	198.68	ratio	0.106232294617564
+1brefore, feature_id	gene4559.lengend.black.arrow.0.6,	feature_shift_x	,start	1	end	142.2
+2brefore, feature_id	gene4559.lengend.black.arrow.0.6,	feature_shift_x	0,start	1	end	142.2	ratio	0.106232294617564
+feature_id	gene4559.lengend.black.arrow.0.6,	feature_shift_x	0,start	0.9	end	142.2	ratio	0.106232294617564
 mythlog.index_id is gene4532.black.arrow.1, sample is pO83_CORR1, block_index is 1
 draw feature_id = gene4532.black.arrow.1
-1brefore, feature_id	gene4532.black.arrow.1,	feature_shift_x	,start	1	end	198.68
-2brefore, feature_id	gene4532.black.arrow.1,	feature_shift_x	0,start	1	end	198.68	ratio	0.106232294617564
-feature_id	gene4532.black.arrow.1,	feature_shift_x	0,start	0.99	end	198.68	ratio	0.106232294617564
+1brefore, feature_id	gene4532.black.arrow.1,	feature_shift_x	,start	1	end	142.2
+2brefore, feature_id	gene4532.black.arrow.1,	feature_shift_x	0,start	1	end	142.2	ratio	0.106232294617564
+feature_id	gene4532.black.arrow.1,	feature_shift_x	0,start	0.9	end	142.2	ratio	0.106232294617564
 mythlog.index_id is gene4537.yellow.circle_point.1, sample is pO83_CORR1, block_index is 1
 draw feature_id = gene4537.yellow.circle_point.1
-1brefore, feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	,start	1	end	132.786666666667
-2brefore, feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	0,start	1	end	132.786666666667	ratio	0.106232294617564
-feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	0,start	0.999999999999	end	132.786666666667	ratio	0.106232294617564
+1brefore, feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	,start	1	end	95.1333333333333
+2brefore, feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	0,start	1	end	95.1333333333333	ratio	0.106232294617564
+feature_id	gene4537.yellow.circle_point.1,	feature_shift_x	0,start	0.9999999999999	end	95.1333333333333	ratio	0.106232294617564
 mythlog.index_id is gene4538.blue.ellipse.1, sample is pO83_CORR1, block_index is 1
 draw feature_id = gene4538.blue.ellipse.1
-1brefore, feature_id	gene4538.blue.ellipse.1,	feature_shift_x	,start	1	end	132.786666666667
-2brefore, feature_id	gene4538.blue.ellipse.1,	feature_shift_x	0,start	1	end	132.786666666667	ratio	0.106232294617564
-feature_id	gene4538.blue.ellipse.1,	feature_shift_x	0,start	0.999999999999	end	132.786666666667	ratio	0.106232294617564
+1brefore, feature_id	gene4538.blue.ellipse.1,	feature_shift_x	,start	1	end	95.1333333333333
+2brefore, feature_id	gene4538.blue.ellipse.1,	feature_shift_x	0,start	1	end	95.1333333333333	ratio	0.106232294617564
+feature_id	gene4538.blue.ellipse.1,	feature_shift_x	0,start	0.9999999999999	end	95.1333333333333	ratio	0.106232294617564
 mythlog1: pO83_CORR1 NC_017659.1 1 1 = 100,88.5
 mythlog3:pO83_CORR1 NC_017659.1 1 1,7060
 draw sample name pO83_CORR2
-using /ClustersPloter/src/Times_New_Roman.ttf
-text is NC_017659.1:7060-14060bp, fontsize is 6, ttf is /ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/text_height_width_by_size.json instead of Imager::Font2
 mythlog.index_id is gene4534, sample is pO83_CORR2, block_index is 1
 draw feature_id = gene4534
 1brefore, feature_id	gene4534,	feature_shift_x	,start	272	end	1501
@@ -260,8 +255,7 @@ feature_id	gene4538,	feature_shift_x	0,start	5618	end	6455	ratio	0.1062322946175
 mythlog1: pO83_CORR2 NC_017659.1 1 7060 = 100,166.277777777778
 mythlog3:pO83_CORR2 NC_017659.1 1 7060,14060
 draw sample name pO83_CORR3
-using /ClustersPloter/src/Times_New_Roman.ttf
-text is NC_017659.1:14060-21000bp, fontsize is 6, ttf is /ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/text_height_width_by_size.json instead of Imager::Font2
 mythlog.index_id is gene4540, sample is pO83_CORR3, block_index is 1
 draw feature_id = gene4540
 1brefore, feature_id	gene4540,	feature_shift_x	,start	958	end	1269
@@ -310,8 +304,7 @@ feature_id	gene4548,	feature_shift_x	0,start	6273	end	6624	ratio	0.1062322946175
 mythlog1: pO83_CORR3 NC_017659.1 1 14060 = 100,244.055555555556
 mythlog3:pO83_CORR3 NC_017659.1 1 14060,21000
 draw sample name pO83_CORR4
-using /ClustersPloter/src/Times_New_Roman.ttf
-text is NC_017659.1:21000-28000bp, fontsize is 6, ttf is /ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/text_height_width_by_size.json instead of Imager::Font2
 mythlog.index_id is gene4549, sample is pO83_CORR4, block_index is 1
 draw feature_id = gene4549
 1brefore, feature_id	gene4549,	feature_shift_x	,start	225	end	1316
@@ -345,8 +338,7 @@ feature_id	gene4554,	feature_shift_x	0,start	5294	end	5711	ratio	0.1062322946175
 mythlog1: pO83_CORR4 NC_017659.1 1 21000 = 100,321.833333333333
 mythlog3:pO83_CORR4 NC_017659.1 1 21000,28000
 draw sample name pO83_CORR5
-using /ClustersPloter/src/Times_New_Roman.ttf
-text is NC_017659.1:reverse:[35000 -> 28000]bp, fontsize is 6, ttf is /ClustersPloter/src/Times_New_Roman.ttf
+using /ClustersPloter/src/text_height_width_by_size.json instead of Imager::Font2
 mythlog.index_id is gene4556, sample is pO83_CORR5, block_index is 1
 draw feature_id = gene4556
 1brefore, feature_id	gene4556,	feature_shift_x	,start	1365	end	1622
@@ -391,16 +383,16 @@ feature is 1, 6370, 6693, 1, 7001, 1, 0, feature
 feature_id	gene4561,	feature_shift_x	0,start	308	end	632	ratio	0.106232294617564
 mythlog1: pO83_CORR5 NC_017659.1 1 28000 = 100,399.611111111111
 mythlog3:pO83_CORR5 NC_017659.1 1 28000,35000
+check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,14060 -> 843.732294617564,166.277777777778
+check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,7060 -> 100,166.277777777778
+check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,35000 -> 843.732294617564,399.611111111111
+check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,28000 -> 100,399.611111111111
+check_blocks_two_ends_cord pO83_CORR1,NC_017659.1,1,1 -> 100,88.5
+check_blocks_two_ends_cord pO83_CORR1,NC_017659.1,1,7060 -> 850,88.5
 check_blocks_two_ends_cord pO83_CORR4,NC_017659.1,1,28000 -> 843.732294617564,321.833333333333
 check_blocks_two_ends_cord pO83_CORR4,NC_017659.1,1,21000 -> 100,321.833333333333
 check_blocks_two_ends_cord pO83_CORR3,NC_017659.1,1,14060 -> 100,244.055555555556
 check_blocks_two_ends_cord pO83_CORR3,NC_017659.1,1,21000 -> 837.35835694051,244.055555555556
-check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,14060 -> 843.732294617564,166.277777777778
-check_blocks_two_ends_cord pO83_CORR2,NC_017659.1,1,7060 -> 100,166.277777777778
-check_blocks_two_ends_cord pO83_CORR1,NC_017659.1,1,1 -> 100,88.5
-check_blocks_two_ends_cord pO83_CORR1,NC_017659.1,1,7060 -> 850,88.5
-check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,35000 -> 843.732294617564,399.611111111111
-check_blocks_two_ends_cord pO83_CORR5,NC_017659.1,1,28000 -> 100,399.611111111111
 
 
 

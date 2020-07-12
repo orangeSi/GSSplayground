@@ -11,9 +11,9 @@ Possible precedence problem on bitwise | operator at /ClustersPloter/src/prepare
 + sort -k 1nr
 + head -1
 + samtools depth -r 14:66901400-66903400 ../data/illumina.chr14.sort.bam
-+ awk {print $NF}
-+ head -1
 + sort -k 1nr
++ head -1
++ awk {print $NF}
 + samtools depth -r 14:66901400-66903400 ../data/illumina.chr14.sort.bam
 + awk {print $NF}
 + sort -k 1nr

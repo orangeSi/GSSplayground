@@ -13,15 +13,13 @@
 
 ### Dependence<br>
 ```
-# install by docker
-docker pull ilikeorange/clustersploter:v0.5.8  
-# then run by:
-docker run --rm  -it clustersploter:v0.5.8  '/ClustersPloter/ClustersPloter.sh'
+#method1: install by docker
 
-# or manually install, tested only in Centos yet
-samtools >=1.7 # add this to linux PATH 
-perl >=v5.10.1
-Imager::Font  # this perl package had been installed in src/Imager-1.011(if it doesn't work, try reinstall it by https://www.cpan.org/)
+#method2: manually install, tested only in Centos yet
+* perl >=v5.10.1
+optional:
+  samtools >=1.7 # if you give sam or bam file, add this to linux PATH 
+  Imager::Font  # perl package for cacualte text height/width by font size 
 ```
 
 ### Features:<br>

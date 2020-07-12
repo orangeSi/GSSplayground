@@ -49,28 +49,28 @@
 
 				<g class='myth'><title><tspan>feature_id -> gene4549.lenged.red.arrow.1</tspan>
 <tspan>track name -> pO83_CORR1</tspan>
-<tspan>ref start-end -> NC_017659.1:1-198.68</tspan></title>
-				<polygon id="gene4549.lenged.red.arrow.1" points="340.4,484.6 340.4,498.6 357.200849858357,498.6 357.200849858357,498.6 361.401062322946,491.6 357.200849858357,484.6 357.200849858357,484.6" style="fill:red;stroke:black;stroke-width:0;opacity:1"/></g>
+<tspan>ref start-end -> NC_017659.1:1-142.2</tspan></title>
+				<polygon id="gene4549.lenged.red.arrow.1" points="187.75,489 187.75,499 199.758498583569,499 199.758498583569,499 202.760623229462,494 199.758498583569,489 199.758498583569,489" style="fill:red;stroke:black;stroke-width:0;opacity:1"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> gene4559.lengend.black.arrow.0.6</tspan>
 <tspan>track name -> pO83_CORR1</tspan>
-<tspan>ref start-end -> NC_017659.1:1-198.68</tspan></title>
-				<polygon id="gene4559.lengend.black.arrow.0.6" points="494.8,484.6 494.8,498.6 511.600849858357,498.6 511.600849858357,498.6 515.801062322946,491.6 511.600849858357,484.6 511.600849858357,484.6" style="fill:black;stroke:black;stroke-width:0;opacity:0.6"/></g>
+<tspan>ref start-end -> NC_017659.1:1-142.2</tspan></title>
+				<polygon id="gene4559.lengend.black.arrow.0.6" points="490.25,489 490.25,499 502.258498583569,499 502.258498583569,499 505.260623229462,494 502.258498583569,489 502.258498583569,489" style="fill:black;stroke:black;stroke-width:0;opacity:0.6"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> gene4532.black.arrow.1</tspan>
 <tspan>track name -> pO83_CORR1</tspan>
-<tspan>ref start-end -> NC_017659.1:1-198.68</tspan></title>
-				<polygon id="gene4532.black.arrow.1" points="871.5,204.5 871.5,218.5 888.300849858357,218.5 888.300849858357,218.5 892.501062322946,211.5 888.300849858357,204.5 888.300849858357,204.5" style="fill:black;stroke:black;stroke-width:0;opacity:1"/></g>
+<tspan>ref start-end -> NC_017659.1:1-142.2</tspan></title>
+				<polygon id="gene4532.black.arrow.1" points="871.5,217.5 871.5,227.5 883.508498583569,227.5 883.508498583569,227.5 886.510623229462,222.5 883.508498583569,217.5 883.508498583569,217.5" style="fill:black;stroke:black;stroke-width:0;opacity:1"/></g>
 
 					<g class='myth'><title><tspan>feature_id -> gene4537.yellow.circle_point.1</tspan>
 <tspan>track name -> pO83_CORR1</tspan>
-<tspan>ref start-end -> NC_017659.1:1-132.786666666667</tspan></title>
-					<circle id="gene4537.yellow.circle_point.1" cx="882" cy="229.7" r="7.00000000000007" stroke="black" stroke-width="0" fill="yellow" style="opacity:1"/></g>
+<tspan>ref start-end -> NC_017659.1:1-95.1333333333333</tspan></title>
+					<circle id="gene4537.yellow.circle_point.1" cx="879" cy="235.5" r="5" stroke="black" stroke-width="0" fill="yellow" style="opacity:1"/></g>
 
 					<g class='myth'><title><tspan>feature_id -> gene4538.blue.ellipse.1</tspan>
 <tspan>track name -> pO83_CORR1</tspan>
-<tspan>ref start-end -> NC_017659.1:1-132.786666666667</tspan></title>
-					<ellipse id="gene4538.blue.ellipse.1" cx="885.5" cy="247.9" rx="7.00000000000007" ry="3.50000000000004"  stroke="black" stroke-width="0" fill="blue" style="opacity:1"/></g>
+<tspan>ref start-end -> NC_017659.1:1-95.1333333333333</tspan></title>
+					<ellipse id="gene4538.blue.ellipse.1" cx="881.5" cy="248.5" rx="5" ry="2.5"  stroke="black" stroke-width="0" fill="blue" style="opacity:1"/></g>
 
 				<g class='myth'><title><tspan>feature_id -> gene4534</tspan>
 <tspan>track name -> pO83_CORR2</tspan>
@@ -230,11 +230,11 @@
 
 
 <text class='myth'  x="404.94890777463" y="85.7777777777778" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:middle;" transform="rotate(0 404.94890777463 85.7777777777778)" >gene4532</text>
-<text class='myth'  x="362.801062322946" y="491.6" style="font-family:Times New Roman;font-size:15px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 362.801062322946 491.6)" >gene4549.lenged.red.arrow.1</text>
-<text class='myth'  x="517.201062322946" y="491.6" style="font-family:Times New Roman;font-size:15px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 517.201062322946 491.6)" >gene4559.lengend</text>
-<text class='myth'  x="893.901062322946" y="211.5" style="font-family:Times New Roman;font-size:15px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 893.901062322946 211.5)" >gene4532</text>
-<text class='myth'  x="890.4" y="229.7" style="font-family:Times New Roman;font-size:15px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 890.4 229.7)" >gene4537</text>
-<text class='myth'  x="893.9" y="247.9" style="font-family:Times New Roman;font-size:15px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 893.9 247.9)" >gene4538</text>
+<text class='myth'  x="203.760623229462" y="494" style="font-family:Times New Roman;font-size:15px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 203.760623229462 494)" >gene4549.lenged.red.arrow.1</text>
+<text class='myth'  x="506.260623229462" y="494" style="font-family:Times New Roman;font-size:15px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 506.260623229462 494)" >gene4559.lengend</text>
+<text class='myth'  x="887.510623229462" y="222.5" style="font-family:Times New Roman;font-size:15px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 887.510623229462 222.5)" >gene4532</text>
+<text class='myth'  x="885" y="235.5" style="font-family:Times New Roman;font-size:15px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 885 235.5)" >gene4537</text>
+<text class='myth'  x="887.5" y="248.5" style="font-family:Times New Roman;font-size:15px;fill:black;text-anchor:start; alignment-baseline:middle;" transform="rotate(0 887.5 248.5)" >gene4538</text>
 <text class='myth'  x="194.184035253384" y="157.955555555556" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:middle;" transform="rotate(0 194.184035253384 157.955555555556)" >gene4534</text>
 <text class='myth'  x="319.272562165565" y="157.955555555556" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:middle;" transform="rotate(0 319.272562165565 157.955555555556)" >gene4535</text>
 <text class='myth'  x="490.465904941769" y="157.955555555556" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:middle;" transform="rotate(0 490.465904941769 157.955555555556)" >gene4536</text>
@@ -263,10 +263,10 @@
 <text class='myth'  x="149.991400692477" y="391.288888888889" style="font-family:Times New Roman;font-size:10px;fill:black;text-anchor:middle;" transform="rotate(0 149.991400692477 391.288888888889)" >gene4561</text>
 
 
-<text class='myth' x="474" y="97.9444444444444" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 474 97.9444444444444)" >NC_017659.1:1-7060bp</text>
-<text class='myth' x="470.866147308782" y="175.722222222222" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 470.866147308782 175.722222222222)" >NC_017659.1:7060-14060bp</text>
-<text class='myth' x="467.679178470255" y="253.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 467.679178470255 253.5)" >NC_017659.1:14060-21000bp</text>
-<text class='myth' x="470.866147308782" y="331.277777777778" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 470.866147308782 331.277777777778)" >NC_017659.1:21000-28000bp</text>
-<text class='myth' x="470.866147308782" y="409.055555555556" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 470.866147308782 409.055555555556)" >NC_017659.1:reverse:[35000 -> 28000]bp</text>
+<text class='myth' x="474" y="96.9444444444444" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 474 96.9444444444444)" >NC_017659.1:1-7060bp</text>
+<text class='myth' x="470.866147308782" y="174.722222222222" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 470.866147308782 174.722222222222)" >NC_017659.1:7060-14060bp</text>
+<text class='myth' x="467.679178470255" y="252.5" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 467.679178470255 252.5)" >NC_017659.1:14060-21000bp</text>
+<text class='myth' x="470.866147308782" y="330.277777777778" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 470.866147308782 330.277777777778)" >NC_017659.1:21000-28000bp</text>
+<text class='myth' x="470.866147308782" y="408.055555555556" style="font-size:6px;fill:black;text-anchor:middle;alignment-baseline:baseline;" transform="rotate(0 470.866147308782 408.055555555556)" >NC_017659.1:reverse:[35000 -> 28000]bp</text>
 
 </svg>
